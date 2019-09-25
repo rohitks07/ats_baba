@@ -1,0 +1,737 @@
+@include('include.headers')
+@include('include.leftSidebars')
+<style>
+    .table-sm td, .table-sm th {
+    padding: .3rem;
+    color: #000;
+    font-size: 13px;
+}
+	
+.alert-success {
+    background-color: #ffffff;
+    border-color: #29b6f6;
+    color: #ffffff;
+}
+.alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .75rem 1.25rem;
+    color: black;
+}
+.card-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+.fa fa-user{
+	font-size:55px;
+	margin-left: 3%;
+	color:#1ba6df;
+
+}
+#wrapper {
+    overflow: hidden;
+    width: 100%;
+    overflow-y: scroll;
+}
+.modal .modal-dialog .modal-content .modal-header {
+    border-bottom-width: 0px;
+    margin: 3px;
+    padding: 9px;
+    padding-bottom: 0px;
+    background: #dadada;
+    height: 46px;
+    width: 100%;
+}
+input[type=text],
+    textarea,
+        {
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        outline: none;
+        margin: 5px 1px 3px 0px;
+        border: 1px solid #DDDDDD;
+        background:#fff;
+
+    }
+
+    input[type=text]:focus,
+    textarea:focus {
+        -moz-box-shadow: 0 0 5px #51cbee;
+        -webkit-box-shadow: 0 0 5px #51cbee;
+        box-shadow: 0 0 5px #51cbee;
+
+        border: 1px solid #51cbee;
+    }
+.card .card-header {
+    padding: 10px 20px;
+    border: none;
+}
+
+</style>
+
+ <div class="content-page">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                   <div class="card-header" style="  background-color:#317eeb;">
+                     	<h3 class="card-title" style="float:left; color:#fff; font-size:large;font-weight:400; text-transform: capitalize;" >
+	                     	 CV Manager<a href="#" id="select_doc" style="color:#fff; float:right; margin-left:10em;">Upload File  <i class="fa fa-upload" style="font-size:20px;color:#fff;"></i> </a>
+	                     	 <input type="file" id="Upload_cv" name="Upload_cv" style="display:none;">
+                     	</h3>
+                    </div>   
+                    <div class="card-body" style="height:148px;"> 
+                        <div class="alert alert-success alert-dismissible">
+                            @if(!empty($toReturn['job_seeker']['cv_file']))
+							<a href="{{url('jobseeker/cv_download'.$toReturn['job_seeker']['cv_file'])}}">My Cv</a>
+							@endif
+						    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>  
+						</div>								
+                    </div> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                 <div class="card card-border card-primary" style="width:100%;">
+                <div class="card-header" style="margin-bottom:-1em;"> 
+                    </div> 
+                        <div class="card-body">
+                            <div class="col-md-6" style="float:left;">
+                                 <form method="post" id="upload_form" action="{{url('jobseeker/edit_jobseeker/upload_photo')}}" enctype="multipart/form-data">
+									<i class="fa fa-user"></i>
+									<!--<img src="{{URL::asset('public/profile_pic/'.$toReturn['job_seeker']['photo'])}}" height="100" width="100">-->
+										<i class="fa fa-upload" style="margin-top:15%;color:#1ba6df"></i>
+								       <a href="#" id="select_image">Upload File</a> <input type="file" id="Upload_image" name="Upload_image" style="display:none;">
+								</form>
+							</div>
+                        <div class="col-md-6" style="float:right;">
+					       <form class="form-horizontal">                                    
+                               <table class="table table-sm">
+                                  <tbody>
+                                    <tr>
+                                      <td><i class="fa fa-mobile" style="font-size:15px" color:"#317eeb";></i>&nbsp;&nbsp;&nbsp;{{$toReturn['job_seeker']['mobile']}}</td>
+                                     </tr>
+                                     <tr>
+                                       <td><i class="fa fa-envelope" style="font-size:15px" color:"#317eeb";></i>&nbsp;&nbsp;&nbsp;{{$toReturn['job_seeker']['email']}}</td>
+                                      </tr>
+                                      <tr>
+                                      <td><i class="fa fa-map-marker" style="font-size:15px" color:"#317eeb";></i>&nbsp;&nbsp;&nbsp;{{$toReturn['job_seeker']['city']}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="fa fa-flag" style="font-size:15px" color:"#317eeb";></i>&nbsp;&nbsp;&nbsp;{{$toReturn['job_seeker']['state']}}</td>
+                                      </tr>
+                                      <tr>
+                                      <td><i class="fa fa-map-marker" style="font-size:15px" color:"#317eeb";></i>&nbsp;&nbsp;&nbsp;{{$toReturn['job_seeker']['country']}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>                
+                             </form>
+                        </div>
+                    </div> <!--card body -->
+                </div><!--end of card--> 
+            </div><!--end of col-->
+        </div><!--end of row-->
+        
+        <div class="row">
+            <div class="col-md-6" style="float:left;">
+                <div class="card card-border card-primary">
+                    <div class="card-header"> 
+                        <h3 class="card-title text-primary" style="float:left;">Personal Summary</h3>
+                        <h3 style="float:right;"><button type="button" class="btn btn-info"  data-toggle="modal" data-target=".bs-example-modal-lg"> <i class="fa fa-pencil" aria-hidden="true"></i></button></h3>
+                    </div>
+                <div class="card-body" style="height: 48px;"> 
+                   <p id="show_summary" >{{$toReturn['summary']['note']}}</p>
+                </div> 
+            </div>
+        </div>
+             <div class="col-md-6" style="float:left;">
+                <div class="card card-border card-primary">
+                    <div class="card-header"> 
+                        <h3 class="card-title text-primary" style="float:left;">Experiences</h3>
+                        <h3 style="float:right;"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#con-close-modal">Add Another &nbsp; <i class="fa fa-plus-square" style="font-size:15px;color:#fff;" aria-hidden="true"></i></button></h3>													
+
+                    </div> 
+                    <div class="card-body"> 
+                        <p class="mb-0"></p> 
+                    </div> 
+                </div>
+            </div>
+        </div><!--end of row-->
+        
+        <div class="row">
+            <div class="col-md-6" style="float:left;">
+                <div class="card card-border card-primary">
+                    <div class="card-header"> 
+                        <h3 class="card-title text-primary" style="float:left;">Education</h3>
+                        <h3 style="float:right;"><button type="button" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-sm">Add Another &nbsp; <i class="fa fa-plus-square" style="font-size:15px;color:#fff" aria-hidden="true"></i></button></h3>
+                    </div>
+                <div class="card-body" style="height: 48px;"> 
+                   
+                </div> 
+            </div>
+        </div>
+             <div class="col-md-6" style="float:left;">
+                <div class="card card-border card-primary">
+                    <div class="card-header"> 
+                        <h3 class="card-title text-primary" style="float:left;">My Job Application</h3>
+                    </div> 
+                    <div class="card-body"> 
+                        <a href="o{{url('jbseeker/my_jobs')}}">View All/Manage</a>										
+                    </div> 
+                </div>
+            </div>
+        </div><!--end of row-->
+        
+        <div class="row">
+            <div class="col-md-12">
+                 <div class="card card-border card-primary">
+                    <div class="card-header"> 
+                        <h3 class="card-title text-primary" style="float:left;">My Additional Information</h3>
+                    </div> 
+                    <div class="card-body">
+                            <table class="table table-sm" style="width:50%;">
+                                  <tbody>
+                                    <tr>
+                                      <td>Interest:</td>
+                                      <td>{{$toReturn['additional_info']['awards']}}</td>
+                                     </tr>
+                                     <tr>
+                                         <td>Career Objective :</td>
+                                         <td>{{$toReturn['additional_info']['interest']}}</td>
+                                      </tr>
+                                      <tr>
+                                          <td>Achievement :</td>
+                                          <td> {{$toReturn['additional_info']['additional_qualities']}} </td>
+                                      </tr>
+                                    
+                                  </tbody>
+                                </table>                
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div><!--end of content-->
+</div><!--end of content-page-->
+
+
+
+
+
+<!-- start of Experience modal-->	
+
+
+									<div class="modal fade bs-example-modal-lg" id="Professional" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+											<form method="post">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title mt-0" id="myLargeModalLabel">Update Professional Summary</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    	 <!-- Career-->   
+														
+								                            <div class="form-group row">
+								                              <label class="col-md-12 control-label" for="example-textarea-input">Summary <span style="color:red;">*</span></label><br><br>
+								                                <div class="col-md-12">
+								                                    <input type="hidden" name="_token" id="token" value="{{csrf_token() }}">
+								                                  <textarea cols="40" rows="9" name="notes" id="notes" style="width:100%;">{{$toReturn['summary']['note']}}</textarea>
+								                                </div>
+								                            </div>
+								                     <!--end of  Career-->
+                                                    </div>
+                                                    <div class="modal-footer"> 
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
+                                                        <button type="button" class="btn btn-info waves-effect waves-light" data-dismiss="modal" id="note">Update</button> 
+                                                    </div> 
+                                                </div><!-- /.modal-content -->
+                                            </form>
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                        
+                                        
+                                        
+							            	<!-- start of Experience modal-->	
+							            <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+                                            <div class="modal-dialog"> 
+                                                <div class="modal-content"> 
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title mt-0">Experience Information</h4> 
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div> 
+                                                    <div class="modal-body"> 
+            										<form action ="{{URL::to('admindashboard/addexp')}}" method="POST">
+														{{csrf_field()}}
+                                                        <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+                                                                    <input type="text" class="form-control" id="seeker_ID" name="seeker_ID" placeholder="Seeker ID" style="border: 1px #d6d6d6 solid; background:#fff;"> <br>
+                                                                    <label for="job_title" class="control-label">Job Title</label> 
+                                                                    <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Job Title" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                        <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+                                                                    <label for="company_name" class="control-label">Company Name</label> 
+                                                                    <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                        <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+                                                                    <label for="responsibilities" class="control-label">Responsibilities</label> 
+                                                                    <input type="text" class="form-control" id="responsibilities" name="responsibilities" placeholder="Responsibilities" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                       <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group" > 
+                                                                    <label for="country" class="control-label">Country</label> 
+																			<select class="form-control" name="country" id="country">
+																				<option value="" selected>Select Country</option>
+																				<option value="Afghanistan" >Afghanistan</option>
+																				<option value="Albany" >Albany</option>
+																				<option value="Algeria" >Algeria</option>
+																				<option value="Angola" >Angola</option>
+																				<option value="Argentina" >Argentina</option>
+																				<option value="Armenia" >Armenia</option>
+																				<option value="Australia" >Australia</option>
+																				<option value="Austria" >Austria</option>
+																				<option value="Azerbaijan" >Azerbaijan</option>
+																				<option value="Bahamas" >Bahamas</option>
+																				<option value="Bahrain" >Bahrain</option>
+																				<option value="Bangladesh" >Bangladesh</option>
+																				<option value="Belgium" >Belgium</option>
+																				<option value="Bhutan" >Bhutan</option>
+																				<option value="Bulgaria" >Bulgaria</option>
+																				<option value="Burma" >Burma</option>
+																				<option value="Burundi" >Burundi</option>
+																				<option value="Cambodia" >Cambodia</option>
+																				<option value="Cameroon" >Cameroon</option>
+																				<option value="Canada" >Canada</option>
+																				<option value="Cape Verd" >Cape Verd</option>
+																				<option value="Central Africa" >Central Africa</option>
+																				<option value="Chadi" >Chadi</option>
+																				<option value="Chile" >Chile</option>
+																				<option value="China" >China</option>
+																				<option value="Columbia" >Columbia</option>
+																				<option value="Comora" >Comora</option>
+																				<option value="Congo" >Congo</option>
+																				<option value="Costa Rica" >Costa Rica</option>
+																				<option value="Croatia" >Croatia</option>
+																				<option value="Cuban" >Cuban</option>
+																				<option value="Cyprus" >Cyprus</option>
+																				<option value="Egypt" >Egypt</option>
+																				<option value="Fiji" >Fiji</option>
+																				<option value="Finland" >Finland</option>
+																				<option value="France" >France</option>
+																				<option value="Germany" >Germany</option>
+																				<option value="Ghana" >Ghana</option>
+																				<option value="Greece" >Greece</option>
+																				<option value="Iceland" >Iceland</option>
+																				<option value="India" >India</option>
+																				<option value="Iran" >Iran</option>
+																				<option value="Iraq" >Iraq</option>
+																				<option value="Ireland" >Ireland</option>
+																				<option value="Israel" >Israel</option>
+																				<option value="Italy" >Italy</option>
+																				<option value="Jamaica" >Jamaica</option>
+																				<option value="Japan" >Japan</option>
+																				<option value="Jordan" >Jordan</option>
+																				<option value="Kenya" >Kenya</option>
+																				<option value="Kuwait" >Kuwait</option>
+																				<option value="Malaysia" >Malaysia</option>
+																				<option value="Mexico" >Mexico</option>
+																				<option value="Mongolia" >Mongolia</option>
+																				<option value="Nepal" >Nepal</option>
+																				<option value="New Zealand" >New Zealand</option>
+																				<option value="Pakistan" >Pakistan</option>
+																				<option value="Peru" >Peru</option>
+																				<option value="Poland" >Poland</option>
+																				<option value="Qatar" >Qatar</option>
+																				<option value="Romania" >Romania</option>
+																				<option value="Russia" >Russia</option>
+																				<option value="Thailand" >Thailand</option>
+																				<option value="United Kingdom" >United Kingdom</option>
+																				<option value="United States" >United States</option>
+																				<option value="Yemen" >Yemen</option>
+																			</select>
+                                                                       </div> 
+                                                              </div> 
+												          </div>
+											         
+														 <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+                                                                    <label for="city" class="control-label">City</label> 
+                                                                    <input type="text" class="form-control" id="city" name="city" placeholder="city" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+														 <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+                                                                    <label for="datea" class="control-label">Start Date</label> 
+                                                                    <input type="date" class="form-control" id="datea" name="datea" placeholder="Start Date" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+														 <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+                                                                    <label for="dateb" class="control-label">End Date (Keep blank if steel working)</label> 
+                                                                    <input type="date" class="form-control" id="dateb" name="dateb" placeholder="End Date" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    <div class="modal-footer"> 
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
+                                                        <button type="submit" class="btn btn-info waves-effect waves-light">Update</button> 
+                                                    </div> 
+                                                </div> 
+                                            </div>
+											</form>
+                                        </div><!-- /.modal -->
+                                    </div>
+                                      
+										
+										<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none">
+                                            <div class="modal-dialog modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title mt-0" id="Education Information">Education Information</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+            										<form action ="{{URL::to('admindashboard/addedu')}}" method="POST">
+													{{csrf_field()}}
+                                                       <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+																<input type="text" class="form-control" id="seeker_ID_edu" name="seeker_ID_edu" placeholder="Seeker ID" style="border: 1px #d6d6d6 solid background:#fff;"> <br>
+                                                                    <label for="degree" class="control-label" style="margin-left: 1em;">Degree Level</label> 
+																	
+																		<select class="form-control" name="degree_level" id="degree_level">
+																				<option value="" selected>Select Degree Level</option>
+																				<option value="Bechelores" >Bechelores</option>
+																				<option value="Masters" >Masters</option>
+																			</select>
+                                                                     
+																	 </div>
+																	 
+														<div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group">
+                                                                    <label for="degree_title" class="control-label" style="margin-left: 1em;">Degree Title</label> 
+                                                                    <input type="text" class="form-control" id="degree_title" name="degree_title" placeholder="Degree Title" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+														
+														<div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group">
+                                                                    <label for="major" class="control-label" style="margin-left: 1em;">Major Subject</label> 
+                                                                    <input type="text" class="form-control" id="major" name="major" placeholder="Major Subject" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div>
+
+														<div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group">
+                                                                    <label for="institute" class="control-label" style="margin-left: 1em;">Name of the Institute</label> 
+                                                                    <input type="text" class="form-control" id="institute" name="institute" placeholder="Name of the Institute" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div>
+
+														<div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+																<label for="country" class="control-label"style="margin-left: 1em;">Country</label> 
+																			<select class="form-control" name="country_edu" id="country_edu">
+																				<option value="" selected>Select Country</option>
+																				<option value="Afghanistan" >Afghanistan</option>
+																				<option value="Albany" >Albany</option>
+																				<option value="Algeria" >Algeria</option>
+																				<option value="Angola" >Angola</option>
+																				<option value="Argentina" >Argentina</option>
+																				<option value="Armenia" >Armenia</option>
+																				<option value="Australia" >Australia</option>
+																				<option value="Austria" >Austria</option>
+																				<option value="Azerbaijan" >Azerbaijan</option>
+																				<option value="Bahamas" >Bahamas</option>
+																				<option value="Bahrain" >Bahrain</option>
+																				<option value="Bangladesh" >Bangladesh</option>
+																				<option value="Belgium" >Belgium</option>
+																				<option value="Bhutan" >Bhutan</option>
+																				<option value="Bulgaria" >Bulgaria</option>
+																				<option value="Burma" >Burma</option>
+																				<option value="Burundi" >Burundi</option>
+																				<option value="Cambodia" >Cambodia</option>
+																				<option value="Cameroon" >Cameroon</option>
+																				<option value="Canada" >Canada</option>
+																				<option value="Cape Verd" >Cape Verd</option>
+																				<option value="Central Africa" >Central Africa</option>
+																				<option value="Chadi" >Chadi</option>
+																				<option value="Chile" >Chile</option>
+																				<option value="China" >China</option>
+																				<option value="Columbia" >Columbia</option>
+																				<option value="Comora" >Comora</option>
+																				<option value="Congo" >Congo</option>
+																				<option value="Costa Rica" >Costa Rica</option>
+																				<option value="Croatia" >Croatia</option>
+																				<option value="Cuban" >Cuban</option>
+																				<option value="Cyprus" >Cyprus</option>
+																				<option value="Egypt" >Egypt</option>
+																				<option value="Fiji" >Fiji</option>
+																				<option value="Finland" >Finland</option>
+																				<option value="France" >France</option>
+																				<option value="Germany" >Germany</option>
+																				<option value="Ghana" >Ghana</option>
+																				<option value="Greece" >Greece</option>
+																				<option value="Iceland" >Iceland</option>
+																				<option value="India" >India</option>
+																				<option value="Iran" >Iran</option>
+																				<option value="Iraq" >Iraq</option>
+																				<option value="Ireland" >Ireland</option>
+																				<option value="Israel" >Israel</option>
+																				<option value="Italy" >Italy</option>
+																				<option value="Jamaica" >Jamaica</option>
+																				<option value="Japan" >Japan</option>
+																				<option value="Jordan" >Jordan</option>
+																				<option value="Kenya" >Kenya</option>
+																				<option value="Kuwait" >Kuwait</option>
+																				<option value="Malaysia" >Malaysia</option>
+																				<option value="Mexico" >Mexico</option>
+																				<option value="Mongolia" >Mongolia</option>
+																				<option value="Nepal" >Nepal</option>
+																				<option value="New Zealand" >New Zealand</option>
+																				<option value="Pakistan" >Pakistan</option>
+																				<option value="Peru" >Peru</option>
+																				<option value="Poland" >Poland</option>
+																				<option value="Qatar" >Qatar</option>
+																				<option value="Romania" >Romania</option>
+																				<option value="Russia" >Russia</option>
+																				<option value="Thailand" >Thailand</option>
+																				<option value="United Kingdom" >United Kingdom</option>
+																				<option value="United States" >United States</option>
+																				<option value="Yemen" >Yemen</option>
+																			</select>
+																	 </div>
+																	 <div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+                                                                    <label for="city" class="control-label"style="margin-left: 1em;">City</label> 
+                                                                    <input type="text" class="form-control" id="city_edu" name="city_edu" placeholder="city" style="border: 1px #d6d6d6 solid; background:#fff;"> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div>
+
+														<div class="row"> 
+                                                            <div class="col-md-12"> 
+                                                                <div class="form-group"> 
+                                                                    <label for="completion_year" class="control-label" style="margin-left: 1em;">Completion Year</label> 
+																			<select class="form-control" id="completion_year" name="completion_year">
+																			<option value="" selected>Completion year</option>
+																			<option value="2001" >2001</option>
+																			<option value="2002" >2002</option>
+																			<option value="2003" >2003</option>
+																			<option value="2004" >2004</option>
+																			<option value="2005" >2005</option>
+																			<option value="2006" >2006</option>
+																			<option value="2007" >2007</option>
+																			<option value="2008" >2008</option>
+																			<option value="2009" >2009</option>
+																			<option value="2010" >2010</option>
+																			<option value="2011" >2011</option>
+																			<option value="2012" >2012</option>
+																			<option value="2013" >2013</option>
+																			<option value="2014" >2014</option>
+																			<option value="2015" >2015</option>
+																			<option value="2016" >2016</option>
+																			<option value="2017" >2017</option>
+																			<option value="2018" >2018</option>
+																			<option value="2019" >2019</option>
+																			</select>
+																	 </div>
+																	 
+														  <div class="modal-footer"> 
+	                                                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
+	                                                        <button type="submit" class="btn btn-info waves-effect waves-light">Update</button> 
+                                                    </div>
+													</form>
+												          </div>
+											          </div>
+													  
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                       
+                                           
+									</div> <!-- card body -->  
+                             </div> <!-- card -->
+						 </div> <!-- row -->	 
+                    </div> <!-- container -->
+                </div>
+            </form>
+         </div>
+ 
+      @include('include.footers')
+     <script type="text/javascript">
+     		 $("#Upload_cv").css('display','none');
+    
+		    $("#select_doc").click(function(e){
+		       e.preventDefault();
+		       $("#Upload_cv").trigger('click');
+		    });
+     </script>
+      <script type="text/javascript">
+     	 $("#Upload_image").css('display','none');
+    
+    $("#select_image").click(function(e){
+       e.preventDefault();
+       $("#Upload_image").trigger('click');
+    });
+     </script>
+  
+
+
+
+  
+   
+	   <script>
+		$(document).ready(function(){
+
+		 $('#upload_form').on('click', function(event){
+		  event.preventDefault();
+		  $.ajax({
+		   url:"{{url('jobseeker/edit_jobseeker/upload_photo')}}",
+		   method:"POST",
+		   data:new FormData(this),
+		   dataType:'JSON',
+		   contentType: false,
+		   cache: false,
+		   processData: false,
+		   success:function(data)
+		   {
+		    // $('#message').css('display', 'block');
+		    // $('#message').html(data.message);
+		    // $('#message').addClass(data.class_name);
+		    // $('#uploaded_image').html(data.uploaded_image);
+		   }
+		  })
+		 });
+
+		});
+		</script>
+
+<!-- Ajax insertion -->
+		<!-- experience modal -->
+		<script>
+         jQuery(document).ready(function(){
+            jQuery('#insert_exp').click(function(e){
+               e.preventDefault();
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+               $.ajax({
+                  url: "{{ url('jobseeker/dashboard/addexp') }}",
+                  method: 'post',
+                  data: {
+		seeker_ID: $('#seeker_ID').val(),
+		job_title: $('#job_title').val(),
+		company_name: $('#company_name').val(),
+		datea: $('#datea').val(),
+		dateb: $('#dateb').val(),
+		city: $('#city').val(),
+		country: $('#country').val(),
+		responsibilities: $('#responsibilities').val()
+                  },
+                  success: function(result){
+                     jQuery('.alert').show();
+                     jQuery('.alert').html(result.success);
+                  }});
+               });
+            });
+    	</script>
+		<!-- Education modal -->
+		<script>
+         jQuery(document).ready(function(){
+            jQuery('#insert_edu').click(function(e){
+               e.preventDefault();
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+               $.ajax({
+                  url: "{{ url('jobseeker/dashboard/addedu') }}",
+                  method: 'post',
+                  data: {
+		seeker_ID: $('#seeker_ID_edu').val(),
+		degree_level: $('#degree_level').val(),
+		degree_title: $('#degree_title').val(),
+		major: $('#major').val(),
+		institute: $('#institute').val(),
+		country: $('#country_edu').val(),
+		city: $('#city_edu').val(),
+		completion_year: $('#completion_year').val()
+                  },
+                  success: function(result){
+                     jQuery('.alert').show();
+                     jQuery('.alert').html(result.success);
+                  }});
+               });
+            });
+    	</script>
+
+		<!-- Personal Summary modal -->
+		<script>
+        $(document).ready(function(){
+            jQuery('#note').click(function(e){
+               e.preventDefault();
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+               $.ajax({
+                  url: "{{url('jobseeker/dashboard/save/notes')}}",
+                  method: 'post',
+                  data: {
+						note: $('#notes').val(),
+						_token:$('#token').val()
+                  		},
+                  	success: function(data){
+                   	console.log(data);
+                     $("#show_summary").html(data.note);
+                  }});
+               });
+            });
+    	</script>
+
+ </body>
+ </html>
+        
+               
+    
+  @include('include.footers')
