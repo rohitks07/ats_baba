@@ -91,36 +91,7 @@ class Job_Employer_Controller extends Controller
     }
 
     public function Add_to_post_job(Request $request)
-    {      
-            // $this->validate($request,[
-            //  'group_of_company'=> 'required',
-            //  'company_name'    => 'required',
-            //  'privacy_level'   => 'required',
-            //  'owner_name'      => 'required',
-            //  'status'          => 'required',
-            //  'industry'        => 'required',
-            //  'job_code'        => 'required',
-            //  'job_title'       => 'required',
-            //  'no_of_vacancies' => 'required',
-            //  'closeing_date'   => 'required',
-            //  'job_visa_status' => 'required',
-            //  'qualification'   => 'required',
-            //  'country'         => 'required',
-            //  'state'           => 'required',
-            //  'city'            => 'required',
-            //  'type_of_job'     => 'required',
-            //  'job_duration'    => 'required',
-            //  'day_week'        => 'required',
-            //  'pay_min'         => 'required',
-            //  'pay_max'         => 'required',
-            //  'pay_uom'         => 'required',
-            //  'experience'      => 'required',
-            //  'requirement'     => 'required',
-            //  'requirements'    => 'required',
-            //  'job_desc'        => 'required',
-            //  'skill'           => 'required'
-            // ] );
-            
+    {                   
             // $Add_group = new tbl_team_member_type();
             $Add_to_post_job = new tbl_post_jobs(); 
             // $Add_job_industries =new tbl_job_industries();
@@ -396,7 +367,11 @@ class Job_Employer_Controller extends Controller
         $postcandidate->experience="";
         $postcandidate->default_cv_id=1;
         // $postcandidate->cv_file=;
-        $postcandidate->skills="";
+        $postcandidate->skills=$request->skills;
+        // return $request->skills;
+        // exit;
+
+    
         $postcandidate->employer_id=Session::get('user_id');
         $postcandidate->created_by=Session::get('user_id');
         $postcandidate->is_employer=Session::get('user_id');

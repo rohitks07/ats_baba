@@ -503,7 +503,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                       <div class="card-body">
+                        <div class="card-body">
                             <center>
                                 <input name="skills" id="Result" class="form-control">
                             </center>
@@ -523,7 +523,6 @@
                                   
                                 </div>
                             </div>
-
                         </div>
                         <!-- .form -->
                        <!--  <div class="buttons" style="width: 100%; height:70px; background: #cecece;"> -->
@@ -533,10 +532,7 @@
                             </center>
                         </div>
                     </div>
-                    <!-- card-body -->
-
                 </div>
-                <!-- card -->
             </div>
        
          </form>
@@ -544,11 +540,9 @@
     </div>
 </div>
     @include('include.emp_footer')
-<script>
-     
+<script>    
     var x = 0;
     var arr = Array();
-
     function add_element_to_array()
     {
     arr[x] = document.getElementById("tags").value;
@@ -562,8 +556,6 @@
     }
     document.getElementById("Result").value = e;
     }
-
-
 </script>
 
 <script>

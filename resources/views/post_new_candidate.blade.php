@@ -3,6 +3,29 @@
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
 <style>
+			.table td {
+				padding: 7px;
+				font-size: top;
+				border-top: 1px solid #dee2e6;
+				font-size: 14px;
+				color: #000;
+				background:#fff;
+			}
+			.table tr {
+				padding: 7px;
+				font-size: top;
+				border-top: 1px solid #dee2e6;
+				font-size: 14px;
+				color: #000;
+				background:#fff;
+			}
+			.table th {
+				padding: 7px;
+				font-size: top;
+				border-top: 1px solid #dee2e6;
+				font-size: 14px;
+			}
+
 			.form-control{
 				border: 1px solid #737373;
 				width: 84%;
@@ -400,7 +423,7 @@
 												            <option value="{{$cities['state']}}"> {{$cities['state']}} </option>
 												        @endforeach														
 										        </select><br>
-										    <input name="city" type="text" class="form-control" id="test" placeholder="City" maxlength="20" style="width: 15%; margin-left:10px;background:#fff;">											     
+										    <input name="city" type="text" class="form-control" id="test" placeholder="City" required maxlength="20" style="width: 15%; margin-left:10px;background:#fff;">											     
 											<span id="citycheck" style="margin-left:34%">Please Select Your location</span>
 										</div>
 								<!--end Location -->
@@ -467,7 +490,7 @@
 							   			<button class="btn btn-primary open1" type="button" id="validatefrm">Next <span class="fa fa-arrow-right"></span></button>
 									</div>
 								</center><br>
-								<div class="menun" style="display: none;">
+								<!-- <div class="menun" style="display: none;"> -->
     						<!--button-->
 							
 <!--starting  Second Row-->
@@ -567,7 +590,7 @@
 				<button class="btn btn-primary open1" type="button" id="edu_validatefrm" onclick="check_if_exists()">Next <span class="fa fa-arrow-right"></span></button>
 			</div>
 		</center><br>
-		<div class="menus" style="display: none;">
+		<!-- <div class="menus" style="display: none;"> -->
 	<!--Button--->	
 		
 		
@@ -619,7 +642,7 @@
 				<button class="btn btn-primary open1" type="button" id="exp_validatefrm">Next <span class="fa fa-arrow-right"></span></button>
 			</div>
 		</center><br>
-		<div class="menua" style="display: none;"> 
+		<!-- <div class="menua" style="display: none;">  -->
    <!--button--> 
 
 <!--starting of fourth Row-->		
@@ -629,15 +652,38 @@
                     <div class="card-header" style="background-color:  #317eeb;">
 		                <h3 class="card-title" style="color:#fff;text-transform: none; font-size:large">Skill Detail</h3>
 					</div><br>
-							
-					<div class="formwraper" style="width:60%; margin-left: 15em;">				
+
+					    <div class="card-body">
+                            <center>
+                                <input name="skills" id="Result" class="form-control" required>
+                            </center>
+                            <br>
+
+                            <div class="form-group row">
+                                <label for="lastname" class="control-label col-lg-4">Add Skill <span style="color:red;">*</span></label>
+                                <div class="col-lg-4">
+                                    <input class="form-control" style="border: 1px solid #737373; width:100%;" id="tags" name="skill" type="text">
+                                    <span class="help-block" style="text-align:right;"><small>
+                                        Single skill at a time..</small></span>
+                               <br>
+                                      <span id="skill_check">Please Add Maximum Three Skill</span> 
+                                </div>
+                                <div class="col-lg-4">
+                                    <button type="button" class="btn btn-info waves-effect waves-light m-l-10" onclick="add_element_to_array();">Add</button>
+                                  
+                                </div>
+                            </div>
+                        </div>
+
+						
+					<!-- <div class="formwraper" style="width:60%; margin-left: 15em;">				
 						<div class="formint">
 							<div class="jobdescription" style="border-top:0px;">								
 								<div class="row">
 									<div class="col-md-12">
 									    <div class="skillBox"><br>
 										    <ul class="skillDetail" id="myskills">
-												<!-- <li>php<a href="javascript:remove_job_skill('php');" class="delete"><i class="fa fa-times-circle"></i></a></li></ul> -->
+											
 										    <div class="clear"></div>
 									    </div>
 									</div>
@@ -661,11 +707,11 @@
 								</div>
 							</div>	
 						</div>		
-					</div>		<!--close formwrape-->											        
+					</div>		 -->
 				</div>		
             </div> <!-- card -->
 		</div> <!-- card-body -->
-		<center><input type="submit" name="submit" value="Submit" class="btn btn-primary" style="background: #1ba6df !important;" ></center>
+		<center><input type="submit" name="submit" id="validatefrm" value="Submit" class="btn btn-primary" style="background: #1ba6df !important;" ></center>
 		</form>		
 </div> <!-- card -->
 </div>						
@@ -676,8 +722,57 @@
 </div> <!-- container -->
 </div> <!-- content -->				
 <!-- END wrapper -->
- 
 @include('include.emp_footer')
+<script>   
+    var x = 0;
+    var arr = Array();
+    function add_element_to_array()
+    {
+    arr[x] = document.getElementById("tags").value;
+    x++;
+    document.getElementById("Result").value = arr;
+    var e = "";   
+        
+    for (var y=0; y<array.length; y++)
+    {
+        e += array[y];
+    }
+    document.getElementById("Result").value = e;
+    }
+</script>
+<script>
+	$(document).ready(function()
+	{	
+		$("#skill_check").hide();
+
+		//validate add skill
+		$("#validatefrm").click(function()
+		{
+			check_skill();
+		});
+		function check_skill()
+		{
+			
+			// var skill_add_val=$("#tags").val();
+			var skill_val=$("#Result").val();
+		
+			if(skill_val=="")
+			{
+				$("#skill_check").show();
+				$("#skill_check").focus();
+				$("#skill_check").css("color","red");
+				err_skill=false;
+				return false;
+			}
+			else
+			{
+					$("#skill_check").hide();
+			}
+		}
+	});
+</script>
+
+
 
 <!--skill Details -->	
 <script>
