@@ -1,6 +1,31 @@
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
 <style>
+            .table td {
+				padding: 7px;
+				font-size: top;
+				border-top: 1px solid #dee2e6;
+				font-size: 14px;
+				color: #000;
+				background:#fff;
+			}
+			.table tr {
+				padding: 7px;
+				font-size: top;
+				border-top: 1px solid #dee2e6;
+				font-size: 14px;
+				color: #000;
+				background:#fff;
+			}
+			.table th {
+				padding: 7px;
+				font-size: top;
+				border-top: 1px solid #dee2e6;
+				font-size: 14px;
+                color: #000;
+				background:#d3d4d6;
+			}
+
 .mini-stat-info span {
 	color: #ffffff;
 	display: block;
