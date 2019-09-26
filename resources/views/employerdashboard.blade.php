@@ -229,57 +229,56 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:100;"></th>
-                                                    <th>Today</th>
-                                                    <th>07/16/2019</th>
-                                                    <th>07/15/2019</th>
-                                                    <th>07/14/2019</th>
-                                                    <th>07/13/2019</th>
-                                                    <th>07/12/2019</th>
-                                                    <th>07/11/2019</th>
-
+                                                    <th>{{$toReturn['date'][0]}}</th>
+                                                    <th>{{$toReturn['date'][1]}}</th>
+                                                    <th>{{$toReturn['date'][2]}}</th>
+                                                    <th>{{$toReturn['date'][3]}}</th>
+                                                    <th>{{$toReturn['date'][4]}}</th>
+                                                    <th>{{$toReturn['date'][5]}}</th>
+                                                    <th>{{$toReturn['date'][6]}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>Assigned</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>Work in Process</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Covered Jobs</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Total Jobs</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
+                                                    <td>{{$toReturn['Publish_DatejobCount'][0]}}</td>
+                                                    <td>{{$toReturn['Publish_DatejobCount'][1]}}</td>
+                                                    <td>{{$toReturn['Publish_DatejobCount'][2]}}</td>
+                                                    <td>{{$toReturn['Publish_DatejobCount'][3]}}</td>
+                                                    <td>{{$toReturn['Publish_DatejobCount'][4]}}</td>
+                                                    <td>{{$toReturn['Publish_DatejobCount'][5]}}</td>
+                                                    <td>{{$toReturn['Publish_DatejobCount'][6]}}</td>
                                                 </tr>
 
                                             </tbody>
@@ -305,57 +304,57 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:100;"></th>
-                                                    <th>Today</th>
-                                                    <th>07/16/2019</th>
-                                                    <th>07/15/2019</th>
-                                                    <th>07/14/2019</th>
-                                                    <th>07/13/2019</th>
-                                                    <th>07/12/2019</th>
-                                                    <th>07/11/2019</th>
-
+                                                    <th>{{$toReturn['date'][0]}}</th>
+                                                    <th>{{$toReturn['date'][1]}}</th>
+                                                    <th>{{$toReturn['date'][2]}}</th>
+                                                    <th>{{$toReturn['date'][3]}}</th>
+                                                    <th>{{$toReturn['date'][4]}}</th>
+                                                    <th>{{$toReturn['date'][5]}}</th>
+                                                    <th>{{$toReturn['date'][6]}}</th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>Assigned</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>Work in Process</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Covered Jobs</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Total Jobs</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
-                                                    <td>7</td>
-                                                    <td>4</td>
+                                                    <td>{{$toReturn['close_DatejobCount'][0]}}</td>
+                                                    <td>{{$toReturn['close_DatejobCount'][1]}}</td>
+                                                    <td>{{$toReturn['close_DatejobCount'][2]}}</td>
+                                                    <td>{{$toReturn['close_DatejobCount'][3]}}</td>
+                                                    <td>{{$toReturn['close_DatejobCount'][4]}}</td>
+                                                    <td>{{$toReturn['close_DatejobCount'][5]}}</td>
+                                                    <td>{{$toReturn['close_DatejobCount'][6]}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

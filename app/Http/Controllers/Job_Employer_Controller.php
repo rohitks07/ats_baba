@@ -41,14 +41,12 @@ use Validator;
 
 
 
-
 class Job_Employer_Controller extends Controller
 {
      public function dashboard()
     {
             $toReturn['one_day_job']= count(tbl_post_job::whereDate('dated', '=', date('Y-m-d'))->where('employer_ID',Session::get('id'))->get());
-            $toReturn['total_job']= count(tbl_post_job::where('employer_ID',Session::get('id'))->get());
-            
+            $toReturn['total_job']= count(tbl_post_job::where('employer_ID',Session::get('id'))->get());           
             //$toReturn['total_job']=count(tbl_post_job::get());
             $toReturn['job_post'] = tbl_post_job::paginate(10);
             $toReturn['total_resume']=count(Tbl_job_seekers::where('employer_id',Session::get('user_id'))->get());
@@ -62,8 +60,26 @@ class Job_Employer_Controller extends Controller
             $toReturn['application']= Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs','tbl_seeker_applied_for_job.job_ID','=','post_jobs.ID')
             ->leftjoin('tbl_job_seekers as seeker','tbl_seeker_applied_for_job.seeker_ID','=','seeker.ID')
             ->select('post_jobs.job_code as job_code','post_jobs.job_title as job_title','post_jobs.client_name as job_client_name','post_jobs.country as location','post_jobs.job_visa_status as  job_visa','post_jobs.pay_min as pay_min','post_jobs.pay_max as pay_max','seeker.first_name as can_first_name','seeker.last_name as can_last_name','seeker.country as can_location','seeker.visa_status as can_visa','tbl_seeker_applied_for_job.dated as applied_date')
-            ->paginate(10);
-        return view('employerdashboard')->with('toReturn',$toReturn);
+            ->paginate(10);       
+            for($i=0;$i<7;$i++)
+            {
+                $toReturn['date'][$i]= date('d-m-Y',strtotime("-".$i."days"));
+                $toReturn['Publish_DatejobCount'][$i]= tbl_post_job::where('dated','=',date('Y-m-d',strtotime("-".$i."days")))->count();
+                $toReturn['close_DatejobCount'][$i]= tbl_post_job::where('last_date','=',date('Y-m-d',strtotime("-".$i."days")))->count();
+                // return $toReturn['close_DatejobCount'][$i];
+                // exit;
+
+            }    
+        
+           // return $toReturn['date'];
+
+                // $toReturn['Total_Jobs']= tbl_post_job::where(date('d-m-Y'))->count();
+          // }
+           
+        //    return $toReturn['Total_Jobs'];
+        //    exit;
+            //$toReturn['Work in Process']
+    return view('employerdashboard')->with('toReturn',$toReturn);
     }
     
     
@@ -108,7 +124,13 @@ class Job_Employer_Controller extends Controller
             $Add_to_post_job->company_ID=Session::get('org_ID');
             $date = $request->closeing_date;
             $Add_to_post_job ->last_date   =  date('Y-m-d', strtotime($date));
+            return $date;
+            exit;
+            
             $Add_to_post_job ->dated       =  date('Y-m-d');
+
+
+
             $Add_to_post_job ->job_visa_status=  implode(',',$request->visa);
             $Add_to_post_job ->qualification  =  implode(',',$request->quali);
             $Add_to_post_job ->country        =  $request->country;
@@ -368,10 +390,6 @@ class Job_Employer_Controller extends Controller
         $postcandidate->default_cv_id=1;
         // $postcandidate->cv_file=;
         $postcandidate->skills=$request->skills;
-        // return $request->skills;
-        // exit;
-
-    
         $postcandidate->employer_id=Session::get('user_id');
         $postcandidate->created_by=Session::get('user_id');
         $postcandidate->is_employer=Session::get('user_id');

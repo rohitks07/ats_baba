@@ -123,7 +123,7 @@
                                     <option value="">Select Owner Name</option>
                                     
                                           @foreach($toReturn['team_member'] as $team_member)
-                                            <option value="{{$team_member['full_name']}}"> {{$team_member['full_name']}} </option>
+                                            <option value="{{$team_member['ID']}}"> {{$team_member['full_name']}} </option>
                                           @endforeach
                                     
                                   </select>
