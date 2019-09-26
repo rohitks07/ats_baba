@@ -486,10 +486,24 @@
 									<div class="form-group row delete_row">
 										<label for="address" class="control-label col-lg-12"> </label>
 											<select name="degree[]" id="degree" class="form-control" placeholder="Degree Title" style="width: 14%; margin-left: 9px; border: 1px solid #737373;">
-												<option value="" selected>Select Degree</option>
+											<option value="" selected>Select Degree</option>
+												<option value="BA">BA</option>
+												<option value="BE/B.TECH">BE/B.TECH</option>
+												<option value="B.SC">B.SC</option>
+												<option value="MA">MA</option>
+												<option value="ME/M.TECH">ME/M.TECH</option>
+												<option value="MBA">MBA</option>
+												<option value="M.SC">M.SC</option>
+												<option value="M.COM">M.COM</option>
+												<option value="B.COM">B.COM</option>
+												<option value="BBA">BBA</option>
+												<option value="CA">CA</option>
+												<option value="BCA">BCA</option>
+												
+												<!-- <option value="" selected>Select Degree</option>
 												    @foreach($toReturn['degree'] as  $degree)
 												       <option value="{{$degree['degree_title']}}"> {{$degree['degree_title']}}</option>	
-                                                    @endforeach
+                                                    @endforeach -->
                                             </select>
 										    <input type="text" name="major_subject[]" id="subject" class="form-control" placeholder="Major Subject" style="width: 14%;">	
 										    <input type="text" name="institute[]" id="institute" class="form-control" placeholder="Institute" style="width: 14%;">
@@ -706,10 +720,19 @@ $(document).ready(function(){
 					                <div class="form-group row delete_row" >								
 										<label for="address" class="control-label col-lg-12"> </label>
 											<select name="degree[]" id="" class="form-control" placeholder="Degree Title" style="width: 14%; margin-left: 9px; border: 1px solid #737373;">
-												<option value="" selected>Select Degree</option>
-												    @foreach($toReturn['degree'] as  $degree)
-												       <option value="{{$degree['ID']}}"> {{$degree['degree_title']}}</option>	
-                                                    @endforeach													
+											<option value="" selected>Select Degree</option>   
+												<option value="BA">BA</option>
+												<option value="BE/B.TECH">BE/B.TECH</option>
+												<option value="B.SC">B.SC</option>
+												<option value="MA">MA</option>
+												<option value="ME/M.TECH">ME/M.TECH</option>
+												<option value="MBA">MBA</option>
+												<option value="M.SC">M.SC</option>
+												<option value="M.COM">M.COM</option>
+												<option value="B.COM">B.COM</option>
+												<option value="BBA">BBA</option>
+												<option value="CA">CA</option>
+												<option value="BCA">BCA</option>												
 										    </select>
 										    <input type="text" name="major_subject[]" class="form-control" placeholder="Major Subject" style="width: 14%;">	
 										    <input type="text" name="institute[]" class="form-control" placeholder="Institute" style="width: 14%;">
