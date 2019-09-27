@@ -143,9 +143,9 @@
                                         <option value="Closed">Closed</option>
                                         <option value="Pending">Pending</option>
                                         
-                                        @foreach($toReturn['post_job'] as $post_job)
+                                        <!-- @foreach($toReturn['post_job'] as $post_job)
                                             <option value="{{$post_job['sts']}}"> {{$post_job['sts']}} </option>
-                                        @endforeach
+                                        @endforeach -->
 
                                   </select>
                               </div>
@@ -196,8 +196,8 @@
                               <!--Closing Date-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Closing Date <span style="color:red;">*</span></label>
-                                  <div class="col-sm-8">
-                                      <input type="text" class="datetext datepicker"  name="closeing_date" id="closeing_date" placeholder="dd-mm-yyyy" style="width:25%; padding:8px;">
+                                  <div class="col-sm-8 input-group date" >
+                                      <input type="date" class="datetext datepicker"  name="closeing_date" <style="width:35%; padding:8px;">
                                       <span id="date_check">Enter Valid Closing Date</span> 
                                   </div>
                               </div>
@@ -557,6 +557,7 @@
     document.getElementById("Result").value = e;
     }
 </script>
+
 
 <script>
     var resizefunc = [];

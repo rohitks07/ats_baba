@@ -124,13 +124,9 @@ class Job_Employer_Controller extends Controller
             $Add_to_post_job->company_ID=Session::get('org_ID');
             $date = $request->closeing_date;
             $Add_to_post_job ->last_date   =  date('Y-m-d', strtotime($date));
-            return $date;
-            exit;
-            
+            // return $date;
+            // exit;status          
             $Add_to_post_job ->dated       =  date('Y-m-d');
-
-
-
             $Add_to_post_job ->job_visa_status=  implode(',',$request->visa);
             $Add_to_post_job ->qualification  =  implode(',',$request->quali);
             $Add_to_post_job ->country        =  $request->country;
@@ -717,33 +713,37 @@ class Job_Employer_Controller extends Controller
     public function assign_job($id="")
     {
         $toReturn=array();
-        $toReturn['post_job'] = tbl_post_jobs::where('id',$id)->first();
         $toReturn['team_member_list']= tbl_team_member::get()->toArray();  
         foreach($toReturn['team_member_list'] as $key => $value){
            $check_already_assign = tbl_job_post_assign::where(array('job_post_id'=>$id,'team_member_id'=>$toReturn['team_member_list'][$key]['ID'],'status'=>'active'))->first();
         //    echo"<pre>";
         //    print_r($check_already_assign);
         //    exit;
-           if(!empty($check_already_assign)){
+            if(!empty($check_already_assign)){
                 $toReturn['team_member_list'][$key]['sts'] = 'active';
             }else{
                 $toReturn['team_member_list'][$key]['sts'] = 'inactive';
             }
         
         }
+        $toReturn['post_job'] = tbl_post_jobs::where('id',$id)->first();
         $post_job  = tbl_post_jobs::where('id',$id)->first();      
         $assign_details= \DB::table('tbl_job_post_assign')
                                                 ->leftjoin('tbl_team_member','tbl_team_member.ID','=','tbl_job_post_assign.team_member_id')
                                                 ->leftjoin('user','user.ID','=','tbl_job_post_assign.team_member_id')
-                                                ->select('tbl_team_member.full_name as name','tbl_team_member.email as email','user.full_name as userAssign','tbl_job_post_assign.job_assigned_date as job_assign_date')->get()->toArray();
+                                                ->select('tbl_team_member.full_name as name','tbl_team_member.email as email','user.full_name as userAssign',
+                                                        'tbl_job_post_assign.job_assigned_date as job_assign_date')->get()->toArray();
+                    // return $assign_details;
+                    // exit;
+            
             return view('posted_job_assined')->with('toReturn',$toReturn)->with('jobpost',$post_job)->with('assign_details',$assign_details);
                                      //->with('job_post_assign_status',$job_post_assign_status);
     }
 
     public function assign_active(Request $request)
     {
-        return $request->team_member_id;
-        // // exit;  
+        //return $request->team_member_id;
+        // // exit;  s
         if($request->sts =='active')
         {
                 $assigned_job = new tbl_job_post_assign();            
