@@ -101,7 +101,7 @@
     <div class="content-page">
         <div class="content">
             <div class="container-fluid">
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" action="{{url('employer/forward_candidate')}}" method="post">
+                <form class="cmxform form-horizontal tasi-form" id="signupForm" action="{{url('employer/forward_candidate')}}" method="post" enctype="multipart/form-data">
                     @csrf()
                     <div class="row">
                         <div class="col-md-12">
@@ -148,7 +148,7 @@
                                                 <input type="text"  style="width: 75%;" placeholder="Subject" id="Subject" name="email_subject" required >  
                                             </div>
                                         </div>
-
+                                        <input type="hidden"  placeholder="Updated Resume" name="updated_resume" value="{{$toReturn['application_detail']['updated_resume']}}" />
                                         <div class="form-group row">
                                             <label for="Subject"  class="control-label col-lg-4">Email Content<span class="red">*</label>
                                             <div class="col-lg-6">
@@ -219,16 +219,12 @@
                                               <input type="date" placeholder="Date Of Birth" name="date_of_birth" required/>
                                             </div><!--emd of col-->
                                         </div> <!--end of row-->
-
                                         <div class="row" >
                                         <div class="col-md-1"></div>
                                             <div class="col-md-3" id="dels">
-                                                
                                              <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" checked>
                                              <label class="form-label">Last 4 Digit SSN No.</label>
                                                  <input type="text" max="4" placeholder="Last 4 Digit SSN No." id="last_for_digit_ssn" name="last_for_digit_ssn"  required>  
-                                                 
-                                                 
                                                         <span id="emsg" style="display:none;">Please Enter a Valid SSN No.</span>
                                                     
                                             </div><!--emd of col-->
@@ -452,15 +448,24 @@
                                             </thead>    
                                             <tbody>
                                                 <tr style="background: aliceblue;">
-                                                    <td><input type="checkbox"  name="other_doc0" id="other_doc0" value="1"> 
-                                                    <input type="hidden" name="doc1" value="Dice_Profile_Sviatoslav_Liubenko1.docx" /><a href="http://hrmssystems.com//public/uploads/candidate/resumes/Dice_Profile_Sviatoslav_Liubenko1.docx"> Dice_Profile_Sviatoslav_Liubenko1.docx</a></td>
-
-                                                    <td><input type="checkbox"  name="other_doc1" id="other_doc1" value="1"> 
-                                                        <input type="hidden" name="doc2" value="" /></a></td>
-                                                    <td><input type="checkbox"  name="other_doc2" id="other_doc2" value="1"> 
-                                                        <input type="hidden" name="doc3" value="" /></td>
+                                                    <td><input type="checkbox"  name="other_doc0" id="other_doc0" value="document_upload"> 
+                                                    @if(!empty($toReturn['application_detail']['updated_resume']))
+                                                    <input type="hidden" name="document_name[]" value="update_Resume">
+							                        <input type="hidden" name="document_upload[]" value="{{$toReturn['application_detail']['updated_resume']}}" ><a href="{{url('public/seekerresume/'.$toReturn['application_detail']['updated_resume'])}}">{{$toReturn['application_detail']['updated_resume']}}</a>
+							                        @endif
+                                                    <td><input type="button"  name="other_doc1" id="other_doc1" value="Delete"> 
+                                                        <input type="button" name="add_more_doc" value="Add More "/></a></td>
+                                                   
                                                 </tr>
-                                                        </tbody>
+                                                <tr><td></td><td></td></tr>
+                                                <tr id="exp_detail">		
+										        <td class="form-group row delete_exp">													
+										        <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;">
+                                                <input type="file" name="document_upload[]" id="document_upload" class="form-control" style="width: 40%;">
+												<p><button type="button" id="btnAdd_Exp" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
+												</td>
+                                                </tr>
+                                                </tbody>
                                                 </table>   
                                             </div>
                                         <hr>
@@ -501,6 +506,23 @@ $(document).ready(function(){
 });
 </script>
 <script type="text/javascript">
-    function lastfor()
+    
 </script>
 @include('include.footer')
+<script>
+$(document).ready(function(){
+	var i=1;
+	$('#btnAdd_Exp').click(function(){
+        i++;				
+            var data2=`<div class="form-group row delete_exp">													
+            <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;">
+                            <input type="file" name="document_upload[]" id="document_upload" style="width: 40%;">
+							<button type="button" id="btnRemove" class="btn btn-primary btn_remove">Remove</button>											  
+						 </div>`;
+		 $('#exp_detail').append(data2);
+	});	
+});
+$(document).on('click', '.btn_remove', function() {
+    $(this).closest('.delete_exp').remove();
+});	 
+</script>

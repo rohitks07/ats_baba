@@ -31,6 +31,10 @@
     color: #000;
     background: #c3c3c399;
 }
+.modal .modal-dialog .modal-content {
+    height: 600px;
+    overflow-y: scroll;
+}
 
 </style>  
                         
@@ -101,7 +105,7 @@
 							        	<form action="{{url('employer/assigned')}}" method="post">
 							        	<input type="hidden" name="_token" value ="{{ csrf_token()  }}" >
 
-							        	<input type="text" name="job_id" value="{{$jobpost['ID']}}">
+							        	<input type="hidden" name="job_id" value="{{$jobpost['ID']}}">
 						        		<input type="hidden" name="team_member_id"  value="{{$toReturn['ID']}}">
 						        	 	<input type="hidden" name="owner_id" value="{{$jobpost['owner_id']}}">
 								        <td><input type="hidden" name="full_name" value="{{$toReturn['full_name']}}">{{$toReturn['full_name']}}</td>

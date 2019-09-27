@@ -494,6 +494,7 @@
                                             <tbody>
                                                 @foreach($toReturn['job_post'] as $job_post)
                                                 <input type="hidden" value="{{$job_post['ID']}}">
+                                                <?php $id=$job_post['ID'];?>
                                                 <tr>
                                                     <td>{{$job_post['job_code']}}</td>
                                                     <td>{{$job_post['job_title']}}</td>
@@ -511,7 +512,7 @@
                                                         <span class="btn btn-primary btn-xs" style="cursor:none;">0</span>
                                                     </td>
                                                     <td class="actions">
-                                                        <a href="#" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Asign this job"><i class="fa fa-users"></i></a>
+                                                        <a href="{{url('employer/posted_job_assined/'.$id)}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Asign this job"><i class="fa fa-users"></i></a>
                                                         <a href="#" class="hidden on-editing login-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                                         <a href="#" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="submit a candidate"><i class="fa fa-user"></i></a>
                                                     </td>

@@ -790,16 +790,18 @@ class Job_Employer_Controller extends Controller
     }
     public function submit_candidate(Request $Request)
     { 
+        // return $Request;
         // return $Request->updated_resume;
         // if ($Request->hasFile('updated_resume')){
-            $updated_resume = $Request->file('updated_resume');
-            return $updated_resume;
-            exit();
-            $new_updated_resume = rand() . '.' . $updated_resume->getClientOriginalExtension();
-            $updated_resume->move(public_path('seekerresume'), $new_updated_resume);
-            // return $new_updated_resume;
-            // exit();
-            // }
+            // $updated_resume = $Request->file('updated_resume');
+            // return $updated_resume;
+            $mydate=date('m-Y-d');
+            $seeker_name=$Request->seeker_name;
+            if ($Request->hasFile('updated_resume')){
+                $updated_resume = $Request->file('updated_resume');
+                $new_updated_resume =$seeker_name."update_resume".$mydate.".".$updated_resume->getClientOriginalExtension();
+                $updated_resume->move(public_path('seekerresume'), $new_updated_resume);
+                }
         $seeker_applied_for_job=new Tbl_seeker_applied_for_job();
         $seeker_applied_for_job->seeker_ID=$Request->seeker_id;
         $seeker_applied_for_job->job_ID=$Request->job_id;
@@ -817,10 +819,10 @@ class Job_Employer_Controller extends Controller
         $seeker_applied_for_job->phone_no_mobile=$Request->mobile_number;
         // $seeker_applied_for_job->phone_no_home=
         $seeker_applied_for_job->email_id	=$Request->seeker_email;
-        // if($Request->hasFile('updated_resume'))
-        // {
+        if($Request->hasFile('updated_resume'))
+        {
         $seeker_applied_for_job->updated_resume=$new_updated_resume;
-        // }
+        }
         // $seeker_applied_for_job->skype_id=
         $seeker_applied_for_job->current_location=$Request->seeker_city;
         $seeker_applied_for_job->visa_status=$Request->seeker_visa;
@@ -962,6 +964,7 @@ public function upda($id ="")
         ));
        return redirect('employer/dashboard/interview-meeting');
     }
+   
     public function application_forword($id="")
     {
         $toReturn['application_detail']= Tbl_seeker_applied_for_job::where('ID',$id)->first();
@@ -971,13 +974,16 @@ public function upda($id ="")
     }
     public function forward_candidate(Request $Request)
     {
+        // return $Request->document_upload[0];
+
+        $update_resume=$Request->updated_resume;
         $experience_list=$Request->experience;
         $reference_list=$Request->reference;
         $job_id=$Request->job_id;
         $seeker_id=$Request->seeker_id;
-        // return $seeker_id;
         $seeker_detail=Tbl_job_seekers::where('ID',$seeker_id)->first();
         $seeker_edu_detail=tbl_seeker_academic::where('seeker_id',$seeker_id)->first();
+        // return $seeker_edu_detail;
         $seeker_exp_detail=tbl_seeker_experience::where('seeker_ID',$seeker_id)->first();
         $current_org=$seeker_exp_detail['company_name'];
         $start_date = $seeker_exp_detail['start_date'];
@@ -990,7 +996,6 @@ public function upda($id ="")
         $exp_years=floor($exp_month/12);
         $job_detail=tbl_post_job::where('ID',$job_id)->first();
         $forward_candidate=new Tbl_forward_candidate();
-
         $forward_candidate->job_seeker_id=$seeker_id;
         $forward_candidate->job_id=$Request->job_id;
         $forward_candidate->forward_by=Session::get('email');
@@ -1028,22 +1033,47 @@ public function upda($id ="")
         $forward_candidate_reference=new Tbl_forward_candidate_reference();    
         $send_mail_id=Session::get('email');
         $email_to=$Request->email_to;
-        // foreach($experience_list as $key =>$value)
+        // echo"<pre>";
+        // print_r($experience_list);
+        // exit;
+        // return $experience_list;
+        // if(!empty($experience_list))
         // {
-        //     $forward_candidate_exp_required=new Tbl_forward_candidate_exp_required();
+        //     foreach($experience_list as $key =>$value)
+        // {   
+            echo"dsfsdf";
+            // if($experience_list[$key]!="" )
+            // {
+                
+            $forward_candidate_exp_required1 = new Tbl_forward_candidate_exp_required();
+            $forward_candidate_exp_required1->skills="fghf";
+            // $forward_candidate_exp_required->skills=$experience_list[0][0];
+            // $forward_candidate_exp_required->yrs_of_exp=$experience_list[1][1];
+            // $forward_candidate_exp_required->expertise_level=$experience_list[1][2];
+            $forward_candidate_exp_required1->save;
+            // }
+            // break;
 
+        // }            
         // }
+        
 
-        $data = array('forward_candidate'=>$forward_candidate, 'experience_list'=>$experience_list, 'reference_list'=>$reference_list); 
+        $data = array('forward_candidate'=>$forward_candidate, 'experience_list'=>$experience_list, 'reference_list'=>$reference_list,'update_resume'=>$update_resume); 
         // echo "<pre>";
         // print_r($data['forward_candidate']['fullname']);
         // exit;   
-        Mail::send('emails.forward_candidate',['data' => $data], function($message) use ($data){
-            $message->to($data['forward_candidate']['forward_to'])
-                    ->subject($data['forward_candidate']['subject']);                  
-            $message->from($data['forward_candidate']['forward_by'],'ATS BABA');
-        });
-        // return view('emails.forward_candidate')->with('data',$data);
+        // Mail::send('emails.forward_candidate',['data' => $data], function($message) use ($data){
+        //     $message->to($data['forward_candidate']['forward_to'])
+        //             ->cc($data['forward_candidate']['cc'])
+        //             ->bcc($data['forward_candidate']['bcc'])
+        //             ->subject($data['forward_candidate']['subject']);
+        //     $message->attach('public/seekerresume', array(
+        //             'as' => $data['update_resume'], 
+        //             'mime' => 'application/docx')
+        //         ); 
+        //     $message->from($data['forward_candidate']['forward_by'],'ATS BABA');
+        // });
+        return view('emails.forward_candidate')->with('data',$data);
                return redirect('employer/Application');
         
     }

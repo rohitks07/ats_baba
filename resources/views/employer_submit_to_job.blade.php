@@ -77,7 +77,7 @@ width: 84%;
 <div id="wrapper">
     <div class="content-page">
         <div class="content">
-        <form class="cmxform form-horizontal tasi-form" id="signupForm" action="{{url('employer/submit_candidate')}}"   method="post" >
+        <form class="cmxform form-horizontal tasi-form" id="signupForm" action="{{url('employer/submit_candidate')}}"   method="post"  enctype="multipart/form-data" >
         @csrf()
             <div class="row">
                 <div class="col-md-12">
@@ -122,7 +122,6 @@ width: 84%;
                                             <label for=""  class="control-label col-lg-4">Upload Resume<span class="red">*</span></label>
                                             <div class="col-lg-8">
                                                   <input type="file" class="form-control" name="updated_resume" id="updated_resume"   required style="width: 50%;">
-                                                  
               									  <p>Upload files only in .doc, .docx or .pdf format with maximum size of 6 MB.</p>
                                             </div>
                                         </div>

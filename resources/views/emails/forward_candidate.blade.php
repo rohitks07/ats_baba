@@ -26,11 +26,13 @@
 <tr><td>Availability for In-person Interview</td><td>{{$data['forward_candidate']['personinterview']}}</td></tr>
 <tr><td>Availability for Telephone Interview</td><td>{{$data['forward_candidate']['telephonicinterview']}}</td></tr>
 <tr><td>Availability for new Project</td><td>{{$data['forward_candidate']['availibilitynewproj']}}</td></tr>
-<tr><td>Rate</td><td>{{$data['forward_candidate']['expectedrate']}}</td></tr>
+<tr><td>Rate</td><td>${{$data['forward_candidate']['expectedrate']}}</td></tr>
 
 </table>
 <h3><u>Experience Summary:</h3></u>
-<h4> Total IT Experience: 8+Years</h4>
+@if($data['forward_candidate']['yearExp'])
+<h4> Total IT Experience: {{$data['forward_candidate']['yearExp']}}+Years</h4>
+@endif
 <h4>Total US Experience: 4+Years</h4>
 
 <table border="1px" style="border-collapse: collapse;">
@@ -55,7 +57,6 @@
 <h3><u>Last Two project references :</h3></u><br>
 @if(($data['reference_list'][0][0])!="")
 <table border="1px" style="border-collapse: collapse;">
-
 <tr><th style="">Full Name</th><th style="">EmailId</th><th style="">Designation</th><th style="">Contact Number</th><th style="">Client Name</th></tr>
 <tr><td>{{$data['reference_list'][0][0]}}</td><td>{{$data['reference_list'][0][1]}}</td><td>{{$data['reference_list'][0][2]}}</td><td>{{$data['reference_list'][0][3]}}</td><td>{{$data['reference_list'][0][4]}}</td></tr>
 <tr><td>{{$data['reference_list'][1][0]}}</td><td>{{$data['reference_list'][1][1]}}</td><td>{{$data['reference_list'][1][2]}}</td><td>{{$data['reference_list'][1][3]}}</td><td>{{$data['reference_list'][1][4]}}</td></tr>
