@@ -413,18 +413,17 @@
 												<select name="country" id="country" class="form-control"  style="max-width:19%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
 												    <option value="" selected>Country</option>
 												        @foreach($toReturn['countries'] as $countries)
-												            <option value="{{$countries['country_name']}}"> {{$countries['country_citizen']}} </option>
+												            <option value="{{$countries['ID']}}"> {{$countries['country_name']}} </option>
 												        @endforeach	
 											    </select><br>
 
 										        <select name="state" id="state_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
-													<option value="" selected>State</option>
-														@foreach($toReturn['cities'] as $cities)
-												            <option value="{{$cities['state']}}"> {{$cities['state']}} </option>
-												        @endforeach														
+													<option value="" selected>select</option>
 										        </select><br>
-										    <input name="city" type="text" class="form-control" id="test" placeholder="City" required maxlength="20" style="width: 15%; margin-left:10px;background:#fff;">											     
-											<span id="citycheck" style="margin-left:34%">Please Select Your location</span>
+										        <select name="city" id="city_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
+												<option value="">Select</option>	
+												</select>
+												<span id="citycheck" style="margin-left:34%">Please Select Your location</span>
 										</div>
 								<!--end Location -->
 								<!--Address Line 1-->	   
@@ -1312,5 +1311,71 @@ $(function() {
 				});
 			});
 		</script>
+		 <script>
+$(document).ready(function()
+{
+    $('#country').on('change', function()
+        {
+			$('#state_text').empty();
+            var country_id = $(this).val();
+			alert(country_id);
+             if(country_id)
+                {
+                     $.ajax({
+
+                            type:'GET',
+                        	url:'{{url('employer/fetchstate')}}'+"/"+country_id,
+                            dataType:'json',
+                            success: function(data)
+                            {
+								console.log(data);
+                                 
+                                  $.each(data,function(i,state){
+                                  $("#state_text").append("<option>"+state.state+"</option>");
+
+                                 //console.log(response);
+                                 });
+                                   
+                            }
+                    });
+                }
+         
+    });
+});
+</script>
+		 <script>
+$(document).ready(function()
+{
+    $('#state_text').on('change', function()
+        {
+			$('#city_text').empty();
+            var state_id = $(this).val();
+			var country_id=$('#state_text').val();
+
+			alert(state_id);
+             if(state_id)
+                {
+                     $.ajax({
+
+                            type:'GET',
+                        	url:'{{url('employer/fetchcity')}}'+"/"+state_id+"/"+country_id,
+                            dataType:'json',
+                            success: function(data)
+                            {
+								console.log(data);
+                                 
+                                  $.each(data,function(i,city){
+                                  $("#city_text").append("<option >"+city.city_name+"</option>");
+
+                                 //console.log(response);
+                                 });
+                                   
+                            }
+                    });
+                }
+         
+    });
+});
+</script>
 </body>
 </html>

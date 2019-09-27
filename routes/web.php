@@ -43,6 +43,9 @@ Route::get('admindashboard','job_seeker_Controller@index1');
 Route::post('admindashboard/addexp','job_seeker_Controller@addexp');
 Route::post('admindashboard/addedu','job_seeker_Controller@addedu');
 // Admin Dasahboard routes
+Route::get('employer/fetchstate/{id}','LocationController@fetchstate');
+Route::get('employer/fetchcity/{id}/{counid}','LocationController@fetchcity');
+
 
 //Super admin route definition
 Route::get('admin','userloginController@loginPage');
