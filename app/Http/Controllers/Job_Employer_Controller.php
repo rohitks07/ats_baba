@@ -124,7 +124,7 @@ class Job_Employer_Controller extends Controller
             $Add_to_post_job->company_ID=Session::get('org_ID');
             $date = $request->closeing_date;
             $Add_to_post_job ->last_date   =  date('Y-m-d', strtotime($date));
-            // return $date;
+            // return $date; 
             // exit;status          
             $Add_to_post_job ->dated       =  date('Y-m-d');
             $Add_to_post_job ->job_visa_status=  implode(',',$request->visa);
@@ -136,9 +136,18 @@ class Job_Employer_Controller extends Controller
             $Add_to_post_job ->job_duration   =  $request->job_duration;
             $Add_to_post_job ->job_duration_uom =  $request->day_week;
             $select_payment=$request->select_payment;
+            if($select_payment=='DOE')
+            {
+                $Add_to_post_job ->pay_min       =  $select_payment;
+                $Add_to_post_job ->	pay_max      =  $select_payment;
+            }else{
             $payment_array=explode('-',$select_payment);
             $Add_to_post_job ->pay_min        =  $payment_array[0];
-            $Add_to_post_job ->	pay_max      =  $payment_array[1];
+            $Add_to_post_job ->pay_max      =  $payment_array[1];
+            }
+            // $payment_array=explode('-',$select_payment);
+            // $Add_to_post_job ->pay_min        =  $payment_array[0];
+            // $Add_to_post_job ->	pay_max      =  $payment_array[1];
             $Add_to_post_job ->pay_uom        =  $request->pay_uom;
             $Add_to_post_job ->min_pay_rate        =  $request->pay_min;
             $Add_to_post_job ->	max_pay_rate        =  $request->pay_max;

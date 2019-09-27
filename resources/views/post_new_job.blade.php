@@ -141,8 +141,7 @@
                                         <option value="Hold">Hold</option>
                                         <option value="Cancelled">Cancelled</option>
                                         <option value="Closed">Closed</option>
-                                        <option value="Pending">Pending</option>
-                                        
+                                        <option value="Pending">Pending</option>   
                                         <!-- @foreach($toReturn['post_job'] as $post_job)
                                             <option value="{{$post_job['sts']}}"> {{$post_job['sts']}} </option>
                                         @endforeach -->
@@ -430,7 +429,7 @@
                                       <option value="45k-50k">45k - 50k</option>
                                       <option value="50k-55k">50k - 55k</option>
                                       <option value="55k-60k">55k - 60k</option>
-                                      <option>(DOE)Depends upon Experience</option>
+                                      <option value="DOE">(DOE)Depends upon Experience</option>
 
                                       </select>
                                   <div class="col-md-12" style="float: right;margin-left: 19em;margin-top: 2%;">
