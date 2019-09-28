@@ -83,7 +83,7 @@
                               <!--group-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Group<span style="color:red;">*</span></label>
-                                  <select name="group_of_company" id="for_group" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;">
+                                  <select name="group_of_company" id="for_group" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" required>
                                         <option value="">Select Group Type</option>
                                           @foreach($toReturn['team_member_type'] as $team_member_type)
                                             <option value="{{$team_member_type['type_name']}}"> {{$team_member_type['type_name']}} </option>
@@ -95,7 +95,7 @@
                               <!--Client Name-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Client Name<span style="color:red;">*</span></label>
-                                  <input type="text" name="company_name" id="company_name" placeholder="Client Name" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" >
+                                  <input type="text" name="company_name" id="company_name" placeholder="Client Name" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                   <!-- <select name="company_name" id="company_name" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
                                         <option value="">Select Client Name</option>
                                         <option value="Zenar">Zenar</option>
@@ -109,7 +109,7 @@
                               <!--Privacy Level-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Privacy Level<span style="color:red;">*</span></label>
-                                  <select name="privacy_level" id="privacy_level" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
+                                  <select name="privacy_level" id="privacy_level" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                       <option value="public">Public</option>
                                       <option value="private">Private</option>
                                   </select>
@@ -119,7 +119,7 @@
                               <!--Owner Name-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Owner Name<span style="color:red;">*</span></label>
-                                  <select name="owner_name" id="owner_name" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
+                                  <select name="owner_name" id="owner_name" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                     <option value="">Select Owner Name</option>
                                     
                                           @foreach($toReturn['team_member'] as $team_member)
@@ -134,7 +134,7 @@
                               <!--Status-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Status<span style="color:red;">*</span></label>
-                                  <select name="status" id="status" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
+                                  <select name="status" id="status" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                         <option value="Published">Published</option>
                                         <option value="Draft">Draft</option>
                                         <option value="Deleted">Deleted</option>
@@ -153,7 +153,7 @@
                               <!--Industry-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Industry<span style="color:red;">*</span></label>
-                                  <select name="industry" id="industry" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
+                                  <select name="industry" id="industry" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                       @foreach($toReturn['job_industries'] as $job_industries)
                                             <option value="{{$job_industries['ID']}}"> {{$job_industries['industry_name']}} </option>
                                       @endforeach
@@ -165,7 +165,7 @@
                               <div class="form-group row">
                                   <label for="" class="control-label col-lg-4">Job Code<span style="color:red;">*</span> </label>
                                   <div class="col-lg-8">
-                                      <input type="text" name="job_code" id="job_code" placeholder="Job Code" maxlength="50">
+                                      <input type="text" name="job_code" id="job_code" placeholder="Job Code" maxlength="50" required>
                                       <br>
                                       <span id="jobcode_check">Please Enter Job Code</span> 
                                   </div>
@@ -176,7 +176,7 @@
                               <div class="form-group row">
                                   <label for="" class="control-label col-lg-4">Job Title<span style="color:red;">*</span> </label>
                                   <div class="col-lg-8">
-                                      <input type="text" name="job_title" id="job_title" placeholder="Job Title" maxlength="50">
+                                      <input type="text" name="job_title" id="job_title" placeholder="Job Title" maxlength="50" required>
                                       <br>
                                       <span id="jobtitle_check">Please Enter Job Title</span> 
                                   </div>
@@ -187,7 +187,7 @@
                               <div class="form-group row">
                                   <label for="" class="control-label col-lg-4">No.of Vacancies<span style="color:red;">*</span> </label>
                                   <div class="col-lg-8">
-                                      <input type="text" name="no_of_vacancies" id="" placeholder="No.of Vacancies" maxlength="150">
+                                      <input type="text" name="no_of_vacancies" id="" placeholder="No.of Vacancies" maxlength="150" required>
                                   </div>
                               </div>
                               <!--end of No.of Vacancies-->
@@ -196,7 +196,7 @@
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Closing Date <span style="color:red;">*</span></label>
                                   <div class="col-sm-8 input-group date" >
-                                      <input type="date" class="datetext datepicker"  name="closeing_date" <style="width:35%; padding:8px;">
+                                      <input type="date" class="datetext datepicker"  name="closeing_date" style="width:35%; padding:8px;" required>
                                       <span id="date_check">Enter Valid Closing Date</span> 
                                   </div>
                               </div>
@@ -205,7 +205,7 @@
                               <!--Visa-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Visa<span style="color:red;">*</span></label>
-                                  <select name="visa[]" id="job_visa_status" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple>
+                                  <select name="visa[]" id="job_visa_status" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple required>
                                       <option value="EAD-GC" selected>EAD-GC</option>
                                       <option value="EAD-H4">EAD-H4</option>
                                       <option value="EAD-L2">EAD-L2</option>
@@ -221,7 +221,7 @@
                               <!--Qualification -->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Qualification <span style="color:red;">*</span></label>
-                                  <select name="quali[]" id="qualification" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple>
+                                  <select name="quali[]" id="qualification" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple required>
                                       <option value="BA" selected>BA</option>
                                       <option value="BE">BE</option>
                                       <option value="BS">BS</option>
@@ -256,7 +256,7 @@
                               <!--location-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
-                                  <select name="country" id="country" class="form-control" style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;">
+                                  <select name="country" id="country" class="form-control" style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
                                       <option value="Afghanistan" selected>Afghanistan</option>
                                       <option value="Albany">Albany</option>
                                       <option value="Algeria">Algeria</option>
@@ -325,7 +325,7 @@
                                       <option value="Yemen">Yemen</option>
                                   </select>
 
-                                  <select name="state" id="state_text" class="form-control" style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;">
+                                  <select name="state" id="state_text" class="form-control" style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
                                       <option value="AK" selected>AK</option>
                                       <option value="AL">AL</option>
                                       <option value="AR">AR</option>
@@ -379,7 +379,7 @@
                                       <option value="WV">WV</option>
                                       <option value="WY">WY</option>
                                   </select>
-                                  <div class="col-md-12" style="float: right;margin-left: 19em;margin-top: 2%;">
+                                  <div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
                                       <input type="text" name="city" id="city" placeholder="City" maxlength="150" style="width:44%;">
                                       <br>
                                       <span id="citycheck">Please choose Your Location</span> 
@@ -390,7 +390,7 @@
                               <!--Job Type-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Job Type <span style="color:red;">*</span></label>
-                                  <select name="type_of_job" id="type_of_job" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
+                                  <select name="type_of_job" id="type_of_job" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                       <option value="Full Time">Full Time</option>
                                       <option value="Contract">Contract</option>
                                       <option value="Contract-to-Hire">Contract-to-Hire</option>
@@ -403,7 +403,7 @@
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Job Duration <span style="color:red;">*</span></label>
                                   <input type="text" name="job_duration" id="job_duration" style="width:19%; float:left; margin-left: 1%;">
-                                  <select name="day_week" id="job_duration_day" class="form-control" style="width:23%; border: 1px solid #bbb8b8; float:left; margin-left:0.5em;">
+                                  <select name="day_week" id="job_duration_day" class="form-control" style="width:23%; border: 1px solid #bbb8b8; float:left; margin-left:0.5em;" required>
                                       <option value="Day">Day</option>
                                       <option value="Week">Week</option>
                                       <option value="Month">Month</option>
@@ -418,7 +418,7 @@
                                   <label class="control-label col-lg-4">Salary/Pay Rate <span style="color:red;">*</span></label>
                                   <!-- <input type="text" placeholder="min" name="pay_min" id="pay_min" style="width:20%; float:left;  margin-left: 1%;">&nbsp;&nbsp;
                                   <input type="text" placeholder="Max" name="pay_max" id="pay_max" value="" maxlength="4" style="width:22%; float:left;"> -->
-                                  <select name="select_payment" id="pay_min" class="form-control" style="max-width:42%; margin-left: 9px; border: 1px solid #bbb8b8;">
+                                  <select name="select_payment" id="pay_min" class="form-control" style="max-width:42%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
                                       <option> SELECT MONTHLY WAGES</option>
                                       <option value="15k-20k">15k - 20k</option>
                                       <option value="20k-25k">20k - 25k</option>
@@ -433,7 +433,7 @@
 
                                       </select>
                                   <div class="col-md-12" style="float: right;margin-left: 19em;margin-top: 2%;">
-                                      <select name="pay_uom" id="pay_uom" class="form-control" style="width:19%; border: 1px solid #bbb8b8; float:left; margin-left:0.5em;">
+                                      <select name="pay_uom" id="pay_uom" class="form-control" style="width:19%; border: 1px solid #bbb8b8; float:left; margin-left:2.5em;" required>
                                           <option value="Hourly">Hourly</option>
                                           <option value="Annum">Annum</option>
                                       </select>
@@ -445,7 +445,7 @@
                               <div class="form-group row">
                                   <label for="" class="control-label col-lg-4">Experience Required <span style="color:red;">*</span> </label>
                                   <div class="col-lg-8">
-                                      <input type="text" name="experience" id="experience" placeholder="Experience Required" maxlength="2">
+                                      <input type="text" name="experience" id="experience" placeholder="Experience Required" maxlength="2" required>
                                       <em style="vertical-align: sub;">years</em>
                                       <br>
                                       <span id="exp_req_check">Please Enter a Valid Year</span> 
@@ -457,7 +457,7 @@
                               <div class="form-group row">
                                   <label class="col-md-4 control-label" for="example-textarea-input">Requirements (Must)<span style="color:red;">*</span></label>
                                   <div class="col-md-8">
-                                      <textarea cols="40" rows="3" name="requirement" id="textarea" style="width:66%;"></textarea>
+                                      <textarea cols="40" rows="3" name="requirement" id="textarea" style="width:66%;" required></textarea>
                                       <br>
                                       <span class="tooltiptext">Must have required technologies like Java, Asp.net, PHP etc..</span>        
                                       <br>                         
@@ -481,7 +481,7 @@
                               <div class="form-group row">
                                   <label class="col-md-4 control-label" for="example-textarea-input">Job Description<span style="color:red;">*</span></label>
                                     <div class="col-md-8">
-                                        <textarea name="job_desc" id="editor" cols="60" rows="6" style="width:66%;"></textarea>
+                                        <textarea name="job_desc" id="editor" cols="60" rows="6" style="width:66%;" required></textarea>
                                         <br>
                                       <span id="job_desc_check">Please Enter Job Description</span> 
                                         
@@ -511,7 +511,7 @@
                             <div class="form-group row">
                                 <label for="lastname" class="control-label col-lg-4">Add Skill <span style="color:red;">*</span></label>
                                 <div class="col-lg-4">
-                                    <input class="form-control" style="border: 1px solid #737373; width:100%;" id="tags" name="skill" type="text">
+                                    <input class="form-control" style="border: 1px solid #737373; width:100%;" id="tags" name="skill" type="text" required>
                                     <span class="help-block" style="text-align:right;"><small>
                                         Single skill at a time..</small></span>
                                <br>

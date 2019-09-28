@@ -92,15 +92,15 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Name <span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												 <input type="text" id="" name="name" placeholder="Contact Person Name" >
+												 <input type="text" id="" name="name" placeholder="Contact Person Name" required>
 											</div>
 									  </div>
 								<!--end of Name-->
 								<!--Phone-->	   
 									<div class="form-group row">
-										<label for="" class="control-label col-lg-4">Phone (C)</label>
+										<label for="" class="control-label col-lg-4">Phone (C)<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												 <input type="text" id="" name="phone_c" placeholder="00.000.000" maxlength="10">
+												 <input type="text" id="" name="phone_c" placeholder="00.000.000" maxlength="10" required>
 											</div>
 									  </div>
 								<!--end of Phone (C)-->
@@ -117,9 +117,9 @@
 							<div class="col-md-6">
 								<!--Email (H))-->	   
 									<div class="form-group row" >
-										<label for="" class="control-label col-lg-4">Email (H)</label>
+										<label for="" class="control-label col-lg-4">Email (H)<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												 <input type="text" id="" name="email_h" placeholder="Email ID" maxlength="60">
+												 <input type="text" id="" name="email_h" placeholder="Email ID" maxlength="60" required>
 											</div>
 									  </div>
 								<!--end of Email (H)-->
@@ -136,7 +136,7 @@
 									   <!--Address-->				
 										<div class="form-group row">
 											<label for="address" class="control-label col-lg-4">Address </label>
-												<select name="country" id="country" class="form-control" onChange="grab_cities_by_country(this.value);" style="width:17%; border: 1px solid #737373; margin-left: 9px; background:#fff;">
+												<select name="country" id="country" class="form-control" onChange="grab_cities_by_country(this.value);" style="width:17%; border: 1px solid #737373; margin-left: 9px; background:#fff;" required>
 												<option value="" selected>Select Country</option>
 												<option value="Afghanistan" >Afghanistan</option>
 												<option value="Albany" >Albany</option>
@@ -206,7 +206,7 @@
 												<option value="Yemen" >Yemen</option>
 											  </select>
 											  
-										<select name="state" id="state_text" class="form-control" onchange="select_city_by_state(this.options[this.selectedIndex].value)" style="max-width:17%; margin-left: 9px; border: 1px solid #737373; background:#fff;">
+										<select name="state" id="state_text" class="form-control" onchange="select_city_by_state(this.options[this.selectedIndex].value)" style="max-width:17%; margin-left: 9px; border: 1px solid #737373; background:#fff;" required>
 											<option value="" selected>Select State</option>
 												<option value="AK" >AK</option>
 												<option value="AL" >AL</option>
