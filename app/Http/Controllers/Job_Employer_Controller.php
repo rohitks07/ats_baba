@@ -265,9 +265,7 @@ class Job_Employer_Controller extends Controller
 
     public function show_detail($id ="")
     {
-        
         $data= tbl_post_jobs::where('ID',$id)->first();
-        
         $industry=tbl_job_industries::where('ID',$data->industry_ID)->first();
         return view('team_member_jobdetails')
         ->with('data', $data)
@@ -293,20 +291,24 @@ class Job_Employer_Controller extends Controller
  public function list()
  {
  ini_set('memory_limit', '-1');
+
         $toReturn = array();
         $source="Internal";
         $personal = \DB::table('tbl_job_seekers')
                                 ->select('tbl_job_seekers.ID as id','tbl_job_seekers.first_name as first','tbl_job_seekers.last_name as last',
                                 'tbl_job_seekers.dob as dob','tbl_job_seekers.city as city','tbl_job_seekers.state as state','tbl_job_seekers.visa_status as visa',
                                 'tbl_job_seekers.email as email','tbl_job_seekers.mobile as mobile','tbl_job_seekers.skype_id as skype_id',
-                                'tbl_seeker_applied_for_job.total_experience as experience','tbl_seeker_academic.degree_title as degree')
+                                'tbl_seeker_experience.start_date as seeker_experience_start','tbl_seeker_experience.end_date as seeker_experience_end','tbl_seeker_academic.degree_title as degree')
                                ->leftjoin('tbl_seeker_experience','tbl_seeker_experience.seeker_ID', '=' , 'tbl_job_seekers.ID')
                                ->leftjoin('tbl_seeker_academic','tbl_seeker_academic.seeker_ID', '=' ,'tbl_job_seekers.ID' )
-                               ->leftjoin('tbl_seeker_applied_for_job','tbl_seeker_applied_for_job.seeker_ID', '=' ,'tbl_job_seekers.ID')
-                               
                                ->where('tbl_job_seekers.employer_id',Session::get('user_id'))
                                 ->orderBy('tbl_job_seekers.ID','asc')
+                                ->distinct()
                                ->paginate(10);
+                            //    echo"<pre>";
+                            //    print_r($personal);
+                            //    exit;
+                            //    return $personal;
                                
             $current_module_id=2;
             $user_permission_list=Session::get('user_permission');
@@ -409,6 +411,8 @@ class Job_Employer_Controller extends Controller
         // educational insert
         $degree = $request->degree;   
            foreach($degree as $key => $value) {
+               if($degree[$key]!="")
+               {
             $seeker_academic = new Tbl_seeker_academic();
             $seeker_academic->seeker_ID	=$id;
             $seeker_academic->degree_title    = $degree[$key];
@@ -416,14 +420,18 @@ class Job_Employer_Controller extends Controller
             $seeker_academic->institude       = $request->institute[$key];
             $seeker_academic->city            = $request->edu_city[$key];
             $seeker_academic->country         = $request->edu_country[$key];
-            $seeker_academic->completion_year =$request->completion_year[$key];               
+            $seeker_academic->completion_year =$request->completion_year[$key];
+            $seeker_academic->dated=data('Y-m-d');               
             $seeker_academic->save();
+            }
 
         }
 
         //experiance  start
         $job_title_experience = $request->job_title;              
         foreach($job_title_experience as $key => $value ){
+            if($job_title_experience[$key]!="")
+               {
             $seeker_exprience = new Tbl_seeker_experience();
             $seeker_exprience->seeker_ID=$id;
             $seeker_exprience->  job_title  = $job_title_experience[$key]; 
@@ -432,7 +440,8 @@ class Job_Employer_Controller extends Controller
             $seeker_exprience->country      = $request->exp_country[$key];
             $seeker_exprience->start_date   = $request->start_date[$key];
             $seeker_exprience->end_date     = $request->end_date[$key];
-            $seeker_exprience->save();  
+            $seeker_exprience->save(); 
+            } 
         }
         //   experiance end
 

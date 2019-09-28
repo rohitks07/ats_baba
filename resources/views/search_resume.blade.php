@@ -113,14 +113,22 @@
                                                 </thead>
                                                 <tbody>  
                                                 @foreach($personal as $key => $value)  
-                                                <?php $id=$personal[$key]->id;
+												<?php $id=$personal[$key]->id;
+												$start_date=$personal[$key]->seeker_experience_start;
+												$end_date=$personal[$key]->seeker_experience_end;
+													$datetime1 = strtotime(date('Y-m-d', strtotime($start_date)));
+													 $datetime2 = strtotime(date('Y-m-d', strtotime($end_date)));
+													 $secs = $datetime2 - $datetime1;// == <seconds between the two times>
+													 $days = $secs / 86400;
+													 $exp_month=floor($days/30);
+													 $exp_years=floor($exp_month/12);
                                                         ?>                                                                                         
 													<tr>										
 														<td>{{$personal[$key]->first}} {{$personal[$key]->last}}</td>
 														<td>{{$personal[$key]->dob}}</td>
 														<td>{{$personal[$key]->state}},{{$personal[$key]->city}}</td>
 														<td>{{$personal[$key]->visa}}</td>
-														<td>{{$personal[$key]->experience}}</td>
+														<td>{{$exp_years}}.{{$exp_month}}</td>
 														<td>{{$personal[$key]->degree}}</td>
 														<td>{{$personal[$key]->email}}</td>
 														<td>{{$personal[$key]->mobile}}</td>

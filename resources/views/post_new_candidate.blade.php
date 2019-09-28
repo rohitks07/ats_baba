@@ -420,9 +420,10 @@
 										        <select name="state" id="state_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
 													<option value="" selected>select</option>
 										        </select><br>
-										        <select name="city" id="city_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
+												<input type="text" id="address1" placeholder="city" name="city" maxlength="100">
+										        <!-- <select name="city" id="city_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
 												<option value="">Select</option>	
-												</select>
+												</select> -->
 												<span id="citycheck" style="margin-left:34%">Please Select Your location</span>
 										</div>
 								<!--end Location -->
@@ -489,7 +490,7 @@
 							   			<button class="btn btn-primary open1" type="button" id="validatefrm">Next <span class="fa fa-arrow-right"></span></button>
 									</div>
 								</center><br>
-								<!-- <div class="menun" style="display: none;"> -->
+								<div class="menun" style="display: none;">
     						<!--button-->
 							
 <!--starting  Second Row-->
@@ -589,7 +590,7 @@
 				<button class="btn btn-primary open1" type="button" id="edu_validatefrm" onclick="check_if_exists()">Next <span class="fa fa-arrow-right"></span></button>
 			</div>
 		</center><br>
-		<!-- <div class="menus" style="display: none;"> -->
+		<div class="menus" style="display: none;">
 	<!--Button--->	
 		
 		
@@ -641,7 +642,7 @@
 				<button class="btn btn-primary open1" type="button" id="exp_validatefrm">Next <span class="fa fa-arrow-right"></span></button>
 			</div>
 		</center><br>
-		<!-- <div class="menua" style="display: none;">  -->
+		<div class="menua" style="display: none;"> 
    <!--button--> 
 
 <!--starting of fourth Row-->		
