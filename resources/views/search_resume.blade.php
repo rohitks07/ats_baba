@@ -138,7 +138,9 @@
                                                             </ul>
                                                         @endif 
                                                         @if($toReturn['current_module_permission']['is_delete']=="yes")  
-														   <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;"></i>
+														<a href="{{url('employer/search_resume/delete',$id)}}">
+                                                           <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;"></i>
+                                                           </a>
                                                         @endif
                                                         <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user"></i></a>
 														  

@@ -282,7 +282,7 @@
                                   <input type="text" placeholder="min" name="pay_min" id="pay_min" style="width:20%; float:left;  margin-left: 1%;" value="{{$toReturn['post_job']['pay_min']}}">&nbsp;&nbsp;
                                   <input type="text" placeholder="Max" name="pay_max" id="pay_max" value="" maxlength="4" style="width:22%; float:left;" value="{{$toReturn['post_job']['pay_max']}}">
                                   <div class="col-md-12" style="float: right;margin-left: 12em;margin-top: 2%;">
-                                      <select name="pay_uom" id="pay_uom" class="form-control" style="width:44%; border: 1px solid #bbb8b8; float:left; margin-left:0.5em;">
+                                      <select name="pay_uom" id="pay_uom" class="form-control" style="width:44%; border: 1px solid #bbb8b8; float:left; margin-left:9.5em;">
                                           <option value="Hourly">Hourly</option>
                                           <option value="Annum">Annum</option>
                                       </select>
