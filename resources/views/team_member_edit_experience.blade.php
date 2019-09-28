@@ -126,10 +126,10 @@ textarea[class="form-control"]{
                                                 </thead>
                                                 <tbody>                               
 												
-												                                           
+												
+
+												
 														@foreach($experiences as $experience)
-														
-														
 														<tr>
 														<?php $id=$experience->ID;
 															$seeker_id=$experience->seeker_ID;
@@ -178,7 +178,7 @@ textarea[class="form-control"]{
                                         <div class="form-group row">
                                             <label for="email" class="control-label col-lg-4">Job Title</label>
                                             	<div class="col-lg-8">
-													<input type="hidden" name="seeker_id" value="{{$id}}" >
+													<input type="hidden" name="seeker_id" value="{{$seeker_id}}" >
                                                  	<input type="text" id="job_title" name="job_title"  placeholder="Job Title">
                                             	</div>
                                         	</div>
@@ -471,75 +471,17 @@ textarea[class="form-control"]{
 								
 							
                             </div>
-							</form>
-                        </div>
+
+						</form>	
+                        
                     </div>
-                </div>
-     <!-- Modal Edit-->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalCenterTitle">Edit Modal</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-	  <form class="cmxform form-horizontal tasi-form"  action="{{url('employer/team_member_edit_experience/up')}}"   method="post" >
-									{{csrf_field()}} 
-									<div class="form-group row">
-	                                            <label for="" class="control-label col-lg-4">Job Title</label>
-	                                            	<div class="col-lg-8">
-													<input type="text" name="ID"  value="{{$id}}">
-	                                                   <input type="text" id="job_title" name="job_title"  placeholder="Job Title" value="{{$experience['job_title']}}">
-	                                            </div>
-												</div>
-												<div class="form-group row">
-	                                            <label for="" class="control-label col-lg-4">Company Name</label>
-	                                            	<div class="col-lg-8">
-	                                                   <input type="text" id="company_name" name="company_name"  placeholder="Company Name" value="{{$experience['company_name']}}">
-	                                            </div>
-	                                        </div>	
-											<div class="form-group row">
-	                                            <label for="confirm_password"  class="control-label col-lg-4">Start Date</label>
-	                                            <div class="col-lg-8">
-	                                               	<input type="date" id="start_date" name="start_date" value="" placeholder="Start Date" value="{{$experience['start_date']}}"/>
-	                                            </div>
-	                                        </div>
-	                                        <div class="form-group row">
-	                                            <label for="confirm_password"  class="control-label col-lg-4">End Date</label>
-	                                            <div class="col-lg-8">
-	                                                <input type="date" id="end_date" name="end_date" value="" placeholder="end_date" value="{{$experience['end_date']}}" />
-	                                                
-	                                            </div>
-	                                        </div>		
-
-											<div class="form-group row">
-	                                            <label for="" class="control-label col-lg-4">City</label>
-	                                            	<div class="col-lg-8">
-	                                                   <input type="text" id="city" name="city"  placeholder="City" value="{{$experience['city']}}">
-	                                            </div>
-	                                        </div>		
-
-											<div class="form-group row">
-	                                            <label for="" class="control-label col-lg-4">Country</label>
-	                                            	<div class="col-lg-8">
-	                                                   <input type="text" id="country" name="country"  placeholder="Country" value= "{{$experience['country']}}">
-	                                            </div>
-	                                        </div>										
+            </div> 
 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
-      </div>
-
-	  </form>
-    </div>
   </div>
-</div>
+     
+
+  
 @include('include.emp_footer')
 
 

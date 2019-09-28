@@ -256,10 +256,6 @@ Route::post('employer/post_job/update','Job_Employer_Controller@updatejob');
 
 Route::post('employer/importContact','Import_Controller@import');
 
-Route::post('employer/team_member_edit_experience/add','Search_Resume_Controller@add_insert');
-Route::get('employer/team_member_edit_experience_del/{id}/{seekerid}','Search_Resume_Controller@delete_entry');
-Route::get('employer/team_member_edit_experience_update/{id}/{seekerid}','Search_Resume_Controller@show_up');
-Route::post('employer/team_member_edit_experience_upedit/','Search_Resume_Controller@update');
 
 
 // Employer Section routes definition
@@ -382,3 +378,22 @@ Route::post('employer/dashboard/interview-meeting-upchange','Job_Employer_Contro
 Route::get('employer/dashboard/interview-meeting-intedit{id}','Job_Employer_Controller@updaint');
 Route::post('employer/dashboard/interview-interview-upchange','Job_Employer_Controller@updateedit');
 
+//Candidate->Experience
+Route::get('employer/team_member_edit_experience/{id}','Search_Resume_Controller@edit_experience');
+Route::post('employer/team_member_edit_experience/add','Search_Resume_Controller@add_insert');
+Route::get('employer/team_member_edit_experience_del/{id}/{seekerid}','Search_Resume_Controller@delete_entry');
+Route::get('employer/team_member_edit_experience_update/{id}/{seekerid}','Search_Resume_Controller@show_up');
+Route::post('employer/team_member_edit_experience','Search_Resume_Controller@update');
+
+
+//Candidate->Skills
+Route::get('employer/team_member_skills/{id}','Search_Resume_Controller@view_skill');
+ Route::post('employer/team_member_skills/in','Search_Resume_Controller@insert_skill');
+ Route::get('employer/team_member_skills_del/{id}/{seekerid}','Search_Resume_Controller@delete_skill');
+
+ //Candidate->Personal Details
+ Route::get('employer/edit_posted_candidate/{id}/','Search_Resume_Controller@view_personal_details');
+ Route::post('employer/edit_posted_candidate/update/','Search_Resume_Controller@update_personal_details');
+
+ //Candidate->Education
+ Route::get('employer/employer_edit_education/{id}/','Search_Resume_Controller@show_education');
