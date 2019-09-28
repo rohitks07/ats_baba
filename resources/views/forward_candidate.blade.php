@@ -34,7 +34,7 @@
     }
     
     input[type=text],
-    input[type=email] {
+    input[type=email],input[type=date],select {
         width: 100%;
         padding: 7px;
         border-radius: 5px;
@@ -152,7 +152,7 @@
                                         <div class="form-group row">
                                             <label for="Subject"  class="control-label col-lg-4">Email Content<span class="red">*</label>
                                             <div class="col-lg-6">
-                                                <textarea class="wysihtml5 form-control article-ckeditor"  id="article-ckeditor" required placeholder="Message body" style="height: 200px" name="email_content" required ></textarea>
+                                                <textarea class="wysihtml5 form-control article-ckeditor"  required id="article-ckeditor" required placeholder="Message body" style="height: 200px" name="email_content" required ></textarea>
                                             </div>
                                         </div>
                                     <div class="card-header bg-primary"> 
@@ -488,7 +488,7 @@ function showTable(checkbox,tableId){
         $("#"+tableId).hide();
 }
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function(){
     
     var $regexname=/^([0-9])$/;
@@ -525,4 +525,91 @@ $(document).ready(function(){
 $(document).on('click', '.btn_remove', function() {
     $(this).closest('.delete_exp').remove();
 });	 
+</script> -->
+<script type="text/javascript">
+function showTable(checkbox,tableId){
+    if($('#'+checkbox).is(":checked"))   
+        $("#"+tableId).show();
+    else
+        $("#"+tableId).hide();
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    
+    var $regexname=/^([0-9])$/;
+    $('#last_for_digit_ssn').on('keypress keydown keyup',function(){
+             if (!$(this).val().match($regexname)) {
+              // there is a mismatch, hence show the error message
+                //  $('.emsg').removeClass('hidden');
+                 $('#emsg').show();
+             }
+           else{
+                // else, do not display message
+                $('#emsg').addClass('hidden');
+               }
+         });
+});
+</script>
+<script type="text/javascript">
+    function lastfor();
+</script>
+<script>
+    // last ssn number
+function numbval() {
+  var x, text;
+
+  // Get the value of the input field with id="numb"
+  x = document.getElementById("last_for_digit_ssn").value;
+
+  // If x is Not a Number or less than one or greater than 10
+  if (isNaN(x) || x < 1000 || x > 9999) {
+    text = "Please enter a Valid SSN No.";
+  } else {
+    text = " ";
+  }
+  document.getElementById("chk").innerHTML = text;
+}
+    
+// for ctc
+function ctc() {
+  var x, text;
+  x = document.getElementById("inlinetext").value;
+
+  if (isNaN(x) || x < 1 ) {
+    text = "Please enter a Valid CTC No.";
+  } else {
+    text = " ";
+  }
+  document.getElementById("wrong").innerHTML = text;
+}
+
+// etc
+function etc() {
+  var x, text;
+  x = document.getElementById("inlinetextetc").value;
+
+  if (isNaN(x) || x < 1 ) {
+    text = "Please enter a Valid ETC No.";
+  } else {
+    text = " ";
+  }
+  document.getElementById("wrong2").innerHTML = text;
+}
+
+// expected rate
+function rate() {
+  var x, text;
+
+  // Get the value of the input field with id="numb"
+  x = document.getElementById("expectedrate").value;
+
+  // If x is Not a Number or less than one or greater than 10
+  if (isNaN(x) || x < 1) {
+    text = "Please enter numbers only";
+  } else {
+    text = " ";
+  }
+  document.getElementById("exprate").innerHTML = text;
+}
 </script>
