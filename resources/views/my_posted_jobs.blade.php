@@ -76,7 +76,12 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-						@if($toReturn['current_module_permission']['is_add']=="yes")                                       
+						@if(!empty($toReturn['user_type']=="teammember"))
+							@if($toReturn['current_module_permission']['is_add']=="yes")                                       
+							<a href="{{url('employer/post_new_job')}}">
+							<button type="button" class="btn btn-success" style="float:left;">Add a Job</button></a>
+							@endif
+						@else
 						<a href="{{url('employer/post_new_job')}}">
 						<button type="button" class="btn btn-success" style="float:left;">Add a Job</button></a>
 						@endif
@@ -116,16 +121,26 @@
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$posted_job['last_date']}}</td>
 																<td></td>													
-				                                                <td class="actions">
+				                                               <td class="actions">
+																@if(!empty($toReturn['user_type']=="teammember"))
 																@if($toReturn['current_module_permission']['is_edit']=="yes")
-																<a href="{{url('employer/job/edit/'.$id)}}"><i class="fa fa-pencil"></i></a>
+																<a href="{{url('employer/job/edit/'.$id)}}"><i class="fa fa-pencil" title="Edit"></i></a>
 																@endif
+																@else
+																<a href="{{url('employer/job/edit/'.$id)}}" ><i class="fa fa-pencil" title="Edit" ></i></a>
+																@endif
+																@if(!empty($toReturn['user_type']=="teammember"))
 																@if($toReturn['current_module_permission']['is_delete']="yes")
-																<a href="{{url('employer/delete/'.$id)}}"><i class="fa fa-trash-o"></i></a>
+																<a href="{{url('employer/delete/'.$id)}}"><i class="fa fa-trash-o" title="Delete"></i></a>
+																@endif
+																@else
+																<a href="{{url('employer/delete/'.$id)}}"><i class="fa fa-trash-o" title="Delete" ></i></a>
 																@endif
 																<!-- @if($toReturn['current_module_permission']['is_delete']="yes") -->
 																<a href="{{url(''.$id)}}" data-toggle="modal"
-                                                                        data-target="#myModal{{$posted_job['ID']}}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                                                                        data-target="#myModal{{$posted_job['ID']}}"><i class="fa fa-plane" aria-hidden="true"></i></a>
+                                                                        <i class="fa fa-envelope"  title="Mail" ></i>
+																	<i class="fa fa-plus" title="Node"></i>
 																<!-- @endif -->									
 																<div id="myModal{{$posted_job['ID']}}" class="modal fade"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 																	<div class="modal-dialog">
@@ -167,9 +182,9 @@
 																		</div>
 																	</div> 
 																</div>
-																	<i class="fa fa-paper-plane"></i>
-																	<i class="fa fa-envelope"></i>
-																	<i class="fa fa-plus"></i>
+																	<!--<i class="fa fa-paper-plane"></i>-->
+																	<!--<i class="fa fa-envelope"></i>-->
+																	<!--<i class="fa fa-plus"></i>-->
 															    </td>     											
 			                                            </tr>
 			                                            @endforeach									  

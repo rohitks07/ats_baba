@@ -35,7 +35,6 @@ class Login_Controller extends Controller{
             $password_assign =$getUserDetails->password;
             $user_type=$getUserDetails->user_type;
             $user_id=$getUserDetails->user_id;
-   
             if ($email_id==$email_assign && $password==$password_assign)
             {       
                 $session_data = array(
@@ -60,7 +59,6 @@ class Login_Controller extends Controller{
                     $toReturn['user_permission']=Tbl_team_member_permission::where('team_member_id',$user_id)
                     ->leftjoin('tbl_module','tbl_team_member_permission.permission_value','=','tbl_module.module_id')
                     ->get()->toArray();
-
                     $session_data = array(
                         'id'   =>$getUserDetails->ID,
                         'email'=>$getUserDetails->email,

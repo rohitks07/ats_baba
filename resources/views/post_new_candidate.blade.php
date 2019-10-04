@@ -375,7 +375,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Skype ID</label>
 											<div class="col-lg-8">
-												<input type="text" id="skype_id"  name="skype_id" maxlength="30">
+												<input type="text" id="skype_id"  name="skype_id" maxlength="30" placeholder="Skype ID">
 											</div>
 									  </div>
 								<!--end of Skype ID-->
@@ -533,7 +533,7 @@
                                       <option value="WV">WV</option>
                                       <option value="WY">WY</option>
 										        </select><br>
-										<input type="text" name="city" id="city_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
+										<input type="text" name="city" id="city_text" class="form-control"  placeholder="City" style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
 										        <!-- <select name="city" id="city_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
 												<option value="">Select</option>	
 												</select> -->
@@ -560,7 +560,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Mobile Phone<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="mobile_number" name="mobilephone" maxlength="10"><br>
+												<input type="text" id="mobile_number" name="mobilephone"  placeholder="Mobile Phone" maxlength="10"><br>
 												<span id="mob_ph_check">Please Enter a Valid Mobile Number</span>
 											</div>
 									  </div>
@@ -569,7 +569,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Home Phone<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="phone" name="homephone" maxlength="10"><br>
+												<input type="text" id="phone" name="homephone" placeholder="Home Phone" maxlength="10"><br>
 												<span id="home_ph_check">Please Enter a Valid Home Number</span>
 											</div>
 									  </div>
@@ -646,9 +646,72 @@
 										    <input type="text" name="edu_city[]"  id="edu_city" class="form-control" placeholder="City" style="width: 14%;">
 	                                        <select type="text" name="edu_country[]" id="edu_country" class="form-control" placeholder="Country" style="width: 14%;">
 												<option value="" selected>-Country-</option>
-												    @foreach($toReturn['countries'] as $countries)
-												        <option value="{{$countries['country_name']}}"> {{$countries['country_name']}} </option>
-												    @endforeach	
+												    <!--@foreach($toReturn['countries'] as $countries)-->
+												    <!--    <option value="{{$countries['country_name']}}"> {{$countries['country_name']}} </option>-->
+												    <!--@endforeach	-->
+												    <option value="Afghanistan" selected>Afghanistan</option>
+												<option value="Albany">Albany</option>
+												<option value="Algeria">Algeria</option>
+												<option value="Angola">Angola</option>
+												<option value="Argentina">Argentina</option>
+												<option value="Armenia">Armenia</option>
+												<option value="Australia">Australia</option>
+												<option value="Austria">Austria</option>
+												<option value="Azerbaijan">Azerbaijan</option>
+												<option value="Bahamas">Bahamas</option>
+												<option value="Bahrain">Bahrain</option>
+												<option value="Bangladesh">Bangladesh</option>
+												<option value="Belgium">Belgium</option>
+												<option value="Bhutan">Bhutan</option>
+												<option value="Bulgaria">Bulgaria</option>
+												<option value="Burma">Burma</option>
+												<option value="Burundi">Burundi</option>
+												<option value="Cambodia">Cambodia</option>
+												<option value="Cameroon">Cameroon</option>
+												<option value="Cape Verd">Cape Verd</option>
+												<option value="Central Africa">Central Africa</option>
+												<option value="Chadi">Chadi</option>
+												<option value="Chile">Chile</option>
+												<option value="China">China</option>
+												<option value="Columbia">Columbia</option>
+												<option value="Comora">Comora</option>
+												<option value="Congo">Congo</option>
+												<option value="Costa Rica">Costa Rica</option>
+												<option value="Croatia">Croatia</option>
+												<option value="Cuban">Cuban</option>
+												<option value="Cyprus">Cyprus</option>
+												<option value="Egypt">Egypt</option>
+												<option value="Fiji">Fiji</option>
+												<option value="Finland">Finland</option>
+												<option value="France">France</option>
+												<option value="Germany">Germany</option>
+												<option value="Greece">Greece</option>
+												<option value="Iceland">Iceland</option>
+												<option value="India">India</option>
+												<option value="Iran">Iran</option>
+												<option value="Iraq">Iraq</option>
+												<option value="Ireland">Ireland</option>
+												<option value="Israel">Israel</option>
+												<option value="Italy">Italy</option>
+												<option value="Jamaica">Jamaica</option>
+												<option value="Japan">Japan</option>
+												<option value="Jordan">Jordan</option>
+												<option value="Kenya">Kenya</option>
+												<option value="Kuwait">Kuwait</option>
+												<option value="Malaysia">Malaysia</option>
+												<option value="Mexico">Mexico</option>
+												<option value="Mongolia">Mongolia</option>
+												<option value="Nepal">Nepal</option>
+												<option value="New Zealand">New Zealand</option>
+												<option value="Pakistan">Pakistan</option>
+												<option value="Peru">Peru</option>
+												<option value="Poland">Poland</option>
+												<option value="Qatar">Qatar</option>
+												<option value="Romania">Romania</option>
+												<option value="Russia">Russia</option>
+												<option value="Thailand">Thailand</option>
+												<option value="United States">United States</option>
+												<option value="Yemen">Yemen</option>
 												                                 
 											</select>
 											<select name="completion_year[]" id="completion" class="form-control" placeholder="Passing Year" style="width: 15%;" >
@@ -682,7 +745,27 @@
 													<option value="1993" >1993</option>
 													<option value="1992" >1992</option>
 													<option value="1991" >1991</option>
-													<option value="1990" >1990</option>	
+													<option value="1990" >1990</option>
+													<option value="1989" >1989</option>
+												<option value="1988" >1988</option>
+												<option value="1987" >1987</option>
+												<option value="1986" >1986</option>
+												<option value="1985" >1985</option>
+												<option value="1984" >1984</option>
+												<option value="1983" >1983</option>
+												<option value="1982" >1982</option>
+												<option value="1981" >1981</option>
+												<option value="1980" >1980</option>
+												<option value="1979" >1979</option>
+												<option value="1978" >1978</option>
+												<option value="1977" >1977</option>
+												<option value="1976" >1976</option>
+												<option value="1975" >1975</option>
+												<option value="1974" >1974</option>
+												<option value="1973" >1973</option>
+												<option value="1972" >1972</option>
+												<option value="1971" >1971</option>
+												<option value="1970" >1970</option>
 											</select>	
 										<p><button type="button" id="btnAdd" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
 										<span id="education_check">Please fill All Fields</span>
@@ -1425,71 +1508,71 @@ $(function() {
 				});
 			});
 		</script>
-		 <script>
-$(document).ready(function()
-{
-    $('#country').on('change', function()
-        {
-			$('#state_text').empty();
-            var country_id = $(this).val();
-			alert(country_id);
-             if(country_id)
-                {
-                     $.ajax({
+// 		 <script>
+// $(document).ready(function()
+// {
+//     $('#country').on('change', function()
+//         {
+// 			$('#state_text').empty();
+//             var country_id = $(this).val();
+// 			alert(country_id);
+//              if(country_id)
+//                 {
+//                      $.ajax({
 
-                            type:'GET',
-                        	url:'{{url('employer/fetchstate')}}'+"/"+country_id,
-                            dataType:'json',
-                            success: function(data)
-                            {
-								console.log(data);
+//                             type:'GET',
+//                         	url:'{{url('employer/fetchstate')}}'+"/"+country_id,
+//                             dataType:'json',
+//                             success: function(data)
+//                             {
+// 								console.log(data);
                                  
-                                  $.each(data,function(i,state){
-                                  $("#state_text").append("<option>"+state.state+"</option>");
+//                                   $.each(data,function(i,state){
+//                                   $("#state_text").append("<option>"+state.state+"</option>");
 
-                                 //console.log(response);
-                                 });
+//                                  //console.log(response);
+//                                  });
                                    
-                            }
-                    });
-                }
+//                             }
+//                     });
+//                 }
          
-    });
-});
-</script>
-		 <script>
-$(document).ready(function()
-{
-    $('#state_text').on('change', function()
-        {
-			$('#city_text').empty();
-            var state_id = $(this).val();
-			var country_id=$('#state_text').val();
+//     });
+// });
+// </script>
+// 		 <script>
+// $(document).ready(function()
+// {
+//     $('#state_text').on('change', function()
+//         {
+// 			$('#city_text').empty();
+//             var state_id = $(this).val();
+// 			var country_id=$('#state_text').val();
 
-			alert(state_id);
-             if(state_id)
-                {
-                     $.ajax({
+// 			alert(state_id);
+//              if(state_id)
+//                 {
+//                      $.ajax({
 
-                            type:'GET',
-                        	url:'{{url('employer/fetchcity')}}'+"/"+state_id+"/"+country_id,
-                            dataType:'json',
-                            success: function(data)
-                            {
-								console.log(data);
+//                             type:'GET',
+//                         	url:'{{url('employer/fetchcity')}}'+"/"+state_id+"/"+country_id,
+//                             dataType:'json',
+//                             success: function(data)
+//                             {
+// 								console.log(data);
                                  
-                                  $.each(data,function(i,city){
-                                  $("#city_text").append("<option >"+city.city_name+"</option>");
+//                                   $.each(data,function(i,city){
+//                                   $("#city_text").append("<option >"+city.city_name+"</option>");
 
-                                 //console.log(response);
-                                 });
+//                                  //console.log(response);
+//                                  });
                                    
-                            }
-                    });
-                }
+//                             }
+//                     });
+//                 }
          
-    });
-});
-</script>
+//     });
+// });
+// </script>
 </body>
 </html>

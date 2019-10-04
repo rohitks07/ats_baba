@@ -86,7 +86,7 @@
                                   <select name="group_of_company" id="for_group" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" required>
                                         <option value="">Select Group Type</option>
                                           @foreach($toReturn['team_member_type'] as $team_member_type)
-                                            <option value="{{$team_member_type['type_name']}}"> {{$team_member_type['type_name']}} </option>
+                                            <option value="{{$team_member_type['type_ID']}}"> {{$team_member_type['type_name']}} </option>
                                           @endforeach
                                  </select><br>
                                  <span id="group_check"style="margin-left:35%;">Please Select Any Group</span>
@@ -96,14 +96,7 @@
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Client Name<span style="color:red;">*</span></label>
                                   <input type="text" name="company_name" id="company_name" placeholder="Client Name" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
-                                  <!-- <select name="company_name" id="company_name" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
-                                        <option value="">Select Client Name</option>
-                                        <option value="Zenar">Zenar</option>
-                                          @foreach($toReturn['post_job'] as $post_job)
-                                            <option value="{{$post_job['client_name']}}"> {{$post_job['client_name']}} </option>
-                                            @endforeach
-                                  </select> -->
-                                    <span id="clientname_check" style="margin-left:35%;">Please Select Any Client Name</span> 
+                                  <span id="clientname_check" style="margin-left:35%;">Please Select Any Client Name</span> 
                               </div>
                               <!--Client Name-->
                               <!--Privacy Level-->
@@ -121,11 +114,9 @@
                                   <label for="address" class="control-label col-lg-4">Owner Name<span style="color:red;">*</span></label>
                                   <select name="owner_name" id="owner_name" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                     <option value="">Select Owner Name</option>
-                                    
-                                          @foreach($toReturn['team_member'] as $team_member)
+                                     @foreach($toReturn['team_member'] as $team_member)
                                             <option value="{{$team_member['ID']}}"> {{$team_member['full_name']}} </option>
-                                          @endforeach
-                                    
+                                    @endforeach
                                   </select>
                                   <span id="owner_check"style="margin-left:35%;">Please Select Any Owner Name</span>     
                               </div>
@@ -560,6 +551,32 @@
 
 <script>
     var resizefunc = [];
+</script>
+
+
+<script>
+    // $(document).ready(function(){
+    //     $('select[name="group_of_company"]').on('change', function(){
+    //     $('#owner_name').empty();
+    //         var group_id = $(this).val();
+    //         if(group_id)
+    //         {          
+    //             $.ajax({
+    //                 type:'get',
+    //                 url:'{{url('employer/post_new_job/post_job/')}}'+"/"+group_id,
+    //                 dataType:'json',
+    //                 success: function(data)
+    //                 {
+    //                     $('#owner_name').empty();
+    //                     $.each(data,function(i,owner_name){
+    //                             $("#owner_name").append("<option>"+owner_name.full_name+"</option>");
+    //                     });
+    //                     console.log(data);                   
+    //                 }
+    //             });
+    //         } 
+    //     });
+    // });
 </script>
 
 

@@ -47,10 +47,9 @@ class Post_Job_Controller extends Controller
         $tbl_company->loc_time_zone=$data->locationtimezone;
         $tbl_company->dis_time_zone=$data->displaytimezone;
         $tbl_company->company_csz=' ';
-       // $tbl_company->save();
+        $tbl_company->save();
       
         $comp_id=$tbl_company->id;
-       
         // tbl_employer insertion
         $tbl_employer=new tbl_employers();
         $tbl_employer->company_ID=$comp_id;
@@ -63,16 +62,17 @@ class Post_Job_Controller extends Controller
         $tbl_employer->mobile_phone=$data->mobile_phone;
         $date=date('Y-m-d');
         $tbl_employer->dated=$date;
-        //$tbl_employer->save();
+        $tbl_employer->save();
         
         // user insertion
         $user_tbl=new user();
         $user_tbl->full_name=$data->firstname;
         $user_tbl->email=$data->email_id;
         $user_tbl->password=$data->password_id;
+        $user_tbl->user_id=$tbl_employer->id;
         $user_tbl->user_type="employer";
         $user_tbl->org_ID=$comp_id;
-        //$user_tbl->save();
+        $user_tbl->save();
         return redirect('/')->with("success","Comapany Created Success Fully");
     }
 }
