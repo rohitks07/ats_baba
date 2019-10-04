@@ -192,12 +192,10 @@ Route::post('job_application/sts','Job_Employer_Controller@status');
 
 
 // Route::get('employer/Application','Job_Employer_Controller@application');
-Route::get('employer/posted_jobs','Job_Employer_Controller@view_my_posted_job');
 Route::get('employer/delete/{id}','Job_Employer_Controller@delete_employer');
 
 
 Route::get('employer/post_new_job','Job_Employer_Controller@view_post_form');
-Route::post('employer/post_new_job/post_job','Job_Employer_Controller@Add_to_post_job');
 Route::get('employer/jobsdetails/{id}','Job_Employer_Controller@show_detail');
 Route::get('employer/job/edit/{id}','Job_Employer_Controller@editjob');
 Route::post('employer/post_job/update','Job_Employer_Controller@updatejob');
@@ -232,7 +230,7 @@ Route::get('employer/appli_forward/{id}','Job_Employer_Controller@application_fo
 Route::post('employer/forward_candidate','Job_Employer_Controller@forward_candidate');
 Route::get('employer/submit_candidate_detail/{id}','Job_Employer_Controller@list_candidate');
 Route::post('employer/submit_candidate','Job_Employer_Controller@submit_candidate');
-
+Route::get('employer/listmember/{id}','Job_Employer_Controller@list_teammember');
 // Jobsseeker Routes definition
 Route::get('test',function()
 {
@@ -245,12 +243,13 @@ Route::get('jobseeker/dashboard','Job_Seeker_Controller@dashboard');
 Route::get('employer/Application','Job_Employer_Controller@application');
 Route::get('employer/appli_del/{id}','Job_Employer_Controller@application_delete');
 
-
 Route::get('employer/posted_jobs','Job_Employer_Controller@view_my_posted_job');
 Route::get('employer/post_new_job','Job_Employer_Controller@view_post_form');
 Route::post('employer/post_new_job/post_job','Job_Employer_Controller@Add_to_post_job');
 Route::get('employer/job/edit/{id}','Job_Employer_Controller@editjob');
 Route::post('employer/post_job/update','Job_Employer_Controller@updatejob');
+Route::post('employer/post_job/update','Job_Employer_Controller@updatejob');
+Route::post('posted_jobs/assign','Job_Employer_Controller@PostjobsAssignToJobSeeker');
 
 
 
@@ -383,7 +382,7 @@ Route::get('employer/team_member_edit_experience/{id}','Search_Resume_Controller
 Route::post('employer/team_member_edit_experience/add','Search_Resume_Controller@add_insert');
 Route::get('employer/team_member_edit_experience_del/{id}/{seekerid}','Search_Resume_Controller@delete_entry');
 Route::get('employer/team_member_edit_experience_update/{id}/{seekerid}','Search_Resume_Controller@show_up');
-Route::post('employer/team_member_edit_experience','Search_Resume_Controller@update');
+Route::post('employer/team_member_edit_experience/update','Search_Resume_Controller@update');
 
 
 //Candidate->Skills
@@ -397,3 +396,7 @@ Route::get('employer/team_member_skills/{id}','Search_Resume_Controller@view_ski
 
  //Candidate->Education
  Route::get('employer/employer_edit_education/{id}/','Search_Resume_Controller@show_education');
+ 
+ //data for location
+ Route::get('employer/post_new_job/post_job/state/{country_id}','LocationController@get_state');
+ Route::get('employer/post_new_job/post_job/city/{state_id}','LocationController@get_city');

@@ -135,6 +135,38 @@
         position: absolute;
         will-change: left, right;
     }
+    
+.table td {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table th {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
+}
 </style>
 <div id="wrapper">
     <div class="content-page">

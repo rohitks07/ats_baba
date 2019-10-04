@@ -998,12 +998,12 @@ input[type=password]:focus{
 
                 var pm_val = $("#federal_id").val();
                 var no_federal=$( "#federal_id" ).length;
-                if(no_federal===10)
+                if(no_federal===9)
                 {
                     document.getElementById('federal').innerHTML="Please Enter 10 Digit No.";
                 }
                 var federalno = new RegExp(/^[0-9-+]+$/);
-                if (pm_val.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) {
+                if (pm_val.match(/^(\+\d{1,3}[- ]?)?\d{9}$/)) {
                     $("#federal").hide();
                 } else {
                     $("#federal").show();
@@ -1023,12 +1023,10 @@ input[type=password]:focus{
             $("#validatefrm").click(function() {
                 check_ds();
             });
-
             function check_ds() {
-
                 var pm_val = $("#duns_id").val();
                 var federalno = new RegExp(/^[0-9-+]+$/);
-                if (pm_val.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) {
+                if (pm_val.match(/^(\+\d{1,3}[- ]?)?\d{9}$/)) {
                     $("#duns").hide();
                 } else {
                     $("#duns").show();

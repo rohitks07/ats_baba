@@ -346,11 +346,11 @@
                                                     {{-- Drop down --}}
                                                     <div class="form-group">
                                                         <select class="form-control" name="interview_job" id="jobcode" required>
-                                                            <option selected>{{$data['int']->invitees_to}}</option>
+                                                            
                                                             <!-- <option>Select Job For Schedule an interview</option> -->
-                                                            <option>4122-85</option>
-                                                            <option>9122-95</option>
-                                                            <option>6128-50</option>
+                                                            @foreach ($toReturn['jobpost'] as $item)
+                                                        <option value="{{$item['ID']}}">{{$item['job_code']}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
 
@@ -377,7 +377,7 @@
                                                         <select class="form-control" name="candiate_name" id="candidatename" required>
                                                             <option selected>{{$data['int']->candiate_name}}</option>
                                                             @foreach ($data['name'] as $i)
-                                                        <option>{{$i['first_name']}}</option>
+                                                            <option value="{{$i['first_name']}}|{{$i['ID']}}">{{$i['first_name']}}</option>
                                                             @endforeach
                                                             
                                                         </select>
