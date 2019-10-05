@@ -113,46 +113,37 @@
 									
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-12">
+                                <form action="{{url('employer/team_member_edit_experience/update')}}"  method="post">
 									<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Job Title</label>
 	                                            	<div class="col-lg-8">
-													<form action="{{url('employer/team_member_edit_experience')}}"  method="post">
 													<input type="hidden" name="_token" id="csrf-token" value="{{csrf_token()}}"/>
 													<input type="hidden" name="seeker_id"  value="{{$exp->seeker_ID}}">
 													<input type="hidden" name="ID"  value="{{$exp->ID}}">
 	                                                   <input type="text" id="job_title" name="job_title"  placeholder="Job Title" value="{{$exp->job_title}}">
-
 	                                            </div>
 												</div>
 												<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Company Name</label>
 	                                            	<div class="col-lg-8">
-
 	                                                   <input type="text" id="company_name" name="company_name"  placeholder="Company Name" value="{{$exp->company_name}}">
-
 	                                            </div>
 	                                        </div>	
 											<div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">Start Date</label>
 	                                            <div class="col-lg-8">
-
 	                                               	<input type="date" id="start_date" name="start_date"  placeholder="start Date" value="{{$exp->start_date}}"/>
-
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">End Date</label>
 	                                            <div class="col-lg-8">
-
 	                                                <input type="date" id="end_date" name="end_date"  placeholder="end_date" value="{{$exp->end_date}}" />
-
 	                                            </div>
 	                                        </div>		
-
 											<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">City</label>
 	                                            	<div class="col-lg-8">
-
 	                                                   <input type="text" id="city" name="city"  placeholder="City" value="{{$exp->city}}">
 
 	                                            </div>

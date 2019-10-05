@@ -14,8 +14,8 @@
     }
     .mini-stat {
     border-radius: 3px;
-    margin-bottom: 20px;
-    padding: 13px;
+    margin-bottom: 5px;
+    padding: 10px;
     color: #ffffff;
 }
     /* Darker background on mouse-over */
@@ -50,6 +50,10 @@
         width: 100%;
         overflow-y: scroll;
     }
+.card-body {
+    flex: 1 1 auto;
+    padding: 0.5em;
+}
  
 
 .table td {
@@ -64,7 +68,7 @@
     padding: 7px;
     font-size: top;
     border-top: 1px solid #dee2e6;
-    font-size: 14px;
+    font-size: 10px;
     color: #000;
     background:#fff;
 }
@@ -118,7 +122,6 @@
 <div id="wrapper">
     <div class="content-page">
         <div class="content">
-            <br>
             <div class="row">
                 <div class="col-md-2">
                     <div class="mini-stat" style="background-color:#317eeb; border-radius:10px;">
@@ -467,7 +470,7 @@
                                     <h3 class="card-title" style="text-align:left;">Jobs</h3>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{url('employer/post_new_job')}}"><h3 class="card-title" style="text-align:right;">Post a New Job</h3></a><a href="{{url('employer/posted_jobs')}}"><h3 class="card-title" style="text-align:right;">View All</h3></a>
+                                    <a href="{{url('employer/posted_jobs')}}"><h3 class="card-title" style="text-align:right;">View All</h3></a>
                                 </div>
                             </div>
                         </div>
@@ -576,36 +579,34 @@
                 <div class="card card-border card-primary">
                         <div class="card-header">
                                     <h3 class="card-title" style="text-align:left;">Job Application</h3>
-                                    <a href="{{url('employer/Application')}}"><h3 class="card-title" style="text-align:right;">View All</h3></a>
+                                    <a href="{{url('employer/Application')}}"><h3 class="card-title" style="text-align:right; margin-top:-35px;">View All</h3></a>
                         </div><!--end of card-header-->
                       
-
                <div class="card-body" style="height:150px;">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="table-responsive">
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap">
-
-                                <thead>
-                                    <tr>
-                                        <th colspan="6">Job Details</th>
-                                        <th colspan="3">Candidate Details</th>
-                                        <th>Submittal Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th> Code</th>
-                                        <th>Title</th>
-                                        <th>Client</th>
-                                        <th>Location</th>
-                                        <th>Visa Type</th>
-                                        <th>Pay Rate</th>
-                                        <th>Name</th>
-                                        <th>Location</th>
-                                        <th>Visa</th>
-                                        <th>Date</th>
-
-                                    </tr>
-                                </thead>
+                                        <thead>
+                                            <tr>
+                                                <th colspan="6">Job Details</th>
+                                                <th colspan="3">Candidate Details</th>
+                                                <th>Submittal Date</th>
+                                            </tr>
+                                            <tr>
+                                                <th> Code</th>
+                                                <th>Title</th>
+                                                <th>Client</th>
+                                                <th>Location</th>
+                                                <th>Visa Type</th>
+                                                <th>Pay Rate</th>
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Visa</th>
+                                                <th>Date</th>
+        
+                                            </tr>
+                                        </thead>
                                 <tbody>
                                     @foreach($toReturn['application'] as $application)
                                     <tr>

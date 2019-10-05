@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
+<script>
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+</script>
 <style>
 			.form-control{
 				border: 1px solid #737373;
@@ -221,7 +230,14 @@
 												</select>
 												<span id="visacheck">Please Select Visa</span>
 										   </div>
-									</div>									
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label">Total It Experience <span style="color:red;">*</span></label>
+											<div class="col-sm-8">
+                                            <input type="text" id="Experience" placeholder="Total It Experience" name="total_experience" maxlength="10"  required value="{{$details['experience']}}">
+												<!--<span id="Experiencecheck">Plz Insert It Experience </span>-->
+										   </div>
+									</div>
 								<!--end of Visa-->
 								
 								</div><!--end of column-->
@@ -230,26 +246,33 @@
 								<div class="col-md-6">
 								
 								<!-- Location-->				
-										<div class="form-group row">
-											<label for="address" class="control-label col-lg-4">Location<span style="color:red;">*</span> </label>
-												<select name="country" id="country" class="form-control"  style="max-width:19%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
-												   <option selected>{{$details['country']}}</option>
-												    <option value="">Country</option>
-												        @foreach($toReturn['countries'] as $countries)
-												            <option value="{{$countries['country_name']}}"> {{$countries['country_citizen']}} </option>
-												        @endforeach	
-											    </select><br>
-
-										        <select name="state" id="state_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
-													<option selected>{{$details['state']}}</option>
-													<option value="">State</option>
-														@foreach($toReturn['cities'] as $cities)
-												            <option value="{{$cities['state']}}"> {{$cities['state']}} </option>
-												        @endforeach														
-										        </select><br>
-										    <input name="city" type="text" class="form-control" id="test" placeholder="City" value="{{$details['city']}}" maxlength="20" style="width: 15%; margin-left:10px;background:#fff;" >											     
-											<span id="citycheck" style="margin-left:34%">Please Select Your location</span>
-										</div>
+										<!--location-->
+												<div class="form-group row">
+													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
+													<select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
+													  <option value="">Select Country</option>
+													  @foreach($toReturn['countries'] as $country)
+													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
+													  @endforeach  
+													  
+													 
+													</select>
+				  
+													<select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
+														  <option value="">Select country first</option>
+				  
+													</select>
+													<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
+														
+														<select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
+															  <option value="">Select state first</option>
+				  
+													  </select>
+														<br>
+														<span id="citycheck">Please choose Your Location</span> 
+													</div>
+													
+												</div>
 								<!--end Location -->
 								<!--Address Line 1-->	   
 									<div class="form-group row">
@@ -328,6 +351,52 @@
 
  
 @include('include.emp_footer')
+<script type="text/javascript">
+    $('#country').on('change', function(e){
+    console.log(e);
+    $('#state_text').empty();
+    var country_id = e.target.value;
+    console.log (country_id);
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/state/")}}'+"/"+country_id,
+                success:function(data){
+                    console.log(data);
+                     $.each(data, function(index, value) {
+                        $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
+                        console.log(value.state_id);
+                        });
+            },
+                error:function(data){
+                console.log(data);
+            }
+
+        });
+
+    });
+    $('#state_text').on('change', function(e){
+    console.log(e);
+    $('#city').empty();
+    var state_id = e.target.value;
+    console.log (state_id);
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/city/")}}'+"/"+state_id,
+                success:function(data){
+                    console.log(data);
+                    
+                     $.each(data, function(index, value) {
+                        $('#city').append("<option value="+'"'+value.city_id+'"'+"selected>"+value.city_name+"</option>");
+                        });
+                    
+            },
+                error:function(data){
+                console.log(data);
+            }
+        });
+    });
+</script>
+
 
 <!--skill Details -->	
 <script>
@@ -386,9 +455,9 @@ $(document).ready(function(){
 										    <input type="text" name="edu_city[]" class="form-control" placeholder="City" style="width: 14%;">
 	                                        <select type="text" name="edu_country[]" class="form-control" placeholder="Country" style="width: 14%;">
 												<option value="" selected>Country</option>
-												    @foreach($toReturn['countries'] as $countries)
-												        <option value="{{$countries['ID']}}"> {{$countries['country_name']}} </option>
-												    @endforeach                               
+												    @foreach($toReturn['countries'] as $country)
+													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
+													  @endforeach                                 
 											</select>
 											<select class="form-control" name="completion_year[]" placeholder="Passing Year" style="width: 15%;" >
 												<option value="" selected="selected">Completion</option>
@@ -450,13 +519,12 @@ $(document).ready(function(){
 							<input type="text" name="exp_city[]" class="form-control" placeholder="City" style="width: 14%;">
 							<select type="text" name="exp_country[]" class="form-control" placeholder="Country" style="width: 14%;">
 								<option value="" selected>-Country-</option>
-								    @foreach($toReturn['countries'] as $countries)
-										<option value="{{$countries['ID']}}"> {{$countries['country_name']}} </option>
-								    @endforeach  
+								   @foreach($toReturn['countries'] as $country)
+										<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
+								  @endforeach  
 							</select>
 							<input placeholder="Start Date" name="start_date[]" class="textbox-n form-control start_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">
 							<input placeholder="End Date" name="end_date[]" class="textbox-n form-control end_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">							   
-
 							<button type="button" id="btnRemove" class="btn btn-primary btn_remove">Remove</button>											  
 						 </div>`;
 		 $('#exp_detail').append(data2);
@@ -864,5 +932,7 @@ $(function() {
 				});
 			});
 		</script>
+		
+
 </body>
 </html>

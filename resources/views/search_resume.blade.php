@@ -1,30 +1,38 @@
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
 <style>
-            .table td {
-				padding: 7px;
-				font-size: top;
-				border-top: 1px solid #dee2e6;
-				font-size: 14px;
-				color: #000;
-				background:#fff;
-			}
-			.table tr {
-				padding: 7px;
-				font-size: top;
-				border-top: 1px solid #dee2e6;
-				font-size: 14px;
-				color: #000;
-				background:#fff;
-			}
-			.table th {
-				padding: 7px;
-				font-size: top;
-				border-top: 1px solid #dee2e6;
-				font-size: 14px;
-                color: #000;
-				background:#d3d4d6;
-			}
+
+.table td {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table th {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
+}
 
 .mini-stat-info span {
 	color: #ffffff;
@@ -86,10 +94,14 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
-                                <div class="card-header" style="background:#317eeb;"> 
+                                <div class="card-header" style="background:#317eeb;">
+								@if(!empty($toReturn['user_type']=="teammember")) 
                                 @if($toReturn['current_module_permission']['is_add']=="yes")                                      
 									<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-success" style="float:left;">Add a Candidate</button></a>
-                                @endif											
+                                @endif
+								@else
+								<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-success" style="float:left;">Add a Candidate</button></a>
+								@endif											
 								</div> 
                                   
                                 <div class="card-body" style="border: 1px #B0B0B0 solid;">
@@ -113,20 +125,34 @@
                                                 </thead>
                                                 <tbody>  
                                                 @foreach($personal as $key => $value)  
-                                                <?php $id=$personal[$key]->id;
+												<?php $id=$personal[$key]->id;
+														$start_date=$personal[$key]->seeker_experience_start;
+														$end_date=$personal[$key]->seeker_experience_end;
+															$datetime1 = strtotime(date('Y-m-d', strtotime($start_date)));
+															 $datetime2 = strtotime(date('Y-m-d', strtotime($end_date)));
+															 $secs = $datetime2 - $datetime1;// == <seconds between the two times>
+															 $days = $secs / 86400;
+															 $exp_month=floor($days/30);
+															 $exp_years=floor($exp_month/12);
                                                         ?>                                                                                         
 													<tr>										
 														<td>{{$personal[$key]->first}} {{$personal[$key]->last}}</td>
 														<td>{{$personal[$key]->dob}}</td>
-														<td>{{$personal[$key]->state}},{{$personal[$key]->city}}</td>
+														<td>{{$personal[$key]->city}},{{$personal[$key]->state}}</td>
 														<td>{{$personal[$key]->visa}}</td>
-														<td>{{$personal[$key]->experience}}</td>
+														<!--<td>{{$exp_years}}.{{$exp_month}}</td>-->
+														@if($personal[$key]->total_experience)
+														<td>{{$personal[$key]->total_experience}}Years</td>
+														@else
+														<td>No experience </td>
+														@endif
 														<td>{{$personal[$key]->degree}}</td>
 														<td>{{$personal[$key]->email}}</td>
 														<td>{{$personal[$key]->mobile}}</td>
 														<td>{{$source}}</td>
 														<td>{{$personal[$key]->skype_id}}</td>								
                                                         <td class="actions">
+														@if(!empty($toReturn['user_type']=="teammember")) 
                                                         @if($toReturn['current_module_permission']['is_edit']=="yes")
 														   <i class="fa fa-pencil" aria-hidden="true" data-toggle="dropdown" style="color: #1ba6df;cursor: pointer;" title="Edit"></i>
 														   <ul class="dropdown-menu">
@@ -136,18 +162,34 @@
                                                                     <li><a href="{{url('employer/team_member_edit_experience/'.$id)}}">Experience</a></li>
                                                                     <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
                                                             </ul>
-                                                        @endif 
+                                                        @endif
+														@else
+														<i class="fa fa-pencil" aria-hidden="true" data-toggle="dropdown" style="color: #1ba6df;cursor: pointer;" title="Edit" ></i>
+														   <ul class="dropdown-menu">
+                                                                <li class="active">
+																<a href="{{url('employer/edit_posted_candidate/'.$id)}}">Personal Detail</a></li>
+                                                                      <li><a href="#">Education</a></li>
+                                                                    <li><a href="{{url('employer/team_member_edit_experience/'.$id)}}">Experience</a></li>
+                                                                    <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
+                                                            </ul>
+														@endif
+														@if(!empty($toReturn['user_type']=="teammember"))  
                                                         @if($toReturn['current_module_permission']['is_delete']=="yes")  
 														<a href="{{url('employer/search_resume/delete',$id)}}">
-                                                           <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;"></i>
+                                                           <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;" title="Delete"></i>
                                                            </a>
                                                         @endif
-                                                        <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user"></i></a>
+														@else
+														<a href="{{url('employer/search_resume/delete',$id)}}">
+                                                           <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;"  title="Delete"></i>
+                                                           </a>
+														@endif
+                                                        <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user" title="Submit to Job"></i></a>
 														  
-														   <i class="fa fa-envelope" aria-hidden="true" style="color:#317eeb;"></i>
-														   <i class="fa fa-plus" aria-hidden="true" style="color:#317eeb;"></i>
+														   <i class="fa fa-envelope" aria-hidden="true" style="color:#317eeb;" title="Mail"></i>
+														   <i class="fa fa-plus" aria-hidden="true" style="color:#317eeb;" title="Note"></i>
 														  
-												        </td>														   										                                             				  											
+												        </td>																				   										                                             				  											
                                                     </tr>  	
 														@endforeach	
                                                 </tbody>

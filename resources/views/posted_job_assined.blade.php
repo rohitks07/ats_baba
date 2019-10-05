@@ -14,22 +14,36 @@
     padding: 0em;
 }
 
-.table td, .table th {
-    padding: 0.4em;
-    vertical-align: top;
+.table td {
+    padding: 7px;
+    font-size: top;
     border-top: 1px solid #dee2e6;
-    font-family: inherit;
-    font-size: 15px;
+    font-size: 14px;
     color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
 }
 .table th {
-    padding: 0.5em;
-    vertical-align: top;
+    padding: 7px;
+    font-size: top;
     border-top: 1px solid #dee2e6;
-    font-family: inherit;
-    font-size: 15px;
+    font-size: 14px;
     color: #000;
-    background: #c3c3c399;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
 }
 .modal .modal-dialog .modal-content {
     height: 600px;
@@ -100,21 +114,21 @@
 							      </tr>
 							    </thead>
 							    <tbody>
-							    	@foreach($toReturn['team_member_list'] as $toReturn)
+							    	@foreach($toReturn['team_member_list'] as $key=>$toReturn)
 							        <tr>
 							        	<form action="{{url('employer/assigned')}}" method="post">
 							        	<input type="hidden" name="_token" value ="{{ csrf_token()  }}" >
-
+							        
 							        	<input type="hidden" name="job_id" value="{{$jobpost['ID']}}">
 						        		<input type="hidden" name="team_member_id"  value="{{$toReturn['ID']}}">
-						        	 	<input type="hidden" name="owner_id" value="{{$jobpost['owner_id']}}">
-								        <td><input type="hidden" name="full_name" value="{{$toReturn['full_name']}}">{{$toReturn['full_name']}}</td>
+						        	 	
+                                        <td><input type="hidden" name="owner_id" value="{{$toReturn['ID']}}">{{$toReturn['full_name']}}</td>
 								        <td><input type="hidden" name="email" value="{{$toReturn['email']}}">{{$toReturn['email']}}</td>
-								        @if($toReturn['sts'] == 'active')
+								        @if($toReturn['sts'] == 'inactive')
 								        	<td><input type="submit" class="btn btn-success btn-xs1" value="Assign"></td>
 								        		<input type="hidden" name="sts" value="active">
 								    	@else
-								    		<td><input type="submit" class="btn btn-success btn-xs1" value="Unassign"></td>
+								    		<td><input type="submit" class="btn btn-danger btn-xs1" value="Unassign"></td>
 								    			<input type="hidden" name="sts"  value="blocked">
 								    	@endif
 									    </form>
@@ -154,6 +168,14 @@
                     else
                     {
                     $("#"+id).css('background-color','#e20b0b');                          
+
+                    }
+                    // $("#formreset").reset();
+                }
+            });
+    }
+</script>
+ -->-color','#e20b0b');                          
 
                     }
                     // $("#formreset").reset();

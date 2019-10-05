@@ -110,6 +110,38 @@
         position: absolute;
         will-change: left, right;
     }
+    
+.table td {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table th {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
+}
 </style>
 <div id="wrapper">
     <div class="content-page">
@@ -142,11 +174,17 @@
                                     <div class="card">
                                         <div class="card-header" style="background-color:#d0d0d0">
                                             <h3 class="card-title" style="color:#000;text-transform: none; font-size:large">User Detail :
+                                               @if(!empty($toReturn['user_type']=="teammember")) 
                                                 @if($toReturn['current_module_permission']['is_add']=="yes")
                                                         <a href="{{url('employer/teammember')}}">
                                                             <button type="button" class="btn btn-success" style="float:right;">Add Member</button>
                                                         </a>
                                                     @endif
+                                                @else
+                                                <a href="{{url('employer/teammember')}}">
+                                                            <button type="button" class="btn btn-success" style="float:right;">Add Member</button>
+                                                </a>
+                                                @endif
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="row">
@@ -176,12 +214,21 @@
                                                                             <?php
                                                                         	$id=$team_member->ID;
                                                                         	?>
-                                                                                <td class="actions">
+                                                                               <td class="actions">
+                                                                                @if(!empty($toReturn['user_type']=="teammember")) 
                                                                                 @if($toReturn['current_module_permission']['is_edit']=="yes")
                                                                                     <a href="{{url('employer/manageteammember/edit/'.$id)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-pencil"></i></a>
                                                                                 @endif
+                                                                                @else
+                                                                                <a href="{{url('employer/manageteammember/edit/'.$id)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-pencil"></i></a>
+
+                                                                                @endif
+                                                                                @if(!empty($toReturn['user_type']=="teammember")) 
                                                                                 @if($toReturn['current_module_permission']['is_delete']=="yes")
                                                                                     <a href="{{url('employer/manageteammember/delete/'.$id)}}" style="margin-left:10px;" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                                @endif
+                                                                                @else
+                                                                                <a href="{{url('employer/manageteammember/delete/'.$id)}}" style="margin-left:10px;" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                                                                                 @endif
                                                                                 </td>
                                                                         </tr>
@@ -203,9 +250,13 @@
                                                 <div class="card">
                                                     <div class="card-header" style="background-color:#d0d0d0">
                                                         <h3 class="card-title" style="color:#000;text-transform: none; font-size:large">Customers :
+                                                        @if(!empty($toReturn['user_type']=="teammember")) 
                                                         @if($toReturn['current_module_permission']['is_add']=="yes")
                                                         <a href="{{url('employer/teammember/add')}}" ><button type="button" class="btn btn-success" data-toggle="modal" data-target="#custom-width-modal"  style="float: right;">Add Group</button></h3></a>
-                                                    @endif
+                                                        @endif
+                                                        @else
+                                                        <a href="{{url('employer/teammember/add')}}" ><button type="button" class="btn btn-success" data-toggle="modal" data-target="#custom-width-modal"  style="float: right;">Add Group</button></h3></a>
+                                                        @endif
                                                     </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -243,18 +294,27 @@
                                                             	$id=$team_member_type->type_ID;
                                                             ?>
                                                                 <td class="actions">
+                                                                @if(!empty($toReturn['user_type']=="teammember")) 
                                                                 @if($toReturn['current_module_permission']['is_edit']=="yes")
-
                                                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#editgroup{{$team_member_type->type_ID}}">Edit</button>
                                                                 @endif
+                                                                @else
+                                                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#editgroup{{$team_member_type->type_ID}}">Edit</button>
+                                                                @endif
+                                                                @if(!empty($toReturn['user_type']=="teammember")) 
                                                                 @if($toReturn['current_module_permission']['is_delete']=="yes")
                                                                     <a href="{{url('employer/manageteammember/add/delete/'.$id)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
                                                                         <button type="button" class="btn-round-xs btn-xs" style="background-color:#ff6347; color:#fff">Delete</button>
                                                                     </a>
                                                                 @endif
+                                                                @else
+                                                                <a href="{{url('employer/manageteammember/add/delete/'.$id)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
+                                                                        <button type="button" class="btn-round-xs btn-xs" style="background-color:#ff6347; color:#fff">Delete</button>
+                                                                    </a>
+                                                                @endif
+                                                                <button class="btn btn-info btn-xs"  onclick="select_teammember({{$team_member_type->type_ID}});" data-toggle="modal" data-target="#dff{{$team_member_type->type_ID}}">view</button>
                                                                 </td>
                                                         </tr>
-                                                        @if($toReturn['current_module_permission']['is_edit']=="yes")
                                                         <div id="editgroup{{$team_member_type->type_ID}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
@@ -281,12 +341,11 @@
                                                                     </div>
                                                                 </div>
                                                         </div>
-                                                        @endif
                                                         @endforeach
                                                     </tbody>
                                                     </table>
 
-                                                </div>
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>
@@ -302,8 +361,61 @@
         </div>
     </div>
 </div>
-@include('include.emp_footer')
 
+
+
+                                    <!-- view model -->
+                                                            <div class="modal fade" id="groupmemberlist" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content" style="width:500px">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title" class="font-weight-bold" style="color:#4285F4;">Group Member list</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    </div>
+                                                                    <div class="modal-body" >
+                                                                        <div id="teammember_list">
+                                                                        </div>
+                                                                           
+
+                                                                    </div>
+                                                                        <div class="modal-footer">
+                                                                            <!-- <a href="{{url('employer/teammember/showgroup/'.$id)}}"><button type="button" class="btn btn-success">SHOW</button></a> -->
+                                                                            <!-- <button type="button" onclick="show()" class="btn btn-success" >SHOW</button> -->
+                                                                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                                                                        </div>
+                                                                    
+                                                                </div>
+                                                                
+                                                                </div>
+                                                            </div>
+@include('include.emp_footer')
+<script>
+function select_teammember(id){
+$('#groupmemberlist').modal();
+$("#teammember_list").empty();
+$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+                $.ajax({
+                    url: "{{url('employer/listmember')}}"+"/"+id,
+                    type: 'get',
+                    dataType: "json",
+
+                    success: function(data) {
+                            $.each(data,function(i,team){
+                            $("#teammember_list").append("<table class='table table'class='font-weight-bold' style='width: 100%;border-bottom-color:5px solid red;background-color:white;'><tr class='font-weight-bold' style='color:#138D75;'><td>"+team.first_name+"</td><td style='text-align:right;'>"+team.email+"</td></tr></table>");
+                            // $("#teammember_email_id").append("<p>"+team.email+"</p>");
+                        });
+                        console.log(data);
+
+                    }
+                });
+}
+</script>
 
 
 

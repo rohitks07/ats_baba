@@ -5,8 +5,37 @@
         width:100%;
         overflow-y:scroll;
     }
-th{
-    color:#fff;
+
+.table td {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table th {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
 }
 .content-page > .content {
     margin-bottom: 60px;
@@ -36,7 +65,7 @@ th{
                                     <div class="col-md-12 col-sm-12 col-12">
                                     <span  ><button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#add_new_modal">Add New Qualification </button></span><br><br>
                                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead style="background:#317eeb;">
+                                        <thead>
                                             <tr>
                                                 <th>Qualification</th>
                                                 <th>Text</th>

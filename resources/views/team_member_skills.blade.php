@@ -103,6 +103,38 @@
         background: #fff;
         width: 100%;
     }
+    
+.table td {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table th {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
+}
 
 </style>
 <div class="content-page">
@@ -123,7 +155,6 @@
                                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                         <tr>
-
                                             <th>Skills</th>
 
                                             <th>Actions</th>
@@ -131,17 +162,12 @@
                                     </thead>
                                     <tbody>
                                         @foreach($skills as $skill)
-
-
                                         <tr>
-                                            <?php $id=$skill->ID;
-															$seeker_id=$skill->seeker_ID;
-														?>
-
-                                            <td>{{$skill->skill_name}}</td>
-
+                                            <?php $id=$skill['ID'];
+												// 			$seeker_id=$skill->seeker_ID;
+											?>
+                                            <td>{{$skill['skill_name']}}</td>
                                             <td>
-
                                                 <a
                                                     href="{{url('employer/team_member_skills_del/'.$id.'/'.$seeker_id)}}">
                                                     <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;"
@@ -159,50 +185,44 @@
         </div>
     </div>
 </div>
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
-                                            aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title mt-0" id="myModalLabel"
-                                                            style="font-weight:100;">Edit Experience</h4>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
 
-                                                        <form class="cmxform form-horizontal tasi-form"
-                                                            action="{{url('employer/team_member_skills/in')}}"
-                                                            method="post">
-                                                            {{csrf_field()}}
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0" id="myModalLabel"
+                style="font-weight:100;">Edit Experience</h4>
+            <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="cmxform form-horizontal tasi-form" action="{{url('employer/team_member_skills/in')}}" method="post">
+@csrf()
+                <div class="card-body">
 
-                                                            <div class="card-body">
-
-
-                                                                <div class="form-group row">
-                                                                    <label for="email"
-                                                                        class="control-label col-lg-4">Skills</label>
-                                                                    <div class="col-lg-8">
-                                                                        <input type="hidden" id="seeker_ID"
-                                                                            name="seeker_ID" value="{{$seeker_id}}">
-                                                                        <input type="text" id="skills" name="skills"
-                                                                            placeholder="Skill,Skill">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Close</button>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="form-group row">
+                        <label for="email"
+                            class="control-label col-lg-4">Skills</label>
+                        <div class="col-lg-8">
+                            <input type="hidden" id="seeker_ID" name="seeker_ID" value="{{$seeker_id}}">
+                            <input type="text" id="skills" name="skills"
+                                placeholder="Skill,Skill">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit"
+                            class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
 
 
 

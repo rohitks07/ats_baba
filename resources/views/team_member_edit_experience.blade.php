@@ -97,6 +97,37 @@ textarea[class="form-control"]{
 	width: 100%;
 }
 
+.table td {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table th {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
+}
 									
 </style>                             
         <div class="content-page">              
@@ -125,16 +156,11 @@ textarea[class="form-control"]{
                                                     </tr>
                                                 </thead>
                                                 <tbody>                               
-												
-												
-
-												
 														@foreach($experiences as $experience)
 														<tr>
 														<?php $id=$experience->ID;
-															$seeker_id=$experience->seeker_ID;
+														    $seeker_id=$experience->seeker_ID;
 														?>
-														
 														<td>{{$experience->job_title}}</td>
 														<td>{{$experience->company_name}}</td>
 														<td>{{$experience->start_date}}</td>
@@ -170,15 +196,15 @@ textarea[class="form-control"]{
                                 </button>
                             </div>
                         <div class="modal-body">
-						<form class="cmxform form-horizontal tasi-form"  action="{{url('employer/team_member_edit_experience/add')}}"   method="post" >
-									{{csrf_field()}}
+						<form class="cmxform form-horizontal tasi-form"  action="{{url('employer/team_member_edit_experience/add')}}" method="post">
+									@csrf();
                             <div class="card-body">
                                 
                                     
                                         <div class="form-group row">
                                             <label for="email" class="control-label col-lg-4">Job Title</label>
                                             	<div class="col-lg-8">
-													<input type="hidden" name="seeker_id" value="{{$seeker_id}}" >
+													<input type="hidden" name="seeker_id" value="{{$exp_seeker_id}}">
                                                  	<input type="text" id="job_title" name="job_title"  placeholder="Job Title">
                                             	</div>
                                         	</div>

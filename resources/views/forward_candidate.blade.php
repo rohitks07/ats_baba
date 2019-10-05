@@ -77,25 +77,43 @@
         margin-top: 2%;
         margin-left: 2%;
     }
-    
-    .table thead th {
-        vertical-align: bottom;
-        /* border-bottom: 2px solid #dee2e6; */
-        color: #fff;
-        font-size: 14px;
-    }
-    
-    .table td,
-    .table th {
-        padding: 7px;
-        vertical-align: top;
-        border-top: 1px solid #d1d1d4;
-    }
-    
+
     .card .card-header {
         padding: 2px 20px;
         border: none;
     }
+    
+.table td {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table th {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
+}
 </style>
 <div id="wrapper">
     <div class="content-page">
@@ -157,85 +175,83 @@
                                         </div>
                                     <div class="card-header bg-primary"> 
                                     </div> 
-                                       <div class="card-body" style="background:#f3f2f2;">
+                                    <div class="card-header bg-primary"> 
+                                    </div> 
+                                       <div class="container-fluid card-body" style="background:#f3f2f2;">
                                     <div class="row" >
-                                        <div class="col-md-1"></div>
-                                            <div class="col-md-3" id="dels">
+                                        <!-- <div class="col-md-1"></div> -->
+                                        <!-- col-sm-6 col-md-4     col-md-3 col-sm-4 -->
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                               <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="fullname" checked>
                                                 <label class="form-label">Full Name </label>
                                                  <input type="text" id="fullname" placeholder="Full Name " name="fullname" value="{{$toReturn['application_detail']['candate_name']}}" required>   
-                                            </div><!--emd of col-->
+                                            </div><!--end of col-->
 
-                                            <div class="col-md-3" id="dels">
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
                                               <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="phone_primary" checked>
-                                              <label class="form-label">Phone Primary</label>
-                                                <input type="text" id="phone_primart" placeholder="Phone Primary" name="phone_primary" value="{{$toReturn['application_detail']['phone_no_mobile']}}" required>  
-                                            </div><!--emd of col-->
+                                              <label class="form-label">Phone(Primary)</label>
+                                                <input type="text" id="phone_primart" placeholder="Phone(Primary)" name="phone_primary" value="{{$toReturn['application_detail']['phone_no_mobile']}}" required>  
+                                            </div><!--end of col-->
 
-                                            <div class="col-md-3" id="dels">
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox" name="param[]" value="condidate_email_id" checked>
-                                                <label class="form-label">Email Id</label>
-                                                 <input type="text" id="condidate_email_id" placeholder="Email Id" name="condidate_email_id" value="{{$toReturn['application_detail']['email_id']}}" required>     
-                                            </div><!--emd of col-->
-                                        </div> <!--end of row-->
+                                                <label class="form-label">Email ID</label>
+                                                 <input type="text" id="condidate_email_id" placeholder="Email ID" name="condidate_email_id" value="{{$toReturn['application_detail']['email_id']}}" required>     
+                                                 </div><!-- end of col -->
+                                      
 
-                                        <div class="row" >
-                                        <div class="col-md-1"></div>
-                                            <div class="col-md-3" id="dels">
+                                        <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="skypeid" checked> 
+                                                <label class="form-label">Skype ID</label>
+                                                <input type="text" id="skypeid" onblur="rate()" placeholder="Skype ID" name="skypeid" >
+                                        </div><!-- end of col -->
+
+                                        <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                              <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="current_location" checked >
-                                             <label class="form-label">Current Location</label>
-                                                <input type="text" id="" placeholder="Current Location" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>      
-                                            </div><!--emd of col-->
-
-                                            <div class="col-md-3" id="dels">
-                                             <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="current_ctc" checked >
-                                             <label class="form-label">Current CTC</label>
-                                                    <input type="text" id="inlinetext" placeholder="Current CTC" name="current_ctc" required />   
-                                            </div><!--emd of col-->
-
-                                            <div class="col-md-3" id="dels">
-                                             <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="expected_ctc" checked>
-                                             <label class="form-label">Expected CTC(min)</label>
-                                                 <input type="text"  placeholder="Expected CTC(min)" name="expected_ctc"  required/>    
-                                            </div><!--emd of col-->
-                                        </div> <!--end of row-->
-
-                                        <div class="row" >
-                                        <div class="col-md-1"></div>
-                                            <div class="col-md-3" id="dels">
-                                             <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
-                                             <label class="form-label">Qualification With University</label>
-                                                <input type="text" placeholder="Qualification With University" name="qual_with_uni"  required/>   
-                                            </div><!--emd of col-->
-
-                                            <div class="col-md-3" id="dels">
+                                             <label class="form-label">Current Location(City,State)</label>
+                                                <input type="text" id="" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>      
+                                            </div><!--end of col-->
+                                        <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                              <input class="form-check-input chkbx" type="checkbox" name="param[]" value="us_visa_status" checked >
                                              <label class="form-label">US Visa Status</label>  
                                                  <input type="text"  placeholder=" US Visa Status " name="us_visa_status" value="{{$toReturn['application_detail']['visa_status']}}" required>   
-                                            </div><!--emd of col-->
-                                            <div class="col-md-3" id="dels">
-                                              <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="date_of_birth" checked >
-                                              <label class="form-label">Date Of Birth</label>
-                                              <input type="date" placeholder="Date Of Birth" name="date_of_birth" required/>
-                                            </div><!--emd of col-->
-                                        </div> <!--end of row-->
-                                        <div class="row" >
-                                        <div class="col-md-1"></div>
-                                            <div class="col-md-3" id="dels">
-                                             <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" checked>
-                                             <label class="form-label">Last 4 Digit SSN No.</label>
-                                                 <input type="text" max="4" placeholder="Last 4 Digit SSN No." id="last_for_digit_ssn" name="last_for_digit_ssn"  required>  
-                                                        <span id="emsg" style="display:none;">Please Enter a Valid SSN No.</span>
-                                                    
-                                            </div><!--emd of col-->
-                                                    
-                                            <div class="col-md-3" id="dels">
-                                             <input class="form-check-input chkbx" type="checkbox" name="param[]" value="entred_in_us" checked >
-                                             <label class="form-label">Entered In Us</label>
-                                                <input type="text"  placeholder="Entered In Us" name="entred_in_us" required>  
-                                            </div><!--emd of col-->
+                                            </div><!--end of col-->
+                                        
+                                        
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="visaexpiry" checked> 
+                                                <label class="form-label">US Visa Expiry</label>
+                                                <input type="date" id="visaexpiry" onblur="rate()" placeholder="US Visa Expiry" name="visaexpiry" >
+                                        </div><!-- end of col -->
+                                        
+                                        <div class="col-sm-12 col-md-6 col-lg-4" id="dels" style="background-color:;">
+                                                
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" checked>
+                                                <label class="form-label">SSN No.(Last Four Digits)</label>
+                                                   
+                                                    <input type="text" onblur="numbval()" max="4" placeholder="SSN No.(Last Four Diogits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title required>
+                                                           
+                                               </div><!--end of col-->
 
-                                            <div class="col-md-3" id="dels">
+                                               <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="passportno" checked> 
+                                                <label class="form-label">Passport No</label>
+                                                <input type="text" id="passportno" onblur="rate()" placeholder="Passport No" name="passportno" >
+                                        </div><!-- end of col -->
+
+                                        <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
+                                              <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="dob" checked >
+                                              <label class="form-label">D O B</label>
+                                              <input type="date" placeholder="Date Of Birth" name="dob" required/>
+                                            </div><!--end of col-->
+
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
+                                             <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
+                                             <label class="form-label">Qualification With University Name and Passing Year(Bachelors)</label>
+                                                <input type="text" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni"  required/>   
+                                            </div><!--end of col-->
+
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="Open_For_Relocation" checked>
                                                 <label class="form-label">Open For Relocation(Yes/No)</label>
                                                 <!--<input type="text" placeholder="Open For Relocation(Y/N)" name="Open_For_Relocation" required/>-->
@@ -243,31 +259,29 @@
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
-                                            </div><!--emd of col-->
-                                        </div> <!--end of row-->
+                                            </div><!--end of col-->
 
-                                        <div class="row" >
-                                        <div class="col-md-1"></div>
-                                            <div class="col-md-3" id="dels">
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                               <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_tele" checked>
-                                              <label class="form-label">Availability For Telephone(Yes/No)</label>
-                                                <!--<input type="text"  placeholder="Availability For Telephone(Y/N)" name="availa_for_tele"  required/>     -->
-                                                <select placeholder="Availability For Telephone(Yes/No)" name="availa_for_tele">
+                                              <label class="form-label">Availability For Telephone Interview(Yes/No)</label>
+                                                <!--<input type="text"  placeholder="Availability For Telephone Interview(Y/N)" name="availa_for_tele"  required/>     -->
+                                                <select placeholder="Availability For Telephone Interview(Yes/No)" name="availa_for_tele">
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
-                                            </div><!--emd of col-->
-                                            <div class="col-md-3" id="dels">
-                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_per" checked>
-                                                <label class="form-label">Availability For Person(Yes/No)</label>
-                                                <!--<input type="text"  placeholder="Availability For Person(Y/N)" name="availa_for_per"  required />-->
-                                                <select  placeholder="Availability For Person(Yes/No)" name="availa_for_per">
-                                                    <option>Yes</option>
-                                                    <option>No</option>
-                                                </select>
-                                            </div><!--emd of col-->
+                                            </div><!--end of col-->
 
-                                            <div class="col-md-3" id="dels">
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_per" checked>
+                                                <label class="form-label">Availability For In-Person Interview(Yes/No)</label>
+                                                <!--<input type="text"  placeholder="Availability For In-Person Interview(Y/N)" name="availa_for_per"  required />-->
+                                                <select  placeholder="Availability For In-Person Interview(Yes/No)" name="availa_for_per">
+                                                    <option>Yes</option>
+                                                    <option>No</option>
+                                                </select>
+                                            </div><!--end of col-->
+
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_new" checked> 
                                                 <label class="form-label">Availability For New Project(Yes/No) </label>
                                                 <!--<input type="text"  placeholder="Availability For New Project(Y/N)" name="availa_for_new" required />-->
@@ -275,14 +289,52 @@
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
-                                            </div><!--emd of col-->
-                                            <div class="col-md-3" id="dels">
+                                            </div><!--end of col-->
+
+                                            <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="linkedinid" checked> 
+                                                <label class="form-label">Linkedin ID</label>
+                                                <input type="text" id="linkedinid" onblur="rate()" placeholder="Linkedin Id" name="linkedinid">
+                                        </div><!-- end of col -->
+
+                                        <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="expectedrate" checked> 
                                                 <label class="form-label">Expected Rate</label>
-                                                <input type="text"  placeholder="Expected Rate" name="expectedrate" required>       
-                                            </div><!--emd of col-->
-                                            
-                                        </div> <!--end of row-->  
+                                                <input type="text" id="expectedrate" onblur="rate()" placeholder="Expected Rate" name="expectedrate" required>
+                                        </div><!-- end of col -->
+                                           
+                                         <div class="col-sm-1" id="dels" style="background-color:;">
+                                                
+                                            <p id="wrong2" style="color:red;"></p>
+                                                                                            
+                                            </div><!--end of col-->
+                                         
+                                      
+                                         <div class="col-sm-1" id="dels" style="background-color:;">
+                                                
+                                            <p id="wrong" style="color:red;"></p>
+                                                                                            
+                                            </div><!--end of col-->
+
+                                        
+                                          
+                                      
+                                        <div class="col-sm-1" id="dels" style="background-color:;">
+                                                
+                                            <p id="chk" style="color:red;"></p>
+                                                                                            
+                                            </div><!--end of col-->
+                                                    
+                                          
+
+                                      
+                                        <div class="col-sm-1" id="dels" >
+                                                
+                                            <p id="exprate" style="color:red; "></p>
+                                                                                            
+                                            </div><!--end of col-->
+
+<!--                                        </div> end of row  -->
                                     </div>
                                 </div>
                                 <hr>
@@ -447,21 +499,19 @@
                                                </tr>
                                             </thead>    
                                             <tbody>
-                                                <tr style="background: aliceblue;">
-                                                    <td><input type="checkbox"  name="other_doc0" id="other_doc0" value="document_upload"> 
+                                            
+                                                <tr style="background: aliceblue;" id="update_resume">
+                                                    <td><input type="checkbox"  name="other_doc0" id="other_doc0" value="document_upload">
                                                     @if(!empty($toReturn['application_detail']['updated_resume']))
-                                                    <input type="hidden" name="document_name[]" value="update_Resume">
-							                        <input type="hidden" name="document_upload[]" value="{{$toReturn['application_detail']['updated_resume']}}" ><a href="{{url('public/seekerresume/'.$toReturn['application_detail']['updated_resume'])}}">{{$toReturn['application_detail']['updated_resume']}}</a>
+                                                    <input type="hidden" name="update_Resume_name" value="update_Resume">
+							                        <input type="hidden" name="update_Resume_file" value="{{$toReturn['application_detail']['updated_resume']}}" ><a href="{{url('public/seekerresume/'.$toReturn['application_detail']['updated_resume'])}}">{{$toReturn['application_detail']['updated_resume']}}</a>
 							                        @endif
-                                                    <td><input type="button"  name="other_doc1" id="other_doc1" value="Delete"> 
-                                                        <input type="button" name="add_more_doc" value="Add More "/></a></td>
-                                                   
+                                                    <td><input type="button"  name="delete_doc" id="delete_doc" value="Delete"> 
                                                 </tr>
-                                                <tr><td></td><td></td></tr>
                                                 <tr id="exp_detail">		
 										        <td class="form-group row delete_exp">													
-										        <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;">
-                                                <input type="file" name="document_upload[]" id="document_upload" class="form-control" style="width: 40%;">
+										        <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;" required>
+                                                <input type="file" name="document_upload[]" id="document_upload" class="form-control" style="width: 40%;" required>
 												<p><button type="button" id="btnAdd_Exp" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
 												</td>
                                                 </tr>
@@ -480,6 +530,7 @@
         </form>
     </div>
 </div>
+@include('include.emp_footer')
 <script type="text/javascript">
 function showTable(checkbox,tableId){
     if($('#'+checkbox).is(":checked"))   
@@ -588,7 +639,6 @@ function ctc() {
 function etc() {
   var x, text;
   x = document.getElementById("inlinetextetc").value;
-
   if (isNaN(x) || x < 1 ) {
     text = "Please enter a Valid ETC No.";
   } else {
@@ -600,10 +650,8 @@ function etc() {
 // expected rate
 function rate() {
   var x, text;
-
   // Get the value of the input field with id="numb"
   x = document.getElementById("expectedrate").value;
-
   // If x is Not a Number or less than one or greater than 10
   if (isNaN(x) || x < 1) {
     text = "Please enter numbers only";
@@ -612,4 +660,9 @@ function rate() {
   }
   document.getElementById("exprate").innerHTML = text;
 }
+</script>
+<script>
+$("#delete_doc").click(function(e) {
+    $("#update_resume").css("display", "none");
+});
 </script>

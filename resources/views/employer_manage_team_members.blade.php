@@ -25,22 +25,7 @@
 			.card-body{
 				padding: 0.25rem;
 			}
-			.table-bordered td, .table-bordered th {
-				border: 1px solid #4387cc;
-			}
-				.table thead th {
-					vertical-align: bottom;
-					border-bottom: 2px solid #51a6fb;
-				}
-				.table thead th {
-					vertical-align: bottom;
-					border-bottom: 0px solid #51a6fb;
-					/* width: 67%; */
-					padding: 6px;
-					background-color: honeydew;
-					text-align: center;
-					color: #095496;
-				}
+		
 				.card .card-header {
 					padding: 10px 20px;
 					border: none;
@@ -55,21 +40,7 @@
 					margin-top: 0;
 					text-transform:none;
 				}
-				.table-bordered td, .table-bordered th {
-					border: 1px solid #4387cc;
-					padding: 7px;
-					text-align: center;
-					color: #565656;
-				}
-				.table-bordered td, .table-bordered th {
-					border: 1px solid #4387cc;
-					padding: 4px;
-					text-align: center;
-					color: #4c4c4c;
-				}
-				.table-striped > tbody > tr:nth-of-type(odd) {
-					background-color: #f5f5f5;
-					}
+			
 					.btn-xs, .btn-group-xs>.btn {
 						padding: 1px 5px;
 						font-size: 12px;
@@ -81,6 +52,38 @@
 						overflow: hidden;
 						width: 100%;
 					}
+					
+                .table td {
+                    padding: 7px;
+                    font-size: top;
+                    border-top: 1px solid #dee2e6;
+                    font-size: 14px;
+                    color: #000;
+                    background:#fff;
+                }
+                .table tr {
+                    padding: 7px;
+                    font-size: top;
+                    border-top: 1px solid #dee2e6;
+                    font-size: 14px;
+                    color: #000;
+                    background:#fff;
+                }
+                .table th {
+                    padding: 7px;
+                    font-size: top;
+                    border-top: 1px solid #dee2e6;
+                    font-size: 14px;
+                    color: #000;
+                    background:#e4e4e4;
+                }
+                .table thead th {
+                    vertical-align: bottom;
+                    border-bottom: 0.5px solid #000;
+                }
+                .table-bordered thead td, .table-bordered thead th {
+                    border-bottom-width: 1px;
+                }
 			
 	</style>        
     </head>

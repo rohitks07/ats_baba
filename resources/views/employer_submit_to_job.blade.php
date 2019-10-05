@@ -73,6 +73,38 @@ width: 84%;
 	height:80px;
 	background:#e0e0e0;
 }
+
+.table td {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table tr {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#fff;
+}
+.table th {
+    padding: 7px;
+    font-size: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #000;
+    background:#e4e4e4;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0.5px solid #000;
+}
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 1px;
+}
 </style>       
 <div id="wrapper">
     <div class="content-page">
@@ -94,17 +126,28 @@ width: 84%;
                                         <div class="form-group row">
                                             <label for=""  class="control-label col-lg-4">Mobile Phone <span class="red">*</span></label>
                                             <div class="col-lg-8">
-                                                <input name="mobile_number" type="tel" class="form-control" id="mobile_number" value="" maxlength="10" required style="max-width:50%; border: 1px solid #bbb8b8;" />
+                                                <input name="mobile_number" type="tel" class="form-control" id="mobile_number"   maxlength="12" required style="max-width:50%; border: 1px solid #bbb8b8;" />
                                             </div>
                                         </div>
-
+                                        <div class="form-group row">
+                                          <label for="address" class="control-label col-lg-4">Job Type <span style="color:red;">*</span></label>
+                                          <select name="" id="type_of_job" class="form-control" onchange="fulltime()" style="width:33%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
+                                              <option value="">Select Job Type</option>
+                                              <option value="Full Time">Full Time</option>
+                                              <option value="Contract">Contract</option>
+                                              <option value="Contract-to-Hire">Contract-to-Hire</option>
+                                              <option value="Part Time">Part Time</option>
+                                          </select>
+                                        </div>
+                                        <!--Job Type-->
+                                                       
                                          <div class="form-group row">
-                                            <label for="" class="control-label col-lg-4">Salary<span class="red">*</span></label>
+                                            <label for="" class="control-label col-lg-4">Salary/Pay Rate <span class="red">*</span></label>
                                             <div class="col-lg-8">
                                                <!-- <span><input name="pay_min" type="text" class="form-control" id="pay_min"  min="0" style="width: 29%; float:left;"/></span>
 							                  <span><input name="pay_max" type="text" class="form-control" id="pay_max" min="0" style="width: 29%; float:left;"/></span> -->
                                                 <select name="payment_range" id="select_ranage" class="form-control" style="max-width:50%; border: 1px solid #bbb8b8;">
-                                                                <option> SELECT MONTHLY RANGE</option>
+                                                                <option value=""> SELECT MONTHLY RANGE</option>
                                                                 <option value="15k-20k">15k - 20k</option>
                                                                 <option value="20k-25k">20k - 25k</option>
                                                                 <option value="25k-30k">25k - 30k</option>
@@ -114,9 +157,37 @@ width: 84%;
                                                                 <option value="45k-50k">45k - 50k</option>
                                                                 <option value="50k-55k">50k - 55k</option>
                                                                 <option value="55k-60k">55k - 60k</option>
+                                                                <option value="15$-20$">15$ - 20$</option>
+                                                                <option value="20$-25$">20$ - 25$</option>
+                                                                <option value="25$-30$">25$ - 30$</option>
+                                                                <option value="30$-35$">30$ - 35$</option>
+                                                                <option value="35$-40$">35$ - 40$</option>
+                                                                <option value="40$-45$">40$ - 45$</option>
+                                                                <option value="45$-50$">45$ - 50$</option>
+                                                                <option value="DOE">(DOE)Depends upon Experience</option>
                                                 </select>
                                             </div>
                                         </div>
+
+                         <!--                <div class="form-group row">-->
+                         <!--                   <label for="" class="control-label col-lg-4">Salary<span class="red">*</span></label>-->
+                         <!--                   <div class="col-lg-8">-->
+                                               <!-- <span><input name="pay_min" type="text" class="form-control" id="pay_min"  min="0" style="width: 29%; float:left;"/></span>
+							                  <!--<span><input name="pay_max" type="text" class="form-control" id="pay_max" min="0" style="width: 29%; float:left;"/></span> -->
+                         <!--                       <select name="payment_range" id="select_ranage" class="form-control" style="max-width:50%; border: 1px solid #bbb8b8;" required>-->
+                         <!--                                       <option> SELECT MONTHLY RANGE</option>-->
+                         <!--                                       <option value="15k-20k">15k - 20k</option>-->
+                         <!--                                       <option value="20k-25k">20k - 25k</option>-->
+                         <!--                                       <option value="25k-30k">25k - 30k</option>-->
+                         <!--                                       <option value="30k-35k">30k - 35k</option>-->
+                         <!--                                       <option value="35k-40k">35k - 40k</option>-->
+                         <!--                                       <option value="40k-45k">40k - 45k</option>-->
+                         <!--                                       <option value="45k-50k">45k - 50k</option>-->
+                         <!--                                       <option value="50k-55k">50k - 55k</option>-->
+                         <!--                                       <option value="55k-60k">55k - 60k</option>-->
+                         <!--                       </select>-->
+                         <!--                   </div>-->
+                         <!--               </div>-->
 
                                          <div class="form-group row">
                                             <label for=""  class="control-label col-lg-4">Upload Resume<span class="red">*</span></label>
@@ -186,6 +257,84 @@ width: 84%;
     </form>
 </div> 
 @include('include.footers')
+<script type="text/javascript">
+    function fulltime(){
+        // alert('hrllo');
+        temp = document.getElementById('type_of_job').value;
+        // alert(temp);
+        if (temp == 'Full Time'){
+            // alert('gfg');
+             var x = document.getElementById("select_ranage").options[1].disabled = false;
+             var x = document.getElementById("select_ranage").options[2].disabled = false;
+             var x = document.getElementById("select_ranage").options[3].disabled = false;
+             var x = document.getElementById("select_ranage").options[4].disabled = false;
+             var x = document.getElementById("select_ranage").options[5].disabled = false;
+             var x = document.getElementById("select_ranage").options[6].disabled = false;
+             var x = document.getElementById("select_ranage").options[7].disabled = false;            
+             var x = document.getElementById("select_ranage").options[8].disabled = false;
+             var x = document.getElementById("select_ranage").options[9].disabled = false;
+             var x = document.getElementById("select_ranage").options[10].disabled = true;
+             var x = document.getElementById("select_ranage").options[11].disabled = true;
+             var x = document.getElementById("select_ranage").options[12].disabled = true;
+             var x = document.getElementById("select_ranage").options[13].disabled = true;
+             var x = document.getElementById("select_ranage").options[14].disabled = true;
+             var x = document.getElementById("select_ranage").options[15].disabled = true;
+             var x = document.getElementById("select_ranage").options[16].disabled = true;
+        }
+        else if (temp == 'Contract'){
+            // alert('gfg');
+             var x = document.getElementById("select_ranage").options[1].disabled = true;
+             var x = document.getElementById("select_ranage").options[2].disabled = true;
+             var x = document.getElementById("select_ranage").options[3].disabled = true;
+             var x = document.getElementById("select_ranage").options[4].disabled = true;
+             var x = document.getElementById("select_ranage").options[5].disabled = true;
+             var x = document.getElementById("select_ranage").options[6].disabled = true;
+             var x = document.getElementById("select_ranage").options[7].disabled = true;          
+             var x = document.getElementById("select_ranage").options[8].disabled = true;
+             var x = document.getElementById("select_ranage").options[9].disabled = true;
+             var x = document.getElementById("select_ranage").options[10].disabled = false;
+             var x = document.getElementById("select_ranage").options[11].disabled = false;
+             var x = document.getElementById("select_ranage").options[12].disabled = false;
+             var x = document.getElementById("select_ranage").options[13].disabled = false;
+             var x = document.getElementById("select_ranage").options[14].disabled = false;
+             var x = document.getElementById("select_ranage").options[15].disabled = false;
+             var x = document.getElementById("select_ranage").options[16].disabled = false;
+        }
+        else{
+             var x = document.getElementById("select_ranage").options[1].disabled = false;
+             var x = document.getElementById("select_ranage").options[2].disabled = false;
+             var x = document.getElementById("select_ranage").options[3].disabled = false;
+             var x = document.getElementById("select_ranage").options[4].disabled = false;
+             var x = document.getElementById("select_ranage").options[5].disabled = false;
+             var x = document.getElementById("select_ranage").options[6].disabled = false;
+             var x = document.getElementById("select_ranage").options[7].disabled = false;
+             var x = document.getElementById("select_ranage").options[8].disabled = false;
+             var x = document.getElementById("select_ranage").options[9].disabled = false;
+             var x = document.getElementById("select_ranage").options[10].disabled = false;
+             var x = document.getElementById("select_ranage").options[11].disabled = false;
+             var x = document.getElementById("select_ranage").options[12].disabled = false;
+             var x = document.getElementById("select_ranage").options[13].disabled = false;
+             var x = document.getElementById("select_ranage").options[14].disabled = false;
+             var x = document.getElementById("select_ranage").options[15].disabled = false;
+             var x = document.getElementById("select_ranage").options[16].disabled = false;
+        }
+    }
+</script>
+<script>
+    function phoneMask() { 
+    var num = $(this).val().replace(/\D/g,''); 
+  if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6)  + '-' + num.substring(6,10)) ) 
+  {
+
+  }
+//   else
+//   {
+	   
+// 	$("#home_ph_check").show();
+//   }
+}
+$('#mobile_number').keyup(phoneMask);
+</script>
 </body>
 <!-- Mirrored from coderthemes.com/moltran/blue/form-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Jun 2019 12:15:55 GMT -->
 </html>

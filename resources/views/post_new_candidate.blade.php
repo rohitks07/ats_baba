@@ -1,7 +1,15 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!DOCTYPE html>
 <html lang="en">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
+<script>
+		$.ajaxSetup({
+		  headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		  }
+		});
+		</script>
 <style>
 			.table td {
 				padding: 7px;
@@ -141,7 +149,12 @@
 		border-radius: 5px;
 		width: 48%;
 	}
- </style>       		     
+	  #wrapper {
+    overflow-y:scroll;
+    width: 100%;
+}
+ </style>
+ <div id="wrapper">
 		<div class="content-page">             
 			<div class="content"> <br><br><br>                         
 				<div class="row"> 							
@@ -375,7 +388,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Skype ID</label>
 											<div class="col-lg-8">
-												<input type="text" id="skype_id"  name="skype_id" maxlength="30">
+												<input type="text" id="skype_id"  name="skype_id" maxlength="30" placeholder="Skype ID">
 											</div>
 									  </div>
 								<!--end of Skype ID-->
@@ -399,7 +412,14 @@
 												</select>  
 												<span id="visacheck">Please Select Visa</span>
 										   </div>
-									</div>									
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label">Total It Experience <span style="color:red;">*</span></label>
+											<div class="col-sm-8">
+                                            <input type="text" id="Experience" placeholder="Total It Experience" name="total_experience" maxlength="10"  required>
+												<!--<span id="Experiencecheck">Plz Insert It Experience </span>-->
+										   </div>
+									</div>
 								<!--end of Visa-->
 								
 								</div><!--end of column-->
@@ -409,136 +429,24 @@
 								
 								<!-- Location-->				
 										<div class="form-group row">
-											<label for="address" class="control-label col-lg-4">Location<span style="color:red;">*</span> </label>
-												<select name="country" id="country" class="form-control"  style="max-width:19%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
-												    <option value="" selected>Country</option>
-													<option value="Afghanistan" selected>Afghanistan</option>
-												<option value="Albany">Albany</option>
-												<option value="Algeria">Algeria</option>
-												<option value="Angola">Angola</option>
-												<option value="Argentina">Argentina</option>
-												<option value="Armenia">Armenia</option>
-												<option value="Australia">Australia</option>
-												<option value="Austria">Austria</option>
-												<option value="Azerbaijan">Azerbaijan</option>
-												<option value="Bahamas">Bahamas</option>
-												<option value="Bahrain">Bahrain</option>
-												<option value="Bangladesh">Bangladesh</option>
-												<option value="Belgium">Belgium</option>
-												<option value="Bhutan">Bhutan</option>
-												<option value="Bulgaria">Bulgaria</option>
-												<option value="Burma">Burma</option>
-												<option value="Burundi">Burundi</option>
-												<option value="Cambodia">Cambodia</option>
-												<option value="Cameroon">Cameroon</option>
-												<option value="Cape Verd">Cape Verd</option>
-												<option value="Central Africa">Central Africa</option>
-												<option value="Chadi">Chadi</option>
-												<option value="Chile">Chile</option>
-												<option value="China">China</option>
-												<option value="Columbia">Columbia</option>
-												<option value="Comora">Comora</option>
-												<option value="Congo">Congo</option>
-												<option value="Costa Rica">Costa Rica</option>
-												<option value="Croatia">Croatia</option>
-												<option value="Cuban">Cuban</option>
-												<option value="Cyprus">Cyprus</option>
-												<option value="Egypt">Egypt</option>
-												<option value="Fiji">Fiji</option>
-												<option value="Finland">Finland</option>
-												<option value="France">France</option>
-												<option value="Germany">Germany</option>
-												<option value="Greece">Greece</option>
-												<option value="Iceland">Iceland</option>
-												<option value="India">India</option>
-												<option value="Iran">Iran</option>
-												<option value="Iraq">Iraq</option>
-												<option value="Ireland">Ireland</option>
-												<option value="Israel">Israel</option>
-												<option value="Italy">Italy</option>
-												<option value="Jamaica">Jamaica</option>
-												<option value="Japan">Japan</option>
-												<option value="Jordan">Jordan</option>
-												<option value="Kenya">Kenya</option>
-												<option value="Kuwait">Kuwait</option>
-												<option value="Malaysia">Malaysia</option>
-												<option value="Mexico">Mexico</option>
-												<option value="Mongolia">Mongolia</option>
-												<option value="Nepal">Nepal</option>
-												<option value="New Zealand">New Zealand</option>
-												<option value="Pakistan">Pakistan</option>
-												<option value="Peru">Peru</option>
-												<option value="Poland">Poland</option>
-												<option value="Qatar">Qatar</option>
-												<option value="Romania">Romania</option>
-												<option value="Russia">Russia</option>
-												<option value="Thailand">Thailand</option>
-												<option value="United States">United States</option>
-												<option value="Yemen">Yemen</option>
-												</select>
-											    <br>
-
-										        <select name="state" id="state_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
-												
-												<option value="AK" selected>AK</option>
-                                      <option value="AL">AL</option>
-                                      <option value="AR">AR</option>
-                                      <option value="AZ">AZ</option>
-                                      <option value="CA">CA</option>
-                                      <option value="CO">CO</option>
-                                      <option value="CT">CT</option>
-                                      <option value="DE">DE</option>
-                                      <option value="FL">FL</option>
-                                      <option value="GA">GA</option>
-                                      <option value="HI">HI</option>
-                                      <option value="IA">IA</option>
-                                      <option value="ID">ID</option>
-                                      <option value="IL">IL</option>
-                                      <option value="IN">IN</option>
-                                      <option value="KS">KS</option>
-                                      <option value="KY">KY</option>
-                                      <option value="LA">LA</option>
-                                      <option value="MA">MA</option>
-                                      <option value="MD">MD</option>
-                                      <option value="ME">ME</option>
-                                      <option value="MI">MI</option>
-                                      <option value="MN">MN</option>
-                                      <option value="MO">MO</option>
-                                      <option value="MS">MS</option>
-                                      <option value="MT">MT</option>
-                                      <option value="NC">NC</option>
-                                      <option value="ND">ND</option>
-                                      <option value="NE">NE</option>
-                                      <option value="NH">NH</option>
-                                      <option value="NJ">NJ</option>
-                                      <option value="NM">NM</option>
-                                      <option value="NV">NV</option>
-                                      <option value="NY">NY</option>
-                                      <option value="OH">OH</option>
-                                      <option value="OK">OK</option>
-                                      <option value="OR">OR</option>
-                                      <option value="PA">PA</option>
-                                      <option value="PR">PR</option>
-                                      <option value="RI">RI</option>
-                                      <option value="SC">SC</option>
-                                      <option value="SD">SD</option>
-                                      <option value="TN">TN</option>
-                                      <option value="TX">TX</option>
-                                      <option value="UT">UT</option>
-                                      <option value="VA">VA</option>
-                                      <option value="VI">VI</option>
-                                      <option value="VT">VT</option>
-                                      <option value="WA">WA</option>
-                                      <option value="WI">WI</option>
-                                      <option value="WV">WV</option>
-                                      <option value="WY">WY</option>
-										        </select><br>
-										<input type="text" name="city" id="city_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
-										        <!-- <select name="city" id="city_text" class="form-control"  style="max-width:17%; margin-left: 9px; border: 1px solid #737373;background:#fff;" >
-												<option value="">Select</option>	
-												</select> -->
-												<span id="citycheck" style="margin-left:34%">Please Select Your location</span>
-										</div>
+													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
+													<select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
+													  <option value="">Select Country</option>
+													  @foreach($toReturn['countries'] as $country)
+													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
+													  @endforeach  
+													  </select>
+													<select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
+														  <option value="">Select country first</option>
+													</select>
+													<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
+														<select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
+															  <option value="">Select state first</option>
+													  </select>
+														<br>
+														<span id="citycheck">Please choose Your Location</span> 
+													</div>
+												</div>
 								<!--end Location -->
 								<!--Address Line 1-->	   
 									<div class="form-group row">
@@ -560,7 +468,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Mobile Phone<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="mobile_number" name="mobilephone" maxlength="10"><br>
+												<input type="text" id="mobile_number" name="mobilephone"  placeholder="Mobile Phone" maxlength="12"><br>
 												<span id="mob_ph_check">Please Enter a Valid Mobile Number</span>
 											</div>
 									  </div>
@@ -569,7 +477,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Home Phone<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="phone" name="homephone" maxlength="10"><br>
+												<input type="text" id="phone" name="homephone" placeholder="Home Phone" maxlength="12"><br>
 												<span id="home_ph_check">Please Enter a Valid Home Number</span>
 											</div>
 									  </div>
@@ -646,9 +554,72 @@
 										    <input type="text" name="edu_city[]"  id="edu_city" class="form-control" placeholder="City" style="width: 14%;">
 	                                        <select type="text" name="edu_country[]" id="edu_country" class="form-control" placeholder="Country" style="width: 14%;">
 												<option value="" selected>-Country-</option>
-												    @foreach($toReturn['countries'] as $countries)
-												        <option value="{{$countries['country_name']}}"> {{$countries['country_name']}} </option>
-												    @endforeach	
+												    <!--@foreach($toReturn['countries'] as $countries)-->
+												    <!--    <option value="{{$countries['country_name']}}"> {{$countries['country_name']}} </option>-->
+												    <!--@endforeach	-->
+												    <option value="Afghanistan" selected>Afghanistan</option>
+												<option value="Albany">Albany</option>
+												<option value="Algeria">Algeria</option>
+												<option value="Angola">Angola</option>
+												<option value="Argentina">Argentina</option>
+												<option value="Armenia">Armenia</option>
+												<option value="Australia">Australia</option>
+												<option value="Austria">Austria</option>
+												<option value="Azerbaijan">Azerbaijan</option>
+												<option value="Bahamas">Bahamas</option>
+												<option value="Bahrain">Bahrain</option>
+												<option value="Bangladesh">Bangladesh</option>
+												<option value="Belgium">Belgium</option>
+												<option value="Bhutan">Bhutan</option>
+												<option value="Bulgaria">Bulgaria</option>
+												<option value="Burma">Burma</option>
+												<option value="Burundi">Burundi</option>
+												<option value="Cambodia">Cambodia</option>
+												<option value="Cameroon">Cameroon</option>
+												<option value="Cape Verd">Cape Verd</option>
+												<option value="Central Africa">Central Africa</option>
+												<option value="Chadi">Chadi</option>
+												<option value="Chile">Chile</option>
+												<option value="China">China</option>
+												<option value="Columbia">Columbia</option>
+												<option value="Comora">Comora</option>
+												<option value="Congo">Congo</option>
+												<option value="Costa Rica">Costa Rica</option>
+												<option value="Croatia">Croatia</option>
+												<option value="Cuban">Cuban</option>
+												<option value="Cyprus">Cyprus</option>
+												<option value="Egypt">Egypt</option>
+												<option value="Fiji">Fiji</option>
+												<option value="Finland">Finland</option>
+												<option value="France">France</option>
+												<option value="Germany">Germany</option>
+												<option value="Greece">Greece</option>
+												<option value="Iceland">Iceland</option>
+												<option value="India">India</option>
+												<option value="Iran">Iran</option>
+												<option value="Iraq">Iraq</option>
+												<option value="Ireland">Ireland</option>
+												<option value="Israel">Israel</option>
+												<option value="Italy">Italy</option>
+												<option value="Jamaica">Jamaica</option>
+												<option value="Japan">Japan</option>
+												<option value="Jordan">Jordan</option>
+												<option value="Kenya">Kenya</option>
+												<option value="Kuwait">Kuwait</option>
+												<option value="Malaysia">Malaysia</option>
+												<option value="Mexico">Mexico</option>
+												<option value="Mongolia">Mongolia</option>
+												<option value="Nepal">Nepal</option>
+												<option value="New Zealand">New Zealand</option>
+												<option value="Pakistan">Pakistan</option>
+												<option value="Peru">Peru</option>
+												<option value="Poland">Poland</option>
+												<option value="Qatar">Qatar</option>
+												<option value="Romania">Romania</option>
+												<option value="Russia">Russia</option>
+												<option value="Thailand">Thailand</option>
+												<option value="United States">United States</option>
+												<option value="Yemen">Yemen</option>
 												                                 
 											</select>
 											<select name="completion_year[]" id="completion" class="form-control" placeholder="Passing Year" style="width: 15%;" >
@@ -682,7 +653,27 @@
 													<option value="1993" >1993</option>
 													<option value="1992" >1992</option>
 													<option value="1991" >1991</option>
-													<option value="1990" >1990</option>	
+													<option value="1990" >1990</option>
+													<option value="1989" >1989</option>
+												<option value="1988" >1988</option>
+												<option value="1987" >1987</option>
+												<option value="1986" >1986</option>
+												<option value="1985" >1985</option>
+												<option value="1984" >1984</option>
+												<option value="1983" >1983</option>
+												<option value="1982" >1982</option>
+												<option value="1981" >1981</option>
+												<option value="1980" >1980</option>
+												<option value="1979" >1979</option>
+												<option value="1978" >1978</option>
+												<option value="1977" >1977</option>
+												<option value="1976" >1976</option>
+												<option value="1975" >1975</option>
+												<option value="1974" >1974</option>
+												<option value="1973" >1973</option>
+												<option value="1972" >1972</option>
+												<option value="1971" >1971</option>
+												<option value="1970" >1970</option>
 											</select>	
 										<p><button type="button" id="btnAdd" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
 										<span id="education_check">Please fill All Fields</span>
@@ -729,9 +720,9 @@
 										        <input type="text" name="exp_city[]" id="exp_city" class="form-control" placeholder="City" style="width: 14%;">
 											<select type="text" name="exp_country[]" id="exp_country" class="form-control" placeholder="Country" style="width: 14%;">
 												<option value="">-Country-</option>
-												    @foreach($toReturn['countries'] as $countries)
-												        <option value="{{$countries['country_name']}}"> {{$countries['country_name']}} </option>
-												    @endforeach                         
+												    @foreach($toReturn['countries'] as $country)
+													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
+													  @endforeach                    
 											</select>
 											    <input placeholder="Start Date" name="start_date[]" id="start_date" class="textbox-n form-control start_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 15%;">
 											    <input placeholder="End Date" name="end_date[]" id="end_date" class="textbox-n form-control end_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 15%;">							   
@@ -768,7 +759,7 @@
 
 					    <div class="card-body">
                             <center>
-                                <input name="skills" id="Result" class="form-control" required>
+                                <input name="skills" id="Result" class="form-control"  type="text" required>
                             </center>
                             <br>
 
@@ -833,7 +824,8 @@
 </div><!--end of row-->			
 </div> 							
 </div> <!-- container -->
-</div> <!-- content -->				
+</div> <!-- content -->	
+</div>
 <!-- END wrapper -->
 @include('include.emp_footer')
 <script>   
@@ -920,6 +912,34 @@
 
                                                     <!--dynamic clone for educational -->	
 <script>
+	$("#home_ph_check").hide();
+	function phoneMask() { 
+    var num = $(this).val().replace(/\D/g,''); 
+   if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6)  + '-' + num.substring(6,10)) ) 
+   {
+
+   }
+   else
+   {
+	   
+	$("#home_ph_check").show();
+   }
+}
+$('#phone').keyup(phoneMask);
+
+$("#mob_ph_check").hide();
+function phoneMask() { 
+    var num = $(this).val().replace(/\D/g,''); 
+   if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6)  + '-' + num.substring(6,10))) 
+   {
+
+   }
+   else{
+	$("#mob_ph_check").show();
+   }
+}
+$('#mobile_number').keyup(phoneMask);
+
 $(document).ready(function(){
 	var i=1;
 	$('#btnAdd').click(function(){
@@ -947,9 +967,9 @@ $(document).ready(function(){
 										    <input type="text" name="edu_city[]" class="form-control" placeholder="City" style="width: 14%;">
 	                                        <select type="text" name="edu_country[]" class="form-control" placeholder="Country" style="width: 14%;">
 												<option value="" selected>Country</option>
-												    @foreach($toReturn['countries'] as $countries)
-												        <option value="{{$countries['ID']}}"> {{$countries['country_name']}} </option>
-												    @endforeach                               
+												    @foreach($toReturn['countries'] as $country)
+													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
+													  @endforeach                               
 											</select>
 											<select class="form-control" name="completion_year[]" placeholder="Passing Year" style="width: 15%;" >
 												<option value="" selected="selected">Completion</option>
@@ -1011,9 +1031,9 @@ $(document).ready(function(){
 							<input type="text" name="exp_city[]" class="form-control" placeholder="City" style="width: 14%;">
 							<select type="text" name="exp_country[]" class="form-control" placeholder="Country" style="width: 14%;">
 								<option value="" selected>-Country-</option>
-								    @foreach($toReturn['countries'] as $countries)
-										<option value="{{$countries['ID']}}"> {{$countries['country_name']}} </option>
-								    @endforeach  
+								   @foreach($toReturn['countries'] as $country)
+								<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
+									 @endforeach  
 							</select>
 							<input placeholder="Start Date" name="start_date[]" class="textbox-n form-control start_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">
 							<input placeholder="End Date" name="end_date[]" class="textbox-n form-control end_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">							   
@@ -1238,53 +1258,7 @@ $(function() {
 				var err_home_ph=true;
 				var err_resume=true;
 			
-			//validate mobile Phone
-				$("#validatefrm").click(function()
-				{
-					check_mb_phone();
-				});
-				function check_mb_phone()
-				{
-					
-					var ph_val=$("#mobile_number").val();
-					var phoneno=new RegExp(/^[0-9-+]+$/);
-					if(ph_val.match(/^(\+\d{1,3}[- ]?)?\d{10}$/))
-					{
-						$("#mob_ph_check").hide();
-					}
-					else
-					{
-						$("#mob_ph_check").show();
-						$("#mob_ph_check").focus();
-						$("#mob_ph_check").css("color","red");
-						err_mob_ph=false;
-						return false;
-					}
-				}
-				//validate home Phone
-				$("#validatefrm").click(function()
-				{
-					check_hm_phone();
-				});
-				function check_hm_phone()
-				{
-					
-					var ph_val=$("#phone").val();
-					var phoneno=new RegExp(/^[0-9-+]+$/);
-					if(ph_val.match(/^(\+\d{1,3}[- ]?)?\d{10}$/))
-					{
-						$("#home_ph_check").hide();
-					}
-					else
-					{
-						$("#home_ph_check").show();
-						$("#home_ph_check").focus();
-						$("#home_ph_check").css("color","red");
-						err_home_ph=false;
-						return false;
-					}
-				}
-				//validation Resume
+		
 				$("#validatefrm").click(function()
 				{
 					check_resume();
@@ -1425,71 +1399,84 @@ $(function() {
 				});
 			});
 		</script>
-		 <script>
-$(document).ready(function()
-{
-    $('#country').on('change', function()
-        {
-			$('#state_text').empty();
-            var country_id = $(this).val();
-			alert(country_id);
-             if(country_id)
-                {
-                     $.ajax({
+<script type="text/javascript">
+    $('#country').on('change', function(e){
+    console.log(e);
+    $('#state_text').empty();
+    var country_id = e.target.value;
+    console.log (country_id);
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/state/")}}'+"/"+country_id,
+                success:function(data){
+                    console.log(data);
+                     $.each(data, function(index, value) {
+                        $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
+                        console.log(value.state_id);
+                        });
+            },
+                error:function(data){
+                console.log(data);
+            }
 
-                            type:'GET',
-                        	url:'{{url('employer/fetchstate')}}'+"/"+country_id,
-                            dataType:'json',
-                            success: function(data)
-                            {
-								console.log(data);
-                                 
-                                  $.each(data,function(i,state){
-                                  $("#state_text").append("<option>"+state.state+"</option>");
+        });
 
-                                 //console.log(response);
-                                 });
-                                   
-                            }
-                    });
-                }
-         
     });
-});
-</script>
-		 <script>
-$(document).ready(function()
-{
-    $('#state_text').on('change', function()
-        {
-			$('#city_text').empty();
-            var state_id = $(this).val();
-			var country_id=$('#state_text').val();
-
-			alert(state_id);
-             if(state_id)
-                {
-                     $.ajax({
-
-                            type:'GET',
-                        	url:'{{url('employer/fetchcity')}}'+"/"+state_id+"/"+country_id,
-                            dataType:'json',
-                            success: function(data)
-                            {
-								console.log(data);
-                                 
-                                  $.each(data,function(i,city){
-                                  $("#city_text").append("<option >"+city.city_name+"</option>");
-
-                                 //console.log(response);
-                                 });
-                                   
-                            }
-                    });
-                }
-         
+    $('#state_text').on('change', function(e){
+    console.log(e);
+    $('#city').empty();
+    var state_id = e.target.value;
+    console.log (state_id);
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/city/")}}'+"/"+state_id,
+                success:function(data){
+                    console.log(data);
+                    
+                     $.each(data, function(index, value) {
+                        $('#city').append("<option value="+'"'+value.city_id+'"'+"selected>"+value.city_name+"</option>");
+                        });
+                    
+            },
+                error:function(data){
+                console.log(data);
+            }
+        });
     });
-});
 </script>
+// 		 <script>
+// $(document).ready(function()
+// {
+//     $('#state_text').on('change', function()
+//         {
+// 			$('#city_text').empty();
+//             var state_id = $(this).val();
+// 			var country_id=$('#state_text').val();
+
+// 			alert(state_id);
+//              if(state_id)
+//                 {
+//                      $.ajax({
+
+//                             type:'GET',
+//                         	url:'{{url('employer/fetchcity')}}'+"/"+state_id+"/"+country_id,
+//                             dataType:'json',
+//                             success: function(data)
+//                             {
+// 								console.log(data);
+                                 
+//                                   $.each(data,function(i,city){
+//                                   $("#city_text").append("<option >"+city.city_name+"</option>");
+
+//                                  //console.log(response);
+//                                  });
+                                   
+//                             }
+//                     });
+//                 }
+         
+//     });
+// });
+// </script>
 </body>
 </html>

@@ -5,12 +5,6 @@
 		  background-color: #000000;
 		  color: white;
 		}
-		.table td {
-			padding: .75rem;
-			vertical-align: top;
-			border-top: 1px solid #ffffff;
-			width:20%;
-		}
         #wrapper{
             width: 100%;
             overflow-y: scroll;
@@ -18,6 +12,38 @@
         .img{
             width:15%;
             height:20%;
+        }
+        
+        .table td {
+            padding: 7px;
+            font-size: top;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #000;
+            background:#fff;
+        }
+        .table tr {
+            padding: 7px;
+            font-size: top;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #000;
+            background:#fff;
+        }
+        .table th {
+            padding: 7px;
+            font-size: top;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #000;
+            background:#e4e4e4;
+        }
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 0.5px solid #000;
+        }
+        .table-bordered thead td, .table-bordered thead th {
+            border-bottom-width: 1px;
         }
 </style>
         		
