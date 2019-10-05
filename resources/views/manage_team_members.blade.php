@@ -265,6 +265,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Group Name</th>
+                                                            <th>Group Owner Name</th>
                                                             <th>Status</th>
                                                             <th>Date Created</th>
                                                             <th>Date Closed</th>
@@ -276,9 +277,10 @@
             
                                                     <tbody>
                                                         @foreach ($team_member_type as $team_member_type)
-                                                        <input type="hidden" value="{{$team_member_type['type_ID']}}">
+                                                        <input type="hidden" value="{{$team_member_type['group_id']}}">
                                                         <tr>
-                                                            <td>{{$team_member_type->type_name}}</td>
+                                                            <td>{{$team_member_type->group_name}}</td>
+                                                            <td>{{$team_member_type->team_leader_full_name}}</td>
                                                             <td>
                                                                 <button type="button" class="btn-round-xs btn-xs" style="background-color:#04B431; color:#fff">{{$team_member_type->status}}</button>
                                                             </td>
@@ -291,7 +293,7 @@
                                                                 <button type="button" class="btn-round-xs btn-xs" style="background-color:#1ba6df; color:#fff">0</button>
                                                             </td>
                                                             <?php
-                                                            	$id=$team_member_type->type_ID;
+                                                            	$id=$team_member_type->group_id;
                                                             ?>
                                                                 <td class="actions">
                                                                 @if(!empty($toReturn['user_type']=="teammember")) 
@@ -312,7 +314,7 @@
                                                                         <button type="button" class="btn-round-xs btn-xs" style="background-color:#ff6347; color:#fff">Delete</button>
                                                                     </a>
                                                                 @endif
-                                                                <button class="btn btn-info btn-xs"  onclick="select_teammember({{$team_member_type->type_ID}});" data-toggle="modal" data-target="#dff{{$team_member_type->type_ID}}">view</button>
+                                                                <button class="btn btn-info btn-xs"  onclick="select_teammember({{$team_member_type->group_id}});" data-toggle="modal" data-target="#dff{{$team_member_type->type_ID}}">view</button>
                                                                 </td>
                                                         </tr>
                                                         <div id="editgroup{{$team_member_type->type_ID}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
@@ -329,8 +331,9 @@
                                                                             <div class="modal-body">
                                                                                 <div class="form-group row">
                                                                                  <label for="" class="control-label col-lg-4">Group Name <span style="color:red;">*</span></label>
-                                                                                    <input type="text" name="type_namegroup"  value="{{$team_member_type->type_name}}" style="width:66%">
-                                                                                    <input type="hidden" name="id" value="{{$team_member_type['type_ID']}}">
+                                                                                    <input type="text" name="type_namegroup"  value="{{$team_member_type->group_name}}" style="width:66%;">
+                                                                                    <input type="text" name="team_memeber" value="{{$team_member_type->team_leader_full_name}}"  style="width:66%;" >
+                                                                                    <input type="hidden" name="id" value="{{$team_member_type['group_id']}}">
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
@@ -404,7 +407,6 @@ $.ajaxSetup({
                     url: "{{url('employer/listmember')}}"+"/"+id,
                     type: 'get',
                     dataType: "json",
-
                     success: function(data) {
                             $.each(data,function(i,team){
                             $("#teammember_list").append("<table class='table table'class='font-weight-bold' style='width: 100%;border-bottom-color:5px solid red;background-color:white;'><tr class='font-weight-bold' style='color:#138D75;'><td>"+team.first_name+"</td><td style='text-align:right;'>"+team.email+"</td></tr></table>");

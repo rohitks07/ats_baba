@@ -125,12 +125,12 @@ class Job_Employer_Controller extends Controller
     {
             $toReturn=array();
             $toReturn['team_member_type']=tbl_team_member_type::get()->toArray();
-            $toReturn['post_job']        =tbl_post_jobs::get()->toArray();
-            $toReturn['team_member']     =tbl_team_member::get()->toArray();
-            $toReturn['job_industries']  =tbl_job_industries::get()->toArray();
-             $toReturn['cities']          =cities::get()->toArray();
-            $toReturn['countries']          =countries::get()->toArray();
-            $toReturn['states']          =states::get()->toArray();
+            $toReturn['post_job']=tbl_post_jobs::get()->toArray();
+            $toReturn['team_member']=tbl_team_member::get()->toArray();
+            $toReturn['job_industries']=tbl_job_industries::get()->toArray();
+             $toReturn['cities']=cities::get()->toArray();
+            $toReturn['countries']=countries::get()->toArray();
+            $toReturn['states']=states::get()->toArray();
         return view('post_new_job')->with('toReturn',$toReturn);
     }
 
@@ -164,11 +164,11 @@ class Job_Employer_Controller extends Controller
              $sta=  $request->state;
              $cit=  $request->city;
     
-             $val_contries      =countries::where('country_id',$con)->first('country_name')->toArray();
+             $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
     
-             $val_state          =states::where('state_id',$sta)->first('state_name')->toArray();
+             $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
              
-             $val_city          =cities::where('city_id',$cit)->first('city_name')->toArray();
+             $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
             
              
              $Add_to_post_job->country = $val_contries['country_name'];
@@ -333,7 +333,16 @@ class Job_Employer_Controller extends Controller
             }
         }
     }
-    $toReturn['post_job'] = tbl_post_jobs::where('employer_ID',Session::get('id'))->paginate(25);
+     $one_group_teammember_employer_id=Session::get('one_group_teammember_id');
+    if($one_group_teammember_employer_id)
+    {
+        $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by',$one_group_teammember_employer_id)->paginate(10);
+    }else
+    {
+        $toReturn['post_job'] = tbl_post_jobs::where('employer_ID',Session::get('id'))->paginate(10);
+
+    }
+    
     return view('my_posted_jobs')->with('toReturn',$toReturn);
 }
 
@@ -386,6 +395,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
        {
            $user_id=Session::get('user_id');
        }
+       
     $toReturn['application']= Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs','tbl_seeker_applied_for_job.job_ID','=','post_jobs.ID')
       ->leftjoin('tbl_job_seekers as seeker','tbl_seeker_applied_for_job.seeker_ID','=','seeker.ID')
       // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ' )
@@ -724,7 +734,8 @@ public function PostjobsAssignToJobSeeker(Request $request)
     
     public function addteam()
     { 
-    	return view('create_team_member_group');
+        $list_teamember=tbl_team_member::get()->toArray();
+    	return view('create_team_member_group')->with('list_teammember',$list_teamember);
     }
     
     
@@ -732,6 +743,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
     { 
         $teamType=new Tbl_team_member_type();
         $teamType->type_name=$Request->groupname;
+        $teamType->team_leader_id=$Request->team_member;
         $teamType->status=1;
         $date=date('Y-m-d h:i:s');
         $teamType->date_created=$date;
@@ -776,8 +788,10 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $team_member= tbl_team_member::leftjoin('tbl_team_member_type as member_type','tbl_team_member.team_member_type','=','member_type.type_ID')
         ->select('tbl_team_member.ID as ID','tbl_team_member.first_name as first_name','member_type.type_name as team_member_type','tbl_team_member.city as city','tbl_team_member.state as state','tbl_team_member.country as  country','tbl_team_member.loc_time_zone as loc_time_zone','tbl_team_member.first_login_date as first_login_date','tbl_team_member.last_login_date as last_login_date','tbl_team_member.last_updated_date as last_updated_date','tbl_team_member.is_active as is_active','tbl_team_member.ID as ID')
         ->get();
-         $team_member_type=tbl_team_member_type::all();
-         
+         $team_member_type=tbl_team_member_type::leftjoin('tbl_team_member as team_leader','tbl_team_member_type.team_leader_id','=','team_leader.ID')
+         ->select('tbl_team_member_type.type_name as group_name','tbl_team_member_type.type_ID as group_id','tbl_team_member_type.status as status','tbl_team_member_type.team_leader_id as team_leader_id','tbl_team_member_type.date_created as date_created','tbl_team_member_type.date_closed as date_closed','team_leader.full_name as team_leader_full_name')
+         ->get();
+        //  return $team_member_type;
         return view('manage_team_members')->with("team_member",$team_member)->with("team_member_type",$team_member_type)->with('toReturn',$toReturn);
     }
     public function delete_teammember($id ="")

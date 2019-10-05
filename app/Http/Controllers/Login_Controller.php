@@ -56,8 +56,40 @@ class Login_Controller extends Controller{
                 }
                 elseif($user_type=='teammember')
                 {
-                    $toReturn['team_member']=tbl_team_member::where('ID',$user_id)->get();
-                    // return $toReturn;
+                    $toReturn=array();
+                    $toReturn['team_member']=tbl_team_member::where('ID',Session::get('user_id'))->first();
+                    $toReturn['is_team_leader']=tbl_team_member_type::where('team_leader_id',Session::get('user_id'))->first(); 
+                    // return $toReturn['is_team_leader'];
+                    if(!empty($toReturn['is_team_leader']))
+                    {
+                        $list_teammember=tbl_team_member::where('team_member_type',$toReturn['is_team_leader']['type_ID'])->get()->toArray();
+                        
+                        $toReturn['one_group_teammember_list']['id']=array();
+                        foreach($list_teammember as $key=>$value)
+                        {
+                            $toReturn['one_group_teammember_list']['id'][$key]=$list_teammember[$key]['ID'];
+                            $toReturn['one_group_teammember_list']['employer_id'][$key]=$list_teammember[$key]['employer_id'];
+                            $toReturn['one_group_teammember_list']['company_id'][$key]=$list_teammember[$key]['company_id'];
+                            $toReturn['one_group_teammember_list']['full_name'][$key]=$list_teammember[$key]['full_name'];
+                        }
+                        $toReturn['user_permission']=Tbl_team_member_permission::where('team_member_id',$user_id)
+                        ->leftjoin('tbl_module','tbl_team_member_permission.permission_value','=','tbl_module.module_id')
+                        ->get()->toArray();
+                        $session_data = array(
+                        'id'   =>$getUserDetails->ID,
+                        'email'=>$getUserDetails->email,
+                        'full_name'=>$getUserDetails->full_name,
+                        'user_id'=>$getUserDetails->user_id,
+                        'type' =>$getUserDetails->user_type,
+                        'org_ID'=>$getUserDetails->org_ID,
+                        'user_permission'=>$toReturn['user_permission'],
+                        'one_group_teammember_id'=>$toReturn['one_group_teammember_list']['id'],
+                        'one_group_teammember_employer_id'=>$toReturn['one_group_teammember_list']['employer_id'],
+                        'one_group_teammember_full_name'=>$toReturn['one_group_teammember_list']['full_name']
+                        );
+                        // // exit;  
+                    }
+                    else{
                     $toReturn['user_permission']=Tbl_team_member_permission::where('team_member_id',$user_id)
                     ->leftjoin('tbl_module','tbl_team_member_permission.permission_value','=','tbl_module.module_id')
                     ->get()->toArray();
@@ -70,7 +102,15 @@ class Login_Controller extends Controller{
                         'org_ID'=>$getUserDetails->org_ID,
                         'user_permission'=>$toReturn['user_permission']
                     );
+                    }
+                   
+                    // echo"<pre>";
+                    // print_r($session_data);
+                    // exit;
                     Session::put($session_data);
+                    Session::put("sessiondata",$session_data);
+    
+                    // session()->forget('one_group_teammember_id');
                     // return $session_data;
                     return redirect('employer/dashboard');
                 }
@@ -139,8 +179,16 @@ class Login_Controller extends Controller{
     }
     public function session_out()
     {
-        session_unset();
-        return redirect('/');
+        // session_unset();
+        Session::flush($session_data);
+        Session()->forget('one_group_teammember_id');
+        if(session()->forget($session_data))
+        {
+            return redirect('/');
+        }
+      
+
+       
     }
    
 }

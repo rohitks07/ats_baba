@@ -50,8 +50,19 @@
                                             <label for="" class="control-label col-lg-4">Group Name <span style="color:red;">*</span></label>
                                             <div class="col-lg-8">
                                                 <input class="form-control" id="groupname"  type="text" name="groupname" placeholder="Group Name">
-                                                <input class="form-control" id="employer_id" type="hidden" name="employer_id" placeholder="enter employer_id">
                                                 <span id="groupspan" name="groupspan">This field must not be empty</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="" class="control-label col-lg-4">Team Member  <span style="color:red;">*</span></label>
+                                            <div class="col-lg-8">
+                                            <select class="form-control" id="team_member" name="team_member">
+                                                <option value="" >--Select--</option>
+                                                @foreach($list_teammember as $list_teammember)
+                                                <option value="{{$list_teammember['ID']}}">{{$list_teammember['full_name']}}</option>
+                                                @endforeach
+                                                </select>
+                                                <span id="teamspan" name="groupspan">This field must not be empty</span>
                                             </div>
                                         </div>
                                         <!--end of Group Name-->
@@ -84,17 +95,16 @@
     <script>
         $(document).ready(function() {
             $("#groupspan").hide();
-
+            $("#teamspan").hide();
             var err_check = true;
-
             //validate name
             $("#validatefrm").click(function() {
                 check_groupspan();
+                check_teamspan();
+                
             });
-
             function check_groupspan() {
                  var groupspan_val = $("#groupname").val();
-
                 if (groupspan_val == "") {
                         $("#groupspan").show();
                         $("#groupspan").focus();
@@ -105,10 +115,23 @@
                         $("#groupspan").hide();
                     }
                 }
+                function check_teamspan()
+                {
+                    var check_teamspan = $("#team_member").val();
+                if (check_teamspan == "") {
+                        $("#teamspan").show();
+                        $("#teamspan").focus();
+                        $("#teamspan").css("color", "red");
+                        err_check = false;
+                        return false;
+                    } else {
+                        $("#teamspan").hide();
+                    }
+                }
                     $("#validatefrm").click(function() {
                         err_check = true;
-
                         check_groupspan();
+                        check_teamspan();
 
                         if ((err_check == true)) {
                             return true;

@@ -71,7 +71,7 @@
                     <div class="card">
                         <div class="card-header">
 						@if(!empty($toReturn['user_type']=="teammember"))
-							@if($toReturn['current_module_permission']['is_add']=="yes")                                       
+							@if(@$toReturn['current_module_permission']['is_add']=="yes")                                       
 							<a href="{{url('employer/post_new_job')}}">
 							<button type="button" class="btn btn-success" style="float:right;">Add a Job</button></a>
 							@endif
@@ -115,7 +115,7 @@
 																<td>{{$posted_job['last_date']}}</td>
 				                                               <td class="actions">
 																@if(!empty($toReturn['user_type']=="teammember"))
-																@if($toReturn['current_module_permission']['is_edit']=="yes")
+																@if(@$toReturn['current_module_permission']['is_edit']=="yes")
 																<a href="{{url('employer/job/edit/'.$id)}}"><i class="fa fa-pencil" title="Edit"></i></a>
                                                                 <a href="{{url('employer/posted_job_assined/'.$id)}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Asign this job"><i class="fa fa-users"></i></a>
 																@endif
@@ -124,7 +124,7 @@
 																<a href="{{url('employer/job/edit/'.$id)}}" ><i class="fa fa-pencil" title="Edit" ></i></a>
 																@endif
 																@if(!empty($toReturn['user_type']=="teammember"))
-																@if($toReturn['current_module_permission']['is_delete']="yes")
+																@if(@$toReturn['current_module_permission']['is_delete']="yes")
 																<a href="{{url('employer/delete/'.$id)}}"><i class="fa fa-trash-o" title="Delete"></i></a>
 																@endif
 																@else
