@@ -247,9 +247,12 @@ body{
                                                         
                                                         <tr>
                                                             
-                                                            <?php $ida=$r->job_ID; ?>
+                                                            <?php $ida=$r->job_ID; 
+                                                            $date_application=$r->interview_date;
+                                                            $new_date = date("m-d-Y", strtotime($date_application));
+                                                            ?>
                                                         <td>{{$r->candiate_name}}</td>
-                                                        <td>{{$r->interview_date}}</td> 
+                                                        <td>{{$new_date}}</td> 
                                                         <td>{{$r->invitees_to}}</td>
                                                         <td>{{$r->interview_type}}</td>
             
@@ -316,8 +319,11 @@ body{
                                                             
                                                         
                                                         <tr>
-                                                                <?php $id=$i->meeting_ID; ?>
-                                                                <td>{{$i->meeting_date}}</td>
+                                                                <?php $id=$i->meeting_ID;
+                                                                $date_application1=$i->meeting_date;
+                                                                $new_date1 = date("m-d-Y", strtotime($date_application1));
+                                                                ?>
+                                                                <td>{{$new_date1}}</td>
                                                                 <td>{{$i->meeting_time}}</td>
                                                                 <td>{{$i->subject}}</td>
                                                                 
