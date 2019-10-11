@@ -61,7 +61,8 @@
 <tr><td>{{$data['experience_list'][$key][0]}}</td><td>{{$data['experience_list'][$key][1]}}</td><td>{{$data['experience_list'][$key][2]}}</td></tr>
 <?php $kee = $key + 1;
 if($data['experience_list'][$kee][0] == "" && $data['experience_list'][$kee][1] == "" && $data['experience_list'][$kee][2] == "")
-break; ?>
+break;
+ ?>
 @endforeach
 @endif
 
@@ -87,9 +88,9 @@ break;
 @endif
 </table>
 <br>
-@if($data['emp_details'])
+@if((@$data['emp_details'])!="")
 <u><b> Employer Details</b></u>
-<table border="1px " style="border-collapse: collapse;">
+<table border="1px" style="border-collapse: collapse;">
 <tr><th> Company Name</th> <th>Email Id </th><th>Employer Name </th> <th>Phone Number </th></tr>
 <tr> <td>{{$data['emp_details']['company_name']}}</td><td>{{$data['emp_details']['email_Id']}}</td><td>{{$data['emp_details']['employer_name']}}</td><td>{{$data['emp_details']['phone_number']}}</td></tr>
 </table>
