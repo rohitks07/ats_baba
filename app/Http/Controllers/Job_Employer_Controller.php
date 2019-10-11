@@ -1422,6 +1422,18 @@ public function upda($id ="")
          $forward_candidate_documents->modified_by=Session::get('id');
          $forward_candidate_documents->save();
         }
+        if($Request->Companyemp_detail)
+        {
+        $emp_details=new tbl_forward_emp_details();
+        $emp_details->forward_candidate_id=$forward_candidate->id;
+        $emp_details->company_name=$Request->Companyemp_detail;
+        $emp_details->email_Id=$Request->Emailemp_detail;
+        $emp_details->phone_number=$Request->Phoneemp_detail;
+        $emp_details->employer_name=$Request->Employeremp_detail;
+        $emp_details->status=1;
+        $emp_details->created_by=Session('user_id');
+        $emp_details->save();
+        }
         $document_array=Tbl_forward_candidate_document::where('forward_candidate_id',$forward_candidate->id)->get('documents')->toArray();
     //     }
     //   if($document_array)
@@ -1430,7 +1442,7 @@ public function upda($id ="")
        }
        else
        {
-                 $data = array('forward_candidate'=>$forward_candidate, 'experience_list'=>$experience_list, 'reference_list'=>$reference_list,'update_resume'=>$update_resume,'emp_details'=>$emp_details);
+                 $data = array('forward_candidate'=>$forward_candidate, 'experience_list'=>$experience_list, 'reference_list'=>$reference_list,'update_resume'=>$update_resume,);
        }
         // print_r($data['forward_candidate']['forward_to']);
         // exit;
