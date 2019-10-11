@@ -112,7 +112,10 @@
 			                                    	    @foreach($toReturn['post_job'] as $posted_job) 
 														<tr>
 															<?php
-        													$id=$posted_job['ID'];
+															$id=$posted_job['ID'];
+															$last_date=$posted_job['last_date'];
+															$new_last_Date = date("m-d-Y", strtotime($last_date));
+															
                                                         	?>
 																<td>{{$posted_job['job_code']}}</td>
 				                                                <td><a href="{{url('employer/jobsdetails/'.$id)}}">{{$posted_job['job_title']}} </a></td>
@@ -122,7 +125,7 @@
 				                                                <td>{{$posted_job['job_mode']}}</td>													
 				                                                <td>{{$posted_job['dated']}}</td>
 																<td>{{$posted_job['sts']}}</td>
-																<td>{{$posted_job['last_date']}}</td>
+																<td>{{$new_last_Date}}</td>
 				                                               <td class="actions">
 																@if(!empty($toReturn['user_type']=="teammember"))
 																@if($toReturn['current_module_permission']['is_edit']=="yes")
