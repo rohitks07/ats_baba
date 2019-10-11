@@ -396,7 +396,10 @@
                                             <tbody>
                                                 @foreach($toReturn['interview'] as $interview)
                                                 <tr>
-                                                    <td>{{$interview['interview_date']}}</td>
+                                                    <?php $interview_date=$interview['interview_date']; 
+                                                          $new_date = date("m-d-Y", strtotime($interview_date)); 
+                                                    ?>
+                                                    <td>{{$new_date}}</td>
                                                     <td>{{$interview['from_time']}}</td>
                                                     <td>{{$interview['job_ID']}}</td>
                                                     <td>{{$interview['candiate_name']}}</td>
@@ -497,7 +500,15 @@
                                             <tbody>
                                                 @foreach($toReturn['job_post'] as $job_post)
                                                 <input type="hidden" value="{{$job_post['ID']}}">
-                                                <?php $id=$job_post['ID'];?>
+                                                <?php $id=$job_post['ID'];
+                                                $dated=$job_post['dated'];
+                                                $last_date=$job_post['last_date']; 
+                                                $date_one = date("m-d-Y", strtotime($dated)); 
+                                                $date_two = date("m-d-Y", strtotime($last_date)); 
+                                                
+                                                ?>
+                                                 
+                                                    
                                                 <tr>
                                                     <td>{{$job_post['job_code']}}</td>
                                                     <td>{{$job_post['job_title']}}</td>
@@ -506,8 +517,8 @@
                                                     <td align="center" valign="middle">
                                                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#published{{$job_post['ID']}}">{{$job_post['sts']}}</button>
                                                     </td>
-                                                    <td>{{$job_post['dated']}}</td>
-                                                    <td>{{$job_post['last_date']}}</td>
+                                                    <td>{{$date_one}}</td>
+                                                    <td>{{$date_two}}</td>
                                                     <td class="text-center">
                                                         <span class="btn btn-primary btn-xs" style="cursor:none;">0</span>
                                                     </td>
@@ -610,6 +621,9 @@
                                 <tbody>
                                     @foreach($toReturn['application'] as $application)
                                     <tr>
+                                        <?php $date_application=$application['applied_date'];
+                                        $new_date = date("m-d-Y", strtotime($date_application));
+                                        ?>
                                         <td>{{$application['job_code']}}</td>
                                         <td>{{$application['job_title']}}</td>
                                         <td>{{$application['job_client_name']}}</td>
@@ -619,7 +633,7 @@
                                         <td>{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
                                         <td>{{$application['can_location']}}</td>
                                         <td>{{$application['can_visa']}}</td>
-                                        <td>{{$application['applied_date']}}</td>
+                                        <td>{{$new_date}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
