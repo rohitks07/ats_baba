@@ -203,12 +203,20 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($team_member as $team_member)
+                                                                        <?php 
+                                                                            $first_login_date1=$team_member->first_login_date;
+                                                                            $last_login_date1=$team_member->last_login_date;
+                                                                            $last_updated_date1=$team_member->last_updated_date;
+                                                                            $first_login_date = date("m-d-Y H:i: sa", strtotime($first_login_date1));
+                                                                            $last_login_date = date("m-d-Y H:i: sa", strtotime($last_login_date1));
+                                                                            $last_updated_date = date("m-d-Y H:i: sa", strtotime($last_updated_date1));
+                                                                        ?>
                                                                         <tr>
                                                                             <td>{{$team_member->first_name}}</td>
                                                                             <td>{{$team_member->team_member_type}}</td>
-                                                                            <td>{{$team_member->first_login_date}}</td>
-                                                                            <td>{{$team_member->last_login_date}}</td>
-                                                                            <td>{{$team_member->last_updated_date}}</td>
+                                                                            <td>{{$first_login_date}}</td>
+                                                                            <td>{{$last_login_date1}}</td>
+                                                                            <td>{{$last_updated_date}}</td>
                                                                             <td>{{$team_member->is_active}}</td>
                         
                                                                             <?php
@@ -278,12 +286,23 @@
                                                         @foreach ($team_member_type as $team_member_type)
                                                         <input type="hidden" value="{{$team_member_type['type_ID']}}">
                                                         <tr>
+                                                            <?php 
+                                                            $date_created1=$team_member_type->date_created;
+                                                            $date_closed1=$team_member_type->date_closed;
+                                                           
+                                                            $date_created = date("m-d-Y H:i: sa", strtotime($date_created1));
+                                                            $date_closed = date("m-d-Y H:i: sa", strtotime($date_closed1));
+                                                            
+                                                            
+                                                            ?>
+
+
                                                             <td>{{$team_member_type->type_name}}</td>
                                                             <td>
                                                                 <button type="button" class="btn-round-xs btn-xs" style="background-color:#04B431; color:#fff">{{$team_member_type->status}}</button>
                                                             </td>
-                                                            <td>{{$team_member_type->date_created}}</td>
-                                                            <td>{{$team_member_type->date_closed}}</td>
+                                                            <td>{{$date_created}}</td>
+                                                            <td>{{$date_closed}}</td>
                                                             <td>
                                                                 <button type="button" class="btn-round-xs btn-xs" style="background-color:#1ba6df; color:#fff">2</button>
                                                             </td>
