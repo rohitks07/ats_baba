@@ -45,6 +45,7 @@ use App\states;
 use App\tbl_candidate_notes;
 use App\Tbl_job_mail;
 use App\tbl_forward_emp_details;
+use App\Tbl_seeker_documents;
 
 
 
@@ -605,7 +606,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
     
     public function post_new_candidate(Request $request)
     {
-       
+    //    return $request;
         $con=$request->country;
         $sta=$request->state;
         $cit=$request->city;
@@ -671,7 +672,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $postcandidate->experience=$request->total_experience;
         $postcandidate->save();
         $id=$postcandidate->id;
-       
+       //return $id;
         // educational insert
         $degree = $request->degree;   
            foreach($degree as $key => $value) {
@@ -709,7 +710,27 @@ public function PostjobsAssignToJobSeeker(Request $request)
             }
         //   experiance end
 
-
+        if($request->file('multi_docs')!="")
+        {
+            
+        foreach($request->file('multi_docs') as $key=>$file)
+        {
+        $user_document_name=$request->multi_docs[$key];
+        $file_name=$user_document_name->getClientOriginalName();
+        $file_uploaded =$user_document_name->getClientOriginalExtension();
+        $user_document_name->move(public_path('forward_document'), $file_name);
+        $candidate_documents= new Tbl_seeker_documents();
+        //$candidate_documents->id=$forward_candidate->id;
+        $candidate_documents->document_type=  $file_uploaded;
+        $candidate_documents->file_name=$file_name;
+        $candidate_documents->status=1;
+        $candidate_documents->dated =date("Y/m/d h:i:s");
+        $candidate_documents->seeker_ID=$id;
+        
+        //return ('$candidate_documents');
+        $candidate_documents->save();
+        }
+        }
         //skill  start
         $seeker_skill_name = new Tbl_seeker_skills();
         $seeker_skill_name->seeker_ID=$id;
