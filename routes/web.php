@@ -400,5 +400,7 @@ Route::get('employer/employer_edit_education/{id}/','Search_Resume_Controller@vi
  Route::post('employer/job/notes/','Job_Employer_Controller@show_job_note');
  Route::post('employer/search_resume/Candidate_add_notes','Job_Employer_Controller@add_candidate_note');
  Route::post('employer/candidate/notes/','Job_Employer_Controller@show_candidate_note');
-  Route::post('employer/posted_jobs/email_add','Job_Employer_Controller@add_new_job_email');
+ Route::post('employer/posted_jobs/email_add','Job_Employer_Controller@add_new_job_email');
+ 
+ Route::get('employer/report','Report_Controller@repost_show');
  

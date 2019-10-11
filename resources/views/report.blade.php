@@ -1,5 +1,13 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
+<script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
   <style>
     #wrapper {
         width: 100%;
@@ -143,7 +151,7 @@
                                                             </div>
                                                             <button type="button" class="btn btn-icon waves-effect waves-light btn-purple m-b-5">
                                                                 <i class="fa fa-search"></i> </button>
-                                                        </form>
+                                                        </form>  
                                                     </div><!--end of card header-->
                                                         <div class="card-body">
                                                             <div class="row">
@@ -156,44 +164,118 @@
                                                                                 <th>Jobs Created</th>
                                                                                 <th>Jobs Assigned</th>
                                                                                 <th>Candidate Created</th>
-                                                                                <th>Application Submitted</th>
                                                                                 <th>Client Submittal</th>
+                                                                                <th>Application Submitted</th>
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody>
                                                                                 
                                                                                 <tr>
-                                                                                    <td>10/03/2019</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
+                                                                                    <td>{{$toReturn['week_date'][0]}} 
+                                                                                            
+                                                                                    <td>{{$toReturn['job_created'][0]}}</td>
+                                                                                            <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created'][0]}}</td>
+                                                                                    <td>{{$toReturn['client_submittal'][0]}}</td>
+                                                                                    <td>{{$toReturn['application_submitted'][0]}}</td>                                                                                      
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>10/03/2019</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
+                                                                                        <td>{{$toReturn['week_date'][1]}}</td> 
+                                                                                        <td>{{$toReturn['job_created'][1]}}</td>
+                                                                                        <td>0</td>
+                                                                                        <td>{{$toReturn['candidate_created'][1]}}</td>
+                                                                                        <td>{{$toReturn['client_submittal'][1]}}</td>
+                                                                                        <td>{{$toReturn['application_submitted'][1]}}</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                    <td>{{$toReturn['week_date'][2]}}</td>
+                                                                                    <td>{{$toReturn['job_created'][2]}}</td>
                                                                                     <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created'][2]}}</td>
+                                                                                    <td>{{$toReturn['client_submittal'][2]}}</td>
+                                                                                    <td>{{$toReturn['application_submitted'][2]}}</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                    <td>{{$toReturn['week_date'][3]}}</td>
+                                                                                    <td>{{$toReturn['job_created'][3]}}</td>
                                                                                     <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created'][3]}}</td>
+                                                                                    <td>{{$toReturn['client_submittal'][3]}}</td>
+                                                                                    <td>{{$toReturn['application_submitted'][3]}}</td>
                                                                                 </tr>
+                                                                                <tr>
+                                                                                    <td>{{$toReturn['week_date'][4]}}</td>
+                                                                                    <td>{{$toReturn['job_created'][4]}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created'][4]}}</td>
+                                                                                    <td>{{$toReturn['client_submittal'][4]}}</td>
+                                                                                    <td>{{$toReturn['application_submitted'][4]}}</td>
+                                                                                </tr>
+                                                                                <tr>    
+                                                                                        <td>{{$toReturn['week_date'][5]}}</td>
+                                                                                        <td>{{$toReturn['job_created'][5]}}</td>
+                                                                                        <td>0</td>
+                                                                                        <td>{{$toReturn['candidate_created'][5]}}</td>
+                                                                                        <td>{{$toReturn['client_submittal'][5]}}</td>
+                                                                                        <td>{{$toReturn['application_submitted'][5]}}</td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>{{$toReturn['week_date'][6]}}</td>
+                                                                                        <td>{{$toReturn['job_created'][6]}}</td>
+                                                                                        <td>0</td>
+                                                                                        <td>{{$toReturn['candidate_created'][6]}}</td>
+                                                                                        <td>{{$toReturn['client_submittal'][6]}}</td>
+                                                                                        <td>{{$toReturn['application_submitted'][6]}}</td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>{{$toReturn['week_date'][7]}}</td>
+                                                                                        <td>{{$toReturn['job_created'][7]}}</td>
+                                                                                        <td>0</td>
+                                                                                        <td>{{$toReturn['candidate_created'][7]}}</td>
+                                                                                        <td>{{$toReturn['client_submittal'][7]}}</td>
+                                                                                        <td>{{$toReturn['application_submitted'][7]}}</td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>{{$toReturn['week_date'][8]}}</td>
+                                                                                        <td>{{$toReturn['job_created'][8]}}</td>
+                                                                                        <td>0</td>
+                                                                                        <td>{{$toReturn['candidate_created'][8]}}</td>
+                                                                                        <td>{{$toReturn['client_submittal'][8]}}</td>
+                                                                                        <td>{{$toReturn['application_submitted'][8]}}</td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>{{$toReturn['week_date'][9]}}</td>
+                                                                                        <td>{{$toReturn['job_created'][9]}}</td>
+                                                                                        <td>0</td>
+                                                                                        <td>{{$toReturn['candidate_created'][9]}}</td>
+                                                                                        <td>{{$toReturn['client_submittal'][9]}}</td>
+                                                                                        <td>{{$toReturn['application_submitted'][9]}}</td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>{{$toReturn['week_date'][10]}}</td>
+                                                                                        <td>{{$toReturn['job_created'][10]}}</td>
+                                                                                        <td>0</td>
+                                                                                        <td>{{$toReturn['candidate_created'][10]}}</td>
+                                                                                        <td>{{$toReturn['client_submittal'][10]}}</td>
+                                                                                        <td>{{$toReturn['application_submitted'][10]}}</td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>{{$toReturn['week_date'][11]}}</td>
+                                                                                        <td>{{$toReturn['job_created'][11]}}</td>
+                                                                                        <td>0</td>
+                                                                                        <td>{{$toReturn['candidate_created'][11]}}</td>
+                                                                                        <td>{{$toReturn['client_submittal'][11]}}</td>
+                                                                                        <td>{{$toReturn['application_submitted'][11]}}</td>
+
+                                                                                </tr>
+                                                                                
+                                                                               
                                                                             </tbody>
                                                                         </table>
                                                                     </div><!--end of table-->
@@ -243,7 +325,7 @@
                                                                             <tbody>
                                                                                 
                                                                                 <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                <td>{{$toReturn['week_week_one']}}</td>
                                                                                     <td>0</td>
                                                                                     <td>0</td>
                                                                                     <td>0</td>
@@ -251,7 +333,7 @@
                                                                                     <td>0</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                <td>{{$toReturn['week_week_two']}}</td>
                                                                                     <td>0</td>
                                                                                     <td>0</td>
                                                                                     <td>0</td>
@@ -259,7 +341,7 @@
                                                                                     <td>0</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                <td>{{$toReturn['week_week_three']}}</td>
                                                                                     <td>0</td>
                                                                                     <td>0</td>
                                                                                     <td>0</td>
@@ -267,7 +349,63 @@
                                                                                     <td>0</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                <td>{{$toReturn['week_week_four']}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <td>{{$toReturn['week_week_five']}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <td>{{$toReturn['week_week_six']}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <td>{{$toReturn['week_week_seven']}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <td>{{$toReturn['week_week_eight']}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <td>{{$toReturn['week_week_nine']}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <td>{{$toReturn['week_week_ten']}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <td>{{$toReturn['week_week_eleven']}}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <td>{{$toReturn['week_week_twelve']}}</td>
                                                                                     <td>0</td>
                                                                                     <td>0</td>
                                                                                     <td>0</td>
@@ -320,39 +458,94 @@
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                
-                                                                                <tr>
-                                                                                    <td>10/03/2019</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>10/03/2019</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>10/03/2019</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>10/03/2019</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                </tr>
+                                                                                    <tr>
+                                                                                            <td>{{$toReturn['month_week_one1']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                            <td>{{$toReturn['month_week_one2']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                            <td>{{$toReturn['month_week_one3']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                            <td>{{$toReturn['month_week_one4']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['month_week_one5']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['month_week_one6']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['month_week_one7']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['month_week_one8']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['month_week_one9']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['month_week_one10']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['month_week_one11']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['month_week_one12']}}</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                                <td>0</td>
+                                                                                            </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div><!--end of table-->
@@ -400,38 +593,94 @@
                                                                             </thead>
                                                                             <tbody>
                                                                                 
-                                                                                <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                    <tr>
+                                                                                    <td>{{$toReturn['year_week_one1']}}</td>
+                                                                                    <td>{{$toReturn['job_created_yerly1']}}</td>
                                                                                     <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly1']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly1']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly1']}}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                            <td>{{$toReturn['year_week_one2']}}</td>
+                                                                                            <td>{{$toReturn['job_created_yerly2']}}</td>
+                                                                                            <td>0</td>
+                                                                                            <td>{{$toReturn['candidate_created_yerly2']}}</td>
+                                                                                            <td>{{$toReturn['application_submitted_yerly2']}}</td>
+                                                                                            <td>{{$toReturn['client_submittal_yerly2']}}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                            <td>{{$toReturn['year_week_one3']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly3']}}</td>
                                                                                     <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly3']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly3']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly3']}}</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                            <td>{{$toReturn['year_week_one4']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly4']}}</td>
                                                                                     <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly4']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly4']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly4']}}</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['year_week_one5']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly5']}}</td>
                                                                                     <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly5']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly5']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly5']}}</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['year_week_one6']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly6']}}</td>
                                                                                     <td>0</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly6']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly6']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly6']}}</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['year_week_one7']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly7']}}</td>
                                                                                     <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly7']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly7']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly7']}}</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['year_week_one8']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly8']}}</td>
                                                                                     <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly8']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly8']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly8']}}</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['year_week_one9']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly9']}}</td>
                                                                                     <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly9']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly9']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly9']}}</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['year_week_one10']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly10']}}</td>
                                                                                     <td>0</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly10']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly10']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly10']}}</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['year_week_one11']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly11']}}</td>
                                                                                     <td>0</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>10/03/2019</td>
+                                                                                    <td>{{$toReturn['candidate_created_yerly11']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly11']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly11']}}</td>
+                                                                                            </tr>
+                                                                                            <td>{{$toReturn['year_week_one12']}}</td>
+                                                                                                <td>{{$toReturn['job_created_yerly12']}}</td>
                                                                                     <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>10/03/2019</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
-                                                                                </tr>
+                                                                                    <td>{{$toReturn['candidate_created_yerly12']}}</td>
+                                                                                    <td>{{$toReturn['application_submitted_yerly12']}}</td>
+                                                                                    <td>{{$toReturn['client_submittal_yerly12']}}</td>
+                                                                                            </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div><!--end of table-->
@@ -451,3 +700,5 @@
 		    </div><!--end of wrapper-->
 
 @include('include.footer')
+
+
