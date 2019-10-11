@@ -510,7 +510,13 @@
 												  <p>Hint:Upload files only in .doc,</br> .docx or .pdf format with</br> maximum size of 32 MB.</p>
 											</div>
 								    </div>								
-								<!--end of Other Documents -->								
+								<!--end of Other Documents -->	
+								<div  id="div1">
+								
+								</div>
+								
+
+    <p ><button type="button" id="btnAdd_Exp" class="btn btn-primary" >Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>								
 								</div><!--end of column-->								
 							   </div><!--end of row-->
 
@@ -837,6 +843,30 @@
 </div>
 <!-- END wrapper -->
 @include('include.emp_footer')
+<script>
+
+	$(document).ready(function(){
+  $("#btnAdd_Exp").click(function(){
+	  var a=`<div class="input-group mb-3 delete_exp1">
+  			<input type="file" class="form-control col-sm-8" placeholder="Recipient's username" name="multi_docs[]" aria-label="Recipient's username" aria-describedby="button-addon2">
+  			<div class="input-group-append">
+			  <button type="button" class="btn btn-primary btn_remove1">Remove</button>
+  			</div>
+			</div>`;
+	$("#div1").append(a);
+	
+    });
+	$(document).on('click', '.btn_remove1', function() {
+    $(this).closest('.delete_exp1').remove();
+});	 
+	
+	});
+
+	
+
+
+
+</script>
 <script>   
     var x = 0;
     var arr = Array();
