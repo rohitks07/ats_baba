@@ -125,7 +125,7 @@
                                 <li><a href="{{url('employer/companyprofile')}}" class="dropdown-item"><i class="md md-face-unlock mr-2"></i>ORG.PROFILE</a></li>
                                     <li><a href="{{url('employer/manageteammember')}}" class="dropdown-item"><i class="md md-settings mr-2"></i>USER MANAGEMENT</a></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-lock mr-2"></i>SETTING</a></li>
-                                    <li><a href="{{url('admin/logout')}}" class="dropdown-item"><i class="md md-settings-power mr-2"></i> Logout</a></li>
+                                    <li><a href="{{url('employer/logout')}}" class="dropdown-item"><i class="md md-settings-power mr-2"></i> Logout</a></li>
                                 </ul>
                             </li>
                         </ul>

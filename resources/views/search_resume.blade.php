@@ -1,5 +1,16 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+</script>
 <style>
 
 .table td {
@@ -137,8 +148,9 @@
                                                         ?>                                                                                         
 													<tr>										
 														<td>{{$personal[$key]->first}} {{$personal[$key]->last}}</td>
-														<td>{{$personal[$key]->dob}}</td>
-														<td>{{$personal[$key]->city}},{{$personal[$key]->state}}</td>
+														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
+														<td>{{$dob}}</td>
+														<td>{{$personal[$key]->city}}, &nbsp;{{$personal[$key]->state}}</td>
 														<td>{{$personal[$key]->visa}}</td>
 														<!--<td>{{$exp_years}}.{{$exp_month}}</td>-->
 														@if($personal[$key]->total_experience)
@@ -168,7 +180,7 @@
 														   <ul class="dropdown-menu">
                                                                 <li class="active">
 																<a href="{{url('employer/edit_posted_candidate/'.$id)}}">Personal Detail</a></li>
-                                                                      <li><a href="#">Education</a></li>
+                                                                      <li><a href="{{url('employer/employer_edit_education/'.$id)}}">Education</a></li>
                                                                     <li><a href="{{url('employer/team_member_edit_experience/'.$id)}}">Experience</a></li>
                                                                     <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
                                                             </ul>
@@ -186,11 +198,142 @@
 														@endif
                                                         <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user" title="Submit to Job"></i></a>
 														  
-														   <i class="fa fa-envelope" aria-hidden="true" style="color:#317eeb;" title="Mail"></i>
-														   <i class="fa fa-plus" aria-hidden="true" style="color:#317eeb;" title="Note"></i>
-														  
+														    <a data-toggle="modal" data-target="#mailModal{{$id}}"><i class="fa fa-envelope" aria-hidden="true" style="color:#317eeb;" title="Mail"></i></a>
+                                                            <a href="" data-toggle="modal"data-target="#exampleModalCenter{{$personal[$key]->id}}"><i class="fa fa-plus"  title="Note" aria-hidden="true"></i></a>
+                                                    <!-- Modal -->														  
 												        </td>																				   										                                             				  											
-                                                    </tr>  	
+                                                    </tr>
+                                                     <div class="modal fade bd-example-modal-lg fade" id="exampleModalCenter{{$personal[$key]->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg " role="document">
+                                                            <div class="modal-content" style="width:100%;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="exampleModalCenterTitle">
+                                                                        <h2>Candidate Notes</h2>
+                                                                    </h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="{{url('employer/search_resume/Candidate_add_notes')}}" method="post">
+                                                                    @csrf
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="hidden" value="{{$id}}"
+                                                                                    id="id_val" name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{$personal[$key]->first}}{{$personal[$key]->middle}}{{$personal[$key]->last}}"
+                                                                                    id="id" name="owner_id">
+                                                                                <input type="text" class="form-control"
+                                                                                    placeholder="Notes Title" id="title"
+                                                                                    aria-label="Recipient's username"
+                                                                                    name="title"
+                                                                                    aria-describedby="basic-addon2"
+                                                                                    required>
+                                                                                <input type="text" class="form-control"
+                                                                                    placeholder="Enter Notes" id="note"
+                                                                                    aria-label="Recipient's username"
+                                                                                    name="note"
+                                                                                    aria-describedby="basic-addon2"
+                                                                                    required>
+                                                                                <select name="privacy"
+                                                                                    class="custom-select">
+                                                                                    <option value="public">Public
+                                                                                    </option>
+                                                                                    <option value="Private">Private
+                                                                                    </option>
+                                                                                </select>
+                                                                                <div class="input-group-append">
+                                                                                    <button class="btn btn-warning"
+                                                                                        type="submit"
+                                                                                        id="send_ajax">Submit</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-5">
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <a class="btn btn-primary"
+                                                                                    id="view{{$id}}" href="#"
+                                                                                    role="button"
+                                                                                    onclick="view({{$id}});">View
+                                                                                    More</a>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <div class="row">
+                                                                    <div class="mb-12">
+                                                                        <div id="append_view{{$id}}"
+                                                                            class="table-responsive-lg "
+                                                                            style="margin-left:170px;">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!--Mail Job Details -->
+                                                    <div class="modal fade" id="mailModal{{$id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h3 class="modal-title" id="exampleModalLabel">Mail</h3>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                    	  <form class="cmxform form-horizontal tasi-form"  action="{{url('employer/search_resume/jod_details_mail')}}"   method="post" >
+                                                    									{{csrf_field()}}
+                                                                <input type="hidden" class="form-control" id="candidate_id" name="candidate_id" value="{{$personal[$key]->id}}"required>
+                                                    		  <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label">To:</label>
+                                                                <input type="email" class="form-control" id="mail_to" name="mail_to" required>
+                                                              </div>
+                                                    		  <!--<div class="form-group">-->
+                                                        <!--        <label for="recipient-name" class="col-form-label">From:</label>-->
+                                                        <!--        <input type="email" class="form-control" id="mail_from" name="mail_from" required>-->
+                                                        <!--      </div>-->
+                                                    		  <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label">Subject:</label>
+                                                                <input type="text" class="form-control" id="subject" name="subject" required>
+                                                              </div>
+                                                    		  <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label">Job:</label>
+                                                    			<select name="job" id="job" class="form-control" required>
+                                                                <option value="">---Select---</option>
+                                                    			@foreach($job_list as $item)
+                                                                <option value=" {{$item['ID']}}">{{$item['job_title']}} </option>
+                                                    			@endforeach
+                                                               
+                                                               
+                                                                </select>
+                                                              </div>
+                                                    		 
+                                                              <div class="form-group">
+                                                                <label for="message-text" class="col-form-label">Comment:</label>
+                                                                <textarea class="form-control" id="comment" name="comment" required></textarea>
+                                                              </div>
+                                                           
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    		<input type="submit" class="btn btn-secondary" value="submit">  
+                                                    		</div>
+                                                    	  </form>
+                                                        </div>
+                                                      </div>
+                                                    </div>
 														@endforeach	
                                                 </tbody>
                                             </table>
@@ -203,9 +346,58 @@
                     </div> 
 				</div>
             </div>
+            
+                                                   
+                                                   
       
 @include('include.emp_footer')
 
 
-
+<script type="text/javascript">
+				function view(id)
+				{
+							$.ajax({
+								type: 'POST',
+								url: '{{url("employer/candidate/notes/")}}',
+								data: {
+									id:id,
+									"_token": "{{ csrf_token() }}"
+								},
+								success: function (data) {
+									$('#append_view'+id).append("<table class='table' style="border:1px solid" >");
+									$('#append_view'+id).append("<thead>");
+									$('#append_view'+id).append("<tr>");
+								// 	$('#append_view'+id).append("<th>Candidate _ID</th>");
+									$('#append_view'+id).append("<th>Title</th>");
+									$('#append_view'+id).append("<th>Note</th>");
+									$('#append_view'+id).append("<th>Created By</th>");
+									$('#append_view'+id).append("<th>Status</th>");
+									$('#append_view'+id).append("<th>Privacy</th>");
+									$('#append_view'+id).append("</tr>");
+									$('#append_view'+id).append("</thead>");
+									$('#append_view'+id).append("<tbody>");
+									$.each(data, function(index, value) {
+										
+										$('#append_view'+id).append("<tr>");
+								// 		$('#append_view'+id).append("<td>"+value.candidate_id+"</td>");
+										$('#append_view'+id).append("<td>"+value.title+"</td>");
+										$('#append_view'+id).append("<td>"+value.note+"</td>");
+										$('#append_view'+id).append("<td>"+value.created_by+"</td>");
+										$('#append_view'+id).append("<td>"+value.status+"</td>");
+										$('#append_view'+id).append("<td>"+value.privacy_level+"</td>");
+										$('#append_view'+id).append("</tr>");
+										});
+										$('#append_view'+id).append("</tbody>");
+										$('#append_view'+id).append("</table>");
+										$('#view'+id).hide();
+																
+								},
+								error: function (data) {
+									console.log(data);
+								}
+			
+							});
+				}
+					
+				</script>
 </html>

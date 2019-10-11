@@ -8,11 +8,13 @@ use App\Tbl_job_seekers;
 use App\user;
 use Validator;
 
+
 class Seeker_Signup_Controller extends Controller
 {
     public function index()
     {
-        return view('jobseekersignup');
+
+        return view('jobseekersignup')
     }
 
     public function add(Request $request){

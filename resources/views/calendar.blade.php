@@ -254,15 +254,16 @@ body{
                                                         <td>{{$r->interview_type}}</td>
             
                                                             <td class="actions">
-                                                                <a href="{{url('employer/dashboard/interview-meeting-intdel'.$ida)}}" class="on-default edit-row"
-                                                                    data-toggle="tooltip" data-placement="top" title=""
-                                                                    data-original-title="delete" ><i
-                                                                        class="fa fa-trash-o"></i></a>
                                                                 <a href="{{url('employer/dashboard/interview-meeting-intedit'.$ida)}}" class="hidden on-editing login-row"
                                                                      data-placement="top" title=""
                                                                      data-toggle="tooltip"
                                                                      data-original-title="Edit"  ><i
                                                                         class="fa fa-pencil"></i></a>
+                                                                <a href="{{url('employer/dashboard/interview-meeting-intdel'.$ida)}}" class="on-default edit-row"
+                                                                    data-toggle="tooltip" data-placement="top" title=""
+                                                                    data-original-title="delete" ><i
+                                                                        class="fa fa-trash-o"></i></a>
+                                                                
                                                             </td>
                                                         </tr>
                                                         @endforeach
@@ -326,15 +327,16 @@ body{
 
 
                                                             <td class="actions">
-                                                                <a href="{{url('employer/dashboard/interview-meeting-del'.$id)}}" title="delete" class="hidden on-editing login-row"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    data-original-title="delete"><i
-                                                                        class="fa fa-trash-o"></i></a>
+                                                               
                                                             <a href="{{url('employer/dashboard/interview-meeting-up'.$id)}}" class="hidden on-editing login-row"
                                                                      data-placement="top" title=""
                                                                      data-toggle="tooltip"
                                                                      data-original-title="Edit" ><i
                                                                         class="fa fa-pencil"></i></a>
+                                                             <a href="{{url('employer/dashboard/interview-meeting-del'.$id)}}" title="delete" class="hidden on-editing login-row"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    data-original-title="delete"><i
+                                                                        class="fa fa-trash-o"></i></a>
                                                             </td>
                                                         </tr>
                                                         @endforeach

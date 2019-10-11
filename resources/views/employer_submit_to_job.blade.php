@@ -157,37 +157,21 @@ width: 84%;
                                                                 <option value="45k-50k">45k - 50k</option>
                                                                 <option value="50k-55k">50k - 55k</option>
                                                                 <option value="55k-60k">55k - 60k</option>
-                                                                <option value="15$-20$">15$ - 20$</option>
-                                                                <option value="20$-25$">20$ - 25$</option>
-                                                                <option value="25$-30$">25$ - 30$</option>
-                                                                <option value="30$-35$">30$ - 35$</option>
-                                                                <option value="35$-40$">35$ - 40$</option>
-                                                                <option value="40$-45$">40$ - 45$</option>
-                                                                <option value="45$-50$">45$ - 50$</option>
+                                                                <option value="$20-$25">$20 - $25</option>
+                                                                <option value="$25-$30">$25 - $30</option>
+                                                                <option value="$30-$35">$30 - $35</option>
+                                                                <option value="$35-$40">$35 - $40</option>
+                                                                <option value="$40-$45">$40 - $45</option>
+                                                                <option value="$45-$50">$45 - $50</option>
+                                                                <option value="$50-$55">$50 - $55</option>
+                                                                <!--<option value="$55-$60">$55 - $60</option>-->
+                                                                <!--<option value="$60-$65">$60 - $65</option>-->
+                                                                <!--<option value="$65-$70">$65 - $70</option>-->
+                                                                
                                                                 <option value="DOE">(DOE)Depends upon Experience</option>
                                                 </select>
                                             </div>
                                         </div>
-
-                         <!--                <div class="form-group row">-->
-                         <!--                   <label for="" class="control-label col-lg-4">Salary<span class="red">*</span></label>-->
-                         <!--                   <div class="col-lg-8">-->
-                                               <!-- <span><input name="pay_min" type="text" class="form-control" id="pay_min"  min="0" style="width: 29%; float:left;"/></span>
-							                  <!--<span><input name="pay_max" type="text" class="form-control" id="pay_max" min="0" style="width: 29%; float:left;"/></span> -->
-                         <!--                       <select name="payment_range" id="select_ranage" class="form-control" style="max-width:50%; border: 1px solid #bbb8b8;" required>-->
-                         <!--                                       <option> SELECT MONTHLY RANGE</option>-->
-                         <!--                                       <option value="15k-20k">15k - 20k</option>-->
-                         <!--                                       <option value="20k-25k">20k - 25k</option>-->
-                         <!--                                       <option value="25k-30k">25k - 30k</option>-->
-                         <!--                                       <option value="30k-35k">30k - 35k</option>-->
-                         <!--                                       <option value="35k-40k">35k - 40k</option>-->
-                         <!--                                       <option value="40k-45k">40k - 45k</option>-->
-                         <!--                                       <option value="45k-50k">45k - 50k</option>-->
-                         <!--                                       <option value="50k-55k">50k - 55k</option>-->
-                         <!--                                       <option value="55k-60k">55k - 60k</option>-->
-                         <!--                       </select>-->
-                         <!--                   </div>-->
-                         <!--               </div>-->
 
                                          <div class="form-group row">
                                             <label for=""  class="control-label col-lg-4">Upload Resume<span class="red">*</span></label>
@@ -259,7 +243,7 @@ width: 84%;
 @include('include.footers')
 <script type="text/javascript">
     function fulltime(){
-        // alert('hrllo');
+        alert('hrllo');
         temp = document.getElementById('type_of_job').value;
         // alert(temp);
         if (temp == 'Full Time'){
@@ -280,6 +264,7 @@ width: 84%;
              var x = document.getElementById("select_ranage").options[14].disabled = true;
              var x = document.getElementById("select_ranage").options[15].disabled = true;
              var x = document.getElementById("select_ranage").options[16].disabled = true;
+            
         }
         else if (temp == 'Contract'){
             // alert('gfg');

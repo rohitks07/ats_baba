@@ -176,7 +176,7 @@ $.ajaxSetup({
 									 <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4"> Date Of Birth</label>
 	                                            <div class="col-lg-8">
-	                                               	<input type="date" id="dob" name="dob" value="{{$details['dob']}}" placeholder="dd/mm/yyyy" />
+	                                               	<input type="date" id="dob" name="dob" value="{{$details['dob']}}" placeholder="dd/mm/yyyy" style="width:83%; padding:0.5em;"  >
 	                                            </div>
 	                                        </div>
 								<!--end Date of Birth-->
@@ -294,7 +294,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Mobile Phone<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="mobile_number" name="mobilephone" maxlength="10" value="{{$details['mobile']}}"><br>
+												<input type="text" id="mobile_number" name="mobilephone" maxlength="12" value="{{$details['mobile']}}"><br>
 												<span id="mob_ph_check">Please Enter a Valid Mobile Number</span>
 											</div>
 									  </div>
@@ -303,7 +303,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Home Phone<span style="color:red;"></span></label>
 											<div class="col-lg-8">
-												<input type="text" id="phone" name="homephone" maxlength="10" value="{{$details['home_phone']}}"><br>
+												<input type="text" id="phone" name="homephone" maxlength="12" value="{{$details['home_phone']}}"><br>
 												<span id="home_ph_check">Please Enter a Valid Home Number</span>
 											</div>
 									  </div>
@@ -537,7 +537,35 @@ $(document).on('click', '.btn_remove', function() {
 <!--close dynamic clone for EXPERIANCE -->
 
 <!--dynamic add skills-->
+<script>
+    $("#home_ph_check").hide();
+function phoneMask() { 
+var num = $(this).val().replace(/\D/g,''); 
+if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6) + '-' + num.substring(6,10)) ) 
+{
 
+}
+else
+{
+
+$("#home_ph_check").show();
+}
+}
+$('#phone').keyup(phoneMask);
+
+$("#mob_ph_check").hide();
+function phoneMask() { 
+var num = $(this).val().replace(/\D/g,''); 
+if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6) + '-' + num.substring(6,10))) 
+{
+
+}
+else{
+$("#mob_ph_check").show();
+}
+}
+$('#mobile_number').keyup(phoneMask);
+</script>
 <script>
 $(function() {
     var availableSkills =   
@@ -746,28 +774,28 @@ $(function() {
 				var err_resume=true;
 			
 			//validate mobile Phone
-				$("#validatefrm").click(function()
-				{
-					check_mb_phone();
-				});
-				function check_mb_phone()
-				{
+				// $("#validatefrm").click(function()
+				// {
+				// 	check_mb_phone();
+				// });
+				// function check_mb_phone()
+				// {
 					
-					var ph_val=$("#mobile_number").val();
-					var phoneno=new RegExp(/^[0-9-+]+$/);
-					if((ph_val="")||(phoneno=""))
-					{
-						$("#mob_ph_check").hide();
-					}
-					else
-					{
-						$("#mob_ph_check").show();
-						$("#mob_ph_check").focus();
-						$("#mob_ph_check").css("color","red");
-						err_mob_ph=false;
-						return false;
-					}
-				}
+				// 	var ph_val=$("#mobile_number").val();
+				// 	var phoneno=new RegExp(/^[0-9-+]+$/);
+				// 	if((ph_val="")||(phoneno=""))
+				// 	{
+				// 		$("#mob_ph_check").hide();
+				// 	}
+				// 	else
+				// 	{
+				// 		$("#mob_ph_check").show();
+				// 		$("#mob_ph_check").focus();
+				// 		$("#mob_ph_check").css("color","red");
+				// 		err_mob_ph=false;
+				// 		return false;
+				// 	}
+				// }
 				// //validate home Phone
 				// $("#validatefrm").click(function()
 				// {

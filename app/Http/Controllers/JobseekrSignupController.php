@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\JobseekerSignupModel;
 use App\user;
+use App\cities;
+use App\countries;
+use App\states;
 
 class JobseekrSignupController extends Controller
 {
     public function index()
     {
-        return view('jobseekersignup');
+        
+        $toReturn['cities']          =cities::get()->toArray();
+        $toReturn['countries']       =countries::get()->toArray();
+        $toReturn['states']          =states::get()->toArray();
+        return view('jobseekersignup')->with('toReturn',$toReturn);;
     }
 
     public function add(Request $request){
@@ -36,8 +43,17 @@ class JobseekrSignupController extends Controller
 
         
         // for tbl_job seeker 
-        $jobseeker = new JobseekerSignupModel();
+       
+          
+        $con =  $request->country;
+        $sta=  $request->state;
+        $cit=  $request->city;
+    
+        $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
+        $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
+        $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
         
+        $jobseeker = new JobseekerSignupModel();
         $jobseeker ->first_name = $request->first_name;
         $jobseeker ->email      = $request->email;
         $password_ok            = $request->password;
@@ -54,9 +70,9 @@ class JobseekrSignupController extends Controller
         $birthday    = $request->dob_year . '-' . $request->dob_month . '-' . $request->dob_day;
         $jobseeker->dob = date('Y-m-d', strtotime($birthday));
         $jobseeker->present_address = $request->present_address;
-        $jobseeker->country = $request->country;
-        $jobseeker->state = $request->state;
-        $jobseeker->city = $request->city;
+        $jobseeker->country =$val_contries['country_name'];
+        $jobseeker->state   =$val_state['state_name'];
+        $jobseeker->city    =$val_city['city_name'];
         $jobseeker->nationality = $request->nationality;
         $jobseeker->visa_status = $request->visa_status;
         $jobseeker->mobile = $request->mobile;

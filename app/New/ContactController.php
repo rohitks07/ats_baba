@@ -54,14 +54,23 @@ class ContactController extends Controller
     public function show(){
 
         $current_module_id=6;
+             $toReturn['user_type']=Session::get('type');
+            if($toReturn['user_type']=="teammember")
+            {
             $user_permission_list=Session::get('user_permission');
-        foreach($user_permission_list as $key =>$value )
-        {
-             if($user_permission_list[$key]['module_id']==$current_module_id)
-             {
-                 $toReturn['current_module_permission']=Tbl_team_member_permission::where('permission_value',$current_module_id)->where('team_member_id',Session::get('user_id'))->first()->toArray();
-             }
-        }
+                if($user_permission_list)
+                {
+                    foreach($user_permission_list as $key =>$value )
+                    {
+                        if($user_permission_list[$key]['module_id']==$current_module_id)
+                        {
+                            $toReturn['current_module_permission']=Tbl_team_member_permission::where('permission_value',$current_module_id)->where('team_member_id',Session::get('user_id'))->first()->toArray();
+                        
+                        }
+
+                    }
+                }
+            }
         $contact_object =Tbl_post_contacts::all();   
         $emailList = Tbl_email_list_contacts::all();
         $email=Tbl_email_list::all();

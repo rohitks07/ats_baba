@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\user;
 use App\Tbl_companies;
 use App\Tbl_employers;
+use App\cities;
+use App\countries;
+use App\states;
 use Validator;
 
 
@@ -26,11 +29,8 @@ class Post_Job_Controller extends Controller
         $con =  $request->country;
         $sta=  $request->state;
         $cit=  $request->city;
-    
         $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
-    
         $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
-        
         $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
         
         

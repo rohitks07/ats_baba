@@ -147,7 +147,7 @@
 							</div>
 							<div class="tab-pane show active" id="home-1" role="tabpanel" aria-labelledby="home-tab-1">
 								<div class="card-body">
-									<h2 style="font-weight:100;color:#317eeb;"> {{@$data[0]->job_title}}
+									<h2 style="font-weight:100;color:#317eeb;">{{$data[0]->job_code ?? ''}} {{@$data[0]->job_title}}
 										<a href=""><i class="fa fa-external-link fa-1x" aria-hidden="true"></i></h2></a>
 										<div class="row">
 											<div class="col-md-8">
@@ -171,7 +171,7 @@
 														</tr>
 														<tr>
 															<td>Job Location:</td>
-															<td>{{@$data[0]->country}},&nbsp;{{@$data[0]->state}},&nbsp;{{@$data[0]->city}}</td>
+															<td>{{@$data[0]->country}},{{@$data[0]->state}},{{@$data[0]->city}}</td>
 														</tr>
 														<tr>
 															<td>Minimum Education:</td>
@@ -183,11 +183,11 @@
 														</tr>
 														<tr>
 															<td>Apply By:</td>
-															<td> {{@$data[0]->last_updated_by}}</td>
+															<td>{{@$data[0]->dated}}</td>
 														</tr>
 														<tr>
 															<td>Job Posting Date:</td>
-															<td>{{@$data[0]->dated}}</td>
+															<td>{{@$data[0]->last_updated_by}}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -241,7 +241,7 @@
 																	<td>{{@$data[0]->sts}}</td>
 																</tr>
 																<tr>
-																	<td>Created Date:</td>
+																	<td>Created By:</td>
 																	<td>{{@$data[0]->dated}}</td>
 																</tr>
 																<tr>

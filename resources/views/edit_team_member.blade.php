@@ -1,6 +1,14 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
-
+<script>
+		$.ajaxSetup({
+		  headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		  }
+		});
+		
+</script>
     <!-- Custom Files -->
     <style>
         .form-control {
@@ -112,32 +120,30 @@
                                                 </div>
                                             </div>
                                             <!--end of Confirm Password-->
-                                            <!-- Location-->
-                                            <div class="form-group row">
-                                                <label for="address" class="control-label col-lg-4">Location<span style="color:red;">*</span> </label>
-                                                <select name="country" id="country" class="form-control" onChange="grab_cities_by_country(this.value);" style="width:17%; border: 1px solid #b3b3b3; margin-left: 9px;">
-                                                    @foreach($country as $country)
-                                                    <option value="{{$country->country_name}}">{{$country->country_name}}</option>
-                                                    @endforeach
-
-                                                </select>
-                                                
-                                                <select name="state" id="state" class="form-control" onchange="select_city_by_state(this.options[this.selectedIndex].value)" style="max-width:17%; margin-left: 9px; border: 1px solid #b3b3b3;">
-                                                    <option value="" selected>Select State</option>
-                                                    @foreach($city as $city)
-                                                    <option value="{{$city->state}}">{{$city->state}}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div>
-                                                <span id="statemsg" name="statemsg" style="display:none;">This field must not be empty</span>
-                                                </div>
-                                                
-                                                <input name="city" type="text" class="form-control" id="city" placeholder="City" value="{{$city->city_name}}" maxlength="150" style="width:15%; margin-left:1em;">
-                                                
-                                                <span id="citycheck" name="citycheck" class=""> please enter city name</span>
-
-                                            </div>
-                                            <!--end of Location-->
+                                            
+                                            <!--location-->
+                                                <div class="form-group row">
+													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
+													<select name="country" id="country"  class="form-control "  style="width:11%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
+													  <option value="">Select Country</option>
+													  @foreach($toReturn['countries'] as $country)
+													<option value="{{$country['country_id']}}">{{ $country['country_name']}}</option>
+													  @endforeach  
+													</select>
+				                                            
+													<select name="state" id="state_text" class="form-control " style="max-width:12%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
+														  <option value="">Select State</option>
+													</select>
+													<!--<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">-->
+														<select name="city" id="city" class="form-control " style="max-width:20%; border: 1px solid #bbb8b8;" required>
+															  <option value="">Select City</option>
+													    </select>
+														<br>
+														<span id="citycheck">Please choose Your Location</span> 
+													<!--</div>-->
+												</div>
+											<!--end location-->
+                                            
                                             <!--Mobile Phone-->
                                             <div class="form-group row">
                                                 <label for="" class="control-label col-lg-4">Mobile Phone<span style="color:red;">*</span></label>
@@ -393,460 +399,40 @@
 
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <!--start-->
+                                                <tbody> 
+                                                    @foreach ($toReturn['editteam'] as $key => $value)
                                                     <tr>
-                                                        <td>Company Profile</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox1_1" type="checkbox" checked="">
-                                                                <label for="checkbox1_1">
-                                                                </label>
-                                                            </div>
+                                                        <td>{{$toReturn['editteam'][$key]['nameofmodule']}}<input type="hidden" name="editchange[]" value="
+                                                            {{$toReturn['editteam'][$key]['moduleid']}}">
                                                         </td>
+    
                                                         <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox1_2" type="checkbox">
-                                                                <label for="checkbox1_2">
-                                                                </label>
-                                                            </div>
+                                                            <input id="checkbox1{{$key}}"  name="read{{$toReturn['editteam'][$key]['moduleid']}}" value="read" type="checkbox" <?php echo ($toReturn['editteam'][$key]['read'] == 'yes') ? 'checked' : ""; ?>>
                                                         </td>
+    
+                                                        <td><input id="checkbox2{{$key}}" name="add{{$toReturn['editteam'][$key]['moduleid']}}" value="add"    type="checkbox" <?php echo ($toReturn['editteam'][$key]['add'] == 'yes') ? 'checked' : ""; ?>>
+                                                        </td>
+    
                                                         <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox1_3" type="checkbox">
-                                                                <label for="checkbox1_3">
-                                                                </label>
-                                                            </div>
+                                                            <input id="checkbox3{{$key}}" name="edit{{$toReturn['editteam'][$key]['moduleid']}}" value="edit" type="checkbox" <?php echo ($toReturn['editteam'][$key]['edit'] == 'yes') ? 'checked' : ""; ?>>
                                                         </td>
+    
                                                         <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox1_4" type="checkbox">
-                                                                <label for="checkbox1_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-
+                                                            <input id="checkbox4{{$key}}" name="delete{{$toReturn['editteam'][$key]['moduleid']}}" value="delete" type="checkbox" <?php echo ($toReturn['editteam'][$key]['delete'] == 'yes') ? 'checked' : ""; ?>>
+                                                        </td>                  
                                                     </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>Candidate Management:</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox2_1" type="checkbox" checked="">
-                                                                <label for="checkbox2_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox2_2" type="checkbox">
-                                                                <label for="checkbox2_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox2_3" type="checkbox">
-                                                                <label for="checkbox2_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox2_4" type="checkbox">
-                                                                <label for="checkbox2_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>Job Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox3_1" type="checkbox" checked="">
-                                                                <label for="checkbox3_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox3_2" type="checkbox">
-                                                                <label for="checkbox3_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox3_3" type="checkbox">
-                                                                <label for="checkbox3_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox3_4" type="checkbox">
-                                                                <label for="checkbox3_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>User Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox4_1" type="checkbox" checked="">
-                                                                <label for="checkbox4_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox4_2" type="checkbox">
-                                                                <label for="checkbox4_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox4_3" type="checkbox">
-                                                                <label for="checkbox4_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox4_4" type="checkbox">
-                                                                <label for="checkbox4_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>Application Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox5_1" type="checkbox" checked="">
-                                                                <label for="checkbox5_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox5_2" type="checkbox">
-                                                                <label for="checkbox5_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox5_3" type="checkbox">
-                                                                <label for="checkbox5_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox5_4" type="checkbox">
-                                                                <label for="checkbox5_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>Contacts Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox6_1" type="checkbox" checked="">
-                                                                <label for="checkbox6_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox6_2" type="checkbox">
-                                                                <label for="checkbox6_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox6_3" type="checkbox">
-                                                                <label for="checkbox6_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox6_4" type="checkbox">
-                                                                <label for="checkbox6_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>Organization Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox7_1" type="checkbox" checked="">
-                                                                <label for="checkbox7_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox7_2" type="checkbox">
-                                                                <label for="checkbox7_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox7_3" type="checkbox">
-                                                                <label for="checkbox7_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox7_4" type="checkbox">
-                                                                <label for="checkbox7_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>Calender Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox8_1" type="checkbox" checked="">
-                                                                <label for="checkbox8_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox8_2" type="checkbox">
-                                                                <label for="checkbox8_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox8_3" type="checkbox">
-                                                                <label for="checkbox8_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox8_4" type="checkbox">
-                                                                <label for="checkbox8_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>AR Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox9_1" type="checkbox" checked="">
-                                                                <label for="checkbox9_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox9_2" type="checkbox">
-                                                                <label for="checkbox9_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox9_3" type="checkbox">
-                                                                <label for="checkbox9_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox9_4" type="checkbox">
-                                                                <label for="checkbox9_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>AP Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox10_1" type="checkbox" checked="">
-                                                                <label for="checkbox10_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox10_2" type="checkbox">
-                                                                <label for="checkbox10_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox10_3" type="checkbox">
-                                                                <label for="checkbox10_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox10_4" type="checkbox">
-                                                                <label for="checkbox10_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>HR Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox11_1" type="checkbox" checked="">
-                                                                <label for="checkbox11_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox11_2" type="checkbox">
-                                                                <label for="checkbox11_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox11_3" type="checkbox">
-                                                                <label for="checkbox11_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox11_4" type="checkbox">
-                                                                <label for="checkbox11_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>HR Recruitment Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox12_1" type="checkbox" checked="">
-                                                                <label for="checkbox12_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox12_2" type="checkbox">
-                                                                <label for="checkbox12_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox12_3" type="checkbox">
-                                                                <label for="checkbox12_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox12_4" type="checkbox">
-                                                                <label for="checkbox12_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>Marketing Management</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input id="checkbox13_1" type="checkbox" checked="">
-                                                                <label for="checkbox13_1">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-success">
-                                                                <input id="checkbox13_2" type="checkbox">
-                                                                <label for="checkbox13_2">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-warning">
-                                                                <input id="checkbox13_3" type="checkbox">
-                                                                <label for="checkbox13_3">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-danger">
-                                                                <input id="checkbox13_4" type="checkbox">
-                                                                <label for="checkbox13_4">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <!--end-->
-                                                    <!--start-->
-                                                    <tr>
-                                                        <td>System Administration</td>
-                                                        <td>
-                                                            <div class="checkbox checkbox-primary">
-															<input type="checkbox" id="checkbox14_1" checked data-toggle="toggle" data-width="100">
-                                                                <label for="checkbox141">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-														<td></td>
-														<td></td>
-														<td></td>
-                                                    </tr>
-                                                    <!--end-->
+                                                    @endforeach                                                   
+                                                     <tr> 
+                                                        <!-- <td><input type="hidden" name="" value="">System Administration</td> -->
+                                                        <!-- td>
+                                                            <label class="switch">
+                                                                <input type="checkbox"  name="systemAdministration" checked>
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                        </td> -->
+                                                    </tr><!--end-->
                                                 </tbody>
+        
                                             </table>
                                         </div>
                                         <br>
@@ -887,7 +473,52 @@
         </div>
         </div>
         <!-- END wrapper -->
+        
+<script type="text/javascript">
+    $('#country').on('change', function(e){
+    console.log(e);
+    $('#state_text').empty();
+    var country_id = e.target.value;
+    console.log (country_id);
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/state/")}}'+"/"+country_id,
+                success:function(data){
+                    console.log(data);
+                     $.each(data, function(index, value) {
+                        $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
+                        console.log(value.state_id);
+                        });
+            },
+                error:function(data){
+                console.log(data);
+            }
 
+        });
+
+    });
+    $('#state_text').on('change', function(e){
+    console.log(e);
+    $('#city').empty();
+    var state_id = e.target.value;
+    console.log (state_id);
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/city/")}}'+"/"+state_id,
+                success:function(data){
+                    console.log(data);
+                    
+                     $.each(data, function(index, value) {
+                        $('#city').append("<option value="+'"'+value.city_id+'"'+"selected>"+value.city_name+"</option>");
+                        });
+                    
+            },
+                error:function(data){
+                console.log(data);
+            }
+        });
+    });
+</script>
 
 		<script>
 		$(document).ready(function()

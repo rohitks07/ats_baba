@@ -8,7 +8,8 @@
 </style>
 </head>
 <body>
-<p><?php echo strip_tags($data['forward_candidate']['content']); ?></p>
+<br>    
+<p><?php echo $data['forward_candidate']['content'];"<br>" ?> </br></p>
 <table border="1px" style="border-collapse: collapse;">
 <tr><th colspan="2">Candidate’s Personal Details</th></tr>
 <tr><th style="width:250px">Full Name</th><th style="width:250px">{{$data['forward_candidate']['fullname']}}</th></tr>
@@ -85,7 +86,14 @@ break;
 @endforeach
 @endif
 </table>
-
+<br>
+@if($data['emp_details'])
+<u><b> Employer Details</b></u>
+<table border="1px " style="border-collapse: collapse;">
+<tr><th> Company Name</th> <th>Email Id </th><th>Employer Name </th> <th>Phone Number </th></tr>
+<tr> <td>{{$data['emp_details']['company_name']}}</td><td>{{$data['emp_details']['email_Id']}}</td><td>{{$data['emp_details']['employer_name']}}</td><td>{{$data['emp_details']['phone_number']}}</td></tr>
+</table>
+@endif
 
 
 

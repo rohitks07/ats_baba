@@ -377,6 +377,30 @@ textarea[class="form-control"]{
 							                        </select>
 												</div>
             							</div>
+            							 <!--location-->
+                                                <div class="form-group row">
+													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
+													<select name="country" id="country"  class="form-control "  style="width:11%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
+													  <option value="">Select Country</option>
+													  @foreach($toReturn['countries'] as $country)
+													<option value="{{$country['country_id']}}">{{ $country['country_name']}}</option>
+													  @endforeach  
+													</select>
+				                                            
+													<select name="state" id="state_text" class="form-control " style="max-width:12%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
+														  <option value="">Select State</option>
+													</select>
+													<!--<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">-->
+														<select name="city" id="city" class="form-control " style="max-width:9%; border: 1px solid #bbb8b8;" required>
+															  <option value="">Select City</option>
+													    </select>
+														<br>
+														<span id="citycheck">Please choose Your Location</span> 
+													<!--</div>-->
+												</div>
+									<!--end location-->
+	
+            							
 										<div class="form-group row">
 											<label class="col-md-4 control-label" for="example-textarea-input">Current Address<span class="red">*</span></label>
 												<div class="col-md-8">
@@ -384,142 +408,10 @@ textarea[class="form-control"]{
 													<span id="cacheck">Please Enter Your Address</span>
 												</div>
 										</div>
+										
+	
 
-										<div class="form-group row">
-                        					<label for="address" class="control-label col-lg-4">Location <span class="red">*</span></label>
-												<div class="col-md-2">
-													<select name="country" id="country" name="country" class="form-control">
-														<option value="" selected>Select Country</option>
-							                            <option value="Afghanistan" >Afghanistan</option>
-							                            <option value="Albany" >Albany</option>
-							                            <option value="Algeria" >Algeria</option>
-							                            <option value="Angola" >Angola</option>
-							                            <option value="Argentina" >Argentina</option>
-							                            <option value="Armenia" >Armenia</option>
-							                            <option value="Australia" >Australia</option>
-							                            <option value="Austria" >Austria</option>
-							                            <option value="Azerbaijan" >Azerbaijan</option>
-							                            <option value="Bahamas" >Bahamas</option>
-							                            <option value="Bahrain" >Bahrain</option>
-							                            <option value="Bangladesh" >Bangladesh</option>
-							                            <option value="Belgium" >Belgium</option>
-							                            <option value="Bhutan" >Bhutan</option>
-							                            <option value="Bulgaria" >Bulgaria</option>
-							                            <option value="Burma" >Burma</option>
-							                            <option value="Burundi" >Burundi</option>
-							                            <option value="Cambodia" >Cambodia</option>
-							                            <option value="Cameroon" >Cameroon</option>
-							                            <option value="Canada" >Canada</option>
-							                            <option value="Cape Verd" >Cape Verd</option>
-							                            <option value="Central Africa" >Central Africa</option>
-							                            <option value="Chadi" >Chadi</option>
-							                            <option value="Chile" >Chile</option>
-							                            <option value="China" >China</option>
-							                            <option value="Columbia" >Columbia</option>
-							                            <option value="Comora" >Comora</option>
-							                            <option value="Congo" >Congo</option>
-							                            <option value="Costa Rica" >Costa Rica</option>
-							                            <option value="Croatia" >Croatia</option>
-							                            <option value="Cuban" >Cuban</option>
-							                            <option value="Cyprus" >Cyprus</option>
-							                            <option value="Egypt" >Egypt</option>
-							                            <option value="Fiji" >Fiji</option>
-							                            <option value="Finland" >Finland</option>
-							                            <option value="France" >France</option>
-							                            <option value="Germany" >Germany</option>
-							                            <option value="Ghana" >Ghana</option>
-							                            <option value="Greece" >Greece</option>
-							                            <option value="Iceland" >Iceland</option>
-							                            <option value="India" >India</option>
-							                            <option value="Iran" >Iran</option>
-							                            <option value="Iraq" >Iraq</option>
-							                            <option value="Ireland" >Ireland</option>
-							                            <option value="Israel" >Israel</option>
-							                            <option value="Italy" >Italy</option>
-							                            <option value="Jamaica" >Jamaica</option>
-							                            <option value="Japan" >Japan</option>
-							                            <option value="Jordan" >Jordan</option>
-							                            <option value="Kenya" >Kenya</option>
-							                            <option value="Kuwait" >Kuwait</option>
-							                            <option value="Malaysia" >Malaysia</option>
-							                            <option value="Mexico" >Mexico</option>
-							                            <option value="Mongolia" >Mongolia</option>
-							                            <option value="Nepal" >Nepal</option>
-							                            <option value="New Zealand" >New Zealand</option>
-							                            <option value="Pakistan" >Pakistan</option>
-							                            <option value="Peru" >Peru</option>
-							                            <option value="Poland" >Poland</option>
-							                            <option value="Qatar" >Qatar</option>
-							                            <option value="Romania" >Romania</option>
-							                            <option value="Russia" >Russia</option>
-							                            <option value="Thailand" >Thailand</option>
-							                            <option value="United Kingdom" >United Kingdom</option>
-							                            <option value="United States" >United States</option>
-							                            <option value="Yemen" >Yemen</option>
-							                        </select>
-						  							<span id="citycheck">Please Select Your location</span>
-                          						</div>
-						  						<div class="col-md-2">
-													<select name="state" id="state_text" class="form-control">
-							              				<option value="" selected>Select State</option>
-							                            <option value="AK" >AK</option>
-							                            <option value="AL" >AL</option>
-							                            <option value="AR" >AR</option>
-							                            <option value="AZ" >AZ</option>
-							                            <option value="CA" >CA</option>
-							                            <option value="CO" >CO</option>
-							                            <option value="CT" >CT</option>
-							                            <option value="DE" >DE</option>
-							                            <option value="FL" >FL</option>
-							                            <option value="GA" >GA</option>
-							                            <option value="HI" >HI</option>
-							                            <option value="IA" >IA</option>
-							                            <option value="ID" >ID</option>
-							                            <option value="IL" >IL</option>
-							                            <option value="IN" >IN</option>
-							                            <option value="KS" >KS</option>
-							                            <option value="KY" >KY</option>
-							                            <option value="LA" >LA</option>
-							                            <option value="MA" >MA</option>
-							                            <option value="MD" >MD</option>
-							                            <option value="ME" >ME</option>
-							                            <option value="MI" >MI</option>
-							                            <option value="MN" >MN</option>
-							                            <option value="MO" >MO</option>
-							                            <option value="MS" >MS</option>
-							                            <option value="MT" >MT</option>
-							                            <option value="NC" >NC</option>
-							                            <option value="ND" >ND</option>
-							                            <option value="NE" >NE</option>
-							                            <option value="NH" >NH</option>
-							                            <option value="NJ" >NJ</option>
-							                            <option value="NM" >NM</option>
-							                            <option value="NV" >NV</option>
-							                            <option value="NY" >NY</option>
-							                            <option value="OH" >OH</option>
-							                            <option value="OK" >OK</option>
-							                            <option value="OR" >OR</option>
-							                            <option value="PA" >PA</option>
-							                            <option value="PR" >PR</option>
-							                            <option value="RI" >RI</option>
-							                            <option value="SC" >SC</option>
-							                            <option value="SD" >SD</option>
-							                            <option value="TN" >TN</option>
-							                            <option value="TX" >TX</option>
-							                            <option value="UT" >UT</option>
-							                            <option value="VA" >VA</option>
-							                            <option value="VI" >VI</option>
-							                            <option value="VT" >VT</option>
-							                            <option value="WA" >WA</option>
-							                            <option value="WI" >WI</option>
-							                            <option value="WV" >WV</option>
-							                            <option value="WY" >WY</option>
-								                    </select>
-						         				</div>
-												<div class="col-md-2">
-													<input type="text" name="city" class="custom-control" Placeholder="City" id="city">
-												</div>
-										</div>						
+		
 										<div class="form-group row">
 				                            <label class="col-sm-4 control-label">Nationality <span class="red">*</span></label>
 				                                <div class="col-sm-8">
@@ -662,7 +554,51 @@ textarea[class="form-control"]{
 
         <!--form validation init-->
      )
-       
+ <script type="text/javascript">
+    $('#country').on('change', function(e){
+    console.log(e);
+    $('#state_text').empty();
+    var country_id = e.target.value;
+    console.log (country_id);
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/state/")}}'+"/"+country_id,
+                success:function(data){
+                    console.log(data);
+                     $.each(data, function(index, value) {
+                        $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
+                        console.log(value.state_id);
+                        });
+            },
+                error:function(data){
+                console.log(data);
+            }
+
+        });
+
+    });
+    $('#state_text').on('change', function(e){
+    console.log(e);
+    $('#city').empty();
+    var state_id = e.target.value;
+    console.log (state_id);
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/city/")}}'+"/"+state_id,
+                success:function(data){
+                    console.log(data);
+                    
+                     $.each(data, function(index, value) {
+                        $('#city').append("<option value="+'"'+value.city_id+'"'+"selected>"+value.city_name+"</option>");
+                        });
+                    
+            },
+                error:function(data){
+                console.log(data);
+            }
+        });
+    });
+</script>      
 			<!-- Validation Form Account Information-->
 		 
 		<script>

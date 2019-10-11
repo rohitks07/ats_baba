@@ -100,7 +100,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Phone (C)<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												 <input type="text" id="" name="phone_c" placeholder="00.000.000" maxlength="10" required>
+												 <input type="text" id="phonec" name="phone_c" placeholder="00.000.000" maxlength="12" required>
 											</div>
 									  </div>
 								<!--end of Phone (C)-->
@@ -108,7 +108,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Phone (W)</label>
 											<div class="col-lg-8">
-												 <input type="text" id="" name="phone_w" placeholder="00.000.000"  maxlength="10">
+												 <input type="text" id="phonew" name="phone_w" placeholder="00.000.000"  maxlength="12">
 											</div>
 									  </div>
 								<!--end of Phone (W)-->
@@ -313,7 +313,37 @@
         <!-- END wrapper -->
        <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
-	@include('include.emp_footer'); 
+	@include('include.emp_footer')
+	<script>
+	$("#home_ph_check").hide();
+function phoneMask() { 
+var num = $(this).val().replace(/\D/g,''); 
+if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6) + '-' + num.substring(6,10)) ) 
+{
+
+}
+else
+{
+
+$("#phone_c").show();
+}
+}
+$('#phonec').keyup(phoneMask);
+
+$("#phone_w").hide();
+function phoneMask() { 
+var num = $(this).val().replace(/\D/g,''); 
+if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6) + '-' + num.substring(6,10))) 
+{
+
+}
+else{
+$("#phone_w").show();
+}
+}
+$('#phonew').keyup(phoneMask);
+</script>
+	
 	</body>
 
 <!-- Mirrored from coderthemes.com/moltran/blue/form-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Jun 2019 12:15:55 GMT -->

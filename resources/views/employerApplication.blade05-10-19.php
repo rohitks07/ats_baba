@@ -102,10 +102,7 @@
 
                                                     @foreach($toReturn['application'] as $application)
                                                     <tr>   
-                                                    <?php $id=$application['application_id'];
-                                                    $job_id=$application['ID'];
-                                                    $seeker_id=$application['seeker_id']
-                                                    ?>  
+                                                    <?php $id=$application['application_id']; ?>  
                                                                                       
                                                         <td>{{$application['job_code']}}</td>
                                                         <td><a href="{{url('employer/dashboard')}}">{{$application['job_title']}}</a></td>
@@ -118,13 +115,12 @@
                                                         <td>{{$application['can_visa']}}</td>
                                                         <td>{{$application['applied_date']}}</td>
                                                         <td>
-                                                        <a data-toggle="modal" data-target="#interviewModal{{$application['seeker_id']}}"><i class="fa fa-clock-o" aria-hidden="true" title="Schedule Interview"></i></a>
+                                                        <a data-toggle="modal" data-target="#interviewModal"><i class="fa fa-clock-o" aria-hidden="true" title="Schedule Interview"></i></a>
                                                         <!-- <a class="hidden on-editing login-row" data-toggle="interviewModal" data-target="#interviewModal" data-placement="top" title="" data-original-title="Schedule  interview"><i class="fa fa-time">u r</i></a> -->
                                                         <a href="{{url('employer/appli_del/'.$id)}}" class="hidden on-editing login-row" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                         <a href="{{url('employer/appli_forward/'.$id)}}" ><i class="fa fa-arrow-right"  title="Candidate Forward "></i></a>
-                                                        
-                                                         <!-- schedule interview model -->
-                                                        <div class="modal fade" id="interviewModal{{$application['seeker_id']}}" role="dialog">
+                                                        </td>
+                                                        <div class="modal fade" id="interviewModal" role="dialog">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -138,8 +134,6 @@
                                                                             <label for="date">Date</label>
                                                                             <input type="date" class="form-control" id="date_interview" name="date_interview" required/>
                                                                         </div>
-                                                                        <input type="hidden" id="job_id" name="job_id" value="{{$job_id}}">
-                                                                        <input type="hidden" name="seeker_id" value="{{$application['seeker_id']}}">
                                                                         <div class="form-group">
                                                                             <label for="email">Start Time</label>
                                                                             <input id="srttime" class=" form-control timepicker" name="start_time" type="time" required>
@@ -152,26 +146,24 @@
                                                                             <div class="col-md-1">
                                                                             </div>
                                                                         </div>
-                                                                        <input type="hidden" name="invitees_to" value="{{$application['can_first_name']}} {{$application['can_last_name']}}">
-                                                                        <input type="hidden" name="invitees_cc" value="{{$application['can_first_name']}} {{$application['can_last_name']}}">
                                                                         <div class="form-group">
                                                                             <label for="email">Interview Type</label>
-                                                                            <select class="form-control" name="type" id="type" required>
-                                                                                <option value="">Select Interview Type</option>
+                                                                            <select class="form-control" name="type" id="type">
+                                                                                <option>Select Interview Type</option>
                                                                                 <option>Telephonic</option>
                                                                                 <option>Skype/video</option>
                                                                                 <option>In-Person</option>
                                                                             </select>
                                                                         </div>
-                                                                        <input type="hidden" name="interview_type" value="">
+                                                                        <input type="hidden" name="interview_type" value="{{$application['job_code']}}">
                                                                         <input type="hidden" name="candiate_name" value="{{$application['can_first_name']}} {{$application['can_last_name']}}">
                                                                         <div class="form-group">
                                                                             <label for="email">Instruction</label>
-                                                                            <input type="text" class="form-control" id="" placeholder="" name="instruction" required>
+                                                                            <input type="text" class="form-control" id="" placeholder="" name="instruction">
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="email">Time Zone</label>
-                                                                            <select class="form-control" name="time_zone" required>
+                                                                            <select class="form-control" name="time_zone">
                                                                                 <option value="">Time Zone</option>
                                                                                 <option>Eastern Time Zone(ET)</option>
                                                                                 <option>Pacific Time Zone(PT)</option>
@@ -189,7 +181,6 @@
                                                         </div>
                                                     </div>
                                                     </div>
-                                                    </td>
                                                     </tr>
                                                     @endforeach                                              
                                                 </tbody>

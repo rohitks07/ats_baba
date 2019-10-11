@@ -19,7 +19,7 @@ Route::get('forget_password','Login_Controller@forget_password');
 Route::post('email_link','Login_Controller@send_mail');
 Route::get('email_red/{email}','Login_Controller@email_red_view');
 Route::post('forgot','Login_Controller@forgot');
-
+Route::get('employer/logout','Login_Controller@logout');
 
 Route::get('forgetpassword','Login_Controller@forgetpassword_form'); 
 Route::post('forgetemail','Login_Controller@send_email');
@@ -131,21 +131,13 @@ Route::post('jobseeker/dashboard/notes','job_seeker_Controller@notes');
 
 // Route::get('emp','Employee_Dashboard_Controller@index');
 
-// // Route::get('emp/admindashboard','Employee_Dashboard_Controller@my_resume');
-Route::get('create_team_member',function() { return view('create_team_member'); });
-Route::get('create_team_member_group',function() { return view('create_team_member_group'); });
-Route::get('manage_team_members',function() { return view('manage_team_members'); });
-Route::get('manage_team_members_group',function() { return view('manage_team_members_group'); });
 
 Route::post('admindashboard/addexp','Job_Seeker_Controller@addexp');
 Route::post('admindashboard/addedu','Job_Seeker_Controller@addedu');
 
 // Admin Dasahboard routes
-
 Route::get('notifications','NotificationController@show_notification');
 Route::get('notification/details/{id}','NotificationController@details');
-
-
 //New Register Jobpost.......................................................... 
 Route::get('jobpostsignup','Post_Job_Controller@index');
 Route::post('jobpostsignup/add','Post_Job_Controller@insert');
@@ -231,6 +223,7 @@ Route::post('employer/forward_candidate','Job_Employer_Controller@forward_candid
 Route::get('employer/submit_candidate_detail/{id}','Job_Employer_Controller@list_candidate');
 Route::post('employer/submit_candidate','Job_Employer_Controller@submit_candidate');
 Route::get('employer/listmember/{id}','Job_Employer_Controller@list_teammember');
+
 // Jobsseeker Routes definition
 Route::get('test',function()
 {
@@ -395,8 +388,17 @@ Route::get('employer/team_member_skills/{id}','Search_Resume_Controller@view_ski
  Route::post('employer/edit_posted_candidate/update/','Search_Resume_Controller@update_personal_details');
 
  //Candidate->Education
- Route::get('employer/employer_edit_education/{id}/','Search_Resume_Controller@show_education');
- 
+Route::get('employer/employer_edit_education/{id}/','Search_Resume_Controller@view_education');
+ Route::post('employer/employer_edit_education/add/','Search_Resume_Controller@insert_education');
+ Route::get('employer/employer_edit_education/del/{id}/{seekerid}','Search_Resume_Controller@delete_education');
+  Route::post('employer/employer_edit_education/{id}/{seekerid}','Search_Resume_Controller@update_education');
  //data for location
  Route::get('employer/post_new_job/post_job/state/{country_id}','LocationController@get_state');
  Route::get('employer/post_new_job/post_job/city/{state_id}','LocationController@get_city');
+ Route::post('employer/search_resume/jod_details_mail','Search_Resume_Controller@jod_details_mail');
+ Route::post('employer/posted_jobs/add_notes','Job_Employer_Controller@add_job_note');
+ Route::post('employer/job/notes/','Job_Employer_Controller@show_job_note');
+ Route::post('employer/search_resume/Candidate_add_notes','Job_Employer_Controller@add_candidate_note');
+ Route::post('employer/candidate/notes/','Job_Employer_Controller@show_candidate_note');
+  Route::post('employer/posted_jobs/email_add','Job_Employer_Controller@add_new_job_email');
+ 

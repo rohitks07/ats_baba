@@ -582,7 +582,7 @@
                                     <a href="{{url('employer/Application')}}"><h3 class="card-title" style="text-align:right; margin-top:-35px;">View All</h3></a>
                         </div><!--end of card-header-->
                       
-               <div class="card-body" style="height:150px;">
+               <div class="card-body" >
                             <div class="row">
                                 <div class="col-12">
                                     <div class="table-responsive">

@@ -371,7 +371,7 @@
                                                             <option value="">Select Candiate</option>
                                                             @foreach ($data['name'] as $i)
                                                             
-                                                            <option value="{{$i['ID']}}">{{$i['first_name']}}</option>
+                                                            <option value="{{$i['first_name']}}|{{$i['ID']}}">{{$i['first_name']}}</option>
                                                                 @endforeach
                                                         </select>
                                                     </div>

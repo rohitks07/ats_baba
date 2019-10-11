@@ -104,14 +104,8 @@ class Login_Controller extends Controller{
                     );
                     }
                    
-                    // echo"<pre>";
-                    // print_r($session_data);
-                    // exit;
                     Session::put($session_data);
                     Session::put("sessiondata",$session_data);
-    
-                    // session()->forget('one_group_teammember_id');
-                    // return $session_data;
                     return redirect('employer/dashboard');
                 }
                 else
@@ -177,18 +171,10 @@ class Login_Controller extends Controller{
             return redirect('/')->with('alert','Password Reset Successfully'); ;
         }
     }
-    public function session_out()
+    public function logout( Request $request)
     {
-        // session_unset();
-        Session::flush($session_data);
-        Session()->forget('one_group_teammember_id');
-        if(session()->forget($session_data))
-        {
-            return redirect('/');
-        }
-      
-
-       
+        Session::flush();
+        return redirect('/');
     }
    
 }

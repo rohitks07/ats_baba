@@ -177,9 +177,13 @@ textarea[class="form-control"]{
 								                     	 </form>
                                                        <!--   <button type="button" class="btn btn-success" style="float: right;">
 													    <input type="file" value="Import Contact">Import Contact</button> -->
-														@if($toReturn['current_module_permission']['is_add']=="yes")
+													    @if(!empty($toReturn['user_type']=="teammember")) 
+                                                        @if($toReturn['current_module_permission']['is_edit']=="yes")
 													    <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success" style="float: right;margin-right: 1em;">Add Contact</button></a>
 														@endif
+														@else
+                                                        <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success" style="float: right;margin-right: 1em;">Add Contact</button></a>
+                                                        @endif
 													</div>
 													</div>
 													<div class="card-body">
@@ -212,10 +216,20 @@ textarea[class="form-control"]{
 																		<td>{{$contact_object -> company_name}}</td>
 																		<td>{{$contact_object -> designation}}</td>
 																		<td class="actions">
+                                                                             @if(!empty($toReturn['user_type']=="teammember")) 
+        
 																		@if($toReturn['current_module_permission']['is_edit']=="yes")
 																		<a href="{{url('employer/my_posted_contacts/delete/'.$id)}}" data-toggle="modal" data-target="#contact-edit"><i class="fa fa-pencil"></i></a>
 																		@endif
+																		@else
+                                                                        <a href="{{url('employer/my_posted_contacts/delete/'.$id)}}" data-toggle="modal" data-target="#contact-edit"><i class="fa fa-pencil"></i></a>
+
+																		@endif
+                                                                        @if(!empty($toReturn['user_type']=="teammember")) 
 																		@if($toReturn['current_module_permission']['is_delete']=="yes")
+																		<a href="{{url('employer/my_posted_contacts/delete/'.$id)}}"  class="hidden on-editing login-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="delete"><i class="fa fa-trash-o"></i></a>
+																		@endif
+																		@else
 																		<a href="{{url('employer/my_posted_contacts/delete/'.$id)}}"  class="hidden on-editing login-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="delete"><i class="fa fa-trash-o"></i></a>
 																		@endif
 																	</td>  	                                              																								
@@ -237,7 +251,11 @@ textarea[class="form-control"]{
                                                 <div class="card">
                                                     <div class="card-header" style="background-color:#d0d0d0">
                                                         <h3 class="card-title" style="color:#000;text-transform: none; font-size:large">Email List Detail:
+                                                        @if(!empty($toReturn['user_type']=="teammember")) 
 															@if($toReturn['current_module_permission']['is_add']=="yes")
+												 <a href=""><button type="button" class="btn btn-success" style="float: right;">Add an Email List</button></a>
+															@endif
+															@else
 												 <a href=""><button type="button" class="btn btn-success" style="float: right;">Add an Email List</button></a>
 															@endif
                                                     </div>
@@ -272,11 +290,21 @@ textarea[class="form-control"]{
 																	 <td>{{date('d-m-Y',strtotime($email_list->last_updated_date))}}</td>
 																	<td>{{$email_list->last_updated_by}}</td>
 																	<td class="actions">
+                                                                @if(!empty($toReturn['user_type']=="teammember")) 
+
 																	@if($toReturn['current_module_permission']['is_edit']=="yes")
 																	<a href="{{url('employer/my_posted_contacts/del_email/'.$id)}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="delete"><i class="fa fa-trash-o"></i></a>
 																	@endif
+																	@else
+																	<a href="{{url('employer/my_posted_contacts/del_email/'.$id)}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="delete"><i class="fa fa-trash-o"></i></a>
+																	@endif
+                                                                        @if(!empty($toReturn['user_type']=="teammember")) 
 																	@if($toReturn['current_module_permission']['is_delete']=="yes")
 																	<!-- <a href="#" class="hidden on-editing login-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a> -->
+																	@endif
+																	@else
+                                                                <!-- <a href="#" class="hidden on-editing login-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a> -->
+
 																	@endif
 																</td>  	                                              																								
 															  </tr>  
@@ -298,8 +326,14 @@ textarea[class="form-control"]{
                                                 <div class="card">
                                                     <div class="card-header" style="background-color:#d0d0d0">
                                                         <h3 class="card-title" style="color:#000;text-transform: none; font-size:large">Email Contact Details :
+                                                            @if(!empty($toReturn['user_type']=="teammember")) 
+
 															@if($toReturn['current_module_permission']['is_add']=="yes")
                                                        	<a href="{{url('uploadcsv')}}"><button type="button" class="btn btn-success" style="float: right;">Import Email Contact</button></a>
+														<a href="{{url('employer/post_new_email_contact/show')}}"><button type="button" class="btn btn-success" style="float: right; margin-right: 1em;">Add an Email Contact</button></a>
+														@endif
+														@else
+														<a href="{{url('uploadcsv')}}"><button type="button" class="btn btn-success" style="float: right;">Import Email Contact</button></a>
 														<a href="{{url('employer/post_new_email_contact/show')}}"><button type="button" class="btn btn-success" style="float: right; margin-right: 1em;">Add an Email Contact</button></a>
 														@endif
                                                     </div>
@@ -338,11 +372,23 @@ textarea[class="form-control"]{
 																		<!--<td>{{date('d-m-Y', strtotime($emaillist -> last_updated_date))}}</td>-->
 																		<td>{{$emaillist ->  first_name}}</td>
 																		<td class="actions">
+                                                                    @if(!empty($toReturn['user_type']=="teammember")) 
+
 																		@if($toReturn['current_module_permission']['is_edit']=="yes")
 																		<!-- <a href="" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Asign this job"><i class="fa fa-users"></i></a> -->
 																		@endif
+																		@else
+                                            <!-- <a href="" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Asign this job"><i class="fa fa-users"></i></a> -->
+
+																		@endif
+                                                                        @if(!empty($toReturn['user_type']=="teammember")) 
+
 																		@if($toReturn['current_module_permission']['is_delete']=="yes")
 																		<a href="{{url('employer/my_posted_contacts/delete_email/'.$id)}}" class="hidden on-editing login-row" data-toggle="tooltip" data-placement="top" data-original-title="delete"><i class="fa fa-trash-o"></i></a>
+																		@endif
+																		@else
+                                                                        <a href="{{url('employer/my_posted_contacts/delete_email/'.$id)}}" class="hidden on-editing login-row" data-toggle="tooltip" data-placement="top" data-original-title="delete"><i class="fa fa-trash-o"></i></a>
+
 																		@endif
 																		
 																		</td>  	                                              																								
@@ -364,7 +410,6 @@ textarea[class="form-control"]{
 	        	</div>
 	    	</div>
 
-@if($toReturn['current_module_permission']['is_edit']=="yes")
  <!-- /.modal -->
     <div id="#contact-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
             <div class="modal-dialog">
@@ -400,8 +445,7 @@ textarea[class="form-control"]{
                 </div>
             </div>
     </div>
-	@endif
-		
+
 @include('include.emp_footer')
 <script type="text/javascript">
      		 // $("#Upload_cv").css('display','none');

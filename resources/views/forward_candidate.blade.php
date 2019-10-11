@@ -190,7 +190,7 @@
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
                                               <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="phone_primary" checked>
                                               <label class="form-label">Phone(Primary)</label>
-                                                <input type="text" id="phone_primart" placeholder="Phone(Primary)" name="phone_primary" value="{{$toReturn['application_detail']['phone_no_mobile']}}" required>  
+                                                <input type="text" id="phone_primart" placeholder="Phone(Primary)" name="phone_primary" value="{{$toReturn['application_detail']['phone_no_mobile']}}"  maxlength="12" required>  
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
@@ -229,7 +229,7 @@
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" checked>
                                                 <label class="form-label">SSN No.(Last Four Digits)</label>
                                                    
-                                                    <input type="text" onblur="numbval()" max="4" placeholder="SSN No.(Last Four Diogits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title required>
+                                                    <input type="text" onblur="numbval()" maxlenght="4" placeholder="SSN No.(Last Four Diogits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title required>
                                                            
                                                </div><!--end of col-->
 
@@ -485,6 +485,31 @@
                                     </table>   
                                 </div>
                             <hr>
+                            <div align="center">    
+                                        <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required" > &nbsp;&nbsp;&nbsp;Employer Details ? 
+                                        <table class="table" style="display:none;" id="emp_table" cellspacing = "0" style="border: 1Px solid;width: 40%;!important" >
+                                            <thead>
+                                                <tr style="background: #317eeb;">
+                                                    <th colspan= "4">Employer Details</th>
+                                                </tr>
+                                               <tr style="background: #317eeb;">     
+                                                    <th style="border: 1Px solid;">Company Name</th>
+                                                    <th style="border: 1Px solid;"> Email Id</th>
+                                                    <th style="border: 1Px solid;">Employer Name</th>
+                                                    <th style="border: 1Px solid;">Phone Number</th>
+                                                </tr>
+                                            </thead>            
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type ="text" name="Companyemp_detail"/></td>
+                                                    <td><input type ="text" name="Emailemp_detail"/></td>
+                                                    <td><input type ="text" name="Employeremp_detail"/></td>
+                                                    <td><input type ="text" name="Phoneemp_detail"/></td>
+                                                </tr>
+                                            </tbody>
+                                    </table>   
+                                </div>
+                            <hr>
                             <div align="center">        
                                 <input type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="attachment_required" id="attachment_required" value="attachment_required">  &nbsp;&nbsp;&nbsp; Attachment Required ?      
                                     <table class="table" style="display:none;" id="attach_table" cellspacing = "0" style="border: 1Px solid;width: 40%;!important" >
@@ -531,6 +556,20 @@
     </div>
 </div>
 @include('include.emp_footer')
+<script>
+$("#phone_primary").hide();
+function phoneMask() { 
+    var num = $(this).val().replace(/\D/g,''); 
+   if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6)  + '-' + num.substring(6,10))) 
+   {
+
+   }
+   else{
+	$("#phone_primary").show();
+   }
+}
+$('#phone_primart').keyup(phoneMask);
+</script>
 <script type="text/javascript">
 function showTable(checkbox,tableId){
     if($('#'+checkbox).is(":checked"))   

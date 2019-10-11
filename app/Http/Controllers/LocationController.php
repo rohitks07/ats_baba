@@ -10,6 +10,7 @@ use App\Tbl_countries;
 use App\cities;
 use App\countries;
 use App\states;
+
 class LocationController extends Controller
 {
    public function fetchstate($id="")
@@ -29,10 +30,8 @@ class LocationController extends Controller
    
    
    
-   //DINAMIC LOCATION
-   
-              
-   public function get_state($country_id=""){
+  //DINAMIC LOCATION
+  public function get_state($country_id=""){
     $data_state = states::where('country_id', $country_id)->get();
     return response()->json($data_state);
   }
@@ -43,6 +42,5 @@ class LocationController extends Controller
   public function get_city($state_id=""){
     $data_city = cities::where('state_id', $state_id)->get();
     return response()->json($data_city);
-
   }
 }

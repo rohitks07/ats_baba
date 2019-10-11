@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Tbl_job_seekers;
 use App\Tbl_seeker_applied_for_job_doc;
@@ -11,12 +9,15 @@ use App\Tbl_seeker_academic;
 use App\Tbl_seeker_applied_for_job;
 use App\Tbl_countries;
 use App\Tbl_cities;
-
+use App\Tbl_candidate_mail;
 use App\Tbl_visa_type;
 use DB;
 use App\cities;
 use App\countries;
 use App\states;
+use App\tbl_post_job;
+use Session;
+use Mail;
 
 
 class Search_Resume_Controller extends Controller
@@ -266,10 +267,70 @@ public function update_personal_details(Request $request)
 }
 
 //Candidate->Education
-public function show_education($id="")
-{	
-    $education= Tbl_seeker_academic::where('seeker_id',$id)->get();	
-    return view('employer_edit_education')->with('education',$education)->with('id',$id);
+public function view_education($id="")
+{   
+  
+    $educations= Tbl_seeker_academic::where('seeker_id',$id)->get();    
+  
+    return view('employer_edit_education')->with('educations',$educations)->with('id',$id);
 }
+
+    public function insert_education(Request $data)
+    {
+       $id=$data->seeker_ID;    
+        DB::insert('insert into tbl_seeker_academic(seeker_ID,degree_title,institude,city,country,completion_year) values(?,?,?,?,?,?)',[$data->seeker_ID,$data->degree_title,$data->institude,$data->city,$data->country,$data->completion_year]);  
+        return redirect('employer/employer_edit_education/'.$id);    
+    }
+    public function delete_education($id="",$seekerid="")
+    {
+         $del=Tbl_seeker_academic::where('ID',$id)->delete();
+         return redirect('employer/employer_edit_education/'.$seekerid);    
+    }
+
+
+    public function update_education(Request $request,$id="",$seekerid="")
+    {
+        $edu=Tbl_seeker_academic::where('ID',$request->id)->update(array(
+    'degree_title'=>$request->degree_title,
+    'institude'=>$request->institude,
+    'city'=>$request->city,
+    'country'=>$request->country,
+    'completion_year'=>$request->completion_year
+        ));
+        return redirect('employer/employer_edit_education/'.$seekerid);
+    
+    }
+    public function jod_details_mail (Request $request)
+    {
+     $sender_email=Session::get('email');
+        $sender_name=Session::get('full_name');
+        $postmail = new Tbl_candidate_mail();
+        $postmail->candidate_id=$request->candidate_id; 
+        $postmail->mail_to=$request->mail_to;
+        $postmail->mail_from=$sender_email;
+        $postmail->subject=$request->subject;
+        $postmail->job=$request->job;
+        $postmail->comment=$request->comment;
+        $postmail->save();
+        $toemail=$request->mail_to;
+        $formemail=$request->mail_from;
+        $job_id=$request->job;
+        $toReturn['job_post'] = tbl_post_job::where('id',$job_id)->first();
+        $job_detail=$toReturn['job_post'];
+        $mail_content=$request->comment;
+        $mail_subject= $request->subject;
+       
+        $data=array('job_detail'=>$job_detail,'tomail'=>$toemail,'form_mail'=>$formemail ,'mail_content'=>$mail_content,'mail_subject'=>$mail_subject,'sender_email'=>$sender_email,'sender_name'=>$sender_name);
+        // return redirect('employer/search_resume');
+        // return $data[''];
+        Mail::send('emails.job_detail',['data' => $data], function($message) use ($data){
+                $message->to($data['tomail'])
+                        ->subject($data['mail_subject']);
+                        // ->message($data['mail_content']);
+                $message->from($data['sender_email'],$data['sender_name']);
+            });
+            // return view('emails.job_detail')->with('data',$data);
+            return redirect('employer/search_resume');
+    }
 
 }
