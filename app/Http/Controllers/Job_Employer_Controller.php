@@ -1448,13 +1448,10 @@ public function upda($id ="")
          $forward_candidate_documents->created_by=Session::get('id');
          $forward_candidate_documents->modified_by=Session::get('id');
          $forward_candidate_documents->save();
+         $document_array=Tbl_forward_candidate_document::where('forward_candidate_id',$forward_candidate->id)->get('documents')->toArray();
+         $data['document_array']=$document_array;
         }
-       
-        $document_array=Tbl_forward_candidate_document::where('forward_candidate_id',$forward_candidate->id)->get('documents')->toArray();
-    //     }
-    //   if($document_array)
-    //   {
-        $data = array('forward_candidate'=>$forward_candidate, 'experience_list'=>$experience_list, 'reference_list'=>$reference_list,'update_resume'=>$update_resume ,'document_array'=>$document_array);
+        $data = array('forward_candidate'=>$forward_candidate, 'experience_list'=>$experience_list, 'reference_list'=>$reference_list,'update_resume'=>$update_resume );
        }
        else
        {
@@ -1462,40 +1459,38 @@ public function upda($id ="")
        }
         // print_r($data['forward_candidate']['forward_to']);
         // exit;
-        // Mail::send('emails.forward_candidate',['data' => $data], function($message) use ($data){
-        //     $message->to($data['forward_candidate']['forward_to'])
-        //         ->subject($data['forward_candidate']['subject']);
-        //             if($data['forward_candidate']['cc']){
-        //             $message->cc($data['forward_candidate']['cc']);
-        //             }
-        //             if($data['forward_candidate']['bcc']){
-        //             $message->bcc($data['forward_candidate']['bcc']);
-        //             }
-        //             if($data['document_array'])
-        //             {
-        //                 foreach($data['document_array'] as $document)
-        //                 {
-        //                     $document_path="public/forward_document/".$document['documents'];
-        //                     $message->attach($document_path);
-        //                 }
-        //                 if($data['update_resume'])
-        //                 {
-        //                     $path ="public/seekerresume/".$data['update_resume'];  
-        //                     $message->attach($path);
-        //                 }
-        //             }else
-        //             {
-        //         if($data['update_resume'])
-        //         {
-        //         $path ="public/seekerresume/".$data['update_resume'];  
-        //         $message->attach($path);
-        //         }}
-        //     $message->from($data['forward_candidate']['forward_by'],$data['forward_candidate']['sender_fullname']);
-        // });
+        Mail::send('emails.forward_candidate',['data' => $data], function($message) use ($data){
+            $message->to($data['forward_candidate']['forward_to'])
+                ->subject($data['forward_candidate']['subject']);
+                    if($data['forward_candidate']['cc']){
+                    $message->cc($data['forward_candidate']['cc']);
+                    }
+                    if($data['forward_candidate']['bcc']){
+                    $message->bcc($data['forward_candidate']['bcc']);
+                    }
+                    if(@$data['document_array'])
+                    {
+                        foreach($data['document_array'] as $document)
+                        {
+                            $document_path="public/forward_document/".$document['documents'];
+                            $message->attach($document_path);
+                        }
+                        if(@$data['update_resume'])
+                        {
+                            $path ="public/seekerresume/".$data['update_resume'];  
+                            $message->attach($path);
+                        }
+                    }else
+                    {
+                if(@$data['update_resume'])
+                {
+                $path ="public/seekerresume/".$data['update_resume'];  
+                $message->attach($path);
+                }}
+            $message->from($data['forward_candidate']['forward_by'],$data['forward_candidate']['sender_fullname']);
+        });
         return view('emails.forward_candidate')->with('data',$data);
                return redirect('employer/Application');
-        
-    
     }
     public function show_job_note(Request $request){
         $id=$request->id;

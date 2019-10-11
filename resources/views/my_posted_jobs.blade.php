@@ -115,6 +115,7 @@
 															$id=$posted_job['ID'];
 															$last_date=$posted_job['last_date'];
 															$new_last_Date = date("m-d-Y", strtotime($last_date));
+															$closing_date=date('m-d-Y',strtotime($posted_job['dated']));
 															
                                                         	?>
 																<td>{{$posted_job['job_code']}}</td>
@@ -123,7 +124,7 @@
 				                                                <td>{{$posted_job['city']}}, &nbsp;{{$posted_job['state']}}</td>
 				                                                <td>{{$posted_job['vacancies']}}</td>
 				                                                <td>{{$posted_job['job_mode']}}</td>													
-				                                                <td>{{$posted_job['dated']}}</td>
+				                                                <td>{{$closing_date}}</td>
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$new_last_Date}}</td>
 				                                               <td class="actions">

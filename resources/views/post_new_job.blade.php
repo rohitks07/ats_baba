@@ -214,6 +214,7 @@
                                       <option value="H1 Visa">H1 Visa</option>
                                       <option value="TN Visa">TN Visa</option>
                                       <option value="US Citizen">US Citizen</option>
+                                      <option value="H1B">H1B</option>
                                   </select>
                               </div>
                               <!--Visa-->
@@ -263,7 +264,7 @@
 													</select>
 				  
 													<select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-														  <option value="">Select Select</option>
+														  <option value="">Select State</option>
 				  
 													</select>
 													<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">

@@ -446,11 +446,11 @@
 													  @endforeach  
 													  </select>
 													<select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-														  <option value="">Select country first</option>
+														  <option value="">Select State</option>
 													</select>
 													<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
 														<select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
-															  <option value="">Select state first</option>
+															  <option value="">Select City</option>   
 													  </select>
 														<br>
 														<span id="citycheck">Please choose Your Location</span> 
