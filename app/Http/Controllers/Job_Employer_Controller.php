@@ -485,6 +485,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $toReturn = array();
         $source="Internal";
         // $toReturn['personal']=tbl_job_seekers::where('tbl_job_seekers.employer_id',Session::get('user_id'))->get();
+        // return $toReturn['personal'][1];
         $one_group_teammember_employer_id=Session::get('one_group_teammember_id');
 
        if($one_group_teammember_employer_id)
@@ -494,8 +495,8 @@ public function PostjobsAssignToJobSeeker(Request $request)
                                    ->select('tbl_job_seekers.ID as id','tbl_job_seekers.first_name as first','tbl_job_seekers.last_name as last',
                                    'tbl_job_seekers.dob as dob','tbl_job_seekers.city as city','tbl_job_seekers.state as state','tbl_job_seekers.visa_status as visa',
                                    'tbl_job_seekers.email as email','tbl_job_seekers.mobile as mobile','tbl_job_seekers.skype_id as skype_id',
-                                   'tbl_seeker_experience.start_date as seeker_experience_start','tbl_seeker_experience.end_date as seeker_experience_end' ,'tbl_job_seekers.middle_name as middle','tbl_job_seekers.experience as total_experience','tbl_seeker_academic.degree_title as degree')
-                                  ->leftjoin('tbl_seeker_experience','tbl_seeker_experience.seeker_ID', '=' , 'tbl_job_seekers.ID')
+                                   'tbl_job_seekers.middle_name as middle','tbl_job_seekers.experience as total_experience','tbl_seeker_academic.degree_title as degree')
+                                //   ->leftjoin('tbl_seeker_experience','tbl_seeker_experience.seeker_ID', '=' , 'tbl_job_seekers.ID')
                                   ->leftjoin('tbl_seeker_academic','tbl_seeker_academic.seeker_ID', '=' ,'tbl_job_seekers.ID' )
                                   ->whereIn('tbl_job_seekers.created_by',$one_group_teammember_employer_id)
                                     ->orderBy('tbl_job_seekers.ID','asc')
@@ -508,12 +509,13 @@ public function PostjobsAssignToJobSeeker(Request $request)
                                    ->select('tbl_job_seekers.ID as id','tbl_job_seekers.first_name as first','tbl_job_seekers.last_name as last',
                                    'tbl_job_seekers.dob as dob','tbl_job_seekers.city as city','tbl_job_seekers.state as state','tbl_job_seekers.visa_status as visa',
                                    'tbl_job_seekers.email as email','tbl_job_seekers.mobile as mobile','tbl_job_seekers.skype_id as skype_id',
-                                   'tbl_seeker_experience.start_date as seeker_experience_start','tbl_seeker_experience.end_date as seeker_experience_end', 'tbl_job_seekers.middle_name as middle','tbl_job_seekers.experience as total_experience','tbl_seeker_academic.degree_title as degree')
-                                  ->leftjoin('tbl_seeker_experience','tbl_seeker_experience.seeker_ID', '=' , 'tbl_job_seekers.ID')
+                                  'tbl_job_seekers.middle_name as middle','tbl_job_seekers.experience as total_experience','tbl_seeker_academic.degree_title as degree')
+                                //   ->leftjoin('tbl_seeker_experience','tbl_seeker_experience.seeker_ID', '=' , 'tbl_job_seekers.ID')
                                   ->leftjoin('tbl_seeker_academic','tbl_seeker_academic.seeker_ID', '=' ,'tbl_job_seekers.ID' )
                                   ->where('tbl_job_seekers.employer_id',Session::get('user_id'))
                                    ->orderBy('tbl_job_seekers.ID','asc')
                                    ->distinct()
+                                   ->groupBy('degree')
                                   ->paginate(10);
                            
                                }
@@ -1392,19 +1394,20 @@ public function upda($id ="")
             // break;
 
         // }            
-        // }
-         if($Request->Companyemp_detail)
+        if($Request->Companyemp_detail)
         {
-        $emp_details=new tbl_forward_emp_details();
-        $emp_details->forward_candidate_id=$forward_candidate->id;
-        $emp_details->company_name=$Request->Companyemp_detail;
-        $emp_details->email_Id=$Request->Emailemp_detail;
-        $emp_details->phone_number=$Request->Phoneemp_detail;
-        $emp_details->employer_name=$Request->Employeremp_detail;
-        $emp_details->status=1;
-        $emp_details->created_by=Session('user_id');
-        $emp_details->save();
-        }
+            $emp_details=new tbl_forward_emp_details();
+            $emp_details->forward_candidate_id=$forward_candidate->id;
+            $emp_details->company_name=$Request->Companyemp_detail;
+            $emp_details->email_Id=$Request->Emailemp_detail;
+            $emp_details->phone_number=$Request->Phoneemp_detail;
+            $emp_details->employer_name=$Request->Employeremp_detail;
+            $emp_details->status=1;
+            $emp_details->created_by=Session('user_id');
+            $emp_details->save();
+            $data['emp_details']=$emp_details;
+            }
+         
         if($Request->file('document_upload')!="" )
         {
         foreach($Request->file('document_upload') as $key=>$file)
@@ -1422,19 +1425,7 @@ public function upda($id ="")
          $forward_candidate_documents->modified_by=Session::get('id');
          $forward_candidate_documents->save();
         }
-        if($Request->Companyemp_detail)
-        {
-        $emp_details=new tbl_forward_emp_details();
-        $emp_details->forward_candidate_id=$forward_candidate->id;
-        $emp_details->company_name=$Request->Companyemp_detail;
-        $emp_details->email_Id=$Request->Emailemp_detail;
-        $emp_details->phone_number=$Request->Phoneemp_detail;
-        $emp_details->employer_name=$Request->Employeremp_detail;
-        $emp_details->status=1;
-        $emp_details->created_by=Session('user_id');
-        $emp_details->save();
-        $data['emp_details']=$emp_details;
-        }
+       
         $document_array=Tbl_forward_candidate_document::where('forward_candidate_id',$forward_candidate->id)->get('documents')->toArray();
     //     }
     //   if($document_array)

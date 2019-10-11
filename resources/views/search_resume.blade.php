@@ -137,14 +137,14 @@
                                                 <tbody>  
                                                 @foreach($personal as $key => $value)  
 												<?php $id=$personal[$key]->id;
-														$start_date=$personal[$key]->seeker_experience_start;
-														$end_date=$personal[$key]->seeker_experience_end;
-															$datetime1 = strtotime(date('Y-m-d', strtotime($start_date)));
-															 $datetime2 = strtotime(date('Y-m-d', strtotime($end_date)));
-															 $secs = $datetime2 - $datetime1;// == <seconds between the two times>
-															 $days = $secs / 86400;
-															 $exp_month=floor($days/30);
-															 $exp_years=floor($exp_month/12);
+														// $start_date=$personal[$key]->seeker_experience_start;
+														// $end_date=$personal[$key]->seeker_experience_end;
+														// 	$datetime1 = strtotime(date('Y-m-d', strtotime($start_date)));
+														// 	 $datetime2 = strtotime(date('Y-m-d', strtotime($end_date)));
+														// 	 $secs = $datetime2 - $datetime1;// == <seconds between the two times>
+														// 	 $days = $secs / 86400;
+														// 	 $exp_month=floor($days/30);
+														// 	 $exp_years=floor($exp_month/12);
                                                         ?>                                                                                         
 													<tr>										
 														<td>{{$personal[$key]->first}} {{$personal[$key]->last}}</td>
@@ -152,7 +152,6 @@
 														<td>{{$dob}}</td>
 														<td>{{$personal[$key]->city}}, &nbsp;{{$personal[$key]->state}}</td>
 														<td>{{$personal[$key]->visa}}</td>
-														<!--<td>{{$exp_years}}.{{$exp_month}}</td>-->
 														@if($personal[$key]->total_experience)
 														<td>{{$personal[$key]->total_experience}}Years</td>
 														@else
