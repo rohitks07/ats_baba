@@ -59,19 +59,21 @@ class Login_Controller extends Controller{
                     $toReturn=array();
                     $toReturn['team_member']=tbl_team_member::where('ID',Session::get('user_id'))->first();
                     $toReturn['is_team_leader']=tbl_team_member_type::where('team_leader_id',Session::get('user_id'))->first(); 
-                    // return $toReturn['is_team_leader'];
                     if(!empty($toReturn['is_team_leader']))
                     {
                         $list_teammember=tbl_team_member::where('team_member_type',$toReturn['is_team_leader']['type_ID'])->get()->toArray();
-                        
+
                         $toReturn['one_group_teammember_list']['id']=array();
+                        $count=0;
                         foreach($list_teammember as $key=>$value)
                         {
                             $toReturn['one_group_teammember_list']['id'][$key]=$list_teammember[$key]['ID'];
                             $toReturn['one_group_teammember_list']['employer_id'][$key]=$list_teammember[$key]['employer_id'];
                             $toReturn['one_group_teammember_list']['company_id'][$key]=$list_teammember[$key]['company_id'];
                             $toReturn['one_group_teammember_list']['full_name'][$key]=$list_teammember[$key]['full_name'];
+                            $count=$count+1;
                         }
+                        $toReturn['one_group_teammember_list']['id'][$count]=1;
                         $toReturn['user_permission']=Tbl_team_member_permission::where('team_member_id',$user_id)
                         ->leftjoin('tbl_module','tbl_team_member_permission.permission_value','=','tbl_module.module_id')
                         ->get()->toArray();
@@ -103,7 +105,7 @@ class Login_Controller extends Controller{
                         'user_permission'=>$toReturn['user_permission']
                     );
                     }
-                   
+                //    return $session_data;
                     Session::put($session_data);
                     Session::put("sessiondata",$session_data);
                     return redirect('employer/dashboard');

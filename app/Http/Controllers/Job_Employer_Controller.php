@@ -487,7 +487,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         // $toReturn['personal']=tbl_job_seekers::where('tbl_job_seekers.employer_id',Session::get('user_id'))->get();
         // return $toReturn['personal'][1];
         $one_group_teammember_employer_id=Session::get('one_group_teammember_id');
-
+        // return $one_group_teammember_employer_id;
        if($one_group_teammember_employer_id)
                                {
                                    $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by',$one_group_teammember_employer_id)->paginate(10);
@@ -605,6 +605,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
     
     public function post_new_candidate(Request $request)
     {
+       
         $con=$request->country;
         $sta=$request->state;
         $cit=$request->city;
@@ -670,6 +671,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $postcandidate->experience=$request->total_experience;
         $postcandidate->save();
         $id=$postcandidate->id;
+       
         // educational insert
         $degree = $request->degree;   
            foreach($degree as $key => $value) {
@@ -677,7 +679,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
                {
             $seeker_academic = new Tbl_seeker_academic();
             $seeker_academic->seeker_ID	=$id;
-            $seeker_academic->degree_title    = $degree[$key];
+            $seeker_academic->degree_title   = $degree[$key];
             $seeker_academic->major           = $request->major_subject[$key];
             $seeker_academic->institude       = $request->institute[$key];
             $seeker_academic->city            = $request->edu_city[$key];
@@ -686,8 +688,8 @@ public function PostjobsAssignToJobSeeker(Request $request)
             // $seeker_academic->dated=data('Y-m-d');               
             $seeker_academic->save();
             }
-
-        }
+            // return $seeker_academic->id;
+            }
 
         //experiance  start
         $job_title_experience = $request->job_title;              
@@ -704,7 +706,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
             $seeker_exprience->end_date     = $request->end_date[$key];
             $seeker_exprience->save(); 
             } 
-        }
+            }
         //   experiance end
 
 
@@ -713,8 +715,9 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $seeker_skill_name->seeker_ID=$id;
         $seeker_skill_name->skill_name = $request->skill;
         $seeker_skill_name->save();
+        // return $seeker_skill_name->id;
         return redirect('employer/search_resume');
-    }
+     }
     
     // function uploaded_resume(Request $request)
     //   {

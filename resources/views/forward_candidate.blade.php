@@ -504,8 +504,10 @@
                                                     <td><input type ="text" name="Companyemp_detail"/></td>
                                                     <td><input type ="text" name="Emailemp_detail"/></td>
                                                     <td><input type ="text" name="Employeremp_detail"/></td>
-                                                    <td><input type ="text" name="Phoneemp_detail"/></td>
+                                                    <td><input type ="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="phoneMask();" maxlength="12"></td>
+</td> 
                                                 </tr>
+                                                <p id="phone_mess" style="color:red;display:none;" > Please Enter Only Number</p>
                                             </tbody>
                                     </table>   
                                 </div>
@@ -557,6 +559,38 @@
 </div>
 @include('include.emp_footer')
 <script>
+// $("#phone_primary").hide();
+// function phoneMask() { 
+//     var num = $(this).val().replace(/\D/g,''); 
+//    if($(this).val(num.substring(0,3)+ '-' + num.substring(3,6)  + '-' + num.substring(6,10))) 
+//    {
+
+//    }
+//    else{
+// 	$("#phone_mess").show();
+//    }
+// }
+// $('#phone_primart').keyup(phoneMask);
+function chekphone_no()
+{
+    // var phone_no=$('#Phoneemp_detail').val();
+    // if(!phone_no.match(/^\d+/))
+    //     {
+    //     // alert("Please only enter numeric characters only for your Age! (Allowed input:0-9)")
+         
+   
+    //     }
+    //     else
+    //     {
+    //         var phone_no = $('#Phoneemp_detail').val().replace(/\D/g,'');
+    //     $('#Phoneemp_detail').val(phone_no.substring(0,3)+ '-' + num.substring(3,6)  + '-' + num.substring(6,10)) 
+    //     $('#phone_mess').css('display','block');
+    //         $('#phone_mess').hide();
+    //     }
+       
+  
+    
+}
 $("#phone_primary").hide();
 function phoneMask() { 
     var num = $(this).val().replace(/\D/g,''); 
