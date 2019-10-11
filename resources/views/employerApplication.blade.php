@@ -104,7 +104,9 @@
                                                     <tr>   
                                                     <?php $id=$application['application_id'];
                                                     $job_id=$application['ID'];
-                                                    $seeker_id=$application['seeker_id']
+                                                    $seeker_id=$application['seeker_id'];
+                                                    $date_application=$application['applied_date'];
+                                                    $new_date = date("m-d-Y", strtotime($date_application));
                                                     ?>  
                                                                                       
                                                         <td>{{$application['job_code']}}</td>
@@ -116,7 +118,7 @@
                                                         <td>{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
                                                         <td>{{$application['can_location']}}</td>
                                                         <td>{{$application['can_visa']}}</td>
-                                                        <td>{{$application['applied_date']}}</td>
+                                                        <td>{{$new_date}}</td>
                                                         <td>
                                                         <a data-toggle="modal" data-target="#interviewModal{{$application['seeker_id']}}"><i class="fa fa-clock-o" aria-hidden="true" title="Schedule Interview"></i></a>
                                                         <!-- <a class="hidden on-editing login-row" data-toggle="interviewModal" data-target="#interviewModal" data-placement="top" title="" data-original-title="Schedule  interview"><i class="fa fa-time">u r</i></a> -->
