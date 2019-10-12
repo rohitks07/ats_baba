@@ -194,7 +194,6 @@ class Job_Employer_Controller extends Controller
     public function Add_to_post_job(Request $request)
     {                
         
-        
             // $Add_group = new tbl_team_member_type();
             $Add_to_post_job = new tbl_post_jobs(); 
             // $Add_job_industries =new tbl_job_industries();
@@ -219,18 +218,24 @@ class Job_Employer_Controller extends Controller
             
              $con =  $request->country;
              $sta=  $request->state;
-             $cit=  $request->city;
-    
-             $val_contries      =countries::where('country_id',$con)->first('country_name')->toArray();
-    
-             $val_state          =states::where('state_id',$sta)->first('state_name')->toArray();
-             
-             $val_city          =cities::where('city_id',$cit)->first('city_name')->toArray();
+             $cit=  $request->city_name;
+             $city_text=$request->city_text_name;
             
-             
+             $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
+    
+             $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
+             if($city_text)
+             {
+                $Add_to_post_job->city    = $city_text;
+             }
+             else{
+                $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
+                $Add_to_post_job->city=$val_city['city_name'];
+             } 
+            
              $Add_to_post_job->country = $val_contries['country_name'];
              $Add_to_post_job->state   = $val_state['state_name'];
-             $Add_to_post_job->city    = $val_city['city_name'];
+            
             
             
             
@@ -241,13 +246,13 @@ class Job_Employer_Controller extends Controller
             if($select_payment=='DOE')
             {
                 $Add_to_post_job ->pay_min       =  $select_payment;
-                $Add_to_post_job ->	pay_max      =  $select_payment;
+                $Add_to_post_job ->pay_max      =  $select_payment;
             }else{
             $payment_array=explode('-',$select_payment);
             $Add_to_post_job ->pay_min        =  $payment_array[0];
             $Add_to_post_job ->pay_max      =  $payment_array[1];
-            $Add_to_post_job ->	max_pay_rate        =  $payment_array[0];
-            $Add_to_post_job ->	pay_rate_umo        =  $payment_array[1];
+            $Add_to_post_job ->max_pay_rate        =  $payment_array[0];
+            $Add_to_post_job ->pay_rate_umo        =  $payment_array[1];
             }
             // $payment_array=explode('-',$select_payment);
             // $Add_to_post_job ->pay_min        =  $payment_array[0];
@@ -269,10 +274,10 @@ class Job_Employer_Controller extends Controller
             $Add_to_post_job->save();
             //Add Notiofication
             // $notification=new Tbl_notification();
-     
+            // Session::flash('danger','Job Edited Successfully');
+            Session::flash('success','Job Post Successfully');
         return redirect('employer/posted_jobs');
     }
-    
     
     public function editjob($id="")
     {
@@ -303,10 +308,18 @@ class Job_Employer_Controller extends Controller
         // return $Request;
         $con =  $Request->country;
         $sta=  $Request->state;
-        $cit=  $Request->city;
+        $cit=  $Request->city_name;
+        $city_text=  $Request->city_text_name;
         $val_contries=countries::where('country_id',$con)->orWhere('country_name',$con)->first('country_name');
-        $val_state=states::where('state_id',$sta)->orWhere('state_name',$sta)->first('state_name'); 
-        $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
+        $val_state=states::where('state_id',$sta)->orWhere('state_name',$sta)->first('state_name');
+        if($city_text)
+             {
+                $val_city['city_name']=$city_text;
+             }
+             else{
+                $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
+             } 
+      
         $id=$Request->id;
         $job_detail=array(
         'client_name'=>$Request->company_name,
@@ -367,6 +380,7 @@ class Job_Employer_Controller extends Controller
         
     return redirect('employer/posted_jobs');
     }
+
     
     public function view_my_posted_job()
 {
