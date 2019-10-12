@@ -3,52 +3,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
-use Session; 
-use App\Tbl_cities;
-use App\Tbl_countries;
-use App\Tbl_email_list;
-use App\Tbl_email_list_contacts;
-use App\tbl_job_industries;
-use App\Tbl_job_post_assign;
+use Session;
 use App\Tbl_job_seekers;
-use App\tbl_meeting;
-use App\Tbl_post_contacts;
 use App\tbl_post_job;
 use App\tbl_post_jobs;
-use App\tbl_schedule_interview;
-use App\Tbl_seeker_academic;
-use App\Tbl_seeker_applied_for_job;
-use App\Tbl_seeker_applied_for_job_doc;
-use App\Tbl_seeker_experience;
-use App\Tbl_seeker_skills;
-use App\tbl_team_member;
-use App\Tbl_team_member_type;
-use App\tbl_interview_add;
-use App\Tbl_visa_type;
-use App\Tbl_state; 
-use App\Tbl_qualifications;
-use App\Tbl_notification;
-use App\Tbl_team_member_permission;
 use App\Tbl_forward_candidate;
-use App\Tbl_forward_candidate_reference;
-use App\Tbl_forward_candidate_exp_required;
-use App\Tbl_forward_candidate_document;
-use App\Tbl_module;
-use App\Tbl_degree;
-use App\Tbl_jobs_notes;
-use Mail;
-use App\user;
-use Validator;
-use App\cities;
-use App\countries;
-use App\states;
-use App\tbl_candidate_notes;
-use App\Tbl_job_mail;
-use App\tbl_forward_emp_details;
-
-
-
-
+use App\Tbl_seeker_applied_for_job;
 
 class Report_Controller extends Controller
 {
