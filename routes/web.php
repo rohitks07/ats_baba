@@ -403,4 +403,9 @@ Route::get('employer/employer_edit_education/{id}/','Search_Resume_Controller@vi
  Route::post('employer/posted_jobs/email_add','Job_Employer_Controller@add_new_job_email');
  
  Route::get('employer/report','Report_Controller@repost_show');
+ Route::post('employer/report/daily','Report_Controller@search_daily');
+ Route::post('employer/report/weekly','Report_Controller@search_weekly');
+ Route::post('employer/report/month','Report_Controller@search_monthly');
+
+
  
