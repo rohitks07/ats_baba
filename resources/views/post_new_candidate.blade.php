@@ -184,6 +184,7 @@
 										<label for="" class="control-label col-lg-4">Middle Name </label>
 											<div class="col-lg-8">
 												<input type="text" id="middle_name" name="middle_name" placeholder="Middle Name">
+												<span id="middle_namecheck">Not valid Middle Name</span>
 											</div>
 									  </div>
 								<!--end of Middle Name-->
@@ -202,8 +203,8 @@
 									 	<div class="form-group row">
 										  <label for="" class="control-label col-lg-4">Date of Birth<span style="color:red;"></span></label>
     											<div class="col-lg-8">
-    												<input type="date" id="notvalidate" name="dob" placeholder="Last Name" style="width:83%; padding:0.5em;" ><br>
-    												 <span id="dobcheck" >Select a Date Of Birth</span>
+    												<input type="date" id="date_of_birth" name="dob" maxlength="10" placeholder="date of Birth" style="width:83%; padding:0.5em;" ><br>
+    												 <span id="dobcheck" >Select a valid Date Of Birth</span>
 										        </div>
  
 									    </div>
@@ -406,6 +407,7 @@
 										<label for="" class="control-label col-lg-4">Social Security No</label>
 											<div class="col-lg-8">
 												<input type="text" name="ssn" id="ssn" autocomplete="off" placeholder="000-00-0000"  maxlength="9">
+												<span id="ssncheck">Please Enter valid Social Security Number</span>
 											</div>
 									  </div>
 								<!--end of Social Security No-->
@@ -426,7 +428,7 @@
 										<label class="col-sm-4 control-label">Total It Experience <span style="color:red;">*</span></label>
 											<div class="col-sm-8">
                                             <input type="text" id="Experience" placeholder="Total It Experience" name="total_experience" maxlength="10"  required>
-												<!--<span id="Experiencecheck">Plz Insert It Experience </span>-->
+											<span id="Experiencecheck">Please Enter Valid Experience Details </span>
 										   </div>
 									</div>
 								<!--end of Visa-->
@@ -497,7 +499,7 @@
 											<div class="col-lg-8">
 												<input type="file" class="form-control" name="cv_file" id="cv_file"  style="background:#fff;" required>
 												  <p>Upload files only in .doc, .docx or .pdf format with maximum size of 32 MB.</p>
-												  <!--<span id="resume_check">Please Choose a Valid File</span>-->
+												  <span id="resume_check">Please Choose a Valid File</span>
 											</div>
 								    </div>								
 								<!--end of Select File-->	
@@ -1064,7 +1066,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#btnAdd_Exp').click(function(){
         i++;				
-            var data2=`<div class="form-group row delete_exp">													
+            var data2=`<div class="form-group row delete_exp">											
 						    <input type="text" name="job_title[]" class="form-control" placeholder="Job Title" style="width: 14%;">
 							<input type="text" name="company_name[]" class="form-control" placeholder="Company Name" style="width: 17%;">
 							<input type="text" name="exp_city[]" class="form-control" placeholder="City" style="width: 14%;">
@@ -1103,16 +1105,21 @@ $(function() {
 			$(document).ready(function()
 			{
 				$("#first_namecheck").hide();
+				$("#middle_namecheck").hide();
 				$("#last_namecheck").hide();
 				$("#dobcheck").hide();
 				$("#emailcheck").hide();
+				$("#ssncheck").hide();
 				$("#visacheck").hide();
+				$("#Experiencecheck").hide();
 				$("#citycheck").hide();
 				var err_firstname=true;
 				var err_lastname=true;
 				var err_dob=true;
 				var err_email=true;
+				var err_ssn=true;
 				var err_visa=true;
+				var err_Experience=true;
 				var err_city=true;
 				//validate first name
 				$("#validatefrm").click(function()
@@ -1122,11 +1129,9 @@ $(function() {
 				function check_firstname()
 				{
 					var firstname_val=$("#first_name").val();
-					
-					var patt1 = /\b[0-9]/;
-					 var result = firstname_val.search(patt1);
-					if((firstname_val=="")||(result==0))
-					{
+
+					var regexOnlyText = /^[a-zA-Z]+$/;
+					if (firstname_val==""||regexOnlyText.test(firstname_val) != true){
 						$("#first_namecheck").show();
 						$("#first_namecheck").focus();
 						$("#first_namecheck").css("color","red");
@@ -1138,6 +1143,51 @@ $(function() {
 						$("#first_namecheck").hide();
 					}
 					
+					// var patt1 = /\b[0-9]/;
+					// var result = firstname_val.search(patt1);
+					// if((firstname_val=="")||(result==0))
+					// {
+					// 	$("#first_namecheck").show();
+					// 	$("#first_namecheck").focus();
+					// 	$("#first_namecheck").css("color","red");
+					// 	err_firstname=false;
+					// 	return false;
+					// }
+					// else
+					// {
+					// 	$("#first_namecheck").hide();
+					// }
+					
+				}
+				//validate middle name
+				$("#validatefrm").click(function()
+				{
+					check_middlename();
+				});
+				function check_middlename()
+				{
+					var middlename_val=$("#middle_name").val();
+
+					var regexOnlyText = /^[a-zA-Z]+$/;
+					if(middlename_val!="")
+					{	
+						if (regexOnlyText.test(middlename_val) != true){
+							$("#middle_namecheck").show();
+							$("#middle_namecheck").focus();
+							$("#middle_namecheck").css("color","red");
+							err_middlename=false;
+							return false;
+						}
+						else
+						{
+							$("#middle_namecheck").hide();
+						}
+					}
+					else
+					{
+						$("#middle_namecheck").hide();
+					}
+					
 				}
 				//Validation last name
 				$("#validatefrm").click(function()
@@ -1147,11 +1197,9 @@ $(function() {
 				function check_lastname()
 				{
 					var lastname_val=$("#last_name").val();
-					
-					var patt1 = /\b[0-9]/;
-					 var result = lastname_val.search(patt1);
-					if((lastname_val=="")||(result==0))
-					{
+
+					var regexOnlyText = /^[a-zA-Z]+$/;
+					if (lastname_val==""||regexOnlyText.test(lastname_val) != true){
 						$("#last_namecheck").show();
 						$("#last_namecheck").focus();
 						$("#last_namecheck").css("color","red");
@@ -1163,6 +1211,21 @@ $(function() {
 						$("#last_namecheck").hide();
 					}
 					
+					// var patt1 = /\b[0-9]/;
+					// var result = lastname_val.search(patt1);
+					// if((lastname_val=="")||(result==0))
+					// {
+					// 	$("#last_namecheck").show();
+					// 	$("#last_namecheck").focus();
+					// 	$("#last_namecheck").css("color","red");
+					// 	err_lastname=false;
+					// 	return false;
+					// }
+					// else
+					// {
+					// 	$("#last_namecheck").hide();
+					// }
+					
 				}
 				//validate date of birth
 				$("#validatefrm").click(function()
@@ -1171,10 +1234,22 @@ $(function() {
 				});
 				function check_dob()
 				{
-					var dob_val_day=$("#dob_day").val();
-					var dob_val_month=$("#dob_month").val();
-					var dob_val_year=$("#dob_year").val();
-					if((dob_val_day=="")||(dob_val_month=="")||(dob_val_year==""))
+					var date_of_birth= $("#date_of_birth").val();
+					var dob_var = new Date(date_of_birth);
+
+					var dob_val_day = dob_var.getDate();
+					var dob_val_month = dob_var.getMonth() + 1;
+					var dob_val_year = dob_var.getFullYear();
+
+					if(!dob_val_day || !dob_val_month || !dob_val_year)
+					{
+						$("#dobcheck").show();
+						$("#dobcheck").focus();
+						$("#dobcheck").css("color","red");
+						err_dob=false;
+						return false;
+					}
+					else if(dob_val_day > 31 || dob_val_month > 11 || dob_val_year > new Date().getFullYear())
 					{
 						$("#dobcheck").show();
 						$("#dobcheck").focus();
@@ -1186,6 +1261,7 @@ $(function() {
 					{
 						$("#dobcheck").hide();
 					}
+
 				}
 				//validate email
 				$("#validatefrm").click(function()
@@ -1211,7 +1287,35 @@ $(function() {
 						$("#emailcheck").hide();
 					}
 				}
-				
+				// validate Social Security Number (SSN)
+				$("#validatefrm").click(function()
+				{
+					check_ssn();
+				});
+				function check_ssn()
+				{
+					var ssn_val=$("#ssn").val();
+
+					var regexOnlyNumbers = /^[0-9\-]+$/;
+					if(ssn_val!="")
+					{
+						if (regexOnlyNumbers.test(ssn_val) != true){
+							$("#ssncheck").show();
+							$("#ssncheck").focus();
+							$("#ssncheck").css("color","red");
+							err_ssn=false;
+							return false;
+						}
+						else
+						{
+							$("#ssncheck").hide();
+						}
+					}
+					else
+					{
+						$("#ssncheck").hide();
+					}
+				}
 				
 				
 				//validate Visa
@@ -1235,7 +1339,28 @@ $(function() {
 						$("#visacheck").hide();
 					}
 				}
-				
+				//Validation Experience
+				$("#validatefrm").click(function()
+				{
+					check_Experience();
+				});
+				function check_Experience()
+				{
+					var Experience_val=$("#Experience").val();
+
+					var regexOnlyNumbers = /^[0-9]+$/;
+					if (Experience_val==""||regexOnlyNumbers.test(Experience_val) != true){
+						$("#Experiencecheck").show();
+						$("#Experiencecheck").focus();
+						$("#Experiencecheck").css("color","red");
+						err_Experience=false;
+						return false;
+					}
+					else
+					{
+						$("#Experiencecheck").hide();
+					}
+				}
 				//Validation Location
 				$("#validatefrm").click(function()
 				{
@@ -1337,6 +1462,46 @@ $(function() {
 						return false;
 					}
 				});
+				function check_mb_phone(){
+					var var_mobile_number=$("#mobile_number").val();
+
+					var regexOnlyNumbers = /^[0-9-]+$/;
+					if (var_mobile_number.length != 12||regexOnlyNumbers.test(var_mobile_number) != true){
+						$("#mob_ph_check").show();
+						$("#mob_ph_check").focus();
+						$("#mob_ph_check").css("color","red");
+						err_mob_ph=false;
+						return false;
+					}
+					else
+					{
+						$("#mob_ph_check").hide();
+					}
+				}
+				function check_hm_phone(){
+					var var_homephone_number=$("#phone").val();
+
+					var regexOnlyNumbers = /^[0-9-]+$/;
+					if(var_homephone_number.length>2)
+					{
+						if (var_homephone_number.length != 12||regexOnlyNumbers.test(var_homephone_number) != true){
+							$("#home_ph_check").show();
+							$("#home_ph_check").focus();
+							$("#home_ph_check").css("color","red");
+							err_home_ph=false;
+							return false;
+						}
+						else
+						{
+							$("#home_ph_check").hide();
+						}
+					}
+					else
+					{
+						$("#home_ph_check").hide();
+						$("#phone").val("")
+					}
+				}
 			});
 			</script>
 
