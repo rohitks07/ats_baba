@@ -184,7 +184,7 @@
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                               <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="fullname" checked>
                                                 <label class="form-label">Full Name </label>
-                                                 <input type="text" id="fullname" placeholder="Full Name " name="fullname" value="{{$toReturn['application_detail']['candate_name']}}" required>   
+                                                <input style="display:block;" type="text" id="fullname" placeholder="Full Name" name="fullname" value="{{$toReturn['application_detail']['candate_name']}}" required>   
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
@@ -209,12 +209,12 @@
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                              <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="current_location" checked >
                                              <label class="form-label">Current Location(City,State)</label>
-                                                <input type="text" id="" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>      
+                                                <input type="text" id="current_location" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>      
                                             </div><!--end of col-->
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                              <input class="form-check-input chkbx" type="checkbox" name="param[]" value="us_visa_status" checked >
                                              <label class="form-label">US Visa Status</label>  
-                                                 <input type="text"  placeholder=" US Visa Status " name="us_visa_status" value="{{$toReturn['application_detail']['visa_status']}}" required>   
+                                                 <input type="text" id="us_visa_status" placeholder=" US Visa Status " name="us_visa_status" value="{{$toReturn['application_detail']['visa_status']}}" required>   
                                             </div><!--end of col-->
                                         
                                         
@@ -242,20 +242,20 @@
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                               <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="dob" checked >
                                               <label class="form-label">D O B</label>
-                                              <input type="date" placeholder="Date Of Birth" name="dob" required/>
+                                              <input type="date" id="dob" placeholder="Date Of Birth" name="dob" required/>
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                              <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
                                              <label class="form-label">Qualification With University Name and Passing Year(Bachelors)</label>
-                                                <input type="text" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni"  required/>   
+                                                <input type="text" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni"  required/>   
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="Open_For_Relocation" checked>
                                                 <label class="form-label">Open For Relocation(Yes/No)</label>
                                                 <!--<input type="text" placeholder="Open For Relocation(Y/N)" name="Open_For_Relocation" required/>-->
-                                                <select placeholder="Open For Relocation(Yes/No)" name="Open_For_Relocation" >
+                                                <select placeholder="Open For Relocation(Yes/No)" id="open_for_relocation" name="Open_For_Relocation" >
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
@@ -265,7 +265,7 @@
                                               <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_tele" checked>
                                               <label class="form-label">Availability For Telephone Interview(Yes/No)</label>
                                                 <!--<input type="text"  placeholder="Availability For Telephone Interview(Y/N)" name="availa_for_tele"  required/>     -->
-                                                <select placeholder="Availability For Telephone Interview(Yes/No)" name="availa_for_tele">
+                                                <select placeholder="Availability For Telephone Interview(Yes/No)" id="availa_for_tele" name="availa_for_tele">
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
@@ -275,7 +275,7 @@
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_per" checked>
                                                 <label class="form-label">Availability For In-Person Interview(Yes/No)</label>
                                                 <!--<input type="text"  placeholder="Availability For In-Person Interview(Y/N)" name="availa_for_per"  required />-->
-                                                <select  placeholder="Availability For In-Person Interview(Yes/No)" name="availa_for_per">
+                                                <select  placeholder="Availability For In-Person Interview(Yes/No)" id="availa_for_per" name="availa_for_per">
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
@@ -285,7 +285,7 @@
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_new" checked> 
                                                 <label class="form-label">Availability For New Project(Yes/No) </label>
                                                 <!--<input type="text"  placeholder="Availability For New Project(Y/N)" name="availa_for_new" required />-->
-                                                <select  placeholder="Availability For New Project(Yes/No)" name="availa_for_new">
+                                                <select  placeholder="Availability For New Project(Yes/No)" id="availa_for_new" name="availa_for_new">
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
@@ -545,7 +545,7 @@
                                                 </table>   
                                             </div>
                                         <hr>
-                                   <center><button type="submit" class="btn btn-info">Send</button></center>
+                                   <center><button type="submit" class="btn btn-info" id="send">Send</button></center>
                                 </div> <!-- .form -->
                             </div> <!-- card-body -->
                         </div> <!-- card -->
@@ -721,4 +721,138 @@ function rate() {
 $("#delete_doc").click(function(e) {
     $("#update_resume").css("display", "none");
 });
+</script>
+
+
+<script>
+    $(document).ready(function(){
+        var err_fullname=true;
+        var err_phone_primart=true;
+        var err_condidate_email_id=true;
+        var err_skypeid=true;
+        var err_current_location=true;
+        var err_us_visa_status=true;
+        var err_visaexpiry=true;
+        var err_last_for_digit_ssn=true;
+        var err_passportno=true;
+        var err_dob=true;
+        var err_qual_with_uni=true;
+        var err_open_for_relocation=true;
+        var err_availa_for_tele=true;
+        var err_availa_for_per=true;
+        var err_availa_for_new=true;
+        var err_linkedinid=true;
+        var err_expectedrate=true;
+
+        //validate full name
+        $("#fullname").blur(function()
+        {
+            check_fullname();
+        });
+        function check_fullname()
+        {
+            var fullname_val=$("#fullname").val();
+
+            var regexOnlyText = /^[a-zA-Z]+$/;
+            if (fullname_val==""||regexOnlyText.test(fullname_val) != true){
+                $("#fullname_error").show();
+                $("#fullname_error").focus();
+                $("#fullname_error").css("color","red");
+                err_fullname=false;
+                return false;
+            }
+            else
+            {
+                err_fullname=true;
+                $("#fullname_error").hide();
+            }
+            
+        }
+        // validate phone_primart
+        $("#phone_primart").blur(function()
+        {
+            check_phone_primart();
+        });
+        function check_phone_primart(){
+            var var_mobile_number=$("#phone_primart").val();
+
+            var regexOnlyNumbers = /^[0-9-]+$/;
+            if (var_mobile_number.length != 12||regexOnlyNumbers.test(var_mobile_number) != true){
+                $("#phone_primart_error").show();
+                $("#phone_primart_error").focus();
+                $("#phone_primart_error").css("color","red");
+                err_phone_primart=false;
+                return false;
+            }
+            else
+            {
+                err_phone_primart=true;
+                $("#phone_primart_error").hide();
+            }
+        }
+        //validate email
+        $("#condidate_email_id").blur(function()
+        {
+            check_condidate_email_id();
+        });
+        function check_condidate_email_id()
+        {
+            var email_val=$("#condidate_email_id").val();
+            var v=/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            var result = email_val.match(v);
+            if((email_val.length == "")||(result == null))
+            {
+                $("#condidate_email_id_error").show();
+                $("#condidate_email_id_error").focus();
+                $("#condidate_email_id_error").css("color","red");
+                err_condidate_email_id=false;
+                return false;
+            }
+            else
+            {
+                err_condidate_email_id=true;
+                $("#condidate_email_id_error").hide();
+            }
+        }
+
+
+
+
+        // final submission
+        $("#send").click(function()
+        {
+            // when submit button clicked, validate
+            check_fullname();
+            check_phone_primart();
+            check_condidate_email_id();
+            check_skypeid();
+            check_current_location();
+            check_us_visa_status();
+            check_visaexpiry();
+            check_last_for_digit_ssn();
+            check_passportno();
+            check_dob();
+            check_qual_with_uni();
+            check_open_for_relocation();
+            check_availa_for_tele();
+            check_availa_for_per();
+            check_availa_for_new();
+            check_linkedinid();
+            check_expectedrate();
+
+
+
+            // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
+            // if((err_firstname==true)&&(err_middlename==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_ssn==true)&&(err_visa==true)&&(err_Experience==true)&&(err_city==true)&&(err_mob_ph==true)&&(err_home_ph==true)&&(err_resume==true))
+            // {
+            //     return true;
+            // }
+            // else
+            // {
+            //     return false;
+            // }
+
+            return false;
+        });
+    });
 </script>
