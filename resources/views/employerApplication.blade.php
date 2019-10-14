@@ -69,10 +69,12 @@
                    <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header" style="background-color: #317eeb;padding: 2px 20px;">
+                                <div class="card-header" style="background-color: #317eeb;padding: 2px 20px;height:70px;" >
+                            <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;margin-top:15px;">
+
                                 </div>
 
-                            <div class="card-body">
+                            <div class="card-body" >
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-12">
                                             <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" >
@@ -98,7 +100,7 @@
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody> 
+                                                <tbody id="myTable"> 
 
                                                     @foreach($toReturn['application'] as $application)
                                                     <tr>   
@@ -208,6 +210,14 @@
     @include('include.emp_footer')
 
 <script >
+    $(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
     $('#edit_modal_Category').on('show.bs.modal' , function (event){
 
         var button = $(event.relatedTarget)
