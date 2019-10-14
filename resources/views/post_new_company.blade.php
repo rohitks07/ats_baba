@@ -121,7 +121,9 @@ input[type=text],
 										<div class="form-group row">
 											<label for="address" class="control-label col-lg-4">HQ Location<span style="color:red;">*</span> </label>
 											<select name="country_name" id="country" class="form-control" onChange="grab_cities_by_country(this.value);" style="width:11%; border: 1px solid #737373; margin-left: 9px;background:#fff;" required>
-												<option value="" selected>Select Country</option>
+												<option value="United States" selected>United States</option>
+
+												{{-- <option value="" selected>Select Country</option> --}}
 												@foreach($toReturn['countries'] as $countries)
 												<option value="Afghanistan" >{{$countries['country_name']}}</option>
 												@endforeach

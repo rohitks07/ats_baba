@@ -104,7 +104,11 @@
 															<th>Type</th>
 			                                                <th>Publish Date</th>
 															<th>Status</th>                                                    
-			                                                <th>Closing Date</th>
+															<th>Closing Date</th>
+															{{-- @if(!empty($toReturn['user_type']=="employer")) --}}
+
+															<th><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
+															{{-- @endif --}}
 															<th>Actions</th>     													
 			                                            </tr>
 			                                        </thead>
@@ -116,6 +120,10 @@
 															$last_date=$posted_job['last_date'];
 															$new_last_Date = date("m-d-Y", strtotime($last_date));
 															$closing_date=date('m-d-Y',strtotime($posted_job['dated']));
+
+															$application= count(DB::table('tbl_seeker_applied_for_job')->where('job_ID',$id)->get());
+															$client_submittal=count(DB::table('tbl_forward_candidate')->where('job_ID',$id)->get());
+															$assignee=count(DB::table('tbl_job_post_assign')->where('job_post_id',$id)->get());
 															
                                                         	?>
 																<td>{{$posted_job['job_code']}}</td>
@@ -127,6 +135,10 @@
 				                                                <td>{{$closing_date}}</td>
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$new_last_Date}}</td>
+																{{-- @if(!empty($toReturn['user_type']=="employer")) --}}
+                                                                 <td><button type="button" class="btn btn-primary btn-sm">{{$assignee}}</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">{{$application}}</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">{{$client_submittal}}</button></td>
+																{{-- @endif --}}
+
 				                                               <td class="actions">
 																@if(!empty($toReturn['user_type']=="teammember"))
 																@if($toReturn['current_module_permission']['is_edit']=="yes")
@@ -408,29 +420,29 @@
 					success: function (data) {
 						console.log(data);
 						
-						
-						
-						$('#append_view'+id).append("<table class='table table-striped'  >");
-						$('#append_view'+id).append("<thead>");
-						$('#append_view'+id).append("<tr>");
-						$('#append_view'+id).append("<th>Job _ID</th>");
-						$('#append_view'+id).append("<th>Title</th>");
-						$('#append_view'+id).append("<th>Note</th>");
-						$('#append_view'+id).append("<th>Created By</th>");
-						$('#append_view'+id).append("<th>Status</th>");
-						$('#append_view'+id).append("<th>Privacy</th>");
-						$('#append_view'+id).append("</tr>");
-						$('#append_view'+id).append("</thead>");
-						$('#append_view'+id).append("<tbody>");
+						var value_one=`<table class='table table-striped'>
+										<thead>
+											<tr>
+											<th>Job _ID</th>
+											<th>Title</th>
+											<th>Note</th>
+											<th>Created By</th>
+											<th>Status</th>
+											<th>Privacy</th>
+											</tr>
+										</thead>
+										<tbody>`;
+						$('#append_view'+id).append(value_one);
 						$.each(data, function(index, value) {
-							$('#append_view'+id).append("<tr>");
-							$('#append_view'+id).append("<td>"+value.job_id+"</td>");
-							$('#append_view'+id).append("<td>"+value.title+"</td>");
-							$('#append_view'+id).append("<td>"+value.note+"</td>");
-							$('#append_view'+id).append("<td>"+value.created_by+"</td>");
-							$('#append_view'+id).append("<td>"+value.status+"</td>");
-							$('#append_view'+id).append("<td>"+value.privacy_level+"</td>");
-							$('#append_view'+id).append("</tr>");
+							var value_two=`<tr>
+								<td>`+value.job_id+`</td>
+								<td>`+value.title+`</td>
+								<td>`+value.note+`</td>
+								<td>`+value.created_by+`</td>
+								<td>`+value.status+`</td>
+								<td>`+value.privacy_level+`</td>
+							</tr>`;
+							$('#append_view'+id).append(value_two);
 							
 
 							// $('#append_view').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
@@ -438,7 +450,6 @@
 							});
 							$('#append_view'+id).append("</tbody>");
 							$('#append_view'+id).append("</table>");
-							
 							$('#view'+id).hide();
 
 													
