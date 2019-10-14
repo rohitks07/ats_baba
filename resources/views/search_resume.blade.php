@@ -3,6 +3,7 @@
 @include('include.emp_leftsidebar')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -110,6 +111,8 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header" style="background:#317eeb;">
+                             <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;">
+
 								@if(!empty($toReturn['user_type']=="teammember")) 
                                 @if($toReturn['current_module_permission']['is_add']=="yes")                                      
 									<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-success" style="float:left;">Add a Candidate</button></a>
@@ -138,7 +141,7 @@
 														<th>Actions</th>     													
                                                     </tr>
                                                 </thead>
-                                                <tbody>  
+                                                <tbody id="myTable">  
                                                 @foreach($personal as $key => $value)  
 												<?php $id=$personal[$key]->id;
 														// $start_date=$personal[$key]->seeker_experience_start;
@@ -355,8 +358,19 @@
       
 @include('include.emp_footer')
 
-
+<script>
+    $(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 <script type="text/javascript">
+
+
 				function view(id)
 				{
 							$.ajax({

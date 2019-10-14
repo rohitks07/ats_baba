@@ -3,6 +3,7 @@
 @include('include.emp_leftsidebar')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -80,10 +81,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
+								<input id="search" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;">
 						@if(!empty($toReturn['user_type']=="teammember"))
 							@if($toReturn['current_module_permission']['is_add']=="yes")                                       
 							<a href="{{url('employer/post_new_job')}}">
-							<button type="button" class="btn btn-success" style="float:right;">Add a Job</button></a>
+							<button type="button" class="btn btn-success" style="float:left;">Add a Job</button></a>
 							@endif
 						@else
 						<a href="{{url('employer/post_new_job')}}">
@@ -93,7 +95,7 @@
                         	<div class="card-body" style="border: 1px #B0B0B0 solid;">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-12">
-                                                <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" >
 			                                        <thead>
 			                                            <tr>                                                   
 			                                                <th>Code</th>
@@ -105,14 +107,14 @@
 			                                                <th>Publish Date</th>
 															<th>Status</th>                                                    
 															<th>Closing Date</th>
-															{{-- @if(!empty($toReturn['user_type']=="employer")) --}}
+															
 
 															<th><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
-															{{-- @endif --}}
+															
 															<th>Actions</th>     													
 			                                            </tr>
 			                                        </thead>
-			                                        <tbody>  
+			                                        <tbody  id="myTable">  
 			                                    	    @foreach($toReturn['post_job'] as $posted_job) 
 														<tr>
 															<?php
@@ -135,10 +137,8 @@
 				                                                <td>{{$closing_date}}</td>
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$new_last_Date}}</td>
-																{{-- @if(!empty($toReturn['user_type']=="employer")) --}}
+																
                                                                  <td><button type="button" class="btn btn-primary btn-sm">{{$assignee}}</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">{{$application}}</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">{{$client_submittal}}</button></td>
-																{{-- @endif --}}
-
 				                                               <td class="actions">
 																@if(!empty($toReturn['user_type']=="teammember"))
 																@if($toReturn['current_module_permission']['is_edit']=="yes")
@@ -402,7 +402,19 @@
     var resizefunc = [];
 </script>
 @include('include.emp_footer')
+<script>
+	$(document).ready(function(){
+  $("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+	</script>
 <script type="text/javascript">
+
+
 	
 	function view(id)
 	{
