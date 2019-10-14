@@ -368,36 +368,36 @@
                                                             <tbody>
 
                                                                 <tr>
-                                                                    <td>{{$toReturn['week_week1']}}</td>
-                                                                    <td>{{$toReturn['job_created_weekly1']}}</td>
-                                                                    <td>0</td>
-                                                                    <td>{{$toReturn['candidate_created1']}}</td>
-                                                                    <td>{{$toReturn['application_submitted1']}}</td>
-                                                                    <td>{{ $toReturn['client_submittal1']}}</td>
+                                                                <td>{{$toReturn['week_week1']}}</td>
+                                                                <td>{{$toReturn['job_created_weekly1']}}</td>
+                                                                <td>0</td>
+                                                                <td>{{$toReturn['candidate_created1']}}</td>
+                                                                <td>{{$toReturn['application_submitted1']}}</td>
+                                                                <td>{{ $toReturn['client_submittal1']}}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>{{$toReturn['week_week2']}}</td>
-                                                                    <td>{{$toReturn['job_created_weekly2']}}</td>
-                                                                    <td>0</td>
-                                                                    <td>{{$toReturn['candidate_created2']}}</td>
-                                                                    <td>{{$toReturn['application_submitted2']}}</td>
-                                                                    <td>{{ $toReturn['client_submittal2']}}</td>
+                                                                <td>{{$toReturn['week_week2']}}</td>
+                                                                <td>{{$toReturn['job_created_weekly2']}}</td>
+                                                                <td>0</td>
+                                                                <td>{{$toReturn['candidate_created2']}}</td>
+                                                                <td>{{$toReturn['application_submitted2']}}</td>
+                                                                <td>{{ $toReturn['client_submittal2']}}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>{{$toReturn['week_week3']}}</td>
-                                                                    <td>{{$toReturn['job_created_weekly3']}}</td>
-                                                                    <td>0</td>
-                                                                    <td>{{$toReturn['candidate_created3']}}</td>
-                                                                    <td>{{$toReturn['application_submitted3']}}</td>
-                                                                    <td>{{ $toReturn['client_submittal3']}}</td>
+                                                                <td>{{$toReturn['week_week3']}}</td>
+                                                                <td>{{$toReturn['job_created_weekly3']}}</td>
+                                                                <td>0</td>
+                                                                <td>{{$toReturn['candidate_created3']}}</td>
+                                                                <td>{{$toReturn['application_submitted3']}}</td>
+                                                                <td>{{ $toReturn['client_submittal3']}}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>{{$toReturn['week_week4']}}</td>
-                                                                    <td>{{$toReturn['job_created_weekly4']}}</td>
-                                                                    <td>0</td>
-                                                                    <td>{{$toReturn['candidate_created4']}}</td>
-                                                                    <td>{{$toReturn['application_submitted4']}}</td>
-                                                                    <td>{{ $toReturn['client_submittal4']}}</td>
+                                                                <td>{{$toReturn['week_week4']}}</td>
+                                                                <td>{{$toReturn['job_created_weekly4']}}</td>
+                                                                <td>0</td>
+                                                                <td>{{$toReturn['candidate_created4']}}</td>
+                                                                <td>{{$toReturn['application_submitted4']}}</td>
+                                                                <td>{{ $toReturn['client_submittal4']}}</td>
                                                                 </tr>
                                                                 <td>{{$toReturn['week_week5']}}</td>
                                                                 <td>{{$toReturn['job_created_weekly5']}}</td>
@@ -453,7 +453,7 @@
                                                                 <td>0</td>
                                                                 <td>{{$toReturn['candidate_created12']}}</td>
                                                                 <td>{{$toReturn['application_submitted12']}}</td>
-                                                                <td>{{ $toReturn['client_submittal12']}}</td>
+                                                                <td>{{$toReturn['client_submittal12']}}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -931,6 +931,7 @@
                                                             </table>
                                                             </div>  `;
                 $('#show_week').append(value);
+                
 
                 //  $.each(data, function(index, value) {
                 //     // $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");

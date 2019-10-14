@@ -169,7 +169,7 @@
 														   <ul class="dropdown-menu">
                                                                 <li class="active">
 																<a href="{{url('employer/edit_posted_candidate/'.$id)}}">Personal Detail</a></li>
-                                                                      <li><a href="#">Education</a></li>
+                                                                      <li><a href="{{url('employer/employer_edit_education/'.$id)}}">Education</a></li>
                                                                     <li><a href="{{url('employer/team_member_edit_experience/'.$id)}}">Experience</a></li>
                                                                     <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
                                                             </ul>

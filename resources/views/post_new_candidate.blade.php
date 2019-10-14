@@ -440,7 +440,8 @@
 										<div class="form-group row">
 													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
 													<select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-													  <option value="">Select Country</option>
+														<option value="United States" selected>United States</option>
+
 													  @foreach($toReturn['countries'] as $country)
 													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
 													  @endforeach  
@@ -568,11 +569,11 @@
 										    <input type="text" name="institute[]" id="institute" class="form-control" placeholder="Institute" style="width: 14%;">
 										    <input type="text" name="edu_city[]"  id="edu_city" class="form-control" placeholder="City" style="width: 14%;">
 	                                        <select type="text" name="edu_country[]" id="edu_country" class="form-control" placeholder="Country" style="width: 14%;">
-												<option value="" selected>-Country-</option>
+												<option value="" selected></option>
 												    <!--@foreach($toReturn['countries'] as $countries)-->
 												    <!--    <option value="{{$countries['country_name']}}"> {{$countries['country_name']}} </option>-->
 												    <!--@endforeach	-->
-												    <option value="Afghanistan" selected>Afghanistan</option>
+												    <option value="Afghanistan" >Afghanistan</option>
 												<option value="Albany">Albany</option>
 												<option value="Algeria">Algeria</option>
 												<option value="Angola">Angola</option>
@@ -633,7 +634,7 @@
 												<option value="Romania">Romania</option>
 												<option value="Russia">Russia</option>
 												<option value="Thailand">Thailand</option>
-												<option value="United States">United States</option>
+												<option value="United States" selected>United States</option>
 												<option value="Yemen">Yemen</option>
 												                                 
 											</select>

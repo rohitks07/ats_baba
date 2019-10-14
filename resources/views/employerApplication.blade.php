@@ -20,8 +20,8 @@
 <script src="{{url('assets/packages/timegrid/main.js')}}"></script>
 <script src="{{url('assets/packages/list/main.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
 
 
 <style>
@@ -144,13 +144,13 @@
                                                                         <input type="hidden" name="seeker_id" value="{{$application['seeker_id']}}">
                                                                         <div class="form-group">
                                                                             <label for="email">Start Time</label>
-                                                                            <input id="srttime" class=" form-control timepicker" name="start_time" type="time" required>
+                                                                            <input id="srttime" class=" form-control timepicker1" name="start_time" type="time" required>
                                                                             <!-- <input type="time" class="form-control" id="" placeholder="Start Time" name="srttime"> -->
                                                                         </div>
                                                     
                                                                         <div class="form-group">
                                                                             <label for="email">End Time</label>
-                                                                            <input id="endtime" class="form-control timepicker1" name="end_time" type="time" required>
+                                                                            <input id="endtime"   class="form-control timepicker2" name="end_time" type="time" required>
                                                                             <div class="col-md-1">
                                                                             </div>
                                                                         </div>
@@ -207,9 +207,13 @@
                    
 
 
-
+                   <script>
+                    $('#srttime').timepicker1();
+                    $('#endtime').timepicker2();
+                
+                </script>
                   
-                                        @include('include.emp_footer')
+    @include('include.emp_footer')
 
 <script >
     $('#edit_modal_Category').on('show.bs.modal' , function (event){
@@ -225,11 +229,7 @@
 
     })
 </script>
-<script>
-    $('.timepicker').timepicker();
-    $('.timepicker1').timepicker();
 
-</script>
 
 </body>
 </html>

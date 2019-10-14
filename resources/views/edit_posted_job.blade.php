@@ -265,6 +265,8 @@
                                     <label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
                                     <select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
                                       <option value="">{{$toReturn['post_job']->countries}}</option>
+                                      <option value="United States" selected>United States</option>
+
                                       @foreach($toReturn['countries'] as $country)
                                     <option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
                                       @endforeach  
