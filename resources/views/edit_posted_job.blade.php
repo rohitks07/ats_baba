@@ -347,7 +347,7 @@
                                 <input type="text" placeholder="Max" name="pay_max" id="pay_max" value="" maxlength="4" style="width:22%; float:left;"> -->
                                 <select name="select_payment" id="pay_min" name="pay_min"class="form-control" style="max-width:42%; margin-left: 9px; border: 1px solid #bbb8b8;">
                                 <option selected>{{$toReturn['post_job']->pay_min}}-{{$toReturn['post_job']->pay_max}}</option>
-                                    <option> SELECT MONTHLY WAGES</option>
+                                    <option> Select Salary/Pay Rate</option>
                                     <option value="15k-20k">15k - 20k</option>
                                     <option value="20k-25k">20k - 25k</option>
                                     <option value="25k-30k">25k - 30k</option>
