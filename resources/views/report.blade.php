@@ -909,7 +909,7 @@
                                                                 <tr>
                                                                 <td>` + one_first + `&nbsp;-&nbsp;` + one_second + `</td>
                                                                 <td>` + data.job_created_days + `</td>
-                                                                <td></td>
+                                                                <td>` + data.post_assign_days +`</td>
                                                                 <td>` + data.candidate_created_days + `</td>
                                                                 <td>` + data.application_submitted_days + `</td>
                                                                 <td>` + data.client_submittal_days + `</td>
@@ -986,7 +986,7 @@
                                                                 <tr>
                                                                 <td>` + one_first + `&nbsp;-&nbsp;` + one_second + `</td>
                                                                 <td>` + data.job_created_days + `</td>
-                                                                <td></td>
+                                                                <td>` +data.post_assign_days+ `</td>
                                                                 <td>` + data.candidate_created_days + `</td>
                                                                 <td>` + data.application_submitted_days + `</td>
                                                                 <td>` + data.client_submittal_days + `</td>

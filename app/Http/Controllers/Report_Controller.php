@@ -607,6 +607,9 @@ class Report_Controller extends Controller
         $data['client_submittal_days']= count(Tbl_forward_candidate::where('forward_date','<=',$date_2)
                                             ->where('forward_date','>=',$date_1)
                                             ->get());
+        $data['post_assign_days']= count(tbl_job_post_assign::where('job_assigned_date','<=',$date_2)
+                                            ->where('job_assigned_date','>=',$date_1)
+                                            ->get());                                        
         return response()->json($data);
     }
 
@@ -630,6 +633,9 @@ class Report_Controller extends Controller
         $data['client_submittal_days']= count(Tbl_forward_candidate::where('forward_date','<=',$date_2)
                                             ->where('forward_date','>=',$date_1)
                                             ->get());
+        $data['post_assign_days']= count(tbl_job_post_assign::where('job_assigned_date','<=',$date_2)
+                                            ->where('job_assigned_date','>=',$date_1)
+                                            ->get());                                     
         return response()->json($data);
 
     }
