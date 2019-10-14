@@ -132,7 +132,6 @@
                                             <label for="email" class="control-label col-lg-4">From<span class="red">*</span></label>
                                             <div class="col-lg-8">
                                                 <input type="email" style="width: 75%;" placeholder="Email Id" id="" name="email_from" disabled value="{{$toReturn['form_email_id']}}" required>
-
                                             </div>
                                         </div>
 
@@ -142,7 +141,6 @@
                                                 <input type="hidden" name="job_id" value="{{$toReturn['application_detail']['job_ID']}}">
                                                 <input type="hidden" name="seeker_id" value="{{$toReturn['application_detail']['seeker_ID']}}"> 
                                                 <input type="email" style="width: 75%;" placeholder=" Send Email To " id="" name="email_to" required>
-
                                             </div>
                                         </div>
 
@@ -182,68 +180,73 @@
                                         <!-- <div class="col-md-1"></div> -->
                                         <!-- col-sm-6 col-md-4     col-md-3 col-sm-4 -->
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
-                                              <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="fullname" checked>
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="fullname" checked>
                                                 <label class="form-label">Full Name </label>
-                                                <input style="display:block;" type="text" id="fullname" placeholder="Full Name" name="fullname" value="{{$toReturn['application_detail']['candate_name']}}" required>   
+                                                <input type="text" id="fullname" placeholder="Full Name" name="fullname" value="{{$toReturn['application_detail']['candate_name']}}" required>   
+                                                <span id="fullname_error">Please enter valid name</span>
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
-                                              <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="phone_primary" checked>
-                                              <label class="form-label">Phone(Primary)</label>
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="phone_primary" checked>
+                                                <label class="form-label">Phone(Primary)</label>
                                                 <input type="text" id="phone_primart" placeholder="Phone(Primary)" name="phone_primary" value="{{$toReturn['application_detail']['phone_no_mobile']}}"  maxlength="12" required>  
+                                                <span id="phone_primart_error">Please enter valid Phone</span>
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox" name="param[]" value="condidate_email_id" checked>
                                                 <label class="form-label">Email ID</label>
-                                                 <input type="text" id="condidate_email_id" placeholder="Email ID" name="condidate_email_id" value="{{$toReturn['application_detail']['email_id']}}" required>     
-                                                 </div><!-- end of col -->
+                                                <input type="text" id="condidate_email_id" placeholder="Email ID" name="condidate_email_id" value="{{$toReturn['application_detail']['email_id']}}" required>     
+                                                <span id="condidate_email_id_error">Please enter valid email ID</span>
+                                            </div><!-- end of col -->
                                       
 
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
-                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="skypeid" checked> 
-                                                <label class="form-label">Skype ID</label>
-                                                <input type="text" id="skypeid" onblur="rate()" placeholder="Skype ID" name="skypeid" >
+                                            <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="skypeid" checked> 
+                                            <label class="form-label">Skype ID</label>
+                                            <input type="text" id="skypeid" onblur="rate()" placeholder="Skype ID" name="skypeid" >
                                         </div><!-- end of col -->
 
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
-                                             <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="current_location" checked >
-                                             <label class="form-label">Current Location(City,State)</label>
-                                                <input type="text" id="current_location" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>      
-                                            </div><!--end of col-->
+                                            <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="current_location" checked >
+                                            <label class="form-label">Current Location(City,State)</label>
+                                            <input type="text" id="current_location" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>      
+                                        </div><!--end of col-->
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
-                                             <input class="form-check-input chkbx" type="checkbox" name="param[]" value="us_visa_status" checked >
-                                             <label class="form-label">US Visa Status</label>  
-                                                 <input type="text" id="us_visa_status" placeholder=" US Visa Status " name="us_visa_status" value="{{$toReturn['application_detail']['visa_status']}}" required>   
-                                            </div><!--end of col-->
+                                            <input class="form-check-input chkbx" type="checkbox" name="param[]" value="us_visa_status" checked >
+                                            <label class="form-label">US Visa Status</label>  
+                                            <input type="text" id="us_visa_status" placeholder=" US Visa Status " name="us_visa_status" value="{{$toReturn['application_detail']['visa_status']}}" required>   
+                                            <span id="us_visa_status_error">Please enter valid visa status</span>
+                                        </div><!--end of col-->
                                         
                                         
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="visaexpiry" checked> 
                                                 <label class="form-label">US Visa Expiry</label>
                                                 <input type="date" id="visaexpiry" onblur="rate()" placeholder="US Visa Expiry" name="visaexpiry" >
+                                                <span id="visaexpiry_error">Please enter valid expiry date</span>
                                         </div><!-- end of col -->
                                         
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels" style="background-color:;">
-                                                
-                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" checked>
-                                                <label class="form-label">SSN No.(Last Four Digits)</label>
-                                                   
-                                                    <input type="text" onblur="numbval()" maxlenght="4" placeholder="SSN No.(Last Four Diogits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title required>
-                                                           
-                                               </div><!--end of col-->
+                                            <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" checked>
+                                            <label class="form-label">SSN No.(Last Four Digits)</label>
+                                            <input type="text" onblur="numbval()" maxlenght="4" placeholder="SSN No.(Last Four Diogits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title required>
+                                            <span id="last_for_digit_ssn_error">Please enter SSN No. (last four digit only)</span>
+                                        </div><!--end of col-->
 
-                                               <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
-                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="passportno" checked> 
-                                                <label class="form-label">Passport No</label>
-                                                <input type="text" id="passportno" onblur="rate()" placeholder="Passport No" name="passportno" >
+                                        <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
+                                            <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="passportno" checked> 
+                                            <label class="form-label">Passport No</label>
+                                            <input type="text" id="passportno" onblur="rate()" placeholder="Passport No" name="passportno" >
+                                            <span id="passportno_error">Please enter valid passport no</span>
                                         </div><!-- end of col -->
 
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
-                                              <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="dob" checked >
-                                              <label class="form-label">D O B</label>
-                                              <input type="date" id="dob" placeholder="Date Of Birth" name="dob" required/>
-                                            </div><!--end of col-->
+                                          <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="dob" checked >
+                                          <label class="form-label">D O B</label>
+                                          <input type="date" id="dob" placeholder="Date Of Birth" name="dob" required/>
+                                          <span id="dob_error">Please enter valid DOB</span>
+                                        </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                              <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
@@ -301,6 +304,7 @@
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="expectedrate" checked> 
                                                 <label class="form-label">Expected Rate</label>
                                                 <input type="text" id="expectedrate" onblur="rate()" placeholder="Expected Rate" name="expectedrate" required>
+                                                <span id="expectedrate_error">Please enter valid rate</span>
                                         </div><!-- end of col -->
                                            
                                          <div class="col-sm-1" id="dels" style="background-color:;">
@@ -705,16 +709,16 @@ function etc() {
 
 // expected rate
 function rate() {
-  var x, text;
-  // Get the value of the input field with id="numb"
-  x = document.getElementById("expectedrate").value;
-  // If x is Not a Number or less than one or greater than 10
-  if (isNaN(x) || x < 1) {
-    text = "Please enter numbers only";
-  } else {
-    text = " ";
-  }
-  document.getElementById("exprate").innerHTML = text;
+  // var x, text;
+  // // Get the value of the input field with id="numb"
+  // x = document.getElementById("expectedrate").value;
+  // // If x is Not a Number or less than one or greater than 10
+  // if (isNaN(x) || x < 1) {
+  //   text = "Please enter numbers only";
+  // } else {
+  //   text = " ";
+  // }
+  // document.getElementById("exprate").innerHTML = text;
 }
 </script>
 <script>
@@ -726,6 +730,16 @@ $("#delete_doc").click(function(e) {
 
 <script>
     $(document).ready(function(){
+        $("#fullname_error").hide();
+        $("#phone_primart_error").hide();
+        $("#condidate_email_id_error").hide();
+        $("#us_visa_status_error").hide();
+        $("#visaexpiry_error").hide();
+        $("#last_for_digit_ssn_error").hide();
+        $("#dob_error").hide();
+        $("#expectedrate_error").hide();
+        $("#passportno_error").hide();
+
         var err_fullname=true;
         var err_phone_primart=true;
         var err_condidate_email_id=true;
@@ -753,7 +767,7 @@ $("#delete_doc").click(function(e) {
         {
             var fullname_val=$("#fullname").val();
 
-            var regexOnlyText = /^[a-zA-Z]+$/;
+            var regexOnlyText = /^[a-zA-Z ]+$/;
             if (fullname_val==""||regexOnlyText.test(fullname_val) != true){
                 $("#fullname_error").show();
                 $("#fullname_error").focus();
@@ -814,6 +828,187 @@ $("#delete_doc").click(function(e) {
                 $("#condidate_email_id_error").hide();
             }
         }
+        // us visa status
+        $("#us_visa_status").blur(function()
+        {
+            check_us_visa_status();
+        });
+        function check_us_visa_status()
+        {
+            var us_visa_status_val=$("#us_visa_status").val();
+
+            var regexOnlyTextNumbers = /^[a-zA-Z0-9-]+$/;
+            if (us_visa_status_val==""||regexOnlyTextNumbers.test(us_visa_status_val) != true){
+                $("#us_visa_status_error").show();
+                $("#us_visa_status_error").focus();
+                $("#us_visa_status_error").css("color","red");
+                err_us_visa_status=false;
+                return false;
+            }
+            else
+            {
+                err_us_visa_status=true;
+                $("#us_visa_status_error").hide();
+            }
+            
+        }
+        // validate visa expiry
+        $("#visaexpiry").blur(function()
+        {
+            check_visaexpiry();
+        });
+        function check_visaexpiry()
+        {
+            var visaexpiry_val= $("#visaexpiry").val();
+            
+            if(visaexpiry_val)
+            {
+                var visaexpiry_var = new Date(visaexpiry_val);
+                var visaexpiry_val_day = visaexpiry_var.getDate();
+                var visaexpiry_val_month = visaexpiry_var.getMonth() + 1;
+                var visaexpiry_val_year = visaexpiry_var.getFullYear();
+
+                if(!visaexpiry_val_day || !visaexpiry_val_month || !visaexpiry_val_year)
+                {
+                    $("#visaexpiry_error").show();
+                    $("#visaexpiry_error").focus();
+                    $("#visaexpiry_error").css("color","red");
+                    err_visaexpiry=false;
+                    return false;
+                }
+                else if(visaexpiry_val_day > 31 || visaexpiry_val_month > 11 || visaexpiry_val_year > 2050)
+                {
+                    $("#visaexpiry_error").show();
+                    $("#visaexpiry_error").focus();
+                    $("#visaexpiry_error").css("color","red");
+                    err_visaexpiry=false;
+                    return false;
+                }
+                else
+                {
+                    err_visaexpiry=true;
+                    $("#visaexpiry_error").hide();
+                }
+            }
+            else
+            {
+                err_visaexpiry=true;
+                $("#visaexpiry_error").hide();
+            }
+
+        }
+        // last four digit ssn
+        $("#last_for_digit_ssn").blur(function()
+        {
+            check_last_for_digit_ssn();
+        });
+        function check_last_for_digit_ssn(){
+            var var_last_for_digit_ssn=$("#last_for_digit_ssn").val();
+
+            var regexOnlyNumbers = /^[0-9-]+$/;
+            if (var_last_for_digit_ssn.length != 4||regexOnlyNumbers.test(var_last_for_digit_ssn) != true){
+                $("#last_for_digit_ssn_error").show();
+                $("#last_for_digit_ssn_error").focus();
+                $("#last_for_digit_ssn_error").css("color","red");
+                err_last_for_digit_ssn=false;
+                return false;
+            }
+            else
+            {
+                err_last_for_digit_ssn=true;
+                $("#last_for_digit_ssn_error").hide();
+            }
+        }
+        // passport no
+        $("#passportno").blur(function()
+        {
+            check_passportno();
+        });
+        function check_passportno()
+        {
+            var passportno_val=$("#passportno").val();
+
+            var regexOnlyText = /^[a-zA-Z0-9-]+$/;
+            if(passportno_val)
+            {
+                if (regexOnlyText.test(passportno_val) != true){
+                    $("#passportno_error").show();
+                    $("#passportno_error").focus();
+                    $("#passportno_error").css("color","red");
+                    err_passportno=false;
+                    return false;
+                }
+                else
+                {
+                    err_passportno=true;
+                    $("#passportno_error").hide();
+                }
+            }
+            else{
+                err_passportno=true;
+                $("#passportno_error").hide();
+            }
+            
+        }
+        // validate dob
+        $("#dob").blur(function()
+        {
+            check_dob();
+        });
+        function check_dob()
+        {
+            var dob_val= $("#dob").val();
+            
+            var dob_var = new Date(dob_val);
+            var dob_val_day = dob_var.getDate();
+            var dob_val_month = dob_var.getMonth() + 1;
+            var dob_val_year = dob_var.getFullYear();
+
+            if(!dob_val_day || !dob_val_month || !dob_val_year)
+            {
+                $("#dob_error").show();
+                $("#dob_error").focus();
+                $("#dob_error").css("color","red");
+                err_dob=false;
+                return false;
+            }
+            else if(dob_val_day > 31 || dob_val_month > 11 || dob_val_year > new Date().getFullYear())
+            {
+                $("#dob_error").show();
+                $("#dob_error").focus();
+                $("#dob_error").css("color","red");
+                err_dob=false;
+                return false;
+            }
+            else
+            {
+                err_dob=true;
+                $("#dob_error").hide();
+            }
+        }
+        //validate expected rate
+        $("#expectedrate").blur(function()
+        {
+            check_expectedrate();
+        });
+        function check_expectedrate(){
+            var var_expectedrate=$("#expectedrate").val();
+
+            var regexOnlyNumbers = /^[0-9]+$/;
+            if (regexOnlyNumbers.test(var_expectedrate) != true){
+                $("#expectedrate_error").show();
+                $("#expectedrate_error").focus();
+                $("#expectedrate_error").css("color","red");
+                err_expectedrate=false;
+                return false;
+            }
+            else
+            {
+                err_expectedrate=true;
+                $("#expectedrate_error").hide();
+            }
+        }
+        
 
 
 
@@ -825,34 +1020,23 @@ $("#delete_doc").click(function(e) {
             check_fullname();
             check_phone_primart();
             check_condidate_email_id();
-            check_skypeid();
-            check_current_location();
             check_us_visa_status();
             check_visaexpiry();
             check_last_for_digit_ssn();
             check_passportno();
             check_dob();
-            check_qual_with_uni();
-            check_open_for_relocation();
-            check_availa_for_tele();
-            check_availa_for_per();
-            check_availa_for_new();
-            check_linkedinid();
             check_expectedrate();
 
 
-
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            // if((err_firstname==true)&&(err_middlename==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_ssn==true)&&(err_visa==true)&&(err_Experience==true)&&(err_city==true)&&(err_mob_ph==true)&&(err_home_ph==true)&&(err_resume==true))
-            // {
-            //     return true;
-            // }
-            // else
-            // {
-            //     return false;
-            // }
-
-            return false;
+            if((err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_expectedrate==true))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         });
     });
 </script>
