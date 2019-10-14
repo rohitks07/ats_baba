@@ -315,7 +315,7 @@
                              <!--Job Type-->
                              <div class="form-group row">
                                  <label for="address" class="control-label col-lg-4">Job Type <span style="color:red;">*</span></label>
-                                 <select name="type_of_job" id="type_of_job" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
+                                 <select name="type_of_job" id="type_of_job" class="form-control" onchange="fulltime()" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
                                  <option selected>{{$toReturn['post_job']->job_mode}}</option> 
                                     <option value="Full Time">Full Time</option>
                                      <option value="Contract">Contract</option>
@@ -345,19 +345,34 @@
                                 <label class="control-label col-lg-4">Salary/Pay Rate <span style="color:red;">*</span></label>
                                 <!-- <input type="text" placeholder="min" name="pay_min" id="pay_min" style="width:20%; float:left;  margin-left: 1%;">&nbsp;&nbsp;
                                 <input type="text" placeholder="Max" name="pay_max" id="pay_max" value="" maxlength="4" style="width:22%; float:left;"> -->
-                                <select name="select_payment" id="pay_min" name="pay_min"class="form-control" style="max-width:42%; margin-left: 9px; border: 1px solid #bbb8b8;">
-                                <option selected>{{$toReturn['post_job']->pay_min}}-{{$toReturn['post_job']->pay_max}}</option>
-                                    <option> Select Salary/Pay Rate</option>
-                                    <option value="15k-20k">15k - 20k</option>
-                                    <option value="20k-25k">20k - 25k</option>
-                                    <option value="25k-30k">25k - 30k</option>
-                                    <option value="30k-35k">30k - 35k</option>
-                                    <option value="35k-40k">35k - 40k</option>
-                                    <option value="40k-45k">40k - 45k</option>
-                                    <option value="45k-50k">45k - 50k</option>
-                                    <option value="50k-55k">50k - 55k</option>
-                                    <option value="55k-60k">55k - 60k</option>
-                                    <option value="DOE">(DOE)Depends upon Experience</option>
+                                
+                                    <select name="select_payment"  id="pay_min" class="form-control"
+                                        style="max-width:42%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
+                                        <option selected>{{$toReturn['post_job']->pay_min}}-{{$toReturn['post_job']->pay_max}}</option>
+                                        <option> Select Salary/Pay Rate</option>
+                                        <option value="20k-25k">20k - 25k</option>
+                                        <option value="25k-30k">25k - 30k</option>
+                                        <option value="30k-35k">30k - 35k</option>
+                                        <option value="35k-40k">35k - 40k</option>
+                                        <option value="40k-45k">40k - 45k</option>
+                                        <option value="45k-50k">45k - 50k</option>
+                                        <option value="50k-55k">50k - 55k</option>
+                                        <option value="55k-60k">55k - 60k</option>
+                                        <option value="60k-65k">60k - 65k</option>
+                                        <option value="65k-70k">65k - 70k</option>
+                                        <option value="$20-$25">$20 - $25</option>
+                                        <option value="$25-$30">$25 - $30</option>
+                                        <option value="$30-$35">$30 - $35</option>
+                                        <option value="$35-$40">$35 - $40</option>
+                                        <option value="$40-$45">$40 - $45</option>
+                                        <option value="$45-$50">$45 - $50</option>
+                                        <option value="$50-$55">$50 - $55</option>
+                                        <option value="$55-$60">$55 - $60</option>
+                                        <option value="$60-$65">$60 - $65</option>
+                                        <option value="$65-$70">$65 - $70</option>
+                                        <option value="$70-$75">$70 - $75</option>
+                                        <option value="$75-$80">$75 - $80</option>
+                                        <option value="DOE">(DOE)Depends upon Experience</option>
 
                                     </select>
                                 <div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
@@ -932,4 +947,88 @@
             }
     }
     </script>
+    <script type="text/javascript">
+        function fulltime(){
+          // alert('hrllo');
+            temp = document.getElementById('type_of_job').value;
+            // alert(temp);
+            if (temp == 'Full Time'){
+                //alert('full time');
+                 var x = document.getElementById("pay_min").options[1].disabled = false;
+                 var x = document.getElementById("pay_min").options[2].disabled = false;
+                 var x = document.getElementById("pay_min").options[3].disabled = false;
+                 var x = document.getElementById("pay_min").options[4].disabled = false;
+                 var x = document.getElementById("pay_min").options[5].disabled = false;
+                 var x = document.getElementById("pay_min").options[6].disabled = false;
+                 var x = document.getElementById("pay_min").options[7].disabled = false;            
+                 var x = document.getElementById("pay_min").options[8].disabled = false;
+                 var x = document.getElementById("pay_min").options[9].disabled = false;
+                 var x = document.getElementById("pay_min").options[10].disabled = false;
+                 var x = document.getElementById("pay_min").options[11].disabled = true;
+                 var x = document.getElementById("pay_min").options[12].disabled = true;
+                 var x = document.getElementById("pay_min").options[13].disabled = true;
+                 var x = document.getElementById("pay_min").options[14].disabled = true;
+                 var x = document.getElementById("pay_min").options[15].disabled = true;
+                 var x = document.getElementById("pay_min").options[16].disabled = true;
+                 var x = document.getElementById("pay_min").options[17].disabled = true;
+                 var x = document.getElementById("pay_min").options[18].disabled = true;
+                 var x = document.getElementById("pay_min").options[19].disabled = true;
+                 var x = document.getElementById("pay_min").options[20].disabled = true;
+                 var x = document.getElementById("pay_min").options[21].disabled = true;
+                 var x = document.getElementById("pay_min").options[22].disabled = true;
+                }
+                else if (temp == 'Contract'){
+                    //alert('Contract');
+                     var x = document.getElementById("pay_min").options[1].disabled = true;
+                     var x = document.getElementById("pay_min").options[2].disabled = true;
+                     var x = document.getElementById("pay_min").options[3].disabled = true;
+                     var x = document.getElementById("pay_min").options[4].disabled = true;
+                     var x = document.getElementById("pay_min").options[5].disabled = true;
+                     var x = document.getElementById("pay_min").options[6].disabled = true;
+                     var x = document.getElementById("pay_min").options[7].disabled = true;          
+                     var x = document.getElementById("pay_min").options[8].disabled = true;
+                     var x = document.getElementById("pay_min").options[9].disabled = true;
+                     var x = document.getElementById("pay_min").options[10].disabled = true;
+                     var x = document.getElementById("pay_min").options[11].disabled = false;
+                     var x = document.getElementById("pay_min").options[12].disabled = false;
+                     var x = document.getElementById("pay_min").options[13].disabled = false;
+                     var x = document.getElementById("pay_min").options[14].disabled = false;
+                     var x = document.getElementById("pay_min").options[15].disabled = false;
+                     var x = document.getElementById("pay_min").options[16].disabled = false;
+                     var x = document.getElementById("pay_min").options[17].disabled = false;
+                     var x = document.getElementById("pay_min").options[18].disabled = false;
+                     var x = document.getElementById("pay_min").options[19].disabled = false;
+                     var x = document.getElementById("pay_min").options[20].disabled = false;
+                     var x = document.getElementById("pay_min").options[21].disabled = false;
+                     var x = document.getElementById("pay_min").options[22].disabled = false;
+                     
+                    
+                }
+                else{
+                     var x = document.getElementById("pay_min").options[1].disabled = false;
+                     var x = document.getElementById("pay_min").options[2].disabled = false;
+                     var x = document.getElementById("pay_min").options[3].disabled = false;
+                     var x = document.getElementById("pay_min").options[4].disabled = false;
+                     var x = document.getElementById("pay_min").options[5].disabled = false;
+                     var x = document.getElementById("pay_min").options[6].disabled = false;
+                     var x = document.getElementById("pay_min").options[7].disabled = false;          
+                     var x = document.getElementById("pay_min").options[8].disabled = false;
+                     var x = document.getElementById("pay_min").options[9].disabled = false;
+                     var x = document.getElementById("pay_min").options[10].disabled = false;
+                     var x = document.getElementById("pay_min").options[11].disabled = false;
+                     var x = document.getElementById("pay_min").options[12].disabled = false;
+                     var x = document.getElementById("pay_min").options[13].disabled = false;
+                     var x = document.getElementById("pay_min").options[14].disabled = false;
+                     var x = document.getElementById("pay_min").options[15].disabled = false;
+                     var x = document.getElementById("pay_min").options[16].disabled = false;
+                     var x = document.getElementById("pay_min").options[17].disabled = false;
+                     var x = document.getElementById("pay_min").options[18].disabled = false;
+                     var x = document.getElementById("pay_min").options[19].disabled = false;
+                     var x = document.getElementById("pay_min").options[20].disabled = false;
+                     var x = document.getElementById("pay_min").options[21].disabled = false;
+                     var x = document.getElementById("pay_min").options[22].disabled = false;
+                     
+                }
+            }
+            </script>
 </body>
