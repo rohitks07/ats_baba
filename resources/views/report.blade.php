@@ -192,11 +192,16 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Date</th>
-                                                                    <th>Jobs Created</th>
-                                                                    <th>Jobs Assigned</th>
-                                                                    <th>Candidate Created</th>
-                                                                    <th>Application Submitted</th>
-                                                                    <th>Client Submittal</th>
+                                                                    <th>Jobs Created&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Action view</th>
+                                                                    <th>Jobs Assigned&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Action view</th>
+                                                                    <th>Candidate Created&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Action view</th>
+                                                                    <th>Application Submitted&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Action view</th>
+                                                                    <th>Client Submittal&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Action view</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -205,104 +210,164 @@
                                                                     <td>{{$toReturn['week_date'][0]}}</td>
 
                                                                     <td>{{$toReturn['job_created'][0]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][0]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][0]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][0]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][1]}}</td>
                                                                     <td>{{$toReturn['job_created'][1]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][1]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][1]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][1]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][2]}}</td>
                                                                     <td>{{$toReturn['job_created'][2]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][2]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][2]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][2]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][3]}}</td>
                                                                     <td>{{$toReturn['job_created'][3]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][3]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][3]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][3]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][4]}}</td>
                                                                     <td>{{$toReturn['job_created'][4]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][4]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][4]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][4]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][5]}}</td>
                                                                     <td>{{$toReturn['job_created'][5]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][5]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][5]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][5]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][6]}}</td>
                                                                     <td>{{$toReturn['job_created'][6]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][6]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][6]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][6]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][7]}}</td>
                                                                     <td>{{$toReturn['job_created'][7]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][7]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][7]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][7]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][8]}}</td>
                                                                     <td>{{$toReturn['job_created'][8]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][8]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][8]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][8]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][9]}}</td>
                                                                     <td>{{$toReturn['job_created'][9]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][9]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][9]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][9]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][10]}}</td>
                                                                     <td>{{$toReturn['job_created'][10]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][10]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][10]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][10]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{$toReturn['week_date'][11]}}</td>
                                                                     <td>{{$toReturn['job_created'][11]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>0</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['candidate_created'][11]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['application_submitted'][11]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
                                                                     <td>{{$toReturn['client_submittal'][11]}}</td>
+                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
                                                                 </tr>
 

@@ -137,7 +137,7 @@ width: 84%;
                                               <option value="Contract">Contract</option>
                                               <option value="Contract-to-Hire">Contract-to-Hire</option>
                                               <option value="Part Time">Part Time</option>
-                                          </select>
+                                          </select> 
                                         </div>
                                         <!--Job Type-->
                                                        
