@@ -97,9 +97,13 @@
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
     background-clip: padding-box;
 }
-									
+#wrapper{
+			    width:100%;
+			    overflow-y:scroll;
+			}								
 </style>  
-<body>                           
+<body>  
+        <div id="wrapper">
         <div class="content-page">              
             <div class="content">               
                     <div class="row">

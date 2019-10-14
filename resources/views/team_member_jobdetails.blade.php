@@ -277,64 +277,22 @@
 																<th>Mobile</th>
 															</tr>
 														</thead>
+														@foreach($toReturn['application'] as $application)
+															<tr>
+																<td>{{$application['dated']}}</td>
+																<td>{{$application['candate_name']}}</td>
+																<td></td>
+																<td>{{$application['current_location']}}</td>
+																<td>{{$application['total_experience']}}</td>
+																<td>{{$application['expected_salary']}}</td>
+																<td>{{$application['visa_status']}}</td>
+																<td>{{$application['email_id']}}</td>
+																<td>{{$application['phone_no_mobile']}}</td>
 
-
+															</tr>
+														@endforeach
 														<tbody>
-															<tr>
-																<td>02/19/2019</td>
-																<td>Anusha Chava</td>
-																<td>F 0</td>
-																<td>Milpitas, CA</td>
-																<td>0.0</td>
-																<td> </td>
-																<td>EAD-H4</td>
-																<td>ui.anusha@gmail.com</td>
-																<td>408.674.0655</td>
-															</tr>
-															<tr>
-																<td>03/12/2019</td>
-																<td>Meena Lingampalli</td>
-																<td>F 0</td>
-																<td>Pleasanton, CA, CA</td>
-																<td>0.0</td>
-																<td> </td>
-																<td>EAD-H4</td>
-																<td>meenakumariui@gmail.com</td>
-																<td>440.201.9682</td>
-															</tr>
-															<tr>
-																<td>04/18/2019</td>
-																<td>MostArjuman Sultana</td>
-																<td>F 0</td>
-																<td>San Jose, CA</td>
-																<td>0.0</td>
-																<td> </td>
-																<td>EAD-H4</td>
-																<td>msultana663@gmail.com</td>
-																<td>510.858.1182</td>
-															</tr>
-															<tr>
-																<td>04/22/2019</td>
-																<td>Rajashekharreddy Banda</td>
-																<td>F 0</td>
-																<td>San Diego, CA</td>
-																<td>0.0</td>
-																<td> </td>
-																<td>H1 Visa</td>
-																<td>bandaui0704@gmail.com</td>
-																<td>510.925.5355</td>
-															</tr>
-															<tr>
-																<td>04/26/2019</td>
-																<td>Tasneem Pathan</td>
-																<td>F 0</td>
-																<td>Livermore, CA, CA</td>
-																<td>0.0</td>
-																<td> </td>
-																<td>Green Card</td>
-																<td>tasneem.pathan04@gmail.com</td>
-																<td>929.456.2005</td>
-															</tr>
+															
 														</tbody>
 													</table>
 
@@ -362,7 +320,24 @@
 																<th>Qualification</th>
 															</tr>
 														</thead>
+														<tbody>
+														@foreach($toReturn['Client_submittals'] as $client_submittals)
+														<tr>
+																<td>{{$client_submittals['forward_date']}}</td>
+																<td>{{$client_submittals['job_code']}}</td>
+																<td>{{$client_submittals['job_title']}}</td>
+																<td>{{$client_submittals['job_type']}}</td>
+																<td>{{$client_submittals['country']}}</td>
+																<td>{{$client_submittals['skills']}}</td>
+																<td>{{$client_submittals['fullname']}}</td>
+																<td>{{$client_submittals['mobile']}}</td>
+																<td>{{$client_submittals['email']}}</td>
+																<td>{{$client_submittals['visa_status']}}</td>
+																<td>{{$client_submittals['qualification1']}}</td>
 
+														</tr>
+														@endforeach
+														</tbody>
 													</table>
 
 												</div>
@@ -384,14 +359,15 @@
 																				<th>Change Log</th>
 																			</tr>
 																		</thead>
-
-
 																		<tbody>
-																			<tr>
-																				<td>02/19/2019 17:08:34</td>
-																				<td>Abhishek Kumar</td>
-																				<td>Created</td>
-																			</tr>
+																		@foreach($toReturn['list_job_history'] as $job_history)
+																		<?php $user_name=DB::table('user')->where('ID',$job_history['created_by'])->first('full_name');?>
+																				<tr>
+																					<td>{{$job_history['created_date']}}</td>
+																					<td>{{$user_name->full_name}}</td>
+																					<td>{{$job_history['update_text']}}</td>
+																				</tr>
+																		@endforeach
 																		</tbody>
 																	</table>
 
