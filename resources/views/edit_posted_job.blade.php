@@ -261,7 +261,7 @@
                          <!-- col 2-->
                          <div class="col-lg-6 col-md-6 col-sm-6">
                               <!--location-->
-                               <div class="form-group row">
+                               <div class="form-group row" STYLE="background-color:;">
                                     <label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
                                     <select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
                                       <option value="">{{$toReturn['post_job']->countries}}</option>
@@ -275,20 +275,39 @@
                                     </select>
   
                                     <select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-                                        <option value="">Select Country First</option>
+                                        <option value="">Select State</option>
                                           <!--<option >{{$toReturn['post_job']->state}}</option>-->
   
                                     </select>
-                                    <div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
+                                    <!-- <div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
                                         
                                         <select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
                                             <option value="">Select state first</option>
-                                              <!--<option>{{$toReturn['post_job']->city}}</option>-->
+                                              <option>{{$toReturn['post_job']->city}}</option>
   
-                                      </select>
-                                        <br>
+                                      </select> -->
+                                      <!-- START -->
+                                        <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
+                                            <div id="select_city">
+												<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
+													<option value="">Select City </option>
+												</select>
+												<br>
+												<span id="citycheck">Please choose Your Location</span>
+                                            </div> 
+										</div>
+                                        <input type="checkbox" id="myCheck"  onclick="mycity()" style="width:20px;height:20px;">
+                                        <label id="city_label" class="control-label col-lg-4">Enter City if not present</label>
+
+                                        <div id="textCity" style="display:none;"  class="form-group row col-md-12"> 
+                                            <label for="" class="control-label col-lg-4">Enter City <span style="color:red;">*</span></label>
+                                            <input type="text" class="col-sm-5" id="" name="city_text_name">
+										</div>
+
+                                      <!-- END -->
+                                        <!-- <br>
                                         <span id="citycheck">Please choose Your Location</span> 
-                                    </div>
+                                    </div> -->
                                     
                                 </div>
                             <!--end of location-->
@@ -895,4 +914,22 @@
            $('#closeing_date').datepicker('setDate', 'today');
        });
    </script>
+<script>
+    function mycity() {
+
+        var checkBox = document.getElementById("myCheck");
+        if (checkBox.checked == true){
+            $('#select_city').css('display','none');
+            $('#textCity').css('display','block');
+            $('#city_label').css('display','none')
+            // city2.style.display = "block";
+            // city.style.display = "none";
+            }
+        else {
+            $('#select_city').css('display','block');
+            $('#textCity').css('display','none');
+            $('#city_label').css('display','block')
+            }
+    }
+    </script>
 </body>

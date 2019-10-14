@@ -1,14 +1,15 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
+
  @include('include.emp_header')
  @include('include.emp_leftsidebar')
-<script>
+ <script>
 		$.ajaxSetup({
 		  headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		  }
 		});
 		
-</script>
+		</script>
 <style>
     input[type=text],
     textarea,
@@ -78,7 +79,7 @@
 
     <div class="content-page">
         <div class="content">
-          <form action="{{url('employer/post_new_job/post_job')}}"   method="post">
+          <form action="{{url('employer/post_new_job/post_job')}}"   method="post" novalidate >
             <input type="hidden" name="_token" value = "{{ csrf_token()  }}" >    
             <div class="card">
                 <div class="card-header" style="background-color:#317eeb;">
@@ -196,7 +197,7 @@
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Closing Date <span style="color:red;">*</span></label>
                                   <div class="col-sm-8 input-group date" >
-                                      <input type="date" class="datetext datepicker"  name="closeing_date" style="width:66%; padding:8px;" required>
+                                      <input type="date" class="datetext datepicker"  name="closeing_date" style="width:35%; padding:8px;" required>
                                       <span id="date_check">Enter Valid Closing Date</span> 
                                   </div>
                               </div>
@@ -214,7 +215,6 @@
                                       <option value="H1 Visa">H1 Visa</option>
                                       <option value="TN Visa">TN Visa</option>
                                       <option value="US Citizen">US Citizen</option>
-                                      <option value="H1B">H1B</option>
                                   </select>
                               </div>
                               <!--Visa-->
@@ -249,12 +249,13 @@
                                   </select>
                               </div>
                               <!--Qualification -->
+
                           </div><!-- end col 1-->
 
                           <!-- col 2-->
                           <div class="col-lg-6 col-md-6 col-sm-6">
                               <!--location-->
-                                               <div class="form-group row">
+                              <div class="form-group row">
 													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
 													<select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
 													  {{-- <option value="">Select Country</option> --}}
@@ -269,24 +270,31 @@
 														  <option value="">Select State</option>
 				  
 													</select>
-													<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
-														
-														<select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
-															  <option value="">Select City</option>
-				  
-													  </select>
+
+													<div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
+                                                        <div id="select_city">
+														<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
+															  <option value="">Select City </option>
+													    </select>
 														<br>
-														<span id="citycheck">Please choose Your Location</span> 
+														<span id="citycheck">Please choose Your Location</span>
+                                                        </div> 
 													</div>
-													
+                                                    <input type="checkbox" id="myCheck"  onclick="mycity()" style="width:20px;height:20px;">
+                                                    <label id="city_label" class="control-label col-lg-4">Enter City if not present</label>
+
+                                                    <div id="textCity" style="display:none;"  class="form-group row col-md-12"> 
+                                                        <label for="" class="control-label col-lg-4">Enter City <span style="color:red;">*</span></label>
+                                                        <input type="text" class="col-sm-5" id="" name="city_text_name">
+													</div>
+
 												</div>
                               <!--end of location-->
-         
+
                               <!--Job Type-->
                               <div class="form-group row">
                                   <label for="address" class="control-label col-lg-4">Job Type <span style="color:red;">*</span></label>
-                                  <select name="type_of_job" id="type_of_job"  onchange="fulltime()" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
-                                       <option value="">Select Job Type</option>
+                                  <select name="type_of_job" id="type_of_job" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                       <option value="Full Time">Full Time</option>
                                       <option value="Contract">Contract</option>
                                       <option value="Contract-to-Hire">Contract-to-Hire</option>
@@ -315,32 +323,19 @@
                                   <!-- <input type="text" placeholder="min" name="pay_min" id="pay_min" style="width:20%; float:left;  margin-left: 1%;">&nbsp;&nbsp;
                                   <input type="text" placeholder="Max" name="pay_max" id="pay_max" value="" maxlength="4" style="width:22%; float:left;"> -->
                                   <select name="select_payment" id="pay_min" class="form-control" style="max-width:42%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-                                       <option value=""> SELECT MONTHLY RANGE</option>
-                                        <option value="20k-25k">20k - 25k</option>
-                                        <option value="25k-30k">25k - 30k</option>
-                                        <option value="30k-35k">30k - 35k</option>
-                                        <option value="35k-40k">35k - 40k</option>
-                                        <option value="40k-45k">40k - 45k</option>
-                                        <option value="45k-50k">45k - 50k</option>
-                                        <option value="50k-55k">50k - 55k</option>
-                                        <option value="55k-60k">55k - 60k</option>
-                                        <option value="60k-65k">60k - 65k</option>
-                                        <option value="65k-70k">65k - 70k</option>
-                                        <option value="$20-$25">$20 - $25</option>
-                                        <option value="$25-$30">$25 - $30</option>
-                                        <option value="$30-$35">$30 - $35</option>
-                                        <option value="$35-$40">$35 - $40</option>
-                                        <option value="$40-$45">$40 - $45</option>
-                                        <option value="$45-$50">$45 - $50</option>
-                                        <option value="$50-$55">$50 - $55</option>
-                                        <option value="$55-$60">$55 - $60</option>
-                                        <option value="$60-$65">$60 - $65</option>
-                                        <option value="$65-$70">$65 - $70</option>
-                                        <option value="$70-$75">$70 - $75</option>
-                                        <option value="$75-$80">$75 - $80</option>
-                                        <option value="DOE">(DOE)Depends upon Experience</option>
-                                      
-                                 </select>
+                                      <option> SELECT MONTHLY WAGES</option>
+                                      <option value="15k-20k">15k - 20k</option>
+                                      <option value="20k-25k">20k - 25k</option>
+                                      <option value="25k-30k">25k - 30k</option>
+                                      <option value="30k-35k">30k - 35k</option>
+                                      <option value="35k-40k">35k - 40k</option>
+                                      <option value="40k-45k">40k - 45k</option>
+                                      <option value="45k-50k">45k - 50k</option>
+                                      <option value="50k-55k">50k - 55k</option>
+                                      <option value="55k-60k">55k - 60k</option>
+                                      <option value="DOE">(DOE)Depends upon Experience</option>
+
+                                      </select>
                                   <div class="col-md-12" style="float: right;margin-left: 19em;margin-top: 2%;">
                                       <select name="pay_uom" id="pay_uom" class="form-control" style="width:19%; border: 1px solid #bbb8b8; float:left; margin-left:2.5em;" required>
                                           <option value="Hourly">Hourly</option>
@@ -447,9 +442,8 @@
         </div>
     </div>
 </div>
-@include('include.emp_footer')
-    
-<script type="text/javascript">
+    @include('include.emp_footer')
+    <script type="text/javascript">
     $('#country').on('change', function(e){
     console.log(e);
     $('#state_text').empty();
@@ -465,9 +459,8 @@
                         console.log(value.state_id);
                         });
             },
-                error:function(data){
-                console.log(data);
-            }
+               
+          
 
         });
 
@@ -482,15 +475,11 @@
             url: '{{url("employer/post_new_job/post_job/city/")}}'+"/"+state_id,
                 success:function(data){
                     console.log(data);
-                    
                      $.each(data, function(index, value) {
                         $('#city').append("<option value="+'"'+value.city_id+'"'+"selected>"+value.city_name+"</option>");
                         });
                     
             },
-                error:function(data){
-                console.log(data);
-            }
         });
     });
 </script>
@@ -935,99 +924,28 @@
 				});
 			});
 		</script>
+		<script>
+        $(document).ready(function() {
+            $('#closeing_date ').datepicker();
+            
+        });
+    </script>
 <script>
-$(document).ready(function() {
-    $('#closeing_date ').datepicker();
-    
-});
-</script>
+    function mycity() {
 
-
-<script type="text/javascript">
-    function fulltime(){
-      //  alert('hrllo');
-        temp = document.getElementById('type_of_job').value;
-        // alert(temp);
-        if (temp == 'Full Time'){
-            //alert('full time');
-             var x = document.getElementById("pay_min").options[1].disabled = false;
-             var x = document.getElementById("pay_min").options[2].disabled = false;
-             var x = document.getElementById("pay_min").options[3].disabled = false;
-             var x = document.getElementById("pay_min").options[4].disabled = false;
-             var x = document.getElementById("pay_min").options[5].disabled = false;
-             var x = document.getElementById("pay_min").options[6].disabled = false;
-             var x = document.getElementById("pay_min").options[7].disabled = false;            
-             var x = document.getElementById("pay_min").options[8].disabled = false;
-             var x = document.getElementById("pay_min").options[9].disabled = false;
-             var x = document.getElementById("pay_min").options[10].disabled = false;
-             var x = document.getElementById("pay_min").options[11].disabled = true;
-             var x = document.getElementById("pay_min").options[12].disabled = true;
-             var x = document.getElementById("pay_min").options[13].disabled = true;
-             var x = document.getElementById("pay_min").options[14].disabled = true;
-             var x = document.getElementById("pay_min").options[15].disabled = true;
-             var x = document.getElementById("pay_min").options[16].disabled = true;
-             var x = document.getElementById("pay_min").options[17].disabled = true;
-             var x = document.getElementById("pay_min").options[18].disabled = true;
-             var x = document.getElementById("pay_min").options[19].disabled = true;
-             var x = document.getElementById("pay_min").options[20].disabled = true;
-             var x = document.getElementById("pay_min").options[21].disabled = true;
-             var x = document.getElementById("pay_min").options[22].disabled = true;
-             
-            
-            
-        }
-        else if (temp == 'Contract'){
-            //alert('Contract');
-             var x = document.getElementById("pay_min").options[1].disabled = true;
-             var x = document.getElementById("pay_min").options[2].disabled = true;
-             var x = document.getElementById("pay_min").options[3].disabled = true;
-             var x = document.getElementById("pay_min").options[4].disabled = true;
-             var x = document.getElementById("pay_min").options[5].disabled = true;
-             var x = document.getElementById("pay_min").options[6].disabled = true;
-             var x = document.getElementById("pay_min").options[7].disabled = true;          
-             var x = document.getElementById("pay_min").options[8].disabled = true;
-             var x = document.getElementById("pay_min").options[9].disabled = true;
-             var x = document.getElementById("pay_min").options[10].disabled = true;
-             var x = document.getElementById("pay_min").options[11].disabled = false;
-             var x = document.getElementById("pay_min").options[12].disabled = false;
-             var x = document.getElementById("pay_min").options[13].disabled = false;
-             var x = document.getElementById("pay_min").options[14].disabled = false;
-             var x = document.getElementById("pay_min").options[15].disabled = false;
-             var x = document.getElementById("pay_min").options[16].disabled = false;
-             var x = document.getElementById("pay_min").options[17].disabled = false;
-             var x = document.getElementById("pay_min").options[18].disabled = false;
-             var x = document.getElementById("pay_min").options[19].disabled = false;
-             var x = document.getElementById("pay_min").options[20].disabled = false;
-             var x = document.getElementById("pay_min").options[21].disabled = false;
-             var x = document.getElementById("pay_min").options[22].disabled = false;
-             
-            
-        }
-        else{
-             var x = document.getElementById("pay_min").options[1].disabled = false;
-             var x = document.getElementById("pay_min").options[2].disabled = false;
-             var x = document.getElementById("pay_min").options[3].disabled = false;
-             var x = document.getElementById("pay_min").options[4].disabled = false;
-             var x = document.getElementById("pay_min").options[5].disabled = false;
-             var x = document.getElementById("pay_min").options[6].disabled = false;
-             var x = document.getElementById("pay_min").options[7].disabled = false;          
-             var x = document.getElementById("pay_min").options[8].disabled = false;
-             var x = document.getElementById("pay_min").options[9].disabled = false;
-             var x = document.getElementById("pay_min").options[10].disabled = false;
-             var x = document.getElementById("pay_min").options[11].disabled = false;
-             var x = document.getElementById("pay_min").options[12].disabled = false;
-             var x = document.getElementById("pay_min").options[13].disabled = false;
-             var x = document.getElementById("pay_min").options[14].disabled = false;
-             var x = document.getElementById("pay_min").options[15].disabled = false;
-             var x = document.getElementById("pay_min").options[16].disabled = false;
-             var x = document.getElementById("pay_min").options[17].disabled = false;
-             var x = document.getElementById("pay_min").options[18].disabled = false;
-             var x = document.getElementById("pay_min").options[19].disabled = false;
-             var x = document.getElementById("pay_min").options[20].disabled = false;
-             var x = document.getElementById("pay_min").options[21].disabled = false;
-             var x = document.getElementById("pay_min").options[22].disabled = false;
-             
-        }
+        var checkBox = document.getElementById("myCheck");
+        if (checkBox.checked == true){
+            $('#select_city').css('display','none');
+            $('#textCity').css('display','block');
+            $('#city_label').css('display','none')
+            // city2.style.display = "block";
+            // city.style.display = "none";
+            }
+        else {
+            $('#select_city').css('display','block');
+            $('#textCity').css('display','none');
+            $('#city_label').css('display','block')
+            }
     }
-</script>
+    </script>
 </body>
