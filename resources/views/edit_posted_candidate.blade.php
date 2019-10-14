@@ -174,7 +174,7 @@ $.ajaxSetup({
 								
 									 <!-- Date of Birth-->				
 									 <div class="form-group row">
-	                                            <label for="confirm_password"  class="control-label col-lg-4"> Date Of Birth</label>
+	                                            <label for="confirm_password"  class="control-label col-lg-4"> Date Of Birth (mm-dd-yyyy)</label>
 	                                            <div class="col-lg-8">
 	                                               	<input type="date" id="dob" name="dob" value="{{$details['dob']}}" placeholder="dd/mm/yyyy" style="width:83%; padding:0.5em;"  >
 	                                            </div>

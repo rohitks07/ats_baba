@@ -199,7 +199,7 @@
                              
                              <!--Closing Date-->
                              <div class="form-group row">
-                                <label for="address" class="control-label col-lg-4">Closing Date <span style="color:red;">*</span></label>
+                                <label for="address" class="control-label col-lg-4">Closing Date (mm-dd-yyyy)<span style="color:red;">*</span></label>
                                 <div class="col-sm-8 input-group date" >
                                     <input type="date" class="datetext datepicker" id="date" required name="closeing_date" <style="width:35%; padding:8px;"  value="{{$toReturn['post_job']['last_date']}}" style="border: 1px solid #bbb8b8;">
                                     <!--<span id="date_check">Enter Valid Closing Date</span>-->

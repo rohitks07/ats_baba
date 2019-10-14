@@ -201,7 +201,7 @@
 									 <!-- Date of Birth-->	
 									 
 									 	<div class="form-group row">
-										  <label for="" class="control-label col-lg-4">Date of Birth<span style="color:red;"></span></label>
+										  <label for="" class="control-label col-lg-4">Date of Birth (mm-dd-yyyy)<span style="color:red;"></span></label>
     											<div class="col-lg-8">
     												<input type="date" id="date_of_birth" name="dob" maxlength="10" placeholder="date of Birth" style="width:83%; padding:0.5em;" ><br>
     												 <span id="dobcheck" >Select a valid Date Of Birth</span>
