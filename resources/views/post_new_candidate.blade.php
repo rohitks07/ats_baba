@@ -1234,7 +1234,7 @@ $(function() {
 					err_dob=false;
 					return false;
 				}
-				else if(dob_val_day > 31 || dob_val_month > 11 || dob_val_year > new Date().getFullYear())
+				else if(dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear())
 				{
 					$("#dobcheck").show();
 					$("#dobcheck").focus();

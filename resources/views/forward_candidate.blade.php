@@ -876,7 +876,7 @@ $("#delete_doc").click(function(e) {
                     err_visaexpiry=false;
                     return false;
                 }
-                else if(visaexpiry_val_day > 31 || visaexpiry_val_month > 11 || visaexpiry_val_year > 2050)
+                else if(visaexpiry_val_day > 31 || visaexpiry_val_month > 12 || visaexpiry_val_year > 2050)
                 {
                     $("#visaexpiry_error").show();
                     $("#visaexpiry_error").focus();
@@ -972,7 +972,7 @@ $("#delete_doc").click(function(e) {
                 err_dob=false;
                 return false;
             }
-            else if(dob_val_day > 31 || dob_val_month > 11 || dob_val_year > new Date().getFullYear())
+            else if(dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear())
             {
                 $("#dob_error").show();
                 $("#dob_error").focus();
