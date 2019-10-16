@@ -139,7 +139,7 @@ $.ajaxSetup({
                                <div class="card-body">
 							        <h3>Personal Detail</h3>
 							   <hr>
-						<form action="{{url('employer/edit_posted_candidate/update/')}}" method="post" enctype="multipart/form-data">
+						<form action="{{url('employer/edit_posted_candidate/update/')}}" method="post" enctype="multipart/form-data" novalidate>
 						{{csrf_field()}}
 						<input type="hidden" name="id" id="id" value="{{$details->ID}}">
 						    <input type="hidden" name="_token" value = "{{ csrf_token()}}" > 

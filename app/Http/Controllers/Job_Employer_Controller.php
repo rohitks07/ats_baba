@@ -636,12 +636,26 @@ public function PostjobsAssignToJobSeeker(Request $request)
     
     public function post_new_candidate(Request $request)
     {
+        
         $con=$request->country;
         $sta=$request->state;
         $cit=$request->city;
-        $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
-        $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
-        $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
+        $city_text=$request->city_text_name;
+
+        $val_contries=countries::where('country_id',$con)->first('country_name');
+        $val_state=states::where('state_id',$sta)->first('state_name');
+        $val_city=cities::where('city_id',$cit)->first('city_name');
+
+        if($city_text)
+        {
+           $val_city['city_name']=$city_text;
+        }
+        else{
+           $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
+        } 
+
+
+
         $validation = Validator::make($request->all(), [
                 'cv_file' => 'required'
             ]);

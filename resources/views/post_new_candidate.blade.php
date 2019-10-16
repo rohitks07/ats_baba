@@ -166,7 +166,7 @@
                                <div class="card-body">
 							        <h3>Personal Detail</h3>
 							   <hr>
-						<form action="{{url('employer/post_new_candidate/insert')}}" method="post" enctype="multipart/form-data">
+						<form action="{{url('employer/post_new_candidate/insert')}}" method="post" enctype="multipart/form-data" novalidate>
 						    <input type="hidden" name="_token" value = "{{ csrf_token()}}" > 
 							   <div class="row">
 								    <div class="col-md-6">

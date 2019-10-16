@@ -79,7 +79,7 @@
 <div id="wrapper">
    <div class="content-page">
        <div class="content">
-         <form action="{{url('employer/post_job/update')}}"   method="post">
+         <form action="{{url('employer/post_job/update')}}"   method="post" novalidate>
            <input type="hidden" name="_token" value = "{{ csrf_token()  }}" >
            <input type="hidden" name="id" value="{{$toReturn['post_job']['ID']}}">    
            <div class="card">
