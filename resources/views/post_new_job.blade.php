@@ -349,6 +349,7 @@
                                         <option value="Contract-to-Hire">Contract-to-Hire</option>
                                         <option value="Part Time">Part Time</option>
                                     </select>
+                                    <label id="check_job_type" style="display:none">Cannot be blank</label>
                                 </div>
                                 <!--Job Type-->
 
@@ -953,7 +954,7 @@
         var err_jobcode = true;
         var err_jobtitle = true;
         var err_date = true;
-
+        var err_job_type=true;
         var err_vacancies = true;
 
 
@@ -1153,11 +1154,35 @@
             
             }
             
-            $("#").blur(function () {
-                check_city();
-            });
-            function check_city(){
+            // $("#").blur(function () {
+            //     check_city();
+            // });
+            // function check_city(){
 
+            // }
+
+
+            $("#validatefrm").click(function(){
+                check_jon_type();
+            });
+            $("#type_of_job").blur(function(){
+                check_jon_type();
+            });
+            function check_jon_type(){
+                var type_job = $("#type_of_job").val();
+                if(type_job==""){
+                    // check_job_type
+                    $("#check_job_type").show();
+                    $("#check_job_type").focus();
+                    $("#check_job_type").css("color", "red");
+                   
+                    err_job_type=false;
+                     return false;
+                }
+                else
+                {
+                    $("#check_job_type").hide();
+                }
             }
             
 
@@ -1172,20 +1197,21 @@
             err_vacancies = true;
             err_country = true;
             err_state = true;
+            err_job_type=true;
             check_group();
             check_clientname();
             check_owner();
             check_jobcode();
             check_jobtitle();
             check_date();
-
+            check_jon_type();
             check_vacancies();
 
 
             if ((err_country == true) && (err_state == true) && (err_group == true) && (
                     err_vacancies ==
                     true) && (err_clientname == true) && (err_owner == true) && (err_jobcode ==
-                    true) && (err_jobtitle == true) && (err_date == true) && (err_city == true)) {
+                    true) && (err_jobtitle == true) && (err_date == true) && (err_city == true)&&(err_job_type==true)) {
                 return true;
             } else {
                 return false;
