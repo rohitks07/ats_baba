@@ -148,14 +148,16 @@
                                         <div class="form-group row">
                                             <label for="CC" class="control-label col-lg-4">CC</label>
                                             <div class="col-lg-8">
-                                                <input type="email" style="width: 75%;" placeholder="CC " id="" name="email_cc">
+                                                <input type="text" style="width: 75%;" placeholder="CC " id="email_cc" name="email_cc">
+                                                <span id="email_cc_error">Please enter valid email ID</span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="Bcc" class="control-label col-lg-4">Bcc</label>
                                             <div class="col-lg-8">
-                                                <input type="email" style="width: 75%;" placeholder=" BCC" id="" name="email_bcc">
+                                                <input type="text" style="width: 75%;" placeholder=" BCC" id="email_bcc" name="email_bcc">
+                                                <span id="email_bcc_error">Please enter valid email ID</span>
                                             </div>
                                         </div>
 
@@ -732,6 +734,8 @@ $("#delete_doc").click(function(e) {
 <script>
     $(document).ready(function(){
         $("#email_to_error").hide();
+        $("#email_cc_error").hide();
+        $("#email_bcc_error").hide();
         $("#fullname_error").hide();
         $("#phone_primart_error").hide();
         $("#condidate_email_id_error").hide();
@@ -743,6 +747,8 @@ $("#delete_doc").click(function(e) {
         $("#passportno_error").hide();
 
         var err_email_to=true;
+        var err_email_cc=true;
+        var err_email_bcc=true;
         var err_fullname=true;
         var err_phone_primart=true;
         var err_condidate_email_id=true;
@@ -805,6 +811,92 @@ $("#delete_doc").click(function(e) {
                 $("#email_to_error").css("color","red");
                 err_email_to_val=false;
                 return false;
+            }
+        }
+        //validate email cc
+        $("#email_cc").keyup(function()
+        {
+            var var_tmp = $("#email_cc").val();
+            $("#email_cc").val(var_tmp.replace(/ /g, ""));
+        });
+        $("#email_cc").blur(function()
+        {
+            check_email_cc();
+        });
+        function check_email_cc()
+        {
+            var email_cc_val=$("#email_cc").val();
+            email_cc_val=email_cc_val.replace(/,(\s+)?$/, ''); // removing last comma
+            $("#email_cc").val(email_cc_val); // removing last comma in input
+
+            var email_cc_val_arr = email_cc_val.split(','); // array
+
+            if(email_cc_val){
+                for(i=0; i<email_cc_val_arr.length; i++){
+                    var v=/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                    var result = email_cc_val_arr[i].match(v);
+                    if((email_cc_val_arr[i] == "")||(result == null))
+                    {
+                        $("#email_cc_error").show();
+                        $("#email_cc_error").focus();
+                        $("#email_cc_error").css("color","red");
+                        err_email_cc_val=false;
+                        return false;
+                        break;
+                    }
+                    else
+                    {
+                        err_email_cc_val=true;
+                        $("#email_cc_error").hide();
+                    }
+                }
+            }
+            else{
+                err_email_cc_val=true;
+                $("#email_cc_error").hide();
+            }
+        }
+        //validate email bcc
+        $("#email_bcc").keyup(function()
+        {
+            var var_tmp = $("#email_bcc").val();
+            $("#email_bcc").val(var_tmp.replace(/ /g, ""));
+        });
+        $("#email_bcc").blur(function()
+        {
+            check_email_bcc();
+        });
+        function check_email_bcc()
+        {
+            var email_bcc_val=$("#email_bcc").val();
+            email_bcc_val=email_bcc_val.replace(/,(\s+)?$/, ''); // removing last comma
+            $("#email_bcc").val(email_bcc_val); // removing last comma in input
+
+            var email_bcc_val_arr = email_bcc_val.split(','); // array
+
+            if(email_bcc_val){
+                for(i=0; i<email_bcc_val_arr.length; i++){
+                    var v=/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                    var result = email_bcc_val_arr[i].match(v);
+                    if((email_bcc_val_arr[i] == "")||(result == null))
+                    {
+                        $("#email_bcc_error").show();
+                        $("#email_bcc_error").focus();
+                        $("#email_bcc_error").css("color","red");
+                        err_email_bcc_val=false;
+                        return false;
+                        break;
+                    }
+                    else
+                    {
+                        err_email_bcc_val=true;
+                        $("#email_bcc_error").hide();
+                    }
+                }
+            }
+            else{
+                err_email_bcc_val=true;
+                $("#email_bcc_error").hide();
             }
         }
         //validate full name
@@ -1066,8 +1158,10 @@ $("#delete_doc").click(function(e) {
         $("#send").click(function()
         {
             // when submit button clicked, validate
-            check_fullname();
             check_email_to();
+            check_email_cc();
+            check_email_bcc();
+            check_fullname();
             check_phone_primart();
             check_condidate_email_id();
             check_us_visa_status();
