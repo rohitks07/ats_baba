@@ -211,27 +211,31 @@ public function update_personal_details(Request $request)
     $con =  $request->country;
     $sta=  $request->state;
     $cit=  $request->city;
-    $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
-    $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
-    $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
-          if ($request->hasFile('cv_file')){
-        $cv = $request->file('cv_file');
-        $store_cv =$cv->getClientOriginalName();
-        $cv->move(public_path('seekerresume'), $store_cv);
+    $val_contries=countries::where('country_id',$con)->first('country_name');
+    $val_state=states::where('state_id',$sta)->first('state_name');
+    $val_city=cities::where('city_id',$cit)->first('city_name');
+        if ($request->hasFile('cv_file')){
+            $cv = $request->file('cv_file');
+            $store_cv =$cv->getClientOriginalName();
+            $cv->move(public_path('seekerresume'), $store_cv);
         }
-         if ($request->hasFile('file_other1')){
-        $file_other1 = $request->file('file_other1');
-        $store_file_other1 =$file_other1->getClientOriginalName();
-        $file_other1->move(public_path('seekerresume'), $store_file_other1);
+        else{
+            $store_cv=$request->cv_file_before;
+        }
+        
+        if ($request->hasFile('file_other1')){
+            $file_other1 = $request->file('file_other1');
+            $store_file_other1 =$file_other1->getClientOriginalName();
+            $file_other1->move(public_path('seekerresume'), $store_file_other1);
         }
         else
         {
             $store_file_other1="";
         }
-         if ($request->hasFile('$file_other2')){
-        $file_other2 = $request->file('$file_other2');
-        $store_file_other2 =$file_other2->getClientOriginalName();
-        $file_other2->move(public_path('seekerresume'), $store_file_other2);
+        if ($request->hasFile('$file_other2')){
+            $file_other2 = $request->file('$file_other2');
+            $store_file_other2 =$file_other2->getClientOriginalName();
+            $file_other2->move(public_path('seekerresume'), $store_file_other2);
         }
         else
         {

@@ -1004,7 +1004,7 @@ $("#delete_doc").click(function(e) {
         {
             var us_visa_status_val=$("#us_visa_status").val();
 
-            var regexOnlyTextNumbers = /^[a-zA-Z0-9-]+$/;
+            var regexOnlyTextNumbers = /^[a-zA-Z0-9- ]+$/;
             if (us_visa_status_val==""||regexOnlyTextNumbers.test(us_visa_status_val) != true){
                 $("#us_visa_status_error").show();
                 $("#us_visa_status_error").focus();

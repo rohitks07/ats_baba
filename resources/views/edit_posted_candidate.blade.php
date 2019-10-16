@@ -312,12 +312,13 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Upload Resume<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="file" class="form-control" name="cv_file" id="cv_file" value="{{$details['cv_file']}}" style="background:#fff;" />
-												  <p>Upload files only in .doc, .docx or .pdf format with maximum size of 32 MB.</p>
-												  <span id="resume_check">Please Choose a Valid File</span>
+												<input type="file" class="form-control" name="cv_file" id="cv_file" style="background:#fff;" />
+												<input type="hidden" name="cv_file_before" value="{{$details['cv_file']}}" ><a href="{{url('public/seekerresume/'.$details['cv_file'])}}">{{$details['cv_file']}}</a>
+												<p>Upload files only in .doc, .docx or .pdf format with maximum size of 32 MB.</p>
+												<span id="resume_check">Please Choose a Valid File</span>
 											</div>
 								    </div>								
-								<!--end of Select File-->	
+								<!--end of Select File-->
 								<!--Other Documents -->	 
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Other Documents</label>										
@@ -828,18 +829,21 @@ $(function() {
 				{
 					
 					var file_val=$("#cv_file").val();
-					 var ext = file_val.split('.').pop();
-					if(ext=="pdf" || ext=="docx" || ext=="doc")
+					var ext = file_val.split('.').pop();
+					if(file_val)
 					{
+						if(ext=="pdf" || ext=="docx" || ext=="doc")
+						{
 							$("#resume_check").hide();
-					}
-					else
-					{
-						$("#resume_check").show();
-						$("#resume_check").focus();
-						$("#resume_check").css("color","red");
-						err_resume=false;
-						return false;
+						}
+						else
+						{
+							$("#resume_check").show();
+							$("#resume_check").focus();
+							$("#resume_check").css("color","red");
+							err_resume=false;
+							return false;
+						}
 					}
 				}
 				$("#validatefrm").click(function()
