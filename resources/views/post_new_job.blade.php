@@ -297,8 +297,7 @@
                                             style="color:red;">*</span></label>
                                     <select name="country" id="country" class="form-control "
                                         style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-                                        <option value="United States" selected>United States</option>
-                                        @foreach($toReturn['countries'] as $country)
+                                        <option value="224" selected>United States</option>                                        @foreach($toReturn['countries'] as $country)
                                         <option value="{{$country['country_id']}}">{{ $country['country_name'] }}
                                         </option>
                                         @endforeach
@@ -529,11 +528,9 @@
 </div>
 @include('include.emp_footer')
 <script type="text/javascript">
-    $('#country').on('change', function (e) {
-        console.log(e);
+$(window).on("load", function(e){
         $('#state_text').empty();
         var country_id = e.target.value;
-        console.log(country_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/state/")}}' + "/" + country_id,
@@ -552,10 +549,8 @@
 
     });
     $('#state_text').on('change', function (e) {
-        console.log(e);
         $('#city').empty();
         var state_id = e.target.value;
-        console.log(state_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/city/")}}' + "/" + state_id,
