@@ -1173,7 +1173,7 @@ $("#delete_doc").click(function(e) {
 
 
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if((err_email_to==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_expectedrate==true))
+            if((err_email_to==true)&&(err_email_cc==true)&&(err_email_bcc==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_expectedrate==true))
             {
                 return true; //ok
             }
