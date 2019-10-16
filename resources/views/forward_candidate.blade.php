@@ -140,7 +140,8 @@
                                             <div class="col-lg-8">
                                                 <input type="hidden" name="job_id" value="{{$toReturn['application_detail']['job_ID']}}">
                                                 <input type="hidden" name="seeker_id" value="{{$toReturn['application_detail']['seeker_ID']}}"> 
-                                                <input type="email" style="width: 75%;" placeholder=" Send Email To " id="" name="email_to" required>
+                                                <input type="text" style="width: 75%;" placeholder=" Send Email To " id="email_to" name="email_to">
+                                                <span id="email_to_error">Please enter valid email ID</span>
                                             </div>
                                         </div>
 
@@ -730,6 +731,7 @@ $("#delete_doc").click(function(e) {
 
 <script>
     $(document).ready(function(){
+        $("#email_to_error").hide();
         $("#fullname_error").hide();
         $("#phone_primart_error").hide();
         $("#condidate_email_id_error").hide();
@@ -740,6 +742,7 @@ $("#delete_doc").click(function(e) {
         $("#expectedrate_error").hide();
         $("#passportno_error").hide();
 
+        var err_email_to=true;
         var err_fullname=true;
         var err_phone_primart=true;
         var err_condidate_email_id=true;
@@ -758,6 +761,52 @@ $("#delete_doc").click(function(e) {
         var err_linkedinid=true;
         var err_expectedrate=true;
 
+        //validate email to
+        $("#email_to").keyup(function()
+        {
+            var var_tmp = $("#email_to").val();
+            $("#email_to").val(var_tmp.replace(/ /g, ""));
+        });
+        $("#email_to").blur(function()
+        {
+            check_email_to();
+        });
+        function check_email_to()
+        {
+            var email_to_val=$("#email_to").val();
+            email_to_val=email_to_val.replace(/,(\s+)?$/, ''); // removing last comma
+            $("#email_to").val(email_to_val); // removing last comma in input
+
+            var email_to_val_arr = email_to_val.split(','); // array
+
+            if(email_to_val){
+                for(i=0; i<email_to_val_arr.length; i++){
+                    var v=/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                    var result = email_to_val_arr[i].match(v);
+                    if((email_to_val_arr[i] == "")||(result == null))
+                    {
+                        $("#email_to_error").show();
+                        $("#email_to_error").focus();
+                        $("#email_to_error").css("color","red");
+                        err_email_to_val=false;
+                        return false;
+                        break;
+                    }
+                    else
+                    {
+                        err_email_to_val=true;
+                        $("#email_to_error").hide();
+                    }
+                }
+            }
+            else{
+                $("#email_to_error").show();
+                $("#email_to_error").focus();
+                $("#email_to_error").css("color","red");
+                err_email_to_val=false;
+                return false;
+            }
+        }
         //validate full name
         $("#fullname").blur(function()
         {
@@ -1018,6 +1067,7 @@ $("#delete_doc").click(function(e) {
         {
             // when submit button clicked, validate
             check_fullname();
+            check_email_to();
             check_phone_primart();
             check_condidate_email_id();
             check_us_visa_status();
@@ -1029,13 +1079,13 @@ $("#delete_doc").click(function(e) {
 
 
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if((err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_expectedrate==true))
+            if((err_email_to==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_expectedrate==true))
             {
-                return true;
+                return true; //ok
             }
             else
             {
-                return false;
+                return false; //error occurred
             }
         });
     });
