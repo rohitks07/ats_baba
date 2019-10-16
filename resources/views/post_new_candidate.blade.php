@@ -166,7 +166,7 @@
                                <div class="card-body">
 							        <h3>Personal Detail</h3>
 							   <hr>
-						<form action="{{url('employer/post_new_candidate/insert')}}" method="post" enctype="multipart/form-data">
+						<form action="{{url('employer/post_new_candidate/insert')}}" method="post" enctype="multipart/form-data" novalidate>
 						    <input type="hidden" name="_token" value = "{{ csrf_token()}}" > 
 							   <div class="row">
 								    <div class="col-md-6">
@@ -452,11 +452,20 @@
 														  <option value="">Select State</option>
 													</select>
 													<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
-														<select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
+															<div id="select_city">
+														<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
 															  <option value="">Select City</option>   
 													  </select>
 														<br>
+														
 														<span id="citycheck">Please choose Your Location</span> 
+													</div>
+												</div>
+												<input type="checkbox" id="myCheck"  onclick="mycity()" style="width:20px;height:20px;">
+												<label id="city_label" class="control-label col-lg-4">Enter City if not present</label>
+												<div id="textCity" style="display:none;"  class="form-group row col-md-12"> 
+                                                        <label for="" class="control-label col-lg-4">Enter City <span style="color:red;">*</span></label>
+                                                        <input type="text" class="col-sm-5" id="" name="city_text_name">
 													</div>
 												</div>
 								<!--end Location -->
@@ -1664,5 +1673,23 @@ $(function() {
 //     });
 // });
 // </script>
+<script>
+		function mycity() {
+	
+			var checkBox = document.getElementById("myCheck");
+			if (checkBox.checked == true){
+				$('#select_city').css('display','none');
+				$('#textCity').css('display','block');
+				$('#city_label').css('display','none')
+				// city2.style.display = "block";
+				// city.style.display = "none";
+				}
+			else {
+				$('#select_city').css('display','block');
+				$('#textCity').css('display','none');
+				$('#city_label').css('display','block')
+				}
+		}
+		</script>
 </body>
 </html>

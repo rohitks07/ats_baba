@@ -54,6 +54,9 @@ class Search_Resume_Controller extends Controller
         
         $val_city       =cities::where('city_id',$cit)->first('city_name')->toArray();
 
+
+        
+
         $postcandidate = new Tbl_job_seekers(); 
         $postcandidate->first_name=$request->first_name;
         $postcandidate->middle_name=$request->middle_name;
@@ -200,7 +203,8 @@ public function view_personal_details($id="")
     $toReturn['cities']          =cities::get()->toArray();
     $toReturn['countries']       =countries::get()->toArray();
     $toReturn['states']          =states::get()->toArray();
-    $details= Tbl_job_seekers::where('ID',$id)->first();	
+    $details= Tbl_job_seekers::where('ID',$id)->first();
+
     	
    return view('edit_posted_candidate')->with('toReturn',$toReturn)->with('details',$details);
 
@@ -208,16 +212,33 @@ public function view_personal_details($id="")
 public function update_personal_details(Request $request)
 {
     
+      // return $request->city_text_name; 
+
     $con =  $request->country;
     $sta=  $request->state;
     $cit=  $request->city;
+
+    $city_text=$request->city_text_name;
+
+
     $val_contries=countries::where('country_id',$con)->first('country_name');
     $val_state=states::where('state_id',$sta)->first('state_name');
     $val_city=cities::where('city_id',$cit)->first('city_name');
-        if ($request->hasFile('cv_file')){
-            $cv = $request->file('cv_file');
-            $store_cv =$cv->getClientOriginalName();
-            $cv->move(public_path('seekerresume'), $store_cv);
+
+    if($city_text)
+    {
+       $val_city['city_name']=$city_text;
+    }
+    else{
+       $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
+    } 
+
+
+
+          if ($request->hasFile('cv_file')){
+        $cv = $request->file('cv_file');
+        $store_cv =$cv->getClientOriginalName();
+        $cv->move(public_path('seekerresume'), $store_cv);
         }
         else{
             $store_cv=$request->cv_file_before;
@@ -241,6 +262,8 @@ public function update_personal_details(Request $request)
         {
             $store_file_other2="";
         }
+        
+
         
     $u=Tbl_job_seekers::where('ID',$request->id)->update(array(
     'first_name'=>$request->first_name,
