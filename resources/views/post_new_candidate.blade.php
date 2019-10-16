@@ -1342,6 +1342,11 @@ $(function() {
 			}
 		}
 		//Validation Experience
+		$("#Experience").keyup(function()
+        {
+            var var_tmp = $("#Experience").val();
+            $("#Experience").val(var_tmp.replace(/[^0-9]/g, ''));
+        });
 		$("#Experience").blur(function()
 		{
 			check_Experience();
