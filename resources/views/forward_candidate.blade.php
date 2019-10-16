@@ -184,21 +184,21 @@
                                         <!-- col-sm-6 col-md-4     col-md-3 col-sm-4 -->
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="fullname" checked>
-                                                <label class="form-label">Full Name </label>
+                                                <label class="form-label">Full Name<span class="red">*</span></label>
                                                 <input type="text" id="fullname" placeholder="Full Name" name="fullname" value="{{$toReturn['application_detail']['candate_name']}}" required>   
                                                 <span id="fullname_error">Please enter valid name</span>
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="phone_primary" checked>
-                                                <label class="form-label">Phone(Primary)</label>
+                                                <label class="form-label">Phone(Primary)<span class="red">*</span></label>
                                                 <input type="text" id="phone_primart" placeholder="Phone(Primary)" name="phone_primary" value="{{$toReturn['application_detail']['phone_no_mobile']}}"  maxlength="12" required>  
                                                 <span id="phone_primart_error">Please enter valid Phone</span>
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox" name="param[]" value="condidate_email_id" checked>
-                                                <label class="form-label">Email ID</label>
+                                                <label class="form-label">Email ID<span class="red">*</span></label>
                                                 <input type="text" id="condidate_email_id" placeholder="Email ID" name="condidate_email_id" value="{{$toReturn['application_detail']['email_id']}}" required>     
                                                 <span id="condidate_email_id_error">Please enter valid email ID</span>
                                             </div><!-- end of col -->
@@ -212,12 +212,13 @@
 
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                             <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="current_location" checked >
-                                            <label class="form-label">Current Location(City,State)</label>
+                                            <label class="form-label">Current Location(City,State)<span class="red">*</span></label>
                                             <input type="text" id="current_location" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>      
+                                            <span id="current_location_error">Should not be blank</span>
                                         </div><!--end of col-->
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                             <input class="form-check-input chkbx" type="checkbox" name="param[]" value="us_visa_status" checked >
-                                            <label class="form-label">US Visa Status</label>  
+                                            <label class="form-label">US Visa Status<span class="red">*</span></label>  
                                             <input type="text" id="us_visa_status" placeholder=" US Visa Status " name="us_visa_status" value="{{$toReturn['application_detail']['visa_status']}}" required>   
                                             <span id="us_visa_status_error">Please enter valid visa status</span>
                                         </div><!--end of col-->
@@ -226,40 +227,41 @@
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="visaexpiry" checked> 
                                                 <label class="form-label">US Visa Expiry</label>
-                                                <input type="date" id="visaexpiry" onblur="rate()" placeholder="US Visa Expiry" name="visaexpiry" >
+                                                <input type="date" id="visaexpiry" placeholder="US Visa Expiry" name="visaexpiry" >
                                                 <span id="visaexpiry_error">Please enter valid expiry date</span>
                                         </div><!-- end of col -->
                                         
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels" style="background-color:;">
                                             <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" checked>
-                                            <label class="form-label">SSN No.(Last Four Digits)</label>
-                                            <input type="text" onblur="numbval()" maxlenght="4" placeholder="SSN No.(Last Four Diogits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title required>
+                                            <label class="form-label">SSN No.(Last Four Digits)<span class="red">*</span></label>
+                                            <input type="text" maxlength="4" placeholder="SSN No.(Last Four Digits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title required>
                                             <span id="last_for_digit_ssn_error">Please enter SSN No. (last four digit only)</span>
                                         </div><!--end of col-->
 
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
                                             <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="passportno" checked> 
                                             <label class="form-label">Passport No</label>
-                                            <input type="text" id="passportno" onblur="rate()" placeholder="Passport No" name="passportno" >
+                                            <input type="text" id="passportno" placeholder="Passport No" name="passportno" >
                                             <span id="passportno_error">Please enter valid passport no</span>
                                         </div><!-- end of col -->
 
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                           <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="dob" checked >
-                                          <label class="form-label">D O B</label>
+                                          <label class="form-label">D O B<span class="red">*</span></label>
                                           <input type="date" id="dob" placeholder="Date Of Birth" name="dob" required/>
                                           <span id="dob_error">Please enter valid DOB</span>
                                         </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                              <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
-                                             <label class="form-label">Qualification With University Name and Passing Year(Bachelors)</label>
-                                                <input type="text" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni"  required/>   
+                                             <label class="form-label">Qualification With University Name and Passing Year(Bachelors)<span class="red">*</span></label>
+                                             <input type="text" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni"  required/>   
+                                                <span id="qual_with_uni_error">Should not be blank</span>
                                             </div><!--end of col-->
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="Open_For_Relocation" checked>
-                                                <label class="form-label">Open For Relocation(Yes/No)</label>
+                                                <label class="form-label">Open For Relocation(Yes/No)<span class="red">*</span></label>
                                                 <!--<input type="text" placeholder="Open For Relocation(Y/N)" name="Open_For_Relocation" required/>-->
                                                 <select placeholder="Open For Relocation(Yes/No)" id="open_for_relocation" name="Open_For_Relocation" >
                                                     <option>Yes</option>
@@ -269,7 +271,7 @@
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                               <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_tele" checked>
-                                              <label class="form-label">Availability For Telephone Interview(Yes/No)</label>
+                                              <label class="form-label">Availability For Telephone Interview(Yes/No)<span class="red">*</span></label>
                                                 <!--<input type="text"  placeholder="Availability For Telephone Interview(Y/N)" name="availa_for_tele"  required/>     -->
                                                 <select placeholder="Availability For Telephone Interview(Yes/No)" id="availa_for_tele" name="availa_for_tele">
                                                     <option>Yes</option>
@@ -279,7 +281,7 @@
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_per" checked>
-                                                <label class="form-label">Availability For In-Person Interview(Yes/No)</label>
+                                                <label class="form-label">Availability For In-Person Interview(Yes/No)<span class="red">*</span></label>
                                                 <!--<input type="text"  placeholder="Availability For In-Person Interview(Y/N)" name="availa_for_per"  required />-->
                                                 <select  placeholder="Availability For In-Person Interview(Yes/No)" id="availa_for_per" name="availa_for_per">
                                                     <option>Yes</option>
@@ -289,7 +291,7 @@
 
                                             <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="availa_for_new" checked> 
-                                                <label class="form-label">Availability For New Project(Yes/No) </label>
+                                                <label class="form-label">Availability For New Project(Yes/No)<span class="red">*</span></label>
                                                 <!--<input type="text"  placeholder="Availability For New Project(Y/N)" name="availa_for_new" required />-->
                                                 <select  placeholder="Availability For New Project(Yes/No)" id="availa_for_new" name="availa_for_new">
                                                     <option>Yes</option>
@@ -305,7 +307,7 @@
 
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
                                                 <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="expectedrate" checked> 
-                                                <label class="form-label">Expected Rate</label>
+                                                <label class="form-label">Expected Rate<span class="red">*</span></label>
                                                 <input type="text" id="expectedrate" onblur="rate()" placeholder="Expected Rate" name="expectedrate" required>
                                                 <span id="expectedrate_error">Please enter valid rate</span>
                                         </div><!-- end of col -->
@@ -674,15 +676,15 @@ function numbval() {
   var x, text;
 
   // Get the value of the input field with id="numb"
-  x = document.getElementById("last_for_digit_ssn").value;
+  // x = document.getElementById("last_for_digit_ssn").value;
 
-  // If x is Not a Number or less than one or greater than 10
-  if (isNaN(x) || x < 1000 || x > 9999) {
-    text = "Please enter a Valid SSN No.";
-  } else {
-    text = " ";
-  }
-  document.getElementById("chk").innerHTML = text;
+  // // If x is Not a Number or less than one or greater than 10
+  // if (isNaN(x) || x < 1000 || x > 9999) {
+  //   text = "Please enter a Valid SSN No.";
+  // } else {
+  //   text = " ";
+  // }
+  // document.getElementById("chk").innerHTML = text;
 }
     
 // for ctc
@@ -739,10 +741,12 @@ $("#delete_doc").click(function(e) {
         $("#fullname_error").hide();
         $("#phone_primart_error").hide();
         $("#condidate_email_id_error").hide();
+        $("#current_location_error").hide();
         $("#us_visa_status_error").hide();
         $("#visaexpiry_error").hide();
         $("#last_for_digit_ssn_error").hide();
         $("#dob_error").hide();
+        $("#qual_with_uni_error").hide();
         $("#expectedrate_error").hide();
         $("#passportno_error").hide();
 
@@ -969,6 +973,28 @@ $("#delete_doc").click(function(e) {
                 $("#condidate_email_id_error").hide();
             }
         }
+        //validate qualification with university
+        $("#current_location").blur(function()
+        {
+            check_current_location();
+        });
+        function check_current_location()
+        {
+            var current_location_val=$("#current_location").val();
+            if (current_location_val==""){
+                $("#current_location_error").show();
+                $("#current_location_error").focus();
+                $("#current_location_error").css("color","red");
+                err_current_location=false;
+                return false;
+            }
+            else
+            {
+                err_current_location=true;
+                $("#current_location_error").hide();
+            }
+            
+        }
         // us visa status
         $("#us_visa_status").blur(function()
         {
@@ -1039,6 +1065,11 @@ $("#delete_doc").click(function(e) {
 
         }
         // last four digit ssn
+        $("#last_for_digit_ssn").keyup(function()
+        {
+            var var_tmp = $("#last_for_digit_ssn").val();
+            $("#last_for_digit_ssn").val(var_tmp.replace(/[^0-9]/g, ''));
+        });
         $("#last_for_digit_ssn").blur(function()
         {
             check_last_for_digit_ssn();
@@ -1127,6 +1158,28 @@ $("#delete_doc").click(function(e) {
                 $("#dob_error").hide();
             }
         }
+        //validate qualification with university
+        $("#qual_with_uni").blur(function()
+        {
+            check_qual_with_uni();
+        });
+        function check_qual_with_uni()
+        {
+            var qual_with_uni_val=$("#qual_with_uni").val();
+            if (qual_with_uni_val==""){
+                $("#qual_with_uni_error").show();
+                $("#qual_with_uni_error").focus();
+                $("#qual_with_uni_error").css("color","red");
+                err_qual_with_uni=false;
+                return false;
+            }
+            else
+            {
+                err_qual_with_uni=true;
+                $("#qual_with_uni_error").hide();
+            }
+            
+        }
         //validate expected rate
         $("#expectedrate").blur(function()
         {
@@ -1164,16 +1217,19 @@ $("#delete_doc").click(function(e) {
             check_fullname();
             check_phone_primart();
             check_condidate_email_id();
+            check_current_location();
+            check_current_location();
             check_us_visa_status();
             check_visaexpiry();
             check_last_for_digit_ssn();
             check_passportno();
             check_dob();
+            check_qual_with_uni();
             check_expectedrate();
 
 
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if((err_email_to==true)&&(err_email_cc==true)&&(err_email_bcc==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_expectedrate==true))
+            if((err_email_to==true)&&(err_email_cc==true)&&(err_email_bcc==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_current_location==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_qual_with_uni==true)&&(err_expectedrate==true))
             {
                 return true; //ok
             }
