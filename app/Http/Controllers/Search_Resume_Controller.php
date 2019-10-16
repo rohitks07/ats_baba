@@ -54,6 +54,21 @@ class Search_Resume_Controller extends Controller
         
         $val_city       =cities::where('city_id',$cit)->first('city_name')->toArray();
 
+
+         // return $Request;
+    
+     $cit=  $request->city_name;
+     $city_text=  $request->city_text_name;
+     $val_contries=countries::where('country_id',$con)->orWhere('country_name',$con)->first('country_name');
+     $val_state=states::where('state_id',$sta)->orWhere('state_name',$sta)->first('state_name');
+     if($city_text)
+          {
+             $val_city['city_name']=$city_text;
+          }
+          else{
+             $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
+          } 
+
         $postcandidate = new Tbl_job_seekers(); 
         $postcandidate->first_name=$request->first_name;
         $postcandidate->middle_name=$request->middle_name;
@@ -207,13 +222,30 @@ public function view_personal_details($id="")
 }
 public function update_personal_details(Request $request)
 {
+     // return $Request;
     
+     $cit=  $request->city_name;
+     $city_text=  $request->city_text_name;
+     $val_contries=countries::where('country_id',$con)->orWhere('country_name',$con)->first('country_name');
+     $val_state=states::where('state_id',$sta)->orWhere('state_name',$sta)->first('state_name');
+     if($city_text)
+          {
+             $val_city['city_name']=$city_text;
+          }
+          else{
+             $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
+          } 
+return val_city;
+
     $con =  $request->country;
     $sta=  $request->state;
     $cit=  $request->city;
     $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
     $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
     $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
+
+    
+
           if ($request->hasFile('cv_file')){
         $cv = $request->file('cv_file');
         $store_cv =$cv->getClientOriginalName();
