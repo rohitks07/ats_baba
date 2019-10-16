@@ -200,7 +200,10 @@ class Job_Employer_Controller extends Controller
             $toReturn['cities']          =cities::get()->toArray();
             $toReturn['countries']       =countries::get()->toArray();
             $toReturn['states']          =states::get()->toArray();
-        return view('post_new_job')->with('toReturn',$toReturn);
+            // $toReturn['countries']       =countries::where('')get()
+            $country_name="United States";
+            $country_id=224;
+        return view('post_new_job')->with('toReturn',$toReturn)->with('country_name',$country_name)->with('country_id',$country_id);
     }
 
     public function Add_to_post_job(Request $request)
@@ -233,15 +236,15 @@ class Job_Employer_Controller extends Controller
              $cit=  $request->city_name;
              $city_text=$request->city_text_name;
             
-             $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
+             $val_contries=countries::where('country_id',$con)->first('country_name');
     
-             $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
+             $val_state=states::where('state_id',$sta)->first('state_name');
              if($city_text)
              {
                 $Add_to_post_job->city    = $city_text;
              }
              else{
-                $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
+                $val_city=cities::where('city_id',$cit)->first('city_name');
                 $Add_to_post_job->city=$val_city['city_name'];
              } 
             

@@ -503,19 +503,15 @@
    <!-- Validation of Post new Job -->
    <script type="text/javascript">
     $('#country').on('change', function (e) {
-        console.log(e);
         $('#state_text').empty();
         var country_id = e.target.value;
-        console.log(country_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/state/")}}' + "/" + country_id,
             success: function (data) {
-                console.log(data);
                 $.each(data, function (index, value) {
                     $('#state_text').append("<option value=" + '"' + value.state_id + '"' +
                         "selected>" + value.state_name + "</option>");
-                    console.log(value.state_id);
                 });
             },
 

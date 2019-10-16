@@ -39,20 +39,18 @@ class Search_Resume_Controller extends Controller
                                ->first();
                              
         return view ('search_resume')->with('toReturn',$toReturn);
- 
         
-    	
     }
     
     public function post_new_candidate(Request $request){
         $con =  $request->country;
         $sta=  $request->state;
         $cit=  $request->city;
-        $val_contries      =countries::where('country_id',$con)->first('country_name')->toArray();
+        $val_contries      =countries::where('country_id',$con)->first('country_name');
 
-        $val_state      =states::where('state_id',$sta)->first('state_name')->toArray();
+        $val_state      =states::where('state_id',$sta)->first('state_name');
         
-        $val_city       =cities::where('city_id',$cit)->first('city_name')->toArray();
+        $val_city       =cities::where('city_id',$cit)->first('city_name');
 
 
         
@@ -204,8 +202,6 @@ public function view_personal_details($id="")
     $toReturn['countries']       =countries::get()->toArray();
     $toReturn['states']          =states::get()->toArray();
     $details= Tbl_job_seekers::where('ID',$id)->first();
-
-    	
    return view('edit_posted_candidate')->with('toReturn',$toReturn)->with('details',$details);
 
 }

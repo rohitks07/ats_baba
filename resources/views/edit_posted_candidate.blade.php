@@ -250,7 +250,7 @@ $.ajaxSetup({
 												<div class="form-group row">
 													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
 													<select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-														<option value="United States" selected>United States</option>
+														<option value="224" selected>United States</option>
 														@foreach($toReturn['countries'] as $country)
 													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
 													  @endforeach  
@@ -373,23 +373,18 @@ $.ajaxSetup({
  
 @include('include.emp_footer')
 <script type="text/javascript">
-    $('#country').on('change', function(e){
-    console.log(e);
+$("#country").on("change", function(e){
     $('#state_text').empty();
     var country_id = e.target.value;
-    console.log (country_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/state/")}}'+"/"+country_id,
                 success:function(data){
-                    console.log(data);
                      $.each(data, function(index, value) {
                         $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
-                        console.log(value.state_id);
                         });
             },
                 error:function(data){
-                console.log(data);
             }
 
         });
@@ -399,20 +394,15 @@ $.ajaxSetup({
     console.log(e);
     $('#city').empty();
     var state_id = e.target.value;
-    console.log (state_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/city/")}}'+"/"+state_id,
                 success:function(data){
-                    console.log(data);
-                    
                      $.each(data, function(index, value) {
                         $('#city').append("<option value="+'"'+value.city_id+'"'+"selected>"+value.city_name+"</option>");
                         });
-                    
             },
                 error:function(data){
-                console.log(data);
             }
         });
     });

@@ -225,12 +225,11 @@
 
                                 <!--Closing Date-->
                                 <div class="form-group row">
-                                    <label for="address" class="control-label col-lg-4">Closing Date <span
+                                    <label for="address" class="control-label col-lg-4">Closing Date(mm/dd/yyyy) <span
                                             style="color:red;">*</span></label>
                                     <div class="col-sm-8 input-group date">
                                         <input type="date" class="datetext datepicker" id="closeing_date"
-                                            name="closeing_date" style="width:35%; padding:8px;" required>
-                                        <span class="mt-2 ml-2">Format(mm-dd-yyyy)</span>
+                                            name="closeing_date" style="width:66%; padding:8px;" required>
                                         <span id="date_check">Enter Valid Closing Date</span>
                                     </div>
                                 </div>
@@ -297,12 +296,12 @@
                                             style="color:red;">*</span></label>
                                     <select name="country" id="country" class="form-control "
                                         style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-                                        <option value="224" selected>United States</option>                                        @foreach($toReturn['countries'] as $country)
+                                        <option value="224" selected>{{$country_name}}</option>                         
+                                                       @foreach($toReturn['countries'] as $country)
                                         <option value="{{$country['country_id']}}">{{ $country['country_name'] }}
                                         </option>
                                         @endforeach
                                     </select>
-
                                     <select name="state" id="state_text" class="form-control "
                                         style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
                                         <option value="">Select State</option>
@@ -312,7 +311,7 @@
                                     <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
                                         <div id="select_city">
                                             <select name="city_name" id="city" class="form-control "
-                                                style="max-width:22%; border: 1px solid #bbb8b8;" required>
+                                                style="max-width:22%; border: 1px solid #bbb8b8;margin-left: -35px;" required>
                                                 <option value="" selected>Select City </option>
                                             </select>
                                             <br>
@@ -406,7 +405,7 @@
                                     </select>
                                     <div class="col-md-12" style="float: right;margin-left: 19em;margin-top: 2%;">
                                         <select name="pay_uom" id="pay_uom" class="form-control"
-                                            style="width:19%; border: 1px solid #bbb8b8; float:left; margin-left:2.5em;"
+                                            style="width:19%; border: 1px solid #bbb8b8; float:left;"
                                             required>
                                             <option value="Hourly">Hourly</option>
                                             <option value="Annum">Annum</option>
@@ -420,9 +419,8 @@
                                     <label for="" class="control-label col-lg-4">Experience Required <span
                                             style="color:red;">*</span> </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="experience" id="experience"
-                                            placeholder="Experience Required" maxlength="2" required>
-                                        <em style="vertical-align: sub;">years</em>
+                                        <input type="text" class="form-control" name="experience"  id="experience"
+                                            placeholder="Experience Required" maxlength="2" required><span>years</span>
                                         <br>
                                         <span id="exp_req_check">Please Enter a Valid Year</span>
                                     </div>
@@ -528,7 +526,7 @@
 </div>
 @include('include.emp_footer')
 <script type="text/javascript">
-$(window).on("load", function(e){
+$("#country").on("change", function(e){
         $('#state_text').empty();
         var country_id = e.target.value;
         $.ajax({
