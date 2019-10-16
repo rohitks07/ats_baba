@@ -319,6 +319,7 @@ class Job_Employer_Controller extends Controller
             // return $toReturn['team_member'];
             $toReturn['job_industries']  =tbl_job_industries::get()->toArray();
             $toReturn['industries_name']=tbl_job_industries::where('ID',$toReturn['post_job']['industry_ID'])->first();
+            // return $toReturn['job_industries'];
             $toReturn['cities']          =cities::get()->toArray();
             $toReturn['countries']       =countries::get()->toArray();
             $toReturn['states']          =states::get()->toArray();
@@ -381,8 +382,9 @@ class Job_Employer_Controller extends Controller
         'requirement_must'=>$Request->requirement,
         'requirement_optional'=>$Request->requirements,
         'job_description'=>$Request->job_desc,
-        'required_skills'=>$Request->required_skills,
-        'owner_id'=>$Request->owner_name
+        'required_skills'=>$Request->skills,
+        'owner_id'=>$Request->owner_name,
+        'for_group'=>$Request->group_of_company
         );
     $select_payment=$Request->select_payment;
     

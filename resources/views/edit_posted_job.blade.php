@@ -95,7 +95,7 @@
                              <div class="form-group row">
                                 <label for="address" class="control-label col-lg-4">Group<span style="color:red;">*</span></label>
                                 <select name="group_of_company" id="for_group" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;">
-                                        <option selected>{{$toReturn['member_type']->type_name}}</option>
+                                        <option selected>{{$toReturn['post_job']['for_group']}}</option>
                                         @foreach($toReturn['team_member_type'] as $team_member_type)
                                           <option value="{{$team_member_type['type_name']}}"> {{$team_member_type['type_name']}} </option>
                                         @endforeach
@@ -126,13 +126,12 @@
                              <div class="form-group row">
                                  <label for="address" class="control-label col-lg-4">Owner Name<span style="color:red;">*</span></label>
                                  <select name="owner_name" id="owner_name" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
-                                   <option value="">Select Owner Name</option>
+                                   <option >Select Owner Name</option>
                                    @foreach ($toReturn['name'] as $item)
                                    <option selected>{{$item['full_name']}}</option> 
-
-                                   @endforeach
+                                  @endforeach
                                         @foreach($toReturn['team_member'] as $team_member)
-                                           <option> {{$team_member['full_name']}} </option>
+                                           <option value="{{$team_member['ID']}}"> {{$team_member['full_name']}} </option>
                                          @endforeach
                                    
                                  </select>
@@ -160,7 +159,7 @@
                              <div class="form-group row">
                                  <label for="address" class="control-label col-lg-4">Industry<span style="color:red;">*</span></label>
                                  <select name="industry" id="industry" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
-                                 <option selected>{{$toReturn['industries_name']['industry_name']}}</option> 
+                                 <option value="$toReturn['industries_name']['ID']" selected>{{$toReturn['industries_name']['industry_name']}}</option> 
                                     @foreach($toReturn['job_industries'] as $job_industries)
                                            <option value="{{$job_industries['ID']}}"> {{$job_industries['industry_name']}} </option>
                                      @endforeach
@@ -343,7 +342,7 @@
                                  <label for="address" class="control-label col-lg-4">Job Duration <span style="color:red;">*</span></label>
                                  <input type="text" name="job_duration" id="job_duration" style="width:19%; float:left; margin-left: 1%;border: 1px solid #bbb8b8;" value="{{$toReturn['post_job']['job_duration']}}">
                                  <select name="day_week" id="job_duration_day" class="form-control" style="width:23%; border: 1px solid #bbb8b8; float:left; margin-left:0.5em;">
-                                 <option selected>{{$toReturn['post_job']->job_duration_day}}</option> 
+                                 <option selected>{{$toReturn['post_job']['job_duration_uom']}}</option> 
                                     <option value="Day">Day</option>
                                      <option value="Week">Week</option>
                                      <option value="Month">Month</option>
@@ -461,7 +460,7 @@
                    <div class="card">
                     <div class="card-body">
                         <center>
-                            <input name="skills" id="Result" class="form-control" value="{{$toReturn['post_job']->required_skills}}">
+                            <input name="skills" id="Result" class="form-control" value="{{$toReturn['post_job']->required_skills}}" readonly="readonly">
                         </center>
                         <br>
 
@@ -541,8 +540,9 @@
 </script>
 
 <script>
-    var x = 0;
     var arr = Array();
+    var arr = document.getElementById("Result").value.split(',');
+    var x = arr.length;
 
     function add_element_to_array() {
         arr[x] = document.getElementById("tags").value;
@@ -550,10 +550,11 @@
         document.getElementById("Result").value = arr;
         var e = "";
 
-        for (var y = 0; y < array.length; y++) {
-            e += array[y];
+        for (var y = 0; y < arr.length; y++) {
+            e = e+","+arr[y];
         }
-        document.getElementById("Result").value = e;
+        document.getElementById("Result").value = e.replace(/(^[,\s]+)|([,\s]+$)/g, '');
+        document.getElementById("tags").value="";
     }
 
 </script>

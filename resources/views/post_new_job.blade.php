@@ -486,7 +486,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <center>
-                                    <input name="skills" id="Result" class="form-control">
+                                    <input name="skills" id="Result" class="form-control" readonly="readonly">
                                 </center>
                                 <br>
 
@@ -575,10 +575,11 @@ $("#country").on("change", function(e){
         document.getElementById("Result").value = arr;
         var e = "";
 
-        for (var y = 0; y < array.length; y++) {
-            e += array[y];
+        for (var y = 0; y < arr.length; y++) {
+            e = e+","+arr[y];
         }
-        document.getElementById("Result").value = e;
+        document.getElementById("Result").value = e.replace(/(^[,\s]+)|([,\s]+$)/g, '');
+        document.getElementById("tags").value="";
     }
 
 </script>
