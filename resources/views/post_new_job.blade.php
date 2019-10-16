@@ -641,6 +641,7 @@
         var err_city = true;
         var err_country = true;
         var err_state = true;
+        var err_city_val=true;
 
         //validate job duration
         $("#validatefrm").click(function () {
@@ -833,22 +834,75 @@
         $("#validatefrm").click(function () {
             check_city();
         });
-        $("#state_text").blur(function () {
-            check_city();
-        });
+        
 
         function check_city() {
             var loc_val2 = $("#city").val();
-            if (loc_val2 == "") {
+            var jobcode_val = $("#textCity_input").val();
+            var checkBox = document.getElementById("myCheck");
+            if ((checkBox.checked == true)&&(jobcode_val=="")) {
+                console.log("new");
                 $("#citycheck").show();
                 $("#citycheck").focus();
                 $("#citycheck").css("color", "red");
-                err_city = false;
+                err_city_val = false;
                 return false;
-            } else {
-                $("#citycheck").hide();
             }
+            else if((checkBox.checked == false)&&(loc_val2==""))
+            {
+                console.log("one");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
+                return false;
+                
+            }
+
+
+        
         }
+
+        $("#validatefrm").click(function () {
+            mycity();
+        });
+        $("#myCheck").click(function () {
+            mycity();
+        });
+
+        
+        function mycity() {
+        $("#textCity_check").hide();
+        var checkBox = document.getElementById("myCheck");
+        if (checkBox.checked == true) {
+            $('#select_city').css('display', 'none');
+            $('#textCity').css('display', 'block');
+            $('#city_label').css('display', 'none')
+            $("#validatefrm").click(function () {
+                var jobcode_val = $("#textCity_input").val();
+                var regex1 = /^[a-zA-Z ]*$/;
+
+                if (jobcode_val == "") {
+                    $("#textCity_check").show();
+                    $("#textCity_check").focus();
+                    $("#textCity_check").css("color", "red");
+                    err_text_city = false;
+                    return false;
+                } else {
+                    isValid = regex1.test(jobcode_val);
+                    $("#textCity_check").css("display", !isValid ? "block" : "none");
+                    $("#textCity_check").css("color", "red");
+                    
+                    err_text_city = false;
+                }
+            });
+
+        } else {
+            $('#select_city').css('display', 'block');
+            $('#textCity').css('display', 'none');
+            $('#city_label').css('display', 'block')
+        }
+    }
 
         $("#validatefrm").click(function () {
             err_jobduration = true;
@@ -857,7 +911,8 @@
             err_req = true;
             err_job_desc = true;
             err_skill = true;
-            err_city = true;
+            err_city_val=true;
+            err_text_city =true
             err_country = true;
             err_state = true;
             check_duration();
@@ -868,7 +923,9 @@
             check_skill();
             check_location();
             check_city();
-            if ((err_city==true)&&(err_country==true)&&(err_state==true)&&(err_jobduration == true) && (err_salary == true) && (err_exp_req == true) && (
+            
+            if ((err_city_val==true)&&(err_text_city==true)&& (err_country == true) && (err_state == true) && (
+                    err_jobduration == true) && (err_salary == true) && (err_exp_req == true) && (
                     err_req == true) && (err_job_desc == true) && (err_skill == true)) {
                 return true;
             } else {
@@ -1065,29 +1122,44 @@
         $("#closeing_date").blur(function () {
             check_date();
         });
-
+        
         function check_date() {
             var date_val = $("#closeing_date").val();
-            var date_regex =
-                "^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$";
+            console.log(date_val);
+            var date_regex = "^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$ ";
+            
 
-            if (date_val == "") {
-                $("#date_check").show();
-                $("#date_check").focus();
-                $("#date_check").css("color", "red");
-                err_date = false;
-                return false;
-            } else {
-                isValid = date_regex.test(date_val);
-                $("#date_check").css("display", !isValid ? "block" : "none");
-                $("#date_check").css("color", "red");
-                return false;
-                err_date = false;
+                var dob_var = new Date(date_val);
+                var dob_val_day = dob_var.getDate();
+                var dob_val_month = dob_var.getMonth() + 1;
+                var dob_val_year = dob_var.getFullYear();
+                
+                if (!dob_val_day || !dob_val_month || !dob_val_year) {
+                    $("#date_check").show();
+                    $("#date_check").focus();
+                    $("#date_check").css("color", "red");
+                    err_dob = false;
+                    return false;
+                } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
+                    $("#date_check").show();
+                    $("#date_check").focus();
+                    $("#date_check").css("color", "red");
+                    err_dob = false;
+                    return false;
+                } else {
+                    err_dob = true;
+                    $("#date_check").hide();
+                }
+            
+            }
+            
+            $("#").blur(function () {
+                check_city();
+            });
+            function check_city(){
 
             }
-
-        }
-
+            
 
         $("#validatefrm").click(function () {
             err_group = true;
@@ -1110,7 +1182,8 @@
             check_vacancies();
 
 
-            if ((err_country == true) && (err_state == true) && (err_group == true) && (err_vacancies ==
+            if ((err_country == true) && (err_state == true) && (err_group == true) && (
+                    err_vacancies ==
                     true) && (err_clientname == true) && (err_owner == true) && (err_jobcode ==
                     true) && (err_jobtitle == true) && (err_date == true) && (err_city == true)) {
                 return true;
@@ -1130,41 +1203,7 @@
     });
 
 </script>
-<script>
-    function mycity() {
-        $("#textCity_check").hide();
-        var checkBox = document.getElementById("myCheck");
-        if (checkBox.checked == true) {
-            $('#select_city').css('display', 'none');
-            $('#textCity').css('display', 'block');
-            $('#city_label').css('display', 'none')
-            $("#validatefrm").click(function () {
-                var jobcode_val = $("#textCity_input").val();
-                var regex1 = /^[a-zA-Z ]*$/;
 
-                if (jobcode_val == "") {
-                    $("#textCity_check").show();
-                    $("#textCity_check").focus();
-                    $("#textCity_check").css("color", "red");
-                    err_text_city = false;
-                    return false;
-                } else {
-                    isValid = regex1.test(jobcode_val);
-                    $("#textCity_check").css("display", !isValid ? "block" : "none");
-                    $("#textCity_check").css("color", "red");
-                    return false;
-                    err_text_city = false;
-                }
-            });
-
-        } else {
-            $('#select_city').css('display', 'block');
-            $('#textCity').css('display', 'none');
-            $('#city_label').css('display', 'block')
-        }
-    }
-
-</script>
 <script type="text/javascript">
     function fulltime() {
         // alert('hrllo');
