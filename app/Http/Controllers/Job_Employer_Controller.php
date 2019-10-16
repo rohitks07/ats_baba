@@ -298,21 +298,43 @@ class Job_Employer_Controller extends Controller
            // $toReturn['state']=Tbl_state::get()->toArray();
           //  $toReturn['city']=Tbl_cities::get()->toArray();
            // $toReturn['countries']=Tbl_countries::get()->toArray();
+           $to=tbl_post_jobs::where('ID',$id)->get('for_group')->toArray();
+           
+           $toReturn['member_type']=Tbl_team_member_type::where('type_ID',$to)->get('type_name')->first();
+        //    return $toReturn['member_type'];
+           
             $toReturn['qualification']=Tbl_qualifications::get()->toArray();
             $toReturn['post_job_edit']=tbl_post_jobs::get()->toArray();
             $toReturn['post_job'] = tbl_post_jobs::where('ID',$id)->first();
+            $io = tbl_post_jobs::where('ID',$id)->get()->first();
+
+
+            $toReturn['name'] = tbl_team_member::where('ID',$io['owner_id'])->get('full_name')->toArray();
+            
             $toReturn['team_member_type']=tbl_team_member_type::get()->toArray();
             $toReturn['team_member']     =tbl_team_member::get()->toArray();
+            // return $toReturn['team_member'];
             $toReturn['job_industries']  =tbl_job_industries::get()->toArray();
             $toReturn['industries_name']=tbl_job_industries::where('ID',$toReturn['post_job']['industry_ID'])->first();
             $toReturn['cities']          =cities::get()->toArray();
             $toReturn['countries']       =countries::get()->toArray();
             $toReturn['states']          =states::get()->toArray();
+            $post_job1 = tbl_post_jobs::where('ID',$id)->get('country')->first();
+            $post_job2 = tbl_post_jobs::where('ID',$id)->get('state')->first();
+            $post_job3 = tbl_post_jobs::where('ID',$id)->get('city')->first();
+            // return $toReturn['post_job3'];
+            $toReturn['country_one']=countries::where('country_name',$post_job1['country'])->get()->toArray();
+            $toReturn['state_one']=states::where('state_name',$post_job2['state'])->get()->toArray();
+            $toReturn['city_one']=cities::where('city_name',$post_job3['city'])->get()->toArray();
+            // return  $toReturn['country_one'];
+            
+
             // return $toReturn['industries_name'];
             // return $toReturn['post_job'];
             // $toReturn['team_member_name']=tbl_team_member::where('ID',$toReturn['post_job']['industry_ID'])->first('industry_name');
         return view('edit_posted_job')->with('toReturn',$toReturn);
     }
+    
     
     
     public function updatejob(Request $Request)

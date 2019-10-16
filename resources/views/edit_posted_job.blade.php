@@ -95,7 +95,7 @@
                              <div class="form-group row">
                                 <label for="address" class="control-label col-lg-4">Group<span style="color:red;">*</span></label>
                                 <select name="group_of_company" id="for_group" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;">
-                                        <option selected>{{$toReturn['post_job']->for_group}}</option>
+                                        <option selected>{{$toReturn['member_type']->type_name}}</option>
                                         @foreach($toReturn['team_member_type'] as $team_member_type)
                                           <option value="{{$team_member_type['type_name']}}"> {{$team_member_type['type_name']}} </option>
                                         @endforeach
@@ -127,7 +127,10 @@
                                  <label for="address" class="control-label col-lg-4">Owner Name<span style="color:red;">*</span></label>
                                  <select name="owner_name" id="owner_name" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
                                    <option value="">Select Owner Name</option>
-                                 <option selected>{{$toReturn['post_job']->owner_id}}</option> 
+                                   @foreach ($toReturn['name'] as $item)
+                                   <option selected>{{$item['full_name']}}</option> 
+
+                                   @endforeach
                                         @foreach($toReturn['team_member'] as $team_member)
                                            <option> {{$team_member['full_name']}} </option>
                                          @endforeach
@@ -191,8 +194,11 @@
                              <div class="form-group row">
                                  <label for="" class="control-label col-lg-4">No.of Vacancies<span style="color:red;">*</span> </label>
                                  <div class="col-lg-8">
-                                     <input type="text" name="no_of_vacancies" id="" placeholder="No.of Vacancies" maxlength="150" value="{{$toReturn['post_job']['vacancies']}}"style="border: 1px solid #bbb8b8;">
-                                 </div>
+                                     <input type="text" name="no_of_vacancies" id="no_of_vacancies" placeholder="No.of Vacancies" maxlength="150" value="{{$toReturn['post_job']['vacancies']}}"style="border: 1px solid #bbb8b8;">
+                                     <br>
+                                     <span id="no_of_vacancies_check">Please Enter Job Title</span>
+                                 
+                                    </div>
                              </div>
                              <!--end of No.of Vacancies-->
 
@@ -264,18 +270,22 @@
                                <div class="form-group row" STYLE="background-color:;">
                                     <label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
                                     <select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-                                      <option value="">{{$toReturn['post_job']->countries}}</option>
-                                      <option value="United States" selected>United States</option>
-
-                                      @foreach($toReturn['countries'] as $country)
+                                            @foreach ($toReturn['country_one'] as $item)
+                                            <option value="{{$item['country_id']}}" selected>{{$item['country_name']}}</option>
+                                            @endforeach
+                                            @foreach($toReturn['countries'] as $country)
                                     <option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
                                       @endforeach  
+
+                                      
                                       
                                      
                                     </select>
   
                                     <select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-                                        <option value="">Select State</option>
+                                            @foreach ($toReturn['state_one'] as $item)
+                                            <option value="{{$item['state_id']}}" selected>{{$item['state_name']}}</option>
+                                            @endforeach
                                           <!--<option >{{$toReturn['post_job']->state}}</option>-->
   
                                     </select>
@@ -290,7 +300,10 @@
                                         <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
                                             <div id="select_city">
 												<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
-													<option value="">Select City </option>
+                                                        @foreach ($toReturn['city_one'] as $item)
+                                                        <option value="{{$item['city_id']}}" selected>{{$item['city_name']}}</option>
+                                                        @endforeach
+                                                    <option value="">Select City </option>
 												</select>
 												<br>
 												<span id="citycheck">Please choose Your Location</span>
@@ -487,548 +500,763 @@
        </div>
    </div>
    @include('include.emp_footer')
+   <!-- Validation of Post new Job -->
    <script type="text/javascript">
-    $('#country').on('change', function(e){
-    console.log(e);
-    $('#state_text').empty();
-    var country_id = e.target.value;
-    console.log (country_id);
+    $('#country').on('change', function (e) {
+        console.log(e);
+        $('#state_text').empty();
+        var country_id = e.target.value;
+        console.log(country_id);
         $.ajax({
             type: 'get',
-            url: '{{url("employer/post_new_job/post_job/state/")}}'+"/"+country_id,
-                success:function(data){
-                    console.log(data);
-                     $.each(data, function(index, value) {
-                        $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
-                        console.log(value.state_id);
-                        });
-            },
-                error:function(data){
+            url: '{{url("employer/post_new_job/post_job/state/")}}' + "/" + country_id,
+            success: function (data) {
                 console.log(data);
-            }
+                $.each(data, function (index, value) {
+                    $('#state_text').append("<option value=" + '"' + value.state_id + '"' +
+                        "selected>" + value.state_name + "</option>");
+                    console.log(value.state_id);
+                });
+            },
+
+
 
         });
 
     });
-    $('#state_text').on('change', function(e){
-    console.log(e);
-    $('#city').empty();
-    var state_id = e.target.value;
-    console.log (state_id);
+    $('#state_text').on('change', function (e) {
+        console.log(e);
+        $('#city').empty();
+        var state_id = e.target.value;
+        console.log(state_id);
         $.ajax({
             type: 'get',
-            url: '{{url("employer/post_new_job/post_job/city/")}}'+"/"+state_id,
-                success:function(data){
-                    console.log(data);
-                    
-                     $.each(data, function(index, value) {
-                        $('#city').append("<option value="+'"'+value.city_id+'"'+"selected>"+value.city_name+"</option>");
-                        });
-                    
-            },
-                error:function(data){
+            url: '{{url("employer/post_new_job/post_job/city/")}}' + "/" + state_id,
+            success: function (data) {
                 console.log(data);
-            }
+                $.each(data, function (index, value) {
+                    $('#city').append("<option value=" + '"' + value.city_id + '"' + "selected>" + value.city_name + "</option>");
+                });
+
+            },
         });
     });
+
+</script>
+
+<script>
+    var x = 0;
+    var arr = Array();
+
+    function add_element_to_array() {
+        arr[x] = document.getElementById("tags").value;
+        x++;
+        document.getElementById("Result").value = arr;
+        var e = "";
+
+        for (var y = 0; y < array.length; y++) {
+            e += array[y];
+        }
+        document.getElementById("Result").value = e;
+    }
+
+</script>
+
+
+<script>
+    var resizefunc = [];
+
 </script>
 <script>
     
-   var x = 0;
-   var arr = Array();
+    $(document).ready(function () {
+        $("#jobduration_check").hide();
+        $("#salary_check").hide();
+        $("#exp_req_check").hide();
+        $("#req_check").hide();
+        $("#job_desc_check").hide();
+        $("#skill_check").hide();
+        var err_jobduration = true;
+        var err_salary = true;
+        var err_exp_req = true;
+        var err_req = true;
+        var err_job_desc = true;
+        var err_skill = true;
+        var err_city = true;
+        var err_country = true;
+        var err_state = true;
+        var err_city_val=true;
 
-   function add_element_to_array()
-   {
-   arr[x] = document.getElementById("tags").value;
-   x++;
-   document.getElementById("Result").value = arr;
-   var e = "";   
-       
-   for (var y=0; y<array.length; y++)
-   {
-       e += array[y];
-   }
-   document.getElementById("Result").value = e;
-   }
+        //validate job duration
+        $("#validatefrm").click(function () {
+            check_duration();
+        });
+        $("#job_duration").blur(function () {
+            check_duration();
+        });
+
+        function check_duration() {
+
+            var job_val = $("#job_duration").val();
+            var regex = /^[0-9-+()]*$/;
+            var regex1 = /^[a-zA-Z ]*$/;
+
+            if (job_val == "") {
+                $("#jobduration_check").show();
+                $("#jobduration_check").focus();
+                $("#jobduration_check").css("color", "red");
+                err_jobduration = false;
+                return false;
+            } else {
+                isValid = regex.test(job_val);
+                $("#jobduration_check").css("display", !isValid ? "block" : "none");
+                $("#jobduration_check").css("color", "red");
+                return false;
+                err_jobduration = false;
+
+            }
+        }
 
 
-</script>
-
-<script>
-   var resizefunc = [];
-</script>
 
 
-<!-- Validation of Post new Job -->
-<script>
-           $(document).ready(function()
-           {
-               $("#clientname_check").hide();
-               $("#owner_check").hide();
-               $("#jobcode_check").hide();
-               $("#jobtitle_check").hide();
-               $("#citycheck").hide();
-               $("#group_check").hide();
-               var err_group=true;
-               var err_clientname=true;
-               var err_owner=true;
-               var err_jobcode=true;
-               var err_jobtitle=true;
-               var err_city=true;
 
-                //validate group
-				$("#validatefrm").click(function()
-				{
-					check_group();
-				});
-				function check_group()
-				{
-					
-					var group_val=$("#for_group").val();
-					if(group_val=="")
-					{
-						$("#group_check").show();
-						$("#group_check").focus();
-						$("#group_check").css("color","red");
-						err_group=false;
-						return false;
-					}
-					else
-					{
-							$("#group_check").hide();
-					}
-				}
-               //validate client name
-               $("#validatefrm").click(function()
-               {
-                   check_clientname();
-               });
-               function check_clientname()
-               {
-                   
-                   var clientname_val=$("#company_name").val();
-                   if(clientname_val=="")
-                   {
-                       $("#clientname_check").show();
-                       $("#clientname_check").focus();
-                       $("#clientname_check").css("color","red");
-                       err_clientname=false;
-                       return false;
-                   }
-                   else
-                   {
-                           $("#clientname_check").hide();
-                   }
-               }
-               //validate owner name
-               $("#validatefrm").click(function()
-               {
-                   check_owner();
-               });
-               function check_owner()
-               {
-                   var owner_val=$("#owner_name").val();
-                   if(owner_val=="")
-                   {
-                       $("#owner_check").show();
-                       $("#owner_check").focus();
-                       $("#owner_check").css("color","red");
-                       err_owner=false;
-                       return false;
-                   }
-                   else
-                   {
-                       $("#owner_check").hide();
-                   }
-               }
 
-               //validate job code
-               $("#validatefrm").click(function()
-               {
-                   check_jobcode();
-               });
-               function check_jobcode()
-               {
-                   var jobcode_val=$("#job_code").val();
-                   if(jobcode_val=="")
-                   {
-                       $("#jobcode_check").show();
-                       $("#jobcode_check").focus();
-                       $("#jobcode_check").css("color","red");
-                       err_jobcode=false;
-                       return false;
-                   }
-                   else
-                   {
-                       $("#jobcode_check").hide();
-                   }
-               }
+        //validate salary/ pay rate
+        $("#validatefrm").click(function () {
+            check_salary();
+        });
+        $("#pay_min").blur(function () {
+            check_salary();
+        });
+        $("#pay_max").blur(function () {
+            check_salary();
+        });
 
-               //validate job title
-               $("#validatefrm").click(function()
-               {
-                   check_jobtitle();
-               });
-               function check_jobtitle()
-               {
-                   var jobtitle_val=$("#job_title").val();
-                   if(jobtitle_val=="")
-                   {
-                       $("#jobtitle_check").show();
-                       $("#jobtitle_check").focus();
-                       $("#jobtitle_check").css("color","red");
-                       err_jobtitle=false;
-                       return false;
-                   }
-                   else
-                   {
-                       $("#jobtitle_check").hide();
-                   }
-               }
-              
+        function check_salary() {
+            var salary_val = $("#pay_min").val();
+            var salary_max_val = $("#pay_max").val();
+            if ((salary_val == "") || (salary_max_val == "")) {
+                $("#salary_check").show();
+                $("#salary_check").focus();
+                $("#salary_check").css("color", "red");
+                err_salary = false;
+                return false;
+            } else {
+                $("#salary_check").hide();
+            }
+        }
 
-               //Validation Location
-               $("#validatefrm").click(function()
-               {
-                   check_location();
-               });
-               function check_location()
-               {
-                   var loc_val=$("#country").val();
-                   var loc_val1=$("#state_text").val();
-                   var loc_val2=$("#city").val();
-                   if((loc_val=="")||(loc_val1=="")||(loc_val2==""))
-                   {
-                       $("#citycheck").show();
-                       $("#citycheck").focus();
-                       $("#citycheck").css("color","red");
-                       err_city=false;
-                       return false;
-                   }
-                   else
-                   {
-                       $("#citycheck").hide();
-                   }
-               }
-               $("#validatefrm").click(function()
-               {
-                   err_clientname=true;
-                   err_owner=true;
-                   err_jobcode=true;
-                   err_jobtitle=true;
-                   err_city=true;
-                   err_group=true;
-                   check_clientname();
-                   check_owner();
-                   check_jobcode();
-                   check_jobtitle();
-                   check_location();
-                   check_group();
-                   if((err_group==true)&&(err_clientname==true)&&(err_owner==true)&&(err_jobcode==true)&&(err_jobtitle==true)&&(err_date==true)&&(err_city==true))
-                   {
-                       return true;
-                   }
-                   else
-                   {
-                       return false;
-                   }
-               });
-           });
-       </script>
+        //validate experience required
+        $("#validatefrm").click(function () {
+            check_exp_req();
+        });
+        $("#experience").blur(function () {
+            check_exp_req();
+        });
 
-       <script>
-           $(document).ready(function()
-           {	
-               $("#jobduration_check").hide();
-               $("#salary_check").hide();
-               $("#exp_req_check").hide();
-               $("#req_check").hide();
-               $("#job_desc_check").hide();
-               $("#skill_check").hide();
-               var err_jobduration=true;
-               var err_salary=true;
-               var err_exp_req=true;
-               var err_req=true;
-               var err_job_desc=true;
-               var err_skill=true;
+        function check_exp_req() {
 
-               //validate job duration
-               $("#validatefrm").click(function()
-               {
-                   check_duration();
-               });
-               function check_duration()
-               {
-                   
-                   var job_val=$("#job_duration").val();
-                   
-                   if(job_val=="")
-                   {
-                       $("#jobduration_check").show();
-                       $("#jobduration_check").focus();
-                       $("#jobduration_check").css("color","red");
-                       err_jobduration=false;
-                       return false;
-                   }
-                   else
-                   {
-                           $("#jobduration_check").hide();
-                   }
-               }
+            var exp_req_val = $("#experience").val();
+            var regex = /^[0-9-+()]*$/;
+            var regex1 = /^[a-zA-Z ]*$/;
 
-               //validate salary/ pay rate
-               $("#validatefrm").click(function()
-               {
-                   check_salary();
-               });
-               function check_salary()
-               {
-                   
-                   var salary_val=$("#pay_min").val();
-                   var salary_max_val=$("#pay_max").val();
-                   
-                   if((salary_val=="")||(salary_max_val==""))
-                   {
-                       $("#salary_check").show();
-                       $("#salary_check").focus();
-                       $("#salary_check").css("color","red");
-                       err_salary=false;
-                       return false;
-                   }
-                   else
-                   {
-                           $("#salary_check").hide();
-                   }
-               }
+            if (exp_req_val == "") {
+                $("#exp_req_check").show();
+                $("#exp_req_check").focus();
+                $("#exp_req_check").css("color", "red");
+                err_exp_req = false;
+                return false;
+            } else {
+                isValid = regex.test(exp_req_val);
+                $("#exp_req_check").css("display", !isValid ? "block" : "none");
+                $("#exp_req_check").css("color", "red");
+                return false;
+                err_exp_req = false;
 
-               //validate experience required
-               $("#validatefrm").click(function()
-               {
-                   check_exp_req();
-               });
-               function check_exp_req()
-               {
-                   
-                   var exp_req_val=$("#experience").val();
-                   var year=/^[0-9]{1}$/;
-                   var result = exp_req_val.match(year);
-                   if((exp_req_val=="")||(result == null))
-                   {
-                       $("#exp_req_check").show();
-                       $("#exp_req_check").focus();
-                       $("#exp_req_check").css("color","red");
-                       err_exp_req=false;
-                       return false;
-                   }
-                   else
-                   {
-                           $("#exp_req_check").hide();
-                   }
-               }
-               
-               //validate requirement
-               $("#validatefrm").click(function()
-               {
-                   check_req();
-               });
-               function check_req()
-               {
-                   
-                   var req_val=$("#textarea").val();
-                   
-                   if(req_val=="")
-                   {
-                       $("#req_check").show();
-                       $("#req_check").focus();
-                       $("#req_check").css("color","red");
-                       err_req=false;
-                       return false;
-                   }
-                   else
-                   {
-                           $("#req_check").hide();
-                   }
-               }
-               //validate job description
-               $("#validatefrm").click(function()
-               {
-                   check_job_desc();
-               });
-               function check_job_desc()
-               {
-                   
-                   var job_desc_val=$("#editor").val();
-                   
-                   if(job_desc_val=="")
-                   {
-                       $("#job_desc_check").show();
-                       $("#job_desc_check").focus();
-                       $("#job_desc_check").css("color","red");
-                       err_job_desc=false;
-                       return false;
-                   }
-                   else
-                   {
-                           $("#job_desc_check").hide();
-                   }
-               }
-               //validate add skill
-               $("#validatefrm").click(function()
-               {
-                   check_skill();
-               });
-               function check_skill()
-               {
-                   
-                   // var skill_add_val=$("#tags").val();
-                   var skill_val=$("#Result").val();
-                  
-                   if(skill_val=="")
-                   {
-                       $("#skill_check").show();
-                       $("#skill_check").focus();
-                       $("#skill_check").css("color","red");
-                       err_skill=false;
-                       return false;
-                   }
-                   else
-                   {
-                           $("#skill_check").hide();
-                   }
-               }
+            }
 
-               $("#validatefrm").click(function()
-               {
-                   err_jobduration=true;
-                   err_salary=true;
-                   err_exp_req=true;
-                   err_req=true;
-                   err_job_desc=true;
-                   err_skill=true;
-                   check_duration();
-                   check_salary();
-                   check_exp_req();
-                   check_req();
-                   check_job_desc();
-                   check_skill();
 
-                   if((err_jobduration==true)&&(err_salary==true)&&(err_exp_req==true)&&(err_req==true)&&(err_job_desc==true)&&(err_skill==true))
-                   {
-                       return true;
-                   }
-                   else
-                   {
-                       return false;
-                   }
-               });
-           });
-       </script>
-    <script>
-       $(document).ready(function() {
-           $('#closeing_date').datepicker();
-           $('#closeing_date').datepicker('setDate', 'today');
-       });
-   </script>
-<script>
-    function mycity() {
 
+
+
+
+        }
+
+        //validate requirement
+        $("#validatefrm").click(function () {
+            check_req();
+        });
+        $("#textarea").blur(function () {
+            check_req();
+        });
+
+        function check_req() {
+
+            var req_val = $("#textarea").val();
+
+            if (req_val == "") {
+                $("#req_check").show();
+                $("#req_check").focus();
+                $("#req_check").css("color", "red");
+                err_req = false;
+                return false;
+            } else {
+                $("#req_check").hide();
+            }
+        }
+        //validate job description
+        $("#validatefrm").click(function () {
+            check_job_desc();
+        });
+        $("#editor").blur(function () {
+            check_job_desc();
+        });
+
+        function check_job_desc() {
+
+            var job_desc_val = $("#editor").val();
+
+            if (job_desc_val == "") {
+                $("#job_desc_check").show();
+                $("#job_desc_check").focus();
+                $("#job_desc_check").css("color", "red");
+                err_job_desc = false;
+                return false;
+            } else {
+                $("#job_desc_check").hide();
+            }
+        }
+        //validate add skill
+        $("#validatefrm").click(function () {
+            check_skill();
+        });
+        $("#Result").click(function () {
+            check_skill();
+        });
+
+        function check_skill() {
+            var skill_val = $("#Result").val();
+            if (skill_val == "") {
+                $("#skill_check").show();
+                $("#skill_check").focus();
+                $("#skill_check").css("color", "red");
+                err_skill = false;
+                return false;
+            } else {
+                $("#skill_check").hide();
+            }
+        }
+        //Validation Location
+        $("#validatefrm").click(function () {
+            check_location();
+        });
+        $("#country").blur(function () {
+            check_location();
+        });
+        $("#state_text").blur(function () {
+            check_location();
+        });
+
+        function check_location() {
+            var loc_val = $("#country").val();
+            var loc_val1 = $("#state_text").val();
+            if ((loc_val == "") || (loc_val1 == "")) {
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+
+                err_country = false;
+                err_state = false;
+                return false;
+
+            } else {
+                $("#citycheck").hide();
+            }
+        }
+
+        $("#validatefrm").click(function () {
+            check_city();
+        });
+        
+
+        function check_city() {
+            var loc_val2 = $("#city").val();
+            var jobcode_val = $("#textCity_input").val();
+            var checkBox = document.getElementById("myCheck");
+            if ((checkBox.checked == true)&&(jobcode_val=="")) {
+                console.log("new");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
+                return false;
+            }
+            else if((checkBox.checked == false)&&(loc_val2==""))
+            {
+                console.log("one");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
+                return false;
+                
+            }
+
+
+        
+        }
+
+        $("#validatefrm").click(function () {
+            mycity();
+        });
+        $("#myCheck").click(function () {
+            mycity();
+        });
+
+        
+        function mycity() {
+        $("#textCity_check").hide();
         var checkBox = document.getElementById("myCheck");
-        if (checkBox.checked == true){
-            $('#select_city').css('display','none');
-            $('#textCity').css('display','block');
-            $('#city_label').css('display','none')
-            // city2.style.display = "block";
-            // city.style.display = "none";
-            }
-        else {
-            $('#select_city').css('display','block');
-            $('#textCity').css('display','none');
-            $('#city_label').css('display','block')
-            }
-    }
-    </script>
-    <script type="text/javascript">
-        function fulltime(){
-          // alert('hrllo');
-            temp = document.getElementById('type_of_job').value;
-            // alert(temp);
-            if (temp == 'Full Time'){
-                //alert('full time');
-                 var x = document.getElementById("pay_min").options[1].disabled = false;
-                 var x = document.getElementById("pay_min").options[2].disabled = false;
-                 var x = document.getElementById("pay_min").options[3].disabled = false;
-                 var x = document.getElementById("pay_min").options[4].disabled = false;
-                 var x = document.getElementById("pay_min").options[5].disabled = false;
-                 var x = document.getElementById("pay_min").options[6].disabled = false;
-                 var x = document.getElementById("pay_min").options[7].disabled = false;            
-                 var x = document.getElementById("pay_min").options[8].disabled = false;
-                 var x = document.getElementById("pay_min").options[9].disabled = false;
-                 var x = document.getElementById("pay_min").options[10].disabled = false;
-                 var x = document.getElementById("pay_min").options[11].disabled = true;
-                 var x = document.getElementById("pay_min").options[12].disabled = true;
-                 var x = document.getElementById("pay_min").options[13].disabled = true;
-                 var x = document.getElementById("pay_min").options[14].disabled = true;
-                 var x = document.getElementById("pay_min").options[15].disabled = true;
-                 var x = document.getElementById("pay_min").options[16].disabled = true;
-                 var x = document.getElementById("pay_min").options[17].disabled = true;
-                 var x = document.getElementById("pay_min").options[18].disabled = true;
-                 var x = document.getElementById("pay_min").options[19].disabled = true;
-                 var x = document.getElementById("pay_min").options[20].disabled = true;
-                 var x = document.getElementById("pay_min").options[21].disabled = true;
-                 var x = document.getElementById("pay_min").options[22].disabled = true;
-                }
-                else if (temp == 'Contract'){
-                    //alert('Contract');
-                     var x = document.getElementById("pay_min").options[1].disabled = true;
-                     var x = document.getElementById("pay_min").options[2].disabled = true;
-                     var x = document.getElementById("pay_min").options[3].disabled = true;
-                     var x = document.getElementById("pay_min").options[4].disabled = true;
-                     var x = document.getElementById("pay_min").options[5].disabled = true;
-                     var x = document.getElementById("pay_min").options[6].disabled = true;
-                     var x = document.getElementById("pay_min").options[7].disabled = true;          
-                     var x = document.getElementById("pay_min").options[8].disabled = true;
-                     var x = document.getElementById("pay_min").options[9].disabled = true;
-                     var x = document.getElementById("pay_min").options[10].disabled = true;
-                     var x = document.getElementById("pay_min").options[11].disabled = false;
-                     var x = document.getElementById("pay_min").options[12].disabled = false;
-                     var x = document.getElementById("pay_min").options[13].disabled = false;
-                     var x = document.getElementById("pay_min").options[14].disabled = false;
-                     var x = document.getElementById("pay_min").options[15].disabled = false;
-                     var x = document.getElementById("pay_min").options[16].disabled = false;
-                     var x = document.getElementById("pay_min").options[17].disabled = false;
-                     var x = document.getElementById("pay_min").options[18].disabled = false;
-                     var x = document.getElementById("pay_min").options[19].disabled = false;
-                     var x = document.getElementById("pay_min").options[20].disabled = false;
-                     var x = document.getElementById("pay_min").options[21].disabled = false;
-                     var x = document.getElementById("pay_min").options[22].disabled = false;
-                     
+        if (checkBox.checked == true) {
+            $('#select_city').css('display', 'none');
+            $('#textCity').css('display', 'block');
+            $('#city_label').css('display', 'none')
+            $("#validatefrm").click(function () {
+                var jobcode_val = $("#textCity_input").val();
+                var regex1 = /^[a-zA-Z ]*$/;
+
+                if (jobcode_val == "") {
+                    $("#textCity_check").show();
+                    $("#textCity_check").focus();
+                    $("#textCity_check").css("color", "red");
+                    err_text_city = false;
+                    return false;
+                } else {
+                    isValid = regex1.test(jobcode_val);
+                    $("#textCity_check").css("display", !isValid ? "block" : "none");
+                    $("#textCity_check").css("color", "red");
                     
+                    err_text_city = false;
                 }
-                else{
-                     var x = document.getElementById("pay_min").options[1].disabled = false;
-                     var x = document.getElementById("pay_min").options[2].disabled = false;
-                     var x = document.getElementById("pay_min").options[3].disabled = false;
-                     var x = document.getElementById("pay_min").options[4].disabled = false;
-                     var x = document.getElementById("pay_min").options[5].disabled = false;
-                     var x = document.getElementById("pay_min").options[6].disabled = false;
-                     var x = document.getElementById("pay_min").options[7].disabled = false;          
-                     var x = document.getElementById("pay_min").options[8].disabled = false;
-                     var x = document.getElementById("pay_min").options[9].disabled = false;
-                     var x = document.getElementById("pay_min").options[10].disabled = false;
-                     var x = document.getElementById("pay_min").options[11].disabled = false;
-                     var x = document.getElementById("pay_min").options[12].disabled = false;
-                     var x = document.getElementById("pay_min").options[13].disabled = false;
-                     var x = document.getElementById("pay_min").options[14].disabled = false;
-                     var x = document.getElementById("pay_min").options[15].disabled = false;
-                     var x = document.getElementById("pay_min").options[16].disabled = false;
-                     var x = document.getElementById("pay_min").options[17].disabled = false;
-                     var x = document.getElementById("pay_min").options[18].disabled = false;
-                     var x = document.getElementById("pay_min").options[19].disabled = false;
-                     var x = document.getElementById("pay_min").options[20].disabled = false;
-                     var x = document.getElementById("pay_min").options[21].disabled = false;
-                     var x = document.getElementById("pay_min").options[22].disabled = false;
-                     
+            });
+
+        } else {
+            $('#select_city').css('display', 'block');
+            $('#textCity').css('display', 'none');
+            $('#city_label').css('display', 'block')
+        }
+    }
+
+        $("#validatefrm").click(function () {
+            err_jobduration = true;
+            err_salary = true;
+            err_exp_req = true;
+            err_req = true;
+            err_job_desc = true;
+            err_skill = true;
+            err_city_val=true;
+            err_text_city =true
+            err_country = true;
+            err_state = true;
+            check_duration();
+            check_salary();
+            check_exp_req();
+            check_req();
+            check_job_desc();
+            check_skill();
+            check_location();
+            check_city();
+            
+            if ((err_city_val==true)&&(err_text_city==true)&& (err_country == true) && (err_state == true) && (
+                    err_jobduration == true) && (err_salary == true) && (err_exp_req == true) && (
+                    err_req == true) && (err_job_desc == true) && (err_skill == true)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#group_check").hide();
+        $("#clientname_check").hide();
+        $("#owner_check").hide();
+        $("#no_of_vacancies_check").hide();
+        $("#jobtitle_check").hide();
+        $("#date_check").hide();
+        $("#citycheck").hide();
+        $("#err_vacancies_check").hide();
+        $("#jobcode_check").hide();
+
+        var err_group = true;
+        var err_clientname = true;
+        var err_owner = true;
+        var err_jobcode = true;
+        var err_jobtitle = true;
+        var err_date = true;
+        var err_job_type=true;
+        var err_vacancies = true;
+
+
+
+        //validate group
+
+        $("#validatefrm").click(function () {
+            check_group();
+        });
+        $("#for_group").blur(function () {
+            check_group();
+        });
+
+        function check_group() {
+
+            var group_val = $("#for_group").val();
+            if (group_val == "") {
+                $("#group_check").show();
+                $("#group_check").focus();
+                $("#group_check").css("color", "red");
+                err_group = false;
+                return false;
+            } else {
+                $("#group_check").hide();
+            }
+        }
+        //validate client name
+        $("#validatefrm").click(function () {
+            check_clientname();
+        });
+        $("#company_name").blur(function () {
+            check_clientname();
+        });
+
+        function check_clientname() {
+
+            var clientname_val = $("#company_name").val();
+            var regex1 = /^[a-zA-Z ]*$/;
+            if (clientname_val == "") {
+                $("#clientname_check").show();
+                $("#clientname_check").focus();
+                $("#clientname_check").css("color", "red");
+                err_clientname = false;
+                return false;
+            } else {
+                isValid = regex1.test(clientname_val);
+                $("#clientname_check").css("display", !isValid ? "block" : "none");
+                $("#clientname_check").css("color", "red");
+                return false;
+                err_clientname = false;
+
+            }
+
+
+
+        }
+        //validate owner name
+        $("#validatefrm").click(function () {
+            check_owner();
+        });
+        $("#owner_name").blur(function () {
+            check_owner();
+        });
+
+        function check_owner() {
+            var owner_val = $("#owner_name").val();
+            if (owner_val == "") {
+                $("#owner_check").show();
+                $("#owner_check").focus();
+                $("#owner_check").css("color", "red");
+                err_owner = false;
+                return false;
+            } else {
+                $("#owner_check").hide();
+            }
+        }
+
+        //validate job code
+        $("#validatefrm").click(function () {
+            check_jobcode();
+        });
+        $("#job_code").blur(function () {
+            check_jobcode();
+        });
+
+        function check_jobcode() {
+            var jobcode_val = $("#job_code").val();
+            var regex = /^[0-9-+()]*$/;
+            var regex1 = /^[a-zA-Z ]*$/;
+
+            if (jobcode_val == "") {
+                $("#jobcode_check").show();
+                $("#jobcode_check").focus();
+                $("#jobcode_check").css("color", "red");
+                err_jobcode = false;
+                return false;
+            } else {
+                isValid = regex.test(jobcode_val);
+                $("#jobcode_check").css("display", !isValid ? "block" : "none");
+                $("#jobcode_check").css("color", "red");
+                return false;
+                err_jobcode = false;
+
+            }
+        }
+        //validate no of vancancy
+        $("#validatefrm").click(function () {
+            check_vacancies();
+        });
+        $("#no_of_vacancies").blur(function () {
+            check_vacancies();
+        });
+
+        function check_vacancies() {
+            var jobcode_val = $("#no_of_vacancies").val();
+            var regex = /^[0-9-+()]*$/;
+            var regex1 = /^[a-zA-Z ]*$/;
+
+            if (jobcode_val == "") {
+                $("#no_of_vacancies_check").show();
+                $("#no_of_vacancies_check").focus();
+                $("#no_of_vacancies_check").css("color", "red");
+                err_vacancies = false;
+                return false;
+            } else {
+                isValid = regex.test(jobcode_val);
+                $("#no_of_vacancies_check").css("display", !isValid ? "block" : "none");
+                $("#no_of_vacancies_check").css("color", "red");
+                return false;
+                err_vacancies = false;
+
+            }
+        }
+
+
+
+        //validate job title
+        $("#validatefrm").click(function () {
+            check_jobtitle();
+        });
+        $("#job_title").blur(function () {
+            check_jobtitle();
+        });
+
+        function check_jobtitle() {
+            var jobtitle_val = $("#job_title").val();
+            var regex1 = /^[a-zA-Z ]*$/;
+            if (jobtitle_val == "") {
+                $("#jobtitle_check").show();
+                $("#jobtitle_check").focus();
+                $("#jobtitle_check").css("color", "red");
+                err_jobtitle = false;
+                return false;
+            } else {
+                isValid = regex1.test(jobtitle_val);
+                $("#jobtitle_check").css("display", !isValid ? "block" : "none");
+                $("#jobtitle_check").css("color", "red");
+                return false;
+                err_jobcode = false;
+            }
+        }
+        //validate closing date
+        $("#validatefrm").click(function () {
+            check_date();
+        });
+        $("#closeing_date").blur(function () {
+            check_date();
+        });
+        
+        function check_date() {
+            var date_val = $("#closeing_date").val();
+            console.log(date_val);
+            var date_regex = "^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$ ";
+            
+
+                var dob_var = new Date(date_val);
+                var dob_val_day = dob_var.getDate();
+                var dob_val_month = dob_var.getMonth() + 1;
+                var dob_val_year = dob_var.getFullYear();
+                
+                if (!dob_val_day || !dob_val_month || !dob_val_year) {
+                    console.log("one");
+                    $("#date_check").show();
+                    $("#date_check").focus();
+                    $("#date_check").css("color", "red");
+                    err_dob = false;
+                    return false;
+                } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
+                    console.log("two");
+
+                    $("#date_check").show();
+                    $("#date_check").focus();
+                    $("#date_check").css("color", "red");
+                    err_dob = false;
+                    return false;
+                } else {
+
+                    $("#date_check").hide();
+                }
+            
+            }
+            
+            // $("#").blur(function () {
+            //     check_city();
+            // });
+            // function check_city(){
+
+            // }
+
+
+            $("#validatefrm").click(function(){
+                check_jon_type();
+            });
+            $("#type_of_job").blur(function(){
+                check_jon_type();
+            });
+            function check_jon_type(){
+                var type_job = $("#type_of_job").val();
+                if(type_job==""){
+                    // check_job_type
+                    $("#check_job_type").show();
+                    $("#check_job_type").focus();
+                    $("#check_job_type").css("color", "red");
+                   
+                    err_job_type=false;
+                     return false;
+                }
+                else
+                {
+                    $("#check_job_type").hide();
                 }
             }
-            </script>
+            
+
+        $("#validatefrm").click(function () {
+            err_group = true;
+            err_clientname = true;
+            err_owner = true;
+            err_jobcode = true;
+            err_jobtitle = true;
+            err_date = true;
+            err_city = true;
+            err_vacancies = true;
+            err_country = true;
+            err_state = true;
+            err_job_type=true;
+            check_group();
+            check_clientname();
+            check_owner();
+            check_jobcode();
+            check_jobtitle();
+            check_date();
+            check_jon_type();
+            check_vacancies();
+
+
+            if ((err_country == true) && (err_state == true) && (err_group == true) && (
+                    err_vacancies ==
+                    true) && (err_clientname == true) && (err_owner == true) && (err_jobcode ==
+                    true) && (err_jobtitle == true) && (err_date == true) && (err_city == true)&&(err_job_type==true)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#closeing_date ').datepicker();
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    function fulltime() {
+        // alert('hrllo');
+        temp = document.getElementById('type_of_job').value;
+        // alert(temp);
+        if (temp == 'Full Time') {
+            //alert('full time');
+            var x = document.getElementById("pay_min").options[1].disabled = false;
+            var x = document.getElementById("pay_min").options[2].disabled = false;
+            var x = document.getElementById("pay_min").options[3].disabled = false;
+            var x = document.getElementById("pay_min").options[4].disabled = false;
+            var x = document.getElementById("pay_min").options[5].disabled = false;
+            var x = document.getElementById("pay_min").options[6].disabled = false;
+            var x = document.getElementById("pay_min").options[7].disabled = false;
+            var x = document.getElementById("pay_min").options[8].disabled = false;
+            var x = document.getElementById("pay_min").options[9].disabled = false;
+            var x = document.getElementById("pay_min").options[10].disabled = false;
+            var x = document.getElementById("pay_min").options[11].disabled = true;
+            var x = document.getElementById("pay_min").options[12].disabled = true;
+            var x = document.getElementById("pay_min").options[13].disabled = true;
+            var x = document.getElementById("pay_min").options[14].disabled = true;
+            var x = document.getElementById("pay_min").options[15].disabled = true;
+            var x = document.getElementById("pay_min").options[16].disabled = true;
+            var x = document.getElementById("pay_min").options[17].disabled = true;
+            var x = document.getElementById("pay_min").options[18].disabled = true;
+            var x = document.getElementById("pay_min").options[19].disabled = true;
+            var x = document.getElementById("pay_min").options[20].disabled = true;
+            var x = document.getElementById("pay_min").options[21].disabled = true;
+            var x = document.getElementById("pay_min").options[22].disabled = true;
+        } else if (temp == 'Contract') {
+            //alert('Contract');
+            var x = document.getElementById("pay_min").options[1].disabled = true;
+            var x = document.getElementById("pay_min").options[2].disabled = true;
+            var x = document.getElementById("pay_min").options[3].disabled = true;
+            var x = document.getElementById("pay_min").options[4].disabled = true;
+            var x = document.getElementById("pay_min").options[5].disabled = true;
+            var x = document.getElementById("pay_min").options[6].disabled = true;
+            var x = document.getElementById("pay_min").options[7].disabled = true;
+            var x = document.getElementById("pay_min").options[8].disabled = true;
+            var x = document.getElementById("pay_min").options[9].disabled = true;
+            var x = document.getElementById("pay_min").options[10].disabled = true;
+            var x = document.getElementById("pay_min").options[11].disabled = false;
+            var x = document.getElementById("pay_min").options[12].disabled = false;
+            var x = document.getElementById("pay_min").options[13].disabled = false;
+            var x = document.getElementById("pay_min").options[14].disabled = false;
+            var x = document.getElementById("pay_min").options[15].disabled = false;
+            var x = document.getElementById("pay_min").options[16].disabled = false;
+            var x = document.getElementById("pay_min").options[17].disabled = false;
+            var x = document.getElementById("pay_min").options[18].disabled = false;
+            var x = document.getElementById("pay_min").options[19].disabled = false;
+            var x = document.getElementById("pay_min").options[20].disabled = false;
+            var x = document.getElementById("pay_min").options[21].disabled = false;
+            var x = document.getElementById("pay_min").options[22].disabled = false;
+
+
+        } else {
+            var x = document.getElementById("pay_min").options[1].disabled = false;
+            var x = document.getElementById("pay_min").options[2].disabled = false;
+            var x = document.getElementById("pay_min").options[3].disabled = false;
+            var x = document.getElementById("pay_min").options[4].disabled = false;
+            var x = document.getElementById("pay_min").options[5].disabled = false;
+            var x = document.getElementById("pay_min").options[6].disabled = false;
+            var x = document.getElementById("pay_min").options[7].disabled = false;
+            var x = document.getElementById("pay_min").options[8].disabled = false;
+            var x = document.getElementById("pay_min").options[9].disabled = false;
+            var x = document.getElementById("pay_min").options[10].disabled = false;
+            var x = document.getElementById("pay_min").options[11].disabled = false;
+            var x = document.getElementById("pay_min").options[12].disabled = false;
+            var x = document.getElementById("pay_min").options[13].disabled = false;
+            var x = document.getElementById("pay_min").options[14].disabled = false;
+            var x = document.getElementById("pay_min").options[15].disabled = false;
+            var x = document.getElementById("pay_min").options[16].disabled = false;
+            var x = document.getElementById("pay_min").options[17].disabled = false;
+            var x = document.getElementById("pay_min").options[18].disabled = false;
+            var x = document.getElementById("pay_min").options[19].disabled = false;
+            var x = document.getElementById("pay_min").options[20].disabled = false;
+            var x = document.getElementById("pay_min").options[21].disabled = false;
+            var x = document.getElementById("pay_min").options[22].disabled = false;
+
+        }
+    }
+
+</script>
 </body>
