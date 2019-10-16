@@ -95,23 +95,20 @@
                         	<div class="card-body" style="border: 1px #B0B0B0 solid;">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-12">
-                                                <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" >
+                                                <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
 			                                        <thead>
 			                                            <tr>                                                   
 			                                                <th>Code</th>
-			                                                <th>Title</th>
+			                                                <th width="20%">Title</th>
 			                                                <th>Client</th>
-			                                                <th>Location</th>
+			                                                <th width="15%">Location</th>
 			                                                <th>Positions </th>
 															<th>Type</th>
-			                                                <th>Publish Date</th>
-															<th>Status</th>                                                    
-															<th>Closing Date</th>
-															
-
-															<th><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
-															
-															<th>Actions</th>     													
+			                                                <th width="10%">Publish Date</th>
+															<th >Status</th>                                                    
+															<th width="10%">Closing Date</th>
+															<th width="10%"><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
+															<th width="7%">Actions</th>     													
 			                                            </tr>
 			                                        </thead>
 			                                        <tbody  id="myTable">  
@@ -122,7 +119,6 @@
 															$last_date=$posted_job['last_date'];
 															$new_last_Date = date("m-d-Y", strtotime($last_date));
 															$closing_date=date('m-d-Y',strtotime($posted_job['dated']));
-
 															$application= count(DB::table('tbl_seeker_applied_for_job')->where('job_ID',$id)->get());
 															$client_submittal=count(DB::table('tbl_forward_candidate')->where('job_ID',$id)->get());
 															$assignee=count(DB::table('tbl_job_post_assign')->where('job_post_id',$id)->get());

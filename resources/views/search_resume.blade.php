@@ -101,14 +101,16 @@
 #wrapper{
 			    width:100%;
 			    overflow-y:scroll;
-			}								
+                overflow-x:scroll;
+			}
+							
 </style>  
 <body>  
         <div id="wrapper">
         <div class="content-page">              
             <div class="content">               
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-header" style="background:#317eeb;">
                              <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;">
@@ -121,19 +123,18 @@
 								<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-success" style="float:left;">Add a Candidate</button></a>
 								@endif											
 								</div> 
-                                  
                                 <div class="card-body" style="border: 1px #B0B0B0 solid;">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12 col-12">
-                                            <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <div class="row" >
+                                        <div class="col-12">
+                                            <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width:100%;overflow-x:scroll;">
                                                 <thead>
                                                     <tr>                                                   
-														<th>Name</th>
+														<th width="10%">Name</th>
 														<th>DOB</th>
-														<th>Location</th>
+														<th width="10%">Location</th>
 														<th>Visa</th>
 														<th>Exp. (Year)</th>
-														<th>Education	</th>
+														<th>Education</th>
 														<th>Email (H)</th>
 														<th>Mobile</th> 
 														<th>Source</th>
@@ -151,7 +152,7 @@
 														// 	 $secs = $datetime2 - $datetime1;// == <seconds between the two times>
 														// 	 $days = $secs / 86400;
 														// 	 $exp_month=floor($days/30);
-														// 	 $exp_years=floor($exp_month/12);
+														// 	 $exp_y   ears=floor($exp_month/12);
                                                         ?>                                                                                         
 													<tr>										
 														<td>{{$personal[$key]->first}} {{$personal[$key]->last}}</td>

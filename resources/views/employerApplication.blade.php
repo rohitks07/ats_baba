@@ -77,7 +77,7 @@
                             <div class="card-body" >
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-12">
-                                            <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" >
+                                            <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
                                                 
                                                     <thead>
                                                     <!--<tr>
@@ -90,13 +90,13 @@
                                                     	<th> Code</th>
                                                         <th>Title</th>
                                                         <th>Client</th>
-                                                        <th>Location</th>
-                                                        <th>Visa Type</th>
+                                                        <th width="10%">Location</th>
+                                                        <th width="30%">Visa Type</th>
                                                         <th>Pay Rate</td>
                                                         <th>Name</td>
-                                                        <th>Location</th>
+                                                        <th width="10%">Location</th>
                                                         <th>Visa</th>
-                                                        <th>Date</th>
+                                                        <th width="7%">Date</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -119,7 +119,8 @@
                                                         <td>{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
                                                         <td>{{$application['can_location']}}</td>
                                                         <td>{{$application['can_visa']}}</td>
-                                                        <td>{{$application['applied_date']}}</td>
+                                                        <?php $applied_date=date('m-d-Y',strtotime($application['applied_date'])); ?>
+                                                        <td>{{$applied_date}}</td>
                                                         <td>
                                                         <a data-toggle="modal" data-target="#interviewModal"><i class="fa fa-clock-o" aria-hidden="true" title="Schedule Interview"></i></a>
                                                         <a href="{{url('employer/appli_del/'.$id)}}" class="hidden on-editing login-row" title="Delete"><i class="fa fa-trash-o"></i></a>
