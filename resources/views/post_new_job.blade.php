@@ -378,7 +378,7 @@
                                   <input type="text" placeholder="Max" name="pay_max" id="pay_max" value="" maxlength="4" style="width:22%; float:left;"> -->
                                     <select name="select_payment" id="pay_min" class="form-control"
                                         style="max-width:42%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-                                        <option> Select Salary/Pay Rate</option>
+                                        <option value=""> Select Salary/Pay Rate</option>
                                         <option value="20k-25k">20k - 25k</option>
                                         <option value="25k-30k">25k - 30k</option>
                                         <option value="30k-35k">30k - 35k</option>
