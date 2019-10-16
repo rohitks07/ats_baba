@@ -127,6 +127,7 @@ width: 84%;
                                             <label for=""  class="control-label col-lg-4">Mobile Phone <span class="red">*</span></label>
                                             <div class="col-lg-8">
                                                 <input name="mobile_number" type="tel" class="form-control" id="mobile_number"   maxlength="12" required style="max-width:50%; border: 1px solid #bbb8b8;" />
+                                                <label style="display:none;color:red;" id="mobile_number_check">Enter Valid number</label>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -137,7 +138,7 @@ width: 84%;
                                               <option value="Contract">Contract</option>
                                               <option value="Contract-to-Hire">Contract-to-Hire</option>
                                               <option value="Part Time">Part Time</option>
-                                          </select>
+                                          </select> 
                                         </div>
                                         <!--Job Type-->
                                                        
@@ -146,8 +147,8 @@ width: 84%;
                                             <div class="col-lg-8">
                                                <!-- <span><input name="pay_min" type="text" class="form-control" id="pay_min"  min="0" style="width: 29%; float:left;"/></span>
 							                  <span><input name="pay_max" type="text" class="form-control" id="pay_max" min="0" style="width: 29%; float:left;"/></span> -->
-                                                <select name="payment_range" id="select_ranage" class="form-control" style="max-width:50%; border: 1px solid #bbb8b8;">
-                                                                <option value=""> SELECT MONTHLY RANGE</option>
+                                                <select name="payment_range" id="select_ranage" class="form-control" style="max-width:50%; border: 1px solid #bbb8b8;" required>
+                                                                <option value=""> select Salary/Pay Rate</option>
                                                                 <option value="15k-20k">15k - 20k</option>
                                                                 <option value="20k-25k">20k - 25k</option>
                                                                 <option value="25k-30k">25k - 30k</option>
@@ -212,7 +213,7 @@ width: 84%;
                                             <tbody>
                                             @foreach($toReturn['job_list'] as $job_list)
                                                 <tr>
-                                                    <td><input type="radio" name="job_id" value="{{$job_list['ID']}}"></td>
+                                                    <td><input type="radio" id="" name="job_id" value="{{$job_list['ID']}}"></td>
                                                     <td>{{$job_list['job_code']}}</td>
                                                     <td>{{$job_list['job_title']}}</td>
                                                     <td>{{$job_list['job_title']}}</td>
@@ -243,7 +244,7 @@ width: 84%;
 @include('include.footers')
 <script type="text/javascript">
     function fulltime(){
-        alert('hrllo');
+        //alert('hrllo');
         temp = document.getElementById('type_of_job').value;
         // alert(temp);
         if (temp == 'Full Time'){
@@ -319,6 +320,33 @@ width: 84%;
 //   }
 }
 $('#mobile_number').keyup(phoneMask);
+</script>
+<script>
+        $("#mobile_number").blur(function () {
+            mon_no();
+        });
+
+    function mon_no(){
+    var mobile_number = $("#mobile_number").val();
+    var face_value=mobile_number.charAt(0);
+    if(mobile_number==""){
+        $("#mobile_number_check").css("display","block");
+        // console.log("write");
+    }
+    else if(face_value=="-"){
+        // console.log("done");
+        $("#mobile_number_check").css("display","block");
+    }
+    else if(mobile_number.length==12){
+        $("#mobile_number_check").css("display","none");
+    }
+    else{
+        $("#mobile_number_check").css("display","block");
+    }
+}
+
+    
+
 </script>
 </body>
 <!-- Mirrored from coderthemes.com/moltran/blue/form-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Jun 2019 12:15:55 GMT -->

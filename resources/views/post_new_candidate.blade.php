@@ -201,7 +201,7 @@
 									 <!-- Date of Birth-->	
 									 
 									 	<div class="form-group row">
-										  <label for="" class="control-label col-lg-4">Date of Birth<span style="color:red;"></span></label>
+										  <label for="" class="control-label col-lg-4">Date of Birth (mm-dd-yyyy)<span style="color:red;"></span></label>
     											<div class="col-lg-8">
     												<input type="date" id="date_of_birth" name="dob" maxlength="10" placeholder="date of Birth" style="width:83%; padding:0.5em;" ><br>
     												 <span id="dobcheck" >Select a valid Date Of Birth</span>
@@ -1112,408 +1112,390 @@ $(function() {
 
 <!-- validation Of Personal Details -->
 <script>
-			$(document).ready(function()
+	$(document).ready(function(){
+		// initializing error variables, hiding check/error span
+		$("#first_namecheck").hide();
+		$("#middle_namecheck").hide();
+		$("#last_namecheck").hide();
+		$("#dobcheck").hide();
+		$("#emailcheck").hide();
+		$("#ssncheck").hide();
+		$("#visacheck").hide();
+		$("#Experiencecheck").hide();
+		$("#citycheck").hide();
+		$("#mob_ph_check").hide();
+		$("#home_ph_check").hide();
+		$("#resume_check").hide();
+
+		var err_firstname=true;
+		var err_middlename=true;
+		var err_lastname=true;
+		var err_dob=true;
+		var err_email=true;
+		var err_ssn=true;
+		var err_visa=true;
+		var err_Experience=true;
+		var err_city=true;
+		var err_mob_ph=true;
+		var err_home_ph=true;
+		var err_resume=true;
+
+		//validate first name
+		$("#first_name").blur(function()
+		{
+			check_firstname();
+		});
+		function check_firstname()
+		{
+			var firstname_val=$("#first_name").val();
+
+			var regexOnlyText = /^[a-zA-Z]+$/;
+			if (firstname_val==""||regexOnlyText.test(firstname_val) != true){
+				$("#first_namecheck").show();
+				$("#first_namecheck").focus();
+				$("#first_namecheck").css("color","red");
+				err_firstname=false;
+				return false;
+			}
+			else
 			{
+				err_firstname=true;
 				$("#first_namecheck").hide();
-				$("#middle_namecheck").hide();
-				$("#last_namecheck").hide();
-				$("#dobcheck").hide();
-				$("#emailcheck").hide();
-				$("#ssncheck").hide();
-				$("#visacheck").hide();
-				$("#Experiencecheck").hide();
-				$("#citycheck").hide();
-				var err_firstname=true;
-				var err_lastname=true;
-				var err_dob=true;
-				var err_email=true;
-				var err_ssn=true;
-				var err_visa=true;
-				var err_Experience=true;
-				var err_city=true;
-				//validate first name
-				$("#validatefrm").click(function()
-				{
-					check_firstname();
-				});
-				function check_firstname()
-				{
-					var firstname_val=$("#first_name").val();
-
-					var regexOnlyText = /^[a-zA-Z]+$/;
-					if (firstname_val==""||regexOnlyText.test(firstname_val) != true){
-						$("#first_namecheck").show();
-						$("#first_namecheck").focus();
-						$("#first_namecheck").css("color","red");
-						err_firstname=false;
-						return false;
-					}
-					else
-					{
-						$("#first_namecheck").hide();
-					}
-					
-					// var patt1 = /\b[0-9]/;
-					// var result = firstname_val.search(patt1);
-					// if((firstname_val=="")||(result==0))
-					// {
-					// 	$("#first_namecheck").show();
-					// 	$("#first_namecheck").focus();
-					// 	$("#first_namecheck").css("color","red");
-					// 	err_firstname=false;
-					// 	return false;
-					// }
-					// else
-					// {
-					// 	$("#first_namecheck").hide();
-					// }
-					
-				}
-				//validate middle name
-				$("#validatefrm").click(function()
-				{
-					check_middlename();
-				});
-				function check_middlename()
-				{
-					var middlename_val=$("#middle_name").val();
-
-					var regexOnlyText = /^[a-zA-Z]+$/;
-					if(middlename_val!="")
-					{	
-						if (regexOnlyText.test(middlename_val) != true){
-							$("#middle_namecheck").show();
-							$("#middle_namecheck").focus();
-							$("#middle_namecheck").css("color","red");
-							err_middlename=false;
-							return false;
-						}
-						else
-						{
-							$("#middle_namecheck").hide();
-						}
-					}
-					else
-					{
-						$("#middle_namecheck").hide();
-					}
-					
-				}
-				//Validation last name
-				$("#validatefrm").click(function()
-				{
-					check_lastname();
-				});
-				function check_lastname()
-				{
-					var lastname_val=$("#last_name").val();
-
-					var regexOnlyText = /^[a-zA-Z]+$/;
-					if (lastname_val==""||regexOnlyText.test(lastname_val) != true){
-						$("#last_namecheck").show();
-						$("#last_namecheck").focus();
-						$("#last_namecheck").css("color","red");
-						err_lastname=false;
-						return false;
-					}
-					else
-					{
-						$("#last_namecheck").hide();
-					}
-					
-					// var patt1 = /\b[0-9]/;
-					// var result = lastname_val.search(patt1);
-					// if((lastname_val=="")||(result==0))
-					// {
-					// 	$("#last_namecheck").show();
-					// 	$("#last_namecheck").focus();
-					// 	$("#last_namecheck").css("color","red");
-					// 	err_lastname=false;
-					// 	return false;
-					// }
-					// else
-					// {
-					// 	$("#last_namecheck").hide();
-					// }
-					
-				}
-				//validate date of birth
-				$("#validatefrm").click(function()
-				{
-					check_dob();
-				});
-				function check_dob()
-				{
-					var date_of_birth= $("#date_of_birth").val();
-					var dob_var = new Date(date_of_birth);
-
-					var dob_val_day = dob_var.getDate();
-					var dob_val_month = dob_var.getMonth() + 1;
-					var dob_val_year = dob_var.getFullYear();
-
-					if(!dob_val_day || !dob_val_month || !dob_val_year)
-					{
-						$("#dobcheck").show();
-						$("#dobcheck").focus();
-						$("#dobcheck").css("color","red");
-						err_dob=false;
-						return false;
-					}
-					else if(dob_val_day > 31 || dob_val_month > 11 || dob_val_year > new Date().getFullYear())
-					{
-						$("#dobcheck").show();
-						$("#dobcheck").focus();
-						$("#dobcheck").css("color","red");
-						err_dob=false;
-						return false;
-					}
-					else
-					{
-						$("#dobcheck").hide();
-					}
-
-				}
-				//validate email
-				$("#validatefrm").click(function()
-				{
-					check_email();
-				});
-				function check_email()
-				{
-					var email_val=$("#email").val();
-					var v=/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-					var result = email_val.match(v);
-					if((email_val.length == "")||(result == null))
-					{
-						$("#emailcheck").show();
-						$("#emailcheck").focus();
-						$("#emailcheck").css("color","red");
-						err_email=false;
-						return false;$("#emailcheck").hide();
-					}
-					else
-					{
-						
-						$("#emailcheck").hide();
-					}
-				}
-				// validate Social Security Number (SSN)
-				$("#validatefrm").click(function()
-				{
-					check_ssn();
-				});
-				function check_ssn()
-				{
-					var ssn_val=$("#ssn").val();
-
-					var regexOnlyNumbers = /^[0-9\-]+$/;
-					if(ssn_val!="")
-					{
-						if (regexOnlyNumbers.test(ssn_val) != true){
-							$("#ssncheck").show();
-							$("#ssncheck").focus();
-							$("#ssncheck").css("color","red");
-							err_ssn=false;
-							return false;
-						}
-						else
-						{
-							$("#ssncheck").hide();
-						}
-					}
-					else
-					{
-						$("#ssncheck").hide();
-					}
-				}
-				
-				
-				//validate Visa
-				$("#validatefrm").click(function()
-				{
-					check_visa();
-				});
-				function check_visa()
-				{
-					var visa_val=$("#visa_status").val();
-					if(visa_val.length=="")
-					{
-						$("#visacheck").show();
-						$("#visacheck").focus();
-						$("#visacheck").css("color","red");
-						err_visa=false;
-						return false;
-					}
-					else
-					{
-						$("#visacheck").hide();
-					}
-				}
-				//Validation Experience
-				$("#validatefrm").click(function()
-				{
-					check_Experience();
-				});
-				function check_Experience()
-				{
-					var Experience_val=$("#Experience").val();
-
-					var regexOnlyNumbers = /^[0-9]+$/;
-					if (Experience_val==""||regexOnlyNumbers.test(Experience_val) != true){
-						$("#Experiencecheck").show();
-						$("#Experiencecheck").focus();
-						$("#Experiencecheck").css("color","red");
-						err_Experience=false;
-						return false;
-					}
-					else
-					{
-						$("#Experiencecheck").hide();
-					}
-				}
-				//Validation Location
-				$("#validatefrm").click(function()
-				{
-					check_location();
-				});
-				function check_location()
-				{
-					var loc_val=$("#country").val();
-					var loc_val1=$("#state_text").val();
-					var loc_val2=$("#city").val();
-					if((loc_val=="")||(loc_val1=="")||(loc_val2==""))
-					{
-						$("#citycheck").show();
-						$("#citycheck").focus();
-						$("#citycheck").css("color","red");
-						err_city=false;
-						return false;
-					}
-					else
-					{
-						$("#citycheck").hide();
-					}
-				}
-
-				$("#validatefrm").click(function()
-				{
-					err_firstname=true;
-					err_lastname=true;
-					err_dob=true;
-					err_email=true;
-					err_visa=true;
-					err_city=true;
-					check_firstname();
-					check_lastname();
-					check_dob();
-					check_email();
-					check_visa();
-					check_location();
-					if((err_firstname==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_visa==true)&&(err_city==true))
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				});
-			});
-		</script>
-			<script>
-			$(document).ready(function()
-			{
-				$("#mob_ph_check").hide();
-				$("#home_ph_check").hide();
-				$("#resume_check").hide();
-				
-				var err_mob_ph=true;
-				var err_home_ph=true;
-				var err_resume=true;
+			}
 			
-		
-				$("#validatefrm").click(function()
-				{
-					check_resume();
-				});
-				function check_resume()
-				{
-					
-					var file_val=$("#cv_file").val();
-					 var ext = file_val.split('.').pop();
-					if(ext=="pdf" || ext=="docx" || ext=="doc")
-					{
-							$("#resume_check").hide();
-					}
-					else
-					{
-						$("#resume_check").show();
-						$("#resume_check").focus();
-						$("#resume_check").css("color","red");
-						err_resume=false;
-						return false;
-					}
+		}
+		//validate middle name
+		$("#middle_name").blur(function()
+		{
+			check_middlename();
+		});
+		function check_middlename()
+		{
+			var middlename_val=$("#middle_name").val();
+
+			var regexOnlyText = /^[a-zA-Z]+$/;
+			if(middlename_val!="")
+			{	
+				if (regexOnlyText.test(middlename_val) != true){
+					$("#middle_namecheck").show();
+					$("#middle_namecheck").focus();
+					$("#middle_namecheck").css("color","red");
+					err_middlename=false;
+					return false;
 				}
-				$("#validatefrm").click(function()
+				else
 				{
-					err_mob_ph=true;
+					err_middlename=true;
+					$("#middle_namecheck").hide();
+				}
+			}
+			else
+			{
+				err_middlename=true;
+				$("#middle_namecheck").hide();
+			}
+			
+		}
+		//Validation last name
+		$("#last_name").blur(function()
+		{
+			check_lastname();
+		});
+		function check_lastname()
+		{
+			var lastname_val=$("#last_name").val();
+
+			var regexOnlyText = /^[a-zA-Z]+$/;
+			if (lastname_val==""||regexOnlyText.test(lastname_val) != true){
+				$("#last_namecheck").show();
+				$("#last_namecheck").focus();
+				$("#last_namecheck").css("color","red");
+				err_lastname=false;
+				return false;
+			}
+			else
+			{
+				err_lastname=true;
+				$("#last_namecheck").hide();
+			}
+		}
+		//validate date of birth
+		$("#date_of_birth").blur(function()
+		{
+			check_dob();
+		});
+		function check_dob()
+		{
+			var date_of_birth= $("#date_of_birth").val();
+			
+			if(date_of_birth)
+			{	
+				var dob_var = new Date(date_of_birth);
+				var dob_val_day = dob_var.getDate();
+				var dob_val_month = dob_var.getMonth() + 1;
+				var dob_val_year = dob_var.getFullYear();
+
+				if(!dob_val_day || !dob_val_month || !dob_val_year)
+				{
+					$("#dobcheck").show();
+					$("#dobcheck").focus();
+					$("#dobcheck").css("color","red");
+					err_dob=false;
+					return false;
+				}
+				else if(dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear())
+				{
+					$("#dobcheck").show();
+					$("#dobcheck").focus();
+					$("#dobcheck").css("color","red");
+					err_dob=false;
+					return false;
+				}
+				else
+				{
+					err_dob=true;
+					$("#dobcheck").hide();
+				}
+			}
+			else
+			{
+				err_dob=true;
+				$("#dobcheck").hide();
+			}
+
+		}
+		//validate email
+		$("#email").blur(function()
+		{
+			check_email();
+		});
+		function check_email()
+		{
+			var email_val=$("#email").val();
+			var v=/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+			var result = email_val.match(v);
+			if((email_val.length == "")||(result == null))
+			{
+				$("#emailcheck").show();
+				$("#emailcheck").focus();
+				$("#emailcheck").css("color","red");
+				err_email=false;
+				return false;
+			}
+			else
+			{
+				err_email=true;
+				$("#emailcheck").hide();
+			}
+		}
+		// validate Social Security Number (SSN)
+		$("#ssn").blur(function()
+		{
+			check_ssn();
+		});
+		function check_ssn()
+		{
+			var ssn_val=$("#ssn").val();
+
+			var regexOnlyNumbers = /^[0-9\-]+$/;
+			if(ssn_val!="")
+			{
+				if (regexOnlyNumbers.test(ssn_val) != true){
+					$("#ssncheck").show();
+					$("#ssncheck").focus();
+					$("#ssncheck").css("color","red");
+					err_ssn=false;
+					return false;
+				}
+				else
+				{
+					err_ssn=true;
+					$("#ssncheck").hide();
+				}
+			}
+			else
+			{
+				err_ssn=true;
+				$("#ssncheck").hide();
+			}
+		}				
+		//validate Visa
+		$("#visa_status").blur(function()
+		{
+			check_visa();
+		});
+		function check_visa()
+		{
+			var visa_val=$("#visa_status").val();
+			if(visa_val.length=="")
+			{
+				$("#visacheck").show();
+				$("#visacheck").focus();
+				$("#visacheck").css("color","red");
+				err_visa=false;
+				return false;
+			}
+			else
+			{
+				err_visa=true;
+				$("#visacheck").hide();
+			}
+		}
+		//Validation Experience
+		$("#Experience").blur(function()
+		{
+			check_Experience();
+		});
+		function check_Experience()
+		{
+			var Experience_val=$("#Experience").val();
+
+			var regexOnlyNumbers = /^[0-9]+$/;
+			if (Experience_val==""||regexOnlyNumbers.test(Experience_val) != true){
+				$("#Experiencecheck").show();
+				$("#Experiencecheck").focus();
+				$("#Experiencecheck").css("color","red");
+				err_Experience=false;
+				return false;
+			}
+			else
+			{
+				err_Experience=true;
+				$("#Experiencecheck").hide();
+			}
+		}
+		//Validation Location
+		$("#city").blur(function()
+		{
+			check_location();
+		});
+		function check_location()
+		{
+			var loc_val=$("#country").val();
+			var loc_val1=$("#state_text").val();
+			var loc_val2=$("#city").val();
+			if((loc_val=="")||(loc_val1=="")||(loc_val2==""))
+			{
+				$("#citycheck").show();
+				$("#citycheck").focus();
+				$("#citycheck").css("color","red");
+				err_city=false;
+				return false;
+			}
+			else
+			{
+				err_city=true;
+				$("#citycheck").hide();
+			}
+		}
+		// validate mobile number
+		$("#mobile_number").blur(function()
+		{
+			check_mb_phone();
+		});
+		function check_mb_phone(){
+			var var_mobile_number=$("#mobile_number").val();
+
+			var regexOnlyNumbers = /^[0-9-]+$/;
+			if (var_mobile_number.length != 12||regexOnlyNumbers.test(var_mobile_number) != true){
+				$("#mob_ph_check").show();
+				$("#mob_ph_check").focus();
+				$("#mob_ph_check").css("color","red");
+				err_mob_ph=false;
+				return false;
+			}
+			else
+			{
+				err_mob_ph=true;
+				$("#mob_ph_check").hide();
+			}
+		}
+		// validate home number
+		$("#phone").blur(function()
+		{
+			check_hm_phone();
+		});
+		function check_hm_phone(){
+			var var_homephone_number=$("#phone").val();
+
+			var regexOnlyNumbers = /^[0-9-]+$/;
+			if(var_homephone_number.length>2)
+			{
+				if (var_homephone_number.length != 12||regexOnlyNumbers.test(var_homephone_number) != true){
+					$("#home_ph_check").show();
+					$("#home_ph_check").focus();
+					$("#home_ph_check").css("color","red");
+					err_home_ph=false;
+					return false;
+				}
+				else
+				{
 					err_home_ph=true;
+					$("#home_ph_check").hide();
+				}
+			}
+			else
+			{
+				err_home_ph=true;
+				$("#home_ph_check").hide();
+				$("#phone").val("");
+			}
+		}
+		// cv validate
+		$("#cv_file").change(function()
+		{
+			check_resume();
+		});
+		function check_resume()
+		{
+			
+			var file_val=$("#cv_file").val();
+			var ext = file_val.split('.').pop();
+			if(ext=="pdf" || ext=="docx" || ext=="doc")
+			{
+					$("#resume_check").hide();
 					err_resume=true;
-					
-					check_mb_phone();
-					check_hm_phone();
-					check_resume();
-					if((err_mob_ph==true)&&(err_home_ph==true)&&(err_resume==true))
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				});
-				function check_mb_phone(){
-					var var_mobile_number=$("#mobile_number").val();
+			}
+			else
+			{
+				$("#resume_check").show();
+				$("#resume_check").focus();
+				$("#resume_check").css("color","red");
+				err_resume=false;
+				return false;
+			}
+		}
 
-					var regexOnlyNumbers = /^[0-9-]+$/;
-					if (var_mobile_number.length != 12||regexOnlyNumbers.test(var_mobile_number) != true){
-						$("#mob_ph_check").show();
-						$("#mob_ph_check").focus();
-						$("#mob_ph_check").css("color","red");
-						err_mob_ph=false;
-						return false;
-					}
-					else
-					{
-						$("#mob_ph_check").hide();
-					}
-				}
-				function check_hm_phone(){
-					var var_homephone_number=$("#phone").val();
+		// final submission
+		$("#validatefrm").click(function()
+		{
+			// when submit button clicked, validate
+			check_firstname();
+			check_middlename();
+			check_lastname();
+			check_dob();
+			check_email();
+			check_ssn();
+			check_visa();
+			check_Experience();
+			check_location();
+			check_mb_phone();
+			check_hm_phone();
+			check_resume();
 
-					var regexOnlyNumbers = /^[0-9-]+$/;
-					if(var_homephone_number.length>2)
-					{
-						if (var_homephone_number.length != 12||regexOnlyNumbers.test(var_homephone_number) != true){
-							$("#home_ph_check").show();
-							$("#home_ph_check").focus();
-							$("#home_ph_check").css("color","red");
-							err_home_ph=false;
-							return false;
-						}
-						else
-						{
-							$("#home_ph_check").hide();
-						}
-					}
-					else
-					{
-						$("#home_ph_check").hide();
-						$("#phone").val("")
-					}
-				}
-			});
-			</script>
+
+			// check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
+			if((err_firstname==true)&&(err_middlename==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_ssn==true)&&(err_visa==true)&&(err_Experience==true)&&(err_city==true)&&(err_mob_ph==true)&&(err_home_ph==true)&&(err_resume==true))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		});
+	});
+</script>
 
 			<!-- Validation of Education Details -->
 		<script>

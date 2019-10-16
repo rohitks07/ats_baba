@@ -81,7 +81,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-								<input id="search" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;">
+								<input id="search" type="text" placeholder="   Search" class="form-control" style="float:right;width:350px;border-radius:20px;height:30px;">
 						@if(!empty($toReturn['user_type']=="teammember"))
 							@if($toReturn['current_module_permission']['is_add']=="yes")                                       
 							<a href="{{url('employer/post_new_job')}}">
