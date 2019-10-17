@@ -46,7 +46,6 @@
                                                          <tr>
                                                            <?php $id=$education['ID'];
                                                               $seekerid=$education['seeker_ID'];?>
-                                                                 
 
                                                          <td>{{$education['degree_title']}}</td>
                                                         <td>{{$education['institude']}}</td>
@@ -64,50 +63,55 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Education</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Education</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-            <form class="cmxform form-horizontal tasi-form"  action="{{url('employer/employer_edit_education/add')}}"   method="post" >
+            <form class="cmxform form-horizontal tasi-form"  onsubmit="return validation()" action="{{url('employer/employer_edit_education/add')}}"   method="post" >
             {{csrf_field()}}    
             <div class="form-group row">
                 <label for="" class="control-label col-lg-4">Degree</label>
                 <div class="col-lg-8">
    <input class="form-control" type="hidden" id="seeker_ID" name="seeker_ID" value="{{$education['seeker_ID']}}">
-   <input class="form-control" type="text" id="degree_title" name="degree_title"  placeholder="Degree" value="">
+   <input class="form-control" type="text" id="degree_title" name="degree_title"  placeholder="Degree" value="" required>
+   <span id="degree_titleerror" class="text-danger"></span>
    </div>
     </div>
     <div  class="form-group row">
    <label for="" class="control-label col-lg-4">Institute</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="institude" name="institude"  placeholder="Institute" value="">
+   <input class="form-control " type="text" id="institude" name="institude"  placeholder="Institute" value=""required>
+   <span id="institudeerror" class="text-danger"></span>
    </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">City</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="city" name="city"  placeholder="City" value="">
+   <input class="form-control " type="text" id="city" name="city"  placeholder="City" value="" required>
+   <span id="cityerror" class="text-danger"></span>
    </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">Country</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="country" name="country"  placeholder="Country" value="">
+   <input class="form-control " type="text" id="country" name="country"  placeholder="Country" value="" required>
+   <span id="countryerror" class="text-danger"></span>
    </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">Year of Completion</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="completion_year" name="completion_year"  placeholder="Year of Completion" value="">
-   </div>
+   <input class="form-control " type="text" id="completion_year" name="completion_year"  placeholder="Year of Completion" value="" required>
+   <span id="completion_yearerror" class="text-danger"></span> 
+  </div>
     </div>
     
     
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" onclick="validation()" class="btn btn-primary">Submit</button>
       </div>
       
       
@@ -143,44 +147,49 @@
       </div>
       <div class="modal-body">
      
-            <form class="cmxform form-horizontal tasi-form"  action="{{url('employer/employer_edit_education/'.$id.'/'.$seekerid)}}"   method="post" >
+            <form class="cmxform form-horizontal tasi-form" onsubmit="return validation1()" action="{{url('employer/employer_edit_education/'.$id.'/'.$seekerid)}}"   method="post" >
             {{csrf_field()}}    
             <div class="form-group row">
                 <label for="" class="control-label col-lg-4">Degree</label>
                 <div class="col-lg-8">
    <input class="form-control" type="hidden" id="seeker_ID" name="seeker_ID" value="{{$education['seeker_ID']}}">
-   <input class="form-control" type="text" id="degree_title" name="degree_title"  placeholder="Degree" value="{{$education['degree_title']}}">
-   </div>
+   <input class="form-control" type="text" id="degree_title" name="degree_title"  placeholder="Degree" value="{{$education['degree_title']}}"required>
+   <span id="degree_titleerror" class="text-danger"></span> 
+  </div>
     </div>
     <div  class="form-group row">
    <label for="" class="control-label col-lg-4">Institute</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="institude" name="institude"  placeholder="Institute" value="{{$education['institude']}}">
-   </div>
+   <input class="form-control " type="text" id="institude" name="institude"  placeholder="Institute" value="{{$education['institude']}}"required>
+   <span id="institudeerror" class="text-danger"></span>  
+  </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">City</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="city" name="city"  placeholder="City" value="{{$education['city']}}">
-   </div>
+   <input class="form-control " type="text" id="city" name="city"  placeholder="City" value="{{$education['city']}}"required>
+   <span id="cityerror" class="text-danger"></span>   
+  </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">Country</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="country" name="country"  placeholder="Country" value="{{$education['country']}}">
-   </div>
+   <input class="form-control " type="text" id="country" name="country"  placeholder="Country" value="{{$education['country']}}"required>
+   <span id="countryerror" class="text-danger"></span> 
+  </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">Year of Completion</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="completion_year" name="completion_year"  placeholder="Year of Completion" value="{{$education['completion_year']}}">
-   </div>
+   <input class="form-control " type="text" id="completion_year" name="completion_year"  placeholder="Year of Completion" value="{{$education['completion_year']}}"required>
+   <span id="completion_yearerror" class="text-danger"></span> 
+  </div>
     </div>
     
     
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" onclick="validation1()"class="btn btn-primary">Submit</button>
       </div>
       
       
@@ -188,7 +197,104 @@
   </div>
   </form>
 </div>
+<script type="text/javascript">
+  function validation()
+  {
+      var degree_title = document.getElementById('degree_title').value;
+      var institude = document.getElementById('institude').value;
+      var city = document.getElementById('city').value;
+      var country = document.getElementById('country').value;
+      var completion_year = document.getElementById('completion_year').value;
+      
 
+      var usercheck=/^[A-Za-z. ]{3,}$/;
+      var countrycheck=/^[A-Za-z. ]{3,}$/;
+      var citycheck=/^[A-Za-z. ]{3,}$/;
+      var companycheck=/^[A-Za-z. ]{3,}$/;
+      var completion_yearcheck=/^[19][0-9]{3,3}$/;
+      
+      
+      if(usercheck.test(degree_title)){
+       document.getElementById('degree_titleerror').innerHTML="";
+      }
+      else{
+       document.getElementById('degree_titleerror').innerHTML="Please provide valid  Degree_title";
+       return false;
+      }
+      if(countrycheck.test(institude)){
+       document.getElementById('institudeerror').innerHTML="";
+      }
+      else{
+       document.getElementById('institudeerror').innerHTML="Please provide valid Institude Name";
+       return false;
+      }
+      if(citycheck.test(city)){
+       document.getElementById('cityerror').innerHTML="";
+      }
+      else{
+       document.getElementById('cityerror').innerHTML="Please provide valid City Name";
+       return false;
+      }
+      if(companycheck.test(country)){
+       document.getElementById('countryerror').innerHTML="";
+      }
+      else{
+       document.getElementById('countryerror').innerHTML="Please provide valid Country Name";
+       return false;
+      }
+      if(completion_yearcheck.test(country)){
+       document.getElementById('completion_yearerror').innerHTML="";
+      }
+      else{
+       document.getElementById('completiion_yearerror').innerHTML="Please provide valid Completion_year";
+       return false;
+      }
+      
+  }
+  
+    function validation1()
+    {
+        var degree_title = document.getElementById('degree_title').value;
+        var institude = document.getElementById('institude').value;
+        var city = document.getElementById('city').value;
+        var country = document.getElementById('country').value;
+       
+
+        var usercheck=/^[A-Za-z. ]{3,}$/;
+        var countrycheck=/^[A-Za-z. ]{3,}$/;
+        var citycheck=/^[A-Za-z. ]{3,}$/;
+        var companycheck=/^[A-Za-z. ]{3,}$/;
+        
+        if(usercheck.test(degree_title)){
+         document.getElementById('degree_titleerror').innerHTML="";
+        }
+        else{
+         document.getElementById('degree_titleerror').innerHTML="please provide valid Job Title";
+         return false;
+        }
+        if(countrycheck.test(institude)){
+         document.getElementById('institudeerror').innerHTML="";
+        }
+        else{
+         document.getElementById('institudeerror').innerHTML="please provide valid Country Name";
+         return false;
+        }
+        if(citycheck.test(city)){
+         document.getElementById('cityerror').innerHTML="";
+        }
+        else{
+         document.getElementById('cityerror').innerHTML="please provide valid City Name";
+         return false;
+        }
+        if(companycheck.test(country)){
+         document.getElementById('countryerror').innerHTML="";
+        }
+        else{
+         document.getElementById('countryerror').innerHTML="please provide valid Company Name";
+         return false;
+        }
+    }
+    </script>
 
  
 

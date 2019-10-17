@@ -113,52 +113,98 @@
 									
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-12">
-                                <form action="{{url('employer/team_member_edit_experience/update')}}"  method="post">
+                                <form action="{{url('employer/team_member_edit_experience/update')}}"  method="post" onsubmit="return validation()">
 									<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Job Title</label>
-	                                            	<div class="col-lg-8">
+	                                            	<div class="col-lg-4">
 													<input type="hidden" name="_token" id="csrf-token" value="{{csrf_token()}}"/>
 													<input type="hidden" name="seeker_id"  value="{{$exp->seeker_ID}}">
 													<input type="hidden" name="ID"  value="{{$exp->ID}}">
-	                                                   <input type="text" id="job_title" name="job_title"  placeholder="Job Title" value="{{$exp->job_title}}">
-	                                            </div>
+	                                                   <input type="text" id="job_title" name="job_title"  placeholder="Job Title" value="{{$exp->job_title}}" class="form-control"required>
+                                                        <span id="jobtitleerror" class="text-danger"></span>
+                                                    </div>
 												</div>
 												<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Company Name</label>
-	                                            	<div class="col-lg-8">
-	                                                   <input type="text" id="company_name" name="company_name"  placeholder="Company Name" value="{{$exp->company_name}}">
+	                                            	<div class="col-lg-4">
+                                                       <input type="text" id="company_name" name="company_name"  placeholder="Company Name" value="{{$exp->company_name}}" class="form-control"required>
+                                                       <span id="companyerror" class="text-danger"></span>
 	                                            </div>
 	                                        </div>	
 											<div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">Start Date</label>
-	                                            <div class="col-lg-8">
-	                                               	<input type="date" id="start_date" name="start_date"  placeholder="start Date" value="{{$exp->start_date}}"/>
+	                                            <div class="col-lg-4">
+	                                               	<input type="date" id="start_date" name="start_date"  placeholder="start Date" value="{{$exp->start_date}}" class="form-control"required>
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">End Date</label>
-	                                            <div class="col-lg-8">
-	                                                <input type="date" id="end_date" name="end_date"  placeholder="end_date" value="{{$exp->end_date}}" />
+	                                            <div class="col-lg-4">
+	                                                <input type="date" id="end_date" name="end_date"  placeholder="end_date" value="{{$exp->end_date}}"class="form-control" style="font" required>
 	                                            </div>
 	                                        </div>		
 											<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">City</label>
-	                                            	<div class="col-lg-8">
-	                                                   <input type="text" id="city" name="city"  placeholder="City" value="{{$exp->city}}">
-
+	                                            	<div class="col-lg-4">
+	                                                   <input type="text" id="city" name="city"  placeholder="City"class="form-control" value="{{$exp->city}}"required>
+                                                       <span id="cityerror" class="text-danger"></span>
 	                                            </div>
 	                                        </div>		
 
 											<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Country</label>
-	                                            	<div class="col-lg-8">
-	                                                   <input type="text" id="country" name="country"  placeholder="Country" value="{{$exp->country}}">
-	                                            </div>
+	                                            	<div class="col-lg-4">
+	                                                   <input type="text" id="country" name="country"  placeholder="Country"class="form-control" value="{{$exp->country}}"required>
+                                                    <span id="countryerror" class="text-danger"></span>
+                                                    </div>
 	                                        </div>										
-                                          </div>            
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                          </div>          
+                                            <center><button type="submit" class="btn btn-primary" onclick="validation()">Submit</button></center>
                                           </div>
                                         </div></div></h3></div></form></div></div></div></div></div>
+                                        <script type="text/javascript">
+                                            function validation()
+                                            {
+                                                var jobtitle = document.getElementById('job_title').value;
+                                                var country = document.getElementById('country').value;
+                                                var city = document.getElementById('city').value;
+                                                var company = document.getElementById('company_name').value;
+                        
+                                                var usercheck=/^[A-Za-z. ]{3,}$/;
+                                                var countrycheck=/^[A-Za-z. ]{3,}$/;
+                                                var citycheck=/^[A-Za-z. ]{3,}$/;
+                                                var companycheck=/^[A-Za-z. ]{3,}$/;
+                                                
+                                                if(usercheck.test(jobtitle)){
+                                                 document.getElementById('jobtitleerror').innerHTML="";
+                                                }
+                                                else{
+                                                 document.getElementById('jobtitleerror').innerHTML="please provide valid Job Title";
+                                                 return false;
+                                                }
+                                                if(countrycheck.test(country)){
+                                                 document.getElementById('countryerror').innerHTML="";
+                                                }
+                                                else{
+                                                 document.getElementById('countryerror').innerHTML="please provide valid Country Name";
+                                                 return false;
+                                                }
+                                                if(citycheck.test(city)){
+                                                 document.getElementById('cityerror').innerHTML="";
+                                                }
+                                                else{
+                                                 document.getElementById('cityerror').innerHTML="please provide valid City Name";
+                                                 return false;
+                                                }
+                                                if(companycheck.test(company)){
+                                                 document.getElementById('companyerror').innerHTML="";
+                                                }
+                                                else{
+                                                 document.getElementById('companyerror').innerHTML="please provide valid Company Name";
+                                                 return false;
+                                                }
+                                            }
+                                            </script>
 @include('include.emp_footer')
 
 </html>
