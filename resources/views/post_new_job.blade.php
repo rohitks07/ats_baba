@@ -660,10 +660,18 @@ $("#country").on("change", function(e){
                 return false;
             } else {
                 isValid = regex.test(job_val);
-                $("#jobduration_check").css("display", !isValid ? "block" : "none");
-                $("#jobduration_check").css("color", "red");
-                return false;
-                err_jobduration = false;
+
+                if(!isValid){
+                    $("#jobduration_check").show();
+                    $("#jobduration_check").css("color", "red");
+                    err_jobduration = false;
+                    return false;
+                }
+                else{
+                    $("#jobduration_check").hide();
+                    err_jobduration = true;
+                    return false;
+                }
 
             }
         }
@@ -720,10 +728,18 @@ $("#country").on("change", function(e){
                 return false;
             } else {
                 isValid = regex.test(exp_req_val);
-                $("#exp_req_check").css("display", !isValid ? "block" : "none");
-                $("#exp_req_check").css("color", "red");
-                return false;
-                err_exp_req = false;
+                
+                if(!isValid){
+                    $("#exp_req_check").show();
+                    $("#exp_req_check").css("color", "red");
+                    err_exp_req = false;
+                    return false;
+                }
+                else{
+                    $("#exp_req_check").hide();
+                    err_exp_req = true;
+                    return false;
+                }
 
             }
 
@@ -1060,10 +1076,18 @@ $("#country").on("change", function(e){
                 return false;
             } else {
                 isValid = regex.test(jobcode_val);
-                $("#jobcode_check").css("display", !isValid ? "block" : "none");
-                $("#jobcode_check").css("color", "red");
-                return false;
-                err_jobcode = false;
+                
+                if(!isValid){
+                    $("#jobcode_check").show();
+                    $("#jobcode_check").css("color", "red");
+                    err_jobcode = false;
+                    return false;
+                }
+                else{
+                    $("#jobcode_check").hide();
+                    err_jobcode = true;
+                    return false;
+                }
 
             }
         }
@@ -1088,10 +1112,18 @@ $("#country").on("change", function(e){
                 return false;
             } else {
                 isValid = regex.test(jobcode_val);
-                $("#no_of_vacancies_check").css("display", !isValid ? "block" : "none");
-                $("#no_of_vacancies_check").css("color", "red");
-                return false;
-                err_vacancies = false;
+                
+                if(!isValid){
+                    $("#no_of_vacancies_check").show();
+                    $("#no_of_vacancies_check").css("color", "red");
+                    err_vacancies = false;
+                    return false;
+                }
+                else{
+                    $("#no_of_vacancies_check").hide();
+                    err_vacancies = true;
+                    return false;
+                }
 
             }
         }
@@ -1117,10 +1149,18 @@ $("#country").on("change", function(e){
                 return false;
             } else {
                 isValid = regex1.test(jobtitle_val);
-                $("#jobtitle_check").css("display", !isValid ? "block" : "none");
-                $("#jobtitle_check").css("color", "red");
-                return false;
-                err_jobcode = false;
+                
+                if(!isValid){
+                    $("#jobtitle_check").show();
+                    $("#jobtitle_check").css("color", "red");
+                    err_jobtitle = false;
+                    return false;
+                }
+                else{
+                    $("#jobtitle_check").hide();
+                    err_jobtitle = true;
+                    return false;
+                }
             }
         }
         //validate closing date
