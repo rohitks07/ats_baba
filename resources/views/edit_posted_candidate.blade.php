@@ -139,7 +139,7 @@ $.ajaxSetup({
                                <div class="card-body">
 							        <h3>Personal Detail</h3>
 							   <hr>
-						<form action="{{url('employer/edit_posted_candidate/update/')}}" method="post" enctype="multipart/form-data">
+						<form action="{{url('employer/edit_posted_candidate/update/')}}" method="post" enctype="multipart/form-data" novalidate>
 						{{csrf_field()}}
 						<input type="hidden" name="id" id="id" value="{{$details->ID}}">
 						    <input type="hidden" name="_token" value = "{{ csrf_token()}}" > 
@@ -250,28 +250,48 @@ $.ajaxSetup({
 												<div class="form-group row">
 													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
 													<select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-														<option value="United States" selected>United States</option>
+														<option value="224" selected>United States</option>
 														@foreach($toReturn['countries'] as $country)
 													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
 													  @endforeach  
 													  
 													 
-													</select>
+													</select>&nbsp;&nbsp;&nbsp;
 				  
-													<select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
+													{{-- <select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
 														  <option value="">Select country first</option>
 				  
 													</select>
-													<div class="col-md-12" style="float: right;margin-left: 21em;margin-top: 2%;">
-														
-														<select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
-															  <option value="">Select state first</option>
-				  
+													 --}}
+															
+													 <select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
+														<option value="">Select state</option>
+				
+												  </select>
+												  <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
+													<div id="select_city">
+														<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
+															  <option value="">Select city </option>
+				                                               
 													  </select>
+													  {{-- <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
+														<div id="select_city">
+															<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required> --}}
+																{{-- <option value="">Select City </option> --}}
+
+
+															</select>
 														<br>
 														<span id="citycheck">Please choose Your Location</span> 
 													</div>
 													
+												</div>
+												<input type="checkbox" id="myCheck"  onclick="mycity()" style="width:20px;height:20px;">
+												<label id="city_label" class="control-label col-lg-4">Enter City if not present</label>
+												<div id="textCity" style="display:none;"  class="form-group row col-md-12"> 
+                                                        <label for="" class="control-label col-lg-4">Enter City <span style="color:red;">*</span></label>
+                                                        <input type="text" class="col-sm-5" id="" name="city_text_name">
+													</div>
 												</div>
 								<!--end Location -->
 								<!--Address Line 1-->	   
@@ -312,12 +332,13 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Upload Resume<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="file" class="form-control" name="cv_file" id="cv_file" value="{{$details['cv_file']}}" style="background:#fff;" />
-												  <p>Upload files only in .doc, .docx or .pdf format with maximum size of 32 MB.</p>
-												  <span id="resume_check">Please Choose a Valid File</span>
+												<input type="file" class="form-control" name="cv_file" id="cv_file" style="background:#fff;" />
+												<input type="hidden" name="cv_file_before" value="{{$details['cv_file']}}" ><a href="{{url('public/seekerresume/'.$details['cv_file'])}}">{{$details['cv_file']}}</a>
+												<p>Upload files only in .doc, .docx or .pdf format with maximum size of 32 MB.</p>
+												<span id="resume_check">Please Choose a Valid File</span>
 											</div>
 								    </div>								
-								<!--end of Select File-->	
+								<!--end of Select File-->
 								<!--Other Documents -->	 
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Other Documents</label>										
@@ -352,23 +373,18 @@ $.ajaxSetup({
  
 @include('include.emp_footer')
 <script type="text/javascript">
-    $('#country').on('change', function(e){
-    console.log(e);
+$("#country").on("change", function(e){
     $('#state_text').empty();
     var country_id = e.target.value;
-    console.log (country_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/state/")}}'+"/"+country_id,
                 success:function(data){
-                    console.log(data);
                      $.each(data, function(index, value) {
                         $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
-                        console.log(value.state_id);
                         });
             },
                 error:function(data){
-                console.log(data);
             }
 
         });
@@ -378,20 +394,15 @@ $.ajaxSetup({
     console.log(e);
     $('#city').empty();
     var state_id = e.target.value;
-    console.log (state_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/city/")}}'+"/"+state_id,
                 success:function(data){
-                    console.log(data);
-                    
                      $.each(data, function(index, value) {
                         $('#city').append("<option value="+'"'+value.city_id+'"'+"selected>"+value.city_name+"</option>");
                         });
-                    
             },
                 error:function(data){
-                console.log(data);
             }
         });
     });
@@ -828,18 +839,21 @@ $(function() {
 				{
 					
 					var file_val=$("#cv_file").val();
-					 var ext = file_val.split('.').pop();
-					if(ext=="pdf" || ext=="docx" || ext=="doc")
+					var ext = file_val.split('.').pop();
+					if(file_val)
 					{
+						if(ext=="pdf" || ext=="docx" || ext=="doc")
+						{
 							$("#resume_check").hide();
-					}
-					else
-					{
-						$("#resume_check").show();
-						$("#resume_check").focus();
-						$("#resume_check").css("color","red");
-						err_resume=false;
-						return false;
+						}
+						else
+						{
+							$("#resume_check").show();
+							$("#resume_check").focus();
+							$("#resume_check").css("color","red");
+							err_resume=false;
+							return false;
+						}
 					}
 				}
 				$("#validatefrm").click(function()
@@ -959,6 +973,25 @@ $(function() {
 					}
 				});
 			});
+		</script>
+
+<script>
+		function mycity() {
+	
+			var checkBox = document.getElementById("myCheck");
+			if (checkBox.checked == true){
+				$('#select_city').css('display','none');
+				$('#textCity').css('display','block');
+				$('#city_label').css('display','none')
+				// city2.style.display = "block";
+				// city.style.display = "none";
+				}
+			else {
+				$('#select_city').css('display','block');
+				$('#textCity').css('display','none');
+				$('#city_label').css('display','block')
+				}
+		}
 		</script>
 		
 

@@ -47,42 +47,7 @@
                 width:100%;
                 height:350px;
              }
-    .table tr {
-    padding: 7px;
-    border-top: 1px solid #dee2e6;
-    font-size: 9px;
-    color: #000;
-    background: #fff;
-    }
-    .table tr {
-    padding: 7px;
-    border-top: 1px solid #dee2e6;
-    font-size: 12px;
-    color: #000;
-    background: #fff;
-    }
-.table td {
-    padding: 7px;
-    border-top: 1px solid #dee2e6;
-    font-size: 9px;
-    color: #000;
-    background: #fff;
-    }
-.table tr {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 9px;
-    color: #000;
-    background: #fff;
-    }
-.table th {
-    padding: 7px;
-    border-top: 1px solid #dee2e6;
-    font-size: 13px;
-    color: #000;
-   background: #e4e4e4;
-    }
+    
     </style>
     <body>
     <div class="fixed-left">

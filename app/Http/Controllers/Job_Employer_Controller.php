@@ -200,7 +200,10 @@ class Job_Employer_Controller extends Controller
             $toReturn['cities']          =cities::get()->toArray();
             $toReturn['countries']       =countries::get()->toArray();
             $toReturn['states']          =states::get()->toArray();
-        return view('post_new_job')->with('toReturn',$toReturn);
+            // $toReturn['countries']       =countries::where('')get()
+            $country_name="United States";
+            $country_id=224;
+        return view('post_new_job')->with('toReturn',$toReturn)->with('country_name',$country_name)->with('country_id',$country_id);
     }
 
     public function Add_to_post_job(Request $request)
@@ -233,15 +236,15 @@ class Job_Employer_Controller extends Controller
              $cit=  $request->city_name;
              $city_text=$request->city_text_name;
             
-             $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
+             $val_contries=countries::where('country_id',$con)->first('country_name');
     
-             $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
+             $val_state=states::where('state_id',$sta)->first('state_name');
              if($city_text)
              {
                 $Add_to_post_job->city    = $city_text;
              }
              else{
-                $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
+                $val_city=cities::where('city_id',$cit)->first('city_name');
                 $Add_to_post_job->city=$val_city['city_name'];
              } 
             
@@ -298,21 +301,44 @@ class Job_Employer_Controller extends Controller
            // $toReturn['state']=Tbl_state::get()->toArray();
           //  $toReturn['city']=Tbl_cities::get()->toArray();
            // $toReturn['countries']=Tbl_countries::get()->toArray();
+           $to=tbl_post_jobs::where('ID',$id)->get('for_group')->toArray();
+           
+           $toReturn['member_type']=Tbl_team_member_type::where('type_ID',$to)->get('type_name')->first();
+        //    return $toReturn['member_type'];
+           
             $toReturn['qualification']=Tbl_qualifications::get()->toArray();
             $toReturn['post_job_edit']=tbl_post_jobs::get()->toArray();
             $toReturn['post_job'] = tbl_post_jobs::where('ID',$id)->first();
+            $io = tbl_post_jobs::where('ID',$id)->get()->first();
+
+
+            $toReturn['name'] = tbl_team_member::where('ID',$io['owner_id'])->get('full_name')->toArray();
+            
             $toReturn['team_member_type']=tbl_team_member_type::get()->toArray();
             $toReturn['team_member']     =tbl_team_member::get()->toArray();
+            // return $toReturn['team_member'];
             $toReturn['job_industries']  =tbl_job_industries::get()->toArray();
             $toReturn['industries_name']=tbl_job_industries::where('ID',$toReturn['post_job']['industry_ID'])->first();
+            // return $toReturn['job_industries'];
             $toReturn['cities']          =cities::get()->toArray();
             $toReturn['countries']       =countries::get()->toArray();
             $toReturn['states']          =states::get()->toArray();
+            $post_job1 = tbl_post_jobs::where('ID',$id)->get('country')->first();
+            $post_job2 = tbl_post_jobs::where('ID',$id)->get('state')->first();
+            $post_job3 = tbl_post_jobs::where('ID',$id)->get('city')->first();
+            // return $toReturn['post_job3'];
+            $toReturn['country_one']=countries::where('country_name',$post_job1['country'])->get()->toArray();
+            $toReturn['state_one']=states::where('state_name',$post_job2['state'])->get()->toArray();
+            $toReturn['city_one']=cities::where('city_name',$post_job3['city'])->get()->toArray();
+            // return  $toReturn['country_one'];
+            
+
             // return $toReturn['industries_name'];
             // return $toReturn['post_job'];
             // $toReturn['team_member_name']=tbl_team_member::where('ID',$toReturn['post_job']['industry_ID'])->first('industry_name');
         return view('edit_posted_job')->with('toReturn',$toReturn);
     }
+    
     
     
     public function updatejob(Request $Request)
@@ -356,8 +382,9 @@ class Job_Employer_Controller extends Controller
         'requirement_must'=>$Request->requirement,
         'requirement_optional'=>$Request->requirements,
         'job_description'=>$Request->job_desc,
-        'required_skills'=>$Request->required_skills,
-        'owner_id'=>$Request->owner_name
+        'required_skills'=>$Request->skills,
+        'owner_id'=>$Request->owner_name,
+        'for_group'=>$Request->group_of_company
         );
     $select_payment=$Request->select_payment;
     
@@ -635,6 +662,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
     
     public function post_new_candidate(Request $request)
     {
+        
         $con=$request->country;
         $sta=$request->state;
         $cit=$request->city;

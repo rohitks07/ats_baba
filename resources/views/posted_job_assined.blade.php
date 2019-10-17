@@ -59,7 +59,7 @@
                             <div class="card">
                                 <div class="card-header">                                       
 									<h4 style="color:#fff; float: left;">Team Member Assigned For {{$toReturn['post_job']['job_title']}} -{{$toReturn['post_job']['job_code']}}</h4>
-									<h4><a href="{{url('employer/posted_job_assined')}}"><button type="button" class="btn btn-success" style="float: right;margin-left: 1em;">Back</button></a></h4>
+									<h4><a href="{{url('employer/posted_jobs')}}"><button type="button" class="btn btn-success" style="float: right;margin-left: 1em;">Back</button></a></h4>
 									<h4><button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#myModal" style="float: right; margin-left: 1em;">Add Assignee</button></h4>
 
 								</div> 

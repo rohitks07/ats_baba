@@ -115,7 +115,8 @@
                                 <div class="form-group row">
                                     <label for="address" class="control-label col-lg-4">Client Name<span
                                             style="color:red;">*</span></label>
-                                    <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Client Name"
+                                    <input type="text" name="company_name" id="company_name" class="form-control"
+                                        placeholder="Client Name"
                                         style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                     <span id="clientname_check" style="margin-left:35%;">Please Select Any Client
                                         Name</span>
@@ -188,8 +189,8 @@
                                     <label for="" class="control-label col-lg-4">Job Code<span
                                             style="color:red;">*</span> </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="job_code" id="job_code" placeholder="Job Code"
-                                            maxlength="50" required>
+                                        <input type="text" class="form-control" name="job_code" id="job_code"
+                                            placeholder="Job Code" maxlength="50" required>
                                         <br>
                                         <span id="jobcode_check">Please Enter Job Code</span>
                                     </div>
@@ -201,8 +202,8 @@
                                     <label for="" class="control-label col-lg-4">Job Title<span
                                             style="color:red;">*</span> </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="job_title" id="job_title" placeholder="Job Title"
-                                            maxlength="50" required>
+                                        <input type="text" class="form-control" name="job_title" id="job_title"
+                                            placeholder="Job Title" maxlength="50" required>
                                         <br>
                                         <span id="jobtitle_check">Please Enter Job Title</span>
                                     </div>
@@ -214,9 +215,9 @@
                                     <label for="" class="control-label col-lg-4">No.of Vacancies<span
                                             style="color:red;">*</span> </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="no_of_vacancies" id="no_of_vacancies" placeholder="No.of Vacancies"
-                                            maxlength="150" required>
-                                            <br>
+                                        <input type="text" class="form-control" name="no_of_vacancies"
+                                            id="no_of_vacancies" placeholder="No.of Vacancies" maxlength="150" required>
+                                        <br>
                                         <span id="no_of_vacancies_check">Please Enter Job Title</span>
                                     </div>
                                 </div>
@@ -224,12 +225,11 @@
 
                                 <!--Closing Date-->
                                 <div class="form-group row">
-                                    <label for="address" class="control-label col-lg-4">Closing Date <span
+                                    <label for="address" class="control-label col-lg-4">Closing Date(mm/dd/yyyy) <span
                                             style="color:red;">*</span></label>
                                     <div class="col-sm-8 input-group date">
-                                        <input type="date" class="datetext datepicker" id="closeing_date" name="closeing_date"
-                                            style="width:35%; padding:8px;" required>
-                                        <span class="mt-2 ml-2">Format(mm-dd-yyyy)</span>
+                                        <input type="date" class="datetext datepicker" id="closeing_date"
+                                            name="closeing_date" style="width:66%; padding:8px;" required>
                                         <span id="date_check">Enter Valid Closing Date</span>
                                     </div>
                                 </div>
@@ -296,13 +296,12 @@
                                             style="color:red;">*</span></label>
                                     <select name="country" id="country" class="form-control "
                                         style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-                                        <option value="United States" selected>United States</option>
-                                        @foreach($toReturn['countries'] as $country)
+                                        <option value="224" selected>{{$country_name}}</option>                         
+                                                       @foreach($toReturn['countries'] as $country)
                                         <option value="{{$country['country_id']}}">{{ $country['country_name'] }}
                                         </option>
                                         @endforeach
                                     </select>
-
                                     <select name="state" id="state_text" class="form-control "
                                         style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
                                         <option value="">Select State</option>
@@ -312,8 +311,8 @@
                                     <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
                                         <div id="select_city">
                                             <select name="city_name" id="city" class="form-control "
-                                                style="max-width:22%; border: 1px solid #bbb8b8;" required>
-                                                <option value="">Select City </option>
+                                                style="max-width:22%; border: 1px solid #bbb8b8;margin-left: -35px;" required>
+                                                <option value="" selected>Select City </option>
                                             </select>
                                             <br>
                                             <span id="citycheck">Please choose Your Location</span>
@@ -327,7 +326,8 @@
                                     <div id="textCity" style="display:none;" class="form-group row col-md-12">
                                         <label for="" class="control-label col-lg-4">Enter City <span
                                                 style="color:red;">*</span></label>
-                                        <input type="text" class="col-sm-5 form-control" id="textCity_input" name="city_text_name">
+                                        <input type="text" class="col-sm-5 form-control" id="textCity_input"
+                                            name="city_text_name">
                                         <label id="textCity_check">Need to be filled </label>
                                     </div>
 
@@ -338,13 +338,16 @@
                                 <div class="form-group row">
                                     <label for="address" class="control-label col-lg-4">Job Type <span
                                             style="color:red;">*</span></label>
-                                        <select name="type_of_job" id="type_of_job"  onchange="fulltime()" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
+                                    <select name="type_of_job" id="type_of_job" onchange="fulltime()"
+                                        class="form-control"
+                                        style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                         <option value="">Select Job Type</option>
                                         <option value="Full Time">Full Time</option>
                                         <option value="Contract">Contract</option>
                                         <option value="Contract-to-Hire">Contract-to-Hire</option>
                                         <option value="Part Time">Part Time</option>
                                     </select>
+                                    <label id="check_job_type" style="display:none">Cannot be blank</label>
                                 </div>
                                 <!--Job Type-->
 
@@ -372,9 +375,9 @@
                                             style="color:red;">*</span></label>
                                     <!-- <input type="text" placeholder="min" name="pay_min" id="pay_min" style="width:20%; float:left;  margin-left: 1%;">&nbsp;&nbsp;
                                   <input type="text" placeholder="Max" name="pay_max" id="pay_max" value="" maxlength="4" style="width:22%; float:left;"> -->
-                                    <select name="select_payment"  id="pay_min" class="form-control"
+                                    <select name="select_payment" id="pay_min" class="form-control"
                                         style="max-width:42%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-                                        <option> Select Salary/Pay Rate</option>
+                                        <option value=""> Select Salary/Pay Rate</option>
                                         <option value="20k-25k">20k - 25k</option>
                                         <option value="25k-30k">25k - 30k</option>
                                         <option value="30k-35k">30k - 35k</option>
@@ -402,7 +405,7 @@
                                     </select>
                                     <div class="col-md-12" style="float: right;margin-left: 19em;margin-top: 2%;">
                                         <select name="pay_uom" id="pay_uom" class="form-control"
-                                            style="width:19%; border: 1px solid #bbb8b8; float:left; margin-left:2.5em;"
+                                            style="width:19%; border: 1px solid #bbb8b8; float:left;"
                                             required>
                                             <option value="Hourly">Hourly</option>
                                             <option value="Annum">Annum</option>
@@ -416,9 +419,8 @@
                                     <label for="" class="control-label col-lg-4">Experience Required <span
                                             style="color:red;">*</span> </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" name="experience" id="experience"
-                                            placeholder="Experience Required" maxlength="2" required>
-                                        <em style="vertical-align: sub;">years</em>
+                                        <input type="text" class="form-control" name="experience"  id="experience"
+                                            placeholder="Experience Required" maxlength="2" required><span>years</span>
                                         <br>
                                         <span id="exp_req_check">Please Enter a Valid Year</span>
                                     </div>
@@ -484,7 +486,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <center>
-                                    <input name="skills" id="Result" class="form-control">
+                                    <input name="skills" id="Result" class="form-control" readonly="readonly">
                                 </center>
                                 <br>
 
@@ -524,11 +526,9 @@
 </div>
 @include('include.emp_footer')
 <script type="text/javascript">
-    $('#country').on('change', function (e) {
-        console.log(e);
+$("#country").on("change", function(e){
         $('#state_text').empty();
         var country_id = e.target.value;
-        console.log(country_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/state/")}}' + "/" + country_id,
@@ -547,10 +547,8 @@
 
     });
     $('#state_text').on('change', function (e) {
-        console.log(e);
         $('#city').empty();
         var state_id = e.target.value;
-        console.log(state_id);
         $.ajax({
             type: 'get',
             url: '{{url("employer/post_new_job/post_job/city/")}}' + "/" + state_id,
@@ -577,10 +575,11 @@
         document.getElementById("Result").value = arr;
         var e = "";
 
-        for (var y = 0; y < array.length; y++) {
-            e += array[y];
+        for (var y = 0; y < arr.length; y++) {
+            e = e+","+arr[y];
         }
-        document.getElementById("Result").value = e;
+        document.getElementById("Result").value = e.replace(/(^[,\s]+)|([,\s]+$)/g, '');
+        document.getElementById("tags").value="";
     }
 
 </script>
@@ -622,273 +621,6 @@
 <!-- Validation of Post new Job -->
 <script>
     $(document).ready(function () {
-        $("#group_check").hide();
-        $("#clientname_check").hide();
-        $("#owner_check").hide();
-        $("#no_of_vacancies_check").hide();
-        $("#jobtitle_check").hide();
-        $("#date_check").hide();
-        $("#citycheck").hide();
-        $("#err_vacancies_check").hide();
-        $("#jobcode_check").hide();
-        
-        var err_group = true;
-        var err_clientname = true;
-        var err_owner = true;
-        var err_jobcode = true;
-        var err_jobtitle = true;
-        var err_date = true;
-        var err_city = true;
-        var err_vacancies=true;
-
-        //validate group
-        
-        $("#validatefrm").click(function () {
-            check_group();
-        });
-        $("#for_group").blur(function () {
-            check_group();
-        });
-        function check_group() {
-
-            var group_val = $("#for_group").val();
-            if (group_val == "") {
-                $("#group_check").show();
-                $("#group_check").focus();
-                $("#group_check").css("color", "red");
-                err_group = false;
-                return false;
-            } else {
-                $("#group_check").hide();
-            }
-        }
-        //validate client name
-        $("#validatefrm").click(function () {
-            check_clientname();
-        });
-        $("#company_name").blur(function () {
-            check_clientname();
-        });
-
-        function check_clientname() {
-
-            var clientname_val = $("#company_name").val();
-            var regex1 = /^[a-zA-Z ]*$/;
-            if(clientname_val==""){
-                $("#clientname_check").show();
-                $("#clientname_check").focus();
-                $("#clientname_check").css("color", "red");
-                err_clientname = false;
-                return false;
-                }
-                else{
-                    isValid = regex1.test(clientname_val);
-                    $("#clientname_check").css("display", !isValid ? "block" : "none");
-                    $("#clientname_check").css("color", "red");
-                    return false;
-                    err_clientname = false;
-        
-                }
-
-
-            
-        }
-        //validate owner name
-        $("#validatefrm").click(function () {
-            check_owner();
-        });
-        $("#owner_name").blur(function () {
-            check_owner();
-        });
-
-        function check_owner() {
-            var owner_val = $("#owner_name").val();
-            if (owner_val == "") {
-                $("#owner_check").show();
-                $("#owner_check").focus();
-                $("#owner_check").css("color", "red");
-                err_owner = false;
-                return false;
-            } else {
-                $("#owner_check").hide();
-            }
-        }
-
-        //validate job code
-        $("#validatefrm").click(function () {
-            check_jobcode();
-        });
-        $("#job_code").blur(function () {
-            check_jobcode();
-        });
-
-        function check_jobcode() { 
-            var jobcode_val = $("#job_code").val();
-            var regex = /^[0-9-+()]*$/;
-            var regex1 = /^[a-zA-Z ]*$/;
-
-            if(jobcode_val==""){
-            $("#jobcode_check").show();
-            $("#jobcode_check").focus();
-            $("#jobcode_check").css("color", "red");
-            err_jobcode = false;
-            return false;
-            }
-            else{
-                isValid = regex.test(jobcode_val);
-                $("#jobcode_check").css("display", !isValid ? "block" : "none");
-                $("#jobcode_check").css("color", "red");
-                return false;
-                err_jobcode = false;
-    
-            }
-           }
-        //validate no of vancancy
-        $("#validatefrm").click(function () {
-            check_vacancies();
-        });
-        $("#no_of_vacancies").blur(function () {
-            check_vacancies();
-        });
-
-        function check_vacancies() {
-            var jobcode_val = $("#no_of_vacancies").val();
-            var regex = /^[0-9-+()]*$/;
-            var regex1 = /^[a-zA-Z ]*$/;
-
-            if(jobcode_val==""){
-            $("#no_of_vacancies_check").show();
-            $("#no_of_vacancies_check").focus();
-            $("#no_of_vacancies_check").css("color", "red");
-            err_vacancies = false;
-            return false;
-            }
-            else{
-                isValid = regex.test(jobcode_val);
-                $("#no_of_vacancies_check").css("display", !isValid ? "block" : "none");
-                $("#no_of_vacancies_check").css("color", "red");
-                return false;
-                err_vacancies = false;
-    
-            }
-           }
-
-
-
-    //validate job title
-    $("#validatefrm").click(function () {
-        check_jobtitle();
-    });
-    $("#job_title").blur(function () {
-        check_jobtitle();
-    });
-
-    function check_jobtitle() {
-        var jobtitle_val = $("#job_title").val();
-        var regex1 = /^[a-zA-Z ]*$/;
-        if (jobtitle_val == "") {
-            $("#jobtitle_check").show();
-            $("#jobtitle_check").focus();
-            $("#jobtitle_check").css("color", "red");
-            err_jobtitle = false;
-            return false;
-        } else {
-            isValid = regex1.test(jobtitle_val);
-                $("#jobtitle_check").css("display", !isValid ? "block" : "none");
-                $("#jobtitle_check").css("color", "red");
-                return false;
-                err_jobcode = false;
-        }
-    }
-    //validate closing date
-    $("#validatefrm").click(function () {
-        check_date();
-    });
-    $("#closeing_date").blur(function () {
-        check_date();
-    });
-
-    function check_date() {
-        var date_val = $("#closeing_date").val();
-        var date_regex = "^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" ;
-
-        if(date_val==""){
-            $("#date_check").show();
-            $("#date_check").focus();
-            $("#date_check").css("color", "red");
-            err_date = false;
-            return false;
-            }
-            else{
-                isValid = date_regex.test(date_val);
-                $("#date_check").css("display", !isValid ? "block" : "none");
-                $("#date_check").css("color", "red");
-                return false;
-                err_date = false;
-    
-            }
-
-    }
-
-    //Validation Location
-    $("#validatefrm").click(function () {
-        check_location();
-    });
-    $("#country").blur(function () {
-        check_location();
-    });
-    $("#state_text").blur(function () {
-        check_location();
-    });
-    $("#city").blur(function () {
-        check_location();
-    });
-
-    function check_location() {
-        var loc_val = $("#country").val();
-        var loc_val1 = $("#state_text").val();
-        var loc_val2 = $("#city").val();
-        if ((loc_val == "") || (loc_val1 == "") || (loc_val2 == "")) {
-            $("#citycheck").show();
-            $("#citycheck").focus();
-            $("#citycheck").css("color", "red");
-            err_city = false;
-            return false;
-        } else {
-            $("#citycheck").hide();
-        }
-    }
-    $("#validatefrm").click(function () {
-        err_group = true;
-        err_clientname = true;
-        err_owner = true;
-        err_jobcode = true;
-        err_jobtitle = true;
-        err_date = true;
-        err_city = true;
-        err_vacancies=true;
-        check_group();
-        check_clientname();
-        check_owner();
-        check_jobcode();
-        check_jobtitle();
-        check_date();
-        check_location();
-        check_vacancies();
-
-        if ((err_group == true) &&(err_vacancies==true)&& (err_clientname == true) && (err_owner == true) && (err_jobcode ==
-            true) && (err_jobtitle == true) && (err_date == true) && (err_city == true)) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-    });
-
-</script>
-
-<script>
-    $(document).ready(function () {
         $("#jobduration_check").hide();
         $("#salary_check").hide();
         $("#exp_req_check").hide();
@@ -901,6 +633,10 @@
         var err_req = true;
         var err_job_desc = true;
         var err_skill = true;
+        var err_city = true;
+        var err_country = true;
+        var err_state = true;
+        var err_city_val=true;
 
         //validate job duration
         $("#validatefrm").click(function () {
@@ -916,27 +652,26 @@
             var regex = /^[0-9-+()]*$/;
             var regex1 = /^[a-zA-Z ]*$/;
 
-            if(job_val==""){
-            $("#jobduration_check").show();
-            $("#jobduration_check").focus();
-            $("#jobduration_check").css("color", "red");
-            err_jobduration = false;
-            return false;
-            }
-            else{
+            if (job_val == "") {
+                $("#jobduration_check").show();
+                $("#jobduration_check").focus();
+                $("#jobduration_check").css("color", "red");
+                err_jobduration = false;
+                return false;
+            } else {
                 isValid = regex.test(job_val);
                 $("#jobduration_check").css("display", !isValid ? "block" : "none");
                 $("#jobduration_check").css("color", "red");
                 return false;
                 err_jobduration = false;
-    
+
             }
         }
 
 
 
 
-        
+
 
         //validate salary/ pay rate
         $("#validatefrm").click(function () {
@@ -967,7 +702,7 @@
         $("#validatefrm").click(function () {
             check_exp_req();
         });
-        $("#experience").click(function () {
+        $("#experience").blur(function () {
             check_exp_req();
         });
 
@@ -977,34 +712,33 @@
             var regex = /^[0-9-+()]*$/;
             var regex1 = /^[a-zA-Z ]*$/;
 
-            if(exp_req_val==""){
-            $("#exp_req_check").show();
-            $("#exp_req_check").focus();
-            $("#exp_req_check").css("color", "red");
-            err_exp_req = false;
-            return false;
-            }
-            else{
+            if (exp_req_val == "") {
+                $("#exp_req_check").show();
+                $("#exp_req_check").focus();
+                $("#exp_req_check").css("color", "red");
+                err_exp_req = false;
+                return false;
+            } else {
                 isValid = regex.test(exp_req_val);
                 $("#exp_req_check").css("display", !isValid ? "block" : "none");
                 $("#exp_req_check").css("color", "red");
                 return false;
                 err_exp_req = false;
-    
+
             }
 
 
 
 
-            
-        
+
+
         }
 
         //validate requirement
         $("#validatefrm").click(function () {
             check_req();
         });
-        $("#textarea").click(function () {
+        $("#textarea").blur(function () {
             check_req();
         });
 
@@ -1026,7 +760,7 @@
         $("#validatefrm").click(function () {
             check_job_desc();
         });
-        $("#editor").click(function () {
+        $("#editor").blur(function () {
             check_job_desc();
         });
 
@@ -1064,38 +798,75 @@
                 $("#skill_check").hide();
             }
         }
+        //Validation Location
+        $("#validatefrm").click(function () {
+            check_location();
+        });
+        $("#country").blur(function () {
+            check_location();
+        });
+        $("#state_text").blur(function () {
+            check_location();
+        });
+
+        function check_location() {
+            var loc_val = $("#country").val();
+            var loc_val1 = $("#state_text").val();
+            if ((loc_val == "") || (loc_val1 == "")) {
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+
+                err_country = false;
+                err_state = false;
+                return false;
+
+            } else {
+                $("#citycheck").hide();
+            }
+        }
 
         $("#validatefrm").click(function () {
-            err_jobduration = true;
-            err_salary = true;
-            err_exp_req = true;
-            err_req = true;
-            err_job_desc = true;
-            err_skill = true;
-            check_duration();
-            check_salary();
-            check_exp_req();
-            check_req();
-            check_job_desc();
-            check_skill();
-            if ((err_jobduration == true) && (err_salary == true) && (err_exp_req == true) && (
-                    err_req == true) && (err_job_desc == true) && (err_skill == true)) {
-                return true;
-            } else {
+            check_city();
+        });
+        
+
+        function check_city() {
+            var loc_val2 = $("#city").val();
+            var jobcode_val = $("#textCity_input").val();
+            var checkBox = document.getElementById("myCheck");
+            if ((checkBox.checked == true)&&(jobcode_val=="")) {
+                console.log("new");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
                 return false;
             }
+            else if((checkBox.checked == false)&&(loc_val2==""))
+            {
+                console.log("one");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
+                return false;
+                
+            }
+
+
+        
+        }
+
+        $("#validatefrm").click(function () {
+            mycity();
         });
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#closeing_date ').datepicker();
+        $("#myCheck").click(function () {
+            mycity();
+        });
 
-    });
-
-</script>
-<script>
-    function mycity() {
+        
+        function mycity() {
         $("#textCity_check").hide();
         var checkBox = document.getElementById("myCheck");
         if (checkBox.checked == true) {
@@ -1104,24 +875,23 @@
             $('#city_label').css('display', 'none')
             $("#validatefrm").click(function () {
                 var jobcode_val = $("#textCity_input").val();
-            var regex1 = /^[a-zA-Z ]*$/;
+                var regex1 = /^[a-zA-Z ]*$/;
 
-            if(jobcode_val==""){
-            $("#textCity_check").show();
-            $("#textCity_check").focus();
-            $("#textCity_check").css("color", "red");
-            err_text_city = false;
-            return false;
-            }
-            else{
-                isValid = regex1.test(jobcode_val);
-                $("#textCity_check").css("display", !isValid ? "block" : "none");
-                $("#textCity_check").css("color", "red");
-                return false;
-                err_text_city = false;
-            }
-            }); 
-           
+                if (jobcode_val == "") {
+                    $("#textCity_check").show();
+                    $("#textCity_check").focus();
+                    $("#textCity_check").css("color", "red");
+                    err_text_city = false;
+                    return false;
+                } else {
+                    isValid = regex1.test(jobcode_val);
+                    $("#textCity_check").css("display", !isValid ? "block" : "none");
+                    $("#textCity_check").css("color", "red");
+                    
+                    err_text_city = false;
+                }
+            });
+
         } else {
             $('#select_city').css('display', 'block');
             $('#textCity').css('display', 'none');
@@ -1129,89 +899,412 @@
         }
     }
 
+        $("#validatefrm").click(function () {
+            err_jobduration = true;
+            err_salary = true;
+            err_exp_req = true;
+            err_req = true;
+            err_job_desc = true;
+            err_skill = true;
+            err_city_val=true;
+            err_text_city =true
+            err_country = true;
+            err_state = true;
+            check_duration();
+            check_salary();
+            check_exp_req();
+            check_req();
+            check_job_desc();
+            check_skill();
+            check_location();
+            check_city();
+            
+            if ((err_city_val==true)&&(err_text_city==true)&& (err_country == true) && (err_state == true) && (
+                    err_jobduration == true) && (err_salary == true) && (err_exp_req == true) && (
+                    err_req == true) && (err_job_desc == true) && (err_skill == true)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+
 </script>
-<script type="text/javascript">
-    function fulltime(){
-      // alert('hrllo');
-        temp = document.getElementById('type_of_job').value;
-        // alert(temp);
-        if (temp == 'Full Time'){
-            //alert('full time');
-             var x = document.getElementById("pay_min").options[1].disabled = false;
-             var x = document.getElementById("pay_min").options[2].disabled = false;
-             var x = document.getElementById("pay_min").options[3].disabled = false;
-             var x = document.getElementById("pay_min").options[4].disabled = false;
-             var x = document.getElementById("pay_min").options[5].disabled = false;
-             var x = document.getElementById("pay_min").options[6].disabled = false;
-             var x = document.getElementById("pay_min").options[7].disabled = false;            
-             var x = document.getElementById("pay_min").options[8].disabled = false;
-             var x = document.getElementById("pay_min").options[9].disabled = false;
-             var x = document.getElementById("pay_min").options[10].disabled = false;
-             var x = document.getElementById("pay_min").options[11].disabled = true;
-             var x = document.getElementById("pay_min").options[12].disabled = true;
-             var x = document.getElementById("pay_min").options[13].disabled = true;
-             var x = document.getElementById("pay_min").options[14].disabled = true;
-             var x = document.getElementById("pay_min").options[15].disabled = true;
-             var x = document.getElementById("pay_min").options[16].disabled = true;
-             var x = document.getElementById("pay_min").options[17].disabled = true;
-             var x = document.getElementById("pay_min").options[18].disabled = true;
-             var x = document.getElementById("pay_min").options[19].disabled = true;
-             var x = document.getElementById("pay_min").options[20].disabled = true;
-             var x = document.getElementById("pay_min").options[21].disabled = true;
-             var x = document.getElementById("pay_min").options[22].disabled = true;
-            }
-            else if (temp == 'Contract'){
-                //alert('Contract');
-                 var x = document.getElementById("pay_min").options[1].disabled = true;
-                 var x = document.getElementById("pay_min").options[2].disabled = true;
-                 var x = document.getElementById("pay_min").options[3].disabled = true;
-                 var x = document.getElementById("pay_min").options[4].disabled = true;
-                 var x = document.getElementById("pay_min").options[5].disabled = true;
-                 var x = document.getElementById("pay_min").options[6].disabled = true;
-                 var x = document.getElementById("pay_min").options[7].disabled = true;          
-                 var x = document.getElementById("pay_min").options[8].disabled = true;
-                 var x = document.getElementById("pay_min").options[9].disabled = true;
-                 var x = document.getElementById("pay_min").options[10].disabled = true;
-                 var x = document.getElementById("pay_min").options[11].disabled = false;
-                 var x = document.getElementById("pay_min").options[12].disabled = false;
-                 var x = document.getElementById("pay_min").options[13].disabled = false;
-                 var x = document.getElementById("pay_min").options[14].disabled = false;
-                 var x = document.getElementById("pay_min").options[15].disabled = false;
-                 var x = document.getElementById("pay_min").options[16].disabled = false;
-                 var x = document.getElementById("pay_min").options[17].disabled = false;
-                 var x = document.getElementById("pay_min").options[18].disabled = false;
-                 var x = document.getElementById("pay_min").options[19].disabled = false;
-                 var x = document.getElementById("pay_min").options[20].disabled = false;
-                 var x = document.getElementById("pay_min").options[21].disabled = false;
-                 var x = document.getElementById("pay_min").options[22].disabled = false;
-                 
-                
-            }
-            else{
-                 var x = document.getElementById("pay_min").options[1].disabled = false;
-                 var x = document.getElementById("pay_min").options[2].disabled = false;
-                 var x = document.getElementById("pay_min").options[3].disabled = false;
-                 var x = document.getElementById("pay_min").options[4].disabled = false;
-                 var x = document.getElementById("pay_min").options[5].disabled = false;
-                 var x = document.getElementById("pay_min").options[6].disabled = false;
-                 var x = document.getElementById("pay_min").options[7].disabled = false;          
-                 var x = document.getElementById("pay_min").options[8].disabled = false;
-                 var x = document.getElementById("pay_min").options[9].disabled = false;
-                 var x = document.getElementById("pay_min").options[10].disabled = false;
-                 var x = document.getElementById("pay_min").options[11].disabled = false;
-                 var x = document.getElementById("pay_min").options[12].disabled = false;
-                 var x = document.getElementById("pay_min").options[13].disabled = false;
-                 var x = document.getElementById("pay_min").options[14].disabled = false;
-                 var x = document.getElementById("pay_min").options[15].disabled = false;
-                 var x = document.getElementById("pay_min").options[16].disabled = false;
-                 var x = document.getElementById("pay_min").options[17].disabled = false;
-                 var x = document.getElementById("pay_min").options[18].disabled = false;
-                 var x = document.getElementById("pay_min").options[19].disabled = false;
-                 var x = document.getElementById("pay_min").options[20].disabled = false;
-                 var x = document.getElementById("pay_min").options[21].disabled = false;
-                 var x = document.getElementById("pay_min").options[22].disabled = false;
-                 
+<script>
+    $(document).ready(function () {
+        $("#group_check").hide();
+        $("#clientname_check").hide();
+        $("#owner_check").hide();
+        $("#no_of_vacancies_check").hide();
+        $("#jobtitle_check").hide();
+        $("#date_check").hide();
+        $("#citycheck").hide();
+        $("#err_vacancies_check").hide();
+        $("#jobcode_check").hide();
+
+        var err_group = true;
+        var err_clientname = true;
+        var err_owner = true;
+        var err_jobcode = true;
+        var err_jobtitle = true;
+        var err_date = true;
+        var err_job_type=true;
+        var err_vacancies = true;
+
+
+
+        //validate group
+
+        $("#validatefrm").click(function () {
+            check_group();
+        });
+        $("#for_group").blur(function () {
+            check_group();
+        });
+
+        function check_group() {
+
+            var group_val = $("#for_group").val();
+            if (group_val == "") {
+                $("#group_check").show();
+                $("#group_check").focus();
+                $("#group_check").css("color", "red");
+                err_group = false;
+                return false;
+            } else {
+                $("#group_check").hide();
             }
         }
-        </script>
+        //validate client name
+        $("#validatefrm").click(function () {
+            check_clientname();
+        });
+        $("#company_name").blur(function () {
+            check_clientname();
+        });
+
+        function check_clientname() {
+
+            var clientname_val = $("#company_name").val();
+            var regex1 = /^[a-zA-Z ]*$/;
+            if (clientname_val == "") {
+                $("#clientname_check").show();
+                $("#clientname_check").focus();
+                $("#clientname_check").css("color", "red");
+                err_clientname = false;
+                return false;
+            } else {
+                isValid = regex1.test(clientname_val);
+                $("#clientname_check").css("display", !isValid ? "block" : "none");
+                $("#clientname_check").css("color", "red");
+                return false;
+                err_clientname = false;
+
+            }
+
+
+
+        }
+        //validate owner name
+        $("#validatefrm").click(function () {
+            check_owner();
+        });
+        $("#owner_name").blur(function () {
+            check_owner();
+        });
+
+        function check_owner() {
+            var owner_val = $("#owner_name").val();
+            if (owner_val == "") {
+                $("#owner_check").show();
+                $("#owner_check").focus();
+                $("#owner_check").css("color", "red");
+                err_owner = false;
+                return false;
+            } else {
+                $("#owner_check").hide();
+            }
+        }
+
+        //validate job code
+        $("#validatefrm").click(function () {
+            check_jobcode();
+        });
+        $("#job_code").blur(function () {
+            check_jobcode();
+        });
+
+        function check_jobcode() {
+            var jobcode_val = $("#job_code").val();
+            var regex = /^[0-9-+()]*$/;
+            var regex1 = /^[a-zA-Z ]*$/;
+
+            if (jobcode_val == "") {
+                $("#jobcode_check").show();
+                $("#jobcode_check").focus();
+                $("#jobcode_check").css("color", "red");
+                err_jobcode = false;
+                return false;
+            } else {
+                isValid = regex.test(jobcode_val);
+                $("#jobcode_check").css("display", !isValid ? "block" : "none");
+                $("#jobcode_check").css("color", "red");
+                return false;
+                err_jobcode = false;
+
+            }
+        }
+        //validate no of vancancy
+        $("#validatefrm").click(function () {
+            check_vacancies();
+        });
+        $("#no_of_vacancies").blur(function () {
+            check_vacancies();
+        });
+
+        function check_vacancies() {
+            var jobcode_val = $("#no_of_vacancies").val();
+            var regex = /^[0-9-+()]*$/;
+            var regex1 = /^[a-zA-Z ]*$/;
+
+            if (jobcode_val == "") {
+                $("#no_of_vacancies_check").show();
+                $("#no_of_vacancies_check").focus();
+                $("#no_of_vacancies_check").css("color", "red");
+                err_vacancies = false;
+                return false;
+            } else {
+                isValid = regex.test(jobcode_val);
+                $("#no_of_vacancies_check").css("display", !isValid ? "block" : "none");
+                $("#no_of_vacancies_check").css("color", "red");
+                return false;
+                err_vacancies = false;
+
+            }
+        }
+
+
+
+        //validate job title
+        $("#validatefrm").click(function () {
+            check_jobtitle();
+        });
+        $("#job_title").blur(function () {
+            check_jobtitle();
+        });
+
+        function check_jobtitle() {
+            var jobtitle_val = $("#job_title").val();
+            var regex1 = /^[a-zA-Z ]*$/;
+            if (jobtitle_val == "") {
+                $("#jobtitle_check").show();
+                $("#jobtitle_check").focus();
+                $("#jobtitle_check").css("color", "red");
+                err_jobtitle = false;
+                return false;
+            } else {
+                isValid = regex1.test(jobtitle_val);
+                $("#jobtitle_check").css("display", !isValid ? "block" : "none");
+                $("#jobtitle_check").css("color", "red");
+                return false;
+                err_jobcode = false;
+            }
+        }
+        //validate closing date
+        $("#validatefrm").click(function () {
+            check_date();
+        });
+        $("#closeing_date").blur(function () {
+            check_date();
+        });
+        
+        function check_date() {
+            var date_val = $("#closeing_date").val();
+            console.log(date_val);
+            var date_regex = "^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$ ";
+            
+
+                var dob_var = new Date(date_val);
+                var dob_val_day = dob_var.getDate();
+                var dob_val_month = dob_var.getMonth() + 1;
+                var dob_val_year = dob_var.getFullYear();
+                
+                if (!dob_val_day || !dob_val_month || !dob_val_year) {
+                    $("#date_check").show();
+                    $("#date_check").focus();
+                    $("#date_check").css("color", "red");
+                    err_dob = false;
+                    return false;
+                } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
+                    $("#date_check").show();
+                    $("#date_check").focus();
+                    $("#date_check").css("color", "red");
+                    err_dob = false;
+                    return false;
+                } else {
+                    err_dob = true;
+                    $("#date_check").hide();
+                }
+            
+            }
+            
+            // $("#").blur(function () {
+            //     check_city();
+            // });
+            // function check_city(){
+
+            // }
+
+
+            $("#validatefrm").click(function(){
+                check_jon_type();
+            });
+            $("#type_of_job").blur(function(){
+                check_jon_type();
+            });
+            function check_jon_type(){
+                var type_job = $("#type_of_job").val();
+                if(type_job==""){
+                    // check_job_type
+                    $("#check_job_type").show();
+                    $("#check_job_type").focus();
+                    $("#check_job_type").css("color", "red");
+                   
+                    err_job_type=false;
+                     return false;
+                }
+                else
+                {
+                    $("#check_job_type").hide();
+                }
+            }
+            
+
+        $("#validatefrm").click(function () {
+            err_group = true;
+            err_clientname = true;
+            err_owner = true;
+            err_jobcode = true;
+            err_jobtitle = true;
+            err_date = true;
+            err_city = true;
+            err_vacancies = true;
+            err_country = true;
+            err_state = true;
+            err_job_type=true;
+            check_group();
+            check_clientname();
+            check_owner();
+            check_jobcode();
+            check_jobtitle();
+            check_date();
+            check_jon_type();
+            check_vacancies();
+
+
+            if ((err_country == true) && (err_state == true) && (err_group == true) && (
+                    err_vacancies ==
+                    true) && (err_clientname == true) && (err_owner == true) && (err_jobcode ==
+                    true) && (err_jobtitle == true) && (err_date == true) && (err_city == true)&&(err_job_type==true)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#closeing_date ').datepicker();
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    function fulltime() {
+        // alert('hrllo');
+        temp = document.getElementById('type_of_job').value;
+        // alert(temp);
+        if (temp == 'Full Time') {
+            //alert('full time');
+            var x = document.getElementById("pay_min").options[1].disabled = false;
+            var x = document.getElementById("pay_min").options[2].disabled = false;
+            var x = document.getElementById("pay_min").options[3].disabled = false;
+            var x = document.getElementById("pay_min").options[4].disabled = false;
+            var x = document.getElementById("pay_min").options[5].disabled = false;
+            var x = document.getElementById("pay_min").options[6].disabled = false;
+            var x = document.getElementById("pay_min").options[7].disabled = false;
+            var x = document.getElementById("pay_min").options[8].disabled = false;
+            var x = document.getElementById("pay_min").options[9].disabled = false;
+            var x = document.getElementById("pay_min").options[10].disabled = false;
+            var x = document.getElementById("pay_min").options[11].disabled = true;
+            var x = document.getElementById("pay_min").options[12].disabled = true;
+            var x = document.getElementById("pay_min").options[13].disabled = true;
+            var x = document.getElementById("pay_min").options[14].disabled = true;
+            var x = document.getElementById("pay_min").options[15].disabled = true;
+            var x = document.getElementById("pay_min").options[16].disabled = true;
+            var x = document.getElementById("pay_min").options[17].disabled = true;
+            var x = document.getElementById("pay_min").options[18].disabled = true;
+            var x = document.getElementById("pay_min").options[19].disabled = true;
+            var x = document.getElementById("pay_min").options[20].disabled = true;
+            var x = document.getElementById("pay_min").options[21].disabled = true;
+            var x = document.getElementById("pay_min").options[22].disabled = true;
+        } else if (temp == 'Contract') {
+            //alert('Contract');
+            var x = document.getElementById("pay_min").options[1].disabled = true;
+            var x = document.getElementById("pay_min").options[2].disabled = true;
+            var x = document.getElementById("pay_min").options[3].disabled = true;
+            var x = document.getElementById("pay_min").options[4].disabled = true;
+            var x = document.getElementById("pay_min").options[5].disabled = true;
+            var x = document.getElementById("pay_min").options[6].disabled = true;
+            var x = document.getElementById("pay_min").options[7].disabled = true;
+            var x = document.getElementById("pay_min").options[8].disabled = true;
+            var x = document.getElementById("pay_min").options[9].disabled = true;
+            var x = document.getElementById("pay_min").options[10].disabled = true;
+            var x = document.getElementById("pay_min").options[11].disabled = false;
+            var x = document.getElementById("pay_min").options[12].disabled = false;
+            var x = document.getElementById("pay_min").options[13].disabled = false;
+            var x = document.getElementById("pay_min").options[14].disabled = false;
+            var x = document.getElementById("pay_min").options[15].disabled = false;
+            var x = document.getElementById("pay_min").options[16].disabled = false;
+            var x = document.getElementById("pay_min").options[17].disabled = false;
+            var x = document.getElementById("pay_min").options[18].disabled = false;
+            var x = document.getElementById("pay_min").options[19].disabled = false;
+            var x = document.getElementById("pay_min").options[20].disabled = false;
+            var x = document.getElementById("pay_min").options[21].disabled = false;
+            var x = document.getElementById("pay_min").options[22].disabled = false;
+
+
+        } else {
+            var x = document.getElementById("pay_min").options[1].disabled = false;
+            var x = document.getElementById("pay_min").options[2].disabled = false;
+            var x = document.getElementById("pay_min").options[3].disabled = false;
+            var x = document.getElementById("pay_min").options[4].disabled = false;
+            var x = document.getElementById("pay_min").options[5].disabled = false;
+            var x = document.getElementById("pay_min").options[6].disabled = false;
+            var x = document.getElementById("pay_min").options[7].disabled = false;
+            var x = document.getElementById("pay_min").options[8].disabled = false;
+            var x = document.getElementById("pay_min").options[9].disabled = false;
+            var x = document.getElementById("pay_min").options[10].disabled = false;
+            var x = document.getElementById("pay_min").options[11].disabled = false;
+            var x = document.getElementById("pay_min").options[12].disabled = false;
+            var x = document.getElementById("pay_min").options[13].disabled = false;
+            var x = document.getElementById("pay_min").options[14].disabled = false;
+            var x = document.getElementById("pay_min").options[15].disabled = false;
+            var x = document.getElementById("pay_min").options[16].disabled = false;
+            var x = document.getElementById("pay_min").options[17].disabled = false;
+            var x = document.getElementById("pay_min").options[18].disabled = false;
+            var x = document.getElementById("pay_min").options[19].disabled = false;
+            var x = document.getElementById("pay_min").options[20].disabled = false;
+            var x = document.getElementById("pay_min").options[21].disabled = false;
+            var x = document.getElementById("pay_min").options[22].disabled = false;
+
+        }
+    }
+
+</script>
 </body>
