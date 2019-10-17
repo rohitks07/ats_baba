@@ -518,7 +518,6 @@ public function PostjobsAssignToJobSeeker(Request $request)
  public function list()
  {
  ini_set('memory_limit', '-1');
-
         $toReturn = array();
         $source="Internal";
         // $toReturn['personal']=tbl_job_seekers::where('tbl_job_seekers.employer_id',Session::get('user_id'))->get();
@@ -639,9 +638,9 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $con=$request->country;
         $sta=$request->state;
         $cit=$request->city;
-        $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
-        $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
-        $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
+        $val_contries=countries::where('country_id',$con)->first('country_name');
+        $val_state=states::where('state_id',$sta)->first('state_name');
+        $val_city=cities::where('city_id',$cit)->first('city_name');
         $validation = Validator::make($request->all(), [
                 'cv_file' => 'required'
             ]);

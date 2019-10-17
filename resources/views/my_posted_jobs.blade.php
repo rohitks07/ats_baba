@@ -126,7 +126,6 @@
 															$application= count(DB::table('tbl_seeker_applied_for_job')->where('job_ID',$id)->get());
 															$client_submittal=count(DB::table('tbl_forward_candidate')->where('job_ID',$id)->get());
 															$assignee=count(DB::table('tbl_job_post_assign')->where('job_post_id',$id)->get());
-															
                                                         	?>
 																<td>{{$posted_job['job_code']}}</td>
 				                                                <td><a href="{{url('employer/jobsdetails/'.$id)}}">{{$posted_job['job_title']}} </a></td>

@@ -128,13 +128,18 @@
                                                         @foreach($list_employers as $key => $value)
                                                         <tr>
                                                             <input type="hidden" value="{{$list_employers[$key]->ID}}">
-                                                            
+                                                            <?php
+                                                            $id=$list_employers[$key]->ID;
+                                                            // echo $id;
+                                                            $number_of_jobs=count(DB::table('tbl_post_jobs')->where('company_ID',$id)->get());
+                                                            $number_of_members=count(DB::table('user')->where('org_ID',$id)->get());
+                                                            ?>
                                                             <td>{{$list_employers[$key]->company}}</td>
                                                             <td>{{$list_employers[$key]->hq}}</td>
                                                             <td align="center" valign="middle">
-                                                                 <button type="button" class="btn-round-xs btn-xs" style="background-color:#606060; color:#fff">3108</button></td>
+                                                                 <button type="button" class="btn-round-xs btn-xs" style="background-color:#606060; color:#fff">{{$number_of_jobs}}</button></td>
                                                              <td align="center" valign="middle">
-                                                                 <button type="button" class="btn-round-xs btn-xs" style="background-color:#606060; color:#fff">126</button></td>
+                                                                 <button type="button" class="btn-round-xs btn-xs" style="background-color:#606060; color:#fff">102</button></td>
 															</td>
                                                             <td>{{$list_employers[$key]->email}}</td>
                                                             
