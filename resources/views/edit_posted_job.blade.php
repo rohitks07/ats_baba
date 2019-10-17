@@ -128,11 +128,11 @@
                                  <select name="owner_name" id="owner_name" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
                                    <option >Select Owner Name</option>
                                    @foreach ($toReturn['name'] as $item)
-                                   <option selected>{{$item['full_name']}}</option> 
+                                   <option value="{{$item['ID']}}" selected>{{$item['full_name']}}</option>
                                   @endforeach
-                                        @foreach($toReturn['team_member'] as $team_member)
-                                           <option value="{{$team_member['ID']}}"> {{$team_member['full_name']}} </option>
-                                         @endforeach
+                                      @foreach($toReturn['team_member'] as $team_member)
+                                         <option value="{{$team_member['ID']}}"> {{$team_member['full_name']}} </option>
+                                       @endforeach
                                    
                                  </select>
                                  <span id="owner_check">Please Select Any Owner Name</span>     
@@ -159,7 +159,7 @@
                              <div class="form-group row">
                                  <label for="address" class="control-label col-lg-4">Industry<span style="color:red;">*</span></label>
                                  <select name="industry" id="industry" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;">
-                                 <option value="$toReturn['industries_name']['ID']" selected>{{$toReturn['industries_name']['industry_name']}}</option> 
+                                 <option value="{{$toReturn['industries_name']['ID']}}" selected>{{$toReturn['industries_name']['industry_name']}}</option> 
                                     @foreach($toReturn['job_industries'] as $job_industries)
                                            <option value="{{$job_industries['ID']}}"> {{$job_industries['industry_name']}} </option>
                                      @endforeach
@@ -217,7 +217,7 @@
                                 <label for="address" class="control-label col-lg-4">Visa<span style="color:red;">*</span></label>
                                 <select name="visa[]" id="job_visa_status" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple>
                                     <option selected>{{$toReturn['post_job']->job_visa_status}}</option>
-                                    <option value="EAD-GC" selected>EAD-GC</option>
+                                    <option value="EAD-GC">EAD-GC</option>
                                     <option value="EAD-H4">EAD-H4</option>
                                     <option value="EAD-L2">EAD-L2</option>
                                     <option value="EAD-OPT">EAD-OPT</option>
@@ -234,7 +234,7 @@
                                 <label for="address" class="control-label col-lg-4">Qualification <span style="color:red;">*</span></label>
                                 <select name="quali[]" id="qualification" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple>
                                     <option selected>{{$toReturn['post_job']->qualification}}</option>
-                                    <option value="BA" selected>BA</option>
+                                    <option value="BA">BA</option>
                                     <option value="BE">BE</option>
                                     <option value="BS">BS</option>
                                     <option value="CA">CA</option>
@@ -932,20 +932,19 @@
         function check_clientname() {
 
             var clientname_val = $("#company_name").val();
-            var regex1 = /^[a-zA-Z ]*$/;
-            if (clientname_val == "") {
+
+            var regexOnlyText = /^[^0-9]+$/;
+            if (clientname_val==""||regexOnlyText.test(clientname_val) != true){
                 $("#clientname_check").show();
                 $("#clientname_check").focus();
-                $("#clientname_check").css("color", "red");
-                err_clientname = false;
+                $("#clientname_check").css("color","red");
+                err_clientname=false;
                 return false;
-            } else {
-                isValid = regex1.test(clientname_val);
-                $("#clientname_check").css("display", !isValid ? "block" : "none");
-                $("#clientname_check").css("color", "red");
-                return false;
-                err_clientname = false;
-
+            }
+            else
+            {
+                err_clientname=true;
+                $("#clientname_check").hide();
             }
 
 

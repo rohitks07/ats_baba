@@ -986,21 +986,34 @@ $("#country").on("change", function(e){
         function check_clientname() {
 
             var clientname_val = $("#company_name").val();
-            var regex1 = /^[a-zA-Z ]*$/;
-            if (clientname_val == "") {
+
+            var regexOnlyText = /^[^0-9]+$/;
+            if (clientname_val==""||regexOnlyText.test(clientname_val) != true){
                 $("#clientname_check").show();
                 $("#clientname_check").focus();
-                $("#clientname_check").css("color", "red");
-                err_clientname = false;
+                $("#clientname_check").css("color","red");
+                err_clientname=false;
                 return false;
-            } else {
-                isValid = regex1.test(clientname_val);
-                $("#clientname_check").css("display", !isValid ? "block" : "none");
-                $("#clientname_check").css("color", "red");
-                return false;
-                err_clientname = false;
-
             }
+            else
+            {
+                err_clientname=true;
+                $("#clientname_check").hide();
+            }
+
+            // var regexOnlyText = /^[0-9]+$/;
+            // if ((clientname_val == "")||(regexOnlyText.test(clientname_val) != true)) {
+            //     $("#clientname_check").show();
+            //     $("#clientname_check").focus();
+            //     $("#clientname_check").css("color", "red");
+            //     err_clientname = false;
+            //     return false;
+            // } else {
+            //     $("#clientname_check").hide();
+            //     return false;
+            //     err_clientname = false;
+
+            // }
 
 
 
