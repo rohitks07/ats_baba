@@ -62,7 +62,6 @@ class Login_Controller extends Controller{
                     if(!empty($toReturn['is_team_leader']))
                     {
                         $list_teammember=tbl_team_member::where('team_member_type',$toReturn['is_team_leader']['type_ID'])->get()->toArray();
-
                         $toReturn['one_group_teammember_list']['id']=array();
                         $count=0;
                         foreach($list_teammember as $key=>$value)
