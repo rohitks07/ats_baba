@@ -195,15 +195,16 @@
                                                                 <tr>
                                                                     <th>Date</th>
                                                                     <th>Jobs Created&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
+                                                                    
                                                                     <th>Jobs Assigned&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
+                                                                    
                                                                     <th>Candidate Created&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
+                                                                    
                                                                     <th>Application Submitted&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
+                                                                    
                                                                     <th>Client Submittal&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
+                                                                    <th>Group Report</th>
+                                                                    
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -214,157 +215,116 @@
                                                                     <td>{{$week_report['week_date']}}</td>
                                                                     <?php $date_val=$week_report['week_date']; ?>
 
-
-
-
-
                                                                     <td>{{$week_report['job_created']}}</td>
-                                                                    <td>
-                                                                        <a href="" data-toggle="modal"
-                                                                            data-target=".bd-example-modal-lg1{{$date_val}}"><i
-                                                                                class="fa fa-edit"
-                                                                                aria-hidden="true"></i></a>
-                                                                    </td>
-                                                                    <div class="modal fade bd-example-modal-lg1{{$date_val}}"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="myLargeModalLabel"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg">
-                                                                            <div class="modal-content">
-                                                                                <div class="container-fluid">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-12">
-                                                                                            <h3>Job Created</h3>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <br>
-                                                                                    <br>
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-4" style="border: 1px solid black;">
-                                                                                            <h4>Date</h4>
-                                                                                        </div>
-                                                                                        &nbsp;
-                                                                                        &nbsp;
-                                                                                        <div class="col-md-4" style="border: 1px solid black;">
-                                                                                        <h4>{{$date_val}}</h4>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                    <br>
-                                                                                    <br>
-                                                                                    @foreach (@$toReturn['team_member']
-                                                                                    as $item)
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-4" style="border: 1px solid black;">
-                                                                                            <h6>{{$item['type_name']}}
-                                                                                            </h6>
-                                                                                        </div>
-                                                                                        &nbsp;
-                                                                                        &nbsp;
-                                                                                        <div class="col-md-4" style="border: 1px solid black;">
-                                                                                        <h6>{{$date_val}}</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <br>
-                                                                                    @endforeach
-
-
-                                                                                </div>
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-
                                                                     <td>{{$week_report['post_assign']}}</td>
-
-                                                                    <td>
-                                                                        <a href="" data-toggle="modal"
-                                                                            data-target=".bd-example-modal-lg2"><i
-                                                                                class="fa fa-edit"
-                                                                                aria-hidden="true"></i></a>
-
-
-                                                                    </td>
-                                                                    <div class="modal fade bd-example-modal-lg2"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="myLargeModalLabe1"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg">
-                                                                            <div class="modal-content">
-                                                                                ...
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-
                                                                     <td>{{$week_report['candidate_created']}}</td>
-
-                                                                    <td>
-                                                                        <a href="" data-toggle="modal"
-                                                                            data-target=".bd-example-modal-lg3"><i
-                                                                                class="fa fa-edit"
-                                                                                aria-hidden="true"></i></a>
-
-                                                                    </td>
-                                                                    <div class="modal fade bd-example-modal-lg3"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="myLargeModalLabe1"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg">
-                                                                            <div class="modal-content">
-                                                                                ...
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-
                                                                     <td>{{$week_report['application_submitted']}}</td>
-
-                                                                    <td>
-                                                                        <a href="" data-toggle="modal"
-                                                                            data-target=".bd-example-modal-lg4"><i
-                                                                                class="fa fa-edit"
-                                                                                aria-hidden="true"></i></a>
-
-                                                                    </td>
-                                                                    <div class="modal fade bd-example-modal-lg4"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="myLargeModalLabe1"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg">
-                                                                            <div class="modal-content">
-                                                                                ...
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-
                                                                     <td>{{$week_report['client_submittal']}}</td>
 
                                                                     <td>
                                                                         <a href="" data-toggle="modal"
-                                                                            data-target=".bd-example-modal-lg5"><i
+                                                                            data-target=".bd-example-modal-lg5{{$date_val}}"><i
                                                                                 class="fa fa-edit"
                                                                                 aria-hidden="true"></i></a>
 
                                                                     </td>
-                                                                    <div class="modal fade bd-example-modal-lg5"
+                                                                    <div class="modal fade bd-example-modal-lg5{{$date_val}}"
                                                                         tabindex="-1" role="dialog"
                                                                         aria-labelledby="myLargeModalLabe1"
                                                                         aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
-                                                                                ...
+                                                                                <div class="container-fluid">
+                                                                                    
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-10">
+                                                                                            <h3>Group Report →</h3>
+                                                                                        </div>
+                                                                                        <div class="col-md-2">
+                                                                                            <h3><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h4>Date</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Jobs Created</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Jobs Assigned</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Candidate Created</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Application Submitted</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Client Submittal </h4>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                    
+                                                                                    @foreach (@$toReturn['team_member']
+                                                                                    as $item)
+                                                                                    <?php $group_id=$item['type_ID'];
+                                                                                        
+                                                                                          $new_val=$week_report['week_date'];
+                                                                                          
+                                                                                          $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
+                                                                                          $date = strtotime($newDate); 
+                                                                                          $hi=date('Y-m-d h:i:s', $date); 
+                                                                                          $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate));
+                                                                                          $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                          $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate));
+                                                                                          $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate));
+                                                                                          $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate));
+
+
+                                                                                    ?>
+                                                                                    <div class="row">
+                                                                                        
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6>{{$item['type_name']}}
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:red;text-align:center;">{{$job_create}}</h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:red;text-align:center;">{{$job_assigned}}</h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:red;text-align:center;">{{$candidate_create}}</h6>
+                                                                                        </div>
+                                                                                        
+                                                                                        
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:red;text-align:center;">{{$application_submitted}}</h6>
+                                                                                        </div>
+                                                                                        
+                                                                                        
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:red;text-align:center;">{{$client_submittal}}</h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                 
+                                                                                    @endforeach
+
+
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -471,7 +431,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">Monthly
-                                                Report:{{$toReturn['monthly'][0]['month_week_one1']}} -
+                                                Report:{{$toReturn['monthly'][1]['month_week_one1']}} -
                                                 {{$toReturn['monthly'][11]['month_week_one1']}}
                                             </h3>
                                             {{-- <form class="form-inline" style="float:right;margin-bottom: 0px;">

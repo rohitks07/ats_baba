@@ -11,7 +11,8 @@ use App\Tbl_forward_candidate;
 use App\Tbl_seeker_applied_for_job;
 use App\tbl_job_post_assign;
 use App\Tbl_team_member_type;
- 
+use App\Tbl_team_member; 
+
 
 class Report_Controller extends Controller
 {
@@ -26,7 +27,8 @@ class Report_Controller extends Controller
                 $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-'.$j.' days'));
                 $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-'.$j.' days'));
                 $newDate[$j] = date("Y-m-d", strtotime($toReturn['week_date_dated_us'][$j]));
-                $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::whereDate('dated',$newDate[$j])->where('company_ID',$org_id)->get());
+                $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::whereDate('dated',$newDate[$j])->get());
+                // $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::whereDate('dated',$newDate[$j])->where('company_ID',$org_id)->get());
                 // $data_group[$j]=tbl_post_job::whereDate('dated',$newDate[$j])->where('company_ID',$org_id)->get('for_group');
 
                 $toReturn['week_report'][$j]['candidate_created']= count(Tbl_job_seekers::whereDate('dated',$newDate[$j])->get());
@@ -36,13 +38,73 @@ class Report_Controller extends Controller
 
                 
             }
-            // return  $data_group;
+            
 
-                //code 
+
+         //job post
             $date_team['team']=Tbl_team_member_type::leftjoin('tbl_post_jobs','tbl_post_jobs.for_group','=','tbl_team_member_type.type_ID')
             ->select('tbl_team_member_type.type_ID as id','tbl_team_member_type.type_name',
                     'tbl_post_jobs.for_group as group','tbl_post_jobs.dated as date')
                     ->get();
+
+
+
+            //job post assign
+            $post_assign=tbl_job_post_assign::get()->toArray();
+
+
+                                    
+
+            //job assign
+            $date_team['post_assign']=Tbl_team_member::leftjoin('tbl_job_post_assign','tbl_job_post_assign.team_member_id','=','tbl_team_member.ID')     
+                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+                                                    ->select('tbl_team_member.team_member_type','tbl_team_member.company_id','tbl_team_member.full_name',
+                                                    'tbl_job_post_assign.team_member_id','tbl_team_member_type.type_name','tbl_team_member_type.type_ID',
+                                                    'tbl_job_post_assign.job_assigned_date')
+                                                    ->get();
+
+            //create_candidate
+            // $date_team['create_candidate']=Tbl_job_seekers::leftjoin('user','user.user_id','=','tbl_job_seekers.employer_id')
+            //                                         ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
+            //                                         ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+            //                                         ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
+            //                                         'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name')
+            //                                         ->get();
+
+
+            $date_team['create_candidate']=tbl_team_member_type::leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
+                                                    ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
+                                                    ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
+                                                    ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
+                                                    'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name')
+                                                    ->get();
+
+            // application_submitted
+            $date_team['application_submitted']=Tbl_seeker_applied_for_job::leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
+                                                    ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
+                                                    ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
+                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+                                                    ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
+                                                    'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name')
+                                                    ->get();
+
+                                                    
+            // $date_team['application_submitted']=Tbl_seeker_applied_for_job::leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
+            //                                         ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
+            //                                         ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
+            //                                         ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+            //                                         ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
+            //                                         'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name')
+            //                                         ->get();
+
+            $date_team['forward_candidate']=Tbl_forward_candidate::leftjoin('tbl_post_jobs','tbl_post_jobs.ID','=','tbl_forward_candidate.job_id')
+                                                                   ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_post_jobs.for_group')
+                                                                   ->select('tbl_team_member_type.type_ID','tbl_team_member_type.type_name',
+                                                                        'tbl_post_jobs.for_group','tbl_forward_candidate.forward_date','tbl_forward_candidate.forward_by')
+                                                                        ->get();
+                                                                        $google=$date_team['forward_candidate'];
+        
+            //   return $google;                                       
         
 
 
@@ -52,33 +114,7 @@ class Report_Controller extends Controller
                 $filtered[$o] = $date_team['team']->whereIn('date', $data_one[$o])->toArray(); 
                 $filtered1[$o] =$date_team['team']->whereIn('date', $data_one[$o]);
 
-            }       
-            // return $toReturn['team_member'];
-            // $id=2;
-            // $new_data = count($date_team['team']->where('type_ID',$id));
-                        
-
-                      
-
-            // $job_count=count(tbl_post_job::get());
-            // foreach ( $toReturn['team_member'] as $key => $value) {
-            //     for($l=0;$l<$job_count;$l++){
-            //         @$full_data[$l] =@$filtered1[$l]->whereIn('group',$value['type_ID'])->toArray();
-            //     }
-            // }
-
-             
-           
-            // return $new_data;
-            
-           
-            // echo "<pre>";
-            // print_r (@$full_data);
-            //   exit;
-
-
-
-                //code end
+            }      
 
             
             // for months;
@@ -87,12 +123,6 @@ class Report_Controller extends Controller
 
                 if($i==0){
                     $one = date('d-m-Y');
-                    $toReturn['monthly'][$i]['month_week_one1'] = $newDate = date("m-Y", strtotime($one));
-                    $toReturn['monthly'][$i]['job_created_monthly1']= count(tbl_post_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['candidate_created_monthly1']= count(Tbl_job_seekers::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['client_submittal_monthly1']= count(Tbl_forward_candidate::whereMonth('forward_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['post_assign_month1']= count(tbl_job_post_assign::whereMonth('job_assigned_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
                     $global=$one;
                 }
                 else{
@@ -171,24 +201,24 @@ class Report_Controller extends Controller
     
                         $toReturn['weekly_show'][$p]['week_week_one']= date('d-m-Y',(strtotime ( '-7 days' , strtotime ($week_data) ) ));
                         $toReturn['weekly_show'][$p]['week_week1'] = date('m-d-Y', strtotime( $toReturn['weekly_show'][$p]['week_week_one']));
-                        $database1[$p]= date('Y-m-d',(strtotime ( '-7 days' , strtotime ($week_data))));
+                        $database1= date('Y-m-d',(strtotime ( '-7 days' , strtotime ($week_data))));
                         $toReturn['weekly_show'][$p]['job_created_weekly1']= count(tbl_post_job::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
-                                                        ->where('dated','>=',$database1[$p])
+                                                        ->where('dated','>=',$database1)
                                                         ->get());
                         $toReturn['weekly_show'][$p]['candidate_created1']= count(Tbl_job_seekers::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
-                                                        ->where('dated','>=',$database1[$p])
+                                                        ->where('dated','>=',$database1)
                                                         ->get());                                
                         $toReturn['weekly_show'][$p]['application_submitted1']= count(Tbl_seeker_applied_for_job::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
-                                                        ->where('dated','>=',$database1[$p])
+                                                        ->where('dated','>=',$database1)
                                                         ->get());                                    
                         $toReturn['weekly_show'][$p]['client_submittal1']= count(Tbl_forward_candidate::where('forward_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
-                                                        ->where('forward_date','>=',$database1[$p])
+                                                        ->where('forward_date','>=',$database1)
                                                         ->get());
                         $toReturn['weekly_show'][$p]['post_assign1']= count(tbl_job_post_assign::where('job_assigned_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
-                                                        ->where('job_assigned_date','>=',$database1[$p])
+                                                        ->where('job_assigned_date','>=',$database1)
                                                         ->get());
                         
-                        $final_date=$database1[$p]; 
+                        $final_date=$database1; 
                         $week_data= $toReturn['weekly_show'][$p]['week_week_one'];                                                      
                     }
                 }
@@ -197,7 +227,8 @@ class Report_Controller extends Controller
             
 
             
-        return view('report')->with('toReturn',$toReturn);
+        return view('report')->with('toReturn',$toReturn)
+                             ->with('date_team',$date_team);
     }
 
 
