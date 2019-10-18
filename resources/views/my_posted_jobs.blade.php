@@ -41,37 +41,30 @@
 			    width:100%;
 			    overflow-y:scroll;
 			}
-			.table td {
-                padding: 7px;
-                font-size: top;
-                border-top: 1px solid #dee2e6;
-                font-size: 14px;
-                color: #000;
-                background:#fff;
-            }
-            .table tr {
-                padding: 7px;
-                font-size: top;
-                border-top: 1px solid #dee2e6;
-                font-size: 14px;
-                color: #000;
-                background:#fff;
-            }
-            .table th {
-                padding: 7px;
-                font-size: top;
-                border-top: 1px solid #dee2e6;
-                font-size: 14px;
-                color: #000;
-                background:#e4e4e4;
-            }
-            .table thead th {
-                vertical-align: bottom;
-                border-bottom: 0.5px solid #000;
-            }
-            .table-bordered thead td, .table-bordered thead th {
-                border-bottom-width: 1px;
-            }
+		table.dataTable thead > tr > th {
+    / padding-left: 8px; /
+    padding-right: 30px;
+}
+.table-bordered th {
+    border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+	font-size: 13px;
+	padding: 0.5em;
+}
+.table td{
+    padding: 0.10rem;
+	font-size: 12px;
+    padding-left: 1em;
+	border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+
+}
 </style>        
 <div id="wrapper">                                            
     <div class="content-page">              
@@ -109,7 +102,7 @@
 															<th >Status</th>                                                    
 															<th width="10%">Closing Date</th>
 															<th width="10%"><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
-															<th width="7%">Actions</th>     													
+															<th width="10%">Actions</th>     													
 			                                            </tr>
 			                                        </thead>
 			                                        <tbody  id="myTable">  
@@ -127,14 +120,14 @@
 																<td>{{$posted_job['job_code']}}</td>
 				                                                <td><a href="{{url('employer/jobsdetails/'.$id)}}">{{$posted_job['job_title']}} </a></td>
 				                                                <td>{{$posted_job['client_name']}}</td>
-				                                                <td>{{$posted_job['city']}}, &nbsp;{{$posted_job['state']}}</td>
+				                                                <td>@if($posted_job['city']){{$posted_job['city']}}, &nbsp;@endif{{$posted_job['state']}}</td>
 				                                                <td>{{$posted_job['vacancies']}}</td>
 				                                                <td>{{$posted_job['job_mode']}}</td>
 																<?php $vis=$posted_job['job_visa_status'];
                                                         $plus_visa=substr_count("$vis",",");
                                                         $sh=explode(",",$vis);
                                                         ?>
-                                                        <td onmouseover="visa_type({{$id}});" id="visa{{$id}}"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;{{$plus_visa}}+</span><span id="data2{{$id}}" style="display:none;" >{{$posted_job['job_visa_status']}}</span></td>																<td>{{$posted_job['pay_min']}}-{{$posted_job['pay_max']}}</td>													
+                                                        <td onmouseover="visa_type({{$id}});" id="visa{{$id}}"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none;" >{{$posted_job['job_visa_status']}}</span></td>																<td>{{$posted_job['pay_min']}}-{{$posted_job['pay_max']}}</td>													
 				                                                <td>{{$closing_date}}</td>
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$new_last_Date}}</td>

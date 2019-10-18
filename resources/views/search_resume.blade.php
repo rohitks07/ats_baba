@@ -14,36 +14,29 @@
 </script>
 <style>
 
-.table td {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#fff;
+table.dataTable thead > tr > th {
+    / padding-left: 8px; /
+    padding-right: 30px;
 }
-.table tr {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#fff;
+.table-bordered th {
+    border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+	font-size: 13px;
+	padding: 0.5em;
 }
-.table th {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#e4e4e4;
-}
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 0.5px solid #000;
-}
-.table-bordered thead td, .table-bordered thead th {
-    border-bottom-width: 1px;
+.table td{
+    padding: 0.10rem;
+	font-size: 12px;
+    padding-left: 1em;
+	border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+
 }
 
 .mini-stat-info span {
@@ -103,7 +96,6 @@
 			    overflow-y:scroll;
                 overflow-x:scroll;
 			}
-							
 </style>  
 <body>  
         <div id="wrapper">
@@ -139,7 +131,7 @@
 														<th>Mobile</th> 
 														<th>Source</th>
 														<th>Skype Id</th> 
-														<th>Actions</th>     													
+														<th width="10%">Actions</th>     													
                                                     </tr>
                                                 </thead>
                                                 <tbody id="myTable">  
@@ -166,7 +158,7 @@
                                                         @if(@$age!="0")F {{$age}}@endif
                                                         @endif
                                                         </td>
-														<td>{{@$personal[$key]->city}}, &nbsp;{{@$personal[$key]->state}}</td>
+														<td>{{$personal[$key]->city}}, &nbsp;{{$personal[$key]->state}}</td>
 														<td>{{$personal[$key]->visa}}</td>
 														@if($personal[$key]->total_experience)
 														<td>{{$personal[$key]->total_experience}}+</td>
