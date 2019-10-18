@@ -163,8 +163,12 @@ textarea[class="form-control"]{
 														?>
 														<td>{{$experience->job_title}}</td>
 														<td>{{$experience->company_name}}</td>
-														<td>{{$experience->start_date}}</td>
-														<td>{{$experience->end_date}}</td>
+														<?php 
+														$start_date=date('m-d-Y',strtotime($experience->start_date));
+														$end_date=date('m-d-Y',strtotime($experience->end_date));
+														?>
+														<td>{{$start_date}}</td>
+														<td>{{$end_date}}</td>
 														<td>{{$experience->city}},{{$experience->country}}</td>  
 															<td>
 															<a  href="{{url('employer/team_member_edit_experience_update/'.$id.'/'.$seeker_id)}}"><i class="fa fa-pencil" aria-hidden="true" style="color: #1ba6df;cursor: pointer;" title="Edit"></i></a>
@@ -481,7 +485,7 @@ textarea[class="form-control"]{
 	                                          <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">Start Date</label>
 	                                            <div class="col-lg-8">
-	                                               	<input type="date" id="start_date" name="start_date" value="" placeholder="Start Date" required/>
+	                                               	<input type="date" id="start_date" name="start_date" value="" placeholder="Start Date" class="form-control" required/>
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
