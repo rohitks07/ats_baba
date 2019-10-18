@@ -9,7 +9,7 @@ use App\tbl_post_job;
 use App\tbl_post_jobs;
 use App\Tbl_forward_candidate;
 use App\Tbl_seeker_applied_for_job;
-use App\Tbl_job_post_assign;
+use App\tbl_job_post_assign;
 use App\Tbl_team_member_type;
 use App\Tbl_team_member; 
 
@@ -34,7 +34,7 @@ class Report_Controller extends Controller
                 $toReturn['week_report'][$j]['candidate_created']= count(Tbl_job_seekers::whereDate('dated',$newDate[$j])->get());
                 $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::whereDate('forward_date',$newDate[$j])->get());
                 $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::whereDate('dated',$newDate[$j])->get());
-                $toReturn['week_report'][$j]['post_assign']= count(Tbl_job_post_assign::whereDate('job_assigned_date',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['post_assign']= count(tbl_job_post_assign::whereDate('job_assigned_date',$newDate[$j])->get());
 
                 
             }
@@ -50,7 +50,7 @@ class Report_Controller extends Controller
 
 
             //job post assign
-            $post_assign=Tbl_job_post_assign::get()->toArray();
+            $post_assign=tbl_job_post_assign::get()->toArray();
 
 
                                     
@@ -133,7 +133,7 @@ class Report_Controller extends Controller
                     $toReturn['monthly'][$i]['candidate_created_monthly1']= count(Tbl_job_seekers::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
                     $toReturn['monthly'][$i]['client_submittal_monthly1']= count(Tbl_forward_candidate::whereMonth('forward_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
                     $toReturn['monthly'][$i]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['post_assign_month1']= count(Tbl_job_post_assign::whereMonth('job_assigned_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                    $toReturn['monthly'][$i]['post_assign_month1']= count(tbl_job_post_assign::whereMonth('job_assigned_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
                     $global=$two;
                 }
             }
@@ -158,7 +158,7 @@ class Report_Controller extends Controller
                         $toReturn['yearly'][$k]['candidate_created_monthly1']= count(Tbl_job_seekers::whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
                         $toReturn['yearly'][$k]['client_submittal_monthly1']= count(Tbl_forward_candidate::whereYear('forward_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
                         $toReturn['yearly'][$k]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
-                        $toReturn['yearly'][$k]['post_assign_month1']= count(Tbl_job_post_assign::whereYear('job_assigned_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                        $toReturn['yearly'][$k]['post_assign_month1']= count(tbl_job_post_assign::whereYear('job_assigned_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
                         $global_year=$two;
                     }
                 }
@@ -190,7 +190,7 @@ class Report_Controller extends Controller
                         $toReturn['weekly_show'][$p]['client_submittal1']= count(Tbl_forward_candidate::where('forward_date','<=',$today_date)
                                                         ->where('forward_date','>=',$database1)
                                                         ->get());
-                        $toReturn['weekly_show'][$p]['post_assign1']= count(Tbl_job_post_assign::where('job_assigned_date','<=',$today_date)
+                        $toReturn['weekly_show'][$p]['post_assign1']= count(tbl_job_post_assign::where('job_assigned_date','<=',$today_date)
                                                         ->where('job_assigned_date','>=',$database1)
                                                         ->get());
                         $first_date=$today_date;
@@ -214,7 +214,7 @@ class Report_Controller extends Controller
                         $toReturn['weekly_show'][$p]['client_submittal1']= count(Tbl_forward_candidate::where('forward_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
                                                         ->where('forward_date','>=',$database1)
                                                         ->get());
-                        $toReturn['weekly_show'][$p]['post_assign1']= count(Tbl_job_post_assign::where('job_assigned_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
+                        $toReturn['weekly_show'][$p]['post_assign1']= count(tbl_job_post_assign::where('job_assigned_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
                                                         ->where('job_assigned_date','>=',$database1)
                                                         ->get());
                         
@@ -253,7 +253,7 @@ class Report_Controller extends Controller
         $data['client_submittal_days']= count(Tbl_forward_candidate::where('forward_date','<=',$date_2)
                                             ->where('forward_date','>=',$date_1)
                                             ->get());
-        $data['post_assign_days']= count(Tbl_job_post_assign::where('job_assigned_date','<=',$date_2)
+        $data['post_assign_days']= count(tbl_job_post_assign::where('job_assigned_date','<=',$date_2)
                                             ->where('job_assigned_date','>=',$date_1)
                                             ->get());                                        
         return response()->json($data);
@@ -279,7 +279,7 @@ class Report_Controller extends Controller
         $data['client_submittal_days']= count(Tbl_forward_candidate::where('forward_date','<=',$date_2)
                                             ->where('forward_date','>=',$date_1)
                                             ->get());
-        $data['post_assign_days']= count(Tbl_job_post_assign::where('job_assigned_date','<=',$date_2)
+        $data['post_assign_days']= count(tbl_job_post_assign::where('job_assigned_date','<=',$date_2)
                                             ->where('job_assigned_date','>=',$date_1)
                                             ->get());                                     
         return response()->json($data);
