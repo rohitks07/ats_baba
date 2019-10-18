@@ -366,7 +366,7 @@
 								</div>
 								
 
-    <p ><button type="button" id="btnAdd_Exp" class="btn btn-primary" >Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>								
+    <p ><button type="button" id="btnAdd_doc" class="btn btn-primary" >Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>								
 								</div><!--end of column-->								
 							   </div><!--end of row-->
 
@@ -590,7 +590,7 @@
 													  @endforeach                    
 											</select>
 											    <input placeholder="Start Date" name="start_date[]" id="start_date" class="textbox-n form-control start_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 15%;">
-											    <input placeholder="End Date" name="end_date[]" id="end_date" class="textbox-n form-control end_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 15%;">							   
+												<input placeholder="End Date" name="end_date[]" id="end_date" class="textbox-n form-control end_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 15%;">
 												<p><button type="button" id="btnAdd_Exp" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
 											    <!-- <a class="btn btn-primary add-more-btn" style="float:left; margin-left:1em;">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></a>												   -->
 												<span id="experience_check">Please fill All Fields</span>
@@ -631,7 +631,7 @@
                             <div class="form-group row">
                                 <label for="lastname" class="control-label col-lg-4">Add Skill <span style="color:red;">*</span></label>
                                 <div class="col-lg-4">
-                                    <input class="form-control" style="border: 1px solid #737373; width:100%;" id="tags" name="skill" type="text">
+                                    <input class="form-control" style="border: 1px solid #737373; width:100%;" id="tags" name="skill" type="text" required>
                                     <span class="help-block" style="text-align:right;"><small>
                                         Enter skill in this formate ex- java,cpp,c,laravel,html etc. </small></span>
                                <br>
@@ -696,7 +696,7 @@
 <script>
 
 	$(document).ready(function(){
-  $("#btnAdd_Exp").click(function(){
+  $("#btnAdd_doc").click(function(){
 	  var a=`<div class="input-group mb-3 delete_exp1">
   			<input type="file" class="form-control col-sm-8" placeholder="Recipient's username" name="multi_docs[]" aria-label="Recipient's username" aria-describedby="button-addon2">
   			<div class="input-group-append">
@@ -735,35 +735,35 @@
     }
 </script>
 <script>
-	$(document).ready(function()
-	{	
-		$("#skill_check").hide();
+	// $(document).ready(function()
+	// {	
+	// 	$("#skill_check").hide();
 
-		//validate add skill
-		$("#validatefrm").click(function()
-		{
-			check_skill();
-		});
-		function check_skill()
-		{
+	// 	//validate add skill
+	// 	$("#validatefrm").click(function()
+	// 	{
+	// 		check_skill();
+	// 	});
+	// 	function check_skill()
+	// 	{
 			
-			// var skill_add_val=$("#tags").val();
-			var skill_val=$("#Result").val();
+	// 		// var skill_add_val=$("#tags").val();
+	// 		var skill_val=$("#Result").val();
 		
-			if(skill_val=="")
-			{
-				$("#skill_check").show();
-				$("#skill_check").focus();
-				$("#skill_check").css("color","red");
-				err_skill=false;
-				return false;
-			}
-			else
-			{
-					$("#skill_check").hide();
-			}
-		}
-	});
+	// 		if(skill_val=="")
+	// 		{
+	// 			$("#skill_check").show();
+	// 			$("#skill_check").focus();
+	// 			$("#skill_check").css("color","red");
+	// 			err_skill=false;
+	// 			return false;
+	// 		}
+	// 		else
+	// 		{
+	// 				$("#skill_check").hide();
+	// 		}
+	// 	}
+	// });
 </script>
 
 
@@ -964,6 +964,7 @@ $(function() {
 		$("#mob_ph_check").hide();
 		$("#home_ph_check").hide();
 		$("#resume_check").hide();
+		$('#skills_check').hide();
 
 		var err_firstname=true;
 		var err_middlename=true;
@@ -977,6 +978,7 @@ $(function() {
 		var err_mob_ph=true;
 		var err_home_ph=true;
 		var err_resume=true;
+		var err_skill=true;
 
 		//validate first name
 		$("#first_name").blur(function()
@@ -1308,6 +1310,42 @@ $(function() {
 				return false;
 			}
 		}
+		//validate skills
+		$("#tags").blur(function()
+		{
+			check_skills();
+		});
+		// function check_skills()
+		// {
+		// 	var ch=$("#first_name").val();
+
+		// 	// var regexOnlyText = /^[a-zA-Z]+$/;
+		// 	if (firstname_val==""||regexOnlyText.test(firstname_val) != true){
+		// 		$("#first_namecheck").show();
+		// 		$("#first_namecheck").focus();
+		// 		$("#first_namecheck").css("color","red");
+		// 		err_firstname=false;
+		// 		return false;
+		// 	}
+		// 	else
+		// 	{
+		// 		err_firstname=true;
+		// 		$("#first_namecheck").hide();
+		// 	}
+			
+		// }
+		function check_skills(){
+
+			var ch=$('#Result').val();
+			if(ch==""){
+				err_skills=false;
+				$('#skills_check').show();
+			}
+			else{
+				err_skills=true;
+				$('#skills_check').hide();
+			}
+		}
 
 		// final submission
 		$("#validatefrm").click(function()
@@ -1325,10 +1363,11 @@ $(function() {
 			check_mb_phone();
 			check_hm_phone();
 			check_resume();
+			check_skills();
 
 
 			// check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-			if((err_firstname==true)&&(err_middlename==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_ssn==true)&&(err_visa==true)&&(err_Experience==true)&&(err_city==true)&&(err_mob_ph==true)&&(err_home_ph==true)&&(err_resume==true))
+			if((err_firstname==true)&&(err_middlename==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_ssn==true)&&(err_visa==true)&&(err_Experience==true)&&(err_city==true)&&(err_mob_ph==true)&&(err_home_ph==true)&&(err_resume==true)&&(err_skill==true))
 			{
 				return true;
 			}
@@ -1534,5 +1573,34 @@ $("#country").on("change", function(e){
 				}
 		}
 		</script>
+<script>
+// var err_skills=true;
+
+
+// $("#validatefrm").click(function()
+// {
+	
+// }
+
+
+// $("#validatefrm").click(function()
+// {
+// 	// err_skills = true;
+// 	// // when submit button clicked, validate
+// 	// check_skills();
+
+
+// 	// // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
+// 	// if((err_skills==true))
+// 	// {
+// 	// 	return true;
+// 	// }
+// 	// else
+// 	// {
+// 	// 	return false;
+// 	// }
+// 	return false;
+// });
+</script>
 </body>
 </html>

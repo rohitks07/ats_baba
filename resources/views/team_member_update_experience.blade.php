@@ -71,6 +71,11 @@
         padding: 7px;
         border-radius: 5px;
     }
+    input[type=date] {
+        width: 100%;
+        padding: 7px;
+        border-radius: 5px;
+    }
     
     textarea {
         border-radius: 5px;
@@ -116,7 +121,7 @@
                                 <form action="{{url('employer/team_member_edit_experience/update')}}"  method="post">
 									<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Job Title</label>
-	                                            	<div class="col-lg-8">
+	                                            	<div class="col-lg-4">
 													<input type="hidden" name="_token" id="csrf-token" value="{{csrf_token()}}"/>
 													<input type="hidden" name="seeker_id"  value="{{$exp->seeker_ID}}">
 													<input type="hidden" name="ID"  value="{{$exp->ID}}">
@@ -125,25 +130,25 @@
 												</div>
 												<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Company Name</label>
-	                                            	<div class="col-lg-8">
+	                                            	<div class="col-lg-4">
 	                                                   <input type="text" id="company_name" name="company_name"  placeholder="Company Name" value="{{$exp->company_name}}">
 	                                            </div>
 	                                        </div>	
 											<div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">Start Date</label>
-	                                            <div class="col-lg-8">
+	                                            <div class="col-lg-4">
 	                                               	<input type="date" id="start_date" name="start_date"  placeholder="start Date" value="{{$exp->start_date}}"/>
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">End Date</label>
-	                                            <div class="col-lg-8">
+	                                            <div class="col-lg-4">
 	                                                <input type="date" id="end_date" name="end_date"  placeholder="end_date" value="{{$exp->end_date}}" />
 	                                            </div>
 	                                        </div>		
 											<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">City</label>
-	                                            	<div class="col-lg-8">
+	                                            	<div class="col-lg-4">
 	                                                   <input type="text" id="city" name="city"  placeholder="City" value="{{$exp->city}}">
 
 	                                            </div>
@@ -151,12 +156,12 @@
 
 											<div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Country</label>
-	                                            	<div class="col-lg-8">
+	                                            	<div class="col-lg-4">
 	                                                   <input type="text" id="country" name="country"  placeholder="Country" value="{{$exp->country}}">
 	                                            </div>
 	                                        </div>										
                                           </div>            
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary" style="margin:10px;">Submit</button>
                                           </div>
                                         </div></div></h3></div></form></div></div></div></div></div>
 @include('include.emp_footer')

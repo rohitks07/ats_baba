@@ -208,7 +208,7 @@
                         <div class="col-lg-8">
                             <input type="hidden" id="seeker_ID" name="seeker_ID" value="{{$seeker_id}}">
                             <input type="text" id="skills" name="skills"
-                                placeholder="Skill,Skill">
+                                placeholder="Skill" required>
                         </div>
                     </div>
                     <div class="modal-footer">

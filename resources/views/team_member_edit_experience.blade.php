@@ -190,7 +190,7 @@ textarea[class="form-control"]{
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title mt-0" id="myModalLabel" style="font-weight:100;">Edit Experience</h4>
+                                <h4 class="modal-title mt-0" id="myModalLabel" style="font-weight:100;">Add Experience</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -205,13 +205,13 @@ textarea[class="form-control"]{
                                             <label for="email" class="control-label col-lg-4">Job Title</label>
                                             	<div class="col-lg-8">
 													<input type="hidden" name="seeker_id" value="{{$exp_seeker_id}}">
-                                                 	<input type="text" id="job_title" name="job_title"  placeholder="Job Title">
+                                                 	<input type="text" id="job_title" name="job_title"  placeholder="Job Title" required>
                                             	</div>
                                         	</div>
 	                                        <div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Company Name</label>
 	                                            	<div class="col-lg-8">
-	                                                   <input type="text" id="company_name" name="company_name"  placeholder="Company Name">
+	                                                   <input type="text" id="company_name" name="company_name"  placeholder="Company Name" required>
 	                                            </div>
 	                                        </div>
 	                                         <div class="form-group row">
@@ -317,7 +317,7 @@ textarea[class="form-control"]{
 															<option value="Hong Kong">Hong Kong</option>
 															<option value="Hungary">Hungary</option>
 															<option value="Iceland">Iceland</option>
-															<option value="India">India</option>
+															<option value="India" selected="selected">India</option>
 															<option value="Indonesia">Indonesia</option>
 															<option value="Iran">Iran</option>
 															<option value="Iraq">Iraq</option>
@@ -381,7 +381,7 @@ textarea[class="form-control"]{
 															<option value="Norfolk Island">Norfolk Island</option>
 															<option value="Norway">Norway</option>
 															<option value="Oman">Oman</option>
-															<option value="Pakistan" selected="selected">Pakistan</option>
+															<option value="Pakistan">Pakistan</option>
 															<option value="Palau Island">Palau Island</option>
 															<option value="Palestine">Palestine</option>
 															<option value="Panama">Panama</option>
@@ -471,13 +471,13 @@ textarea[class="form-control"]{
 	                                        <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">City</label>
 	                                            <div class="col-lg-8">
-	                                               	<input type="text" id="edu_city" name="edu_city" value="" placeholder="City">
+	                                               	<input type="text" id="edu_city" name="edu_city" value="" placeholder="City" required>
 	                                            </div>
 	                                        </div>
 	                                          <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">Start Date</label>
 	                                            <div class="col-lg-8">
-	                                               	<input type="date" id="start_date" name="start_date" value="" placeholder="Start Date" />
+	                                               	<input type="date" id="start_date" name="start_date" value="" placeholder="Start Date" required/>
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
