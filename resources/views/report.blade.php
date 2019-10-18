@@ -194,15 +194,15 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Date</th>
-                                                                    <th>Jobs Created&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Jobs Created</th>
                                                                     
-                                                                    <th>Jobs Assigned&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Jobs Assigned</th>
                                                                     
-                                                                    <th>Candidate Created&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Candidate Created</th>
                                                                     
-                                                                    <th>Application Submitted&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Application Submitted</th>
                                                                     
-                                                                    <th>Client Submittal&nbsp;&nbsp;&nbsp;→</th>
+                                                                    <th>Client Submittal</th>
                                                                     <th>Group Report</th>
                                                                     
                                                                 </tr>
@@ -237,11 +237,13 @@
                                                                                 <div class="container-fluid">
                                                                                     
                                                                                     <div class="row">
-                                                                                        <div class="col-md-10">
-                                                                                            <h3>Group Report →</h3>
+                                                                                        <div class="col-md-11">
+                                                                                            <h3>Group Report</h3>
                                                                                         </div>
-                                                                                        <div class="col-md-2">
-                                                                                            <h3><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></h3>
+                                                                                        <div class="col-md-1 mt-4">
+                                                                                            
+                                                                                            <a href=""data-dismiss="modal" ><i class="fa ion-android-close"></i></a>
+                                                                                            </h3>
                                                                                         </div>
                                                                                     </div>
                                                                                     <br>
@@ -287,10 +289,11 @@
                                                                                           $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
                                                                                           $date = strtotime($newDate); 
                                                                                           $hi=date('Y-m-d h:i:s', $date); 
-                                                                                          $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate));
-                                                                                          $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                          $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate));
-                                                                                          $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate));
-                                                                                          $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate));
+                                                                                          $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                          $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
+                                                                                           $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
+                                                                                          $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
+                                                                                          $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
 
 
                                                                                     ?>
@@ -301,23 +304,23 @@
                                                                                             </h6>
                                                                                         </div>
                                                                                         <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:red;text-align:center;">{{$job_create}}</h6>
+                                                                                        <h6 style="color:blue;text-align:center;">{{$job_create}}</h6>
                                                                                         </div>
                                                                                         <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:red;text-align:center;">{{$job_assigned}}</h6>
+                                                                                        <h6 style="color:blue;text-align:center;">{{$job_assigned}}</h6>
                                                                                         </div>
                                                                                         <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:red;text-align:center;">{{$candidate_create}}</h6>
-                                                                                        </div>
-                                                                                        
-                                                                                        
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:red;text-align:center;">{{$application_submitted}}</h6>
+                                                                                        <h6 style="color:blue;text-align:center;">{{$candidate_create}}</h6>
                                                                                         </div>
                                                                                         
                                                                                         
                                                                                         <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:red;text-align:center;">{{$client_submittal}}</h6>
+                                                                                        <h6 style="color:blue;text-align:center;">{{$application_submitted}}</h6>
+                                                                                        </div>
+                                                                                        
+                                                                                        
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">{{$client_submittal}}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                  
