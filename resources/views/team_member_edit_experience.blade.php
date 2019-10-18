@@ -196,8 +196,8 @@ textarea[class="form-control"]{
                                 </button>
                             </div>
                         <div class="modal-body">
-						<form class="cmxform form-horizontal tasi-form"  action="{{url('employer/team_member_edit_experience/add')}}" method="post">
-									@csrf();
+						<form class="cmxform form-horizontal tasi-form" onsubmit="return validation()" action="{{url('employer/team_member_edit_experience/add')}}" method="post">
+									@csrf()
                             <div class="card-body">
                                 
                                     
@@ -205,19 +205,21 @@ textarea[class="form-control"]{
                                             <label for="email" class="control-label col-lg-4">Job Title</label>
                                             	<div class="col-lg-8">
 													<input type="hidden" name="seeker_id" value="{{$exp_seeker_id}}">
-                                                 	<input type="text" id="job_title" name="job_title"  placeholder="Job Title" required>
-                                            	</div>
+                                                 	<input type="text" id="job_title" name="job_title"  class="form-control"placeholder="Job Title"required>
+													 <span id="jobtitleerror" class="text-danger"></span>
+												</div>
                                         	</div>
 	                                        <div class="form-group row">
 	                                            <label for="" class="control-label col-lg-4">Company Name</label>
 	                                            	<div class="col-lg-8">
-	                                                   <input type="text" id="company_name" name="company_name"  placeholder="Company Name" required>
-	                                            </div>
+	                                                   <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Company Name" required>
+													   <span id="companyerror" class="text-danger"></span>
+													</div>
 	                                        </div>
 	                                         <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">Country</label>
 	                                            <div class="col-lg-8">
-	                                               	<select name="edu_country" id="edu_country" class="form-control">
+	                                               	<select name="edu_country" id="edu_country" class="form-control" required>
 															<option value="Afganistan">Afghanistan</option>
 															<option value="Albania">Albania</option>
 															<option value="Algeria">Algeria</option>
@@ -317,7 +319,7 @@ textarea[class="form-control"]{
 															<option value="Hong Kong">Hong Kong</option>
 															<option value="Hungary">Hungary</option>
 															<option value="Iceland">Iceland</option>
-															<option value="India" selected="selected">India</option>
+															<option value="India"selected="selected">India</option>
 															<option value="Indonesia">Indonesia</option>
 															<option value="Iran">Iran</option>
 															<option value="Iraq">Iraq</option>
@@ -381,7 +383,7 @@ textarea[class="form-control"]{
 															<option value="Norfolk Island">Norfolk Island</option>
 															<option value="Norway">Norway</option>
 															<option value="Oman">Oman</option>
-															<option value="Pakistan">Pakistan</option>
+															<option value="Pakistan" >Pakistan</option>
 															<option value="Palau Island">Palau Island</option>
 															<option value="Palestine">Palestine</option>
 															<option value="Panama">Panama</option>
@@ -466,13 +468,15 @@ textarea[class="form-control"]{
 															<option value="Zambia">Zambia</option>
 															<option value="Zimbabwe">Zimbabwe</option>
 														</select>
+														
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">City</label>
 	                                            <div class="col-lg-8">
-	                                               	<input type="text" id="edu_city" name="edu_city" value="" placeholder="City" required>
-	                                            </div>
+	                                               	<input type="text" id="edu_city" name="edu_city" value=""class="form-control" placeholder="City"required>
+													   <span id="cityerror" class="text-danger"></span>
+												</div>
 	                                        </div>
 	                                          <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">Start Date</label>
@@ -483,7 +487,7 @@ textarea[class="form-control"]{
 	                                        <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">End Date</label>
 	                                            <div class="col-lg-8">
-	                                                <input type="date" id="end_date" name="end_date" value="Present" placeholder="Present" />
+	                                                <input type="date" id="end_date" name="end_date" value="Present" placeholder="Present" class="form-control" required>
 	                                                (Keep blank if still working)
 	                                            </div>
 	                                        </div>
@@ -493,7 +497,7 @@ textarea[class="form-control"]{
                 				
                 			<div class="modal-footer">
                     			<button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                    			<input type="submit" class="btn btn-secondary" value="submit">
+                    			<center><input type="submit" class="btn btn-secondary" onclick="validation()"value="submit"></center>
 								
 							
                             </div>
@@ -506,7 +510,43 @@ textarea[class="form-control"]{
 
   </div>
      
+  <script type="text/javascript">
+	function validation()
+	{
+		var jobtitle = document.getElementById('job_title').value;
+		var company = document.getElementById('company_name').value;
+		var city = document.getElementById('edu_city').value;
+		
 
+		var usercheck=/^[A-Za-z. ]{3,}$/;
+		var citycheck=/^[A-Za-z. ]{3,}$/;
+		var companycheck=/^[A-Za-z. ]{3,}$/;
+		
+		if(usercheck.test(jobtitle)){
+		 document.getElementById('jobtitleerror').innerHTML="";
+		}
+		else{
+		 document.getElementById('jobtitleerror').innerHTML="please provide valid Job Title";
+		 return false;
+		}
+		
+		if(citycheck.test(city)){
+		 document.getElementById('cityerror').innerHTML="";
+		}
+		else{
+		 document.getElementById('cityerror').innerHTML="please provide valid City Name";
+		 return false;
+		}
+		if(companycheck.test(company)){
+		 document.getElementById('companyerror').innerHTML="";
+		}
+		else{
+		 document.getElementById('companyerror').innerHTML="please provide valid Company Name";
+		 return false;
+		}
+	}
+	</script>
+@include('include.emp_footer')
   
 @include('include.emp_footer')
 

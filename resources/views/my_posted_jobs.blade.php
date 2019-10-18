@@ -73,7 +73,6 @@
                 border-bottom-width: 1px;
             }
 </style>        
-          
 <div id="wrapper">                                            
     <div class="content-page">              
     	<div class="content">                
@@ -81,7 +80,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-								<input id="search" type="text" placeholder="   Search" class="form-control" style="float:right;width:350px;border-radius:20px;height:30px;">
+								<input id="search" type="text" placeholder="Search" class="form-control" style="float:right;width:350px;border-radius:20px;height:30px;">
 						@if(!empty($toReturn['user_type']=="teammember"))
 							@if($toReturn['current_module_permission']['is_add']=="yes")                                       
 							<a href="{{url('employer/post_new_job')}}">
@@ -104,6 +103,8 @@
 			                                                <th width="15%">Location</th>
 			                                                <th>Positions </th>
 															<th>Type</th>
+															<th width="7%">Visa Type</th>
+															<th width="7%">Pay Rate</th>
 			                                                <th width="10%">Publish Date</th>
 															<th >Status</th>                                                    
 															<th width="10%">Closing Date</th>
@@ -128,11 +129,15 @@
 				                                                <td>{{$posted_job['client_name']}}</td>
 				                                                <td>{{$posted_job['city']}}, &nbsp;{{$posted_job['state']}}</td>
 				                                                <td>{{$posted_job['vacancies']}}</td>
-				                                                <td>{{$posted_job['job_mode']}}</td>													
+				                                                <td>{{$posted_job['job_mode']}}</td>
+																<?php $vis=$posted_job['job_visa_status'];
+                                                        $plus_visa=substr_count("$vis",",");
+                                                        $sh=explode(",",$vis);
+                                                        ?>
+                                                        <td onmouseover="visa_type({{$id}});" id="visa{{$id}}"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;{{$plus_visa}}+</span><span id="data2{{$id}}" style="display:none;" >{{$posted_job['job_visa_status']}}</span></td>																<td>{{$posted_job['pay_min']}}-{{$posted_job['pay_max']}}</td>													
 				                                                <td>{{$closing_date}}</td>
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$new_last_Date}}</td>
-																
                                                                  <td><button type="button" class="btn btn-primary btn-sm">{{$assignee}}</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">{{$application}}</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">{{$client_submittal}}</button></td>
 				                                               <td class="actions">
 																@if(!empty($toReturn['user_type']=="teammember"))
@@ -155,7 +160,7 @@
 																<a href="{{url(''.$id)}}" data-toggle="modal"
                                                                         data-target="#myModal{{$posted_job['ID']}}"><i class="fa fa-plane" aria-hidden="true"></i></a>
                                                                         <a  href="" data-toggle="modal" data-target="#mailModal{{$posted_job['ID']}}"><i class="fa fa-envelope"></i></a>
-                                                    <a href="" data-toggle="modal" data-target="#exampleModalCenter{{$posted_job['ID']}}"><i class="fa fa-plus" title="Note"></i></a>
+                                                    	<a href="" data-toggle="modal" data-target="#exampleModalCenter{{$posted_job['ID']}}"><i class="fa fa-plus" title="Note"></i></a>
 																<!-- @endif -->									
 																<div class="modal fade" id="myModal{{$posted_job['ID']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
 																<div class="modal-dialog modal-lg">
@@ -407,6 +412,19 @@
   });
 });
 	</script>
+	<script>
+	function visa_type(id)
+{
+	// alert();
+    $("#visa"+id).hover(function(){
+    $("#data1"+id).hide();
+    $("#data2"+id).show();   
+    },function(){
+    $("#data2"+id).hide();
+    $("#data1"+id).show();
+  });
+}
+</script>
 <script type="text/javascript">
 
 

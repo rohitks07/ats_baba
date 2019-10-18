@@ -219,9 +219,9 @@
                                 <div class="form-group row">
                                     <label for="" class="control-label col-lg-4">Member Id <span style="color:red;">*</span></label>
                                     <div class="col-lg-8">
-                                        <input type="text" name="member_id" placeholder=" Member ID">
+                                        <input type="text" name="member_id" id="member_id" placeholder="Member ID">
                                         <br>
-                                      
+                                        <span id="member_id_check">Please enter valid memeber Id</span>
                                     </div>
                                 </div>
                                 <!--Name-->
@@ -292,8 +292,7 @@
                                     <label class="col-sm-4 control-label">Jobs History <span style="color:red;">*</span></label>
                                     <div class="col-sm-8">
                                         <select class="form-control" id="jobs_history" name="jobs_history" style="max-width:50%; border: 1px solid #b3b3b3;">
-                                            <option value="" selected="selected">Select Jobs History </option>
-                                            <option value="yes"> Yes</option>
+                                            <option value="yes">Yes</option>
                                             <option value="no">No</option>
                                         </select>
                                         <span id="jobhistory" name="jobhistory" style="color:red;">This field must not be empty</span>
@@ -388,26 +387,53 @@
 @include('include.emp_footer')
 <script>
     $(document).ready(function() {
+        $("#member_id_check").hide();
         $("#namecheck").hide();
         $("#emailcheck").hide();
         $("#passwordcheck").hide();
         $("#cmfpascheck").hide();
+        var err_check_member_id = true;
         var err_check = true;
         var err_check_email = true;
         var err_check_psw = true;
         var err_check_cmfpsd = true;
 
+        //validate member id
+        $("#member_id").blur(function() {
+            check_member_id();
+        });
+        $("#validatefrm").click(function() {
+            check_member_id();
+        });
+        function check_member_id() {
+            var member_id_val = $("#member_id").val();
+
+            var regexOnlyText = /^[0-9]+$/;
+            if(member_id_val.length==""||regexOnlyText.test(member_id_val) != true)
+            {
+                $("#member_id_check").show();
+                $("#member_id_check").focus();
+                $("#member_id_check").css("color", "red");
+                err_check_member_id = false;
+                return false;
+            } else {
+                $("#member_id_check").hide();
+            }
+
+        }
         //validate name
+        $("#full_name").blur(function() {
+            check_firstname();
+        });
         $("#validatefrm").click(function() {
             check_firstname();
         });
-
         function check_firstname() {
             var full_name_val = $("#full_name").val();
 
-            var patt1 = /\b[0-9]/;
-            var result = full_name_val.search(patt1);
-            if ((full_name_val.length == "") || (result == 0)) {
+            var regexOnlyText = /^[a-zA-Z ]+$/;
+            if(full_name_val.length==""||regexOnlyText.test(full_name_val) != true)
+            {
                 $("#namecheck").show();
                 $("#namecheck").focus();
                 $("#namecheck").css("color", "red");
@@ -419,10 +445,12 @@
 
         }
         //validate email
+        $("#email").blur(function() {
+            check_email();
+        });
         $("#validatefrm").click(function() {
             check_email();
         });
-
         function check_email() {
             var email_val = $("#email").val();
             var v = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -440,10 +468,12 @@
             }
         }
         //validate password
+        $("#password").blur(function() {
+            check_passd();
+        });
         $("#validatefrm").click(function() {
             check_passd();
         });
-
         function check_passd() {
             var passd_val = $("#password").val();
             if ((passd_val.length == "") || (passd_val.length < 6)) {
@@ -458,10 +488,12 @@
         }
 
         //validate confirm password
+        $("#confirm_password").blur(function() {
+            check_cmfpassd();
+        });
         $("#validatefrm").click(function() {
             check_cmfpassd();
         });
-
         function check_cmfpassd() {
             var cmfpassd_val = $("#confirm_password").val();
             var passd_val = $("#password").val();
@@ -477,15 +509,18 @@
         }
 
         $("#validatefrm").click(function() {
+            err_check_member_id = true;
             err_check = true;
             err_check_email = true;
             err_check_psw = true;
             err_check_cmfpsd = true;
+            check_member_id();
             check_firstname();
             check_email();
             check_passd();
             check_cmfpassd();
-            if ((err_check == true)) {
+
+            if ((err_check == true)&&(err_check_member_id==true)&&(err_check_email==true)&&(err_check_psw==true)&&(err_check_cmfpsd==true)) {
                 return true;
             } else {
                 return false;
@@ -526,10 +561,12 @@
             }
         }
         //validate mobile Phone
+        $("#mobile_number").blur(function() {
+            check_phone();
+        });
         $("#validatefrm").click(function() {
             check_phone();
         });
-
         function check_phone() {
 
             var ph_val = $("#mobile_number").val();
@@ -545,10 +582,12 @@
             }
         }
         //validate Jobs History
+        $("#jobs_hostory").blur(function() {
+            check_jobhistory();
+        });
         $("#validatefrm").click(function() {
             check_jobhistory();
         });
-
         function check_jobhistory() {
 
             var jobhistory_val = $("#jobs_history").val();
@@ -563,10 +602,12 @@
             }
         }
         //validate file upload
+        $("#profile_image").change(function() {
+            check_file();
+        });
         $("#validatefrm").click(function() {
             check_file();
         });
-
         function check_file() {
 
             var file_val = $("#profile_image").val();

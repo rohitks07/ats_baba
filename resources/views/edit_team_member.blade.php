@@ -148,7 +148,7 @@
                                             <div class="form-group row">
                                                 <label for="" class="control-label col-lg-4">Mobile Phone<span style="color:red;">*</span></label>
                                                 <div class="col-lg-8">
-                                                    <input class="form-control" id="mobile_number" name="mobile_number" placeholder="" type="number" value="{{$data->mobile_number}}">
+                                                    <input class="form-control" id="mobile_number" name="mobile_number" placeholder="" maxlength="10" type="text" value="{{$data->mobile_number}}">
                                                     <span id="phcheck" name="phcheck">Enter your mobile number</span>
                                                 </div>
                                             </div>
@@ -157,7 +157,8 @@
                                             <div class="form-group row">
                                                 <label for="" class="control-label col-lg-4">Home Phone</label>
                                                 <div class="col-lg-8">
-                                                    <input class="form-control" id="phone" name="phone" placeholder="" type="number" value="{{$data->number}}">
+                                                    <input class="form-control" id="phone" name="phone" placeholder="" type="text"" maxlength="10" value="{{$data->number}}">
+                                                    <span id="homephcheck">Enter your mobile number</span>
                                                 </div>
                                             </div>
                                             <!--end of Home Phone -->
@@ -372,8 +373,7 @@
                                                 <label class="col-sm-4 control-label">Jobs History <span style="color:red;">*</span></label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control" id="jobs_history" name="jobs_history" style="max-width:50%; border: 1px solid #b3b3b3;">
-                                                        <option value="" selected="selected">Select Jobs History </option>
-                                                        <option value="yes"> Yes</option>
+                                                        <option value="yes">Yes</option>
                                                         <option value="no">No</option>
                                                     </select>
                                                     <span id="jobhistory" name="jobhistory">This field must not be empty</span>
@@ -533,6 +533,10 @@
 				var err_check_cmfpsd=true;
 
 				//validate name
+                $("#full_name").blur(function()
+                {
+                    check_firstname();
+                });
 				$("#validatefrm").click(function()
 				{
 					check_firstname();
@@ -541,9 +545,8 @@
 				{
 					var full_name_val=$("#full_name").val();
 					
-					var patt1 = /\b[0-9]/;
-					 var result = full_name_val.search(patt1);
-					if((full_name_val.length=="")||(result==0))
+					var regexOnlyText = /^[a-zA-Z ]+$/;
+					if(full_name_val.length==""||regexOnlyText.test(full_name_val) != true)
 					{
 						$("#namecheck").show();
 						$("#namecheck").focus();
@@ -558,6 +561,10 @@
 					
 				}
 				//validate email
+                $("#email").blur(function()
+                {
+                    check_email();
+                });
 				$("#validatefrm").click(function()
 				{
 					check_email();
@@ -582,6 +589,10 @@
 					}
 				}
                 //validate password
+                $("#password").blur(function()
+                {
+                    check_passd();
+                });
                 $("#validatefrm").click(function()
 				{
 					check_passd();
@@ -602,12 +613,11 @@
 						$("#passwordcheck").hide();
 					}
 				}
-				
-				
-				
-				
-				
 				//validate conforme pass
+                $("#confirm_password").blur(function()
+                {
+                    check_cmfpassd();
+                });
 				$("#validatefrm").click(function()
 				{
 					check_cmfpassd();
@@ -662,11 +672,13 @@
 				
 				$("#citycheck").hide();
 				$("#phcheck").hide();
+				$("#homephcheck").hide();
 				$("#jobhistory").hide();
 				$("#filecheck").hide();
 				
 				var err_city=true;
 				var err_ph=true;
+				var err_home_ph=true;
 				var err_jobhistory=true;
 				var err_file=true;
 				var err_state=true;
@@ -674,6 +686,10 @@
 				
 				
 				//Validation City
+				$("#city").blur(function()
+				{
+					check_loc();
+				});
 				$("#validatefrm").click(function()
 				{
 					check_loc();
@@ -695,6 +711,10 @@
 					}
 				}
 				//validate mobile Phone
+				$("#mobile_number").blur(function()
+				{
+					check_phone();
+				});
 				$("#validatefrm").click(function()
 				{
 					check_phone();
@@ -717,7 +737,46 @@
 						return false;
 					}
 				}
-				//validate Jobs History
+				//validate Home Phone
+				$("#phone").blur(function()
+				{
+					check_home_phone();
+				});
+				$("#validatefrm").click(function()
+				{
+					check_home_phone();
+				});
+				function check_home_phone()
+				{
+					
+					var home_ph_val=$("#phone").val();
+					var home_phoneno=new RegExp(/^[0-9-+]+$/);
+                    if(home_ph_val!="")
+                    {
+                        if(home_ph_val.match(/^(\+\d{1,3}[- ]?)?\d{10}$/))
+                        {
+                            $("#homephcheck").hide();
+                        }
+                        else
+                        {
+                            $("#homephcheck").show();
+                            $("#homephcheck").focus();
+                            $("#homephcheck").css("color","red");
+                            err_home_ph=false;
+                            return false;
+                        }
+                    }
+                    else{
+                           err_home_ph=true;
+                            $("#homephcheck").hide();
+                            return false;
+                        }
+				}
+                //validate Jobs History
+				$("#jobs_history").blur(function()
+				{
+					check_jobhistory();
+				});
 				$("#validatefrm").click(function()
 				{
 					check_jobhistory();
@@ -740,6 +799,10 @@
 					}
 				}
 				//validate file upload
+                $("#profile_image").change(function()
+				{
+					check_file();
+				});
                 $("#validatefrm").click(function()
 				{
 					check_file();
@@ -789,14 +852,16 @@
 				{
 					err_file=true;
 					err_ph=true;
+                    err_home_ph=true;
 					err_city=true;
 					err_jobhistory=true;
 					err_state=true;
 					check_file();
 					check_phone();
+					check_home_phone();
 					check_loc();
 					check_state();
-					if((err_ph==true)&&(err_city==true)&&(err_file==true)&&(err_jobhistory=true)&&(err_state=true))
+					if((err_ph==true)&&(err_home_ph==true)&&(err_city==true)&&(err_file==true)&&(err_jobhistory=true)&&(err_state=true))
 					{
 						return true;
 					}

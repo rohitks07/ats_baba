@@ -108,7 +108,7 @@
                                                         <td>{{$application['job_code']}}</td>
                                                         <td><a href="{{url('employer/dashboard')}}">{{$application['job_title']}}</a></td>
                                                         <td>{{$application['job_client_name']}}</td>
-                                                        <td>{{$application['location']}}</td>
+                                                        <td>{{$application['job_city']}},&nbsp;{{$application['job_state']}}</td>
                                                     
                                                         <?php $vis=$application['job_visa'];
                                                         $plus_visa=substr_count("$vis",",");
@@ -117,7 +117,7 @@
                                                         <td onmouseover="visa_type({{$id}});"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;{{$plus_visa}}+</span><span id="data2{{$id}}" style="display:none">{{$application['job_visa']}}</span></td>
                                                         <td>{{$application['pay_min']}}-{{$application['pay_max']}}</td>
                                                         <td>{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
-                                                        <td>{{$application['can_location']}}</td>
+                                                        <td>{{$application['seeker_city']}},&nbsp;{{$application['seeker_state']}}</td>
                                                         <td>{{$application['can_visa']}}</td>
                                                         <?php $applied_date=date('m-d-Y',strtotime($application['applied_date'])); ?>
                                                         <td>{{$applied_date}}</td>
@@ -161,8 +161,8 @@
                                                                                 <option>In-Person</option>
                                                                             </select>
                                                                         </div>
-                                                                        <input type="hidden" name="interview_type" value="{{$application['job_code']}}">
-                                                                        <input type="hidden" name="candiate_name" value="{{$application['can_first_name']}} {{$application['can_last_name']}}">
+                                                                        <input type="hidden" name="interview_type" value="{{$application['ID']}}">
+                                                                        <input type="hidden" name="candiate_name" value="{{$application['Seeker_id']}}">
                                                                         <div class="form-group">
                                                                             <label for="email">Instruction</label>
                                                                             <input type="text" class="form-control" id="" placeholder="" name="instruction">

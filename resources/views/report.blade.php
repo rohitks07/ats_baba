@@ -164,8 +164,10 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title">Daily Report: {{$toReturn['week_date'][0]}} -
-                                                {{$toReturn['week_date'][11]}}</h3>
+                                            <h3 class="card-title">Daily Report:
+                                                {{$toReturn['week_report'][0]['week_date']}} -
+                                                {{$toReturn['week_report'][11]['week_date']}}
+                                            </h3>
                                             <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
                                                     <label class="sr-only" for="exampleInputEmail2">Start Date</label>
@@ -192,184 +194,146 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Date</th>
-                                                                    <th>Jobs Created&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
-                                                                    <th>Jobs Assigned&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
-                                                                    <th>Candidate Created&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
-                                                                    <th>Application Submitted&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
-                                                                    <th>Client Submittal&nbsp;&nbsp;&nbsp;→</th>
-                                                                    <th>Action view</th>
+                                                                    <th>Jobs Created</th>
+                                                                    
+                                                                    <th>Jobs Assigned</th>
+                                                                    
+                                                                    <th>Candidate Created</th>
+                                                                    
+                                                                    <th>Application Submitted</th>
+                                                                    
+                                                                    <th>Client Submittal</th>
+                                                                    <th>Group Report</th>
+                                                                    
                                                                 </tr>
                                                             </thead>
-                                                            <tbody> 
+                                                            <tbody>
 
+                                                                @foreach ( $toReturn['week_report'] as $key =>
+                                                                $week_report)
                                                                 <tr>
-                                                                    <td>{{$toReturn['week_date'][0]}}</td>
+                                                                    <td>{{$week_report['week_date']}}</td>
+                                                                    <?php $date_val=$week_report['week_date']; ?>
 
-                                                                    <td>{{$toReturn['job_created'][0]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][0]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][0]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][0]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][0]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][1]}}</td>
-                                                                    <td>{{$toReturn['job_created'][1]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][1]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][1]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][1]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][1]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][2]}}</td>
-                                                                    <td>{{$toReturn['job_created'][2]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][2]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][2]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][2]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][2]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][3]}}</td>
-                                                                    <td>{{$toReturn['job_created'][3]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][3]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][3]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][3]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][3]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][4]}}</td>
-                                                                    <td>{{$toReturn['job_created'][4]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][4]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][4]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][4]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][4]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][5]}}</td>
-                                                                    <td>{{$toReturn['job_created'][5]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][5]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][5]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][5]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][5]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
+                                                                    <td>{{$week_report['job_created']}}</td>
+                                                                    <td>{{$week_report['post_assign']}}</td>
+                                                                    <td>{{$week_report['candidate_created']}}</td>
+                                                                    <td>{{$week_report['application_submitted']}}</td>
+                                                                    <td>{{$week_report['client_submittal']}}</td>
 
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][6]}}</td>
-                                                                    <td>{{$toReturn['job_created'][6]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][6]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][6]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][6]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][6]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
+                                                                    <td>
+                                                                        <a href="" data-toggle="modal"
+                                                                            data-target=".bd-example-modal-lg5{{$date_val}}"><i
+                                                                                class="fa fa-edit"
+                                                                                aria-hidden="true"></i></a>
 
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][7]}}</td>
-                                                                    <td>{{$toReturn['job_created'][7]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][7]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][7]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][7]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][7]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
+                                                                    </td>
+                                                                    <div class="modal fade bd-example-modal-lg5{{$date_val}}"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="myLargeModalLabe1"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div class="container-fluid">
+                                                                                    
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-11">
+                                                                                            <h3>Group Report</h3>
+                                                                                        </div>
+                                                                                        <div class="col-md-1 mt-4">
+                                                                                            
+                                                                                            <a href=""data-dismiss="modal" ><i class="fa ion-android-close"></i></a>
+                                                                                            </h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h4>Date</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Jobs Created</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Jobs Assigned</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Candidate Created</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Application Submitted</h4>
+                                                                                        </div>
+                                                                                    
+                                                                                    
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Client Submittal </h4>
+                                                                                        </div>
 
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][8]}}</td>
-                                                                    <td>{{$toReturn['job_created'][8]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][8]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][8]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][8]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][8]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
+                                                                                    </div>
+                                                                                    
+                                                                                    @foreach (@$toReturn['team_member']
+                                                                                    as $item)
+                                                                                    <?php $group_id=$item['type_ID'];
+                                                                                        
+                                                                                          $new_val=$week_report['week_date'];
+                                                                                          
+                                                                                          $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
+                                                                                          $date = strtotime($newDate); 
+                                                                                          $hi=date('Y-m-d h:i:s', $date); 
+                                                                                          $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                          $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
+                                                                                           $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
+                                                                                          $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
+                                                                                          $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
 
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][9]}}</td>
-                                                                    <td>{{$toReturn['job_created'][9]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][9]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][9]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][9]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][9]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][10]}}</td>
-                                                                    <td>{{$toReturn['job_created'][10]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][10]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][10]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][10]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][10]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
+                                                                                    ?>
+                                                                                    <div class="row">
+                                                                                        
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6>{{$item['type_name']}}
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">{{$job_create}}</h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">{{$job_assigned}}</h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">{{$candidate_create}}</h6>
+                                                                                        </div>
+                                                                                        
+                                                                                        
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">{{$application_submitted}}</h6>
+                                                                                        </div>
+                                                                                        
+                                                                                        
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">{{$client_submittal}}</h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                 
+                                                                                    @endforeach
 
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['week_date'][11]}}</td>
-                                                                    <td>{{$toReturn['job_created'][11]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['post_assign'][11]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['candidate_created'][11]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['application_submitted'][11]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
-                                                                    <td>{{$toReturn['client_submittal'][11]}}</td>
-                                                                    <td><a href="" style="font-size:25px;margin-left:35px;"><i class="fa md-folder-shared" aria-hidden="true"></i></a></td>
 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </tr>
+                                                                @endforeach
+
 
 
                                                             </tbody>
@@ -396,8 +360,10 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title">Weekly Report: {{$toReturn['week_week1']}} -
-                                                {{$toReturn['week_week12']}}</h3>
+                                            <h3 class="card-title">Weekly Report:
+                                                {{$toReturn['weekly_show'][0]['week_week1']}} -
+                                                {{$toReturn['weekly_show'][11]['week_week1']}}
+                                            </h3>
                                             <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
                                                     <label class="sr-only" for="exampleInputEmail2">Start Date</label>
@@ -431,95 +397,20 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                @foreach ( $toReturn['weekly_show'] as $key =>
+                                                                $week_report)
+                                                                <tr>
+                                                                    <td>{{$week_report['week_week1']}}</td>
+                                                                    <td>{{$week_report['job_created_weekly1']}}</td>
+                                                                    <td>{{$week_report['post_assign1']}}</td>
+                                                                    <td>{{$week_report['candidate_created1']}}</td>
+                                                                    <td>{{$week_report['application_submitted1']}}</td>
+                                                                    <td>{{$week_report['client_submittal1']}}</td>
+                                                                </tr>
+                                                                @endforeach
 
-                                                                <tr>
-                                                                <td>{{$toReturn['week_week1']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly1']}}</td>
-                                                                <td>{{$toReturn['post_assign1']}}</td>
-                                                                <td>{{$toReturn['candidate_created1']}}</td>
-                                                                <td>{{$toReturn['application_submitted1']}}</td>
-                                                                <td>{{ $toReturn['client_submittal1']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <td>{{$toReturn['week_week2']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly2']}}</td>
-                                                                <td>{{$toReturn['post_assign2']}}</td>
-                                                                <td>{{$toReturn['candidate_created2']}}</td>
-                                                                <td>{{$toReturn['application_submitted2']}}</td>
-                                                                <td>{{ $toReturn['client_submittal2']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <td>{{$toReturn['week_week3']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly3']}}</td>
-                                                                <td>{{$toReturn['post_assign3']}}</td>
-                                                                <td>{{$toReturn['candidate_created3']}}</td>
-                                                                <td>{{$toReturn['application_submitted3']}}</td>
-                                                                <td>{{ $toReturn['client_submittal3']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <td>{{$toReturn['week_week4']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly4']}}</td>
-                                                                <td>{{$toReturn['post_assign4']}}</td>
-                                                                <td>{{$toReturn['candidate_created4']}}</td>
-                                                                <td>{{$toReturn['application_submitted4']}}</td>
-                                                                <td>{{ $toReturn['client_submittal4']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['week_week5']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly5']}}</td>
-                                                                <td>{{$toReturn['post_assign5']}}</td>
-                                                                <td>{{$toReturn['candidate_created5']}}</td>
-                                                                <td>{{$toReturn['application_submitted5']}}</td>
-                                                                <td>{{ $toReturn['client_submittal5']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['week_week6']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly6']}}</td>
-                                                                <td>{{$toReturn['post_assign6']}}</td>
-                                                                <td>{{$toReturn['candidate_created6']}}</td>
-                                                                <td>{{$toReturn['application_submitted6']}}</td>
-                                                                <td>{{ $toReturn['client_submittal6']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['week_week7']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly7']}}</td>
-                                                                <td>{{$toReturn['post_assign7']}}</td>
-                                                                <td>{{$toReturn['candidate_created7']}}</td>
-                                                                <td>{{$toReturn['application_submitted7']}}</td>
-                                                                <td>{{ $toReturn['client_submittal7']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['week_week8']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly8']}}</td>
-                                                                <td>{{$toReturn['post_assign8']}}</td>
-                                                                <td>{{$toReturn['candidate_created8']}}</td>
-                                                                <td>{{$toReturn['application_submitted8']}}</td>
-                                                                <td>{{ $toReturn['client_submittal8']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['week_week9']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly9']}}</td>
-                                                                <td>{{$toReturn['post_assign9']}}</td>
-                                                                <td>{{$toReturn['candidate_created9']}}</td>
-                                                                <td>{{$toReturn['application_submitted9']}}</td>
-                                                                <td>{{ $toReturn['client_submittal9']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['week_week10']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly10']}}</td>
-                                                                <td>{{$toReturn['post_assign10']}}</td>
-                                                                <td>{{$toReturn['candidate_created10']}}</td>
-                                                                <td>{{$toReturn['application_submitted10']}}</td>
-                                                                <td>{{ $toReturn['client_submittal10']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['week_week11']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly11']}}</td>
-                                                                <td>{{$toReturn['post_assign11']}}</td>
-                                                                <td>{{$toReturn['candidate_created11']}}</td>
-                                                                <td>{{$toReturn['application_submitted11']}}</td>
-                                                                <td>{{ $toReturn['client_submittal11']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['week_week12']}}</td>
-                                                                <td>{{$toReturn['job_created_weekly12']}}</td>
-                                                                <td>{{$toReturn['post_assign12']}}</td>
-                                                                <td>{{$toReturn['candidate_created12']}}</td>
-                                                                <td>{{$toReturn['application_submitted12']}}</td>
-                                                                <td>{{$toReturn['client_submittal12']}}</td>
-                                                                </tr>
+
+
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -542,8 +433,10 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title">Monthly Report: {{$toReturn['month_week_one1']}} -
-                                                {{$toReturn['month_week_one12']}}</h3>
+                                            <h3 class="card-title">Monthly
+                                                Report:{{$toReturn['monthly'][1]['month_week_one1']}} -
+                                                {{$toReturn['monthly'][11]['month_week_one1']}}
+                                            </h3>
                                             {{-- <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
                                                     <label class="sr-only" for="exampleInputEmail2">Start Date</label>
@@ -575,105 +468,20 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                @foreach ($toReturn['monthly'] as $key => $monthly)
+
                                                                 <tr>
-                                                                    <td>{{$toReturn['month_week_one1']}}</td>
-                                                                    <td>{{$toReturn['job_created_monthly1']}}</td>
-                                                                    <td>{{$toReturn['post_assign_month1']}}</td>
-                                                                    <td>{{ $toReturn['candidate_created_monthly1']}}
+                                                                    <td>{{$monthly['month_week_one1']}}</td>
+                                                                    <td>{{$monthly['job_created_monthly1']}}</td>
+                                                                    <td>{{$monthly['post_assign_month1']}}</td>
+                                                                    <td>{{ $monthly['candidate_created_monthly1']}}
                                                                     </td>
-                                                                    <td>{{$toReturn['application_submitted_monthly1']}}
+                                                                    <td>{{$monthly['application_submitted_monthly1']}}
                                                                     </td>
-                                                                    <td>{{$toReturn['client_submittal_monthly1']}}</td>
+                                                                    <td>{{$monthly['client_submittal_monthly1']}}</td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['month_week_one2']}}</td>
-                                                                    <td>{{$toReturn['job_created_monthly2']}}</td>
-                                                                    <td>{{$toReturn['post_assign_month2']}}</td>
-                                                                    <td>{{ $toReturn['candidate_created_monthly2']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['application_submitted_monthly2']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['client_submittal_monthly2']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['month_week_one3']}}</td>
-                                                                    <td>{{$toReturn['job_created_monthly3']}}</td>
-                                                                    <td>{{$toReturn['post_assign_month3']}}</td>
-                                                                    <td>{{ $toReturn['candidate_created_monthly3']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['application_submitted_monthly3']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['client_submittal_monthly3']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['month_week_one4']}}</td>
-                                                                    <td>{{$toReturn['job_created_monthly4']}}</td>
-                                                                    <td>{{$toReturn['post_assign_month4']}}</td>
-                                                                    <td>{{ $toReturn['candidate_created_monthly4']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['application_submitted_monthly4']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['client_submittal_monthly4']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['month_week_one5']}}</td>
-                                                                <td>{{$toReturn['job_created_monthly5']}}</td>
-                                                                <td>{{$toReturn['post_assign_month5']}}</td>
-                                                                <td>{{ $toReturn['candidate_created_monthly5']}}</td>
-                                                                <td>{{$toReturn['application_submitted_monthly5']}}</td>
-                                                                <td>{{$toReturn['client_submittal_monthly5']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['month_week_one6']}}</td>
-                                                                <td>{{$toReturn['job_created_monthly6']}}</td>
-                                                                <td>{{$toReturn['post_assign_month6']}}</td>
-                                                                <td>{{ $toReturn['candidate_created_monthly6']}}</td>
-                                                                <td>{{$toReturn['application_submitted_monthly6']}}</td>
-                                                                <td>{{$toReturn['client_submittal_monthly6']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['month_week_one7']}}</td>
-                                                                <td>{{$toReturn['job_created_monthly7']}}</td>
-                                                                <td>{{$toReturn['post_assign_month7']}}</td>
-                                                                <td>{{ $toReturn['candidate_created_monthly7']}}</td>
-                                                                <td>{{$toReturn['application_submitted_monthly7']}}</td>
-                                                                <td>{{$toReturn['client_submittal_monthly7']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['month_week_one8']}}</td>
-                                                                <td>{{$toReturn['job_created_monthly8']}}</td>
-                                                                <td>{{$toReturn['post_assign_month8']}}</td>
-                                                                <td>{{ $toReturn['candidate_created_monthly8']}}</td>
-                                                                <td>{{$toReturn['application_submitted_monthly8']}}</td>
-                                                                <td>{{$toReturn['client_submittal_monthly8']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['month_week_one9']}}</td>
-                                                                <td>{{$toReturn['job_created_monthly9']}}</td>
-                                                                <td>{{$toReturn['post_assign_month9']}}</td>
-                                                                <td>{{ $toReturn['candidate_created_monthly9']}}</td>
-                                                                <td>{{$toReturn['application_submitted_monthly9']}}</td>
-                                                                <td>{{$toReturn['client_submittal_monthly9']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['month_week_one10']}}</td>
-                                                                <td>{{$toReturn['job_created_monthly10']}}</td>
-                                                                <td>{{$toReturn['post_assign_month10']}}</td>
-                                                                <td>{{ $toReturn['candidate_created_monthly10']}}</td>
-                                                                <td>{{$toReturn['application_submitted_monthly10']}}
-                                                                </td>
-                                                                <td>{{$toReturn['client_submittal_monthly10']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['month_week_one11']}}</td>
-                                                                <td>{{$toReturn['job_created_monthly11']}}</td>
-                                                                <td>{{$toReturn['post_assign_month11']}}</td>
-                                                                <td>{{ $toReturn['candidate_created_monthly11']}}</td>
-                                                                <td>{{$toReturn['application_submitted_monthly11']}}
-                                                                </td>
-                                                                <td>{{$toReturn['client_submittal_monthly11']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['month_week_one12']}}</td>
-                                                                <td>{{$toReturn['job_created_monthly12']}}</td>
-                                                                <td>{{$toReturn['post_assign_month12']}}</td>
-                                                                <td>{{ $toReturn['candidate_created_monthly12']}}</td>
-                                                                <td>{{$toReturn['application_submitted_monthly12']}}
-                                                                </td>
-                                                                <td>{{$toReturn['client_submittal_monthly12']}}</td>
-                                                                </tr>
+                                                                @endforeach
+
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -696,8 +504,9 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title">Yearly Report: {{$toReturn['year_week_one1']}} -
-                                                {{$toReturn['year_week_one12']}}</h3>
+
+                                            <h3 class="card-title">Yearly Report: -
+                                            </h3>
                                             {{-- <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
                                                     <label class="sr-only" for="exampleInputEmail2">Start Date</label>
@@ -729,99 +538,21 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                @foreach ($toReturn['yearly'] as $key => $yearly)
+
 
                                                                 <tr>
-                                                                    <td>{{$toReturn['year_week_one1']}}</td>
-                                                                    <td>{{$toReturn['job_created_yerly1']}}</td>
-                                                                    <td>{{$toReturn['post_assign_year1']}}</td>
-                                                                    <td>{{$toReturn['candidate_created_yerly1']}}</td>
-                                                                    <td>{{$toReturn['application_submitted_yerly1']}}
+                                                                    <td>{{$yearly['month_week_one1']}}</td>
+                                                                    <td>{{$yearly['job_created_monthly1']}}</td>
+                                                                    <td>{{$yearly['post_assign_month1']}}</td>
+                                                                    <td>{{$yearly['candidate_created_monthly1']}}</td>
+                                                                    <td>{{$yearly['application_submitted_monthly1']}}
                                                                     </td>
-                                                                    <td>{{$toReturn['client_submittal_yerly1']}}</td>
+                                                                    <td>{{$yearly['client_submittal_monthly1']}}</td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['year_week_one2']}}</td>
-                                                                    <td>{{$toReturn['job_created_yerly2']}}</td>
-                                                                    <td>{{$toReturn['post_assign_year2']}}</td>
-                                                                    <td>{{$toReturn['candidate_created_yerly2']}}</td>
-                                                                    <td>{{$toReturn['application_submitted_yerly2']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['client_submittal_yerly2']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['year_week_one3']}}</td>
-                                                                    <td>{{$toReturn['job_created_yerly3']}}</td>
-                                                                    <td>0</td>
-                                                                    <td>{{$toReturn['candidate_created_yerly3']}}</td>
-                                                                    <td>{{$toReturn['application_submitted_yerly3']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['client_submittal_yerly3']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{$toReturn['year_week_one4']}}</td>
-                                                                    <td>{{$toReturn['job_created_yerly4']}}</td>
-                                                                    <td>0</td>
-                                                                    <td>{{$toReturn['candidate_created_yerly4']}}</td>
-                                                                    <td>{{$toReturn['application_submitted_yerly4']}}
-                                                                    </td>
-                                                                    <td>{{$toReturn['client_submittal_yerly4']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['year_week_one5']}}</td>
-                                                                <td>{{$toReturn['job_created_yerly5']}}</td>
-                                                                <td>0</td>
-                                                                <td>{{$toReturn['candidate_created_yerly5']}}</td>
-                                                                <td>{{$toReturn['application_submitted_yerly5']}}</td>
-                                                                <td>{{$toReturn['client_submittal_yerly5']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['year_week_one6']}}</td>
-                                                                <td>{{$toReturn['job_created_yerly6']}}</td>
-                                                                <td>0</td>
-                                                                <td>{{$toReturn['candidate_created_yerly6']}}</td>
-                                                                <td>{{$toReturn['application_submitted_yerly6']}}</td>
-                                                                <td>{{$toReturn['client_submittal_yerly6']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['year_week_one7']}}</td>
-                                                                <td>{{$toReturn['job_created_yerly7']}}</td>
-                                                                <td>0</td>
-                                                                <td>{{$toReturn['candidate_created_yerly7']}}</td>
-                                                                <td>{{$toReturn['application_submitted_yerly7']}}</td>
-                                                                <td>{{$toReturn['client_submittal_yerly7']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['year_week_one8']}}</td>
-                                                                <td>{{$toReturn['job_created_yerly8']}}</td>
-                                                                <td>0</td>
-                                                                <td>{{$toReturn['candidate_created_yerly8']}}</td>
-                                                                <td>{{$toReturn['application_submitted_yerly8']}}</td>
-                                                                <td>{{$toReturn['client_submittal_yerly8']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['year_week_one9']}}</td>
-                                                                <td>{{$toReturn['job_created_yerly9']}}</td>
-                                                                <td>0</td>
-                                                                <td>{{$toReturn['candidate_created_yerly9']}}</td>
-                                                                <td>{{$toReturn['application_submitted_yerly9']}}</td>
-                                                                <td>{{$toReturn['client_submittal_yerly9']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['year_week_one10']}}</td>
-                                                                <td>{{$toReturn['job_created_yerly10']}}</td>
-                                                                <td>0</td>
-                                                                <td>{{$toReturn['candidate_created_yerly10']}}</td>
-                                                                <td>{{$toReturn['application_submitted_yerly10']}}</td>
-                                                                <td>{{$toReturn['client_submittal_yerly10']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['year_week_one11']}}</td>
-                                                                <td>{{$toReturn['job_created_yerly11']}}</td>
-                                                                <td>0</td>
-                                                                <td>{{$toReturn['candidate_created_yerly11']}}</td>
-                                                                <td>{{$toReturn['application_submitted_yerly11']}}</td>
-                                                                <td>{{$toReturn['client_submittal_yerly11']}}</td>
-                                                                </tr>
-                                                                <td>{{$toReturn['year_week_one12']}}</td>
-                                                                <td>{{$toReturn['job_created_yerly12']}}</td>
-                                                                <td>0</td>
-                                                                <td>{{$toReturn['candidate_created_yerly12']}}</td>
-                                                                <td>{{$toReturn['application_submitted_yerly12']}}</td>
-                                                                <td>{{$toReturn['client_submittal_yerly12']}}</td>
-                                                                </tr>
+                                                                @endforeach
+
+
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -858,8 +589,6 @@
 <!--SCRIPT FOR SEARCH-->
 
 <script>
-
-
     //daily
     function daily() {
 
@@ -909,7 +638,7 @@
                                                                 <tr>
                                                                 <td>` + one_first + `&nbsp;-&nbsp;` + one_second + `</td>
                                                                 <td>` + data.job_created_days + `</td>
-                                                                <td>` + data.post_assign_days +`</td>
+                                                                <td>` + data.post_assign_days + `</td>
                                                                 <td>` + data.candidate_created_days + `</td>
                                                                 <td>` + data.application_submitted_days + `</td>
                                                                 <td>` + data.client_submittal_days + `</td>
@@ -939,7 +668,7 @@
 
 
     //weekly
-    function weekly(){
+    function weekly() {
         $("#hide_week").hide();
         $('#show_week').empty();
         // console.log('work');
@@ -986,7 +715,7 @@
                                                                 <tr>
                                                                 <td>` + one_first + `&nbsp;-&nbsp;` + one_second + `</td>
                                                                 <td>` + data.job_created_days + `</td>
-                                                                <td>` +data.post_assign_days+ `</td>
+                                                                <td>` + data.post_assign_days + `</td>
                                                                 <td>` + data.candidate_created_days + `</td>
                                                                 <td>` + data.application_submitted_days + `</td>
                                                                 <td>` + data.client_submittal_days + `</td>
@@ -996,7 +725,7 @@
                                                             </table>
                                                             </div>  `;
                 $('#show_week').append(value);
-                
+
 
                 //  $.each(data, function(index, value) {
                 //     // $('#state_text').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");

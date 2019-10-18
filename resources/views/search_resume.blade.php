@@ -130,10 +130,10 @@
                                                 <thead>
                                                     <tr>                                                   
 														<th width="10%">Name</th>
-														<th>DOB</th>
+														<th>BIO</th>
 														<th width="10%">Location</th>
 														<th>Visa</th>
-														<th>Exp. (Year)</th>
+														<th>Exp. (Yr.)</th>
 														<th>Education</th>
 														<th>Email (H)</th>
 														<th>Mobile</th> 
@@ -145,23 +145,31 @@
                                                 <tbody id="myTable">  
                                                 @foreach($personal as $key => $value)  
 												<?php $id=$personal[$key]->id;
-														// $start_date=$personal[$key]->seeker_experience_start;
-														// $end_date=$personal[$key]->seeker_experience_end;
-														// 	$datetime1 = strtotime(date('Y-m-d', strtotime($start_date)));
-														// 	 $datetime2 = strtotime(date('Y-m-d', strtotime($end_date)));
-														// 	 $secs = $datetime2 - $datetime1;// == <seconds between the two times>
-														// 	 $days = $secs / 86400;
-														// 	 $exp_month=floor($days/30);
-														// 	 $exp_y   ears=floor($exp_month/12);
+														$dob=$personal[$key]->dob;
+														$today_date=date('Y-m-d');
+															$datetime1 = strtotime(date('Y-m-d', strtotime($dob)));
+															 $datetime2 = strtotime(date('Y-m-d', strtotime($today_date)));
+															 $secs = $datetime2 - $datetime1;// == <seconds between the two times>
+															 $days = $secs / 86400;
+															 $exp_month=floor($days/30);
+                                                             $age=floor($exp_month/12);
+                                                                 
                                                         ?>                                                                                         
 													<tr>										
 														<td>{{$personal[$key]->first}} {{$personal[$key]->last}}</td>
 														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
-														<td>{{$dob}}</td>
+														<!-- <td>{{$dob}}</td> -->
+
+                                                        <td>@if($personal[$key]->can_gender=="male")
+                                                        @if(@$age!="0")M {{$age}}@endif
+                                                        @else
+                                                        @if(@$age!="0")F {{$age}}@endif
+                                                        @endif
+                                                        </td>
 														<td>{{$personal[$key]->city}}, &nbsp;{{$personal[$key]->state}}</td>
 														<td>{{$personal[$key]->visa}}</td>
 														@if($personal[$key]->total_experience)
-														<td>{{$personal[$key]->total_experience}}Years</td>
+														<td>{{$personal[$key]->total_experience}}+</td>
 														@else
 														<td>No experience </td>
 														@endif

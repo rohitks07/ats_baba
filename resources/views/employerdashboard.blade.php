@@ -123,13 +123,13 @@
     <div class="content-page">
         <div class="content">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <div class="mini-stat" style="background-color:#317eeb; border-radius:10px;">
                         <span class="mini-stat" style="margin-bottom: 0px;">
                                     <i class="fa fa-comments-o fa-1x" style="float: left; margin-top:1em;"></i></span>
                         <div class="mini-stat-info text-right text-dark">
                             <span>{{$toReturn['one_day_job']}} Jobs</span>
-                            <p style="color: #fff;">Open Today !!</p>
+                            <p style="color: #fff;">Opened Today !!</p>
                         </div>
                         <div class="panel-footer">
                             <a href="{{url('employer/posted_jobs')}}"><span class="pull-left" style="color:#428bca;">View Details</span>
@@ -137,13 +137,41 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
+                    <div class="mini-stat" style="background-color:#317eeb; border-radius:10px;">
+                        <span class="mini-stat" style="margin-bottom: 0px;">
+                                    <i class="fa fa-comments-o fa-1x" style="float: left; margin-top:1em;"></i></span>
+                        <div class="mini-stat-info text-right text-dark">
+                            <span>{{$toReturn['one_day_job']}} Jobs</span>
+                            <p style="color: #fff;">Total Jobs !!</p>
+                        </div>
+                        <div class="panel-footer">
+                            <a href="{{url('employer/posted_jobs')}}"><span class="pull-left" style="color:#428bca;">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right" style="color:#317eeb;margin-top:6%;font-size: 20px;"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
                     <div class="mini-stat" style="background-color:#d9534f; border-radius:10px;">
                         <span class="mini-stat" style="margin-bottom: 0px;">
                                     <i class="fa fa-tasks fa-1x" style="float: left; margin-top:1em;"></i></span>
                         <div class="mini-stat-info text-right text-dark">
-                            <span>{{$toReturn['total_application']}} Apps</span>
-                            <p style="color: #fff;">Received Today !</p>
+                            <span>{{$toReturn['total_application']}} Application</span>
+                            <p style="color: #fff;">Received Today !!</p>
+                        </div>
+                        <div class="panel-footer">
+                            <a href="{{url('employer/Application')}}"><span class="pull-left" style="color:#d9534f">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right" style="color:#d9534f;margin-top:6%;font-size: 20px;"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="mini-stat" style="background-color:#d9534f; border-radius:10px;">
+                        <span class="mini-stat" style="margin-bottom: 0px;">
+                                    <i class="fa fa-tasks fa-1x" style="float: left; margin-top:1em;"></i></span>
+                        <div class="mini-stat-info text-right text-dark">
+                            <span>{{$toReturn['total_application']}} Application</span>
+                            <p style="color: #fff;">Total Application !!</p>
                         </div>
                         <div class="panel-footer">
                             <a href="{{url('employer/Application')}}"><span class="pull-left" style="color:#d9534f">View Details</span>
@@ -171,7 +199,7 @@
                                     <i class="fa fa-share-alt fa-1x" style="float: left; margin-top:1em;"></i></span>
                         <div class="mini-stat-info text-right text-dark">
                             <span>{{$toReturn['total_resume']}} Resumes</span>
-                            <p style="color: #fff;">Submitted !</p>
+                            <p style="color: #fff;">Submitted !!</p>
                         </div>
                         <div class="panel-footer">
                             <a href="{{url('employer/Application')}}"><span class="pull-left" style="color:#5cb85c;">View Details</span>
@@ -179,35 +207,61 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <div class="mini-stat" style="background-color:#d35400; border-radius:10px;">
                         <span class="mini-stat" style="margin-bottom: 0px;">
-                                    <i class="fa fa-share-alt fa-1x" style="float: left; margin-top:1em;"></i></span>
+                            <i class="fa fa-share-alt fa-1x" style="float: left; margin-top:1em;"></i></span>
                         <div class="mini-stat-info text-right text-dark">
                         <span>{{$toReturn['tota_interview']}} Interview<span>
                             <p style="color: #fff;font-size:15px;">Happening Today !</p>
                         </div>
                         <div class="panel-footer">
-                            
-
-                            <a href="{{url('employer/dashboard/interview-meeting')}}"><span class="pull-left"
-                                style="color:#d35400 ;">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"
-                                    style="color:#d35400 ;margin-top:6%;font-size: 20px;"></i></span></a>
+                            <a href="{{url('employer/dashboard/interview-meeting')}}"><span class="pull-left"style="color:#d35400 ;">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right" style="color:#d35400 ;margin-top:6%;font-size: 20px;"></i></span></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
+                    <div class="mini-stat" style="background-color:#d35400; border-radius:10px;">
+                        <span class="mini-stat" style="margin-bottom: 0px;">
+                            <i class="fa fa-share-alt fa-1x" style="float: left; margin-top:1em;"></i></span>
+                        <div class="mini-stat-info text-right text-dark">
+                        <span>{{$toReturn['tota_interview']}} Interview<span>
+                            <p style="color: #fff;font-size:15px;">Total Interview!!</p>
+                        </div>
+                        <div class="panel-footer">
+                            <a href="{{url('employer/dashboard/interview-meeting')}}"><span class="pull-left"style="color:#d35400 ;">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right" style="color:#d35400 ;margin-top:6%;font-size: 20px;"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
                     <div class="mini-stat" style="background-color:#a569bd; border-radius:10px;">
                         <span class="mini-stat" style="margin-bottom: 0px;">
                                     <i class="fa fa-calendar fa-1x" style="float: left; margin-top:1em;"></i></span>
                         <div class="mini-stat-info text-right text-dark">
                         <span>{{$toReturn['total_meeting']}} Meeting</span>
-                            <p style="color: #fff;">Happening Today !</p>
+                            <p style="color: #fff;">Happening Today !!</p>
                         </div>
                         <div class="panel-footer">
                            
 
+                            <a href="{{url('employer/dashboard/interview-meeting')}}"><span class="pull-left"
+                                style="color:#a569bd ;">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"
+                                    style="color:#a569bd ;margin-top:6%;font-size: 20px;"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="mini-stat" style="background-color:#a569bd; border-radius:10px;">
+                        <span class="mini-stat" style="margin-bottom: 0px;">
+                                    <i class="fa fa-calendar fa-1x" style="float: left; margin-top:1em;"></i></span>
+                        <div class="mini-stat-info text-right text-dark">
+                        <span>{{$toReturn['total_meeting']}} Meeting</span>
+                            <p style="color: #fff;">Total Meeting !!</p>
+                        </div>
+                        <div class="panel-footer">
                             <a href="{{url('employer/dashboard/interview-meeting')}}"><span class="pull-left"
                                 style="color:#a569bd ;">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"
