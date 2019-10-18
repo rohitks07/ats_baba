@@ -62,7 +62,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Education</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Education</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -87,21 +87,21 @@
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">City</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="city" name="city"  placeholder="City" value="" required>
+   <input class="form-control " type="text" id="city" name="city"  placeholder="City" value="{{$education['city']}}" required>
    <span id="cityerror" class="text-danger"></span>
    </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">Country</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="country" name="country"  placeholder="Country" value="" required>
+   <input class="form-control " type="text" id="country" name="country"  placeholder="Country" value="{{$education['country']}}" required>
    <span id="countryerror" class="text-danger"></span>
    </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">Year of Completion</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="completion_year" name="completion_year"  placeholder="Year of Completion" value="" required>
+   <input class="form-control " type="text" id="completion_year" name="completion_year"  placeholder="Year of Completion" value="{{$education['completion_year']}}" required>
    <span id="completion_yearerror" class="text-danger"></span> 
   </div>
     </div>
@@ -131,27 +131,27 @@
       </div>
       <div class="modal-body">
      
-            <form class="cmxform form-horizontal tasi-form" onsubmit="return validation1()" action="{{url('employer/employer_edit_education/'.$id.'/'.$seekerid)}}"   method="post" >
+            <form class="cmxform form-horizontal tasi-form" onsubmit="return validation1()" action="{{url('employer/employer_edit_education/add')}}"   method="post" >
             {{csrf_field()}}    
             <div class="form-group row">
                 <label for="" class="control-label col-lg-4">Degree</label>
                 <div class="col-lg-8">
    <input class="form-control" type="hidden" id="seeker_ID" name="seeker_ID" value="{{$education['seeker_ID']}}">
-   <input class="form-control" type="text" id="degree_title" name="degree_title"  placeholder="Degree" value="{{$education['degree_title']}}"required>
+   <input class="form-control" type="text" id="degree_title" name="degree_title"  placeholder="Degree" value=""required>
    <span id="degree_titleerror" class="text-danger"></span> 
   </div>
     </div>
     <div  class="form-group row">
    <label for="" class="control-label col-lg-4">Institute</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="institude" name="institude"  placeholder="Institute" value="{{$education['institude']}}"required>
+   <input class="form-control " type="text" id="institude" name="institude"  placeholder="Institute" value=""required>
    <span id="institudeerror" class="text-danger"></span>  
   </div>
     </div>
     <div class="form-group row">
    <label for="" class="control-label col-lg-4">City</label>
    <div class="col-lg-8">
-   <input class="form-control " type="text" id="city" name="city"  placeholder="City" value="{{$education['city']}}"required>
+   <input class="form-control " type="text" id="city" name="city"  placeholder="City" value=""required>
    <span id="cityerror" class="text-danger"></span>   
   </div>
     </div>
