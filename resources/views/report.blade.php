@@ -362,7 +362,7 @@
                                         <div class="card-header">
                                             <h3 class="card-title">Weekly Report:
                                                 {{$toReturn['weekly_show'][0]['week_week1']}} -
-                                                {{$toReturn['weekly_show'][11]['week_week1']}}
+                                                {{$toReturn['weekly_show'][5]['week_week1']}}
                                             </h3>
                                             <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
@@ -401,11 +401,11 @@
                                                                 $week_report)
                                                                 <tr>
                                                                     <td>{{$week_report['week_week1']}}</td>
-                                                                    <td>{{$week_report['job_created_weekly1']}}</td>
-                                                                    <td>{{$week_report['post_assign1']}}</td>
-                                                                    <td>{{$week_report['candidate_created1']}}</td>
-                                                                    <td>{{$week_report['application_submitted1']}}</td>
-                                                                    <td>{{$week_report['client_submittal1']}}</td>
+                                                                    <td>{{$week_report['job_created_week_wise']}}</td>
+                                                                    <td>{{$week_report['post_assign_week_wise']}}</td>
+                                                                    <td>{{$week_report['candidate_created_week_wise']}}</td>
+                                                                    <td>{{$week_report['application_submitted_week_wise']}}</td>
+                                                                    <td>{{$week_report['client_submittal_week_wise']}}</td>
                                                                 </tr>
                                                                 @endforeach
 

@@ -171,26 +171,26 @@ class Report_Controller extends Controller
                 $first_date="";
                 $final_date="";
                 $week_data="";
-                for($p=0;$p<12;$p++){
+                for($p=0;$p<6;$p++){
     
                     if($p==0){
                         $today_date= date('Y-m-d');
                         $toReturn['weekly_show'][$p]['week_week_one'] = date('d-m-Y', strtotime('-7 days'));
                         $toReturn['weekly_show'][$p]['week_week1'] = date('m-d-Y', strtotime( $toReturn['weekly_show'][$p]['week_week_one']));
                         $database1= date('Y-m-d', strtotime('-7 days'));
-                        $toReturn['weekly_show'][$p]['job_created_weekly1']= count(tbl_post_job::where('dated','<=',$today_date)
+                        $toReturn['weekly_show'][$p]['job_created_week_wise']= count(tbl_post_job::where('dated','<=',$today_date)
                                                         ->where('dated','>=',$database1)
                                                         ->get());
-                        $toReturn['weekly_show'][$p]['candidate_created1']= count(Tbl_job_seekers::where('dated','<=',$today_date)
+                        $toReturn['weekly_show'][$p]['candidate_created_week_wise']= count(Tbl_job_seekers::where('dated','<=',$today_date)
                                                         ->where('dated','>=',$database1)
                                                         ->get());
-                        $toReturn['weekly_show'][$p]['application_submitted1']= count(Tbl_seeker_applied_for_job::where('dated','<=',$today_date)
+                        $toReturn['weekly_show'][$p]['application_submitted_week_wise']= count(Tbl_seeker_applied_for_job::where('dated','<=',$today_date)
                                                         ->where('dated','>=',$database1)
                                                         ->get());
-                        $toReturn['weekly_show'][$p]['client_submittal1']= count(Tbl_forward_candidate::where('forward_date','<=',$today_date)
+                        $toReturn['weekly_show'][$p]['client_submittal_week_wise']= count(Tbl_forward_candidate::where('forward_date','<=',$today_date)
                                                         ->where('forward_date','>=',$database1)
                                                         ->get());
-                        $toReturn['weekly_show'][$p]['post_assign1']= count(Tbl_job_post_assign::where('job_assigned_date','<=',$today_date)
+                        $toReturn['weekly_show'][$p]['post_assign_week_wise']= count(Tbl_job_post_assign::where('job_assigned_date','<=',$today_date)
                                                         ->where('job_assigned_date','>=',$database1)
                                                         ->get());
                         $first_date=$today_date;
@@ -202,19 +202,19 @@ class Report_Controller extends Controller
                         $toReturn['weekly_show'][$p]['week_week_one']= date('d-m-Y',(strtotime ( '-7 days' , strtotime ($week_data) ) ));
                         $toReturn['weekly_show'][$p]['week_week1'] = date('m-d-Y', strtotime( $toReturn['weekly_show'][$p]['week_week_one']));
                         $database1= date('Y-m-d',(strtotime ( '-7 days' , strtotime ($week_data))));
-                        $toReturn['weekly_show'][$p]['job_created_weekly1']= count(tbl_post_job::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
+                        $toReturn['weekly_show'][$p]['job_created_week_wise']= count(tbl_post_job::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
                                                         ->where('dated','>=',$database1)
                                                         ->get());
-                        $toReturn['weekly_show'][$p]['candidate_created1']= count(Tbl_job_seekers::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
+                        $toReturn['weekly_show'][$p]['candidate_created_week_wise']= count(Tbl_job_seekers::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
                                                         ->where('dated','>=',$database1)
                                                         ->get());                                
-                        $toReturn['weekly_show'][$p]['application_submitted1']= count(Tbl_seeker_applied_for_job::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
+                        $toReturn['weekly_show'][$p]['application_submitted_week_wise']= count(Tbl_seeker_applied_for_job::where('dated','<=',$toReturn['weekly_show'][$p]['week_week_one'])
                                                         ->where('dated','>=',$database1)
                                                         ->get());                                    
-                        $toReturn['weekly_show'][$p]['client_submittal1']= count(Tbl_forward_candidate::where('forward_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
+                        $toReturn['weekly_show'][$p]['client_submittal_week_wise']= count(Tbl_forward_candidate::where('forward_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
                                                         ->where('forward_date','>=',$database1)
                                                         ->get());
-                        $toReturn['weekly_show'][$p]['post_assign1']= count(Tbl_job_post_assign::where('job_assigned_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
+                        $toReturn['weekly_show'][$p]['post_assign_week_wise']= count(Tbl_job_post_assign::where('job_assigned_date','<=',$toReturn['weekly_show'][$p]['week_week_one'])
                                                         ->where('job_assigned_date','>=',$database1)
                                                         ->get());
                         
@@ -222,7 +222,7 @@ class Report_Controller extends Controller
                         $week_data= $toReturn['weekly_show'][$p]['week_week_one'];                                                      
                     }
                 }
-                // return   $toReturn;
+                // return   $toReturn['weekly_show'];
                 // exit;
             
 
