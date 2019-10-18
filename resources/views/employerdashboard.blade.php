@@ -645,6 +645,7 @@
                         <div class="card-header">
                                     <h3 class="card-title" style="text-align:left;">Job Application</h3>
                                     <a href="{{url('employer/Application')}}"><h3 class="card-title" style="text-align:right; margin-top:-35px;">View All</h3></a>
+                                        <input id="myInput" type="text" placeholder="Search..">
                         </div><!--end of card-header-->
                       
                <div class="card-body" >
@@ -708,6 +709,17 @@
     var resizefunc = [];
 </script><br><br>
 @include('include.emp_footer')
+<script>
+$(document).ready(function(){
+$("#myInput").on("keyup", function() {
+var value = $(this).val().toLowerCase();
+$("#datatable tr").filter(function() {
+$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+});
+});
+});
+</script>
+
 </body>
 
 </html>  
