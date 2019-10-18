@@ -160,13 +160,13 @@
 														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
 														<!-- <td>{{$dob}}</td> -->
 
-                                                        <td>@if($personal[$key]->can_gender=="male")
+                                                        <td>@if(@$personal[$key]->can_gender=="male")
                                                         @if(@$age!="0")M {{$age}}@endif
                                                         @else
                                                         @if(@$age!="0")F {{$age}}@endif
                                                         @endif
                                                         </td>
-														<td>{{$personal[$key]->city}}, &nbsp;{{$personal[$key]->state}}</td>
+														<td>{{@$personal[$key]->city}}, &nbsp;{{@$personal[$key]->state}}</td>
 														<td>{{$personal[$key]->visa}}</td>
 														@if($personal[$key]->total_experience)
 														<td>{{$personal[$key]->total_experience}}+</td>

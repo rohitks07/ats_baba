@@ -91,8 +91,8 @@
                                                         <th>Title</th>
                                                         <th>Client</th>
                                                         <th width="10%">Location</th>
-                                                        <th width="30%">Visa Type</th>
-                                                        <th>Pay Rate</td>
+                                                        <th width="20%">Visa Type</th>
+                                                        <th width="7%">Pay Rate</td>
                                                         <th>Name</td>
                                                         <th width="10%">Location</th>
                                                         <th>Visa</th>
@@ -109,7 +109,6 @@
                                                         <td><a href="{{url('employer/dashboard')}}">{{$application['job_title']}}</a></td>
                                                         <td>{{$application['job_client_name']}}</td>
                                                         <td>{{$application['job_city']}},&nbsp;{{$application['job_state']}}</td>
-                                                    
                                                         <?php $vis=$application['job_visa'];
                                                         $plus_visa=substr_count("$vis",",");
                                                         $sh=explode(",",$vis);

@@ -310,8 +310,6 @@ class Job_Employer_Controller extends Controller
             $toReturn['post_job_edit']=tbl_post_jobs::get()->toArray();
             $toReturn['post_job'] = tbl_post_jobs::where('ID',$id)->first();
             $io = tbl_post_jobs::where('ID',$id)->get()->first();
-
-
             $toReturn['name'] = tbl_team_member::where('ID',$io['owner_id'])->get(['ID','full_name'])->toArray();
             
             $toReturn['team_member_type']=tbl_team_member_type::get()->toArray();
@@ -331,8 +329,6 @@ class Job_Employer_Controller extends Controller
             $toReturn['state_one']=states::where('state_name',$post_job2['state'])->get()->toArray();
             $toReturn['city_one']=cities::where('city_name',$post_job3['city'])->get()->toArray();
             // return  $toReturn['country_one'];
-            
-
             // return $toReturn['industries_name'];
             // return $toReturn['post_job'];
             // $toReturn['team_member_name']=tbl_team_member::where('ID',$toReturn['post_job']['industry_ID'])->first('industry_name');
@@ -675,16 +671,16 @@ public function PostjobsAssignToJobSeeker(Request $request)
                 'cv_file' => 'required'
             ]);
           $cv = $request->file('cv_file');
-          $store_cv = rand() . '.' . $cv->getClientOriginalExtension();
+          $store_cv =$cv->getClientOriginalName();
           $cv->move(public_path('seekerresume'), $store_cv);
           if ($request->hasFile('file_other1')){
           $file_other1 = $request->file('file_other1');
-          $file_other1_cv = rand() . '.' . $file_other1->getClientOriginalExtension();
+          $file_other1_cv =$file_other1->getClientOriginalName();
           $file_other1->move(public_path('seekerresume'), $file_other1_cv);
           }
           if ($request->hasFile('file_other2')){
           $file_other2 = $request->file('file_other2');
-          $file_other2_cv = rand() . '.' . $file_other2->getClientOriginalExtension();
+          $file_other2_cv =$file_other2->getClientOriginalName();
           $file_other2->move(public_path('seekerresume'), $file_other2_cv);
           }
         $postcandidate = new Tbl_job_seekers(); 
@@ -700,13 +696,13 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $postcandidate->visa_status=$request->visa_status;
         $postcandidate->country=$val_contries['country_name'];
         $postcandidate->state=$val_state['state_name'];
-        if($city_text_name=""){
+        if(empty($city_text_name)){
             $city_enter=$val_city['city_name'];
         }
         else{
             $city_enter=$city_text_name;
         }
-        $postcandidate->city=
+        $postcandidate->city=$city_enter;
         $postcandidate->address_line_1=$request->addressline1;
         $postcandidate->address_line_2=$request->addressline2;
         $postcandidate->mobile=$request->mobilephone;

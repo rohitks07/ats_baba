@@ -209,25 +209,21 @@ public function update_personal_details(Request $request)
 {
     
       // return $request->city_text_name; 
-
     $con =  $request->country;
     $sta=  $request->state;
-    $cit=  $request->city;
+    $cit=  $request->city_name;
 
-    $city_text=$request->city_text_name;
-
-
+    $city_text_name=$request->city_text_name;
     $val_contries=countries::where('country_id',$con)->first('country_name');
     $val_state=states::where('state_id',$sta)->first('state_name');
     $val_city=cities::where('city_id',$cit)->first('city_name');
-
-    if($city_text)
-    {
-       $val_city['city_name']=$city_text;
-    }
-    else{
-       $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
-    } 
+    if(!empty($city_text_name))
+             {
+                $val_city['city_name']=$city_text_name;
+             }
+             else{
+                $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
+             } 
 
 
 
@@ -258,8 +254,6 @@ public function update_personal_details(Request $request)
         {
             $store_file_other2="";
         }
-        
-
         
     $u=Tbl_job_seekers::where('ID',$request->id)->update(array(
     'first_name'=>$request->first_name,
