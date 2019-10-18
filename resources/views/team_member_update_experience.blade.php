@@ -71,6 +71,11 @@
         padding: 7px;
         border-radius: 5px;
     }
+    input[type=date] {
+        width: 100%;
+        padding: 7px;
+        border-radius: 5px;
+    }
     
     textarea {
         border-radius: 5px;

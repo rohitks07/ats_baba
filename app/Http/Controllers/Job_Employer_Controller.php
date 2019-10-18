@@ -666,7 +666,8 @@ public function PostjobsAssignToJobSeeker(Request $request)
         
         $con=$request->country;
         $sta=$request->state;
-        $cit=$request->city;
+        $cit=$request->city_name;
+        $city_text_name=$request->city_text_name;
         $val_contries=countries::where('country_id',$con)->first('country_name');
         $val_state=states::where('state_id',$sta)->first('state_name');
         $val_city=cities::where('city_id',$cit)->first('city_name');
@@ -699,7 +700,13 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $postcandidate->visa_status=$request->visa_status;
         $postcandidate->country=$val_contries['country_name'];
         $postcandidate->state=$val_state['state_name'];
-        $postcandidate->city=$val_city['city_name'];
+        if($city_text_name=""){
+            $city_enter=$val_city['city_name'];
+        }
+        else{
+            $city_enter=$city_text_name;
+        }
+        $postcandidate->city=
         $postcandidate->address_line_1=$request->addressline1;
         $postcandidate->address_line_2=$request->addressline2;
         $postcandidate->mobile=$request->mobilephone;

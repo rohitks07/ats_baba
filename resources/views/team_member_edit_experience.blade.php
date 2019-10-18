@@ -481,7 +481,7 @@ textarea[class="form-control"]{
 	                                          <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4">Start Date</label>
 	                                            <div class="col-lg-8">
-	                                               	<input type="date" id="start_date" name="start_date" value="" placeholder="Start Date" class="form-control"required>
+	                                               	<input type="date" id="start_date" name="start_date" value="" placeholder="Start Date" required/>
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
