@@ -274,11 +274,11 @@
                                                                                           $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
                                                                                           $date = strtotime($newDate); 
                                                                                           $datetime=date('Y-m-d h:i:s', $date); 
-                                                                                          $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                          $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate));
                                                                                           $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
-                                                                                          $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
-                                                                                          $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
-                                                                                          $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                          $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate));
+                                                                                          $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate));
+                                                                                          $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate));
                                                                                     ?>
                                                                                     <div class="row">
 
@@ -353,8 +353,8 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">Weekly Report:
-                                                {{$toReturn['weekly_show'][0]['week_week1_week_wise']}} -
-                                                {{$toReturn['weekly_show'][11]['week_week1_week_wise']}}
+                                                -
+
                                             </h3>
                                             <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
@@ -386,89 +386,23 @@
                                                                     <th>Candidate Created</th>
                                                                     <th>Application Submitted</th>
                                                                     <th>Client Submittal</th>
+                                                                    <th>Group Report</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week1']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly1']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise1']}}</td>
-                                                                    <td>{{$toReturn['candidate_created1']}}</td>
-                                                                    <td>{{$toReturn['application_submitted1']}}</td>
-                                                                    <td>{{$toReturn['client_submittal1']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week2']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly2']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise2']}}</td>
-                                                                    <td>{{$toReturn['candidate_created2']}}</td>
-                                                                    <td>{{$toReturn['application_submitted2']}}</td>
-                                                                    <td>{{$toReturn['client_submittal2']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week3']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly3']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise3']}}</td>
-                                                                    <td>{{$toReturn['candidate_created3']}}</td>
-                                                                    <td>{{$toReturn['application_submitted3']}}</td>
-                                                                    <td>{{$toReturn['client_submittal3']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week4']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly4']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise4']}}</td>
-                                                                    <td>{{$toReturn['candidate_created4']}}</td>
-                                                                    <td>{{$toReturn['application_submitted4']}}</td>
-                                                                    <td>{{$toReturn['client_submittal4']}}</td>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week5']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly5']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise5']}}</td>
-                                                                    <td>{{$toReturn['candidate_created5']}}</td>
-                                                                    <td>{{$toReturn['application_submitted5']}}</td>
-                                                                    <td>{{$toReturn['client_submittal5']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week6']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly6']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise6']}}</td>
-                                                                    <td>{{$toReturn['candidate_created6']}}</td>
-                                                                    <td>{{$toReturn['application_submitted6']}}</td>
-                                                                    <td>{{$toReturn['client_submittal6']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week7']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly7']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise7']}}</td>
-                                                                    <td>{{$toReturn['candidate_created7']}}</td>
-                                                                    <td>{{$toReturn['application_submitted7']}}</td>
-                                                                    <td>{{$toReturn['client_submittal7']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week8']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly8']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise8']}}</td>
-                                                                    <td>{{$toReturn['candidate_created8']}}</td>
-                                                                    <td>{{$toReturn['application_submitted8']}}</td>
-                                                                    <td>{{$toReturn['client_submittal8']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week9']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly9']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise9']}}</td>
-                                                                    <td>{{$toReturn['candidate_created9']}}</td>
-                                                                    <td>{{$toReturn['application_submitted9']}}</td>
-                                                                    <td>{{$toReturn['client_submittal9']}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>{{ $toReturn['week_week10']}}</td>
-                                                                    <td>{{ $toReturn['job_created_weekly10']}}</td>
-                                                                    <td>{{$toReturn['post_assign_week_wise10']}}</td>
-                                                                    <td>{{$toReturn['candidate_created10']}}</td>
-                                                                    <td>{{$toReturn['application_submitted10']}}</td>
-                                                                    <td>{{$toReturn['client_submittal10']}}</td>
-                                                                </tr>
-                                                            </tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                         </table>
                                                     </div>
                                                     <!--end of table-->
@@ -508,20 +442,194 @@
                                                                     <th>Candidate Created</th>
                                                                     <th>Application Submitted</th>
                                                                     <th>Client Submittal</th>
+                                                                    <th>Group Report</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($toReturn['monthly'] as $key => $monthly)
-
+                                                                @foreach ($toReturn['monthly'] as $monthly)
+                                                                <?php @$month=$monthly['month_week_one1']; 
+                                                                      $newDate_val = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3:$1",$month);
+                                                                    //   $newDate_val = date('Y-m', strtotime($month));
+                                                                ?>
                                                                 <tr>
+                                                                    {{-- <input type="text" id="date_time" value="{{$monthly['month_week_one1']}}"> --}}
                                                                     <td>{{$monthly['month_week_one1']}}</td>
                                                                     <td>{{$monthly['job_created_monthly1']}}</td>
                                                                     <td>{{$monthly['post_assign_month1']}}</td>
-                                                                    <td>{{ $monthly['candidate_created_monthly1']}}
+                                                                    <td>{{$monthly['candidate_created_monthly1']}}
                                                                     </td>
                                                                     <td>{{$monthly['application_submitted_monthly1']}}
                                                                     </td>
                                                                     <td>{{$monthly['client_submittal_monthly1']}}</td>
+                                                                    <?php $vardate=$monthly['month_week_one1']; ?>
+                                                                    <td>
+                                                                        <a href="" data-toggle="modal"
+                                                                        data-target=".bd-example-modal-lg8{{$monthly['month_week_one1']}}"><i
+                                                                                class="fa fa-edit"
+                                                                                aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                    <div class="modal fade bd-example-modal-lg8{{$monthly['month_week_one1']}}"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="myLargeModalLabe1"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div class="container-fluid">
+
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-11">
+                                                                                            <h3>Group Report Monthly</h3>
+                                                                                        </div>
+                                                                                        <div class="col-md-1 mt-4">
+
+                                                                                            <a href=""
+                                                                                                data-dismiss="modal"><i
+                                                                                                    class="fa ion-android-close"></i></a>
+                                                                                            </h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                    <input type="hidden" id="date_time" value="{{$monthly['month_week_one1']}}">
+                                                                                            <h4>Date</h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Jobs Created</h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Jobs Assigned</h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Candidate Created</h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Application Submitted
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Client Submittal </h4>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    @foreach (@$toReturn['team_member']
+                                                                                    as  $item)
+                                                                                    <?php $group_id=$item['type_ID'];
+                                                                                          $new_val=$monthly['month_week_one1'];
+                                                                                        //   $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
+                                                                                          
+                                                                                        //   $date = strtotime($newDate); 
+                                                                                        //   $datetime=date('Y-m-d h:i:s', $date); 
+                                                                                        //   $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                        //   $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
+                                                                                        //   $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
+                                                                                        //   $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
+                                                                                        //   $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+
+                                                                                          $date_team['jobs_created']=DB::table('tbl_team_member_type')
+                                                                                                                                        ->leftjoin('tbl_post_jobs','tbl_post_jobs.for_group','=','tbl_team_member_type.type_ID')
+                                                                                                                                        ->select('tbl_team_member_type.type_ID as id','tbl_team_member_type.type_name',
+                                                                                                                                                'tbl_post_jobs.for_group as group','tbl_post_jobs.dated as date','tbl_post_jobs.company_ID')
+                                                                                                                                        ->whereMonth('tbl_post_jobs.dated',$new_val)
+                                                                                                                                        ->where('tbl_post_jobs.for_group',$group_id)
+                                                                                                                                        ->count();
+                                                                                          $date_team['post_assign']=DB::table('tbl_team_member')
+                                                                                                                                    ->leftjoin('tbl_job_post_assign','tbl_job_post_assign.team_member_id','=','tbl_team_member.ID')     
+                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+                                                                                                                                    ->select('tbl_team_member.team_member_type','tbl_team_member.company_id','tbl_team_member.full_name',
+                                                                                                                                                'tbl_job_post_assign.team_member_id','tbl_team_member_type.type_name','tbl_team_member_type.type_ID',
+                                                                                                                                                'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id')
+                                                                                                                                        ->whereMonth('tbl_job_post_assign.job_assigned_date',$new_val)
+                                                                                                                                        ->where('tbl_team_member_type.type_ID',$group_id)
+                                                                                                                                        ->count();
+                                                                                        $date_team['create_candidate']=DB::table('tbl_team_member_type')
+                                                                                                                                            ->leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
+                                                                                                                                            ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
+                                                                                                                                            ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
+                                                                                                                                            ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
+                                                                                                                                                     'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
+                                                                                                                                            ->whereMonth('tbl_job_seekers.dated',$new_val)
+                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
+                                                                                                                                            ->count();
+                                                                                    $date_team['application_submitted']=DB::table('tbl_seeker_applied_for_job')
+                                                                                                                                                    ->leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
+                                                                                                                                                    ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
+                                                                                                                                                    ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
+                                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+                                                                                                                                                    ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
+                                                                                                                                                            'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
+                                                                                                                                            ->whereMonth('tbl_job_seekers.dated',$new_val)
+                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
+                                                                                                                                            ->count();
+
+
+                                                                                    $date_team['client_submital']=DB::table('tbl_forward_candidate')
+                                                                                                                                            ->leftjoin('tbl_post_jobs','tbl_post_jobs.ID','=','tbl_forward_candidate.job_id')
+                                                                                                                                            ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_post_jobs.for_group')
+                                                                                                                                            ->select('tbl_team_member_type.type_ID','tbl_team_member_type.type_name',
+                                                                                                                                                    'tbl_post_jobs.for_group','tbl_forward_candidate.forward_date','tbl_forward_candidate.forward_by')
+                                                                                                                                            ->whereMonth('tbl_forward_candidate.forward_date',$new_val)
+                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
+                                                                                                                                            ->count();                                                        
+                                                                                    ?>
+                                                                                    <div class="row">
+
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6>{{$item['type_name']}}
+                                                                                                
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$date_team['jobs_created']}}
+                                                                                             </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$date_team['post_assign']}}
+                                                                                                </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$date_team['create_candidate']}}
+                                                                                               
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{ $date_team['application_submitted']}}
+                                                                                                
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{ $date_team['client_submital']}}
+                                                                                                
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </tr>
                                                                 @endforeach
 
@@ -564,6 +672,7 @@
                                                                     <th>Candidate Created</th>
                                                                     <th>Application Submitted</th>
                                                                     <th>Client Submittal</th>
+                                                                    <th>Group Report</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -578,6 +687,174 @@
                                                                     <td>{{$yearly['application_submitted_monthly1']}}
                                                                     </td>
                                                                     <td>{{$yearly['client_submittal_monthly1']}}</td>
+                                                                    <td>
+                                                                            <a href="" data-toggle="modal"
+                                                                            data-target=".bd-example-modal-lg20{{$yearly['month_week_one1']}}"><i
+                                                                                    class="fa fa-edit"
+                                                                                    aria-hidden="true"></i></a>
+                                                                        </td>
+                                                                        <div class="modal fade bd-example-modal-lg20{{$yearly['month_week_one1']}}"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="myLargeModalLabe1"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div class="container-fluid">
+
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-11">
+                                                                                            <h3>Group Report Monthly</h3>
+                                                                                        </div>
+                                                                                        <div class="col-md-1 mt-4">
+
+                                                                                            <a href=""
+                                                                                                data-dismiss="modal"><i
+                                                                                                    class="fa ion-android-close"></i></a>
+                                                                                            </h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                    <input type="hidden" id="date_time" value="{{$yearly['month_week_one1']}}">
+                                                                                            <h4>Date</h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Jobs Created</h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Jobs Assigned</h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Candidate Created</h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Application Submitted
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Client Submittal </h4>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    @foreach (@$toReturn['team_member']
+                                                                                    as  $item)
+                                                                                    <?php $group_id=$item['type_ID'];
+                                                                                          $new_val=$yearly['month_week_one1'];
+                                                                                        //   $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
+                                                                                          
+                                                                                        //   $date = strtotime($newDate); 
+                                                                                        //   $datetime=date('Y-m-d h:i:s', $date); 
+                                                                                        //   $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                        //   $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
+                                                                                        //   $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
+                                                                                        //   $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
+                                                                                        //   $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+
+                                                                                          $date_team['jobs_created_Year']=DB::table('tbl_team_member_type')
+                                                                                                                                        ->leftjoin('tbl_post_jobs','tbl_post_jobs.for_group','=','tbl_team_member_type.type_ID')
+                                                                                                                                        ->select('tbl_team_member_type.type_ID as id','tbl_team_member_type.type_name',
+                                                                                                                                                'tbl_post_jobs.for_group as group','tbl_post_jobs.dated as date','tbl_post_jobs.company_ID')
+                                                                                                                                        ->whereYear('tbl_post_jobs.dated',$new_val)
+                                                                                                                                        ->where('tbl_post_jobs.for_group',$group_id)
+                                                                                                                                        ->count();
+                                                                                          $date_team['post_assign_Year']=DB::table('tbl_team_member')
+                                                                                                                                    ->leftjoin('tbl_job_post_assign','tbl_job_post_assign.team_member_id','=','tbl_team_member.ID')     
+                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+                                                                                                                                    ->select('tbl_team_member.team_member_type','tbl_team_member.company_id','tbl_team_member.full_name',
+                                                                                                                                                'tbl_job_post_assign.team_member_id','tbl_team_member_type.type_name','tbl_team_member_type.type_ID',
+                                                                                                                                                'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id')
+                                                                                                                                        ->whereYear('tbl_job_post_assign.job_assigned_date',$new_val)
+                                                                                                                                        ->where('tbl_team_member_type.type_ID',$group_id)
+                                                                                                                                        ->count();
+                                                                                        $date_team['create_candidate_Year']=DB::table('tbl_team_member_type')
+                                                                                                                                            ->leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
+                                                                                                                                            ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
+                                                                                                                                            ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
+                                                                                                                                            ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
+                                                                                                                                                     'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
+                                                                                                                                            ->whereYear('tbl_job_seekers.dated',$new_val)
+                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
+                                                                                                                                            ->count();
+                                                                                    $date_team['application_submitted_Year']=DB::table('tbl_seeker_applied_for_job')
+                                                                                                                                                    ->leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
+                                                                                                                                                    ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
+                                                                                                                                                    ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
+                                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+                                                                                                                                                    ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
+                                                                                                                                                            'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
+                                                                                                                                            ->whereYear('tbl_job_seekers.dated',$new_val)
+                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
+                                                                                                                                            ->count();
+
+
+                                                                                    $date_team['client_submital_Year']=DB::table('tbl_forward_candidate')
+                                                                                                                                            ->leftjoin('tbl_post_jobs','tbl_post_jobs.ID','=','tbl_forward_candidate.job_id')
+                                                                                                                                            ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_post_jobs.for_group')
+                                                                                                                                            ->select('tbl_team_member_type.type_ID','tbl_team_member_type.type_name',
+                                                                                                                                                    'tbl_post_jobs.for_group','tbl_forward_candidate.forward_date','tbl_forward_candidate.forward_by')
+                                                                                                                                            ->whereYear('tbl_forward_candidate.forward_date',$new_val)
+                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
+                                                                                                                                            ->count();                                                        
+                                                                                    ?>
+                                                                                    <div class="row">
+
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6>{{$item['type_name']}}
+                                                                                                
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$date_team['jobs_created_Year']}}
+                                                                                             </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$date_team['post_assign_Year']}}
+                                                                                                </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$date_team['create_candidate_Year']}}
+                                                                                               
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{ $date_team['application_submitted_Year']}}
+                                                                                                
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{ $date_team['client_submital_Year']}}
+                                                                                                
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </tr>
                                                                 @endforeach
 
@@ -613,7 +890,29 @@
 <!--end of wrapper-->
 
 @include('include.footer')
+<script>
+    function monthly_show(da) {
+            console.log(da);
+            $.ajax({
+                type:'POST',
+                url:'{{url("employer/report/monthly_group")}}',
+                data:{
+                    _token: '{!! csrf_token() !!}',
+                    da:da,
+                },
+                success:function(data){
+                    
+                    console.log(data);
+                },
+                error:function(data){
+                    console.log(data)
+                }
 
+            });
+
+      }
+
+</script>
 
 <!--SCRIPT FOR SEARCH-->
 
