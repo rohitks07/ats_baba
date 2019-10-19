@@ -173,8 +173,8 @@ class Job_Employer_Controller extends Controller
         
             }
 
-
-            $toReturn[]=array();
+//jobs
+    $toReturn[]=array();
     $current_module_id=3;
     $toReturn['user_type']=Session::get('type');
     if($toReturn['user_type']=="teammember")
