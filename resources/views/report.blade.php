@@ -174,7 +174,6 @@
                                                     <input type="date" id="daily_1date" class="form-control"
                                                         placeholder="Start Date">
                                                 </div>
-
                                                 <div class="form-group m-l-10">
                                                     <label class="sr-only" for="exampleInputPassword2">End Date</label>
                                                     <input type="date" id="daily_2date" class="form-control"
@@ -195,38 +194,29 @@
                                                                 <tr>
                                                                     <th>Date</th>
                                                                     <th>Jobs Created</th>
-                                                                    
                                                                     <th>Jobs Assigned</th>
-                                                                    
                                                                     <th>Candidate Created</th>
-                                                                    
                                                                     <th>Application Submitted</th>
-                                                                    
                                                                     <th>Client Submittal</th>
                                                                     <th>Group Report</th>
-                                                                    
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-
                                                                 @foreach ( $toReturn['week_report'] as $key =>
                                                                 $week_report)
                                                                 <tr>
                                                                     <td>{{$week_report['week_date']}}</td>
                                                                     <?php $date_val=$week_report['week_date']; ?>
-
                                                                     <td>{{$week_report['job_created']}}</td>
                                                                     <td>{{$week_report['post_assign']}}</td>
                                                                     <td>{{$week_report['candidate_created']}}</td>
                                                                     <td>{{$week_report['application_submitted']}}</td>
                                                                     <td>{{$week_report['client_submittal']}}</td>
-
                                                                     <td>
                                                                         <a href="" data-toggle="modal"
                                                                             data-target=".bd-example-modal-lg5{{$date_val}}"><i
                                                                                 class="fa fa-edit"
                                                                                 aria-hidden="true"></i></a>
-
                                                                     </td>
                                                                     <div class="modal fade bd-example-modal-lg5{{$date_val}}"
                                                                         tabindex="-1" role="dialog"
@@ -235,107 +225,109 @@
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="container-fluid">
-                                                                                    
+
                                                                                     <div class="row">
                                                                                         <div class="col-md-11">
                                                                                             <h3>Group Report</h3>
                                                                                         </div>
                                                                                         <div class="col-md-1 mt-4">
-                                                                                            
-                                                                                            <a href=""data-dismiss="modal" ><i class="fa ion-android-close"></i></a>
+
+                                                                                            <a href=""
+                                                                                                data-dismiss="modal"><i
+                                                                                                    class="fa ion-android-close"></i></a>
                                                                                             </h3>
                                                                                         </div>
                                                                                     </div>
                                                                                     <br>
                                                                                     <br>
                                                                                     <div class="row">
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
                                                                                             <h4>Date</h4>
                                                                                         </div>
-                                                                                    
-                                                                                    
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h4>Jobs Created</h4>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Jobs Created</h4>
                                                                                         </div>
-                                                                                    
-                                                                                    
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h4>Jobs Assigned</h4>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Jobs Assigned</h4>
                                                                                         </div>
-                                                                                    
-                                                                                    
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h4>Candidate Created</h4>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Candidate Created</h4>
                                                                                         </div>
-                                                                                    
-                                                                                    
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h4>Application Submitted</h4>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Application Submitted
+                                                                                            </h4>
                                                                                         </div>
-                                                                                    
-                                                                                    
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h4>Client Submittal </h4>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h4>Client Submittal </h4>
                                                                                         </div>
-
                                                                                     </div>
-                                                                                    
                                                                                     @foreach (@$toReturn['team_member']
                                                                                     as $item)
                                                                                     <?php $group_id=$item['type_ID'];
-                                                                                        
                                                                                           $new_val=$week_report['week_date'];
-                                                                                          
                                                                                           $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
                                                                                           $date = strtotime($newDate); 
-                                                                                          $hi=date('Y-m-d h:i:s', $date); 
+                                                                                          $datetime=date('Y-m-d h:i:s', $date); 
                                                                                           $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
                                                                                           $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
-                                                                                           $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
+                                                                                          $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
                                                                                           $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
                                                                                           $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
-
-
                                                                                     ?>
                                                                                     <div class="row">
-                                                                                        
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
                                                                                             <h6>{{$item['type_name']}}
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:blue;text-align:center;">{{$job_create}}</h6>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$job_create}}</h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:blue;text-align:center;">{{$job_assigned}}</h6>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$job_assigned}}</h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:blue;text-align:center;">{{$candidate_create}}</h6>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$candidate_create}}
+                                                                                            </h6>
                                                                                         </div>
-                                                                                        
-                                                                                        
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:blue;text-align:center;">{{$application_submitted}}</h6>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$application_submitted}}
+                                                                                            </h6>
                                                                                         </div>
-                                                                                        
-                                                                                        
-                                                                                        <div class="col-md-2" style="border: 1px solid black;">
-                                                                                        <h6 style="color:blue;text-align:center;">{{$client_submittal}}</h6>
+                                                                                        <div class="col-md-2"
+                                                                                            style="border: 1px solid black;">
+                                                                                            <h6
+                                                                                                style="color:blue;text-align:center;">
+                                                                                                {{$client_submittal}}
+                                                                                            </h6>
                                                                                         </div>
                                                                                     </div>
-                                                                                 
                                                                                     @endforeach
-
-
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </tr>
                                                                 @endforeach
-
-
-
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -361,8 +353,8 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">Weekly Report:
-                                                {{$toReturn['weekly_show'][0]['week_week1']}} -
-                                                {{$toReturn['weekly_show'][11]['week_week1']}}
+                                                {{$toReturn['weekly_show'][0]['week_week1_week_wise']}} -
+                                                {{$toReturn['weekly_show'][11]['week_week1_week_wise']}}
                                             </h3>
                                             <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
@@ -397,20 +389,85 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ( $toReturn['weekly_show'] as $key =>
-                                                                $week_report)
                                                                 <tr>
-                                                                    <td>{{$week_report['week_week1']}}</td>
-                                                                    <td>{{$week_report['job_created_week_wise']}}</td>
-                                                                    <td>{{$week_report['post_assign_week_wise']}}</td>
-                                                                    <td>{{$week_report['candidate_created_week_wise']}}</td>
-                                                                    <td>{{$week_report['application_submitted_week_wise']}}</td>
-                                                                    <td>{{$week_report['client_submittal_week_wise']}}</td>
+                                                                    <td>{{ $toReturn['week_week1']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly1']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise1']}}</td>
+                                                                    <td>{{$toReturn['candidate_created1']}}</td>
+                                                                    <td>{{$toReturn['application_submitted1']}}</td>
+                                                                    <td>{{$toReturn['client_submittal1']}}</td>
                                                                 </tr>
-                                                                @endforeach
-
-
-
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week2']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly2']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise2']}}</td>
+                                                                    <td>{{$toReturn['candidate_created2']}}</td>
+                                                                    <td>{{$toReturn['application_submitted2']}}</td>
+                                                                    <td>{{$toReturn['client_submittal2']}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week3']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly3']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise3']}}</td>
+                                                                    <td>{{$toReturn['candidate_created3']}}</td>
+                                                                    <td>{{$toReturn['application_submitted3']}}</td>
+                                                                    <td>{{$toReturn['client_submittal3']}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week4']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly4']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise4']}}</td>
+                                                                    <td>{{$toReturn['candidate_created4']}}</td>
+                                                                    <td>{{$toReturn['application_submitted4']}}</td>
+                                                                    <td>{{$toReturn['client_submittal4']}}</td>
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week5']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly5']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise5']}}</td>
+                                                                    <td>{{$toReturn['candidate_created5']}}</td>
+                                                                    <td>{{$toReturn['application_submitted5']}}</td>
+                                                                    <td>{{$toReturn['client_submittal5']}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week6']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly6']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise6']}}</td>
+                                                                    <td>{{$toReturn['candidate_created6']}}</td>
+                                                                    <td>{{$toReturn['application_submitted6']}}</td>
+                                                                    <td>{{$toReturn['client_submittal6']}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week7']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly7']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise7']}}</td>
+                                                                    <td>{{$toReturn['candidate_created7']}}</td>
+                                                                    <td>{{$toReturn['application_submitted7']}}</td>
+                                                                    <td>{{$toReturn['client_submittal7']}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week8']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly8']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise8']}}</td>
+                                                                    <td>{{$toReturn['candidate_created8']}}</td>
+                                                                    <td>{{$toReturn['application_submitted8']}}</td>
+                                                                    <td>{{$toReturn['client_submittal8']}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week9']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly9']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise9']}}</td>
+                                                                    <td>{{$toReturn['candidate_created9']}}</td>
+                                                                    <td>{{$toReturn['application_submitted9']}}</td>
+                                                                    <td>{{$toReturn['client_submittal9']}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{ $toReturn['week_week10']}}</td>
+                                                                    <td>{{ $toReturn['job_created_weekly10']}}</td>
+                                                                    <td>{{$toReturn['post_assign_week_wise10']}}</td>
+                                                                    <td>{{$toReturn['candidate_created10']}}</td>
+                                                                    <td>{{$toReturn['application_submitted10']}}</td>
+                                                                    <td>{{$toReturn['client_submittal10']}}</td>
+                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -437,20 +494,6 @@
                                                 Report:{{$toReturn['monthly'][1]['month_week_one1']}} -
                                                 {{$toReturn['monthly'][11]['month_week_one1']}}
                                             </h3>
-                                            {{-- <form class="form-inline" style="float:right;margin-bottom: 0px;">
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Start Date</label>
-                                                    <input type="date" id="month_first" class="form-control" placeholder="Start Date">
-                                                </div>
-
-                                                <div class="form-group m-l-10">
-                                                    <label class="sr-only" for="exampleInputPassword2">End Date</label>
-                                                    <input type="date" id="month_second" class="form-control" placeholder="End Date">
-                                                </div>
-                                                <button type="button" 
-                                                    class="btn btn-icon waves-effect waves-light btn-purple m-b-5">
-                                                    <i class="fa fa-search"></i> </button>
-                                            </form> --}}
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -507,20 +550,6 @@
 
                                             <h3 class="card-title">Yearly Report: -
                                             </h3>
-                                            {{-- <form class="form-inline" style="float:right;margin-bottom: 0px;">
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Start Date</label>
-                                                    <input type="date" class="form-control" placeholder="Start Date">
-                                                </div>
-
-                                                <div class="form-group m-l-10">
-                                                    <label class="sr-only" for="exampleInputPassword2">End Date</label>
-                                                    <input type="date" class="form-control" placeholder="End Date">
-                                                </div>
-                                                <button type="button"
-                                                    class="btn btn-icon waves-effect waves-light btn-purple m-b-5">
-                                                    <i class="fa fa-search"></i> </button>
-                                            </form> --}}
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
