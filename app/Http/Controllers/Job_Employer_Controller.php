@@ -173,7 +173,71 @@ class Job_Employer_Controller extends Controller
         
             }
 
-    return view('employerdashboard')->with('toReturn',$toReturn);
+//jobs
+    $toReturn[]=array();
+    $current_module_id=3;
+    $toReturn['user_type']=Session::get('type');
+    if($toReturn['user_type']=="teammember")
+    {
+        $user_permission_list=Session::get('user_permission');
+        if($user_permission_list)
+        {
+            foreach($user_permission_list as $key =>$value )
+            {
+                if($user_permission_list[$key]['module_id']==$current_module_id)
+                {
+                    $toReturn['current_module_permission']=Tbl_team_member_permission::where('permission_value',$current_module_id)->where('team_member_id',Session::get('user_id'))->first()->toArray();
+                    
+                }
+            }
+        }
+    }
+  $one_group_teammember_employer_id=Session::get('one_group_teammember_id');
+    if($one_group_teammember_employer_id)
+    {
+        $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by',$one_group_teammember_employer_id)->orderBy('ID', 'DESC')->paginate(20);
+    }else
+    {
+        $toReturn['post_job'] = tbl_post_jobs::where('employer_ID',Session::get('id'))->orderBy('ID', 'DESC')->paginate(20);
+
+    }
+$post_job_show = tbl_job_seekers::get()->toArray();
+
+// job by applications
+ini_set('memory_limit', '-1');
+     $user_type=Session::get('type');
+     if($user_type=="employer")
+       {
+           $user_id=Session::get('org_ID');
+       }
+       else
+       {
+           $user_id=Session::get('user_id');
+       }
+   $one_group_teammember_employer_id=Session::get('one_group_teammember_id');
+                               if($one_group_teammember_employer_id)
+                               {
+                                $toReturn['application']= Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs','tbl_seeker_applied_for_job.job_ID','=','post_jobs.ID')
+                                ->leftjoin('tbl_job_seekers as seeker','tbl_seeker_applied_for_job.seeker_ID','=','seeker.ID')
+                                // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ' )
+                                ->select('tbl_seeker_applied_for_job.ID as application_id','tbl_seeker_applied_for_job.current_location as current_location','post_jobs.city as job_city','post_jobs.state as job_state','post_jobs.ID as ID','post_jobs.job_code as job_code','post_jobs.job_title as job_title','post_jobs.client_name as job_client_name','post_jobs.country as location','post_jobs.job_visa_status as  job_visa','post_jobs.pay_min as pay_min','seeker.city as seeker_city','seeker.state as seeker_state','post_jobs.pay_max as pay_max','seeker.first_name as can_first_name','seeker.last_name as can_last_name','seeker.country as can_location','seeker.visa_status as can_visa','tbl_seeker_applied_for_job.dated as applied_date')
+                                ->whereIn('tbl_seeker_applied_for_job.submitted_by',$one_group_teammember_employer_id)
+                                ->orderBy('ID', 'DESC')
+                                ->paginate(20);
+                                // return $toReturn['application'][1]['job_state']; 
+                               }
+                               else
+                               {
+                                $toReturn['application']= Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs','tbl_seeker_applied_for_job.job_ID','=','post_jobs.ID')
+                                ->leftjoin('tbl_job_seekers as seeker','tbl_seeker_applied_for_job.seeker_ID','=','seeker.ID')
+                                // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ')
+                                ->select('tbl_seeker_applied_for_job.ID as application_id','tbl_seeker_applied_for_job.current_location as current_location','post_jobs.city as job_city','post_jobs.state as job_state','post_jobs.ID as ID','post_jobs.job_code as job_code','post_jobs.job_title as job_title','post_jobs.client_name as job_client_name','post_jobs.country as location','post_jobs.job_visa_status as  job_visa','post_jobs.pay_min as pay_min','seeker.city as seeker_city','seeker.state as seeker_state','post_jobs.pay_max as pay_max','seeker.first_name as can_first_name','seeker.last_name as can_last_name','seeker.country as can_location','seeker.visa_status as can_visa','tbl_seeker_applied_for_job.dated as applied_date')
+                                ->where('tbl_seeker_applied_for_job.employer_ID',$user_id)
+                                ->orderBy('ID', 'DESC')
+                                ->paginate(20);
+                               }
+
+    return view('employerdashboard')->with('toReturn',$toReturn)->with('post_job_show',$post_job_show)->with('application',$toReturn);
     }
     
     public function status(Request $request){
@@ -1048,20 +1112,20 @@ public function PostjobsAssignToJobSeeker(Request $request)
         
         return redirect('employer/manageteammember');
     }
-    public function manageteamaddedit( Request $Request)
+    public function manageteamaddedit(Request $Request)
     {
         $type_ID=$Request->type_id;
         $team_type= tbl_team_member_type::where('type_ID',$type_ID)->first();
-        $type_name=$Request->type_name;
+        $type_name=$Request->type_namegroup;
         
         tbl_team_member_type::where('type_ID', $type_ID)->update(array('type_name'=>$type_name));
         return redirect('employer/manageteammember');
 
         
     }
+   
   
     
-
     public function add_email_form(Request $request)
     {
             $emailList = new Tbl_email_list_contacts;

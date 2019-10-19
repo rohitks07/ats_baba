@@ -347,8 +347,12 @@
                                                                 <td>{{$date_created}}</td>
                                                                 <td>{{$date_closed}}</td>
                                                                 <td>
+                                                                <?php
+                                                                    $id=$team_member_type['type_ID'];
+                                                                    $number_of_members=count(DB::table('tbl_team_member')->where('team_member_type',$id)->get());
+                                                                ?>
                                                                     <button type="button" class="btn-round-xs btn-xs"
-                                                                        style="background-color:#1ba6df; color:#fff">2</button>
+                                                                        style="background-color:#1ba6df; color:#fff">{{$number_of_members}}</button>
                                                                 </td>
                                                                 <td>
                                                                     <button type="button" class="btn-round-xs btn-xs"
@@ -411,22 +415,17 @@
                                                                             </button>
                                                                         </div>
                                                                         <form
-                                                                            action="{{url('employer/teammember/edit')}}"
+                                                                            action="{{url('employer/manageteammember/add/edit')}}"
                                                                             method="post">
-                                                                            <input type="hidden" name="_token"
-                                                                                value="{{ csrf_token()}}">
+                                                                            {{ csrf_field() }}
+                                                                            <!-- <input type="hidden" name="_token"
+                                                                                value="{{ csrf_token()}}"> -->
                                                                             <div class="modal-body">
                                                                                 <div class="form-group row">
-                                                                                    <label for=""
-                                                                                        class="control-label col-lg-4">Group
-                                                                                        Name <span
-                                                                                            style="color:red;">*</span></label>
-                                                                                    <input type="text"
-                                                                                        name="type_namegroup"
-                                                                                        value="{{$team_member_type->type_name}}"
-                                                                                        style="width:66%">
-                                                                                    <input type="hidden" name="id"
-                                                                                        value="{{$team_member_type['type_ID']}}">
+                                                                                    <label for="" class="control-label col-lg-4">Group Name
+                                                                                     <span style="color:red;">*</span></label>
+                                                                                    <input type="text" name="type_namegroup" value="{{$team_member_type->type_name}}" style="width:66%">
+                                                                                    <input type="hidden" name="type_id" value="{{$team_member_type['type_ID']}}">
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button"

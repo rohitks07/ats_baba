@@ -56,36 +56,29 @@
 }
  
 
-.table td {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#fff;
+table.dataTable thead > tr > th {
+    / padding-left: 8px; /
+    padding-right: 30px;
 }
-.table tr {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 10px;
-    color: #000;
-    background:#fff;
+.table-bordered th {
+    border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+	font-size: 13px;
+	padding: 0.5em;
 }
-.table th {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#e4e4e4;
-}
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 0.5px solid #000;
-}
-.table-bordered thead td, .table-bordered thead th {
-    border-bottom-width: 1px;
+.table td{
+    padding: 0.10rem;
+	font-size: 12px;
+    padding-left: 1em;
+	border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+
 }
 .card-title {
     font-size: 17px;
@@ -525,6 +518,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h3 class="card-title" style="text-align:left;">Jobs</h3>
+                                    <input  id="myInput_jobs" class="form-control form-control-sm col-sm-3" type="search" placeholder="Search..">
                                 </div>
                                 <div class="col-md-6">
                                     <a href="{{url('employer/posted_jobs')}}"><h3 class="card-title" style="text-align:right;">View All</h3></a>
@@ -535,94 +529,54 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="table-responsive">
-                                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>Code</th>
-                                                    <th>Title</th>
-                                                    <th>Client</th>
-                                                    <th>Location</th>
-                                                    <th>Status</th>
-                                                    <th>Publish Dt.</th>
-                                                    <th>Closing Dt.</th>
-                                                    <th>Assignees</th>
-                                                    <th>Applications</th>
-                                                    <th> Actions </th>
-                                                </tr>
-                                            </thead>
-                                            
-                                            <tbody>
-                                                @foreach($toReturn['job_post'] as $job_post)
-                                                <input type="hidden" value="{{$job_post['ID']}}">
-                                                <?php $id=$job_post['ID'];
-                                                $dated=$job_post['dated'];
-                                                $last_date=$job_post['last_date']; 
-                                                $date_one = date("m-d-Y", strtotime($dated)); 
-                                                $date_two = date("m-d-Y", strtotime($last_date)); 
-                                                
-                                                ?>
-                                                 
-                                                    
-                                                <tr>
-                                                    <td>{{$job_post['job_code']}}</td>
-                                                    <td>{{$job_post['job_title']}}</td>
-                                                    <td>{{$job_post['client_name']}}</td>
-                                                    <td>{{$job_post['country']}}</td>
-                                                    <td align="center" valign="middle">
-                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#published{{$job_post['ID']}}">{{$job_post['sts']}}</button>
-                                                    </td>
-                                                    <td>{{$date_one}}</td>
-                                                    <td>{{$date_two}}</td>
-                                                    <td class="text-center">
-                                                        <span class="btn btn-primary btn-xs" style="cursor:none;">0</span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="btn btn-primary btn-xs" style="cursor:none;">0</span>
-                                                    </td>
-                                                    <td class="actions">
-                                                        <a href="{{url('employer/posted_job_assined/'.$id)}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Asign this job"><i class="fa fa-users"></i></a>
-                                                        <a href="#" class="hidden on-editing login-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                        <a href="#" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="submit a candidate"><i class="fa fa-user"></i></a>
-                                                    </td>
-                                                </tr>
-
-                                                <!-- /.modal -->
-                                                <div id="published{{$job_post['ID']}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title mt-0">{{$job_post['job_code']}}</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="{{url('job_application/sts')}}" method="post">
-                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group row">
-                                                                            <input type="hidden" name="id" value="{{$job_post['ID']}}">
-                                                                            <label for="address" class="control-label col-md-12">Status:<span style="color:red;">*</span></label>
-                                                                            <select name="sts" id="sts" class="form-control">
-                                                                                <option value="{{$job_post['sts']}}">Draft</option>
-                                                                                <option value="published"> Published</option>
-                                                                                <option value="on_hold">On Hold</option>
-                                                                                <option value="deleted">Deleted</option>
-                                                                                <option value="cancelled">Cancelled</option>
-                                                                                <option value="closed">Closed</option>
-                                                                                <option value="pending">Pending</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                                            <input type="submit" class="btn btn-info" style="background-color:#04B431; color:#fff"  value="Update Status"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                                @endforeach
-                                            </tbody>
+                                        <table id="datatablejob" class="table table-striped table-bordered dt-responsive nowrap">
+                                        <thead>                                           
+                                            <tr>
+                                            <th>Code</th>
+			                                <th width="20%">Title</th>
+			                                <th>Client</th>
+			                                <th width="15%">Location</th>
+			                                <th>Positions </th>
+											<th>Type</th>
+											<th width="7%">Visa Type</th>
+											<th width="7%">Pay Rate</th>
+			                                <th width="10%">Publish Date</th>
+											<th >Status</th>                                                    
+											<th width="10%">Closing Date</th>			 
+                                            </tr>
+                                        </thead>
+                                <tbody>
+                                @foreach($toReturn['post_job'] as $posted_job) 
+														<tr>
+															<?php
+															$id=$posted_job['ID'];
+															$last_date=$posted_job['last_date'];
+															$new_last_Date = date("m-d-Y", strtotime($last_date));
+															$closing_date=date('m-d-Y',strtotime($posted_job['dated']));
+															$application= count(DB::table('tbl_seeker_applied_for_job')->where('job_ID',$id)->get());
+															$client_submittal=count(DB::table('tbl_forward_candidate')->where('job_ID',$id)->get());
+															$assignee=count(DB::table('tbl_job_post_assign')->where('job_post_id',$id)->get());
+                                                        	?>
+																<td>{{$posted_job['job_code']}}</td>
+				                                                <td><a href="{{url('employer/jobsdetails/'.$id)}}">{{$posted_job['job_title']}} </a></td>
+				                                                <td>{{$posted_job['client_name']}}</td>
+				                                                <td>@if($posted_job['city']){{$posted_job['city']}}, &nbsp;@endif{{$posted_job['state']}}</td>
+				                                                <td>{{$posted_job['vacancies']}}</td>
+				                                                <td>{{$posted_job['job_mode']}}</td>
+																<?php $vis=$posted_job['job_visa_status'];
+                                                        $plus_visa=substr_count("$vis",",");
+                                                        $sh=explode(",",$vis);
+                                                        ?>
+                                                        <td onmouseover="visa_type({{$id}});" id="visa{{$id}}"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none;" >{{$posted_job['job_visa_status']}}</span></td>																<td>{{$posted_job['pay_min']}}-{{$posted_job['pay_max']}}</td>													
+				                                                <td>{{$closing_date}}</td>
+																<td>{{$posted_job['sts']}}</td>
+																<td>{{$new_last_Date}}</td>
+                                                                
+                                                                
+                                                                <!-- completed u r here -->
+                                                                                                    </tr>
+                                    @endforeach
+                                </tbody>
                                         </table>
                                         {{$toReturn['job_post']->links()}}
                                     </div>
@@ -645,7 +599,7 @@
                         <div class="card-header">
                                     <h3 class="card-title" style="text-align:left;">Job Application</h3>
                                     <a href="{{url('employer/Application')}}"><h3 class="card-title" style="text-align:right; margin-top:-35px;">View All</h3></a>
-                                        <input id="myInput" type="text" placeholder="Search..">
+                                        <input  id="myInput" class="form-control form-control-sm col-sm-2" type="search" placeholder="Search..">
                         </div><!--end of card-header-->
                       
                <div class="card-body" >
@@ -654,44 +608,52 @@
                                     <div class="table-responsive">
                                         <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap">
                                         <thead>
-                                            <tr>
-                                                <th colspan="6">Job Details</th>
-                                                <th colspan="3">Candidate Details</th>
-                                                <th>Submittal Date</th>
-                                            </tr>
-                                            <tr>
-                                                <th> Code</th>
-                                                <th>Title</th>
-                                                <th>Client</th>
-                                                <th>Location</th>
-                                                <th>Visa Type</th>
-                                                <th>Pay Rate</th>
-                                                <th>Name</th>
-                                                <th>Location</th>
-                                                <th>Visa</th>
-                                                <th>Date</th>
-        
-                                            </tr>
-                                        </thead>
-                                <tbody>
-                                    @foreach($toReturn['application'] as $application)
-                                    <tr>
-                                        <?php $date_application=$application['applied_date'];
-                                        $new_date = date("m-d-Y", strtotime($date_application));
-                                        ?>
-                                        <td>{{$application['job_code']}}</td>
-                                        <td>{{$application['job_title']}}</td>
-                                        <td>{{$application['job_client_name']}}</td>
-                                        <td>{{$application['location']}}</td>
-                                        <td>{{$application['job_visa']}}</td>
-                                        <td>{{$application['pay_min']}}-{{$application['pay_max']}}</td>
-                                        <td>{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
-                                        <td>{{$application['can_location']}}</td>
-                                        <td>{{$application['can_visa']}}</td>
-                                        <td>{{$new_date}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
+                                                    <!--<tr>
+                                                        <th colspan="6">Job Details</th>
+                                                        <th colspan="3">Candidate Details</th>
+                                                        <th>Submittal Date</th>
+
+                                                    </tr>-->
+                                                    <tr>
+                                                    	<th> Code</th>
+                                                        <th>Title</th>
+                                                        <th>Client</th>
+                                                        <th width="10%">Location</th>
+                                                        <th width="7%">Visa Type</th>
+                                                        <th width="7%">Pay Rate</td>
+                                                        <th>Name</td>
+                                                        <th width="10%">Location</th>
+                                                        <th>Visa</th>
+                                                        <th width="7%">Date</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="myTable"> 
+
+                                                    @foreach($toReturn['application'] as $application)
+                                                    <tr>   
+                                                    <?php $id=$application['application_id']; ?>  
+                                                        <td>{{$application['job_code']}}</td>
+                                                        <td><a href="{{url('employer/dashboard')}}">{{$application['job_title']}}</a></td>
+                                                        <td>{{$application['job_client_name']}}</td>
+                                                        <td>{{$application['job_city']}},&nbsp;{{$application['job_state']}}</td>
+                                                        <?php $vis=$application['job_visa'];
+                                                        $plus_visa=substr_count("$vis",",");
+                                                        $sh=explode(",",$vis);
+                                                        ?>
+                                                        <td onmouseover="visa_type_app({{$id}});" id="visa_app{{$id}}">
+                                                            <span id="app1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span>
+                                                            <span id="app2{{$id}}" style="display:none">{{$application['job_visa']}}</span>
+                                                        </td>
+                                                        <td>{{$application['pay_min']}}-{{$application['pay_max']}}</td>
+                                                        <td>{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
+                                                        <td>@if($application['seeker_city']){{$application['seeker_city']}},&nbsp;@endif{{$application['seeker_state']}}</td>
+                                                        <td>{{$application['can_visa']}}</td>
+                                                        <?php $applied_date=date('m-d-Y',strtotime($application['applied_date'])); ?>
+                                                        <td>{{$applied_date}}</td>
+                                                        </tr>
+                                                    @endforeach                                              
+                                                </tbody>
                             </table>
                             {{$toReturn['application']->links()}}
                         </div><!--end of table-->
@@ -717,7 +679,41 @@ $("#datatable tr").filter(function() {
 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 });
 });
+
+$("#myInput_jobs").on("keyup", function() {
+var value = $(this).val().toLowerCase();
+$("#datatablejob tr").filter(function() {
+$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 });
+});
+
+});
+</script>
+<script>
+	function visa_type(id)
+{
+	// alert();
+    $("#visa"+id).hover(function(){
+    $("#data1"+id).hide();
+    $("#data2"+id).show();   
+    },function(){
+    $("#data2"+id).hide();
+    $("#data1"+id).show();
+  });
+}
+</script>
+<script>
+	function visa_type_app(id)
+{
+	// alert();
+    $("#visa_app"+id).hover(function(){
+    $("#app1"+id).hide();
+    $("#app2"+id).show();   
+    },function(){
+    $("#app2"+id).hide();
+    $("#app1"+id).show();
+  });
+}
 </script>
 
 </body>
