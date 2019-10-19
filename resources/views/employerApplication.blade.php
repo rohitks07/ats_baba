@@ -30,37 +30,31 @@
             overflow-y: scroll;
         }
         
-.table td {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#fff;
+table.dataTable thead > tr > th {
+    / padding-left: 8px; /
+    padding-right: 30px;
 }
-.table tr {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#fff;
+.table-bordered th {
+    border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+	font-size: 13px;
+	padding: 0.5em;
 }
-.table th {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#e4e4e4;
+.table td{
+    padding: 0.10rem;
+	font-size: 12px;
+    padding-left: 1em;
+	border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+
 }
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 0.5px solid #000;
-}
-.table-bordered thead td, .table-bordered thead th {
-    border-bottom-width: 1px;
-}
+	
 </style>
 	<div id="wrapper">
         <div class="content-page">
@@ -77,7 +71,7 @@
                             <div class="card-body" >
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-12">
-                                            <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
+                                            <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
                                                 
                                                     <thead>
                                                     <!--<tr>
@@ -113,10 +107,10 @@
                                                         $plus_visa=substr_count("$vis",",");
                                                         $sh=explode(",",$vis);
                                                         ?>
-                                                        <td onmouseover="visa_type({{$id}});"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;{{$plus_visa}}+</span><span id="data2{{$id}}" style="display:none">{{$application['job_visa']}}</span></td>
+                                                        <td onmouseover="visa_type({{$id}});"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none">{{$application['job_visa']}}</span></td>
                                                         <td>{{$application['pay_min']}}-{{$application['pay_max']}}</td>
                                                         <td>{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
-                                                        <td>{{$application['seeker_city']}},&nbsp;{{$application['seeker_state']}}</td>
+                                                        <td>@if($application['seeker_city']){{$application['seeker_city']}},&nbsp;@endif{{$application['seeker_state']}}</td>
                                                         <td>{{$application['can_visa']}}</td>
                                                         <?php $applied_date=date('m-d-Y',strtotime($application['applied_date'])); ?>
                                                         <td>{{$applied_date}}</td>

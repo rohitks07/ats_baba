@@ -336,7 +336,6 @@ public function view_education($id="")
         $job_detail=$toReturn['job_post'];
         $mail_content=$request->comment;
         $mail_subject= $request->subject;
-       
         $data=array('job_detail'=>$job_detail,'tomail'=>$toemail,'form_mail'=>$formemail ,'mail_content'=>$mail_content,'mail_subject'=>$mail_subject,'sender_email'=>$sender_email,'sender_name'=>$sender_name);
         // return redirect('employer/search_resume');
         // return $data[''];
