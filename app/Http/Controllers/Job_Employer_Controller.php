@@ -1112,20 +1112,20 @@ public function PostjobsAssignToJobSeeker(Request $request)
         
         return redirect('employer/manageteammember');
     }
-    public function manageteamaddedit( Request $Request)
+    public function manageteamaddedit(Request $Request)
     {
         $type_ID=$Request->type_id;
         $team_type= tbl_team_member_type::where('type_ID',$type_ID)->first();
-        $type_name=$Request->type_name;
+        $type_name=$Request->type_namegroup;
         
         tbl_team_member_type::where('type_ID', $type_ID)->update(array('type_name'=>$type_name));
         return redirect('employer/manageteammember');
 
         
     }
+   
   
     
-
     public function add_email_form(Request $request)
     {
             $emailList = new Tbl_email_list_contacts;
