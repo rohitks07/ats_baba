@@ -197,7 +197,7 @@
                                             <label for="" class="control-label col-lg-4">First Name <span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="first_name" name="first_name"
+                                                <input type="text" class="form-control" id="first_name" name="first_name"
                                                     placeholder="First Name"><br>
                                                 <span id="first_namecheck">Not valid First Name</span>
                                             </div>
@@ -207,7 +207,7 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Middle Name </label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="middle_name" name="middle_name"
+                                                <input type="text" class="form-control" id="middle_name" name="middle_name"
                                                     placeholder="Middle Name">
                                                 <span id="middle_namecheck">Not valid Middle Name</span>
                                             </div>
@@ -218,7 +218,7 @@
                                             <label for="" class="control-label col-lg-4">Last Name<span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="last_name" name="last_name"
+                                                <input type="text" class="form-control" id="last_name" name="last_name"
                                                     placeholder="Last Name"><br>
                                                 <span id="last_namecheck">Not valid Last Name</span>
                                             </div>
@@ -231,7 +231,7 @@
                                             <label for="" class="control-label col-lg-4">Date of Birth (mm-dd-yyyy)<span
                                                     style="color:red;"></span></label>
                                             <div class="col-lg-8">
-                                                <input type="date" id="date_of_birth" name="dob" maxlength="10"
+                                                <input type="date" class="form-control" id="date_of_birth" name="dob" maxlength="10"
                                                     placeholder="date of Birth" style="width:83%; padding:0.5em;"><br>
                                                 <span id="dobcheck">Select a valid Date Of Birth</span>
                                             </div>
@@ -259,7 +259,7 @@
                                             <label for="" class="control-label col-lg-4">Email<span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="email" name="email" placeholder="Email"
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email"
                                                     maxlength="35"><br>
                                                 <span id="emailcheck">Please Enter valid Email</span>
                                             </div>
@@ -269,7 +269,7 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Skype ID</label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="skype_id" name="skype_id" maxlength="30"
+                                                <input type="text" id="skype_id" class="form-control" name="skype_id" maxlength="30"
                                                     placeholder="Skype ID">
                                             </div>
                                         </div>
@@ -278,7 +278,7 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Social Security No</label>
                                             <div class="col-lg-8">
-                                                <input type="text" name="ssn" id="ssn" autocomplete="off"
+                                                <input type="text" class="form-control" name="ssn" id="ssn" autocomplete="off"
                                                     placeholder="000-00-0000" maxlength="9">
                                                 <span id="ssncheck">Please Enter valid Social Security Number</span>
                                             </div>
@@ -304,7 +304,7 @@
                                             <label class="col-sm-4 control-label">Total It Experience <span
                                                     style="color:red;">*</span></label>
                                             <div class="col-sm-8">
-                                                <input type="text" id="Experience" placeholder="Total It Experience"
+                                                <input type="text" class="form-control" id="Experience" placeholder="Total It Experience"
                                                     name="total_experience" maxlength="10" required>
                                                 <span id="Experiencecheck">Please Enter Valid Experience Details </span>
                                             </div>
@@ -348,7 +348,7 @@
                                                     <span id="citycheck">Please choose Your Location</span>
                                                 </div>
                                             </div>
-                                            <input type="checkbox" id="myCheck" onclick="mycity()"
+                                            <input type="checkbox" class="form-control" id="myCheck" onclick="mycity()"
                                                 style="width:20px;height:20px;">
                                             <label id="city_label" class="control-label col-lg-4">Enter City if not
                                                 present</label>
@@ -365,7 +365,7 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Address Line 1</label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="address1" placeholder="Address Line 1"
+                                                <input type="text" class="form-control" id="address1" placeholder="Address Line 1"
                                                     name="addressline1" maxlength="100">
                                             </div>
                                         </div>
@@ -374,7 +374,7 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Address Line 2</label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="address1" placeholder="Address Line 2"
+                                                <input type="text" class="form-control" id="address1" placeholder="Address Line 2"
                                                     name="addressline2" maxlength="100">
                                             </div>
                                         </div>
@@ -384,7 +384,7 @@
                                             <label for="" class="control-label col-lg-4">Mobile Phone<span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="mobile_number" name="mobilephone"
+                                                <input type="text" class="form-control" id="mobile_number" name="mobilephone"
                                                     placeholder="Mobile Phone" maxlength="12"><br>
                                                 <span id="mob_ph_check">Please Enter a Valid Mobile Number</span>
                                             </div>
@@ -395,7 +395,7 @@
                                             <label for="" class="control-label col-lg-4">Home Phone<span
                                                     style="color:red;"></span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="phone" name="homephone" placeholder="Home Phone"
+                                                <input type="text" class="form-control" id="phone" name="homephone" placeholder="Home Phone"
                                                     maxlength="12"><br>
                                                 <span id="home_ph_check">Please Enter a Valid Home Number</span>
                                             </div>
@@ -406,7 +406,7 @@
                                             <label for="" class="control-label col-lg-4">Upload Resume<span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="file" class="form-control" name="cv_file" id="cv_file"
+                                                <input type="file" class="form-control" class="form-control" name="cv_file" id="cv_file"
                                                     style="background:#fff;" required>
                                                 <p>Upload files only in .doc, .docx or .pdf format with maximum size of
                                                     32 MB.</p>
