@@ -349,7 +349,7 @@ textarea[class="form-control"]{
 																		<th>Full Name</th>
 																		<th>Email List Name</th>
 																		<th>Date Created</th>
-																		<th>Created By</th>
+																		{{-- <th>Created By</th> --}}
 																		<th>Last Updated</th>
 																		<th>Last Updated By</th>
 																		<th>Actions</th>
@@ -365,11 +365,12 @@ textarea[class="form-control"]{
 																		<td>{{$emaillist -> last_name }}</td>
 																		<td>{{$emaillist -> full_name }}</td>
 																		<td>{{$emaillist -> email_contact_id }}</td>
-																		<td>{{$emaillist -> created_date }}</td>
-																		<!--<td>{{date('d-m-Y', strtotime($emaillist->created_date))}}</td>-->
-																		<td>{{$emaillist->id}}</td>
-																		<td>{{$emaillist -> last_updated_date }}</td>
-																		<!--<td>{{date('d-m-Y', strtotime($emaillist -> last_updated_date))}}</td>-->
+																		<td>{{date('d-m-Y', strtotime($emaillist -> created_date))}}</td>
+																		{{-- <td>{{date('d-m-Y', strtotime($emaillist->created_date))}}</td> --}}
+																		{{-- <td>{{$emaillist->id}}</td> --}}
+																		{{-- <td>{{$emaillist -> last_updated_date }}</td> --}}
+																		<td>--NA--</td>
+																		{{-- <td>{{date('d-m-Y', strtotime($emaillist -> last_updated_date))}}</td> --}}
 																		<td>{{$emaillist ->  first_name}}</td>
 																		<td class="actions">
                                                                     @if(!empty($toReturn['user_type']=="teammember")) 

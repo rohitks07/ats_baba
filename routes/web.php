@@ -168,8 +168,8 @@ Route::get('employer/manages_team_members','EmployerManageTeamMemberController@i
 Route::get('employer/post_new_contacts','ContactController@index');
 Route::post('employer/post_new_contacts/add','ContactController@add');
 Route::get('employer/my_posted_contacts','ContactController@show');
-Route::get('employer/my_posted_contacts/delete/{id}','ContactController@deletContactController@delete');
-Route::post('employer/post_new_email_contact/add','ContactController@add_email_form');
+Route::get('employer/my_posted_contacts/delete/{id}','ContactController@delet');
+Route::post('employer/post_new_email_contact/add','Job_Employer_Controller@add_email_form');
 Route::get('employer/post_new_email_contact/show','ContactController@show_email_form');
 Route::get('employer/my_posted_contacts/delete_email/{id}','ContactController@delete_email');
 Route::get('employer/my_posted_contacts/delete_email_list/{id}','ContactController@delete_email_list');

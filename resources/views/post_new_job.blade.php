@@ -485,9 +485,16 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <center>
-                                    <input name="skills" id="Result" class="form-control" readonly="readonly">
-                                </center>
+                                
+                                    <input name="skills" id="Result" class="form-control" disabled>
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" onclick="fun()" name="" id="val_check" value="checkedValue">
+                                        Display value
+                                      </label>
+                                    </div>
+
+                               
                                 <br>
 
                                 <div class="form-group row">
@@ -525,6 +532,14 @@
     </div>
 </div>
 @include('include.emp_footer')
+<script>
+    function fun(){
+       
+        $("#Result").removeAttr('disabled');
+
+    }
+
+</script>
 <script type="text/javascript">
 $("#country").on("change", function(e){
         $('#state_text').empty();

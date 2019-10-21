@@ -1132,6 +1132,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
             $emailList ->salutation = $request->salutation;
             $emailList ->first_name = $request->firstname;
             $emailList ->last_name  = $request->lastname;
+            $emailList ->created_date = $request->date;
             $emailList ->full_name  = $request->fullname;
             $emailList ->email_contact_id =$request->emailid;
             $emailList ->add_in_contact_db = $request->contactdatabase;
@@ -1611,7 +1612,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $job_history->created_by=Session::get('id');
         $job_history->updated_by=Session::get('id');
         $job_history->save();
-        // return view('emails.forward_candidate')->with('data',$data);
+        return view('emails.forward_candidate')->with('data',$data);
                return redirect('employer/Application');
     }
     public function show_job_note(Request $request){
