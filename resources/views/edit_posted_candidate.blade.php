@@ -274,6 +274,7 @@ $.ajaxSetup({
 															  <option value="">Select city </option>
 				                                               
 													  </select>
+													  
 													  {{-- <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
 														<div id="select_city">
 															<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required> --}}
@@ -723,28 +724,127 @@ $(function() {
 					}
 				}
 				
+				// //Validation Location
+				// $("#validatefrm").click(function()
+				// {
+				// 	check_location();
+				// });
+				// function check_location()
+				// {
+				// 	var loc_val=$("#country").val();
+				// 	var loc_val1=$("#state_text").val();
+				// 	var loc_val2=$("#city").val();
+				// 	if((loc_val=="")||(loc_val1=="")||(loc_val2==""))
+				// 	{
+				// 		$("#citycheck").show();
+				// 		$("#citycheck").focus();
+				// 		$("#citycheck").css("color","red");
+				// 		err_city=false;
+				// 		return false;
+				// 	}
+				// 	else
+				// 	{
+				// 		$("#citycheck").hide();
+				// 	}
 				//Validation Location
-				$("#validatefrm").click(function()
-				{
-					check_location();
-				});
-				function check_location()
-				{
-					var loc_val=$("#country").val();
-					var loc_val1=$("#state_text").val();
-					var loc_val2=$("#city").val();
-					if((loc_val=="")||(loc_val1=="")||(loc_val2==""))
-					{
-						$("#citycheck").show();
-						$("#citycheck").focus();
-						$("#citycheck").css("color","red");
-						err_city=false;
-						return false;
-					}
-					else
-					{
-						$("#citycheck").hide();
-					}
+				$("#validatefrm").click(function () {
+            check_location();
+        });
+        $("#country").blur(function () {
+            check_location();
+        });
+        $("#state_text").blur(function () {
+            check_location();
+        });
+
+        function check_location() {
+            var loc_val = $("#country").val();
+            var loc_val1 = $("#state_text").val();
+            if ((loc_val == "") || (loc_val1 == "")) {
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+
+                err_country = false;
+                err_state = false;
+                return false;
+
+            } else {
+                $("#citycheck").hide();
+            }
+        }
+
+        $("#validatefrm").click(function () {
+            check_city();
+        });
+        
+
+        function check_city() {
+            var loc_val2 = $("#city").val();
+            var jobcode_val = $("#textCity_input").val();
+            var checkBox = document.getElementById("myCheck");
+            if ((checkBox.checked == true)&&(jobcode_val=="")) {
+                console.log("new");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
+                return false;
+            }
+            else if((checkBox.checked == false)&&(loc_val2==""))
+            {
+                console.log("one");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
+                return false;
+                
+            }
+
+
+        
+        }
+
+        $("#validatefrm").click(function () {
+            mycity();
+        });
+        $("#myCheck").click(function () {
+            mycity();
+        });
+
+        
+        function mycity() {
+        $("#textCity_check").hide();
+        var checkBox = document.getElementById("myCheck");
+        if (checkBox.checked == true) {
+            $('#select_city').css('display', 'none');
+            $('#textCity').css('display', 'block');
+            $('#city_label').css('display', 'none')
+            $("#validatefrm").click(function () {
+                var jobcode_val = $("#textCity_input").val();
+                var regex1 = /^[a-zA-Z ]*$/;
+
+                if (jobcode_val == "") {
+                    $("#textCity_check").show();
+                    $("#textCity_check").focus();
+                    $("#textCity_check").css("color", "red");
+                    err_text_city = false;
+                    return false;
+                } else {
+                    isValid = regex1.test(jobcode_val);
+                    $("#textCity_check").css("display", !isValid ? "block" : "none");
+                    $("#textCity_check").css("color", "red");
+                    
+                    err_text_city = false;
+                }
+            });
+
+        } else {
+            $('#select_city').css('display', 'block');
+            $('#textCity').css('display', 'none');
+            $('#city_label').css('display', 'block')
+        }
 				}
 
 				$("#validatefrm").click(function()
@@ -755,13 +855,16 @@ $(function() {
 					err_email=true;
 					err_visa=true;
 					err_city=true;
+					err_state = true;
 					check_firstname();
 					check_lastname();
 					check_dob();
 					check_email();
 					check_visa();
 					check_location();
-					if((err_firstname==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_visa==true)&&(err_city==true))
+
+					
+					if((err_state == true)&&(err_city==true)&&(err_firstname==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_visa==true)&&(err_city==true))
 					{
 						return true;
 					}
@@ -975,7 +1078,7 @@ $(function() {
 			});
 		</script>
 
-<script>
+<!-- <script>
 		function mycity() {
 	
 			var checkBox = document.getElementById("myCheck");
@@ -992,7 +1095,7 @@ $(function() {
 				$('#city_label').css('display','block')
 				}
 		}
-		</script>
+		</script> -->
 		
 
 </body>

@@ -98,9 +98,13 @@ table.dataTable thead > tr > th {
 
                                                     @foreach($toReturn['application'] as $application)
                                                     <tr>   
-                                                    <?php $id=$application['application_id']; ?>  
+                                                    <?php $id=$application['application_id'];
+                                                        $job_id=$application['ID'];
+                                                        $seeker_id=$application['seeker_id'];
+
+                                                        ?>  
                                                         <td>{{$application['job_code']}}</td>
-                                                        <td><a href="{{url('employer/dashboard')}}">{{$application['job_title']}}</a></td>
+                                                        <td><a href="{{url('employer/jobsdetails/'.$job_id)}}">{{$application['job_title']}}</a></td>
                                                         <td>{{$application['job_client_name']}}</td>
                                                         <td>{{$application['job_city']}},&nbsp;{{$application['job_state']}}</td>
                                                         <?php $vis=$application['job_visa'];
@@ -109,7 +113,7 @@ table.dataTable thead > tr > th {
                                                         ?>
                                                         <td onmouseover="visa_type({{$id}});"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none">{{$application['job_visa']}}</span></td>
                                                         <td>{{$application['pay_min']}}-{{$application['pay_max']}}</td>
-                                                        <td>{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
+                                                        <td><a href="{{url('employer/job_matching/'.$seeker_id)}}">{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
                                                         <td>@if($application['seeker_city']){{$application['seeker_city']}},&nbsp;@endif{{$application['seeker_state']}}</td>
                                                         <td>{{$application['can_visa']}}</td>
                                                         <?php $applied_date=date('m-d-Y',strtotime($application['applied_date'])); ?>
@@ -118,6 +122,7 @@ table.dataTable thead > tr > th {
                                                         <a data-toggle="modal" data-target="#interviewModal"><i class="fa fa-clock-o" aria-hidden="true" title="Schedule Interview"></i></a>
                                                         <a href="{{url('employer/appli_del/'.$id)}}" class="hidden on-editing login-row" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                         <a href="{{url('employer/appli_forward/'.$id)}}" ><i class="fa fa-arrow-right"  title="Candidate Forward "></i></a>
+                                                        <a 
                                                         </td>
                                                         <div class="modal fade" id="interviewModal" role="dialog">
                                                         <div class="modal-dialog modal-lg">

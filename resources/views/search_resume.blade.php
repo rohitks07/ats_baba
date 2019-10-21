@@ -121,14 +121,14 @@ table.dataTable thead > tr > th {
                                             <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width:100%;overflow-x:scroll;">
                                                 <thead>
                                                     <tr>                                                   
-														<th width="10%">Name</th>
+														<th width="15%">Name</th>
 														<th>BIO</th>
 														<th width="10%">Location</th>
-														<th>Visa</th>
+														<th width="10%">Visa</th>
 														<th>Exp. (Yr.)</th>
 														<th>Education</th>
-														<th>Email (H)</th>
-														<th>Mobile</th> 
+														<th width="10%">Email (H)</th>
+														<th width="10%">Mobile</th> 
 														<th>Source</th>
 														<th>Skype Id</th> 
 														<th width="10%">Actions</th>     													
@@ -152,7 +152,7 @@ table.dataTable thead > tr > th {
 														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
 														<!-- <td>{{$dob}}</td> -->
 
-                                                        <td>@if(@$personal[$key]->can_gender=="male")
+                                                        <td>@if(@($personal[$key]->can_gender)=="male")
                                                         @if(@$age!="0")M {{$age}}@endif
                                                         @else
                                                         @if(@$age!="0")F {{$age}}@endif

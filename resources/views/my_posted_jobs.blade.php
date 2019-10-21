@@ -90,13 +90,13 @@
                                                 <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
 			                                        <thead>
 			                                            <tr>                                                   
-			                                                <th>Code</th>
+			                                                <th width="10%">Code</th>
 			                                                <th width="20%">Title</th>
 			                                                <th>Client</th>
 			                                                <th width="15%">Location</th>
-			                                                <th>Positions </th>
+			                                                <th># </th>
 															<th>Type</th>
-															<th width="7%">Visa Type</th>
+															<th width="7%">Visa </th>
 															<th width="7%">Pay Rate</th>
 			                                                <th width="10%">Publish Date</th>
 															<th >Status</th>                                                    

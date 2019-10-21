@@ -348,5 +348,33 @@ public function view_education($id="")
             // return view('emails.job_detail')->with('data',$data);
             return redirect('employer/search_resume');
     }
+    public function job_matching($seeker_id)
+    {
+        $data= Tbl_job_seekers::where('ID',$seeker_id)->get();
+        // return $data;
+        $results = array();
+        foreach ($data as $key => $value) {
+          $d = $value;
+          $matchrecord=DB::table('tbl_post_jobs')->where('required_skills','LIKE', '%'.$value->skills.'%')->orWhere('city', 'LIKE', '%'.$value->city.'%')->get()->toArray();
+        //   $results=$d;
+        // foreach($matchrecord as $key=>$valueff)
+        // {
+        //         echo $value->skills."<br>";
+
+        $candiate_skill=$value->skills;
+        // echo $matchrecord[$key]->required_skills."<bre>";
+        // }
+       
+        //   $percentage['matchingskill'][$key]=$value->skills;
+          // array_intersect($value->required_skills,$results['qualification'])
+      }
+
+      $results=$matchrecord;
+      echo"<pre>";
+      print_r($candiate_skill);
+      exit;
+    //   return $results;
+        return view('candidate_matching_job')->with('results',$results);
+    }
 
 }
