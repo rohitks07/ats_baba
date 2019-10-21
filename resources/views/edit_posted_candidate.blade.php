@@ -149,7 +149,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">First Name <span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{$details['first_name']}}"><br>
+												<input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{{$details['first_name']}}"><br>
 												<span id="first_namecheck">Not valid First Name</span>
 											</div>
 									  </div>
@@ -158,7 +158,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Middle Name </label>
 											<div class="col-lg-8">
-												<input type="text" id="middle_name" name="middle_name" placeholder="Middle Name" value="{{$details['middle_name']}}">
+												<input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Middle Name" value="{{$details['middle_name']}}">
 											</div>
 									  </div>
 								<!--end of Middle Name-->
@@ -166,7 +166,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Last Name<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{$details['last_name']}}" ><br>
+												<input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{{$details['last_name']}}" ><br>
 												<span id="last_namecheck">Not valid Last Name</span>
 											</div>
 									  </div>
@@ -176,7 +176,7 @@ $.ajaxSetup({
 									 <div class="form-group row">
 	                                            <label for="confirm_password"  class="control-label col-lg-4"> Date Of Birth (mm-dd-yyyy)</label>
 	                                            <div class="col-lg-8">
-	                                               	<input type="date" id="dob" name="dob" value="{{$details['dob']}}" placeholder="dd/mm/yyyy" style="width:83%; padding:0.5em;"  >
+	                                               	<input type="date" class="form-control" id="dob" name="dob" value="{{$details['dob']}}" placeholder="dd/mm/yyyy" style="width:83%; padding:0.5em;"  >
 	                                            </div>
 	                                        </div>
 								<!--end Date of Birth-->
@@ -196,7 +196,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Email<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="email" name="email" placeholder="Email" maxlength="35" value="{{$details['email']}}"><br>
+												<input type="text" class="form-control" id="email" name="email" placeholder="Email" maxlength="35" value="{{$details['email']}}"><br>
 												<span id="emailcheck">Please Enter valid Email</span>
 											</div>
 									</div>
@@ -205,7 +205,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Skype ID</label>
 											<div class="col-lg-8">
-												<input type="text" id="skype_id"  name="skype_id" maxlength="30" value="{{$details['skype_id']}}">
+												<input type="text" class="form-control" id="skype_id"  name="skype_id" maxlength="30" value="{{$details['skype_id']}}">
 											</div>
 									  </div>
 								<!--end of Skype ID-->
@@ -213,7 +213,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Social Security No</label>
 											<div class="col-lg-8">
-												<input type="text" name="ssn" id="ssn" autocomplete="off" placeholder="000-00-0000"  maxlength="9" value="{{$details['ssn']}}">
+												<input type="text" class="form-control" name="ssn" id="ssn" autocomplete="off" placeholder="000-00-0000"  maxlength="9" value="{{$details['ssn']}}">
 											</div>
 									  </div>
 								<!--end of Social Security No-->
@@ -234,7 +234,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label class="col-sm-4 control-label">Total It Experience <span style="color:red;">*</span></label>
 											<div class="col-sm-8">
-                                            <input type="text" id="Experience" placeholder="Total It Experience" name="total_experience" maxlength="10"  required value="{{$details['experience']}}">
+                                            <input type="text" class="form-control" id="Experience" placeholder="Total It Experience" name="total_experience" maxlength="10"  required value="{{$details['experience']}}">
 												<!--<span id="Experiencecheck">Plz Insert It Experience </span>-->
 										   </div>
 									</div>
@@ -299,7 +299,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Address Line 1</label>
 											<div class="col-lg-8">
-												<input type="text" id="address1" placeholder="Address Line 1" name="addressline1" maxlength="100" value="{{$details['address_line_1']}}">
+												<input type="text" class="form-control" id="address1" placeholder="Address Line 1" name="addressline1" maxlength="100" value="{{$details['address_line_1']}}">
 											</div>
 									  </div>
 								<!--end of Address Line 1-->
@@ -307,7 +307,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Address Line 2</label>
 											<div class="col-lg-8">
-												<input type="text" id="address1" placeholder="Address Line 2" name="addressline2" maxlength="100" value="{{$details['address_line_2']}}">
+												<input type="text" class="form-control" id="address1" placeholder="Address Line 2" name="addressline2" maxlength="100" value="{{$details['address_line_2']}}">
 											</div>
 									  </div>
 								<!--end of Address Line 2-->
@@ -315,7 +315,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Mobile Phone<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="mobile_number" name="mobilephone" maxlength="12" value="{{$details['mobile']}}"><br>
+												<input type="text" class="form-control" id="mobile_number" name="mobilephone" maxlength="12" value="{{$details['mobile']}}"><br>
 												<span id="mob_ph_check">Please Enter a Valid Mobile Number</span>
 											</div>
 									  </div>
@@ -324,7 +324,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Home Phone<span style="color:red;"></span></label>
 											<div class="col-lg-8">
-												<input type="text" id="phone" name="homephone" maxlength="12" value="{{$details['home_phone']}}"><br>
+												<input type="text" class="form-control" id="phone" name="homephone" maxlength="12" value="{{$details['home_phone']}}"><br>
 												<span id="home_ph_check">Please Enter a Valid Home Number</span>
 											</div>
 									  </div>
@@ -333,7 +333,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Upload Resume<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="file" class="form-control" name="cv_file" id="cv_file" style="background:#fff;" />
+												<input type="file"  class="form-control" name="cv_file" id="cv_file" style="background:#fff;" />
 												<input type="hidden" name="cv_file_before" value="{{$details['cv_file']}}" ><a href="{{url('public/seekerresume/'.$details['cv_file'])}}">{{$details['cv_file']}}</a>
 												<p>Upload files only in .doc, .docx or .pdf format with maximum size of 32 MB.</p>
 												<span id="resume_check">Please Choose a Valid File</span>
