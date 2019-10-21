@@ -119,7 +119,7 @@
 									<div class="form-group row" >
 										<label for="" class="control-label col-lg-4">Email (H)<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												 <input type="text" id="" name="email_h" placeholder="Email ID" maxlength="60" required>
+												 <input type="email" class="form-control" id="" name="email_h" placeholder="Email ID" maxlength="60" required>
 											</div>
 									  </div>
 								<!--end of Email (H)-->
@@ -127,7 +127,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Email (W)</label>
 											<div class="col-lg-8">
-												 <input type="text" id="" name="email_w" placeholder="Email ID"  maxlength="60">
+												 <input type="email" class="form-control" id="" name="email_w" placeholder="Email ID"  maxlength="60">
 											</div>
 									  </div>
 								<!--end of Email (W)-->

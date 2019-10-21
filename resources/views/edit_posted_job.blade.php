@@ -460,7 +460,15 @@
                    <div class="card">
                     <div class="card-body">
                         <center>
-                            <input name="skills" id="Result" class="form-control" value="{{$toReturn['post_job']->required_skills}}" readonly="readonly">
+                            <input name="skills" id="Result" class="form-control" value="{{$toReturn['post_job']->required_skills}}" readonly>
+                            <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" onclick="fun()" name="" id="val_check" value="checkedValue">
+                                      Edit Skills
+                                    </label>
+                                  </div>
+                                  <br>
+                                  <br>
                         </center>
                         <br>
 
@@ -499,6 +507,15 @@
        </div>
    </div>
    @include('include.emp_footer')
+
+   <script >
+   function fun(){
+       
+       $("#Result").removeAttr('readonly');
+
+   }
+   
+   </script>
    <!-- Validation of Post new Job -->
    <script type="text/javascript">
     $('#country').on('change', function (e) {

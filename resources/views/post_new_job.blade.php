@@ -486,11 +486,11 @@
                         <div class="card">
                             <div class="card-body">
                                 
-                                    <input name="skills" id="Result" class="form-control" disabled>
+                                    <input name="skills" id="Result" class="form-control" readonly>
                                     <div class="form-check">
                                       <label class="form-check-label">
                                         <input type="checkbox" class="form-check-input" onclick="fun()" name="" id="val_check" value="checkedValue">
-                                        Display value
+                                        Edit skills
                                       </label>
                                     </div>
 
@@ -535,7 +535,7 @@
 <script>
     function fun(){
        
-        $("#Result").removeAttr('disabled');
+        $("#Result").removeAttr('readonly');
 
     }
 

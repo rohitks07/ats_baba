@@ -275,15 +275,15 @@ ini_set('memory_limit', '-1');
             // $Add_group = new tbl_team_member_type();
             $Add_to_post_job = new tbl_post_jobs(); 
             // $Add_job_industries =new tbl_job_industries();
-             $Add_to_post_job ->for_group      =  $request->group_of_company;
+             $Add_to_post_job ->for_group     =  $request->group_of_company;
             $Add_to_post_job ->client_name    =  $request->company_name;
             $Add_to_post_job ->privacy_level  =  $request->privacy_level;
             $Add_to_post_job ->sts            =  $request->status;
-            $Add_to_post_job ->industry_ID =  $request->industry;
+            $Add_to_post_job ->industry_ID    =  $request->industry;
             $Add_to_post_job ->job_code       =  $request->job_code;
             $Add_to_post_job ->job_title      =  $request->job_title;
             $Add_to_post_job ->vacancies      =  $request->no_of_vacancies;
-            $Add_to_post_job->employer_ID   =Session::get('id');
+            $Add_to_post_job->employer_ID     =  Session::get('id');
             $Add_to_post_job->owner_id=$request->owner_name;
             $Add_to_post_job->company_ID=Session::get('org_ID');
             $date = $request->closeing_date;
@@ -722,12 +722,15 @@ public function PostjobsAssignToJobSeeker(Request $request)
     public function post_new_candidate(Request $request)
     {
         
-        $con=$request->country;
-        $sta=$request->state;
-        $cit=$request->city;
-        $val_contries=countries::where('country_id',$con)->first('country_name');
-        $val_state=states::where('state_id',$sta)->first('state_name');
-        $val_city=cities::where('city_id',$cit)->first('city_name');
+
+             $con =  $request->country;
+             $sta=  $request->state;
+             $cit=  $request->city_name;
+             $city_text=$request->city_text_name;
+            
+             $val_contries=countries::where('country_id',$con)->first('country_name');
+             $val_state=states::where('state_id',$sta)->first('state_name');
+
         $validation = Validator::make($request->all(), [
                 'cv_file' => 'required'
             ]);
@@ -755,14 +758,22 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $postcandidate->skype_id=$request->skype_id;
         $postcandidate->ssn=$request->ssn;
         $postcandidate->visa_status=$request->visa_status;
-        $postcandidate->country=$val_contries['country_name'];
-        $postcandidate->state=$val_state['state_name'];
-        $postcandidate->city=$val_city['city_name'];
+        
         $postcandidate->address_line_1=$request->addressline1;
         $postcandidate->address_line_2=$request->addressline2;
         $postcandidate->mobile=$request->mobilephone;
         $postcandidate->home_phone=$request->homephone;
         $postcandidate->cv_file=$store_cv;
+        if(!empty($city_text))
+             {
+                $postcandidate->city    = $city_text;
+             }
+             else{
+                $val_city=cities::where('city_id',$cit)->first('city_name');
+                $postcandidate->city=$val_city['city_name'];
+             } 
+             $postcandidate->country = $val_contries['country_name'];
+             $postcandidate->state   = $val_state['state_name'];
         
         if ($request->hasFile('file_other1')){
         $postcandidate->otherdocuments1=$file_other1_cv;
@@ -903,6 +914,10 @@ public function PostjobsAssignToJobSeeker(Request $request)
             $new_profile_image = rand() . '.' . $profile_image->getClientOriginalExtension();
             $profile_image->move(public_path('seekerresume'), $new_profile_image);
             }
+
+
+
+            
     	$team=new tbl_team_member();
     	$team->employer_id=Session::get('id');
     	$team->company_id=Session::get('org_ID');
@@ -1039,6 +1054,8 @@ public function PostjobsAssignToJobSeeker(Request $request)
                     ->select('tbl_module.module_id as moduleid','tbl_module.module_name as nameofmodule','tbl_team_member_permission.is_add as add',
                             'tbl_team_member_permission.is_edit as edit','tbl_team_member_permission.is_delete as delete',
                             'tbl_team_member_permission.is_read as read')->get()->toArray();
+
+
         
         return view('edit_team_member')
                 ->with('data', $data)
@@ -1050,6 +1067,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
     
     public function edit_teammember_add(Request $Request)
     {
+        // return $Request->profile_image;
         $date=date('Y-m-d h:i:s',time());
         $con =  $Request->country;
         $sta=  $Request->state;
@@ -1057,14 +1075,27 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $val_contries=countries::where('country_id',$con)->orWhere('country_name',$con)->first('country_name');
         $val_state=states::where('state_id',$sta)->orWhere('state_name',$sta)->first('state_name'); 
         $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
-        
+        if ($Request->has('profile_image')){
+            $cv = $Request->file('profile_image');
+            $store_cv =$cv->getClientOriginalName();
+            $cv->move(public_path('seekerresume'), $store_cv);
+            // echo $cv;
+            // echo"done";
+            // exit;
+            }
+            else{
+                $store_cv=$Request->cv_file_before;
+                // echo"work";
+            }
+
+            // return $store_cv;
         tbl_team_member::where('ID', $Request->ID)->update(array(
         'team_member_type'=>$Request->group,
         'email'=>$Request->email,
         'pass_code'=>$Request->password,
         'full_name'=>$Request->full_name,
         'first_name'=>$Request->full_name,
-        'profile_image'=>$Request->profile_image,
+        'profile_image'=>$store_cv,
         'jobs_history'=>$Request->jobs_history,
         'phone'=>$Request->phone,
         'mobile_number'=>$Request->mobile_number,

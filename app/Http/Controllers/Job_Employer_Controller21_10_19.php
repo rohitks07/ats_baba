@@ -307,7 +307,6 @@ class Job_Employer_Controller extends Controller
 
 
             $toReturn['name'] = tbl_team_member::where('ID',$io['owner_id'])->get(['ID','full_name'])->toArray();
-            
             $toReturn['team_member_type']=tbl_team_member_type::get()->toArray();
             $toReturn['team_member']     =tbl_team_member::get()->toArray();
             // return $toReturn['team_member'];

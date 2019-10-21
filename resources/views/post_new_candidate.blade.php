@@ -3,6 +3,8 @@
 <html lang="en">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <script>
     $.ajaxSetup({
         headers: {
@@ -353,7 +355,9 @@
                                             <div id="textCity" style="display:none;" class="form-group row col-md-12">
                                                 <label for="" class="control-label col-lg-4">Enter City <span
                                                         style="color:red;">*</span></label>
-                                                <input type="text" class="col-sm-5" id="" name="city_text_name">
+                                                <input type="text" class="col-sm-5" id="textCity_input"
+                                                    name="city_text_name">
+                                                <label id="textCity_check">Need to be filled </label>
                                             </div>
                                         </div>
                                         <!--end Location -->
@@ -764,14 +768,15 @@
 
                                                                 <div class="col-md-12">
                                                                     <input name="skills" id="Result"
-                                                                        class="form-control" type="text" disabled>
+                                                                        class="form-control" type="text" readonly>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-check">
                                                                         <label class="form-check-label">
                                                                             <input type="checkbox"
                                                                                 class="form-check-input" name=""
-                                                                                id="edit_skills" value="checkedValue" onclick="check_val()">
+                                                                                id="edit_skills" value="checkedValue"
+                                                                                onclick="check_val()">
                                                                             Click to edit skills
                                                                         </label>
                                                                     </div>
@@ -846,7 +851,7 @@
                                                 </div> <!-- card -->
                                             </div> <!-- card-body -->
                                             <center><input type="submit" name="submit" id="validatefrm1" value="Submit"
-                                                    class="btn btn-primary" style="background: #1ba6df !important;">
+                                                    class="btn btn-primary" style="background: #1ba6df !important;"   >
                                             </center>
                             </form>
                         </div> <!-- card -->
@@ -862,11 +867,10 @@
 <!-- END wrapper -->
 @include('include.emp_footer')
 <script>
-    
-	function check_val(){
-		$("#Result").removeAttr('disabled');
-		
-	}
+    function check_val() {
+        $("#Result").removeAttr('readonly');
+
+    }
 
 </script>
 
@@ -1154,11 +1158,14 @@
         var err_ssn = true;
         var err_visa = true;
         var err_Experience = true;
-        var err_city = true;
         var err_mob_ph = true;
         var err_home_ph = true;
         var err_resume = true;
         var err_skills = true;
+        var err_city = true;
+        var err_country = true;
+        var err_state = true;
+        var err_city_val = true;
 
         //validate first name
         $("#first_name").blur(function () {
@@ -1328,7 +1335,7 @@
             }
         }
         //Validation Experience
-        $("#Experience").keyup(function () {
+        $("#Experience").keypress(function () {
             var var_tmp = $("#Experience").val();
             $("#Experience").val(var_tmp.replace(/[^0-9]/g, ''));
         });
@@ -1352,25 +1359,111 @@
             }
         }
         //Validation Location
-        $("#city").blur(function () {
+        $("#country").blur(function () {
             check_location();
         });
 
         function check_location() {
             var loc_val = $("#country").val();
             var loc_val1 = $("#state_text").val();
-            var loc_val2 = $("#city").val();
-            if ((loc_val == "") || (loc_val1 == "") || (loc_val2 == "")) {
+            if ((loc_val == "") || (loc_val1 == "")) {
                 $("#citycheck").show();
                 $("#citycheck").focus();
                 $("#citycheck").css("color", "red");
                 err_city = false;
                 return false;
             } else {
-                err_city = true;
+
                 $("#citycheck").hide();
             }
         }
+        $("#validatefrm1").blur(function () {
+            check_city();
+        });
+
+        function check_city() {
+            var loc_val = $("#city").val();
+            var jobcode_val = $("#textCity_input").val();
+            var checkBox = document.getElementById("myCheck");
+            if ((checkBox.checked == true) && (jobcode_val == "")) {
+                console.log("new");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
+
+
+
+            } else if ((checkBox.checked == false) && (loc_val == "")) {
+                console.log("one");
+                $("#citycheck").show();
+                $("#citycheck").focus();
+                $("#citycheck").css("color", "red");
+                err_city_val = false;
+
+
+
+            }
+            else if((checkBox.checked == true)&&(jobcode_val !== ""))
+            {
+                $("#citycheck").hide();
+                err_city_val = true;
+            }
+
+        }
+        $("#validatefrm1").click(function () {
+            mycity();
+        });
+        $("#myCheck").click(function () {
+            mycity();
+        });
+
+        function mycity() {
+            $("#textCity_check").hide();
+            var checkBox = document.getElementById("myCheck");
+            if (checkBox.checked == true) {
+                $('#select_city').css('display', 'none');
+                $('#textCity').css('display', 'block');
+                $('#city_label').css('display', 'none')
+                $("#validatefrm1").click(function () {
+                    var jobcode_val = $("#textCity_input").val();
+                    var regex1 = /^[a-zA-Z ]*$/;
+
+                    if (jobcode_val == "") {
+                        $("#textCity_check").show();
+                        $("#textCity_check").focus();
+                        $("#textCity_check").css("color", "red");
+                        err_text_city = false;
+                        return false;
+                    } else {
+                        isValid = regex1.test(jobcode_val);
+                        $("#textCity_check").css("display", !isValid ? "block" : "none");
+                        $("#textCity_check").css("color", "red");
+
+
+                    }
+                });
+
+            } else {
+                $('#select_city').css('display', 'block');
+                $('#textCity').css('display', 'none');
+                $('#city_label').css('display', 'block')
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         // validate mobile number
         $("#mobile_number").blur(function () {
             check_mb_phone();
@@ -1401,7 +1494,8 @@
 
             var regexOnlyNumbers = /^[0-9-]+$/;
             if (var_homephone_number.length > 2) {
-                if (var_homephone_number.length != 12 || regexOnlyNumbers.test(var_homephone_number) != true) {
+                if (var_homephone_number.length != 12 || regexOnlyNumbers.test(var_homephone_number) !=
+                    true) {
                     $("#home_ph_check").show();
                     $("#home_ph_check").focus();
                     $("#home_ph_check").css("color", "red");
@@ -1478,6 +1572,7 @@
         // final submission
         $("#validatefrm1").click(function () {
             // when submit button clicked, validate
+
             check_firstname();
             check_middlename();
             check_lastname();
@@ -1491,15 +1586,20 @@
             check_hm_phone();
             check_resume();
             check_skills();
+            check_city();
+
 
 
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if ((err_firstname == true) && (err_middlename == true) && (err_lastname == true) && (
-                    err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
-                    true) && (err_Experience == true) && (err_city == true) && (err_mob_ph == true) && (
-                    err_home_ph == true) && (err_resume == true) && (err_skills == true)) {
+            if ((err_firstname == true) && (err_city_val == true) && (err_text_city == true) && (
+                    err_country == true) && (err_state == true) && (err_middlename == true) && (
+                    err_lastname == true) && ( err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
+                    true) && (err_Experience == true)  && (err_mob_ph == true) && (
+                    err_home_ph == true) && (err_resume == true) && (err_skills == true)) 
+                    {
                 return true;
-            } else {
+            } 
+            else {
                 return false;
             }
         });
