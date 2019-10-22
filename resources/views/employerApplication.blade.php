@@ -102,7 +102,7 @@ table.dataTable thead > tr > th {
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="myTable" style="text-align:center;"> 
+                                                <tbody id="myTable"> 
                                                     @foreach($toReturn['application'] as $application)
                                                     <tr>   
                                                     <?php $id=$application['application_id'];
@@ -113,7 +113,7 @@ table.dataTable thead > tr > th {
                                                         <td style="padding:5px;">{{$application['job_code']}}</td>
                                                         <td><a href="{{url('employer/jobsdetails/'.$job_id)}}">{{$application['job_title']}}</a></td>
                                                         <td>{{$application['job_client_name']}}</td>
-                                                        <td>{{$application['job_city']}},&nbsp;{{$application['job_state']}}</td>
+                                                        <td>@if($application['job_city']){{$application['job_city']}} ,@endif&nbsp;{{$application['job_state']}}</td>
                                                         <?php $vis=$application['job_visa'];
                                                         $plus_visa=substr_count("$vis",",");
                                                         $sh=explode(",",$vis);

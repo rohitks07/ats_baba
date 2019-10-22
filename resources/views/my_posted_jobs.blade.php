@@ -95,7 +95,7 @@
 			                                                <th width="5%">Client</th>
 			                                                <th width="15%">Location</th>
 			                                                <th width="5%"># </th>
-															<th>Type</th>
+															<th width="2%">Type</th>
 															<th width="7%">Visa </th>
 															<th width="7%">Pay Rate</th>
 			                                                <th width="10%">Publish Date</th>
@@ -105,7 +105,7 @@
 															<th width="10%">Actions</th>     													
 			                                            </tr>
 			                                        </thead>
-			                                        <tbody  id="myTable" style="text-align:center;">  
+			                                        <tbody  id="myTable">  
 			                                    	    @foreach($toReturn['post_job'] as $posted_job) 
 														<tr>
 															<?php
@@ -117,7 +117,7 @@
 															$client_submittal=count(DB::table('tbl_forward_candidate')->where('job_ID',$id)->get());
 															$assignee=count(DB::table('tbl_job_post_assign')->where('job_post_id',$id)->get());
                                                         	?>
-																<td style="padding:5px;">{{$posted_job['job_code']}}</td>
+																<td style="padding:1px;">{{$posted_job['job_code']}}</td>
 				                                                <td><a href="{{url('employer/jobsdetails/'.$id)}}">{{$posted_job['job_title']}} </a></td>
 				                                                <td>{{$posted_job['client_name']}}</td>
 				                                                <td>@if($posted_job['city']){{$posted_job['city']}}, &nbsp;@endif{{$posted_job['state']}}</td>

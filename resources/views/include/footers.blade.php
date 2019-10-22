@@ -1,6 +1,6 @@
 <footer class="footer" style="text-align:center;">
     <center><div>ATS
-    © 2019 - 2020 BABA Softwares. All rights reserved.</div></center>
+    © 2019 - 2020 BABA Software. All rights reserved.</div></center>
 </footer>
         <script>
             var resizefunc = [];

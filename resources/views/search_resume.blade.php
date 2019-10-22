@@ -134,7 +134,7 @@ table.dataTable thead > tr > th {
 														<th width="10%">Actions</th>     													
                                                     </tr>
                                                 </thead>
-                                                <tbody id="myTable" style="text-align:center;">  
+                                                <tbody id="myTable" >  
                                                 @foreach($personal as $key => $value)  
 												<?php $id=$personal[$key]->id;
 														$dob=$personal[$key]->dob;
@@ -158,7 +158,7 @@ table.dataTable thead > tr > th {
                                                         @if(@$age!="0")F {{$age}}@endif
                                                         @endif
                                                         </td>
-														<td>{{$personal[$key]->city}}, &nbsp;{{$personal[$key]->state}}</td>
+														<td>@if($personal[$key]->city){{$personal[$key]->city}} , @endif &nbsp;{{$personal[$key]->state}}</td>
 														<td>{{$personal[$key]->visa}}</td>
 														@if($personal[$key]->total_experience)
 														<td>{{$personal[$key]->total_experience}}+</td>
