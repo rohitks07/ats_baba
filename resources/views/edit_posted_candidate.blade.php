@@ -250,7 +250,7 @@ $.ajaxSetup({
 												<div class="form-group row">
 													<label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
 													<select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-														<option value="224" selected>United States</option>
+													<option value="{{$details->country}}" selected>{{$details->country}}</option>
 														@foreach($toReturn['countries'] as $country)
 													<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
 													  @endforeach  
@@ -265,16 +265,15 @@ $.ajaxSetup({
 													 --}}
 															
 													 <select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-														<option value="">Select state</option>
+													 <option value="{{$details->state}}"  selected>{{$details->state}}</option>
 				
 												  </select>
-												  <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
+												  <div class="col-md-12" style="float: right;margin-left: 19.3em;margin-top: 2%;">
 													<div id="select_city">
 														<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
-															  <option value="">Select city </option>
+														<option value="{{$details->city}}" selected>{{$details->city}}</option>
 				                                               
 													  </select>
-													  
 													  {{-- <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
 														<div id="select_city">
 															<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required> --}}
@@ -291,7 +290,8 @@ $.ajaxSetup({
 												<label id="city_label" class="control-label col-lg-4">Enter City if not present</label>
 												<div id="textCity" style="display:none;"  class="form-group row col-md-12"> 
                                                         <label for="" class="control-label col-lg-4">Enter City <span style="color:red;">*</span></label>
-                                                        <input type="text" class="col-sm-5" id="" name="city_text_name">
+														<input type="text" class="form-control" class="col-sm-5" id="city_text" name="city_text_name">
+														<label for="" id="check_city_new" style="display:none;color:red;">Cannot be empty</label>
 													</div>
 												</div>
 								<!--end Location -->
@@ -324,7 +324,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Home Phone<span style="color:red;"></span></label>
 											<div class="col-lg-8">
-												<input type="text" class="form-control" id="phone" name="homephone" maxlength="12" value="{{$details['home_phone']}}"><br>
+												<input type="text" class="form-control" class="form-control" id="phone" name="homephone" maxlength="12" value="{{$details['home_phone']}}"><br>
 												<span id="home_ph_check">Please Enter a Valid Home Number</span>
 											</div>
 									  </div>
@@ -333,7 +333,7 @@ $.ajaxSetup({
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Upload Resume<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="file"  class="form-control" name="cv_file" id="cv_file" style="background:#fff;" />
+												<input type="file" class="form-control" name="cv_file" id="cv_file" style="background:#fff;" />
 												<input type="hidden" name="cv_file_before" value="{{$details['cv_file']}}" ><a href="{{url('public/seekerresume/'.$details['cv_file'])}}">{{$details['cv_file']}}</a>
 												<p>Upload files only in .doc, .docx or .pdf format with maximum size of 32 MB.</p>
 												<span id="resume_check">Please Choose a Valid File</span>
@@ -724,128 +724,55 @@ $(function() {
 					}
 				}
 				
-				// //Validation Location
-				// $("#validatefrm").click(function()
-				// {
-				// 	check_location();
-				// });
-				// function check_location()
-				// {
-				// 	var loc_val=$("#country").val();
-				// 	var loc_val1=$("#state_text").val();
-				// 	var loc_val2=$("#city").val();
-				// 	if((loc_val=="")||(loc_val1=="")||(loc_val2==""))
-				// 	{
-				// 		$("#citycheck").show();
-				// 		$("#citycheck").focus();
-				// 		$("#citycheck").css("color","red");
-				// 		err_city=false;
-				// 		return false;
-				// 	}
-				// 	else
-				// 	{
-				// 		$("#citycheck").hide();
-				// 	}
 				//Validation Location
-				$("#validatefrm").click(function () {
-            check_location();
-        });
-        $("#country").blur(function () {
-            check_location();
-        });
-        $("#state_text").blur(function () {
-            check_location();
-        });
-
-        function check_location() {
-            var loc_val = $("#country").val();
-            var loc_val1 = $("#state_text").val();
-            if ((loc_val == "") || (loc_val1 == "")) {
-                $("#citycheck").show();
-                $("#citycheck").focus();
-                $("#citycheck").css("color", "red");
-
-                err_country = false;
-                err_state = false;
-                return false;
-
-            } else {
-                $("#citycheck").hide();
-            }
-        }
-
-        $("#validatefrm").click(function () {
-            check_city();
-        });
-        
-
-        function check_city() {
-            var loc_val2 = $("#city").val();
-            var jobcode_val = $("#textCity_input").val();
-            var checkBox = document.getElementById("myCheck");
-            if ((checkBox.checked == true)&&(jobcode_val=="")) {
-                console.log("new");
-                $("#citycheck").show();
-                $("#citycheck").focus();
-                $("#citycheck").css("color", "red");
-                err_city_val = false;
-                return false;
-            }
-            else if((checkBox.checked == false)&&(loc_val2==""))
-            {
-                console.log("one");
-                $("#citycheck").show();
-                $("#citycheck").focus();
-                $("#citycheck").css("color", "red");
-                err_city_val = false;
-                return false;
-                
-            }
+				$("#country").blur(function()
+				{
+					check_location();
+				});
+				function check_location()
+				{
+					var loc_val=$("#country").val();
+					var loc_val1=$("#state_text").val();
+					
+					if((loc_val=="")||(loc_val1==""))
+					{
+						$("#citycheck").show();
+						$("#citycheck").focus();
+						$("#citycheck").css("color","red");
+						err_city=false;
+						return false;
+					}
+					else
+					{
+						$("#citycheck").hide();
+					}
 
 
-        
-        }
+					var loc_val2=$("#city").val();
+					var check=document.getElementById("myCheck");
+					if((check.checked == false)&&(loc_val2=="")){
+						$("#citycheck").show();
+						err_city=false;
+					}
+					else if(check.checked == true){
+						var detail=document.getElementById("city_text").value;
+						$("#citycheck").hide();
+						if(detail==""){
+						$("#check_city_new").show();
+						err_city_text=false;
+						}
+						else{
+							$("#check_city_new").hide();
 
-        $("#validatefrm").click(function () {
-            mycity();
-        });
-        $("#myCheck").click(function () {
-            mycity();
-        });
-
-        
-        function mycity() {
-        $("#textCity_check").hide();
-        var checkBox = document.getElementById("myCheck");
-        if (checkBox.checked == true) {
-            $('#select_city').css('display', 'none');
-            $('#textCity').css('display', 'block');
-            $('#city_label').css('display', 'none')
-            $("#validatefrm").click(function () {
-                var jobcode_val = $("#textCity_input").val();
-                var regex1 = /^[a-zA-Z ]*$/;
-
-                if (jobcode_val == "") {
-                    $("#textCity_check").show();
-                    $("#textCity_check").focus();
-                    $("#textCity_check").css("color", "red");
-                    err_text_city = false;
-                    return false;
-                } else {
-                    isValid = regex1.test(jobcode_val);
-                    $("#textCity_check").css("display", !isValid ? "block" : "none");
-                    $("#textCity_check").css("color", "red");
-                    
-                    err_text_city = false;
-                }
-            });
-
-        } else {
-            $('#select_city').css('display', 'block');
-            $('#textCity').css('display', 'none');
-            $('#city_label').css('display', 'block')
-        }
+						}
+						
+						
+					}
 				}
+
+
+
+
 
 				$("#validatefrm").click(function()
 				{
@@ -855,16 +782,14 @@ $(function() {
 					err_email=true;
 					err_visa=true;
 					err_city=true;
-					err_state = true;
+					err_city_text=true;
 					check_firstname();
 					check_lastname();
 					check_dob();
 					check_email();
 					check_visa();
 					check_location();
-
-					
-					if((err_state == true)&&(err_city==true)&&(err_firstname==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_visa==true)&&(err_city==true))
+					if((err_firstname==true)&&(err_lastname==true)&&(err_dob==true)&&(err_email==true)&&(err_visa==true)&&(err_city==true)&&(err_city_text==true))
 					{
 						return true;
 					}
@@ -1078,7 +1003,7 @@ $(function() {
 			});
 		</script>
 
-<!-- <script>
+<script>
 		function mycity() {
 	
 			var checkBox = document.getElementById("myCheck");
@@ -1095,7 +1020,7 @@ $(function() {
 				$('#city_label').css('display','block')
 				}
 		}
-		</script> -->
+		</script>
 		
 
 </body>

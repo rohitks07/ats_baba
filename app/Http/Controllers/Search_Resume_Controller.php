@@ -208,20 +208,21 @@ public function view_personal_details($id="")
 public function update_personal_details(Request $request)
 {
     
-      // return $request->city_text_name; 
+    //   return $request->state; 
     $con =  $request->country;
     $sta=  $request->state;
     $cit=  $request->city_name;
-
     $city_text_name=$request->city_text_name;
-    $val_contries=countries::where('country_id',$con)->first('country_name');
-    $val_state=states::where('state_id',$sta)->first('state_name');
-    $val_city=cities::where('city_id',$cit)->first('city_name');
+    $val_contries=countries::where('country_id',$con)->orWhere('country_name',$con)->first('country_name');
+    $val_state=states::where('state_id',$sta)->orWhere('state_name',$sta)->first('state_name');
+    // return $val_state;
+    $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
     if(!empty($city_text_name))
              {
                 $val_city['city_name']=$city_text_name;
              }
-             else{
+             else
+             {
                 $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
              } 
 
