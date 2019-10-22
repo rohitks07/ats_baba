@@ -1,10 +1,10 @@
 <footer class="footer" style="text-align:center;">
-    <center><div>HRMS
-    © 2019 - 2020 HRMS Softwares. All rights reserved.</div></center>
+    <center><div>ATS
+    © 2019 - 2020 BABA Softwares. All rights reserved.</div></center>
 </footer>
         <script>
             var resizefunc = [];
-        </script>
+        </script> 
 
         <!-- jQuery  -->
         <script src="{{url('assets/js/jquery.min.js')}}"></script>

@@ -8,7 +8,7 @@
     }
 </script>
 <head>
-	<title>HRMS Jobseeker</title>
+	<title>HRMS</title>
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
