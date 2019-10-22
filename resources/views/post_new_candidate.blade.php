@@ -1380,6 +1380,9 @@
         $("#validatefrm1").blur(function () {
             check_city();
         });
+        $("#validatefrm").blur(function () {
+            check_city();
+        });
 
         function check_city() {
             var loc_val = $("#city").val();
@@ -1414,6 +1417,9 @@
         $("#validatefrm1").click(function () {
             mycity();
         });
+        $("#validatefrm").click(function () {
+            mycity();
+        });
         $("#myCheck").click(function () {
             mycity();
         });
@@ -1425,7 +1431,7 @@
                 $('#select_city').css('display', 'none');
                 $('#textCity').css('display', 'block');
                 $('#city_label').css('display', 'none')
-                $("#validatefrm1").click(function () {
+                $("#validatefrm").click(function () {
                     var jobcode_val = $("#textCity_input").val();
                     var regex1 = /^[a-zA-Z ]*$/;
 
@@ -1570,7 +1576,40 @@
         }
 
         // final submission
-        $("#validatefrm1").click(function () {
+        $("#validatefrm").click(function () {
+            // when submit button clicked, validate
+
+            check_firstname();
+            check_middlename();
+            check_lastname();
+            check_dob();
+            check_email();
+            check_ssn();
+            check_visa();
+            check_Experience();
+            check_location();
+            check_mb_phone();
+            check_hm_phone();
+            check_resume();
+            check_skills();
+            check_city();
+
+
+
+            // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
+            if ((err_firstname == true) && (err_city_val == true) && (err_text_city == true) && (
+                    err_country == true) && (err_state == true) && (err_middlename == true) && (
+                    err_lastname == true) && ( err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
+                    true) && (err_Experience == true)  && (err_mob_ph == true) && (
+                    err_home_ph == true) && (err_resume == true) && (err_skills == true)) 
+                    {
+                return true;
+            } 
+            else {
+                return false;
+            }
+        });
+        $("#validatefrm").click(function () {
             // when submit button clicked, validate
 
             check_firstname();
@@ -1615,7 +1654,7 @@
         // $("#edu_validatefrm").click(function () {
         //     check_education();
         // });
-        $("#validatefrm1").click(function () {
+        $("#edu_validatefrm").click(function () {
             check_education();
         });
 
@@ -1639,7 +1678,7 @@
                 $("#education_check").hide();
             }
         }
-        $("#validatefrm1").click(function () {
+        $("#edu_validatefrm").click(function () {
             err_education = true;
             check_education();
             if (err_education == true) {
@@ -1666,7 +1705,7 @@
     $(document).ready(function () {
         $("#experience_check").hide();
         var err_experience = true;
-        $("#validatefrm1").click(function () {
+        $("#exp_validatefrm").click(function () {
             check_experience();
         });
         // $("#exp_validatefrm").click(function () {
@@ -1693,7 +1732,7 @@
                 $("#experience_check").hide();
             }
         }
-        $("#validatefrm1").click(function () {
+        $("#exp_validatefrm").click(function () {
             err_experience = true;
             check_experience();
             if (err_experience == true) {

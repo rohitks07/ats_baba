@@ -232,9 +232,9 @@
                                         </div><!-- end of col -->
                                         
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels" style="background-color:;">
-                                            <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" checked>
-                                            <label class="form-label">SSN No.(Last Four Digits)<span class="red">*</span></label>
-                                            <input type="text" maxlength="4" placeholder="SSN No.(Last Four Digits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title required>
+                                            <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="last_for_digit_ssn" >
+                                            <label class="form-label">SSN No.(Last Four Digits)<span class="red"></span></label>
+                                            <input type="text" maxlength="4" placeholder="SSN No.(Last Four Digits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title >
                                             <span id="last_for_digit_ssn_error">Please enter SSN No. (last four digit only)</span>
                                         </div><!--end of col-->
 
@@ -246,9 +246,9 @@
                                         </div><!-- end of col -->
 
                                         <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
-                                          <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="dob" checked >
-                                          <label class="form-label">D O B<span class="red">*</span></label>
-                                          <input type="date" id="dob" placeholder="Date Of Birth" name="dob" required/>
+                                          <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="dob"  >
+                                          <label class="form-label">D O B<span class="red"></span></label>
+                                          <input type="date" id="dob" placeholder="Date Of Birth" name="dob" />
                                           <span id="dob_error">Please enter valid DOB</span>
                                         </div><!--end of col-->
 
@@ -310,6 +310,16 @@
                                                 <label class="form-label">Expected Rate<span class="red">*</span></label>
                                                 <input type="text" id="expectedrate" onblur="rate()" placeholder="Expected Rate" name="expectedrate" required>
                                                 <span id="expectedrate_error">Please enter valid rate</span>
+                                        </div><!-- end of col -->
+                                        <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="expectedrate" checked> 
+                                                <label class="form-label">Job type<span class="red">*</span></label>
+                                                <select name="job_type" id="expectedrate1" required>
+                                                    <option value="">Select job type</option>
+                                                    <option value="fulltime">fulltime</option>
+                                                    <option value="contact">contact</option>
+                                                </select>
+                                                <span id="expectedrate_error1">Please enter valid rate</span>
                                         </div><!-- end of col -->
                                            
                                          <div class="col-sm-1" id="dels" style="background-color:;">
@@ -748,6 +758,7 @@ $("#delete_doc").click(function(e) {
         $("#dob_error").hide();
         $("#qual_with_uni_error").hide();
         $("#expectedrate_error").hide();
+        $("#expectedrate_error1").hide();
         $("#passportno_error").hide();
 
         var err_email_to=true;
@@ -770,6 +781,7 @@ $("#delete_doc").click(function(e) {
         var err_availa_for_new=true;
         var err_linkedinid=true;
         var err_expectedrate=true;
+        var err_expectedrate1=true;
 
         //validate email to
         $("#email_to").keyup(function()
@@ -1065,7 +1077,7 @@ $("#delete_doc").click(function(e) {
 
         }
         // last four digit ssn
-        $("#last_for_digit_ssn").keyup(function()
+        $("#last_for_digit_ssn").keypress(function()
         {
             var var_tmp = $("#last_for_digit_ssn").val();
             $("#last_for_digit_ssn").val(var_tmp.replace(/[^0-9]/g, ''));
@@ -1123,7 +1135,7 @@ $("#delete_doc").click(function(e) {
             
         }
         // validate dob
-        $("#dob").blur(function()
+        $("#dob").keypress(function()
         {
             check_dob();
         });
@@ -1185,6 +1197,10 @@ $("#delete_doc").click(function(e) {
         {
             check_expectedrate();
         });
+        $("#expectedrate1").blur(function()
+        {
+            check_expectedrate1();
+        });
         function check_expectedrate(){
             var var_expectedrate=$("#expectedrate").val();
 
@@ -1200,6 +1216,23 @@ $("#delete_doc").click(function(e) {
             {
                 err_expectedrate=true;
                 $("#expectedrate_error").hide();
+            }
+        }
+        function check_expectedrate1(){
+            var var_expectedrate1=$("#expectedrate1").val();
+
+            // var regexOnlyNumbers = /^[0-9]+$/;
+            if (var_expectedrate1==""){
+                $("#expectedrate_error1").show();
+                $("#expectedrate_error1").focus();
+                $("#expectedrate_error1").css("color","red");
+                err_expectedrate1=false;
+                return false;
+            }
+            else
+            {
+                err_expectedrate1=true;
+                $("#expectedrate_error1").hide();
             }
         }
         
@@ -1221,15 +1254,15 @@ $("#delete_doc").click(function(e) {
             check_current_location();
             check_us_visa_status();
             check_visaexpiry();
-            check_last_for_digit_ssn();
+            check_expectedrate1()
             check_passportno();
-            check_dob();
+            
             check_qual_with_uni();
             check_expectedrate();
 
 
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if((err_email_to==true)&&(err_email_cc==true)&&(err_email_bcc==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_current_location==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_qual_with_uni==true)&&(err_expectedrate==true))
+            if((err_email_to==true)&&(err_email_cc==true)&&(err_email_bcc==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_current_location==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_qual_with_uni==true)&&(err_expectedrate==true)&&(err_expectedrate1==true))
             {
                 return true; //ok
             }

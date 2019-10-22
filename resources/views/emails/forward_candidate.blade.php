@@ -11,8 +11,8 @@
 <br>    
 <p><?php echo $data['forward_candidate']['content'];"<br>" ?> </br></p>
 <table border="1px" style="border-collapse: collapse;">
-<tr><th colspan="2">Candidate’s Personal Details</th></tr>
-<tr><th style="width:250px">Full Name</th><th style="width:250px">{{$data['forward_candidate']['fullname']}}</th></tr>
+<tr><td colspan="2">Candidate’s Personal Details</td></tr>
+<tr><td style="width:250px">Full Name</td><td style="width:250px">{{$data['forward_candidate']['fullname']}}</td></tr>
 <tr><td>Phone (Primary)</td><td>{{$data['forward_candidate']['mobile']}}</td></tr>
 <tr><td>Email ID</td><td>{{$data['forward_candidate']['email']}}</td></tr>
 @if($data['forward_candidate']['skypeid'])
@@ -26,11 +26,13 @@
  ?>
 <tr><td>US Visa Expiry:</td><td>{{$visaexpiry}}</td></tr>
 @endif
+@if(!empty($data['forward_candidate']['ssn']))
 <tr><td>SSN No.(Last Four Digits)</td><td>{{$data['forward_candidate']['ssn']}}</td></tr>
+@endif
 @if($data['forward_candidate']['passportno'])
 <tr><td>Passport No.</td><td>{{$data['forward_candidate']['passportno']}}</td></tr>
 @endif
-@if($data['forward_candidate']['dob'])
+@if(!empty($data['forward_candidate']['dob']))
 <?php 
  $birthday=date('m-d-Y', strtotime($data['forward_candidate']['dob']));
  ?>
@@ -44,7 +46,11 @@
 @if($data['forward_candidate']['linkedinid'])
 <tr><td>LinkedIn ID:</td><td>{{$data['forward_candidate']['linkedinid']}}</td></tr>
 @endif
-<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}</td></tr>
+@if(!empty($data['forward_candidate']['job_type'] =="fulltime"))
+<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}K</td></tr>
+@else
+<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}/hr on C2C</td></tr>
+@endif
 
 </table>
 
@@ -56,7 +62,7 @@
 <br>
 <br>
 <table border="1px" style="border-collapse: collapse;">
-<tr><th style="width:225px">Skill</th><th style="width:225px">Years of Experience/Exposure</th><th style="width:225px">Expertise Level (0 - 10)[1=Novice; 10=Expert]</th></tr>
+<tr><td style="width:225px">Skill</td><td style="width:225px">Years of Experience/Exposure</td><td style="width:225px">Expertise Level (0 - 10)[1=Novice; 10=Expert]</td></tr>
 @foreach($data['experience_list'] as $key => $value)
 <tr><td>{{$data['experience_list'][$key][0]}}</td><td>{{$data['experience_list'][$key][1]}}</td><td>{{$data['experience_list'][$key][2]}}</td></tr>
 <?php $kee = $key + 1;
@@ -77,7 +83,7 @@ break;
 <br>
 <br>
 <table border="1px " style="border-collapse: collapse;">
-<tr><th style="width:130px">Full Name</th><th style="width:130px">EmailId</th><th style="width:130px">Designation</th><th style="width:130px">Contact Number</th><th style="width:130px">Client Name</th></tr>
+<tr><td style="width:130px">Full Name</td><td style="width:130px">EmailId</td><td style="width:130px">Designation</td><td style="width:130px">Contact Number</td><td style="width:130px">Client Name</td></tr>
 @foreach($data['reference_list'] as $key => $value)
 <tr><td>{{$data['reference_list'][$key][0]}}</td><td>{{$data['reference_list'][$key][1]}}</td><td>{{$data['reference_list'][$key][2]}}</td><td>{{$data['reference_list'][$key][3]}}</td><td>{{$data['reference_list'][$key][4]}}</td></tr>
 <?php $kee = $key + 1;
@@ -91,7 +97,7 @@ break;
 @if((@$data['emp_details'])!="")
 <u><b> Employer Details</b></u>
 <table border="1px" style="border-collapse: collapse;">
-<tr><th> Company Name</th> <th>Email Id </th><th>Employer Name </th> <th>Phone Number </th></tr>
+<tr><td> Company Name</th> <td>Email Id </th><td>Employer Name </th> <td>Phone Number </th></tr>
 <tr> <td>{{$data['emp_details']['company_name']}}</td><td>{{$data['emp_details']['email_Id']}}</td><td>{{$data['emp_details']['employer_name']}}</td><td>{{$data['emp_details']['phone_number']}}</td></tr>
 </table>
 @endif
