@@ -3,8 +3,6 @@
 <html lang="en">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 <script>
     $.ajaxSetup({
         headers: {
@@ -197,8 +195,8 @@
                                             <label for="" class="control-label col-lg-4">First Name <span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="first_name" name="first_name"
-                                                    placeholder="First Name"><br>
+                                                <input type="text" class="form-control" id="first_name"
+                                                    name="first_name" placeholder="First Name"><br>
                                                 <span id="first_namecheck">Not valid First Name</span>
                                             </div>
                                         </div>
@@ -207,8 +205,8 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Middle Name </label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="middle_name" name="middle_name"
-                                                    placeholder="Middle Name">
+                                                <input type="text" class="form-control" id="middle_name"
+                                                    name="middle_name" placeholder="Middle Name">
                                                 <span id="middle_namecheck">Not valid Middle Name</span>
                                             </div>
                                         </div>
@@ -231,8 +229,9 @@
                                             <label for="" class="control-label col-lg-4">Date of Birth (mm-dd-yyyy)<span
                                                     style="color:red;"></span></label>
                                             <div class="col-lg-8">
-                                                <input type="date" class="form-control" id="date_of_birth" name="dob" maxlength="10"
-                                                    placeholder="date of Birth" style="width:83%; padding:0.5em;"><br>
+                                                <input type="date" class="form-control" id="date_of_birth" name="dob"
+                                                    maxlength="10" placeholder="date of Birth"
+                                                    style="width:83%; padding:0.5em;"><br>
                                                 <span id="dobcheck">Select a valid Date Of Birth</span>
                                             </div>
 
@@ -259,8 +258,8 @@
                                             <label for="" class="control-label col-lg-4">Email<span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email"
-                                                    maxlength="35"><br>
+                                                <input type="text" class="form-control" id="email" name="email"
+                                                    placeholder="Email" maxlength="35"><br>
                                                 <span id="emailcheck">Please Enter valid Email</span>
                                             </div>
                                         </div>
@@ -269,8 +268,8 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Skype ID</label>
                                             <div class="col-lg-8">
-                                                <input type="text" id="skype_id" class="form-control" name="skype_id" maxlength="30"
-                                                    placeholder="Skype ID">
+                                                <input type="text" class="form-control" id="skype_id" name="skype_id"
+                                                    maxlength="30" placeholder="Skype ID">
                                             </div>
                                         </div>
                                         <!--end of Skype ID-->
@@ -278,8 +277,8 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Social Security No</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" name="ssn" id="ssn" autocomplete="off"
-                                                    placeholder="000-00-0000" maxlength="9">
+                                                <input type="text" class="form-control" name="ssn" id="ssn"
+                                                    autocomplete="off" placeholder="000-00-0000" maxlength="9">
                                                 <span id="ssncheck">Please Enter valid Social Security Number</span>
                                             </div>
                                         </div>
@@ -304,8 +303,9 @@
                                             <label class="col-sm-4 control-label">Total It Experience <span
                                                     style="color:red;">*</span></label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="Experience" placeholder="Total It Experience"
-                                                    name="total_experience" maxlength="10" required>
+                                                <input type="text" class="form-control" id="Experience"
+                                                    placeholder="Total It Experience" name="total_experience"
+                                                    maxlength="10" required>
                                                 <span id="Experiencecheck">Please Enter Valid Experience Details </span>
                                             </div>
                                         </div>
@@ -355,9 +355,10 @@
                                             <div id="textCity" style="display:none;" class="form-group row col-md-12">
                                                 <label for="" class="control-label col-lg-4">Enter City <span
                                                         style="color:red;">*</span></label>
-                                                <input type="text" class="col-sm-5" id="textCity_input"
+                                                <input type="text" class="col-sm-5" id="city_text_"
                                                     name="city_text_name">
-                                                <label id="textCity_check">Need to be filled </label>
+                                                <label for="" id="enter_city" style="display:block">Must be
+                                                    filled</label>
                                             </div>
                                         </div>
                                         <!--end Location -->
@@ -365,8 +366,8 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Address Line 1</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="address1" placeholder="Address Line 1"
-                                                    name="addressline1" maxlength="100">
+                                                <input type="text" class="form-control" id="address1"
+                                                    placeholder="Address Line 1" name="addressline1" maxlength="100">
                                             </div>
                                         </div>
                                         <!--end of Address Line 1-->
@@ -374,8 +375,8 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Address Line 2</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="address1" placeholder="Address Line 2"
-                                                    name="addressline2" maxlength="100">
+                                                <input type="text" class="form-control" id="address1"
+                                                    placeholder="Address Line 2" name="addressline2" maxlength="100">
                                             </div>
                                         </div>
                                         <!--end of Address Line 2-->
@@ -384,8 +385,8 @@
                                             <label for="" class="control-label col-lg-4">Mobile Phone<span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="mobile_number" name="mobilephone"
-                                                    placeholder="Mobile Phone" maxlength="12"><br>
+                                                <input type="text" class="form-control" id="mobile_number"
+                                                    name="mobilephone" placeholder="Mobile Phone" maxlength="12"><br>
                                                 <span id="mob_ph_check">Please Enter a Valid Mobile Number</span>
                                             </div>
                                         </div>
@@ -395,8 +396,8 @@
                                             <label for="" class="control-label col-lg-4">Home Phone<span
                                                     style="color:red;"></span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="phone" name="homephone" placeholder="Home Phone"
-                                                    maxlength="12"><br>
+                                                <input type="text " class="form-control" id="phone" name="homephone"
+                                                    placeholder="Home Phone" maxlength="12"><br>
                                                 <span id="home_ph_check">Please Enter a Valid Home Number</span>
                                             </div>
                                         </div>
@@ -406,8 +407,8 @@
                                             <label for="" class="control-label col-lg-4">Upload Resume<span
                                                     style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="file" class="form-control" class="form-control" name="cv_file" id="cv_file"
-                                                    style="background:#fff;" required>
+                                                <input type="file" class="form-control" class="form-control"
+                                                    name="cv_file" id="cv_file" style="background:#fff;" required>
                                                 <p>Upload files only in .doc, .docx or .pdf format with maximum size of
                                                     32 MB.</p>
                                                 <span id="resume_check">Please Choose a Valid File</span>
@@ -763,33 +764,16 @@
                                                         </div><br>
 
                                                         <div class="card-body">
-                                                            <div class="row">
-
-
-                                                                <div class="col-md-12">
-                                                                    <input name="skills" id="Result"
-                                                                        class="form-control" type="text" readonly>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="form-check">
-                                                                        <label class="form-check-label">
-                                                                            <input type="checkbox"
-                                                                                class="form-check-input" name=""
-                                                                                id="edit_skills" value="checkedValue"
-                                                                                onclick="check_val()">
-                                                                            Click to edit skills
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-
+                                                            <center>
+                                                                <input name="skills" id="Result" class="form-control"
+                                                                    type="text" required>
+                                                                <label for="" id="skills_check"
+                                                                    style="display:none;color:red;">This cannot be
+                                                                    empty</label>
+                                                            </center>
                                                             <br>
-                                                            <div class="row">
 
-
-
+                                                            <div class="form-group row">
                                                                 <label for="lastname" class="control-label col-lg-4">Add
                                                                     Skill <span style="color:red;">*</span></label>
                                                                 <div class="col-lg-4">
@@ -801,7 +785,9 @@
                                                                             Enter skill in this formate ex-
                                                                             java,cpp,c,laravel,html etc. </small></span>
                                                                     <br>
-                                                                    <span id="skill_check">Please Add Maximum Three
+                                                                    <span id="skill_check"
+                                                                        style="display:none;color:red;">Please Add
+                                                                        Maximum Three
                                                                         Skill</span>
                                                                 </div>
                                                                 <div class="col-lg-4">
@@ -810,7 +796,6 @@
                                                                         onclick="add_element_to_array();">Add</button>
 
                                                                 </div>
-
                                                             </div>
                                                         </div>
 
@@ -850,9 +835,9 @@
                                                     </div>
                                                 </div> <!-- card -->
                                             </div> <!-- card-body -->
-                                            <center><input type="submit" name="submit" id="validatefrm1" value="Submit"
-                                                    class="btn btn-primary" style="background: #1ba6df !important;"   >
-                                            </center>
+                                            <center><input type="submit" name="submit" id="validatefrm_submit"
+                                                    value="Submit" class="btn btn-primary"
+                                                    style="background: #1ba6df !important;"></center>
                             </form>
                         </div> <!-- card -->
                     </div>
@@ -866,16 +851,6 @@
 </div>
 <!-- END wrapper -->
 @include('include.emp_footer')
-<script>
-    function check_val() {
-        $("#Result").removeAttr('readonly');
-
-    }
-
-</script>
-
-
-
 <script>
     $(document).ready(function () {
         $("#btnAdd_doc").click(function () {
@@ -1148,7 +1123,7 @@
         $("#mob_ph_check").hide();
         $("#home_ph_check").hide();
         $("#resume_check").hide();
-        $('#skill_check').hide();
+        $('#skills_check').hide();
 
         var err_firstname = true;
         var err_middlename = true;
@@ -1158,14 +1133,11 @@
         var err_ssn = true;
         var err_visa = true;
         var err_Experience = true;
+        var err_city = true;
         var err_mob_ph = true;
         var err_home_ph = true;
         var err_resume = true;
         var err_skills = true;
-        var err_city = true;
-        var err_country = true;
-        var err_state = true;
-        var err_city_val = true;
 
         //validate first name
         $("#first_name").blur(function () {
@@ -1335,7 +1307,7 @@
             }
         }
         //Validation Experience
-        $("#Experience").keypress(function () {
+        $("#Experience").keyup(function () {
             var var_tmp = $("#Experience").val();
             $("#Experience").val(var_tmp.replace(/[^0-9]/g, ''));
         });
@@ -1373,103 +1345,40 @@
                 err_city = false;
                 return false;
             } else {
-
+                err_city = true;
                 $("#citycheck").hide();
             }
-        }
-        $("#validatefrm1").blur(function () {
-            check_city();
-        });
-        $("#validatefrm").blur(function () {
-            check_city();
-        });
 
-        function check_city() {
-            var loc_val = $("#city").val();
-            var jobcode_val = $("#textCity_input").val();
-            var checkBox = document.getElementById("myCheck");
-            if ((checkBox.checked == true) && (jobcode_val == "")) {
-                console.log("new");
+
+            var data = document.getElementById("myCheck");
+            var loc_val2 = $("#city").val();
+
+            if ((data.checked == false) && (loc_val2 == "")) {
                 $("#citycheck").show();
                 $("#citycheck").focus();
                 $("#citycheck").css("color", "red");
-                err_city_val = false;
-
-
-
-            } else if ((checkBox.checked == false) && (loc_val == "")) {
-                console.log("one");
-                $("#citycheck").show();
-                $("#citycheck").focus();
-                $("#citycheck").css("color", "red");
-                err_city_val = false;
-
-
+                err_city = false;
+                return false;
+            } else if (data.checked == true) {
+                var city = document.getElementById("city_text_").value;
+                if (city == "") {
+                    $('#enter_city').css('color', 'red');
+                    $('#enter_city').css('display', 'block');
+                    err_city = false;
+                    return false;
+                } else {
+                    $('#enter_city').css('color', 'red');
+                    $('#enter_city').css('display', 'none');
+                }
 
             }
-            else if((checkBox.checked == true)&&(jobcode_val !== ""))
-            {
-                $("#citycheck").hide();
-                err_city_val = true;
-            }
 
-        }
-        $("#validatefrm1").click(function () {
-            mycity();
-        });
-        $("#validatefrm").click(function () {
-            mycity();
-        });
-        $("#myCheck").click(function () {
-            mycity();
-        });
-
-        function mycity() {
-            $("#textCity_check").hide();
-            var checkBox = document.getElementById("myCheck");
-            if (checkBox.checked == true) {
-                $('#select_city').css('display', 'none');
-                $('#textCity').css('display', 'block');
-                $('#city_label').css('display', 'none')
-                $("#validatefrm").click(function () {
-                    var jobcode_val = $("#textCity_input").val();
-                    var regex1 = /^[a-zA-Z ]*$/;
-
-                    if (jobcode_val == "") {
-                        $("#textCity_check").show();
-                        $("#textCity_check").focus();
-                        $("#textCity_check").css("color", "red");
-                        err_text_city = false;
-                        return false;
-                    } else {
-                        isValid = regex1.test(jobcode_val);
-                        $("#textCity_check").css("display", !isValid ? "block" : "none");
-                        $("#textCity_check").css("color", "red");
-
-
-                    }
-                });
-
-            } else {
-                $('#select_city').css('display', 'block');
-                $('#textCity').css('display', 'none');
-                $('#city_label').css('display', 'block')
-            }
 
         }
 
+        // function check_checkbx(){
 
-
-
-
-
-
-
-
-
-
-
-
+        // }
         // validate mobile number
         $("#mobile_number").blur(function () {
             check_mb_phone();
@@ -1500,8 +1409,7 @@
 
             var regexOnlyNumbers = /^[0-9-]+$/;
             if (var_homephone_number.length > 2) {
-                if (var_homephone_number.length != 12 || regexOnlyNumbers.test(var_homephone_number) !=
-                    true) {
+                if (var_homephone_number.length != 12 || regexOnlyNumbers.test(var_homephone_number) != true) {
                     $("#home_ph_check").show();
                     $("#home_ph_check").focus();
                     $("#home_ph_check").css("color", "red");
@@ -1538,9 +1446,7 @@
             }
         }
         //validate skills
-        $("#Result").blur(function () {
-            check_skills();
-        });
+
         // function check_skills()
         // {
         // 	var ch=$("#first_name").val();
@@ -1560,25 +1466,10 @@
         // 	}
 
         // }
-        function check_skills() {
-            var ch = document.getElementById("Result").value;
-            console.log(ch);
-            // var ch=$('#Result').val();
-            if (ch == "") {
-                err_skills = false;
-
-                $('#skill_check').css('color', 'red');
-                $('#skill_check').show();
-            } else {
-                err_skills = true;
-                $('#skill_check').hide();
-            }
-        }
 
         // final submission
         $("#validatefrm").click(function () {
             // when submit button clicked, validate
-
             check_firstname();
             check_middlename();
             check_lastname();
@@ -1592,55 +1483,63 @@
             check_hm_phone();
             check_resume();
             check_skills();
-            check_city();
-
 
 
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if ((err_firstname == true) && (err_city_val == true) && (err_text_city == true) && (
-                    err_country == true) && (err_state == true) && (err_middlename == true) && (
-                    err_lastname == true) && ( err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
-                    true) && (err_Experience == true)  && (err_mob_ph == true) && (
-                    err_home_ph == true) && (err_resume == true) && (err_skills == true)) 
-                    {
+            if ((err_firstname == true) && (err_middlename == true) && (err_lastname == true) && (
+                    err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
+                    true) && (err_Experience == true) && (err_city == true) && (err_mob_ph == true) && (
+                    err_home_ph == true) && (err_resume == true) && (err_skill == true)) {
                 return true;
-            } 
-            else {
+            } else {
                 return false;
             }
         });
-        $("#validatefrm").click(function () {
-            // when submit button clicked, validate
-
-            check_firstname();
-            check_middlename();
-            check_lastname();
-            check_dob();
-            check_email();
-            check_ssn();
-            check_visa();
-            check_Experience();
-            check_location();
-            check_mb_phone();
-            check_hm_phone();
-            check_resume();
-            check_skills();
-            check_city();
 
 
-
-            // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if ((err_firstname == true) && (err_city_val == true) && (err_text_city == true) && (
-                    err_country == true) && (err_state == true) && (err_middlename == true) && (
-                    err_lastname == true) && ( err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
-                    true) && (err_Experience == true)  && (err_mob_ph == true) && (
-                    err_home_ph == true) && (err_resume == true) && (err_skills == true)) 
-                    {
-                return true;
-            } 
-            else {
-                return false;
+        $("#tags").blur(function () {
+            var skill = document.getElementById("tags").value;
+            if (skill == "") {
+                $("#skill_check").show()
+                err_skills = false;
+            } else {
+				$("#skill_check").hide()
+                check_skills();
+				err_skills = true;
             }
+
+        });
+
+        function check_skills() {
+
+            // var ch=$('#Result').val();
+            var ch = document.getElementById("Result").value;
+            if (ch == "") {
+                err_skills = false;
+                $('#skills_check').show();
+            } else {
+				err_skills = true;
+                $('#skills_check').hide();
+            }
+        }
+
+        $("#validatefrm_submit").click(function () {
+
+           
+                var skill = document.getElementById("tags").value;
+                if (skill == "") {
+                    $("#skill_check").show()
+                    err_skills = false;
+                } else {
+					err_skills = true;
+                    check_skills();
+                }
+				if(err_skills==false){
+					return false;
+				}
+				else{
+					return true;
+				}
         });
     });
 
@@ -1651,9 +1550,6 @@
     $(document).ready(function () {
         $("#education_check").hide();
         var err_education = true;
-        // $("#edu_validatefrm").click(function () {
-        //     check_education();
-        // });
         $("#edu_validatefrm").click(function () {
             check_education();
         });
@@ -1687,15 +1583,6 @@
                 return false;
             }
         });
-        // $("#edu_validatefrm").click(function () {
-        //     err_education = true;
-        //     check_education();
-        //     if (err_education == true) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // });
     });
 
 </script>
@@ -1708,9 +1595,6 @@
         $("#exp_validatefrm").click(function () {
             check_experience();
         });
-        // $("#exp_validatefrm").click(function () {
-        //     check_experience();
-        // });
 
         function check_experience() {
 
@@ -1741,15 +1625,6 @@
                 return false;
             }
         });
-        // $("#exp_validatefrm").click(function () {
-        //     err_experience = true;
-        //     check_experience();
-        //     if (err_experience == true) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // });
     });
 
 </script>
@@ -1757,6 +1632,7 @@
     $("#country").on("change", function (e) {
         console.log(e);
         $('#state_text').empty();
+        // $('#city').empty();
         var country_id = e.target.value;
         console.log(country_id);
         $.ajax({

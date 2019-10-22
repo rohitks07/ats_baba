@@ -11,7 +11,7 @@
 <br>    
 <p><?php echo $data['forward_candidate']['content'];"<br>" ?> </br></p>
 <table border="1px" style="border-collapse: collapse;">
-<tr><td colspan="2">Candidate’s Personal Details</td></tr>
+<tr><th colspan="2">Candidate’s Personal Details</th></tr>
 <tr><td style="width:250px">Full Name</td><td style="width:250px">{{$data['forward_candidate']['fullname']}}</td></tr>
 <tr><td>Phone (Primary)</td><td>{{$data['forward_candidate']['mobile']}}</td></tr>
 <tr><td>Email ID</td><td>{{$data['forward_candidate']['email']}}</td></tr>
