@@ -722,15 +722,18 @@
                                                                                 class="textbox-n form-control end_date"
                                                                                 type="text" onfocus="(this.type='date')"
                                                                                 onblur="(this.type='text')"
-                                                                                id="start_date" style="width: 15%;">
+																				id="end_date" style="width: 15%;">
                                                                             <p><button type="button" id="btnAdd_Exp"
                                                                                     class="btn btn-primary">Add
                                                                                     More&nbsp;<i class="fa fa-plus"
                                                                                         aria-hidden="true"></i></button>
-                                                                            </p>
+																			</p>
+																			<label id="check_date" style="display:none;color:red;">In correct date format</label>
+																			<label id="check_date1" style="display:none;color:red;">In correct date format</label>
+																				<br>
                                                                             <!-- <a class="btn btn-primary add-more-btn" style="float:left; margin-left:1em;">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></a>												   -->
-                                                                            <span id="experience_check">Please fill All
-                                                                                Fields</span>
+                                                                            <label id="experience_check">Please fill All
+                                                                                Fields</label>
                                                                         </div><!-- GROUP ROW-->
                                                                     </div><!-- EXP ID-->
                                                                 </div><!-- COL-->
@@ -1080,9 +1083,11 @@
 									 @endforeach  
 							</select>
 							<input placeholder="Start Date" name="start_date[]" class="textbox-n form-control start_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">
-							<input placeholder="End Date" name="end_date[]" class="textbox-n form-control end_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">							   
+							<input placeholder="End Date" name="end_date[]" class="textbox-n form-control end_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">	
+													   
 
-							<button type="button" id="btnRemove" class="btn btn-primary btn_remove">Remove</button>											  
+							<button type="button" id="btnRemove" class="btn btn-primary btn_remove">Remove</button>		
+																  
 						 </div>`;
             $('#exp_detail').append(data2);
         });
@@ -1616,16 +1621,81 @@
                 $("#experience_check").hide();
             }
         }
+
+		function val_date(){
+			var dob_val= $("#start_date").val();   
+            var dob_var = new Date(dob_val);
+            var dob_val_day = dob_var.getDate();
+            var dob_val_month = dob_var.getMonth() + 1;
+            var dob_val_year = dob_var.getFullYear();
+
+            if(!dob_val_day || !dob_val_month || !dob_val_year)
+            {
+                $("#check_date").show();
+                $("#check_date").focus();
+                $("#check_date").css("color","red");    
+                err_start_date=false;
+            }
+            else if(dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear())
+            {
+                $("#check_date").show();
+                $("#check_date").focus();
+                $("#check_date").css("color","red"); 
+                err_start_date=false;
+            }
+            else
+            {
+                err_start_date=true;
+                $("#check_date").hide();
+            }
+		}
+
+
+		function val_last(){
+			var dob_val= $("#end_date").val();   
+            var dob_var = new Date(dob_val);
+            var dob_val_day = dob_var.getDate();
+            var dob_val_month = dob_var.getMonth() + 1;
+            var dob_val_year = dob_var.getFullYear();
+
+            if(!dob_val_day || !dob_val_month || !dob_val_year)
+            {
+                $("#check_date1").show();
+                $("#check_date1").focus();
+                $("#check_date1").css("color","red");    
+                err_start_date1=false;
+            }
+            else if(dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear())
+            {
+                $("#check_date1").show();
+                $("#check_date1").focus();
+                $("#check_date1").css("color","red"); 
+                err_start_date1=false;
+            }
+            else
+            {
+                err_start_date1=true;
+                $("#check_date1").hide();
+            }
+		}
         $("#exp_validatefrm").click(function () {
             err_experience = true;
+			err_start_date=true;
+			err_start_date1=true;
             check_experience();
-            if (err_experience == true) {
+			val_date();
+			val_last();
+            if ((err_experience == true)&&(err_start_date == true)&&(err_start_date1 == true)) {
                 return true;
             } else {
                 return false;
             }
         });
     });
+
+
+
+
 
 </script>
 <script type="text/javascript">
