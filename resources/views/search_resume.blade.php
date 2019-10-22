@@ -384,7 +384,7 @@ table.dataTable thead > tr > th {
 									"_token": "{{ csrf_token() }}"
 								},
 								success: function (data) {
-									$('#append_view'+id).append("<table class='table' style="border:1px solid" >");
+									$('#append_view'+id).append("<table class='table' style=border:1px solid' >");
 									$('#append_view'+id).append("<thead>");
 									$('#append_view'+id).append("<tr>");
 								// 	$('#append_view'+id).append("<th>Candidate _ID</th>");
