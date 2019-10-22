@@ -73,7 +73,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-								<input id="search" type="text" placeholder="Search" class="form-control" style="float:right;width:350px;border-radius:20px;height:30px;">
+								<input id="search" type="text" placeholder="Search" class="form-control" style="float:right;width:350px;border-radius:20px;height:30px;border:none;margin-top:2px;">
 						@if(!empty($toReturn['user_type']=="teammember"))
 							@if($toReturn['current_module_permission']['is_add']=="yes")                                       
 							<a href="{{url('employer/post_new_job')}}">
@@ -88,7 +88,7 @@
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-12">
                                                 <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
-			                                        <thead>
+			                                        <thead style="text-align:center;">
 			                                            <tr>                                                   
 			                                                <th width="10%">Code</th>
 			                                                <th width="20%">Title</th>
@@ -105,7 +105,7 @@
 															<th width="10%">Actions</th>     													
 			                                            </tr>
 			                                        </thead>
-			                                        <tbody  id="myTable">  
+			                                        <tbody  id="myTable" style="text-align:center;">  
 			                                    	    @foreach($toReturn['post_job'] as $posted_job) 
 														<tr>
 															<?php
@@ -127,7 +127,7 @@
                                                         $plus_visa=substr_count("$vis",",");
                                                         $sh=explode(",",$vis);
                                                         ?>
-                                                        <td onmouseover="visa_type({{$id}});" id="visa{{$id}}"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none;" >{{$posted_job['job_visa_status']}}</span></td>																<td>{{$posted_job['pay_min']}}-{{$posted_job['pay_max']}}</td>													
+                                                        <td onmouseover="visa_type({{$id}});" id="visa{{$id}}"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none;" >{{$posted_job['job_visa_status']}}</span></td><td>{{$posted_job['pay_min']}}-{{$posted_job['pay_max']}}</td>													
 				                                                <td>{{$closing_date}}</td>
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$new_last_Date}}</td>
@@ -151,8 +151,8 @@
 																@endif
 																<!-- @if($toReturn['current_module_permission']['is_delete']="yes") -->
 																<a href="{{url(''.$id)}}" data-toggle="modal"
-                                                                        data-target="#myModal{{$posted_job['ID']}}"><i class="fa fa-plane" aria-hidden="true"></i></a>
-                                                                        <a  href="" data-toggle="modal" data-target="#mailModal{{$posted_job['ID']}}"><i class="fa fa-envelope"></i></a>
+                                                                        data-target="#myModal{{$posted_job['ID']}}" title="Submit to job"><i class="fa fa-plane" aria-hidden="true"></i></a>
+                                                                        <a  href="" data-toggle="modal" data-target="#mailModal{{$posted_job['ID']}}" title="mail"><i class="fa fa-envelope"></i></a>
                                                     	<a href="" data-toggle="modal" data-target="#exampleModalCenter{{$posted_job['ID']}}"><i class="fa fa-plus" title="Note"></i></a>
 																<!-- @endif -->									
 																<div class="modal fade" id="myModal{{$posted_job['ID']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">

@@ -64,7 +64,15 @@ table.dataTable thead > tr > th {
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" style="background-color: #317eeb;padding: 2px 20px;height:70px;" >
-                            <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;margin-top:15px;">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h3 style="color:white;margin-top:17px;margin-left:10px">Applications</h3>
+                                        </div>
+                                        <div class="col-md-4">
+                                                <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;margin-top:18px;border:none;">
+
+                                        </div>
+                                    </div>
 
                                 </div>
 
@@ -73,7 +81,7 @@ table.dataTable thead > tr > th {
                                     <div class="col-md-12 col-sm-12 col-12">
                                             <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
                                                 
-                                                    <thead>
+                                                    <thead style="text-align:center;">
                                                     <!--<tr>
                                                         <th colspan="6">Job Details</th>
                                                         <th colspan="3">Candidate Details</th>
@@ -94,7 +102,7 @@ table.dataTable thead > tr > th {
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="myTable"> 
+                                                <tbody id="myTable" style="text-align:center;"> 
                                                     @foreach($toReturn['application'] as $application)
                                                     <tr>   
                                                     <?php $id=$application['application_id'];

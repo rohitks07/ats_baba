@@ -105,7 +105,7 @@ table.dataTable thead > tr > th {
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header" style="background:#317eeb;">
-                             <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;">
+                             <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;border:none;height:30px;margin-top:2.5px;">
 
 								@if(!empty($toReturn['user_type']=="teammember")) 
                                 @if($toReturn['current_module_permission']['is_add']=="yes")                                      
@@ -119,7 +119,7 @@ table.dataTable thead > tr > th {
                                     <div class="row" >
                                         <div class="col-12">
                                             <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width:100%;overflow-x:scroll;">
-                                                <thead>
+                                                <thead style="text-align:center;">
                                                     <tr>                                                   
 														<th width="15%">Name</th>
 														<th>BIO</th>
@@ -134,7 +134,7 @@ table.dataTable thead > tr > th {
 														<th width="10%">Actions</th>     													
                                                     </tr>
                                                 </thead>
-                                                <tbody id="myTable">  
+                                                <tbody id="myTable" style="text-align:center;">  
                                                 @foreach($personal as $key => $value)  
 												<?php $id=$personal[$key]->id;
 														$dob=$personal[$key]->dob;
@@ -182,7 +182,7 @@ table.dataTable thead > tr > th {
                                                                     <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
                                                             </ul>
                                                             <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user" title="Submit to Job"></i></a>
-                                                            <a href="{{url('employer/job_matching/'.$id)}}"><i class="fa fa-check-square-o"> </i></a>
+                                                            <a href="{{url('employer/job_matching/'.$id)}}" title="Maching jobs"><i class="fa fa-check-square-o"> </i></a>
                                                         @endif
 														@else
 														<i class="fa fa-pencil" aria-hidden="true" data-toggle="dropdown" style="color: #1ba6df;cursor: pointer;" title="Edit" ></i>
