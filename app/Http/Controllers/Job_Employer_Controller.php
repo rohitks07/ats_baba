@@ -344,9 +344,34 @@ ini_set('memory_limit', '-1');
             
             // $Add_group->save();     
             $Add_to_post_job->save();
+            $job_id=$Add_to_post_job->id;
             //Add Notiofication
             // $notification=new Tbl_notification();
             // Session::flash('danger','Job Edited Successfully');
+
+
+
+
+            
+            $Notification=new Tbl_notification();
+            $Notification->notification_service_id=$job_id;
+            $Notification->service_type="Post Job";
+            $Notification->notification_added_by=Session::get('id');
+            $Notification->notification_added_to=$Add_to_post_job->company_name;
+            $Notification->applied_id=" ";
+            $Notification->notification_text=$Add_to_post_job->job_title."This  job Is Posted By ".Session::get('full_name');
+            $mydate=date('Y-m-d');
+            $Notification->submit_date=$mydate;
+            $Notification->updated_date=$mydate;
+            $Notification->read_date=$mydate;
+            $Notification->read_status_team_member=1;
+            $Notification->read_date_team_member=$mydate;
+            // $Notification->notification_service_id=$Add_to_post_job->ID;
+            $Notification->save();
+
+
+
+
             Session::flash('success','Job Post Successfully');
         return redirect('employer/posted_jobs');
     }
@@ -454,6 +479,7 @@ ini_set('memory_limit', '-1');
         
         }
         
+
         $post_job = tbl_post_jobs::where('ID',$id)->update($job_detail);
         $Notification=new Tbl_notification();
         $Notification->notification_service_id=$id;
@@ -461,7 +487,7 @@ ini_set('memory_limit', '-1');
         $Notification->notification_added_by=Session::get('id');
         $Notification->notification_added_to=$Request->company_name;
         $Notification->applied_id=" ";
-        $Notification->notification_text=$Request->job_title."This  job Is Update By ".Session::get('id');
+        $Notification->notification_text=$Request->job_title."This  job Is Update By ".Session::get('full_name');
         $mydate=date('Y-m-d');
         $Notification->submit_date=$mydate;
         $Notification->updated_date=$mydate;
@@ -542,7 +568,28 @@ public function PostjobsAssignToJobSeeker(Request $request)
     }
 }
     public function delete_employer($id=''){
+        $employer_data1=tbl_post_jobs::where('ID',$id)->first('job_title');
+        // return $employer_data1;
+        $Notification=new Tbl_notification();
+        $Notification->notification_service_id=$id;
+        $Notification->service_type="Delete Job";
+        $Notification->notification_added_by=Session::get('id');
+        $Notification->notification_added_to=$employer_data1;
+        $Notification->applied_id=" ";
+        $Notification->notification_text=$employer_data1->job_title."This Job is Delete  By ".Session::get('full_name');
+        $mydate=date('Y-m-d');
+        $Notification->submit_date=$mydate;
+        $Notification->updated_date=$mydate;
+        $Notification->read_date=$mydate;
+        $Notification->read_status_team_member=1;
+        $Notification->read_date_team_member=$mydate;
+        // $Notification->notification_service_id=$Add_to_post_job->ID;
+        $Notification->save();
+
+
             $employer_data=tbl_post_jobs::where('ID',$id)->delete();
+
+        
         return redirect('employer/posted_jobs');
     }
 
@@ -861,6 +908,33 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $seeker_skill_name->skill_name = $request->skill;
         $seeker_skill_name->save();
         // return $seeker_skill_name->id;
+            $can_ID=$postcandidate->id;
+            $nam=$postcandidate->first_name.$postcandidate->last_name.$postcandidate->last_name;
+
+
+
+
+            $Notification=new Tbl_notification();
+            $Notification->notification_service_id=$can_ID;
+            $Notification->service_type="Add Candidate";
+            $Notification->notification_added_by=Session::get('id');
+            $Notification->notification_added_to=$nam;
+            $Notification->applied_id=" ";
+            $Notification->notification_text=$nam. "This  Candidate Is Posted By ".Session::get('full_name');
+            $mydate=date('Y-m-d');
+            $Notification->submit_date=$mydate;
+            $Notification->updated_date=$mydate;
+            $Notification->read_date=$mydate;
+            $Notification->read_status_team_member=1;
+            $Notification->read_date_team_member=$mydate;
+            // $Notification->notification_service_id=$Add_to_post_job->ID;
+            $Notification->save();
+
+
+
+
+
+
         return redirect('employer/search_resume');
      }
     

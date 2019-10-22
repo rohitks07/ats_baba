@@ -79,9 +79,9 @@ table.dataTable thead > tr > th {
                             <div class="card-body" >
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-12">
-                                            <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
+                                            <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
                                                 
-                                                    <thead style="text-align:center;">
+                                                    <thead class="table-light" style="text-align:center;">
                                                     <!--<tr>
                                                         <th colspan="6">Job Details</th>
                                                         <th colspan="3">Candidate Details</th>
@@ -110,7 +110,7 @@ table.dataTable thead > tr > th {
                                                         $seeker_id=$application['seeker_id'];
                                                                          
                                                         ?>  
-                                                        <td>{{$application['job_code']}}</td>
+                                                        <td style="padding:5px;">{{$application['job_code']}}</td>
                                                         <td><a href="{{url('employer/jobsdetails/'.$job_id)}}">{{$application['job_title']}}</a></td>
                                                         <td>{{$application['job_client_name']}}</td>
                                                         <td>{{$application['job_city']}},&nbsp;{{$application['job_state']}}</td>

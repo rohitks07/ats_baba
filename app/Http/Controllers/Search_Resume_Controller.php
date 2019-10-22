@@ -18,6 +18,7 @@ use App\states;
 use App\tbl_post_job;
 use Session;
 use Mail;
+use App\Tbl_notification;
 
 
 class Search_Resume_Controller extends Controller
@@ -280,6 +281,27 @@ public function update_personal_details(Request $request)
     'otherdocuments2'=>$store_file_other2,
     ));
     
+    $fname=$request->first_name;
+    $mname=$request->middle_name;
+    $lname= $request->last_name;
+    $ID=$request->id;
+    $Notification=new Tbl_notification();
+    $Notification->notification_service_id=$ID;
+    $Notification->service_type="Update Candidate";
+    $Notification->notification_added_by=Session::get('id');
+    $Notification->notification_added_to=$fname.$mname.$lname;
+    $Notification->applied_id=" ";
+    $Notification->notification_text=$fname.$mname.$lname. "This  Candidate Is Updated By ".Session::get('full_name');
+    $mydate=date('Y-m-d');
+    $Notification->submit_date=$mydate;
+    $Notification->updated_date=$mydate;
+    $Notification->read_date=$mydate;
+    $Notification->read_status_team_member=1;
+    $Notification->read_date_team_member=$mydate;
+    // $Notification->notification_service_id=$Add_to_post_job->ID;
+    $Notification->save();
+
+
 
     return redirect('employer/search_resume');
 }

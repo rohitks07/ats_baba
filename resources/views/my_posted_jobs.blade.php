@@ -87,20 +87,20 @@
                         	<div class="card-body" style="border: 1px #B0B0B0 solid;">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-12">
-                                                <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
+                                                <table class="table table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
 			                                        <thead style="text-align:center;">
 			                                            <tr>                                                   
 			                                                <th width="10%">Code</th>
-			                                                <th width="20%">Title</th>
-			                                                <th>Client</th>
+			                                                <th width="15%">Title</th>
+			                                                <th width="5%">Client</th>
 			                                                <th width="15%">Location</th>
-			                                                <th># </th>
+			                                                <th width="5%"># </th>
 															<th>Type</th>
 															<th width="7%">Visa </th>
 															<th width="7%">Pay Rate</th>
 			                                                <th width="10%">Publish Date</th>
 															<th >Status</th>                                                    
-															<th width="10%">Closing Date</th>
+															<th width="7%">Closing Date</th>
 															<th width="10%"><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
 															<th width="10%">Actions</th>     													
 			                                            </tr>
@@ -117,7 +117,7 @@
 															$client_submittal=count(DB::table('tbl_forward_candidate')->where('job_ID',$id)->get());
 															$assignee=count(DB::table('tbl_job_post_assign')->where('job_post_id',$id)->get());
                                                         	?>
-																<td>{{$posted_job['job_code']}}</td>
+																<td style="padding:5px;">{{$posted_job['job_code']}}</td>
 				                                                <td><a href="{{url('employer/jobsdetails/'.$id)}}">{{$posted_job['job_title']}} </a></td>
 				                                                <td>{{$posted_job['client_name']}}</td>
 				                                                <td>@if($posted_job['city']){{$posted_job['city']}}, &nbsp;@endif{{$posted_job['state']}}</td>

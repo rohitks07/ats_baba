@@ -148,7 +148,7 @@ table.dataTable thead > tr > th {
                                                                  
                                                         ?>                                                                                         
 													<tr>										
-														<td>{{$personal[$key]->first}} {{$personal[$key]->last}}</td>
+														<td style="padding:5px;">{{$personal[$key]->first}} {{$personal[$key]->last}}</td>
 														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
 														<!-- <td>{{$dob}}</td> -->
 
