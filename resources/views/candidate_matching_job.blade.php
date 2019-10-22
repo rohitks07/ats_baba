@@ -67,14 +67,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($results as $key=>$value)
+                                    @foreach($results['job_record'] as $results)
                                         <tr>
-                                        <td>{{$results[$key]->job_code}}</td>
-                                        <td>{{$results[$key]->job_title}}</td>
-                                        <td>{{$results[$key]->client_name}}</td>
-                                        <td>{{$results[$key]->job_visa_status}}</td>
-                                        <td>{{$results[$key]->city}}{{$results[$key]->state}}</td>
-                                        <td></td>
+                                        <td>{{$results->job_code}}</td>
+                                        <td>{{$results->job_title}}</td>
+                                        <td>{{$results->client_name}}</td>
+                                        <td>{{$results->job_visa_status}}</td>
+                                        <td>@if($results->city){{$results->city}}, &nbsp;@endif{{$results->state}}</td>
+                                        <td>@if(@$results->match_percentage){{@$results->match_percentage}} @else 0 @endif</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

@@ -407,6 +407,4 @@ Route::get('employer/employer_edit_education/{id}/','Search_Resume_Controller@vi
  Route::post('employer/report/weekly','Report_Controller@search_weekly');
  Route::post('employer/report/month','Report_Controller@search_monthly');
  Route::post('employer/report/monthly_group','Report_Controller@month_group');
-
-
- 
+ Route::get('employer/job_matching/{seeker_id}','Search_Resume_Controller@job_matching');

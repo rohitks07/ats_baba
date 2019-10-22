@@ -181,6 +181,8 @@ table.dataTable thead > tr > th {
                                                                     <li><a href="{{url('employer/team_member_edit_experience/'.$id)}}">Experience</a></li>
                                                                     <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
                                                             </ul>
+                                                            <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user" title="Submit to Job"></i></a>
+                                                            <a href="{{url('employer/job_matching/'.$id)}}"><i class="fa fa-check-square-o"> </i></a>
                                                         @endif
 														@else
 														<i class="fa fa-pencil" aria-hidden="true" data-toggle="dropdown" style="color: #1ba6df;cursor: pointer;" title="Edit" ></i>
@@ -203,7 +205,7 @@ table.dataTable thead > tr > th {
                                                            <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;"  title="Delete"></i>
                                                            </a>
 														@endif
-                                                        <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user" title="Submit to Job"></i></a>
+
 														  
 														    <a data-toggle="modal" data-target="#mailModal{{$id}}"><i class="fa fa-envelope" aria-hidden="true" style="color:#317eeb;" title="Mail"></i></a>
                                                             <a href="" data-toggle="modal"data-target="#exampleModalCenter{{$personal[$key]->id}}"><i class="fa fa-plus"  title="Note" aria-hidden="true"></i></a>

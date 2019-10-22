@@ -95,13 +95,12 @@ table.dataTable thead > tr > th {
                                                     </tr>
                                                 </thead>
                                                 <tbody id="myTable"> 
-
                                                     @foreach($toReturn['application'] as $application)
                                                     <tr>   
                                                     <?php $id=$application['application_id'];
                                                         $job_id=$application['ID'];
                                                         $seeker_id=$application['seeker_id'];
-
+                                                                         
                                                         ?>  
                                                         <td>{{$application['job_code']}}</td>
                                                         <td><a href="{{url('employer/jobsdetails/'.$job_id)}}">{{$application['job_title']}}</a></td>

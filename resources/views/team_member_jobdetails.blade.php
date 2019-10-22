@@ -100,7 +100,7 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col-md-12 col-sm-12 col-12">
-														<table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+														<table id="datatable" class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 															<thead>
 																<tr>
 																	<th>Name</th>
@@ -115,11 +115,9 @@
 																</tr>
 															</thead>
 															<tbody>
-																<?php foreach ($potentialdata as $key => $value) {
-
-																} ?>
+																
 																@if($potentialdata!='')
-																@foreach($value->pronames as $key => $val )
+																@foreach($potentialdata['seeker_details'] as $key => $val )
 																@if($val->first_name!='' && $val->skills!='')
 																<tr>
 																	<td>{{$val->first_name ?? ''}} {{$val->last_name ?? ''}}</td>
@@ -130,11 +128,11 @@
 																	<td>{{$val->mobile ?? ''}}</td>
 																	<td>{{$val->email ?? ''}}</td>
 																	<td>INTERNAL</td>
-																	<td>{{count($potentialdata)}}</td>
+																	<td>@if(@$val->match_percentage){{$val->match_percentage ?? ''}} @else 0 @endif</td>
 																</tr>
 																@endif
 																@endforeach
-																@endif
+																<!-- @endif -->
 															</tbody>
 														</table>
 
@@ -159,35 +157,40 @@
 														</tr>
 														<tr>
 															<td>Total Positions:</td>
-															<td>{{@$data[0]->vacancies}}</td>
+															<td>{{@$data->vacancies}}</td>
 														</tr>
 														<tr>
 															<td>Job Type:</td>
-															<td>{{@$data[0]->job_mode}}</td>
+															<td>{{@$data->job_mode}}</td>
 														</tr>
 														<tr>
 															<td>Salary:</td>
-															<td>{{@$data[0]->pay_min}}</td>
+															<td>{{@$data->pay_min}}</td>
 														</tr>
 														<tr>
 															<td>Job Location:</td>
-															<td>{{@$data[0]->country}},&nbsp;{{@$data[0]->state}},&nbsp;{{@$data[0]->city}}</td>
+															<td>{{@$data->country}},&nbsp;{{@$data->state}},&nbsp;{{@$data->city}}</td>
 														</tr>
 														<tr>
 															<td>Minimum Education:</td>
-															<td>{{@$data[0]->qualification}}</td>
+															<td>{{@$data->qualification}}</td>
 														</tr>
 														<tr>
 															<td>Minimum Experience:</td>
-															<td>{{@$data[0]->experience}}</td>
+															<td>{{@$data->experience}}</td>
 														</tr>
 														<tr>
 															<td>Apply By:</td>
-															<td> {{@$data[0]->last_updated_by}}</td>
+															@if(@$data->last_updated_by)
+															<?php 
+															$last_update_by=DB::table('tbl_team_member')->where('ID',@$data->last_updated_by)->first();
+															?>
+															<td> {{@$last_update_by->first_name}}</td>
+															@endif
 														</tr>
 														<tr>
 															<td>Job Posting Date:</td>
-															<td>{{@$data[0]->dated}}</td>
+															<td>{{@$data->dated}}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -210,47 +213,52 @@
 															<tbody>
 																<tr>
 																	<td>Jobe code:</td>
-																	<td>{{@$data[0]->job_code ?? ''}}</td>
+																	<td>{{@$data->job_code}}</td>
 																</tr>
 																<tr>
 																	<td>Job Title:</td>
-																	<td>{{@$data[0]->job_title}}</td>
+																	<td>{{@$data->job_title}}</td>
 																</tr>
 																<tr>
 																	<td>Qualification:</td>
-																	<td>{{@$data[0]->qualification}}</td>
+																	<td>{{@$data->qualification}}</td>
 																</tr>
 																<tr>
 																	<td>Client Name:</td>
-																	<td>{{@$data[0]->client_name}}</td>
+																	<td>{{@$data->client_name}}</td>
 																</tr>
 																<tr>
 																	<td>Job Slug:</td>
-																	<td>{{@$data[0]->job_slug}}</td>
+																	<td>{{@$data->job_slug}}</td>
 																</tr>
 																<tr>
 																	<td>Job Duration:</td>
-																	<td>{{@$data[0]->job_duration}}</td>
+																	<td>{{@$data->job_duration}}</td>
 																</tr>
 																<tr>
 																	<td>Is Featured:</td>
-																	<td>{{@$data[0]->is_featured}}</td>
+																	<td>{{@$data->is_featured}}</td>
 																</tr>
 																<tr>
 																	<td>Status:</td>
-																	<td>{{@$data[0]->sts}}</td>
+																	<td>{{@$data->sts}}</td>
 																</tr>
 																<tr>
 																	<td>Created Date:</td>
-																	<td>{{@$data[0]->dated}}</td>
+																	<td>{{@$data->dated}}</td>
 																</tr>
 																<tr>
 																	<td>Last Updated Date:</td>
-																	<td>{{@$data[0]->last_updated_date}}</td>
+																	<td>{{@$data->last_updated_date}}</td>
 																</tr>
 																<tr>
+																@if(@$data->last_updated_by)
+															<?php 
+															$last_update_by=DB::table('tbl_team_member')->where('ID',@$data->last_updated_by)->first();
+															?>
 																	<td>Last Updated By:</td>
-																	<td>{{@$data[0]->last_updated_by}}</td>
+																	<td>{{@$last_update_by->first_name}}</td>
+																	@endif
 																</tr>
 															</tbody>
 														</table>

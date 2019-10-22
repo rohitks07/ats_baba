@@ -350,30 +350,48 @@ public function view_education($id="")
     }
     public function job_matching($seeker_id)
     {
-        $data= Tbl_job_seekers::where('ID',$seeker_id)->get();
-        // return $data;
+        $data= Tbl_job_seekers::where('ID',$seeker_id)->first();
         $results = array();
-        foreach ($data as $key => $value) {
-          $d = $value;
-          $matchrecord=DB::table('tbl_post_jobs')->where('required_skills','LIKE', '%'.$value->skills.'%')->orWhere('city', 'LIKE', '%'.$value->city.'%')->get()->toArray();
-        //   $results=$d;
-        // foreach($matchrecord as $key=>$valueff)
-        // {
-        //         echo $value->skills."<br>";
+          $matchrecord=DB::table('tbl_post_jobs')->where('required_skills','LIKE', '%'.$data->skills.'%')->orWhere('city', 'LIKE', '%'.$data->city.'%')->orWhere('job_visa_status', 'LIKE', '%'.$data->visa_status.'%')->get()->toArray();
+          $results['job_record']=$matchrecord;
 
-        $candiate_skill=$value->skills;
-        // echo $matchrecord[$key]->required_skills."<bre>";
-        // }
-       
-        //   $percentage['matchingskill'][$key]=$value->skills;
-          // array_intersect($value->required_skills,$results['qualification'])
-      }
+        foreach($matchrecord as $key=>$value)
+        {
+                $city_match=strnatcasecmp($data->city,$matchrecord[$key]->city);
+               
+                $skill_match=strnatcasecmp($data->skills,$matchrecord[$key]->required_skills);
+                
+                $visa_match=strnatcasecmp($data->visa_status,$matchrecord[$key]->job_visa_status);
+                // echo $data->visa_status."<br>";
+                // echo $matchrecord[$key]->job_visa_status;
+                // return $skill_match;
+                //   $seeker_skill_array=explode(",",@$data->skills);
+                // $job_skill_array=explode(",",@$matchrecord[$key]->required_skills);
+                // $count=0;
+                // foreach($job_skill_array as $  )
+                // {
 
-      $results=$matchrecord;
-      echo"<pre>";
-      print_r($candiate_skill);
-      exit;
-    //   return $results;
+                // }
+                 if($city_match==0 || $visa_match==0 || $skill_match==0)
+                {
+                    $city_match_percentage=0;
+                    $visa_match_percentage=0;
+                    $skill_match_percentage=0;
+                    if($city_match==0)
+                    {
+                        $city_match_percentage=25;
+                    }
+                    if($visa_match==0)
+                    {
+                        $visa_match_percentage=30;
+                    }
+                    if($skill_match==0)
+                    {
+                        $skill_match_percentage=45;
+                    }
+                    $results['job_record'][$key]->match_percentage=$city_match_percentage + $visa_match_percentage + $skill_match_percentage;
+                }
+        }
         return view('candidate_matching_job')->with('results',$results);
     }
 
