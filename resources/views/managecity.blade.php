@@ -67,36 +67,84 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-12">
                                      <span  ><button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#add_new_modal">Add New City </button></span><br><br>
-                                    <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>City Name</th>
                                                 <th>State</th>
-                                                <th>Is Propular</th>
-                                                <th>Status</th>
                                                 <th>Action</th>
                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                             @foreach ($cityList as $cityList)
+                                             @foreach ($cityList as $list)
                                             <tr>
-                                                <td>{{$cityList->city_name}}</td>
-                                                <td>{{$cityList->state}}</td>
-                                                <th>{{$cityList->is_popular}}</th>
-                                                <th>{{$cityList->show}}</th>
+                                                <td>{{$list['city_id']}}</td>
+                                                <td>{{$list['city_name']}}</td>
+                                                <td>{{$list['state_name']}}</td>
+                                                {{-- <td>{{$list['state_id']}}</td> --}}
+                                                
+                                                
                                                 <?php
-                                                $id=$cityList->ID;
+                                                $id=$list->ID;
                                                 ?>
                                                 <td class="actions">
-                                                <a  href="" data-toggle="modal" data-target="#edit_model" class="on-default edit-row" data-toggle="tooltip"  data-mycityname="{{$cityList->city_name}}" data-mystate="{{$cityList->state}}" data-cityid="{{$cityList->ID}}" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                <a href="{{url('admin/cities/delete/'.$id)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                <a  href="" data-toggle="modal" data-target="#edit_model{{$list['city_id']}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="Edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                               
+                                                <div id="edit_model{{$list['city_id']}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+                                                        <div class="modal-dialog"> 
+                                                            <div class="modal-content"> 
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title mt-0">Edit City And State</h4> 
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div> 
+                                                                <div class="modal-body"> 
+                                                                    <form action ="{{url('admin/cities/edit')}}" method="POST">
+                                                                    <div class="row"> 
+                                                                        <div class="col-md-12"> 
+                                                                            <div class="form-group">
+                                                                            
+                                                                                <input type="hidden" name="_token" value ="{{ csrf_token() }}">
+                                                                                <label for="field-1" class="control-label">City Name</label> 
+                                                                                <input type="hidden" id="cityid" name="cityid">
+                                                                            <input type="text" class="form-control" id="cityname" value="{{$list['city_name']}}" required placeholder="enter City Name" name="cityname"> 
+                                                                            </div> 
+                                                                        </div> 
+                                                                    </div> 
+                                                                    <div class="row"> 
+                                                                        <div class="col-md-12"> 
+                                                                            <div class="form-group"> 
+                                                                                <label for="field-3" class="control-label">State</label> 
+                                                                                <input type="text" class="form-control" id="state" required  value="{{$list['state_name']}}" placeholder="Enter State Name" name="state"> 
+                                                                                <input type="hidden" class="form-control" value="{{$list['city_id']}}" id="state_id" required   name="city_id"> 
+                                                                                <input type="hidden" class="form-control" value="{{$list['state_id']}}" id="state_id" required   name="state_id"> 
+                                                                            </div> 
+                                                                        </div> 
+                                                                    </div>
+                                                                    
+                                                                </div> 
+                                                                <div class="modal-footer"> 
+                                                                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
+                                                                    <button type="submit" class="btn btn-info waves-effect waves-light" name="edit_cities">Save </button> 
+                                                                </div> 
+                                                            </form>
+                                                            </div> 
+                                                        </div>
+                                                    </div><!-- /.modal -->
+
+
+                                                <a href="{{url('admin/cities/delete/'.$list['city_id'])}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete City"><i class="fa fa-trash-o"></i></a>
                                                 
                                                 </td>
                                             </tr>
                                                 @endforeach
                                         </tbody>
+                                        
                                      </table>
+                                     {{ $cityList->links() }}
                                 </div>
                             </div>
                         </div>
@@ -151,46 +199,9 @@
 </div><!-- /.modal -->
 
 
-<div id="edit_model" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
-    <div class="modal-dialog"> 
-        <div class="modal-content"> 
-            <div class="modal-header">
-                <h4 class="modal-title mt-0">Edit City And State</h4> 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div> 
-            <div class="modal-body"> 
-                <form action ="{{url('admin/cities/edit')}}" method="POST">
-                <div class="row"> 
-                    <div class="col-md-12"> 
-                        <div class="form-group">
-                        
-                            <input type="hidden" name="_token" value ="{{ csrf_token() }}">
-                            <label for="field-1" class="control-label">City Name</label> 
-                            <input type="hidden" id="cityid" name="cityid">
-                            <input type="text" class="form-control" id="cityname"  required placeholder="enter City Name" name="cityname"> 
-                        </div> 
-                    </div> 
-                </div> 
-                <div class="row"> 
-                    <div class="col-md-12"> 
-                        <div class="form-group"> 
-                            <label for="field-3" class="control-label">State</label> 
-                            <input type="text" class="form-control" id="state" required  placeholder="Enter State Name" name="state"> 
-                        </div> 
-                    </div> 
-                </div>
-                
-            </div> 
-            <div class="modal-footer"> 
-                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
-                <button type="submit" class="btn btn-info waves-effect waves-light" name="edit_cities">Save </button> 
-            </div> 
-        </form>
-        </div> 
-    </div>
-</div><!-- /.modal -->
+
+
+
 <script>
     jQuery(document).ready(function() {
  //executes when HTML-Document is loaded and DOM is ready

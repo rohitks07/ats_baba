@@ -4,15 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tbl_cities;
+use App\cities;
+use App\states;
+
 
 class CityController extends Controller
 {
     public function index()
     {
     	
-    	$cityList=Tbl_cities::all();
+        $cityList=cities::leftjoin('states','states.state_id','=','cities.state_id')
+                            ->select('cities.city_name as city_name','states.state_name as state_name','cities.city_id as city_id','states.state_id as state_id')
+                            ->paginate(15);
+        // $cityList['city_state']->get();                    
+                            
     
-    	return view('managecity')->with("cityList",$cityList);
+        // return $cityList;
+        // exit();
+    	return view('managecity')->with('cityList',$cityList);
 
     }
     public function add_cities( Request $Request)
@@ -33,30 +42,42 @@ class CityController extends Controller
     }
     public function edit_cities( Request $Request)
     {
-        $cityid=$Request->cityid;
-        $cityList= Tbl_cities::where('ID',$cityid)->first();
+        $cityid=$Request->city_id;
+        $stateid=$Request->state_id;
+
         $city_name=$Request->cityname;
         $state=$Request->state;
-        //$cityList->save();
+       
 
-        Tbl_cities::where('ID', $cityid)->update(array(
-            'city_name'=>$city_name,
-            'state' =>  $state
-        
+        cities::where('city_id', $cityid)->update(array(
+            'city_name'=>$city_name,        
+        ));
+
+        states::where('state_id', $stateid)->update(array(
+            'state_name'=>$state,
         ));
 
 
-            return redirect('admin/cities');
+        $cityList=cities::leftjoin('states','states.state_id','=','cities.state_id')
+        ->select('cities.city_name as city_name','states.state_name as state_name','cities.city_id as city_id','states.state_id as state_id')
+        ->paginate(15);
 
-        // return $cityList;
+        return redirect('admin/cities')->with('cityList',$cityList);
+
         
     }
     public function delete($id ="")
     {
 
-        $cityList= Tbl_cities::where('ID',$id)->delete();
-     
-            return redirect('admin/cities');
+        $cityList= cities::where('city_id',$id)->delete();
+
+        $cityList=cities::leftjoin('states','states.state_id','=','cities.state_id')
+        ->select('cities.city_name as city_name','states.state_name as state_name','cities.city_id as city_id','states.state_id as state_id')
+        ->paginate(15);
+
+
+           return redirect('admin/cities')->with('cityList',$cityList);
+
        
    
     }

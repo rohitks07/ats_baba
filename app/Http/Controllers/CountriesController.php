@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tbl_countries;
+use App\countries;
 
 class CountriesController extends Controller
 {
     public function index()
     {
-    	$countries= Tbl_countries::all();	
+        $countries= countries::all();	
+        
 
     	return view('countries')->with("countries",$countries);
     }

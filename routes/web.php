@@ -280,7 +280,7 @@ Route::get('admin/qualification/delete/{id}','QualificationController@delete_qua
 
 Route::post('admin/cities/add','CityController@add_cities');
 Route::post('admin/cities/edit','CityController@edit_cities');
-Route::get('admin/cities/delete/{id}','CityController@delete');
+Route::get('admin/cities/delete/{list}','CityController@delete');
 Route::get('admin/countries','CountriesController@index');//for countries call
 Route::post('admin/countries/add','CountriesController@add_countries'); 
 Route::post('admin/countries/edit','CountriesController@edit_countries'); 
