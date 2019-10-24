@@ -622,7 +622,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
                                 // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ' )
                                 ->select('tbl_seeker_applied_for_job.ID as application_id','tbl_seeker_applied_for_job.current_location as current_location','post_jobs.city as job_city','post_jobs.state as job_state','post_jobs.ID as ID','post_jobs.job_code as job_code','post_jobs.job_title as job_title','post_jobs.client_name as job_client_name','post_jobs.country as location','post_jobs.job_visa_status as  job_visa','post_jobs.pay_min as pay_min','seeker.city as seeker_city','seeker.state as seeker_state','post_jobs.pay_max as pay_max','seeker.first_name as can_first_name','seeker.last_name as can_last_name','seeker.country as can_location','seeker.visa_status as can_visa','tbl_seeker_applied_for_job.dated as applied_date')
                                 ->whereIn('tbl_seeker_applied_for_job.submitted_by',$one_group_teammember_employer_id)
-                                ->orderBy('ID', 'DESC')
+                                ->orderBy('tbl_seeker_applied_for_job.ID', 'DESC')
                                 ->paginate(20);
                                 // return $toReturn['application'][1]['job_state']; 
                                }
@@ -633,13 +633,15 @@ public function PostjobsAssignToJobSeeker(Request $request)
                                 // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ')
                                 ->select('tbl_seeker_applied_for_job.ID as application_id','tbl_seeker_applied_for_job.current_location as current_location','post_jobs.city as job_city','post_jobs.state as job_state','post_jobs.ID as ID','post_jobs.job_code as job_code','post_jobs.job_title as job_title','post_jobs.client_name as job_client_name','post_jobs.country as location','post_jobs.job_visa_status as  job_visa','post_jobs.pay_min as pay_min','seeker.city as seeker_city','seeker.state as seeker_state','post_jobs.pay_max as pay_max','seeker.first_name as can_first_name','seeker.last_name as can_last_name','seeker.country as can_location','seeker.visa_status as can_visa','tbl_seeker_applied_for_job.dated as applied_date')
                                 ->where('tbl_seeker_applied_for_job.employer_ID',$user_id)
-                                ->orderBy('ID', 'DESC')
+                                ->orderBy('tbl_seeker_applied_for_job.ID', 'DESC')
                                 ->paginate(20);
                                }
    	return view('employerApplication')->with('toReturn',$toReturn);
    }
    
     public function application_delete($id=''){
+
+
             $employer_application_delete=Tbl_seeker_applied_for_job::where('ID',$id)->delete();
         return redirect ('employer/Application');
     }
@@ -1280,8 +1282,11 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $assign_details= \DB::table('tbl_job_post_assign')
         ->leftjoin('tbl_team_member','tbl_team_member.ID','=','tbl_job_post_assign.team_member_id')
         ->leftjoin('user','user.ID','=','tbl_job_post_assign.team_member_id')
-        ->select('tbl_team_member.full_name as name','tbl_team_member.email as email','tbl_job_post_assign.job_assigned_by as userAssign',
+        ->select('tbl_team_member.full_name as name','tbl_team_member.ID','tbl_team_member.email as email','tbl_job_post_assign.job_assigned_by as userAssign',
         'tbl_job_post_assign.job_assigned_date as job_assign_date')->where('job_post_id',$id)->get()->toArray();
+
+       
+
         return view('posted_job_assined')->with('toReturn',$toReturn)->with('jobpost',$post_job)->with('assign_details',$assign_details);
     }
 
@@ -1303,7 +1308,9 @@ public function PostjobsAssignToJobSeeker(Request $request)
             $assigned_job->first_read_date_time=now();
             $assigned_job->favourite_flag=0;
             $assigned_job->save();
-            $team_member_name=tbl_team_member::where('ID',$request->team_member_id)->first('full_name');
+
+            $id_assign=$assigned_job->id;
+            $team_member_name=tbl_team_member::where('ID',$request->team_member_id)->first();
             $job_history=new tbl_job_history();
             $job_history->job_id=$job_id;
             $job_history->update_text="this is Job Is Assigned to ".$team_member_name->full_name;
@@ -1311,6 +1318,26 @@ public function PostjobsAssignToJobSeeker(Request $request)
             $job_history->created_by=Session::get('id');
             $job_history->updated_by=Session::get('id');
             $job_history->save();
+            $table_post=Tbl_post_job::where('ID',$assigned_job->job_post_id)->first();
+        // return $id_assign;
+           
+        $Notification=new Tbl_notification();
+        $Notification->notification_service_id=$assigned_job->id;
+        $Notification->service_type="Post Assigned";
+        $Notification->notification_added_by=Session::get('id');
+        $Notification->notification_added_to=$team_member_name->full_name;
+        $Notification->applied_id=$assigned_job->id;
+        $Notification->notification_text="(".$table_post->client_name. ") This Post ts assigned to ".$team_member_name->full_name." By ".Session::get('full_name');
+        $mydate=date('Y-m-d');
+        $Notification->submit_date=$mydate;
+        $Notification->updated_date=$mydate;
+        $Notification->read_date=$mydate;
+        $Notification->read_status_team_member=1;
+        $Notification->read_date_team_member=$mydate;
+        // $Notification->notification_service_id=$Add_to_post_job->ID;
+        // $Notification->save();
+        // return $Notification;
+        // exit();
             return redirect('employer/posted_job_assined/'.$job_id); 
         }
         else
@@ -1410,6 +1437,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $job_history->created_by=Session::get('id');
         $job_history->updated_by=Session::get('id');
         $job_history->save();
+        // return $seeker_applied_for_job;
         return redirect('employer/Application');
         // return $Request;
     }
