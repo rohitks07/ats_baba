@@ -66,7 +66,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-12">
-                                     <span  ><button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#add_new_modal">Add New City </button></span><br><br>
+                                     <span  ><button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#add_new_modal">Add New State </button></span>
+                                     <span  ><button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#add_new_modal1">Add New City </button></span><br><br>
                                     <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
@@ -90,7 +91,7 @@
                                                 $id=$list->ID;
                                                 ?>
                                                 <td class="actions">
-                                                <a  href="" data-toggle="modal" data-target="#edit_model{{$list['city_id']}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="Edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                <a  href=""  data-toggle="modal" data-target="#edit_model{{$list['city_id']}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="Edit" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                                
                                                 <div id="edit_model{{$list['city_id']}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
                                                         <div class="modal-dialog"> 
@@ -163,7 +164,7 @@
     <div class="modal-dialog"> 
         <div class="modal-content"> 
             <div class="modal-header">
-                <h4 class="modal-title mt-0">Add New City And State</h4> 
+                <h4 class="modal-title mt-0">Add State</h4> 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -174,8 +175,13 @@
                     <div class="col-md-12"> 
                         <div class="form-group"> 
                             <input type="hidden" name="_token" value ="{{ csrf_token() }}">
-                            <label for="field-1" class="control-label">City Name</label> 
-                            <input type="text" class="form-control" id="cityname"  required placeholder="Enter City Name" name="cityname"> 
+                            <label for="field-1" class="control-label">Country Name</label> 
+                            <select name="country" class="form-control" id="" required>
+                                <option value="" selected>Select Country</option>
+                            @foreach ($all_country as $item)
+                            <option value="{{$item->country_name}} | {{$item->country_id}}">{{$item->country_name}}</option>
+                            @endforeach
+                        </select>
                         </div> 
                     </div> 
                 </div> 
@@ -184,6 +190,54 @@
                         <div class="form-group"> 
                             <label for="field-3" class="control-label">State</label> 
                             <input type="text" class="form-control" id="state" required  placeholder="Enter State Name" name="state"> 
+                        </div> 
+                    </div> 
+                </div>
+                
+            </div> 
+            <div class="modal-footer"> 
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
+                <button type="submit" class="btn btn-info waves-effect waves-light" name="save">Save </button> 
+            </div>   
+        </form>
+        </div> 
+    </div>
+</div><!-- /.modal -->
+
+
+
+
+// add city
+<div id="add_new_modal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog"> 
+        <div class="modal-content"> 
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Add City</h4> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> 
+            <div class="modal-body"> 
+                <form action ="{{url('admin/state/add')}}" method="POST">
+                <div class="row"> 
+                    <div class="col-md-12"> 
+                        <div class="form-group"> 
+                            <input type="hidden" name="_token" value ="{{ csrf_token() }}">
+                            <label for="field-1" class="control-label">State Name</label> 
+                            <select name="state" class="form-control" id="" required>
+                                <option value="" selected>Select State</option>
+                            @foreach ($all_state as $item)
+                            <option value="{{$item->state_name}} | {{$item->state_id}}">{{$item->state_name}}</option>
+                            @endforeach
+                        </select>
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="row"> 
+                    <div class="col-md-12"> 
+                        <div class="form-group"> 
+                            <label for="field-3" class="control-label">State</label> 
+                            <input type="text" class="form-control" id="state" required  placeholder="Enter State Name" name="city"> 
                         </div> 
                     </div> 
                 </div>

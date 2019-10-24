@@ -285,6 +285,7 @@ Route::get('admin/countries','CountriesController@index');//for countries call
 Route::post('admin/countries/add','CountriesController@add_countries'); 
 Route::post('admin/countries/edit','CountriesController@edit_countries'); 
 Route::get('admin/countries/delete/{id}','CountriesController@delete_countries'); 
+Route::post('admin/state/add','CityController@add_state'); 
 
 Route::get('admin/salary','SalaryController@index'); 
 Route::get('admin/salary/edit','SalaryController@edit_salary');

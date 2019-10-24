@@ -10,7 +10,7 @@ class CountriesController extends Controller
 {
     public function index()
     {
-        $countries= countries::all();	
+        $countries= countries::paginate(15);	
         
 
     	return view('countries')->with("countries",$countries);
@@ -19,24 +19,25 @@ class CountriesController extends Controller
     
     public function add_countries(Request $Request)
     {
-        	$countries=new Tbl_countries();
+        	$countries=new countries();
         	$countries->country_name=$Request->country_name;
-        	$countries->country_citizen=$Request->country_citizen;
-        	$countries->save();
+            $countries->save();
+            
     	return  redirect('admin/countries');
     }
 
     public function edit_countries(Request $Request)
     {
-        $country_id=$Request->countries_id;
         $country_name=$Request->country_name;
-        $country_citizen=$Request->country_citizen;
-        Tbl_countries::where('ID', $country_id)->update(array(
-            'country_name'=>$country_name,
-            'country_citizen' =>  $country_citizen
-        
+        $country_id=$Request->country_id;
+        // return $country_name;
+        // $country_citizen=$Request->country_citizen;
+        countries::where('country_id', $country_id)->update(array(
+            'country_name'=>$country_name,        
         ));
-        return  redirect('admin/countries');
+        $countries= countries::paginate(15);
+
+        return  redirect('admin/countries')->with("countries",$countries);
     }
 
 

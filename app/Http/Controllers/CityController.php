@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Tbl_cities;
 use App\cities;
 use App\states;
-
+use App\countries;
 
 class CityController extends Controller
 {
@@ -21,25 +21,59 @@ class CityController extends Controller
     
         // return $cityList;
         // exit();
-    	return view('managecity')->with('cityList',$cityList);
+        $all_country=countries::get();
+        $all_state=states::get();
+        return view('managecity')->with('cityList',$cityList)
+                ->with('all_country',$all_country)
+                ->with('all_state',$all_state);
 
     }
     public function add_cities( Request $Request)
     {
-    	$city=new Tbl_cities();
-    	$city->show=1;
-    	$city->city_slug="";
+    	
+        
+        $Country=$Request->country;
+        $exploded_value = explode('|', $Country);
+        $value_one = $exploded_value[0];
+        $value_two = $exploded_value[1];
+        
+        $add_to_state =  new states();
+        $add_to_state->state_name = $Request->state;
+        $add_to_state->country_id = $value_two;
+        $add_to_state-> save();
 
-    	$city->city_name=$Request->cityname;
-    	$city->state=$Request->state;
-    	$city->sort_order=233;
-    	$city->country_ID=23;
-    	$city->is_popular=1;
-    	$city->save();
+
+        // return $add_to_state;
+        // exit();
+
+
+
     	return  redirect('admin/cities');
-
-
     }
+
+    public function add_state(Request $Request)
+    {
+    	
+        
+        $State=$Request->state;
+        $exploded_value = explode('|', $State);
+        $value_one = $exploded_value[0];
+        $value_two = $exploded_value[1];
+        
+        $add_to_city =  new cities();
+        $add_to_city->city_name = $Request->city;
+        $add_to_city->state_id = $value_two;
+        $add_to_city-> save();
+
+
+        // return $add_to_city;
+        // exit();
+
+
+
+    	return  redirect('admin/cities');
+    }
+
     public function edit_cities( Request $Request)
     {
         $cityid=$Request->city_id;
@@ -57,12 +91,16 @@ class CityController extends Controller
             'state_name'=>$state,
         ));
 
+        $all_country=countries::get();
+        $all_state=states::get();
 
         $cityList=cities::leftjoin('states','states.state_id','=','cities.state_id')
         ->select('cities.city_name as city_name','states.state_name as state_name','cities.city_id as city_id','states.state_id as state_id')
         ->paginate(15);
 
-        return redirect('admin/cities')->with('cityList',$cityList);
+        return redirect('admin/cities')->with('cityList',$cityList)
+                                    ->with('all_country',$all_country)
+                                    ->with('all_state',$all_state);
 
         
     }
