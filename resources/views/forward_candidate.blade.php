@@ -164,7 +164,8 @@
                                         <div class="form-group row">
                                             <label for="Subject" class="control-label col-lg-4">Subject<span class="red">*</label>
                                             <div class="col-lg-8">
-                                                <input type="text"  style="width: 75%;" placeholder="Subject" id="Subject" name="email_subject" required >  
+                                                <input type="text"  style="width: 75%;" placeholder="Subject" id="subject" name="email_subject" required >  
+                                                <span id="subject_error">Please enter valid subject</span>
                                             </div>
                                         </div>
                                         <input type="hidden"  placeholder="Updated Resume" name="updated_resume" value="{{$toReturn['application_detail']['updated_resume']}}" />
@@ -748,6 +749,7 @@ $("#delete_doc").click(function(e) {
         $("#email_to_error").hide();
         $("#email_cc_error").hide();
         $("#email_bcc_error").hide();
+        $("#subject_error").hide();
         $("#fullname_error").hide();
         $("#phone_primart_error").hide();
         $("#condidate_email_id_error").hide();
@@ -760,10 +762,10 @@ $("#delete_doc").click(function(e) {
         $("#expectedrate_error").hide();
         $("#expectedrate_error1").hide();
         $("#passportno_error").hide();
-
         var err_email_to=true;
         var err_email_cc=true;
         var err_email_bcc=true;
+        var err_subject=true;
         var err_fullname=true;
         var err_phone_primart=true;
         var err_condidate_email_id=true;
@@ -782,7 +784,6 @@ $("#delete_doc").click(function(e) {
         var err_linkedinid=true;
         var err_expectedrate=true;
         var err_expectedrate1=true;
-
         //validate email to
         $("#email_to").keyup(function()
         {
@@ -810,13 +811,13 @@ $("#delete_doc").click(function(e) {
                         $("#email_to_error").show();
                         $("#email_to_error").focus();
                         $("#email_to_error").css("color","red");
-                        err_email_to_val=false;
+                        err_email_to=false;
                         return false;
-                        break;
+                        
                     }
                     else
                     {
-                        err_email_to_val=true;
+                        err_email_to=true;
                         $("#email_to_error").hide();
                     }
                 }
@@ -825,7 +826,7 @@ $("#delete_doc").click(function(e) {
                 $("#email_to_error").show();
                 $("#email_to_error").focus();
                 $("#email_to_error").css("color","red");
-                err_email_to_val=false;
+                err_email_to=false;
                 return false;
             }
         }
@@ -856,19 +857,19 @@ $("#delete_doc").click(function(e) {
                         $("#email_cc_error").show();
                         $("#email_cc_error").focus();
                         $("#email_cc_error").css("color","red");
-                        err_email_cc_val=false;
+                        err_email_cc=false;
                         return false;
-                        break;
+                        
                     }
                     else
                     {
-                        err_email_cc_val=true;
+                        err_email_cc=true;
                         $("#email_cc_error").hide();
                     }
                 }
             }
             else{
-                err_email_cc_val=true;
+                err_email_cc=true;
                 $("#email_cc_error").hide();
             }
         }
@@ -899,21 +900,43 @@ $("#delete_doc").click(function(e) {
                         $("#email_bcc_error").show();
                         $("#email_bcc_error").focus();
                         $("#email_bcc_error").css("color","red");
-                        err_email_bcc_val=false;
+                        err_email_bcc=false;
                         return false;
-                        break;
                     }
                     else
                     {
-                        err_email_bcc_val=true;
+                        err_email_bcc=true;
                         $("#email_bcc_error").hide();
                     }
                 }
             }
             else{
-                err_email_bcc_val=true;
+                err_email_bcc=true;
                 $("#email_bcc_error").hide();
             }
+        }
+        //validate subject
+        $("#subject").blur(function()
+        {
+            check_subject();
+        });
+        function check_subject()
+        {
+            var subject_val=$("#subject").val();
+            if (!subject_val){
+                $("#subject_error").show();
+                $("#subject_error").focus();
+                $("#subject_error").css("color","red");
+                err_subject=false;
+                return false;
+            }
+            else
+            {
+                err_subject=true;
+                $("#subject_error").hide();
+            }
+            
+            
         }
         //validate full name
         $("#fullname").blur(function()
@@ -1039,7 +1062,6 @@ $("#delete_doc").click(function(e) {
         function check_visaexpiry()
         {
             var visaexpiry_val= $("#visaexpiry").val();
-            
             if(visaexpiry_val)
             {
                 var visaexpiry_var = new Date(visaexpiry_val);
@@ -1247,6 +1269,7 @@ $("#delete_doc").click(function(e) {
             check_email_to();
             check_email_cc();
             check_email_bcc();
+            check_subject();
             check_fullname();
             check_phone_primart();
             check_condidate_email_id();
@@ -1262,7 +1285,7 @@ $("#delete_doc").click(function(e) {
 
 
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if((err_email_to==true)&&(err_email_cc==true)&&(err_email_bcc==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_current_location==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_qual_with_uni==true)&&(err_expectedrate==true)&&(err_expectedrate1==true))
+            if((err_email_to==true)&&(err_email_cc==true)&&(err_email_bcc==true)&&(err_subject==true)&&(err_fullname==true)&&(err_phone_primart==true)&&(err_condidate_email_id==true)&&(err_current_location==true)&&(err_us_visa_status==true)&&(err_visaexpiry==true)&&(err_last_for_digit_ssn==true)&&(err_passportno==true)&&(err_dob==true)&&(err_qual_with_uni==true)&&(err_expectedrate==true)&&(err_expectedrate1==true))
             {
                 return true; //ok
             }

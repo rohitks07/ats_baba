@@ -131,12 +131,12 @@ table.dataTable thead > tr > th {
 														<th width="10%">Mobile</th> 
 														<th>Source</th>
 														<th>Skype Id</th> 
-														<th width="10%">Actions</th>     													
+														<th width="30%">Actions</th>     													
                                                     </tr>
                                                 </thead>
                                                 <tbody id="myTable" >  
                                                 @foreach($personal as $key => $value)  
-												<?php $id=$personal[$key]->id;
+												<?php $id=$personal[$key]->ID;
 														$dob=$personal[$key]->dob;
 														$today_date=date('Y-m-d');
 															$datetime1 = strtotime(date('Y-m-d', strtotime($dob)));
@@ -145,10 +145,9 @@ table.dataTable thead > tr > th {
 															 $days = $secs / 86400;
 															 $exp_month=floor($days/30);
                                                              $age=floor($exp_month/12);
-                                                                 
                                                         ?>                                                                                         
 													<tr>										
-														<td style="padding:5px;">{{$personal[$key]->first}} {{$personal[$key]->last}}</td>
+														<td style="padding:5px;">{{$personal[$key]->first_name}} {{$personal[$key]->last_name}}</td>
 														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
 														<!-- <td>{{$dob}}</td> -->
 
@@ -159,7 +158,7 @@ table.dataTable thead > tr > th {
                                                         @endif
                                                         </td>
 														<td>@if($personal[$key]->city){{$personal[$key]->city}} , @endif &nbsp;{{$personal[$key]->state}}</td>
-														<td>{{$personal[$key]->visa}}</td>
+														<td>{{$personal[$key]->visa_status}}</td>
 														@if($personal[$key]->total_experience)
 														<td>{{$personal[$key]->total_experience}}+</td>
 														@else
@@ -384,7 +383,7 @@ table.dataTable thead > tr > th {
 									"_token": "{{ csrf_token() }}"
 								},
 								success: function (data) {
-									$('#append_view'+id).append("<table class='table' style=border:1px solid' >");
+									$('#append_view'+id).append("<table class='table' style="border:1px solid" >");
 									$('#append_view'+id).append("<thead>");
 									$('#append_view'+id).append("<tr>");
 								// 	$('#append_view'+id).append("<th>Candidate _ID</th>");

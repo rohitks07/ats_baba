@@ -1418,7 +1418,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $forward_candidate->qualification1=$Request->qual_with_uni;
         // $forward_candidate->prefer_location=$Request->prefer_location;
         $forward_candidate->passyear=$seeker_edu_detail['completion_year'];
-        $forward_candidate->dob=$seeker_detail['dob'];
+        $forward_candidate->dob=$Request->dob;
         $forward_candidate->entered=$Request->entred_in_us;
         $forward_candidate->relocation=$Request->Open_For_Relocation;
         $forward_candidate->telephonicinterview=$Request->availa_for_tele;

@@ -98,9 +98,9 @@
             TableManageButtons.init();
         </script>
          <script type="text/javascript">
-            function notification()
-            {
-               
+            $( document ).ready(function() {
+            // function notification()
+            // {
                 $("#notification_data").empty();
                 $.ajaxSetup({
                     headers: {
@@ -110,11 +110,6 @@
                 $.ajax({
                     url: "{{url('notifications')}}",
                     type: 'get',
-                    // data: {
-                    //     rent_type: rent_type_data,
-                    //     _token: token,
-
-                    // },
                     dataType: "json",
                     success: function(data) {
                         var No_notifiacation= data.length;
@@ -122,14 +117,13 @@
                         $.each(data,function(i,notifications){
                             $("#notification_data").append("<p>"+notifications.notification_text+"</p>");;
                         });
-                        console.log(data);
-                        
-                        // $("#formreset").reset();
                     }
                 });
 
             
-            }
+            // }
+        });
+           
         </script>
     
         <!-- Datatable init js -->

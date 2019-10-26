@@ -81,7 +81,7 @@
     
                         <ul class="nav navbar-right float-right list-inline">
                             <li class="dropdown d-none d-sm-block">
-                               <a href="javascript:void(0);" onclick="notification();" data-target="#Notification" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                               <a href="javascript:void(0);" data-target="#Notification" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
                                     <i class="md md-notifications"></i> <span class="badge badge-pill badge-xs badge-danger" id="notification_no"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-lg" id="Notification">
@@ -90,7 +90,6 @@
                                         <div > 
                                          <a href=""><p id="notification_data"></p></a>
                                        </div>
-                                      
                                         <a href="javascript:void(0);" class="list-group-item">
                                           <small>See all notifications</small>
                                         </a>

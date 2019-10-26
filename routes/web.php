@@ -403,9 +403,11 @@ Route::get('employer/employer_edit_education/{id}/','Search_Resume_Controller@vi
  Route::post('employer/candidate/notes/','Job_Employer_Controller@show_candidate_note');
  Route::post('employer/posted_jobs/email_add','Job_Employer_Controller@add_new_job_email');
  
- Route::get('employer/report','Report_Controller@repost_show');
- Route::post('employer/report/daily','Report_Controller@search_daily');
- Route::post('employer/report/weekly','Report_Controller@search_weekly');
- Route::post('employer/report/month','Report_Controller@search_monthly');
- Route::post('employer/report/monthly_group','Report_Controller@month_group');
- Route::get('employer/job_matching/{seeker_id}','Search_Resume_Controller@job_matching');
+Route::get('employer/report','Report_Controller@repost_show');
+Route::post('employer/report/daily','Report_Controller@search_daily');
+Route::post('employer/report/weekly','Report_Controller@search_weekly');
+Route::post('employer/report/month','Report_Controller@search_monthly');
+Route::post('employer/report/monthly_group','Report_Controller@month_group');
+Route::get('employer/job_matching/{seeker_id}','Search_Resume_Controller@job_matching');
+Route::get('careers','careersController@view_job_careers');
+Route::get('{url}.viewcareers','careersController@view');
