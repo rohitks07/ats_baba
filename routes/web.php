@@ -411,3 +411,11 @@ Route::post('employer/report/monthly_group','Report_Controller@month_group');
 Route::get('employer/job_matching/{seeker_id}','Search_Resume_Controller@job_matching');
 Route::get('careers','careersController@view_job_careers');
 Route::get('{url}.viewcareers','careersController@view');
+
+//new changes
+Route::get('admin/job_post_manage','Jobpost_manage_Controller@view_manage_job');
+Route::post('admin/job_post_manage/change_status','Jobpost_manage_Controller@change_status');
+Route::get('admin/job_post_manage/delete{id}','Jobpost_manage_Controller@delete');
+Route::get('admin/job_post_manage/edit{id}','Jobpost_manage_Controller@update_view');
+Route::post('admin/job_post_manage/update','Jobpost_manage_Controller@update');
+Route::get('admin/job_post_manage/search','Jobpost_manage_Controller@search');
