@@ -36,7 +36,7 @@
                     <a href="{{url('admin/job_seekers_manage')}}" class="waves-effect"><i class="md md-person"></i><span> Manage JobSeekers </span></a>
                 </li>
                 <li >
-                    <a href="{{url('')}}" class="waves-effect"><i class="fa fa-tasks"></i> <span> Manage Posted Jobs </span> </a>                               <!--< not work >-->
+                    <a href="{{url('admin/job_post_manage')}}" class="waves-effect"><i class="fa fa-tasks"></i> <span> Manage Posted Jobs </span> </a>                               <!--< not work >-->
                 </li>
                 <li >
                     <a href="{{url('admin/page_management')}}" class="waves-effect"><i class="fa fa-book"></i><span> CMS </span></a>
