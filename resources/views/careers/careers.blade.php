@@ -10,23 +10,18 @@
   <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
   <meta content="Coderthemes" name="author" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-  <link rel="shortcut icon" href="assets/images/favicon_1.ico">
-
+  <link rel="shortcut icon" href="{{url('assets/images/favicon_1.ico')}}">
   <!-- Custom Files -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/personal.css" rel="stylesheet" type="text/css" />
-
-  <script src="assets/js/modernizr.min.js"></script>
-
+  <link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('assets/css/personal.css')}}" rel="stylesheet" type="text/css" />
+  <script src="{{url('assets/js/modernizr.min.js')}}"></script>
 </head>
 
 <body>
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <img class="navbar-brand" src="assets/images/logo_itscient.png" style="width: 9%;">
+    <img class="navbar-brand" src="{{url('public/companylogo/'.$company_record->company_logo)}}" style="width: 9%;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -66,15 +61,15 @@
                   enctype="multipart/form-data" method="post" accept-charset="utf-8">
 
                   <div class="input-group" style="width: 80%;">
-                    <input type="text" name="" id="" class="form-control" placeholder="Job title, Keywords, Company">
+                    <input type="text" name="" id="search_job" class="form-control" placeholder="Job title, Keywords, Company">
                     &nbsp;
                     <div class="input-group" style="width: 46%;">
-                      <input type="text" class="form-control" placeholder="City, Country, Postal code">
+                      <input type="text" class="form-control" id="search_location" placeholder="City, Country, Postal code">
                       <div class="input-group-append">
                         <span class="input-group-text" style="height: 38px;"><i class="fa fa-map-marker"></i></span>
                       </div>
                     </div>&nbsp;
-                    <button type="button" class="btn btn-warning waves-effect waves-light m-b-5" style="height: 38px;">
+                    <button type="button" id="submit" class="btn btn-warning waves-effect waves-light m-b-5" style="height: 38px;">
                       <i class="fa fa-search"></i> <span>Find</span> </button>
                   </div>
                 </form>
@@ -210,45 +205,75 @@
 
 
 
-    @foreach($listjob as $listjob)
-    <div class="row res">
-      <div class="col-md-2 sidc">
-      </div>
-    </div>
-    <div class="col-md-7">
-      <div class="crd">
-        <div class="row">
-          <div class="col-md-10" style="background-color: #f7f7f7;">
+    <div class="col-md-10">
+      <!-- <div class="crd" style="width: 92%;">
+       <div class="row">
+        <div class="col-md-10" style="background-color: #f7f7f7;">
+         <h3 style="color: #069;"> Technical Recruiter </h3>
+         <h4> Triveni IT </h4>
+       </div>
+       <div class="col-md-2">
+         <img src="{{url('assets/images/sunweb.png')}}" class="log img img-thumbnail">
+       </div>
+     </div>
+     <div class="row" style="border-bottom: 1px solid #9c9797;">
+      <i class="fa fa-map-marker ft-size" aria-hidden="true"></i>
+      <div class="col-md-10">
+       <p style="font-size: 16px;">C-202, D Block, Sector 63, Noida, Uttar Pradesh 201301, India</p>
+     </div>
+     </div>
+     <div class="row" style="margin-top: 8px;">
+      <i class="fa fa-suitcase ft-size" aria-hidden="true"></i> &nbsp;
+      <p style="font-size: 16px;">Full-time</p>
+      <i class="fa fa-clock-o ft-size" aria-hidden="true"></i> &nbsp;
+      <p style="font-size: 16px;">50 minutes ago</p>
+     </div>
+     <p style="margin-bottom: 8px; text-align: justify;">We are looking for Technical Recruiters in Noida, India that help us grow our internal recruitment team. Technical Recruiter responsibilities include sourcing, screening and providing a shortlist of qualified </p>
+     <div class="col-md-12" style="text-align: right;">
+      <button type="button" class="btn btn-primary">Apply</button>
+     </div>
+     </div> -->
+
+     
+ 
+  @foreach($listjob as $listjob)
+ 
+    <div class="row">
+      <div class="col-md-11">
+        <div class="crd">
+          <div class="row">
+            <div class="col-md-10" style="background-color: #f7f7f7;">
               <h3 style="color: #069;">{{$listjob['job_title']}}</h3>
               <h4> {{$listjob['client_name']}} </h4>
+            </div>
+            <div class="col-md-2">
+              <img src="{{url('assets/images/sunweb.png')}}" class="log img img-thumbnail" style="height:100px; width:100px;">
+            </div>
           </div>
-          <div class="col-md-2">
-            <img src="assets/images/sunweb.png" class="log img img-thumbnail">
+          <div class="row" style="border-bottom: 1px solid #9c9797;">
+            <i class="fa fa-map-marker ft-size" aria-hidden="true"></i>
+            <div class="col-md-10">
+              <p style="font-size: 16px;">{{$listjob['city']}}&nbsp;{{$listjob['state']}} &nbsp;
+                {{$listjob['country']}} </p>
+            </div>
           </div>
-        </div>
-        <div class="row" style="border-bottom: 1px solid #9c9797;">
-          <i class="fa fa-map-marker ft-size" aria-hidden="true"></i>
-          <div class="col-md-10">
-              <p style="font-size: 16px;">{{$listjob['city']}},&nbsp; {{$listjob['state']}}, &nbsp;{{$listjob['country']}} </p>
+          <div class="row" style="margin-top: 8px;">
+            <i class="fa fa-suitcase ft-size" aria-hidden="true"></i> &nbsp;
+            <p style="font-size: 16px;">{{$listjob['job_mode']}}</p>
+            <i class="fa fa-clock-o ft-size" aria-hidden="true"></i> &nbsp;
+            <p style="font-size: 16px;">50 minutes ago</p>
           </div>
-        </div>
-        <div class="row" style="margin-top: 8px;">
-          <i class="fa fa-suitcase ft-size" aria-hidden="true"></i> &nbsp;
-          <p style="font-size: 16px;">{{$listjob['job_mode']}}</p>
-          <i class="fa fa-clock-o ft-size" aria-hidden="true"></i> &nbsp;
-          <p style="font-size: 16px;">50 minutes ago</p>
-        </div>
-        <p style="margin-bottom: 8px; text-align: justify;">{{$listjob['job_description']}} </p>
-        <div class="col-md-12" style="text-align: right;">
-          <button type="button" class="btn btn-primary">Apply</button>
+          <p style="margin-bottom: 8px; text-align: justify;">{{$listjob['job_description']}} </p>
+          <div class="col-md-12" style="text-align: right;">
+            <button type="button" class="btn btn-primary">Apply</button>
+          </div>
         </div>
       </div>
+      <div class="col-md-1"></div>
     </div>
-      @endforeach
-      <div class="crd">
-      </div>
-    <div class="col-md-3"></div>
-  </div>
+ 
+
+@endforeach
 
 
 
@@ -266,22 +291,21 @@
   </script>
 
   <!-- Main  -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/detect.js"></script>
-  <script src="assets/js/fastclick.js"></script>
-  <script src="assets/js/jquery.slimscroll.js"></script>
-  <script src="assets/js/jquery.blockUI.js"></script>
-  <script src="assets/js/waves.js"></script>
-  <script src="assets/js/wow.min.js"></script>
-  <script src="assets/js/jquery.nicescroll.js"></script>
-  <script src="assets/js/jquery.scrollTo.min.js"></script>
-
+  <script src="{{url('assets/js/jquery.min.js')}}"></script>
+  <script src="{{url('assets/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url('assets/js/detect.js')}}"></script>
+  <script src="{{url('assets/js/fastclick.js')}}"></script>
+  <script src="{{url('assets/js/jquery.slimscroll.js')}}"></script>
+  <script src="{{url('assets/js/jquery.blockUI.js')}}"></script>
+  <script src="{{url('assets/js/waves.js')}}"></script>
+  <script src="{{url('assets/js/wow.min.js')}}"></script>
+  <script src="{{url('assets/js/jquery.nicescroll.js')}}"></script>
+  <script src="{{url('assets/js/jquery.scrollTo.min.js')}}"></script>
   <!-- Countdown -->
-  <script src="../plugins/countdown/dest/jquery.countdown.min.js"></script>
-  <script src="../plugins/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+  <script src="{{url('../plugins/countdown/dest/jquery.countdown.min.js')}}"></script>
+  <script src="{{url('../plugins/simple-text-rotator/jquery.simple-text-rotator.min.js')}}"></script>
 
-  <script src="assets/js/jquery.app.js"></script>
+  <script src="{{url('assets/js/jquery.app.js')}}"></script>
 
 
   <script type="text/javascript">
@@ -317,7 +341,38 @@
       output.innerHTML = this.value;
     }
   </script>
-
+  <script>
+    $(document).ready(function ()
+    {
+      $('#submit').click(function()
+      {
+        var job = $("#search_job").val(); 
+        var location = $("#search_location").val();
+        // alert(location); 
+        // alert(job);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{url('careers/search')}}" + "/" + job + "/"+location,
+            type: 'get',
+            dataType: "json",
+            success: function (data) {
+                // $.each(data, function (i, team) {
+                    // $("#teammember_list").append(
+                    //     "<table class='table table'class='font-weight-bold' style='width: 100%;border-bottom-color:5px solid red;background-color:white;'><tr class='font-weight-bold' style='color:#138D75;'><td>" +
+                    //     team.first_name + "</td><td style='text-align:right;'>" + team.email +
+                    //     "</td></tr></table>");
+                    // $("#teammember_email_id").append("<p>"+team.email+"</p>");
+                // });
+                console.log(data);
+            }
+        });
+      });
+    });
+  </script>
 </body>
 
 <!-- Mirrored from coderthemes.com/moltran/blue/pages-coming-soon.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Jun 2019 12:16:17 GMT -->

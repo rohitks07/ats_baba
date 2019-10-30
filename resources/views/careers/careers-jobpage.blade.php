@@ -10,21 +10,20 @@
   <meta content="Coderthemes" name="author" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <link rel="shortcut icon" href="assets/images/favicon_1.ico">
-
+  <link rel="shortcut icon" href="{{url('assets/images/favicon_1.ico')}}">
   <!-- Custom Files -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/personal.css" rel="stylesheet" type="text/css" />
+  <link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('assets/css/personal.css')}}" rel="stylesheet" type="text/css" />
 
-  <script src="assets/js/modernizr.min.js"></script>
+  <script src="{{url('assets/js/modernizr.min.js')}}"></script>
 
 </head>
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <img class="navbar-brand" src="assets/images/logo_itscient.png" style="width: 9%;">
+    <img class="navbar-brand"  src="{{url('public/companylogo/'.$company_record->company_logo)}}" style="width: 9%;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,7 +31,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Search Job<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#">Search Job <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Search Resume</a>
@@ -60,7 +59,6 @@
             <div class="col-md-12">
               <center>            
                 <form action="" name="jsearch" id="jsearch" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-
                   <h1 class="career">CAREERS</h1>        
                 </form>
               </center>
@@ -89,14 +87,14 @@
   </div>
   <div class="col-md-6" style="text-align:justify;">
     <div><div class="text parbase section"><div data-numbers="green">
-      <p>We are innovative problem-solvers who believe water is the key for life. We deliver a comprehensive range of smart, sustainable water solutions to homes, business and industry around the world. Whether it’s for fitness and fun, healthier homes, better flood control, safer sky rises, more sustainable ways to farm, or safe drinking water for those who need it most, we won’t stop until the world’s water is managed the best way possible.</p>
+      <p>We are innovative problem-solvers who believe water is the key for life.  We deliver a comprehensive range of smart, sustainable water solutions to homes, business and industry around the world. Whether it’s for fitness and fun, healthier homes, better flood control, safer sky rises, more sustainable ways to farm, or safe drinking water for those who need it most, we won’t stop until the world’s water is managed the best way possible.</p>
       <p>We don’t ‘go with the flow.’ It’s our duty to stay ahead of the current because the future of water depends on us. Explore how you can be part of charting a course to a healthier world.</p>
 
     </div></div>
     <div class="cta parbase section">
       <div class="cta component ">
-       <?php  $url="itscient";?>
-        <a href="{{url("$url".'.viewcareers')}}"><button class="btn btn-primary" >Search Careers Here</button></a>
+       <?php  $url=$company_record->company_name;?>
+        <a href="{{url($url.'/joblist')}}"><button class="btn btn-primary" >Search Careers Here</button></a>
       </div >
 
     </div>
@@ -111,14 +109,10 @@
 
 <!-- Grid row -->
 <div class="row" style="margin-top: 30px;">
-
   <!-- Grid column -->
   <div class="col-md-12 d-flex justify-content-center mb-5">
-
     <button style="border: 1px solid black !important; margin-right: 4px;" type="button" class="btn btn-success btn-outline-black waves-effect filter" data-rel="all">All</button>
     <button style="border: 1px solid black !important; margin-right: 4px;" type="button" class="btn btn-warning btn-outline-black waves-effect filter" data-rel="1">Jobs</button>
-    
-
   </div>
   <!-- Grid column -->
 
@@ -132,7 +126,7 @@
 
       <!-- Grid column -->
       <div class="mb-3 pics animation all 2">
-        <img class="img-fluid" src="assets/images/gal1.jpg" alt="Card image cap">
+        <img class="img-fluid" src="{{url('assets/images/gal1.jpg')}}" alt="Card image cap">
         <p style="font-size: 20px; font-weight: 700;">Career</p>
       </div>
       <!-- Grid column -->
@@ -143,35 +137,35 @@
 
       <!-- Grid column -->
       <div class="mb-3 pics animation all 1">
-        <img class="img-fluid" src="assets/images/gal3.jpg" alt="Card image cap">
+        <img class="img-fluid" src="{{url('assets/images/gal3.jpg')}}" alt="Card image cap">
         <p style="font-size: 20px; font-weight: 700;">Career</p>
       </div>
       <!-- Grid column -->
 
       <!-- Grid column -->
       <div class="mb-3 pics animation all 2">
-        <img class="img-fluid" src="assets/images/gal4.jpg" alt="Card image cap">
+        <img class="img-fluid" src="{{url('assets/images/gal4.jpg')}}" alt="Card image cap">
         <p style="font-size: 20px; font-weight: 700;">Career</p>
       </div>
       <!-- Grid column -->
 
       <!-- Grid column -->
       <div class="mb-3 pics animation all 1">
-        <img class="img-fluid" src="assets/images/gal5.jpg" alt="Card image cap">
+        <img class="img-fluid" src="{{url('assets/images/gal5.jpg')}}" alt="Card image cap">
         <p style="font-size: 20px; font-weight: 700;">Career</p>
       </div>
       <!-- Grid column -->
 
       <!-- Grid column -->
       <div class="mb-3 pics animation all 2">
-        <img class="img-fluid" src="assets/images/gal6.jpg" alt="Card image cap">
+        <img class="img-fluid" src="{{url('assets/images/gal6.jpg')}}" alt="Card image cap">
         <p style="font-size: 20px; font-weight: 700;">Career</p>
       </div>
       <!-- Grid column -->
 
       <!-- Grid column -->
       <div class="mb-3 pics animation all 2">
-        <img class="img-fluid" src="assets/images/gal7.jpg" alt="Card image cap">
+        <img class="img-fluid" src="{{url('assets/images/gal7.jpg')}}" alt="Card image cap">
         <p style="font-size: 20px; font-weight: 700;">Career</p>
       </div>
       <!-- Grid column -->
@@ -231,22 +225,22 @@
 </script>
 
 <!-- Main  -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/detect.js"></script>
-<script src="assets/js/fastclick.js"></script>
-<script src="assets/js/jquery.slimscroll.js"></script>
-<script src="assets/js/jquery.blockUI.js"></script>
-<script src="assets/js/waves.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/jquery.nicescroll.js"></script>
-<script src="assets/js/jquery.scrollTo.min.js"></script>
+<script src="{{url('assets/js/jquery.min.js')}}"></script>
+<script src="{{url('assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{url('assets/js/detect.js')}}"></script>
+<script src="{{url('assets/js/fastclick.js')}}"></script>
+<script src="{{url('assets/js/jquery.slimscroll.js')}}"></script>
+<script src="{{url('assets/js/jquery.blockUI.js')}}"></script>
+<script src="{{url('assets/js/waves.js')}}"></script>
+<script src="{{url('assets/js/wow.min.js')}}"></script>
+<script src="{{url('assets/js/jquery.nicescroll.js')}}"></script>
+<script src="{{url('assets/js/jquery.scrollTo.min.js')}}"></script>
 
 <!-- Countdown -->
-<script src="../plugins/countdown/dest/jquery.countdown.min.js"></script>
-<script src="../plugins/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+<script src="{{url('../plugins/countdown/dest/jquery.countdown.min.js')}}"></script>
+<script src="{{url('../plugins/simple-text-rotator/jquery.simple-text-rotator.min.js')}}"></script>
 
-<script src="assets/js/jquery.app.js"></script>
+<script src="{{url('assets/js/jquery.app.js')}}"></script>
 
 
 <script type="text/javascript">

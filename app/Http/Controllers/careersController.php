@@ -9,34 +9,46 @@ use App\Tbl_companies;
 
 class careersController extends Controller
 {
-    public function View($url="")
+    public function View($company_name="")
     {
-        // echo $url;
-        $company_web="www.".$url.".com";
-        
-        $company_record=Tbl_companies ::where('company_website',$company_web)->first();
-        print_r($company_record);
-        exit;
-        // echo url()->previous()."</br>";
-        // $p_url=url()->previous();
-        // $previous_url=explode('/',$p_url);
-        // echo url()->current();
-        // $c_url=url()->current();
-    //    $current_url=explode('/',$c_url);
-    //    print_r($current_url[3]);
-      
-    //    $result_url=array_splice($current_url,3,0,$previous_url[3]);
-        // print_r($current_url);
-        exit;
-    //    print_r($current_url[1]);
-        // url()->
-        exit;
-        $listjob=tbl_post_jobs::where('privacy_level','public')->get()->toArray();
-        return view('careers/careers')->with('listjob',$listjob);
+    $name=str_replace(' ', '', $company_name);
+    $company_mail_name=strtolower($name);
+    $company_web="www.".$company_mail_name.".com";
+    $company_record=Tbl_companies::where('company_website',$company_web)->first();
+    if(empty($company_record))
+    {
+        return view('error_pages.page_404');
+    }
+    $listjob=tbl_post_jobs::where('privacy_level','public')->where('company_ID',$company_record->ID)->get()->toArray();
+    return view('careers/careers')->with('listjob',$listjob)->with('company_record',$company_record);
     }
     
-    public function view_job_careers()
+    
+    public function view_job_careers($company_name="")
     {
-        return view('careers/careers-jobpage');
+        // echo $company_name;
+        $company_web="www.".$company_name.".com";
+        // echo $company_web;
+        $company_record=Tbl_companies ::where('company_website',$company_web)->first();
+        if(empty($company_record))
+        {
+            return view('error_pages.page_404');
+        }
+        $listjob=tbl_post_jobs::where('privacy_level','public')->where('company_ID',$company_record->ID)->get()->toArray();
+
+        // print_r($company_record);
+        // // exit;
+        return view('careers/careers-jobpage')->with('company_record',$company_record)->with('listjob',$listjob); 
+    }
+    public function search_job($job="",$location="")
+    {
+    //     $compaletlocation=explode(",",$location);
+    //     // $country=$
+        $listjob=tbl_post_jobs::Where('job_code','LIKE', '%'.$job.'%')->Where('job_title','LIKE', '%'.$job.'%')->orWhere('client_name','LIKE', '%'.$job.'%')->orWhere('country','LIKE', '%'.$location.'%')->orWhere('city','LIKE', '%'.$location.'%')->orWhere('state','LIKE', '%'.$location.'%')->get()->toArray();
+    // //    / echo $job;
+    echo "<pre>";
+    print_r($listjob);
+    // exit;
+        return json_encode($listjob);
     }
 }
