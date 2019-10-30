@@ -94,7 +94,7 @@
     <div class="cta parbase section">
       <div class="cta component ">
        <?php  $url=$company_record->company_name;?>
-        <a href="{{url($url.'/joblist')}}"><button class="btn btn-primary" >Search Careers Here</button></a>
+        <a href="{{url($url.'/jobs')}}"><button class="btn btn-primary" >Search Careers Here</button></a>
       </div >
 
     </div>

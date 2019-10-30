@@ -409,9 +409,9 @@ Route::post('employer/report/weekly','Report_Controller@search_weekly');
 Route::post('employer/report/month','Report_Controller@search_monthly');
 Route::post('employer/report/monthly_group','Report_Controller@month_group');
 Route::get('employer/job_matching/{seeker_id}','Search_Resume_Controller@job_matching');
-Route::get('careers','careersController@view_job_careers');
-Route::get('{url}.viewcareers','careersController@view');
-
+Route::get('careers/{company_name}','careersController@view_job_careers');
+Route::get('{company_name}/jobs','careersController@view');
+Route::get('careers/search/{job}/{location}','careersController@search_job');
 //new changes
 Route::get('admin/job_post_manage','Jobpost_manage_Controller@view_manage_job');
 Route::post('admin/job_post_manage/change_status','Jobpost_manage_Controller@change_status');

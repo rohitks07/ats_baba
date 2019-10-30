@@ -666,9 +666,6 @@
                     </div><!--end of content-->
                 </div><!--end of content-page-->
             </div><!--end of wrapper-->
-
-
-
 <script>
     var resizefunc = [];
 </script><br><br>

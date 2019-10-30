@@ -96,10 +96,10 @@ class Seeker_Signup_Controller extends Controller
         $jobseeker->employer_id='';
         $jobseeker->save();
 
-
         //Create record for user table
         $user_login = new user();
         $user_login ->org_ID="1";
+        $user_login->user_id=$jobseeker->id;
         $user_login ->user_type="seeker";
         $user_login ->full_name=$request->first_name;
         $user_login ->email    =$request->email;
