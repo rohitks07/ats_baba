@@ -45,10 +45,23 @@ class careersController extends Controller
     //     $compaletlocation=explode(",",$location);
     //     // $country=$
         $listjob=tbl_post_jobs::Where('job_code','LIKE', '%'.$job.'%')->Where('job_title','LIKE', '%'.$job.'%')->orWhere('client_name','LIKE', '%'.$job.'%')->orWhere('country','LIKE', '%'.$location.'%')->orWhere('city','LIKE', '%'.$location.'%')->orWhere('state','LIKE', '%'.$location.'%')->get()->toArray();
-    // //    / echo $job;
+    // echo $job;
     echo "<pre>";
     print_r($listjob);
     // exit;
         return json_encode($listjob);
+    }
+    public function alljobs()
+    {
+    //    $company_record=Tbl_companies ::get()->toArray();
+    //    print_r($company_record);
+    //    exit;
+        $listjob=tbl_post_jobs::where('privacy_level','public')
+        ->leftjoin('tbl_companies','tbl_post_jobs.company_ID','=','tbl_companies.ID' )
+        ->get()->toArray();
+        // echo"<pre>";
+        // print_r($listjob[1]);
+        // exit;
+        return view('careers/list_all_jobs')->with('listjob',$listjob);
     }
 }

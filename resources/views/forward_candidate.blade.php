@@ -317,12 +317,30 @@
                                                 <label class="form-label">Job type<span class="red">*</span></label>
                                                 <select name="job_type" id="expectedrate1" required>
                                                     <option value="">Select job type</option>
-                                                    <option value="fulltime">fulltime</option>
-                                                    <option value="contact">contact</option>
+                                                    <option value="fulltime">Fulltime</option>
+                                                    <option value="contact">Contract</option>
+                                                </select>
+                                                <select name="job_rate_type" id="\" required>
+                                                    <option value="">Select job type</option>
+                                                    <option value="C2C" id="c2c">C2C</option>
+                                                    <option value="W2" id="w2">W2</option>
+                                                    <option value="1099" id="1099">1099</option>
+                                                    <option value="C2H" id="c2h">C2H</option>
                                                 </select>
                                                 <span id="expectedrate_error1">Please enter valid rate</span>
                                         </div><!-- end of col -->
-                                           
+                                          
+                                        <!-- <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
+                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="expectedrate" checked> 
+                                                <label class="form-label">Job type<span class="red">*</span></label>
+                                                <select name="job_type" id="expectedrate1" required>
+                                                    <option value="">Select job type</option>
+                                                    <option value="fulltime">Fulltime</option>
+                                                    <option value="contact">Contract</option>
+                                                </select>
+                                                <span id="expectedrate_error1">Please enter valid rate</span> -->
+                                        <!-- </div>end of col -->
+                                         
                                          <div class="col-sm-1" id="dels" style="background-color:;">
                                                 
                                             <p id="wrong2" style="color:red;"></p>
@@ -1295,4 +1313,22 @@ $("#delete_doc").click(function(e) {
             }
         });
     });
+</script>
+<script>
+    $("#expectedrate1")
+            .change(function() {
+                var str = "";
+                $("#expectedrate1 option:selected").each(function() {
+                    str += $(this).text() + " ";
+                });
+                alert(str);
+                if(str=="Fulltime")
+                {
+                    alert("dsdf");
+                }
+                // $("#dis_quantity").text(str);
+                // $("#dis_quantity2").text(str);
+
+            })
+            .change();
 </script>

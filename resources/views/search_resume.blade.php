@@ -92,10 +92,16 @@ table.dataTable thead > tr > th {
     background-clip: padding-box;
 }
 #wrapper{
-			    width:100%;
-			    overflow-y:scroll;
-                overflow-x:scroll;
-			}
+	    width:100%;
+	    overflow-y:scroll;
+        overflow-x:scroll;
+	}
+.card .card-header {
+    padding: 10px 20px;
+    border: none;
+    background: #fff;
+    color: #fff;
+}
 </style>  
 <body>  
         <div id="wrapper">
@@ -103,9 +109,9 @@ table.dataTable thead > tr > th {
             <div class="content">               
                     <div class="row">
                         <div class="col-12">
-                            <div class="card">
-                                <div class="card-header" style="background:#317eeb;">
-                             <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;border:none;height:30px;margin-top:2.5px;">
+                            <div class="card card-border card-primary">
+                                <div class="card-header">
+                             <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;border:none;height:30px;margin-top:2.5px;border:1px solid #999;">
 
 								@if(!empty($toReturn['user_type']=="teammember")) 
                                 @if($toReturn['current_module_permission']['is_add']=="yes")                                      
@@ -115,23 +121,23 @@ table.dataTable thead > tr > th {
 								<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-success" style="float:left;">Add a Candidate</button></a>
 								@endif											
 								</div> 
-                                <div class="card-body" style="border: 1px #B0B0B0 solid;">
+                                <div class="card-body">
                                     <div class="row" >
                                         <div class="col-12">
                                             <table class="table table-striped table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width:100%;overflow-x:scroll;">
                                                 <thead style="text-align:center;">
                                                     <tr>                                                   
-														<th width="15%">Name</th>
-														<th>BIO</th>
+														<th width="10%">Name</th>
+														<th width="5%">BIO</th>
 														<th width="10%">Location</th>
-														<th width="10%">Visa</th>
-														<th>Exp. (Yr.)</th>
-														<th>Education</th>
+														<th width="15%">Visa</th>
+														<th width="5%">Exp. (Yr.)</th>
+														<th width="10%">Education</th>
 														<th width="10%">Email (H)</th>
 														<th width="10%">Mobile</th> 
-														<th>Source</th>
-														<th>Skype Id</th> 
-														<th width="30%">Actions</th>     													
+														<th width="10%">Source</th>
+														<th width="10%">Skype Id</th> 
+														<th width="10%">Actions</th>     													
                                                     </tr>
                                                 </thead>
                                                 <tbody id="myTable" >  
@@ -159,8 +165,8 @@ table.dataTable thead > tr > th {
                                                         </td>
 														<td>@if($personal[$key]->city){{$personal[$key]->city}} , @endif &nbsp;{{$personal[$key]->state}}</td>
 														<td>{{$personal[$key]->visa_status}}</td>
-														@if($personal[$key]->total_experience)
-														<td>{{$personal[$key]->total_experience}}+</td>
+														@if($personal[$key]->experience)
+														<td>{{$personal[$key]->experience}}+</td>
 														@else
 														<td>No experience </td>
 														@endif
@@ -207,11 +213,11 @@ table.dataTable thead > tr > th {
 
 														  
 														    <a data-toggle="modal" data-target="#mailModal{{$id}}"><i class="fa fa-envelope" aria-hidden="true" style="color:#317eeb;" title="Mail"></i></a>
-                                                            <a href="" data-toggle="modal"data-target="#exampleModalCenter{{$personal[$key]->id}}"><i class="fa fa-plus"  title="Note" aria-hidden="true"></i></a>
+                                                            <a href="" data-toggle="modal"data-target="#exampleModalCenter{{$personal[$key]->ID}}"><i class="fa fa-plus"  title="Note" aria-hidden="true"></i></a>
                                                     <!-- Modal -->														  
 												        </td>																				   										                                             				  											
                                                     </tr>
-                                                     <div class="modal fade bd-example-modal-lg fade" id="exampleModalCenter{{$personal[$key]->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                     <div class="modal fade bd-example-modal-lg fade" id="exampleModalCenter{{$personal[$key]->ID}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg " role="document">
                                                             <div class="modal-content" style="width:100%;">
                                                                 <div class="modal-header">
@@ -231,8 +237,8 @@ table.dataTable thead > tr > th {
                                                                             <div class="input-group mb-3">
                                                                                 <input type="hidden" value="{{$id}}"
                                                                                     id="id_val" name="id">
-                                                                                <input type="hidden"
-                                                                                    value="{{$personal[$key]->first}}{{$personal[$key]->middle}}{{$personal[$key]->last}}"
+                                                                                <input type="text"
+                                                                                    value="{{$personal[$key]->first_name}}{{$personal[$key]->middle}}{{$personal[$key]->last_name}}"
                                                                                     id="id" name="owner_id">
                                                                                 <input type="text" class="form-control"
                                                                                     placeholder="Notes Title" id="title"
@@ -303,7 +309,7 @@ table.dataTable thead > tr > th {
                                                           <div class="modal-body">
                                                     	  <form class="cmxform form-horizontal tasi-form"  action="{{url('employer/search_resume/jod_details_mail')}}"   method="post" >
                                                     									{{csrf_field()}}
-                                                                <input type="hidden" class="form-control" id="candidate_id" name="candidate_id" value="{{$personal[$key]->id}}"required>
+                                                                <input type="hidden" class="form-control" id="candidate_id" name="candidate_id" value="{{$personal[$key]->ID}}"required>
                                                     		  <div class="form-group">
                                                                 <label for="recipient-name" class="col-form-label">To:</label>
                                                                 <input type="email" class="form-control" id="mail_to" name="mail_to" required>
@@ -383,7 +389,7 @@ table.dataTable thead > tr > th {
 									"_token": "{{ csrf_token() }}"
 								},
 								success: function (data) {
-									$('#append_view'+id).append("<table class='table' style="border:1px solid" >");
+									$('#append_view'+id).append("<table class='table' style='border:1px solid'>");
 									$('#append_view'+id).append("<thead>");
 									$('#append_view'+id).append("<tr>");
 								// 	$('#append_view'+id).append("<th>Candidate _ID</th>");

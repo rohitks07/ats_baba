@@ -412,6 +412,7 @@ Route::get('employer/job_matching/{seeker_id}','Search_Resume_Controller@job_mat
 Route::get('careers/{company_name}','careersController@view_job_careers');
 Route::get('{company_name}/jobs','careersController@view');
 Route::get('careers/search/{job}/{location}','careersController@search_job');
+Route::get('jobs','careersController@alljobs');
 //new changes
 Route::get('admin/job_post_manage','Jobpost_manage_Controller@view_manage_job');
 Route::post('admin/job_post_manage/change_status','Jobpost_manage_Controller@change_status');
