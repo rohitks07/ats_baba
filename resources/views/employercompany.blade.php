@@ -144,8 +144,8 @@
                                                     <?php
                                                                 @$id=$data[$key]->ID;
                                                                 // echo $id;
-                                                                $number_of_jobs=count(DB::table('tbl_post_jobs')->where('company_ID',$id)->get());
-                                                                $number_of_members=count(DB::table('user')->where('org_ID',$id)->get());
+                                                                $number_of_jobs=count(DB::table('tbl_post_jobs')->where('company_ID',@$id)->get());
+                                                                $number_of_members=count(DB::table('user')->where('org_ID',@$id)->get());
                                                                 ?>
                                                     <td>{{@$data[$key]->company}}</td>
                                                     <td>{{@$data[$key]->hq}}</td>
@@ -155,7 +155,7 @@
                                                     </td>
                                                     <td align="center" valign="middle">
                                                         <button type="button" class="btn btn-xs"
-                                                            style="background-color:#606060; color:#fff">102</button>
+                                                    style="background-color:#606060; color:#fff">{{@$number_of_members}}</button>
                                                     </td>
                                                     </td>
                                                     <td>{{@$data[$key]->email}}</td>
