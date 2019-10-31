@@ -434,3 +434,6 @@ Route::get('admin/emp_edit/quick_view','EmployerCompanyController@quick_view_com
 Route::get('admin/emp_edit{id}','EmployerCompanyController@emp_edit');
 Route::post('admin/emp_edit/update_employer_info/{id}','EmployerCompanyController@update_employer_info');
 Route::post('admin/emp_edit/update_Company_info/{id}','EmployerCompanyController@update_Company_info');
+Route::get('admin/job_post_manage/search','Jobpost_manage_Controller@search');
+Route::get('admin/industries/delete{id}','IndustryController@delete_all_industries');
+Route::post('admin/industries/add','IndustryController@add_all_industries');

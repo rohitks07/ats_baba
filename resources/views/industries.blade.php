@@ -73,25 +73,28 @@
                                                 <thead>
                                                     <tr>
                                                        <th>Industry Name</th>
-                                                       <th>No. Of Employers Listing</th>
-                                                       <th>Top Industry</th>
-                                                       <th>Status</th>
+                                                      <th>Status</th> 
+                                                      <!-- <th>Top Industry</th>
+                                                       <th></th> -->
                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($user as $value)
                                                     <tr>
-                                                      <td>---------</td>
-                                                      <td>----------</td>
-                                                      <td>----------</td>
-                                                      <td>----------</td>
+                                                      <td>{{$value->industry_name}}</td>
+                                                     
+                                                      <td>{{$value->sts}}</td> 
+                                                      <!-- <td>{{$value->top_category}}</td> -->
+                                                      
                                                       <td class="actions">
                                                         <a href="#" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                                        <a href="#" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                        <a href="{{url('admin/industries/delete'.$value->ID)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                                                         <a href="#" class="hidden on-editing save-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save"><i class="fa fa-save"></i></a>
                                                         <a href="#" class="hidden on-editing cancel-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cancel"><i class="fa fa-times"></i></a>
                                                       </td>
                                                     </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                     </div> 
@@ -111,23 +114,30 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div> 
-                                                    
+                                                    <form method="post" action="{{url('admin/industries/add')}}">
+                                                        @csrf
                                                     <div class="modal-body"> 
                                                         <div class="row"> 
+
                                                             <div class="col-md-12"> 
                                                                 <div class="form-group"> 
-                                                                    <label for="field-1" class="control-label">Heading</label> 
-                                                                    <input type="text" class="form-control" id="field-1" placeholder="enter here ..... heading"> 
+                                                                    <label for="field-1" class="control-label">Industry name</label> 
+                                                                    <input type="text" class="form-control" id="field-1" name="ind_name" placeholder="enter industry name"> 
                                                                 </div> 
                                                             </div> 
                                                         </div> 
                                                     </div> 
 
                                                     <div class="modal-footer"> 
+                                                        <div class="row"> 
+                                                             <div class="col-md-12"> 
                                                         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> 
-                                                        <button type="button" class="btn btn-info waves-effect waves-light">Save changes</button> 
-                                                    </div> 
-                                                </div> 
+                                                        <button type="submit" class="btn btn-info waves-effect waves-light">Save changes</button> 
+                                                                </div>
+                                                           </div> 
+                                                      </div>
+                                                </div>
+                                                </form> 
                                             </div>
                                         </div><!-- /.modal -->
 @include('include.footer')
