@@ -417,5 +417,9 @@ public function view_education($id="")
         }
         return view('candidate_matching_job')->with('results',$results);
     }
+    public function View_candidate_detail()
+    {
+        return $id;
+    }
 
 }

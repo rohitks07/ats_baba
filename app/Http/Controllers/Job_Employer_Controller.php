@@ -113,7 +113,7 @@ class Job_Employer_Controller extends Controller
             $toReturn['total_job']= count(tbl_post_job::where('company_ID',$org_id)->get());  
             $toReturn['one_day_job']= count(tbl_post_job::whereDate('dated', '=', date('Y-m-d'))->where('company_ID',$org_id)->get());  
             // $toReturn['total_resume']=count(Tbl_job_seekers::where('employer_id',$id)->get());  
-            $toReturn['total_interview']=count(tbl_schedule_interview::get());    
+            $toReturn['tota_interview']=count(tbl_schedule_interview::get());    
             $toReturn['today_interview']=count(tbl_schedule_interview::where('dated', '=',date('Y-m-d'))->get());     
             $toReturn['today_meeting']=count(tbl_meeting::where('dated', '=',date('Y-m-d'))->get()); 
             $toReturn['total_meeting']=count(tbl_meeting::get()); 
