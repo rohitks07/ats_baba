@@ -72,9 +72,9 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 ">
                                             <?php
-                                                $id=$employer->ID;
+                                                @$id=$employer->ID;
                                                 ?>
-                                            <form action="{{url('admin/emp_edit/update_employer_info/'.$id)}}"
+                                            <form action="{{url('admin/emp_edit/update_employer_info/'.@$id)}}"
                                                 method="POST">
                                                 @csrf
                                                 <center>
@@ -82,10 +82,10 @@
                                                     <br>
                                                     <div class="form-group m-4">
                                                         <label for="">First Name</label>
-                                                        <input type="hidden" value="{{$employer->ID}}" id="id_val">
+                                                        <input type="hidden" value="{{@$employer->ID}}" id="id_val">
                                                         <input type="text" class="form-control" name="first_name"
                                                             id="full_name" aria-describedby="helpId"
-                                                            value="{{$employer->first_name}}" placeholder=""
+                                                            value="{{@$employer->first_name}}" placeholder=""
                                                             style="width:70%;text-align:center;" required>
                                                     </div>
 
@@ -93,13 +93,13 @@
                                                         <label for="">Last Name</label>
                                                         <input type="text" class="form-control" name="last_name"
                                                             id="last_name" aria-describedby="helpId"
-                                                            value=" {{$employer->last_name}}" placeholder=""
+                                                            value=" {{@$employer->last_name}}" placeholder=""
                                                             style="width:70%;text-align:center;" required>
                                                     </div>
                                                     <div class="form-group m-4">
                                                         <label for="">Email</label>
                                                         <input type="email" class="form-control" name="email" id="email"
-                                                            aria-describedby="helpId" value="{{$employer->email}}"
+                                                            aria-describedby="helpId" value="{{@$employer->email}}"
                                                             placeholder="" style="width:70%;text-align:center;"
                                                             required>
                                                     </div>
@@ -108,7 +108,7 @@
                                                         <label for="">Password</label>
                                                         <input type="password" class="form-control" name="password"
                                                             id="password" aria-describedby="helpId"
-                                                            {{$employer->pass_code}} placeholder=""
+                                                            {{@$employer->pass_code}} placeholder=""
                                                             style="width:70%;text-align:center;" required>
                                                     </div>
 
@@ -116,7 +116,7 @@
                                                         <label for="">Mobile Number</label>
                                                         <input type="number" class="form-control" maxlength="10"
                                                             name="number" id="number" aria-describedby="helpId"
-                                                            value="{{$employer->mobile_phone}}" placeholder=""
+                                                            value="{{@$employer->mobile_phone}}" placeholder=""
                                                             style="width:70%;text-align:center;" required>
                                                     </div>
                                                     <br>
@@ -132,7 +132,7 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <center>
-                                                <form action="{{url('admin/emp_edit/update_Company_info/'.$id)}}" method="POST" enctype='multipart/form-data' >
+                                                <form action="{{url('admin/emp_edit/update_Company_info/'.@$id)}}" method="POST" enctype='multipart/form-data' >
                                                     @csrf
                                                     <h3 class="ml-4">Edit Company Info</h3>
 
@@ -142,12 +142,12 @@
                                                         <label for="">Company Name</label>
                                                         <input type="text" class="form-control" name="c_name"
                                                             id="c_name" aria-describedby="helpId"
-                                                            value="{{$company->company_name}}" placeholder=""
+                                                            value="{{@$company->company_name}}" placeholder=""
                                                             style="width:70%;text-align:center;" required>
                                                     </div>
                                                     <?php
-                                                              $industry = DB::table('tbl_job_industries')->where('ID',$company->industry_ID)->first();
-                                                              $industry_all = DB::table('tbl_job_industries')->get();
+                                                              @$industry = DB::table('tbl_job_industries')->where('ID',@$company->industry_ID)->first();
+                                                              @$industry_all = DB::table('tbl_job_industries')->get();
                                                                
 
                                                       ?>
@@ -156,10 +156,10 @@
                                                         <select class="form-control" name="Industry" id="Industry"
                                                             aria-describedby="helpId" value="" placeholder=""
                                                             style="width:70%;text-indent: 38%;" required>
-                                                            <option value="{{$industry->ID}}">
-                                                                {{$industry->industry_name}}</option>
-                                                            @foreach ($industry_all as $item)
-                                                            <option value="{{$item->ID}}">{{$item->industry_name}}
+                                                            <option value="{{@$industry->ID}}">
+                                                                {{@$industry->industry_name}}</option>
+                                                            @foreach (@$industry_all as $item)
+                                                            <option value="{{@$item->ID}}">{{@$item->industry_name}}
                                                             </option>
                                                             @endforeach
                                                         </select>
@@ -169,7 +169,7 @@
                                                         <label for="">No of employee</label>
                                                         <input type="text" class="form-control" name="employee_no"
                                                             id="employee_no" aria-describedby="helpId"
-                                                            value="{{$company->no_of_employees}}" placeholder=""
+                                                            value="{{@$company->no_of_employees}}" placeholder=""
                                                             style="width:70%;text-align:center;" required>
                                                     </div>
 
@@ -177,14 +177,14 @@
                                                         <label for="">Company location</label>
                                                         <input type="text" class="form-control" name="c_location"
                                                             id="c_location" aria-describedby="helpId"
-                                                            value="{{$company->company_location}}" placeholder=""
+                                                            value="{{@$company->company_location}}" placeholder=""
                                                             style="width:70%;text-align:center;" required>
                                                     </div>
                                                     <div class="form-group m-4">
                                                         <label for="">Companny Website</label>
                                                         <input type="text" class="form-control" name="website"
                                                             id="website" aria-describedby="helpId"
-                                                            value="{{$company->company_website}}" placeholder=""
+                                                            value="{{@$company->company_website}}" placeholder=""
                                                             style="width:70%;text-align:center;" required>
                                                     </div>
 
@@ -193,18 +193,18 @@
                                                         <input type="file" class="form-control" name="file" id="file"
                                                             aria-describedby="helpId" value="" placeholder=""
                                                             style="width:70%;text-align:center;" >
-                                                    <input type="hidden" value="{{$company->company_logo}}" name="logo">
+                                                    <input type="hidden" value="{{@$company->company_logo}}" name="logo">
                                                         <br>
-                                                        <small class="bg-warning p-1 ">@if($company->company_logo ==
+                                                        <small class="bg-warning p-1 ">@if(@$company->company_logo ==
                                                             "")No file exist @else
-                                                            {{$company->company_logo}}@endif</small>
+                                                            {{@$company->company_logo}}@endif</small>
                                                         <br>
                                                         <br>
 
-                                                        @if($company->company_logo == "")
+                                                        @if(@$company->company_logo == "")
 
                                                         @else
-                                                        <img src="{{url('public/companylogo/'.$company->company_logo)}}"
+                                                        <img src="{{url('public/companylogo/'.@$company->company_logo)}}"
                                                             alt="logo" width="100px;" style="border:1px solid black;">
                                                         @endif
                                                     </div>
