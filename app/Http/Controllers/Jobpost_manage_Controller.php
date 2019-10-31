@@ -140,14 +140,10 @@ class Jobpost_manage_Controller extends Controller
             
         }
        
-
-       
             // $matchrecord=tbl_post_job::where('job_title','LIKE', '%'.$search_featured1.'%')
             // ->get()
             // ->toArray();
         
-        
-
         return response()->json($matchrecord);
     }
 }

@@ -420,3 +420,17 @@ Route::get('admin/job_post_manage/delete{id}','Jobpost_manage_Controller@delete'
 Route::get('admin/job_post_manage/edit{id}','Jobpost_manage_Controller@update_view');
 Route::post('admin/job_post_manage/update','Jobpost_manage_Controller@update');
 Route::get('admin/job_post_manage/search','Jobpost_manage_Controller@search');
+
+//new item
+
+Route::get('admin/emp_login{id}','EmployerCompanyController@login_index');
+Route::get('admin/job_post_manage/search','Jobpost_manage_Controller@search');
+Route::get('admin/job_seekers_manage/job_post_view','jobseekersmanageController@view_job');
+Route::post('admin/job_seekers_manage/sts','jobseekersmanageController@sts_change');
+Route::get('admin/job_seekers/applied_jobs/edit/{id}','jobseekersmanageController@edit_candeate');
+Route::post('admin/job_seekers/applied_jobs/update','jobseekersmanageController@update');
+Route::get('admin/job_seekers/applied_jobs/auto_login_seeker{id}','jobseekersmanageController@auto_login_seeker');
+Route::get('admin/emp_edit/quick_view','EmployerCompanyController@quick_view_company');
+Route::get('admin/emp_edit{id}','EmployerCompanyController@emp_edit');
+Route::post('admin/emp_edit/update_employer_info/{id}','EmployerCompanyController@update_employer_info');
+Route::post('admin/emp_edit/update_Company_info/{id}','EmployerCompanyController@update_Company_info');
