@@ -57,6 +57,7 @@ Route::get('employer/status/update/{id}','EmployerCompanyController@updateStatus
 Route::get('employer/top_employer/update/{id}','EmployerCompanyController@top_employer');
 Route::get('admin/job_seekers_manage','jobseekersmanageController@index');
 Route::get('admin/page_management','CMSController@index');    
+Route::get('admin/menu','CMSController@menu');    
 Route::post('admin/page_management/add','CMSController@add');
 Route::get('admin/page_management/edit','CMSController@edit');
 Route::get('admin/page_management/delete/{id}','CMSController@delete');
@@ -434,3 +435,6 @@ Route::get('admin/emp_edit/quick_view','EmployerCompanyController@quick_view_com
 Route::get('admin/emp_edit{id}','EmployerCompanyController@emp_edit');
 Route::post('admin/emp_edit/update_employer_info/{id}','EmployerCompanyController@update_employer_info');
 Route::post('admin/emp_edit/update_Company_info/{id}','EmployerCompanyController@update_Company_info');
+Route::get('admin/job_post_manage/search','Jobpost_manage_Controller@search');
+Route::get('admin/industries/delete{id}','IndustryController@delete_all_industries');
+Route::post('admin/industries/add','IndustryController@add_all_industries');

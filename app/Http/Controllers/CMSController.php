@@ -74,4 +74,9 @@ class CMSController extends Controller
        return view('cms_content')->with('cms_content',$cms_content) ;
    }
 
+   public function menu(){
+    
+    return view('error_pages.page_404');
+   }
+
 }
