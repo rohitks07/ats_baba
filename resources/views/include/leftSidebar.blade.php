@@ -42,7 +42,7 @@
                     <a href="{{url('admin/page_management')}}" class="waves-effect"><i class="fa fa-book"></i><span> CMS </span></a>
                 </li>
                 <li >
-                    <a href="{{url('')}}" class="waves-effect"><i class="md md-menu"></i> <span> Manage Menus </span> </a>                                     <!--< not work >-->
+                    <a href="{{url('admin/menu')}}" class="waves-effect"><i class="md md-menu"></i> <span> Manage Menus </span> </a>                                     <!--< not work >-->
                 </li>
 
                 <li >
