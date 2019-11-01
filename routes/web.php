@@ -118,6 +118,10 @@ Route::post('admin/emailTemplate/updated','adminMarketingController@update_templ
 Route::get('admin/emailTemplate/delete/{id}','adminMarketingController@deletetemplate');
 Route::get('admin/marketing/emaillistdelete/{id}','adminMarketingController@deleteemaillist');
 Route::get('admin/marketing/contactdelete/{id}','adminMarketingController@deleteContact');
+
+Route::get('admin/marketing/post_job/state/{country_id}','LocationController@get_state');
+Route::get('admin/post_new_job/post_job/city/{state_id}','LocationController@get_city');
+
 //Super admin route definition
 
 

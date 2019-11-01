@@ -12,6 +12,9 @@ use App\Tbl_email_list;
 use App\Tbl_team_member_type;
 use App\Tbl_salutation;
 use App\Tbl_countries;
+use App\cities;
+use App\countries;
+use App\states;
 use Session;
 use Mail;
 
@@ -25,7 +28,13 @@ class adminMarketingController extends Controller
             $toReturn['emailList']=Tbl_email_list::all();
         $toReturn['email']=tbl_marketing_emailer::all();
         $toReturn['email_Template']=Tbl_email_template::get();
-        return view('admin_marketing')->with('toReturn',$toReturn);
+        // return view('admin_marketing')->with('toReturn',$toReturn);
+
+        // $toReturn=array();
+        $toReturn['countries']=countries::get()->toArray();
+        $country_name="United States";
+        $country_id=224;
+        return view('admin_marketing')->with('toReturn',$toReturn)->with('country_name',$country_name)->with('country_id',$country_id);
     }
     public function addcontact(Request $request)
     {

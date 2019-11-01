@@ -775,3 +775,42 @@ function template_list()
                 });
 }
 </script>
+<script type="text/javascript">
+$("#country").on("change", function(e){
+        $('#state_text').empty();
+        var country_id = e.target.value;
+        $.ajax({
+            type: 'get',
+            url: '{{url("admin/post_new_job/post_job/state/")}}' + "/" + country_id,
+            success: function (data) {
+                console.log(data);
+                $.each(data, function (index, value) {
+                    $('#state_text').append("<option value=" + '"' + value.state_id + '"' +
+                        "selected>" + value.state_name + "</option>");
+                    console.log(value.state_id);
+                });
+            },
+
+
+
+        });
+
+    });
+    $('#state_text').on('change', function (e) {
+        $('#city').empty();
+        var state_id = e.target.value;
+        $.ajax({
+            type: 'get',
+            url: '{{url("admin/post_new_job/post_job/city/")}}' + "/" + state_id,
+            success: function (data) {
+                console.log(data);
+                $.each(data, function (index, value) {
+                    $('#city').append("<option value=" + '"' + value.city_id + '"' +
+                        "selected>" + value.city_name + "</option>");
+                });
+
+            },
+        });
+    });
+
+</script>
