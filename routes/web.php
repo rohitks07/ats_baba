@@ -105,6 +105,19 @@ Route::get('admin/pay_umo','Pay_UMO_Controller@index');
 Route::post('admin/pay_umo/add','Pay_UMO_Controller@add_pay_umo');
 Route::post('admin/pay_umo/edit','Pay_UMO_Controller@edit_pay_umo');
 Route::get('admin/pay_umo/delete/{id}','Pay_UMO_Controller@delete_pay_umo');
+
+// admin Manage Marketing
+Route::get('admin/marketing','adminMarketingController@index');
+Route::post('admin/marketing/addcontact','adminMarketingController@addcontact');
+Route::post('admin/emailTemplate','adminMarketingController@add_template');
+Route::post('admin/market_mail','adminMarketingController@send_mail');
+Route::get('admin/schedule','adminMarketingController@schedule_email');
+Route::post('admin/mails','adminMarketingController@send_mail');
+Route::get('admin/emailTemplate/edit/{id}','adminMarketingController@edit_template');
+Route::post('admin/emailTemplate/updated','adminMarketingController@update_template');
+Route::get('admin/emailTemplate/delete/{id}','adminMarketingController@deletetemplate');
+Route::get('admin/marketing/emaillistdelete/{id}','adminMarketingController@deleteemaillist');
+Route::get('admin/marketing/contactdelete/{id}','adminMarketingController@deleteContact');
 //Super admin route definition
 
 
