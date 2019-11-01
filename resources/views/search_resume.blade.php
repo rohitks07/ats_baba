@@ -389,18 +389,18 @@ table.dataTable thead > tr > th {
 									"_token": "{{ csrf_token() }}"
 								},
 								success: function (data) {
-									$('#append_view'+id).append("<table class='table' style='border:1px solid'>");
-									$('#append_view'+id).append("<thead>");
-									$('#append_view'+id).append("<tr>");
+									$('#append_view'+id).append('<table  style="border:1px solid;color:#787877;border-collapse: collapse; background-color: #f2f2f2;">');
+									// $('#append_view'+id).append("<thead>");
+									// $('#append_view'+id).append("<tr>");
 								// 	$('#append_view'+id).append("<th>Candidate _ID</th>");
 									$('#append_view'+id).append("<th>Title</th>");
 									$('#append_view'+id).append("<th>Note</th>");
 									$('#append_view'+id).append("<th>Created By</th>");
 									$('#append_view'+id).append("<th>Status</th>");
 									$('#append_view'+id).append("<th>Privacy</th>");
-									$('#append_view'+id).append("</tr>");
-									$('#append_view'+id).append("</thead>");
-									$('#append_view'+id).append("<tbody>");
+									// $('#append_view'+id).append("</tr>");
+									// $('#append_view'+id).append("</thead>");
+									// $('#append_view'+id).append("<tbody>");
 									$.each(data, function(index, value) {
 										
 										$('#append_view'+id).append("<tr>");
@@ -412,7 +412,7 @@ table.dataTable thead > tr > th {
 										$('#append_view'+id).append("<td>"+value.privacy_level+"</td>");
 										$('#append_view'+id).append("</tr>");
 										});
-										$('#append_view'+id).append("</tbody>");
+										// $('#append_view'+id).append("</tbody>");
 										$('#append_view'+id).append("</table>");
 										$('#view'+id).hide();
 																
