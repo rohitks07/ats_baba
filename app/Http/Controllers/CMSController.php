@@ -19,7 +19,7 @@ class CMSController extends Controller
         // $this->validate($request,[
         //     'pageheading' => 'required',
         //     'pageslug' => 'required',
-        //     'pagetitle'=>'requried',
+        //     'pagetitle'=>'requried', 
         //     'metakeyword'=> 'requried',
         //     'metadescription' => 'requried'
         // ] );
@@ -76,7 +76,7 @@ class CMSController extends Controller
 
    public function menu(){
     
-    return view('error_pages.page_404');
+    return view('error_pages.menu_page_404');
    }
 
 }

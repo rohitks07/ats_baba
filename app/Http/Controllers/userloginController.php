@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\userlogin;
 use DB;
+use Session;
 
 class userloginController extends Controller
 {
 		function dashboard()
 		{
-
+			
 			return view('dashboard');
 		}
 		
@@ -32,7 +33,13 @@ class userloginController extends Controller
 
 			if($username==$email && $password==$pass)
 			{
-
+				$session_data = array(
+					'id'   =>$userlogin->id,
+					'email_id'=>$userlogin->email_id,
+					'name'=>$userlogin->name
+					
+					);
+					Session::put($session_data);
 				return redirect()->action('userloginController@dashboard');
 			}
 			else
@@ -46,7 +53,8 @@ class userloginController extends Controller
 		}
 		public function logout()
 		{
-			session_unset();
+			// session_unset();
+			Session::flush();
 			return redirect('/');
 		}
 

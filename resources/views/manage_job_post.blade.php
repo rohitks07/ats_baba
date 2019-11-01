@@ -306,7 +306,7 @@
                     </div>
                 </div>
             </div><br><br><br>
-
+ 
             @include('include.footer')
 
 

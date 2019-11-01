@@ -9,8 +9,9 @@ use App\cities;
 use App\states;
 use App\tbl_post_jobs;
 use App\Tbl_seeker_applied_for_job;
+use DB;
 
-class jobseekersmanageController extends Controller
+class jobseekersmanageController extends Controller 
 {
    public function index()
    {
@@ -239,6 +240,217 @@ class jobseekersmanageController extends Controller
             	$error="Email Id Not Found !!!!";
         	return view('employee_admin')->with('error',$error);
         }
+   }
+
+   public function advance_search(Request $request){
+
+        // $email->s2
+        // $gender->cn
+        
+        
+        // $name->s1
+        // $city->c
+        // return $request;
+        $name               =$request->search_name;
+        $email              =$request->company_name;
+        $gender             =$request->search_featured;
+        $city               =$request->city;
+        
+
+        // search for singular
+
+        if($name !=""){
+            //for name
+            $matchrecord=Tbl_job_seekers::where('first_name', 'LIKE','%'.$name.'%')
+                        ->get()
+                        ->toArray();  
+        }
+        else if($email !=""){
+            //for email
+            $matchrecord=Tbl_job_seekers::where('email', 'LIKE','%'.$email.'%')
+                        ->get()
+                        ->toArray();  
+        }
+        else if($gender !=""){
+            //for gender
+            $matchrecord=Tbl_job_seekers::where('gender', 'LIKE',$gender)
+                        ->get()
+                        ->toArray();  
+
+        }
+        else if($city !=""){
+            //for city
+            $matchrecord=Tbl_job_seekers::where('city', 'LIKE','%'.$city.'%')
+                        ->get()
+                        ->toArray();  
+        }
+
+        //search for two  with name
+
+        else if(($name !="")&&($email !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('first_name', 'LIKE','%'.$name.'%')
+                        ->where('email', 'LIKE','%'.$email.'%')
+                        ->get()
+                        ->toArray();
+        }
+        else if(($name !="")&&($gender !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('first_name', 'LIKE','%'.$name.'%')
+                        ->where('gender', 'LIKE',$gender)
+                        ->get()
+                        ->toArray();
+        }
+        else if(($name !="")&&($city !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('first_name', 'LIKE','%'.$name.'%')
+                        ->where('city', 'LIKE','%'.$city.'%')
+                        ->get()
+                        ->toArray();
+        }
+
+
+
+        //search for two  with email
+
+        else if(($email !="")&&($name !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('email', 'LIKE','%'.$email.'%')
+                        ->where('first_name', 'LIKE','%'.$name.'%')
+                        ->get()
+                        ->toArray();
+        }
+        else if(($email !="")&&($gender !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('email', 'LIKE','%'.$email.'%')
+                        ->where('gender', 'LIKE',$gender)
+                        ->get()
+                        ->toArray();
+        }
+        else if(($email !="")&&($city !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('email', 'LIKE','%'.$email.'%')
+                        ->where('city', 'LIKE','%'.$city.'%')
+                        ->get()
+                        ->toArray();
+        }
+
+
+
+        //search for two  with gender
+
+        else if(($gender !="")&&($name !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('gender', 'LIKE',$gender)
+                        ->where('first_name', 'LIKE','%'.$name.'%')
+                        ->get()
+                        ->toArray();
+        }
+        else if(($gender !="")&&($email !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('gender', 'LIKE',$gender)
+                        ->where('email', 'LIKE','%'.$email.'%')
+                        ->get()
+                        ->toArray();
+        }
+        else if(($gender !="")&&($city !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('gender', 'LIKE',$gender)
+                        ->where('city', 'LIKE','%'.$city.'%')
+                        ->get()
+                        ->toArray();
+        }
+
+
+
+        //search for two  with city
+
+        else if(($city !="")&&($name !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('city', 'LIKE','%'.$city.'%')
+                        ->where('first_name', 'LIKE','%'.$name.'%')
+                        ->get()
+                        ->toArray();
+        }
+        else if(($city !="")&&($email !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('city', 'LIKE','%'.$city.'%')
+                        ->where('email', 'LIKE','%'.$email.'%')
+                        ->get()
+                        ->toArray();
+        }
+        else if(($city !="")&&($gender !="")){
+
+            //for name and email
+            $matchrecord=Tbl_job_seekers::where('city', 'LIKE','%'.$city.'%')
+                        ->where('gender', 'LIKE',$gender)
+                        ->get()
+                        ->toArray();
+        }
+        else if(($name !="")&&($email !="")&&($gender !="")){
+
+            //for name and email and gender
+            $matchrecord=Tbl_job_seekers::where('first_name', 'LIKE','%'.$name.'%')
+                        ->where('email', 'LIKE','%'.$email.'%')
+                        ->where('gender', 'LIKE',$gender)
+                        ->get()
+                        ->toArray();
+
+        }
+        else if(($name !="")&&($email !="")&&($city !="")){
+
+            //for name and email and city
+            $matchrecord=Tbl_job_seekers::where('first_name', 'LIKE','%'.$name.'%')
+                        ->where('email', 'LIKE','%'.$email.'%')
+                        ->where('city', 'LIKE','%'.$city.'%')
+                        ->get()
+                        ->toArray();
+
+        }
+        else if(($name !="")&&($gender !="")&&($city !="")){
+
+            //for name and gender and city
+            $matchrecord=Tbl_job_seekers::where('first_name', 'LIKE','%'.$name.'%')
+                        ->where('gender', 'LIKE',$gender)
+                        ->where('city', 'LIKE','%'.$city.'%')
+                        ->get()
+                        ->toArray();
+
+        }
+        else if(($gender !="")&&($email !="")&&($city !="")){
+
+            //for gender and email and city
+            $matchrecord=Tbl_job_seekers::where('gender', 'LIKE',$gender)
+                        ->where('email', 'LIKE','%'.$email.'%')
+                        ->where('city', 'LIKE','%'.$city.'%')
+                        ->get()
+                        ->toArray();
+
+        }
+        else {
+
+            //for name and gender and city and email 
+            $matchrecord=Tbl_job_seekers::where('gender', 'LIKE',$gender)
+                        ->where('first_name', 'LIKE','%'.$name.'%')
+                        ->where('email', 'LIKE','%'.$email.'%')
+                        ->where('city', 'LIKE','%'.$city.'%')
+                        ->get()
+                        ->toArray();
+        }
+        
+            
+        return response()->json($matchrecord);
    }
 }
  
