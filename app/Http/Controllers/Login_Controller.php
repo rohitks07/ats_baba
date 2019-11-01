@@ -106,7 +106,7 @@ class Login_Controller extends Controller{
                     }
                 //    return $session_data;
                     Session::put($session_data);
-                    Session::put("sessiondata",$session_data);
+                    Session::put("session_data",$session_data);
                     return redirect('employer/dashboard');
                 }
                 else
@@ -175,7 +175,7 @@ class Login_Controller extends Controller{
     public function logout( Request $request)
     {
         Session::flush();
-        return redirect('/');
+        return redirect('/'); 
     }
    
 }

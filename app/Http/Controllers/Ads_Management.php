@@ -8,7 +8,8 @@ use App\tbl_ad_codes;
 class Ads_Management extends Controller
 {
     public function index(){
-    	return view('ads')->with('');
+    	// return view('ads')->with('');
+    	return view('error_pages.adds_page_404');
     }
     public function update_ads(Request $Request){
         

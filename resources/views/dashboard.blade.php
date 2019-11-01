@@ -59,14 +59,14 @@
             <div class="row">
                 <div class="col-md-3">
                     <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/employers');?>"><i class="fa awesome_style fa-briefcase"></i><br>
+                    <a href="{{url('admin/emp_or_comp')}}"><i class="fa awesome_style fa-briefcase"></i><br>
                     Employers</a>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/job_seekers');?>"><i class="fa awesome_style awesome_style fa-user"></i><br>
+                    <a href="{{url('admin/job_seekers_manage')}}"><i class="fa awesome_style awesome_style fa-user"></i><br>
                       Jobseeker</a>
                     </div>
                 </div>
@@ -74,13 +74,13 @@
                       
                 <div class="col-md-3">
                      <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/posted_jobs');?>"><i class="fa awesome_style fa-upload"></i> <br>
+                    <a href="{{url('admin/job_seekers_manage')}}"><i class="fa awesome_style fa-upload"></i> <br>
                       Posted Jobs</a>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div style="padding: 15px 0">
-                         <a href="<?php echo url('admin/posted_jobs');?>"><i class="fa fa-clipboard awesome_style"></i><br>Featured Jobs</a>
+                    <a href="{{url('admin/job_post_manage')}}"><i class="fa fa-clipboard awesome_style"></i><br>Featured Jobs</a>
                     </div>
                 </div>
             </div>    
@@ -89,25 +89,25 @@
                
                 <div class="col-md-3">
                    <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/pages');?>"><i class="fa awesome_style fa-file-text"></i><br>Content Management</a>
+                   <a href="{{url('admin/page_management')}}"><i class="fa awesome_style fa-file-text"></i><br>Content Management</a>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                          <div style="padding: 15px 0">
-                        <a href="<?php echo url('admin/stories');?>"><i class="fa awesome_style fa-thumbs-up"></i><br>Success Stories</a>
+                         <a href="{{url('admin/menu')}}"><i class="fa awesome_style fa-thumbs-up"></i><br>Success Stories</a>
                         </div>
                 </div>
 
                 <div class="col-md-3">
                             <div style="padding: 15px 0">
-                               <a href="<?php echo url('admin/invite_employer');?>"><i class="fa awesome_style fa-envelope"></i><br>Invite Employer</a>
+                            <a href="{{url('admin/inviteemployer')}}"><i class="fa awesome_style fa-envelope"></i><br>Invite Employer</a>
                             </div>
                 </div>
 
                 <div class="col-md-3">
                          <div style="padding: 15px 0">
-                             <a href="<?php echo url('admin/invite_jobseeker');?>"><i class="fa awesome_style fa-users"></i><br>Invite Jobseeker</a>
+                         <a href="{{url('admin/invitejobseeker')}}"><i class="fa awesome_style fa-users"></i><br>Invite Jobseeker</a>
                         </div>
                 </div>
 
@@ -124,19 +124,19 @@
 
                 <div class="col-md-3">
                     <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/ads');?>"><i class="fa awesome_style fa-bullhorn"></i><br>Ads</a>
+                    <a href="{{url('admin/ads')}}"><i class="fa awesome_style fa-bullhorn"></i><br>Ads</a>
                     </div>
                 </div>
 
                  <div class="col-md-3">
                      <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/industries');?>"><i class="fa fa-desktop awesome_style"></i><br>Job Industries</a>
+                     <a href="{{url('admin/industries')}}"><i class="fa fa-desktop awesome_style"></i><br>Job Industries</a>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/institute');?>"><i class="fa awesome_style fa-university"></i><br>Institute</a>
+                    <a href="{{url('admin/institute')}}"><i class="fa awesome_style fa-university"></i><br>Institute</a>
                     </div>
                 </div>
             </div>   
@@ -148,25 +148,25 @@
                 
                 <div class="col-md-3">
                      <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/salary');?>"><i class="fa awesome_style fa-money"></i> <br>Salary</a>
+                     <a href="{{url('admin/salary')}}"><i class="fa awesome_style fa-money"></i> <br>Salary</a>
                     </div>
                 </div>
 
                <div class="col-md-3">
                        <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/qualification');?>"><i class="fa  awesome_style fa-graduation-cap">&nbsp;</i><br>Qualification</a>   
+                       <a href="{{url('admin/qualification')}}"><i class="fa  awesome_style fa-graduation-cap">&nbsp;</i><br>Qualification</a>   
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/prohibited_keyword');?>"><i class="fa awesome_style fa-tags"></i><br>Manage Prohibited Keywords</a>
+                    <a href="{{url('admin/prohibited_keyword')}}"><i class="fa awesome_style fa-tags"></i><br>Manage Prohibited Keywords</a>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                      <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/skills');?>"><i class="fa awesome_style fa-tags"></i><br>Manage Skills</a>
+                     <a href="{{url('admin/manageskills')}}"><i class="fa awesome_style fa-tags"></i><br>Manage Skills</a>
                     </div>
                 </div>
 
@@ -177,12 +177,12 @@
                 
                 <div class="col-md-3">
                     <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/manage_newsletters');?>"><i class="fa fa-envelope awesome_style"></i><br>Manage Newsletters</a>
+                    <a href="{{url('admin/team_members')}}"><i class="fa fa-user awesome_style"></i><br>Team Member Type</a>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div style="padding: 15px 0">
-                    <a href="<?php echo url('admin/job_alert_queue');?>"><i class="fa fa-envelope awesome_style"></i><br>Job Alert Queue</a>
+                    <a href="{{url('admin/visa_type')}}"><i class="fa fa-envelope awesome_style"></i><br>Visa type</a>
                     </div>
                 </div>
 
