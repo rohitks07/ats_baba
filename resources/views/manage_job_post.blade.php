@@ -306,7 +306,7 @@
                     </div>
                 </div>
             </div><br><br><br>
-
+ 
             @include('include.footer')
 
 
@@ -352,12 +352,12 @@
                                                     <tbody id="show1"> `;
                             $("#show").append(dataone);
                             $.each(data, function (index, value) {
-                                var job_id = value.ID;
+                                var job_id = data.job.ID;
                                 console.log(job_id);
                                 // var 
                                 var datatwo = `
                                                 <tr>
-                                                <td>` + value.dated + `</td>
+                                                <td>` + value.job.ID + `</td>
                                                 <td>` + value.last_date + `</td>
                                                 <td>` + value.job_title + `</td>
                                                 <td>` + value.country + ` , ` + value.state + ` , ` + value.city + `</td>

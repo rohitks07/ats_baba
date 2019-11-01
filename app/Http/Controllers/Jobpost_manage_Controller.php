@@ -107,12 +107,21 @@ class Jobpost_manage_Controller extends Controller
         // $company_name=$request->company_name;
         $search_featured2=$request->search_featured;
         $city=$request->city;
+
+
         
         if(($search_featured1=="")&&($city=="")){
 
-            $matchrecord=tbl_post_job::where('job_mode', 'LIKE', $search_featured2)
+            $matchrecord['job']=tbl_post_job::where('job_mode', 'LIKE', $search_featured2)
             ->get()
             ->toArray();
+            foreach ($matchrecord['job'] as $item){
+
+                $matchrecord['c'] = DB::table('tbl_companies')->where('ID',$item['company_ID'])->first('company_name');  
+
+            }
+            
+
 
             
             
@@ -121,6 +130,8 @@ class Jobpost_manage_Controller extends Controller
             $matchrecord=tbl_post_job::where('city','LIKE', '%'.$city.'%')
              ->get()
              ->toArray();
+             $company_name = DB::table('tbl_companies')->where('ID',$matchrecord->company_ID)->first('company_name');  
+
              
         }  
         else if(($search_featured2=="")&&($city=="")){
@@ -128,6 +139,8 @@ class Jobpost_manage_Controller extends Controller
             $matchrecord=tbl_post_job::where('job_title','LIKE', '%'.$search_featured1.'%')
             ->get()
             ->toArray();
+            $company_name = DB::table('tbl_companies')->where('ID',$matchrecord->company_ID)->first('company_name');  
+
             
 
         }
@@ -137,13 +150,17 @@ class Jobpost_manage_Controller extends Controller
             ->where('city','LIKE', '%'.$city.'%')
             ->get()
             ->toArray();
+            $company_name = DB::table('tbl_companies')->where('ID',$matchrecord->company_ID)->first('company_name');  
+
             
         }
+
+
        
             // $matchrecord=tbl_post_job::where('job_title','LIKE', '%'.$search_featured1.'%')
             // ->get()
             // ->toArray();
         
-        return response()->json($matchrecord);
+        return response()->json($matchrecord['job']);
     }
 }

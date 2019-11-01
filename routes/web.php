@@ -438,3 +438,4 @@ Route::post('admin/emp_edit/update_Company_info/{id}','EmployerCompanyController
 Route::get('admin/job_post_manage/search','Jobpost_manage_Controller@search');
 Route::get('admin/industries/delete{id}','IndustryController@delete_all_industries');
 Route::post('admin/industries/add','IndustryController@add_all_industries');
+Route::get('admin/job_seekers_manage/advance_search','jobseekersmanageController@advance_search');
