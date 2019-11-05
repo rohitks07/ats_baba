@@ -112,12 +112,12 @@ class Jobpost_manage_Controller extends Controller
         
         if(($search_featured1=="")&&($city=="")){
 
-            $matchrecord['job']=tbl_post_job::where('job_mode', 'LIKE', $search_featured2)
+            $matchrecord=tbl_post_job::where('job_mode', 'LIKE', $search_featured2)
             ->get()
             ->toArray();
-            foreach ($matchrecord['job'] as $item){
+            foreach ($matchrecord as $item){
 
-                $matchrecord['c'] = DB::table('tbl_companies')->where('ID',$item['company_ID'])->first('company_name');  
+                $company_name = DB::table('tbl_companies')->where('ID',$item['company_ID'])->first('company_name');  
 
             }
             
@@ -161,6 +161,8 @@ class Jobpost_manage_Controller extends Controller
             // ->get()
             // ->toArray();
         
-        return response()->json($matchrecord['job']);
+        return response()->json(array(
+            'matchrecord' => $matchrecord,
+            'company_name'=> $company_name));
     }
 }
