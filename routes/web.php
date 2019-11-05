@@ -12,7 +12,7 @@
 */ 
 
 //Login page 
-
+// Auth::routes();
 Route::get('/','Login_Controller@index');
 Route::post('login','Login_Controller@login_page');
 Route::get('forget_password','Login_Controller@forget_password');
@@ -350,8 +350,8 @@ Route::get('jobseekersignup','JobseekrSignupController@index');
 Route::post('jobseekersignup/add','JobseekrSignupController@add');
 Route::get('admin/empcompmanage','EmployerCompanyController@index');
 Route::get('admin/manageskills','ManageSkillController@index');
-Route::get('admin/inviteemployer','InviteEmployerController@index');
-Route::post('admin/inviteemployer/add','InviteEmployerController@add');
+Route::get('admin/inviteemployer','InviteEmpolyerController@index');
+Route::post('admin/inviteemployer/add','InviteEmpolyerController@add');
 Route::get('employer/marketing','MarketingController@index');
 Route::post('employer/market_mail','MarketingController@send_mail');
 Route::get('employer/schedule','MarketingController@schedule_email');

@@ -15,6 +15,11 @@ use DB;
 
 class Jobpost_manage_Controller extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function view_manage_job(){
 
         $data=tbl_post_job::get()->toArray();

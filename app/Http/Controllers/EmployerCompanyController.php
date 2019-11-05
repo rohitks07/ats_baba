@@ -14,6 +14,11 @@ use Session;
 
 class EmployerCompanyController extends Controller
 {
+	public function __construct()
+		{
+			$this->middleware('check');
+
+		}
  	public function index()
  	{
 		 $toReturn = array();

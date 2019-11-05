@@ -7,6 +7,11 @@ use App\tbl_ad_codes;
 
 class Ads_Management extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function index(){
     	// return view('ads')->with('');
     	return view('error_pages.adds_page_404');

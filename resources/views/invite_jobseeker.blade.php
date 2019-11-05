@@ -35,7 +35,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="example-textarea-input">Message</label>
-                                                    <textarea class="form-control" rows="3" id="example-textarea-input">{{$default_message}}</textarea>
+                                                    <textarea class="form-control" rows="3" name="message" id="example-textarea-input">{{$default_message}}</textarea>
                                                 
                                             </div>
                                             <button type="submit" class="btn btn-primary">Submit</button>

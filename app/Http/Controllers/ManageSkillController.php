@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ManageSkillController extends Controller
 {
+	public function __construct()
+		{
+			$this->middleware('check');
+
+		}
 	public function index()
 	{
 		return view('manage_skill');

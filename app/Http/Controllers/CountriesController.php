@@ -8,6 +8,11 @@ use App\countries;
 
 class CountriesController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function index()
     {
         $countries= countries::paginate(15);	

@@ -10,6 +10,11 @@ use App\countries;
 
 class CityController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function index()
     {
     	

@@ -8,6 +8,11 @@ use DB;
 
 class CMSController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function index(){
         $pages_object = Tbl_cms::orderBy('dated','asc')->get();
 

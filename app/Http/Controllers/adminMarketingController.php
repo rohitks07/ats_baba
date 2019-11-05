@@ -20,6 +20,11 @@ use Mail;
 
 class adminMarketingController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function index(){
         $toReturn['team_member_type']=tbl_team_member_type::all();
             $toReturn['salutation']=Tbl_salutation::all();

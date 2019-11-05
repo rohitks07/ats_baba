@@ -7,6 +7,11 @@ use App\Tbl_team_member_type;
 
 class TeamMemberController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
    public function index()
     {
 

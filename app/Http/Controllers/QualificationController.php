@@ -9,6 +9,11 @@ use App\Tbl_qualifications;
 
 class QualificationController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function index()
     {  
         $qual_obj = Tbl_qualifications::all();

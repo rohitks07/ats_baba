@@ -7,6 +7,11 @@ use App\Tbl_institute;
 
 class InstituteController extends Controller
 {
+  public function __construct()
+		{
+			$this->middleware('check');
+
+		}
   public function index()
   {
     $inst_obj =Tbl_institute::all();

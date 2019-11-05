@@ -8,6 +8,11 @@ use App\Tbl_salaries;
 
 class SalaryController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
    public function index()
     { 
     	$salary=Tbl_salaries::orderby('val','asc')->get();

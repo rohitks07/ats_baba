@@ -7,6 +7,11 @@ use App\Tbl_visa_type;
 
 class VisaTypeController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function index()
     {
         $visa_type_obj = Tbl_visa_type ::all();

@@ -13,6 +13,11 @@ use DB;
 
 class jobseekersmanageController extends Controller 
 {
+    public function __construct()
+		{
+			$this->middleware('check');
+
+		}
    public function index()
    {
    	$job_seekers_list=Tbl_job_seekers::all();

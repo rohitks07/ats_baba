@@ -7,6 +7,11 @@ use App\Pay_UMO;
 
 class Pay_UMO_Controller extends Controller
 {
+  public function __construct()
+		{
+			$this->middleware('check');
+
+		}
   public function index()
     { 
     	$Pay_UMO=Pay_UMO::all();

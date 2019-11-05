@@ -7,6 +7,11 @@ use App\Tbl_job_industries;
 
 class IndustryController extends Controller
 {
+	public function __construct()
+		{
+			$this->middleware('check');
+
+		}
     public function index()
     {
     	  // $data['content'] ='sale.allsale';
