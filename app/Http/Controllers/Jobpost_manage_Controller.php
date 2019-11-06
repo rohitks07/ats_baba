@@ -19,7 +19,7 @@ class Jobpost_manage_Controller extends Controller
 		{
 			$this->middleware('check');
 
-		}
+		} 
     public function view_manage_job(){
 
         $data=tbl_post_job::get()->toArray();
@@ -166,8 +166,10 @@ class Jobpost_manage_Controller extends Controller
             // ->get()
             // ->toArray();
         
-        return response()->json(array(
-            'matchrecord' => $matchrecord,
-            'company_name'=> $company_name));
+        // return response()->json(array(
+        //     'matchrecord' => $matchrecord,
+        //     'company_name'=> $company_name));
+
+        return response($matchrecord);
     }
 }

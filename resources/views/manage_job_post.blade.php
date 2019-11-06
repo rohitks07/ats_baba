@@ -356,12 +356,13 @@
                                 console.log(job_id);
                                 // var 
                                 var datatwo = `
+                                    
                                                 <tr>
                                                 <td>` + value.dated + `</td>
                                                 <td>` + value.last_date + `</td>
                                                 <td>` + value.job_title + `</td>
                                                 <td>` + value.country + ` , ` + value.state + ` , ` + value.city + `</td>
-                                                <td>` + value.company_ID + `</td>
+                                                <td> `+value.company_ID+` </td>
                                                 <td align="center" valign="middle">
                                             <button type="button" class="btn btn-xs"
                                                 style="background-color:#317eeb; color:#fff"

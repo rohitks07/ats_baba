@@ -347,7 +347,7 @@ a.bottom-text-w3ls {
 					 <img src="http://hrmssystems.com/public/images/hrmslogo.png" />
 				</div>
 				<form action="{{url('login')}}" method="post">
-                    <input type="hidden" name="_token" value ="{{ csrf_token() }}">
+                    @csrf
 					<p class="legend">Login Here<span class="fa fa-hand-o-down"></span></p>
                     <div>
                         <!-- for register login -->

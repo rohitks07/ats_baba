@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Tbl_job_seekers;
 use App\countries;
 use App\cities;
+use App\sessions;
 use App\states;
 use App\tbl_post_jobs;
 use App\Tbl_seeker_applied_for_job;
 use DB;
+use Session;
 
 class jobseekersmanageController extends Controller 
 {
@@ -148,7 +150,7 @@ class jobseekersmanageController extends Controller
       $user_detail=Tbl_job_seekers::where('ID',$id)->first();
       // return $user_detail;
       $email_id =$user_detail->email;
-    	$password =$request->password;
+    	$password =$user_detail->password;
         $getUserDetails  = DB::table('user')->where('email',$email_id)->where('password',$password)->first();
         // print_r($getUserDetails);
         // exit;
@@ -168,6 +170,13 @@ class jobseekersmanageController extends Controller
                 'type' =>$getUserDetails->user_type,
                 'org_ID'=>$getUserDetails->org_ID
                 );
+
+                $sessions = new sessions();
+                $sessions->user_id = $getUserDetails->ID;
+                $sessions->email = $getUserDetails->email;
+                $sessions->check_val =$getUserDetails->user_type ;
+                $sessions->save();
+
 
                 // session create
                 Session::put($session_data);

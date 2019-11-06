@@ -174,9 +174,13 @@
                                                             <a href="{{url('admin/job_seekers/applied_jobs/edit/'.$id)}}" class="btn btn-xs mb-1"
                                                                     style="background-color:#FF9800; color:#fff">Edit
                                                                     candidate</a><br>
-                                                            {{-- <button type="button" onclick="location.href = '{{url('admin/job_seekers/applied_jobs/auto_login_seeker'.$id)}}'" class="btn btn-xs mb-1"
+
+
+                                                            <a type="button" onclick="location.href = '{{url('admin/job_seekers/applied_jobs/auto_login_seeker'.$id)}}'" class="btn btn-xs mb-1"
                                                                     style="background-color:#606060; color:#fff">Login
-                                                                    as candidate</button><br> --}}
+                                                                    as candidate</a><br>
+
+
                                                                 <button type="button"
                                                                     onclick="location.href = '{{url('admin/job_seekers/applied_jobs/de'.$id)}}';"
                                                                     class="btn btn-xs mb-1"
@@ -326,6 +330,7 @@
                                         <tbody id="show1"> `;
                 $("#show_clear").append(dataone);
                 $.each(data, function (index, value) {
+                    
                     var job_id = value.ID;
                     console.log(job_id);
                     // var 
@@ -359,6 +364,10 @@
                                                             <a href="{{url('admin/job_seekers/applied_jobs/edit/`+value.ID+`')}}" class="btn btn-xs mb-1"
                                                                     style="background-color:#FF9800; color:#fff">Edit
                                                                     candidate</a><br>
+
+                                                                    <a type="button" onclick="location.href = '{{url('admin/job_seekers/applied_jobs/auto_login_seeker`+value.ID+`')}}'" class="btn btn-xs mb-1"
+                                                                    style="background-color:#606060; color:#fff">Login
+                                                                    as candidate</a><br>
                                                             
                                                                 <button type="button"
                                                                     onclick="location.href = '{{url('admin/job_seekers/applied_jobs/de`+value.ID+`')}}';"

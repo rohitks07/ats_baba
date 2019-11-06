@@ -73,10 +73,10 @@
                                 <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="http://hrmssystems.com/public/uploads/employer/thumb/71549055713.jpg" alt="user-img" class="rounded-circle"> </a>
                                 <ul class="dropdown-menu">
                                     
-                                    <li><a href="{{url('admin/logout')}}" class="dropdown-item"><i class="md md-lock mr-2"></i>logOut</a></li>
+                                    <li><a href="{{url('indexjobseeker/logout')}}" class="dropdown-item"><i class="md md-lock mr-2"></i>logOut</a></li>
                             </li>
                         </ul>
-                    </div>
+                    </div> 
                 </nav>
             </div>
           

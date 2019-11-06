@@ -8,6 +8,7 @@ use App\Tbl_state;
 use App\Tbl_cities; 
 use App\Tbl_countries;
 use App\Tbl_seeker_experience;
+use App\sessions;
 use App\Tbl_seeker_academic;
 use App\Tbl_seeker_skills;
 use App\tbl_candidate_notes;
@@ -19,9 +20,14 @@ use Session;
 
 class Job_Seeker_Controller extends Controller{
 
+    public function __construct()
+		{
+			$this->middleware('check_jobseeker');
+
+		}
     public function index(){
         return view('indexjobseeker');
-     }
+     } 
   
     public function manage_account(Request $request){
          
@@ -258,6 +264,14 @@ class Job_Seeker_Controller extends Controller{
         $fileName = time().'.txt';
          return response()->download($filePath, $fileName, $headers);
 
+    }
+
+    public function logout(){
+
+        sessions::where('check_val','seeker')->delete();
+        Session::flush();
+        return redirect('/');
+			
     }
     
   }

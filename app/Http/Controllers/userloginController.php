@@ -90,6 +90,8 @@ class userloginController extends Controller
 			
 			Session::flush();
 			sessions::where('user_id',1)->delete();
+			
+			
 			return redirect('/');
 		}
 

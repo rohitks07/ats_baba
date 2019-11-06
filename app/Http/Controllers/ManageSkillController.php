@@ -13,6 +13,7 @@ class ManageSkillController extends Controller
 		}
 	public function index()
 	{
-		return view('manage_skill');
+		return view('error_pages.skill_page');
+		// return view('manage_skill');
 	}
 }

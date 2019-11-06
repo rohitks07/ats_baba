@@ -23,18 +23,19 @@ Route::get('employer/logout','Login_Controller@logout');
 
 Route::get('forgetpassword','Login_Controller@forgetpassword_form'); 
 Route::post('forgetemail','Login_Controller@send_email');
-
+ 
 // JobSeeker Section routes definition
 Route::get('indexjobseeker','Job_Seeker_Controller@index');
+//new added
+Route::get('indexjobseeker/logout','Job_Seeker_Controller@logout');
+//
 Route::get('jobseeker/my_account','Job_Seeker_Controller@manage_account');
 Route::post('jobseeker/my_account/update','Job_Seeker_Controller@update_manage_account');
-
 Route::post('jobseeker/change_pass/password_update','Job_Seeker_Controller@update_pass');
 Route::post('jobseeker/edit_jobseeker/upload_photo','Job_Seeker_Controller@uploaded_image');
 Route::post('jobseeker/add_skill/add','Job_Seeker_Controller@add');
 Route::get('jobseeker/add_skill','Job_Seeker_Controller@show');
 Route::get('jobseeker/my_jobs','Job_Seeker_Controller@my_jobs');
-
 Route::get('jobseeker/add_info','Job_Seeker_Controller@add_info');
 Route::get('jobseeker/search_jobs','Job_Seeker_Controller@search_jobs');
 
@@ -86,7 +87,7 @@ Route::post('admin/countries/edit','CountriesController@edit_countries');
 Route::get('admin/countries/delete/{id}','CountriesController@delete_countries');
 Route::get('admin/cities','CityController@index');
 Route::post('admin/cities/add','CityController@add_cities');
-Route::post('admin/cities/edit','CityController@edit_cities');
+Route::post('admin/cities/edit','CityController@edit_cities'); 
 Route::get('admin/cities/delete/{id}','CityController@delete');
 Route::get('admin/prohibited_keyword','ProhibitedController@index');        
 Route::post('admin/prohibited_keyword/add','ProhibitedController@add');        
