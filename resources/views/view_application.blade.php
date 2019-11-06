@@ -15,7 +15,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <td>{{$toReturn['job_details']->pay_min}}- {{$toReturn['job_details']->pay_max}}</td><td>@if($toReturn['skill_match_percentage']>=70)<span style="background-color:green;color:white">{{$toReturn['skill_match_percentage']}}</span>@elseif(($toReturn['skill_match_percentage']<=70)&&($toReturn['skill_match_percentage']>=50))<span style="background-color:yellow">{{$toReturn['skill_match_percentage']}}</span> @else <span style="background-color:red">{{$toReturn['skill_match_percentage']}}</span> @endif</td><td>{{$toReturn['list_application']->expected_salary}}</td>
+                            <td>{{$toReturn['job_details']->pay_min}}- {{$toReturn['job_details']->pay_max}}</td><td>@if($toReturn['matchpayrate']>=70)<span style="background-color:green;color:white">{{$toReturn['matchpayrate']}}</span>@elseif(($toReturn['matchpayrate']<=70)&&($toReturn['matchpayrate']>=50))<span style="background-color:yellow;">{{$toReturn['matchpayrate']}}</span> @else <span style="background-color:red;color:white;">{{$toReturn['matchpayrate']}}</span> @endif</td><td>{{$toReturn['list_application']->expected_salary}}</td>
                             </tbody>
                         </table>
                         </div> 
@@ -32,7 +32,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <td>{{$toReturn['job_details']->required_skills}}</td><td>@if($toReturn['skill_match_percentage']>=70)<span style="background-color:green;color:white">{{$toReturn['skill_match_percentage']}}</span>@elseif(($toReturn['skill_match_percentage']<=70)&&($toReturn['skill_match_percentage']>=50))<span style="background-color:yellow">{{$toReturn['skill_match_percentage']}}</span> @else <span style="background-color:red">{{$toReturn['skill_match_percentage']}}</span> @endif</td><td>{{$toReturn['seeker_details']->skills}}</td>
+                            <td>{{$toReturn['job_details']->required_skills}}</td><td>@if($toReturn['matchpayrate']>=70)<span style="background-color:green;color:white">{{$toReturn['skill_match_percentage']}}</span>@elseif(($toReturn['skill_match_percentage']<=70)&&($toReturn['skill_match_percentage']>=50))<span style="background-color:yellow;">{{$toReturn['skill_match_percentage']}}</span> @else <span style="background-color:red;color:white">{{$toReturn['skill_match_percentage']}}</span> @endif</td><td>{{$toReturn['seeker_details']->skills}}</td>
                             </tbody>
                         </table>
                         </div> 
@@ -52,7 +52,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <td>{{$toReturn['job_details']->job_visa_status}}</td><td>{{$toReturn['visa_match_percentage']}}</td><td>{{$toReturn['seeker_details']->visa_status}}</td>
+                            <td>{{$toReturn['job_details']->job_visa_status}}</td><td>@if($toReturn['visa_match_percentage']>=70)<span style="background-color:green;color:white">{{$toReturn['visa_match_percentage']}}</span>@elseif(($toReturn['visa_match_percentage']<=70)&&($toReturn['visa_match_percentage']>=50))<span style="background-color:yellow;">{{$toReturn['visa_match_percentage']}}</span> @else <span style="background-color:red;color:white">{{$toReturn['visa_match_percentage']}}</span> @endif</td><td>{{$toReturn['seeker_details']->visa_status}}</td>
                             </tbody>
                         </table>
                         </div> 
@@ -70,7 +70,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <td>{{$toReturn['job_details']->city}},&nbsp;{{$toReturn['job_details']->state}},&nbsp; {{$toReturn['job_details']->country}}</td><td></td><td>{{$toReturn['seeker_details']->city}},&nbsp;{{$toReturn['seeker_details']->state}},&nbsp;{{$toReturn['seeker_details']->country}}</td>
+                            <td>{{$toReturn['jobcity']}},&nbsp;{{$toReturn['jobstate']}},&nbsp; {{$toReturn['job_details']->country}}</td><td>@if($toReturn['matchLocation']>=70)<span style="background-color:green;color:white">{{$toReturn['matchLocation']}}</span>@elseif(($toReturn['matchLocation']<=70)&&($toReturn['matchLocation']>=50))<span style="background-color:yellow;">{{$toReturn['matchLocation']}}</span> @else <span style="background-color:red;color:white">{{$toReturn['matchLocation']}}</span> @endif</td><td>{{$toReturn['seeker_details']->city}},&nbsp;{{$toReturn['seeker_details']->state}},&nbsp;{{$toReturn['seeker_details']->country}}</td>
                             </tbody>
                         </table>
                         </div> 

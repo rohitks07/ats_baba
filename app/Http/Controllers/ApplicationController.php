@@ -43,7 +43,8 @@ class ApplicationController extends Controller
     // print_r($toReturn['job_details']->city);
     // exit; 
     if((!empty($city_name->city_name))&&(!empty($state_name->state_name)))
-    {// print_r($city_name->city_name);
+    {
+    // print_r($city_name->city_name);
     // exit;
     $joblocationarray['city']=$city_name->city_name;
     $joblocationarray['country']=$toReturn['job_details']->country;
@@ -55,24 +56,53 @@ class ApplicationController extends Controller
     $joblocationarray['country']=$toReturn['job_details']->country;
     $joblocationarray['state']=$toReturn['job_details']->state;
     }
-    // print_r($joblocationarray);
-    // // exit;
-    // echo "seeker"."<br>";
-    // echo $toReturn['seeker_details']->country."&nbsp;";
-    // echo $toReturn['seeker_details']->state."&nbsp;";
-    // echo $toReturn['seeker_details']->city."&nbsp;";
-    // echo $toReturn['seeker_details']->experience."&nbsp;";
-    // echo $toReturn['seeker_details']->skills ."&nbsp;"."<br>";
-    // echo $toReturn['seeker_details']->visa_status."&nbsp;";
-    // echo $toReturn['list_application']->expected_salary."&nbsp;";
+    $toReturn['jobcity']=$joblocationarray['city'];
+    $toReturn['jobstate']=$joblocationarray['state'];
+    // return $toReturn['jobstate'];
+    $seeker_location_array=array();
+    $seeker_state_name=states::orWhere('state_id',$toReturn['seeker_details']->state)->orWhere('state_name',$toReturn['seeker_details']->state)->first();
+    $seeker_city_name=cities::orWhere('city_id',$toReturn['seeker_details']->city)->orWhere('city_name',$toReturn['seeker_details']->city)->first();
+    if((!empty($seeker_city_name->city_name))&&(!empty($seeker_state_name->state_name)))
+    {
+    $seeker_location_array['city']=$city_name->city_name;
+    $seeker_location_array['country']=$toReturn['seeker_details']->country;
+    $seeker_location_array['state']=$state_name->state_name;
+    }
+    else
+    {
+    $seeker_location_array['city']=$toReturn['seeker_details']->city;
+    $seeker_location_array['country']=$toReturn['seeker_details']->country;
+    $seeker_location_array['state']=$toReturn['seeker_details']->state;
+    }
+    $match_city=strnatcasecmp($joblocationarray['city'],$seeker_location_array['city']);
+    $match_state=strnatcasecmp($joblocationarray['state'],$seeker_location_array['state']);
+    $match_country=strnatcasecmp($joblocationarray['country'],$seeker_location_array['country']);
     // exit;
+    $toReturn['matchLocation']=0;
+    if($match_city==0)
+    {
+        $toReturn['matchLocation']=100;
+    }
+    elseif($match_state==0)
+    {
+        $toReturn['matchLocation']=55;
+    }
+    elseif($match_country==0)
+    {
+        $toReturn['matchLocation']=30;
+    }
+    else
+    {
+        $toReturn['matchLocation']=0;
+    }
+    
     $toReturn['matchpayrate']=0;
     $candidate_pay_rate=explode("-", $toReturn['list_application']->expected_salary);
+    // return $toReturn['seeker_details'];
     $min_match_salary=strnatcasecmp($toReturn['job_details']->pay_min,$candidate_pay_rate[0]);
     $max_to_min_match_salary=strnatcasecmp($toReturn['job_details']->pay_max,$candidate_pay_rate[0]);
-    $min_to_max_match_salary=strnatcasecmp($toReturn['job_details']->pay_min,$candidate_pay_rate[1]);
-    
-    $max_match_salary=strnatcasecmp($toReturn['job_details']->pay_max,$candidate_pay_rate[1]);
+    $min_to_max_match_salary=strnatcasecmp($toReturn['job_details']->pay_min,@$candidate_pay_rate[1]);
+    $max_match_salary=strnatcasecmp($toReturn['job_details']->pay_max,@$candidate_pay_rate[1]);
     if($min_match_salary==0&& $max_match_salary==0)
     {
         $toReturn['matchpayrate']=100;
@@ -85,12 +115,6 @@ class ApplicationController extends Controller
     {
         $toReturn['matchpayrate']=0;
     }
-//     echo $min_to_max_match_salary;
-//     echo $max_to_min_match_salary;
-//     echo $min_match_salary;
-//     echo $max_match_salary;
-// print_r($candidate_pay_rate);
-// exit;
     $job_visa_array=explode(",",$toReturn['job_details']->job_visa_status);
     $job_skill_array=explode(",",$toReturn['job_details']->required_skills);
 
