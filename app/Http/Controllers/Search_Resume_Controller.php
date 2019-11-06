@@ -16,6 +16,7 @@ use App\cities;
 use App\countries;
 use App\states;
 use App\tbl_post_job;
+use App\Tbl_seeker_documents;
 use Session;
 use Mail;
 use App\Tbl_notification;
@@ -226,9 +227,6 @@ public function update_personal_details(Request $request)
              {
                 $val_city=cities::where('city_id',$cit)->orWhere('city_name',$cit)->first('city_name');
              } 
-
-
-
           if ($request->hasFile('cv_file')){
         $cv = $request->file('cv_file');
         $store_cv =$cv->getClientOriginalName();
@@ -360,66 +358,76 @@ public function view_education($id="")
         $mail_content=$request->comment;
         $mail_subject= $request->subject;
         $data=array('job_detail'=>$job_detail,'tomail'=>$toemail,'form_mail'=>$formemail ,'mail_content'=>$mail_content,'mail_subject'=>$mail_subject,'sender_email'=>$sender_email,'sender_name'=>$sender_name);
-        // return redirect('employer/search_resume');
-        // return $data[''];
         Mail::send('emails.job_detail',['data' => $data], function($message) use ($data){
                 $message->to($data['tomail'])
                         ->subject($data['mail_subject']);
                         // ->message($data['mail_content']);
                 $message->from($data['sender_email'],$data['sender_name']);
             });
-            // return view('emails.job_detail')->with('data',$data);
             return redirect('employer/search_resume');
     }
     public function job_matching($seeker_id)
     {
         $data= Tbl_job_seekers::where('ID',$seeker_id)->first();
         $results = array();
-          $matchrecord=DB::table('tbl_post_jobs')->where('required_skills','LIKE', '%'.$data->skills.'%')->orWhere('city', 'LIKE', '%'.$data->city.'%')->orWhere('job_visa_status', 'LIKE', '%'.$data->visa_status.'%')->get()->toArray();
+          $matchrecord=DB::table('tbl_post_jobs')->where('required_skills','LIKE', '%'.$data->skills.'%')->where('city', 'LIKE', '%'.$data->city.'%')->where('job_visa_status', 'LIKE', '%'.$data->visa_status.'%')->get()->toArray();
           $results['job_record']=$matchrecord;
-
         foreach($matchrecord as $key=>$value)
         {
                 $city_match=strnatcasecmp($data->city,$matchrecord[$key]->city);
-               
-                $skill_match=strnatcasecmp($data->skills,$matchrecord[$key]->required_skills);
-                
-                $visa_match=strnatcasecmp($data->visa_status,$matchrecord[$key]->job_visa_status);
-                // echo $data->visa_status."<br>";
-                // echo $matchrecord[$key]->job_visa_status;
-                // return $skill_match;
-                //   $seeker_skill_array=explode(",",@$data->skills);
-                // $job_skill_array=explode(",",@$matchrecord[$key]->required_skills);
-                // $count=0;
-                // foreach($job_skill_array as $  )
-                // {
-
-                // }
-                 if($city_match==0 || $visa_match==0 || $skill_match==0)
+                $visa_match_percentage=0;
+                $skill_match_percentage=0;
+                $city_match_percentage=0;
+                $job_visa_array=explode(",",$matchrecord[$key]->job_visa_status);
+                $job_skill_array=explode(",",$matchrecord[$key]->required_skills);
+                foreach($job_visa_array as $key_visa=>$value)
                 {
-                    $city_match_percentage=0;
-                    $visa_match_percentage=0;
-                    $skill_match_percentage=0;
-                    if($city_match==0)
-                    {
-                        $city_match_percentage=25;
-                    }
-                    if($visa_match==0)
+                    $visa_match_list=strnatcasecmp($job_visa_array[$key_visa],$data->visa_status);
+                    if($visa_match_list==0)
                     {
                         $visa_match_percentage=30;
                     }
-                    if($skill_match==0)
+                }
+                $job_skill_count=0;
+                foreach($job_skill_array as $key_skill=>$value)
+                {
+                    $job_match_list=strnatcasecmp($job_skill_array[$key_skill],$data->skills);
+                    $job_skill_count=$job_skill_count+1;
+                    if($job_skill_count==3)
                     {
                         $skill_match_percentage=45;
                     }
-                    $results['job_record'][$key]->match_percentage=$city_match_percentage + $visa_match_percentage + $skill_match_percentage;
                 }
+                if($city_match==0)
+                {
+                    $city_match_percentage=25;
+                }
+                $results['job_record'][$key]->match_percentage=$city_match_percentage + $visa_match_percentage + $skill_match_percentage;
         }
         return view('candidate_matching_job')->with('results',$results);
     }
-    public function View_candidate_detail()
+    public function View_candidate_detail($id="")
     {
-        return $id;
+        $toReturn['job_seeker']=Tbl_job_seekers::where('ID',$id)->first();
+        $toReturn['experience']=Tbl_seeker_experience::where('seeker_ID',$id)->get()->toArray();
+        $toReturn['academic']=Tbl_seeker_academic::where('seeker_ID',$id)->get()->toArray();
+        $toReturn['skills']=Tbl_seeker_skills::where('seeker_ID',$id)->get()->toArray();
+        $toReturn['job_application']=Tbl_seeker_applied_for_job::where('seeker_ID',$id)->get()->toArray();
+        $toReturn['job_details']=array();
+        foreach($toReturn['job_application'] as $key =>$value)
+        {
+            $toReturn['job_details'][$key]=tbl_post_job::where('ID',$toReturn['job_application'][$key]['job_ID'])->first();
+        }
+        $toReturn['extra_doc']=Tbl_seeker_documents::where('seeker_ID',$id)->get()->toArray();
+        return view('view_candidate_detail')->with('toReturn',$toReturn);
+    }
+    public function update_resume(Request $Request)
+    {
+        $upload_cv=$Request->file('Upload_cv');
+         $file_name=$upload_cv->getClientOriginalName();
+         $upload_cv->move(public_path('seekerresume'), $file_name);
+        Tbl_job_seekers::where('ID',$Request->seeker_id)->update(array('cv_file'=>$file_name));
+        return redirect('employer/candidate/'.$Request->seeker_id); 
     }
 
 }

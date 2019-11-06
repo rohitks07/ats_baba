@@ -262,9 +262,9 @@ ini_set('memory_limit', '-1');
     public function Add_to_post_job(Request $request)
     {                
         
-            // $Add_group = new tbl_team_member_type();
+        $jobs_list=tbl_post_jobs::where('job_code',00000)->get()->toArray();
+        return $jobs_list;
             $Add_to_post_job = new tbl_post_jobs(); 
-            // $Add_job_industries =new tbl_job_industries();
              $Add_to_post_job ->for_group     =  $request->group_of_company;
             $Add_to_post_job ->client_name    =  $request->company_name;
             $Add_to_post_job ->privacy_level  =  $request->privacy_level;
@@ -277,20 +277,15 @@ ini_set('memory_limit', '-1');
             $Add_to_post_job->owner_id=$request->owner_name;
             $Add_to_post_job->company_ID=Session::get('org_ID');
             $date = $request->closeing_date;
-            $Add_to_post_job ->last_date   =  date('Y-m-d', strtotime($date));
-            // return $date; 
-            // exit;status          
+            $Add_to_post_job ->last_date   =  date('Y-m-d', strtotime($date));       
             $Add_to_post_job ->dated       =  date('Y-m-d');
             $Add_to_post_job ->job_visa_status=  implode(',',$request->visa);
             $Add_to_post_job ->qualification  =  implode(',',$request->quali);
-            
              $con =  $request->country;
              $sta=  $request->state;
              $cit=  $request->city_name;
              $city_text=$request->city_text_name;
-            
              $val_contries=countries::where('country_id',$con)->first('country_name');
-    
              $val_state=states::where('state_id',$sta)->first('state_name');
              if(!empty($city_text))
              {
@@ -300,9 +295,8 @@ ini_set('memory_limit', '-1');
                 $val_city=cities::where('city_id',$cit)->first('city_name');
                 $Add_to_post_job->city=$val_city['city_name'];
              } 
-             $Add_to_post_job->country = $val_contries['country_name'];
-             $Add_to_post_job->state   = $val_state['state_name'];
-                        
+            $Add_to_post_job->country = $val_contries['country_name'];
+            $Add_to_post_job->state   = $val_state['state_name'];
             $Add_to_post_job ->job_mode       =  $request->type_of_job;
             $Add_to_post_job ->job_duration   =  $request->job_duration;
             $Add_to_post_job ->job_duration_uom =  $request->job_duration;
@@ -318,12 +312,8 @@ ini_set('memory_limit', '-1');
             $Add_to_post_job ->max_pay_rate        =  $payment_array[0];
             $Add_to_post_job ->pay_rate_umo        =  $payment_array[1];
             }
-            // $payment_array=explode('-',$select_payment);
-            // $Add_to_post_job ->pay_min        =  $payment_array[0];
-            // $Add_to_post_job ->  pay_max      =  $payment_array[1];
             $Add_to_post_job ->pay_uom        =  $request->pay_uom;
             $Add_to_post_job ->min_pay_rate        =  $request->pay_min;
-           
              $Add_to_post_job ->experience     =  $request->experience;
             $Add_to_post_job ->min_experience     =  $request->experience;
             $Add_to_post_job ->max_experience     =  $request->experience;
@@ -333,17 +323,13 @@ ini_set('memory_limit', '-1');
             $Add_to_post_job ->required_skills =  $request->skills;
             $Add_to_post_job->created_by=Session::get('id');
             $Add_to_post_job->last_updated_by=Session::get('id');
-            
-            // $Add_group->save();     
             $Add_to_post_job->save();
             $job_id=$Add_to_post_job->id;
+            $job_code=$Add_to_post_job->job_code;
+            
             //Add Notiofication
             // $notification=new Tbl_notification();
             // Session::flash('danger','Job Edited Successfully');
-
-
-
-
             $user_list=user::where('org_ID',Session::get('org_ID'))->get()->toArray();
         //   $user_user_id=implode(',',$user_list);
         //   echo $user_user_id;
@@ -1692,7 +1678,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
                             foreach($data['seeker_extra_doc'] as $key=>$value)
                             {
                                 $document_path="public/forward_document/".$data['seeker_extra_doc'][$key]['file_name'];
-                                $message->attach($path);
+                                $message->attach($document_path);
                             }
                         }       
                     }

@@ -432,6 +432,9 @@ Route::get('careers/{company_name}','careersController@view_job_careers');
 Route::get('{company_name}/jobs','careersController@view');
 Route::get('careers/search/{job}/{location}','careersController@search_job');
 Route::get('jobs','careersController@alljobs');
+Route::get('employer/candidate/{id}','Search_Resume_Controller@View_candidate_detail');
+Route::post('employer/seeker/resume_update','Search_Resume_Controller@update_resume');
+Route::get('employer/application_view/{id}','ApplicationController@view_application');
 //new changes
 Route::get('admin/job_post_manage','Jobpost_manage_Controller@view_manage_job');
 Route::post('admin/job_post_manage/change_status','Jobpost_manage_Controller@change_status');

@@ -153,8 +153,7 @@ table.dataTable thead > tr > th {
                                                              $age=floor($exp_month/12);
                                                         ?>                                                                                         
 													<tr>										
-														<td style="padding:5px;">{{$personal[$key]->first_name}} {{$personal[$key]->last_name}}</td>
-														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
+                                                    <td style="padding:5px;"><a href="{{url('employer/candidate/'.$id)}}" > {{$personal[$key]->first_name}} {{$personal[$key]->last_name}}</a></td>														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
 														<!-- <td>{{$dob}}</td> -->
 
                                                         <td>@if(@($personal[$key]->can_gender)=="male")

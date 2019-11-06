@@ -504,7 +504,6 @@
             url: "{{url('employer/listmember')}}" + "/" + id,
             type: 'get',
             dataType: "json",
-
             success: function (data) {
                 $.each(data, function (i, team) {
                     $("#teammember_list").append(
