@@ -90,6 +90,9 @@
                     <a href="{{url('admin/team_members')}}" class="waves-effect"><i class="md md-location-city"></i><span>Manage Team Member Type </span></a>
                 </li>
                 <li >
+                    <a href="{{url('admin/team_members_view')}}" class="waves-effect"><i class="md md-location-city"></i><span>Manage Team Member</span></a>
+                </li>
+                <li >
                     <a href="{{url('admin/visa_type')}}" class="waves-effect"><i class="md md-location-city"></i><span>Manage Visa Type </span></a>
                 </li>
                 <li >

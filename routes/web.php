@@ -86,7 +86,7 @@ Route::post('admin/countries/add','CountriesController@add_countries');
 Route::post('admin/countries/edit','CountriesController@edit_countries'); 
 Route::get('admin/countries/delete/{id}','CountriesController@delete_countries');
 Route::get('admin/cities','CityController@index');
-Route::post('admin/cities/add','CityController@add_cities');
+Route::post('admin/cities/add','CityController@add_cities'); 
 Route::post('admin/cities/edit','CityController@edit_cities'); 
 Route::get('admin/cities/delete/{id}','CityController@delete');
 Route::get('admin/prohibited_keyword','ProhibitedController@index');        
@@ -98,6 +98,10 @@ Route::get('admin/team_members','TeamMemberController@index');
 Route::post('admin/team_members/add','TeamMemberController@add_teammembertype');        
 Route::post('admin/team_members/edit','TeamMemberController@edit_teammembertype');        
 Route::get('admin/team_members/delete/{id}','TeamMemberController@delete_teammembertype'); 
+
+Route::get('admin/team_members_view/delete/{id}','TeamMemberController@delete_team_view'); 
+Route::get('admin/team_members_view','TeamMemberController@view_team_member'); 
+
 Route::get('admin/visa_type','VisaTypeController@index');          
 Route::post('admin/visa_type/add','VisaTypeController@add_visa_type');              
 Route::post('admin/visa_type/edit','VisaTypeController@edit_visa_type');          

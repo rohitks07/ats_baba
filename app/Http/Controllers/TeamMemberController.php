@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tbl_team_member_type;
+use App\tbl_team_member;
 
 class TeamMemberController extends Controller
 {
@@ -26,7 +27,7 @@ class TeamMemberController extends Controller
         	$Tbl_team_member_type->save();
         	return redirect('admin/team_members');
     }
-    public function edit_teammembertype(Request $Request)
+    public function edit_teammembertype(Request $Request) 
     { 
     	$member_id=$Request->team_type_id;
     	$member_type=$Request->team_type_name;
@@ -45,5 +46,20 @@ class TeamMemberController extends Controller
             return redirect('admin/team_members');
        
    
+    }
+
+    public function view_team_member(){
+
+        $team_memeber = tbl_team_member::paginate(15);
+        // return $team_memeber;
+        // exit();
+        return view('team_member_view')->with('team_member',$team_memeber);
+    }
+
+    public function delete_team_view($id){
+
+        tbl_team_member::where('ID',$id)->delete();
+
+        return redirect('admin/team_members_view');
     }
 }
