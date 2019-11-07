@@ -101,6 +101,10 @@ Route::get('admin/team_members/delete/{id}','TeamMemberController@delete_teammem
 
 Route::get('admin/team_members_view/delete/{id}','TeamMemberController@delete_team_view'); 
 Route::get('admin/team_members_view','TeamMemberController@view_team_member'); 
+Route::get('admin/team_members_view/show_report','TeamMemberController@report'); 
+Route::get('admin/team_members_view/show_report_seeker','TeamMemberController@seeker_report'); 
+Route::get('admin/team_members_view/show_report_seeker_applied_for','TeamMemberController@show_report_seeker_applied_for'); 
+Route::get('admin/team_members_view/forward_to','TeamMemberController@forward_to'); 
 
 Route::get('admin/visa_type','VisaTypeController@index');          
 Route::post('admin/visa_type/add','VisaTypeController@add_visa_type');              
