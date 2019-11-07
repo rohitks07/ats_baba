@@ -495,8 +495,8 @@
 
 {{-- <script src="{{asset('public/pdf_plugins/jspdf.js')}}"></script>
 <script src="{{asset('public/pdf_plugins/pdfFromHTML.js')}}"></script> --}}
-<script src="{{asset('public/pdf_plugins/html2canvas.min.js')}}"></script>
-<script src="{{asset('public/pdf_plugins/canvas-toBlob.js')}}"></script>
+{{-- <script src="{{asset('public/pdf_plugins/html2canvas.min.js')}}"></script>
+<script src="{{asset('public/pdf_plugins/canvas-toBlob.js')}}"></script> --}}
 
 
 <script>
