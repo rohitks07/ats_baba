@@ -115,11 +115,12 @@ class TeamMemberController extends Controller
 
 
 
-    public function report_show($id = ""){
+    public function report_show($id = "",$name = ""){
 
             //for days
             $team_memeber = tbl_team_member::where('ID',$id)->first('email');
             $data = $team_memeber['email'];
+            
 
             for ($j=0; $j < 12 ; $j++) { 
                 $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-'.$j.' days'));
@@ -130,10 +131,32 @@ class TeamMemberController extends Controller
                 $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::whereDate('forward_date',$newDate[$j])->where('forward_by',$data)->get());
                 $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::whereDate('dated',$newDate[$j])->where('submitted_by',$id)->get());
             }
+ 
 
-            // return $toReturn;
-            // exit();
 
-        return view('report_view')->with('toReturn',$toReturn);
+            // for months;
+            $global="";
+
+            for($i=0;$i<12;$i++){
+                if($i==0){
+                    $one = date('d-m-Y');
+                    $global=$one;
+                }
+                else{
+                    $two= date('d-m-Y',(strtotime ( '-30 days' , strtotime (   $global) ) ));
+                    $toReturn['monthly'][$i]['month_week_one1'] =$newDate = date("m-Y", strtotime($global));
+                    $toReturn['monthly'][$i]['job_created_monthly1']= count(tbl_post_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->where('created_by',$id)->get());
+                    $toReturn['monthly'][$i]['candidate_created_monthly1']= count(Tbl_job_seekers::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->where('created_by',$id)->get());
+                    $toReturn['monthly'][$i]['client_submittal_monthly1']= count(Tbl_forward_candidate::whereMonth('forward_date',$toReturn['monthly'][$i]['month_week_one1'])->where('forward_by',$data)->get());
+                    $toReturn['monthly'][$i]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->where('submitted_by',$id)->get());
+                    $global=$two;
+                }
+            }
+
+
+
+           
+
+        return view('report_view')->with('toReturn',$toReturn)->with('name',$name);
     }
 }

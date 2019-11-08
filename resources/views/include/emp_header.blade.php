@@ -320,7 +320,9 @@ i.dollar2{
                             <li class="dropdown open">
                                 <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="http://hrmssystems.com/public/uploads/employer/thumb/71549055713.jpg" title="{{Session::get('full_name')}}" alt="user-img" class="rounded-circle"> </a>
                                 <ul class="dropdown-menu">
-                                <li><a href="{{url('employer/companyprofile')}}" class="dropdown-item"><i class="md md-face-unlock mr-2"></i>ORG.PROFILE</a></li>
+                                    
+                                <li id="hide_org" style="display:block;"><a href="{{url('employer/companyprofile')}}" class="dropdown-item"><i class="md md-face-unlock mr-2"></i>ORG.PROFILE</a></li>
+                                
                                     <li><a href="{{url('employer/manageteammember')}}" class="dropdown-item"><i class="md md-settings mr-2"></i>USER MANAGEMENT</a></li>
                                     <li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-lock mr-2"></i>SETTING</a></li>
                                     <li><a href="{{url('employer/logout')}}" class="dropdown-item"><i class="md md-settings-power mr-2"></i> Logout</a></li>

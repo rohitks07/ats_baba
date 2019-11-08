@@ -92,6 +92,7 @@
                                             <tr>
                                                 <?php 
                                                             $id = $item['ID'];
+                                                            $name = $item['full_name'];
                                                            
                                                             ?>
 
@@ -103,11 +104,11 @@
                                                         class="on-default remove-row" data-toggle="tooltip"
                                                         data-placement="top" title="" data-original-title="Delete"><i
                                                             class="fa fa-trash-o"></i></a>
-                                                    <a href="JavaScript:Void(0)" class="on-default remove-row"
+                                                    {{-- <a href="JavaScript:Void(0)" class="on-default remove-row"
                                                         onclick="show_data({{$id}})" data-toggle="tooltip"
                                                         data-placement="top" title="" data-original-title="Report"><i
-                                                            class="fa fa-briefcase"></i></a>
-                                                <a href="{{url('admin/team_members_view/report_show/'.$id)}}" class="on-default remove-row"
+                                                            class="fa fa-briefcase"></i></a> --}}
+                                                <a href="{{url('admin/team_members_view/report_show/'.$id.'/'.$name)}}" class="on-default remove-row"
                                                          data-toggle="tooltip"
                                                         data-placement="top" title="" data-original-title="Report show"><i
                                                             class="fa fa-briefcase"></i></a>

@@ -106,7 +106,7 @@ Route::get('admin/team_members_view/show_report_seeker','TeamMemberController@se
 Route::get('admin/team_members_view/show_report_seeker_applied_for','TeamMemberController@show_report_seeker_applied_for'); 
 Route::get('admin/team_members_view/forward_to','TeamMemberController@forward_to'); 
 
-Route::get('admin/team_members_view/report_show/{id}','TeamMemberController@report_show'); 
+Route::get('admin/team_members_view/report_show/{id}/{name}','TeamMemberController@report_show');  
 
 Route::get('admin/visa_type','VisaTypeController@index');          
 Route::post('admin/visa_type/add','VisaTypeController@add_visa_type');              
@@ -231,6 +231,9 @@ Route::post('employer/manageteammember/edit/add','Job_Employer_Controller@edit_t
 Route::get('employer/manageteammember/add','Job_Employer_Controller@manageteamadd');
 Route::get('employer/manageteammember/add/delete/{id}','Job_Employer_Controller@delete_teammember_type');
 Route::post('employer/manageteammember/add/edit','Job_Employer_Controller@manageteamaddedit');
+//new
+Route::any('employer/manageteammember/team_members_view/report_show/{id}/{name}','Job_Employer_Controller@report_show');
+Route::any('permission/org','Job_Employer_Controller@permission_org');
 //employeer Features for marketing
 Route::get('employer/marketing','MarketingController@index');
 Route::post('employer/market_mail','MarketingController@send_mail');

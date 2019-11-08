@@ -1,6 +1,6 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
-@include('include.header')
-@include('include.leftSidebar')
+@include('include.emp_header')
+@include('include.emp_leftsidebar')
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script>
@@ -150,7 +150,7 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header" style="background-color:white">
-                                            <h3 class="card-title">Daily Report Of: {{$name}}
+                                            <h3 class="card-title" style="font-size:20px;"><b>DAILY REPORT OF: {{$name}}</b>
 
                                             </h3>
                                             <button type="button" class="btn btn-warning text-dark  ml-3"
@@ -192,7 +192,8 @@
                                                                     </th>
                                                                     <th
                                                                         style="text-align:center;color:white;background-color:rgb(10, 153, 247);">
-                                                                        Application Forward</th>
+                                                                        Application Forward
+                                                                        </th>
                                                                     {{-- <th>Action</th> --}}
 
 
@@ -242,7 +243,7 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header" style="background-color:white">
-                                            <h3 class="card-title">Monthly Report Of: {{$name}}
+                                            <h3 class="card-title" style="font-size:20px;"><b>MONTHLY REPORT OF: {{$name}} </b>
                                             </h3>
                                             <button type="button" class="btn btn-warning text-dark ml-3"
                                                 onclick="history.back();" style="float:right;">Back</button>

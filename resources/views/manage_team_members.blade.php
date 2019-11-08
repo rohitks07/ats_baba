@@ -223,6 +223,8 @@
                                                                             $first_login_date = date("m-d-Y H:i: sa", strtotime($first_login_date1));
                                                                             $last_login_date = date("m-d-Y H:i: sa", strtotime($last_login_date1));
                                                                             $last_updated_date = date("m-d-Y H:i: sa", strtotime($last_updated_date1));
+                                                                            $id = $team_member->ID;
+                                                                            $name = $team_member->first_name;
                                                                         ?>
                                                             <tr>
                                                                 <td>{{$team_member->first_name}}</td>
@@ -241,15 +243,21 @@
                                                                     <a href="{{url('employer/manageteammember/edit/'.$id)}}"
                                                                         class="on-default remove-row"
                                                                         data-toggle="tooltip" data-placement="top"
-                                                                        title="" data-original-title="Delete"><i
+                                                                        title="" data-original-title="edit"><i
                                                                             class="fa fa-pencil"></i></a>
+                                                                    
                                                                     @endif
                                                                     @else
                                                                     <a href="{{url('employer/manageteammember/edit/'.$id)}}"
                                                                         class="on-default remove-row"
                                                                         data-toggle="tooltip" data-placement="top"
-                                                                        title="" data-original-title="Delete"><i
+                                                                        title="" data-original-title="edit"><i
                                                                             class="fa fa-pencil"></i></a>
+                                                                            <a href="{{url('employer/manageteammember/team_members_view/report_show/'.$id.'/'.$name)}}"
+                                                                        class="on-default remove-row"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        title="" data-original-title="Report show"><i
+                                                                            class="fa fa-briefcase"></i></a>
 
                                                                     @endif
                                                                     @if(!empty($toReturn['user_type']=="teammember"))
@@ -269,6 +277,7 @@
                                                                         title="" data-original-title="Delete"><i
                                                                             class="fa fa-trash-o"></i></a>
                                                                     @endif
+
                                                                 </td>
                                                             </tr>
                                                             @endforeach
@@ -347,7 +356,7 @@
                                                                 <td>{{$date_created}}</td>
                                                                 <td>{{$date_closed}}</td>
                                                                 <td>
-                                                                <?php
+                                                                    <?php
                                                                     $id=$team_member_type['type_ID'];
                                                                     $number_of_members=count(DB::table('tbl_team_member')->where('team_member_type',$id)->get());
                                                                 ?>
@@ -422,10 +431,17 @@
                                                                                 value="{{ csrf_token()}}"> -->
                                                                             <div class="modal-body">
                                                                                 <div class="form-group row">
-                                                                                    <label for="" class="control-label col-lg-4">Group Name
-                                                                                     <span style="color:red;">*</span></label>
-                                                                                    <input type="text" name="type_namegroup" value="{{$team_member_type->type_name}}" style="width:66%">
-                                                                                    <input type="hidden" name="type_id" value="{{$team_member_type['type_ID']}}">
+                                                                                    <label for=""
+                                                                                        class="control-label col-lg-4">Group
+                                                                                        Name
+                                                                                        <span
+                                                                                            style="color:red;">*</span></label>
+                                                                                    <input type="text"
+                                                                                        name="type_namegroup"
+                                                                                        value="{{$team_member_type->type_name}}"
+                                                                                        style="width:66%">
+                                                                                    <input type="hidden" name="type_id"
+                                                                                        value="{{$team_member_type['type_ID']}}">
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button"

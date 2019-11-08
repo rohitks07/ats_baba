@@ -127,6 +127,35 @@
         </script>
     
         <!-- Datatable init js -->
+
+
+        <script>
+        
+        // $('#hide_org').show();
+        // $('#hide_org').hide();
+
+        $(document).ready(function(){
+            $.ajax({
+                url: "{{url('permission/org')}}",
+                type:"GET",
+                
+                success:function(data){
+                    console.log(data);
+                    if(data == "Yes"){
+                        $('#hide_org').show();
+                    }else{
+                        $('#hide_org').hide();
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+
+                },
+            });
+        });
+
+        
+        </script>
        </body>
 
 <!-- Mirrored from coderthemes.com/moltran/blue/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Jun 2019 12:15:40 GMT -->

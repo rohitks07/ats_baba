@@ -1019,7 +1019,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
     public function manageteam()
     { 
         $current_module_id=11;
-        $toReturn['user_type']=Session::get('type');
+        $toReturn['user_type']=Session::get('type'); 
         if($toReturn['user_type']=="teammember")
         {
         $user_permission_list=Session::get('user_permission');
@@ -1038,13 +1038,81 @@ public function PostjobsAssignToJobSeeker(Request $request)
         }
         // return $toReturn;
         $team_member= tbl_team_member::leftjoin('tbl_team_member_type as member_type','tbl_team_member.team_member_type','=','member_type.type_ID')
-        ->select('tbl_team_member.ID as ID','tbl_team_member.first_name as first_name','member_type.type_name as team_member_type','tbl_team_member.city as city','tbl_team_member.state as state','tbl_team_member.country as  country','tbl_team_member.loc_time_zone as loc_time_zone','tbl_team_member.first_login_date as first_login_date','tbl_team_member.last_login_date as last_login_date','tbl_team_member.last_updated_date as last_updated_date','tbl_team_member.is_active as is_active','tbl_team_member.ID as ID')
-        ->get();
+                                    ->select('tbl_team_member.ID as ID','tbl_team_member.first_name as first_name','member_type.type_name as team_member_type',
+                                    'tbl_team_member.city as city','tbl_team_member.state as state','tbl_team_member.country as  country',
+                                    'tbl_team_member.loc_time_zone as loc_time_zone','tbl_team_member.first_login_date as first_login_date',
+                                    'tbl_team_member.last_login_date as last_login_date','tbl_team_member.last_updated_date as last_updated_date',
+                                    'tbl_team_member.is_active as is_active','tbl_team_member.ID as ID')
+                                    ->get();
+
          $team_member_type=tbl_team_member_type::all();
          
         return view('manage_team_members')->with("team_member",$team_member)->with("team_member_type",$team_member_type)->with('toReturn',$toReturn);
     }
-    
+
+
+
+
+    // new 
+    public function report_show($id = "" , $name = ""){
+
+        //for days
+        $team_memeber = tbl_team_member::where('ID',$id)->first('email');
+        $data = $team_memeber['email'];
+        
+
+        for ($j=0; $j < 12 ; $j++) { 
+            $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-'.$j.' days'));
+            $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-'.$j.' days'));
+            $newDate[$j] = date("Y-m-d", strtotime($toReturn['week_date_dated_us'][$j]));
+            $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::whereDate('dated',$newDate[$j])->where('created_by',$id)->get());
+            $toReturn['week_report'][$j]['candidate_created']= count(Tbl_job_seekers::whereDate('dated',$newDate[$j])->where('created_by',$id)->get());
+            $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::whereDate('forward_date',$newDate[$j])->where('forward_by',$data)->get());
+            $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::whereDate('dated',$newDate[$j])->where('submitted_by',$id)->get());
+        }
+
+
+
+        // for months;
+        $global="";
+
+        for($i=0;$i<12;$i++){
+            if($i==0){
+                $one = date('d-m-Y');
+                $global=$one;
+            }
+            else{
+                $two= date('d-m-Y',(strtotime ( '-30 days' , strtotime (   $global) ) ));
+                $toReturn['monthly'][$i]['month_week_one1'] =$newDate = date("m-Y", strtotime($global));
+                $toReturn['monthly'][$i]['job_created_monthly1']= count(tbl_post_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->where('created_by',$id)->get());
+                $toReturn['monthly'][$i]['candidate_created_monthly1']= count(Tbl_job_seekers::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->where('created_by',$id)->get());
+                $toReturn['monthly'][$i]['client_submittal_monthly1']= count(Tbl_forward_candidate::whereMonth('forward_date',$toReturn['monthly'][$i]['month_week_one1'])->where('forward_by',$data)->get());
+                $toReturn['monthly'][$i]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->where('submitted_by',$id)->get());
+                $global=$two;
+            }
+        }
+
+             return view('report_manage_team_member')->with('toReturn',$toReturn)->with('name',$name);
+    }
+
+    // starts here
+    public function permission_org(){
+
+       $type = Session::get('type');
+
+       if($type == "employer")
+       {
+            $data = "Yes";
+       }
+       else if($type == "teammember")
+       {
+            $data = "no";
+       }
+       return response($data);
+    }
+
+// above this comment is permission for org profile
+
     
     public function delete_teammember($id ="")
     {
