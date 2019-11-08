@@ -92,7 +92,7 @@
 
     </div></div>
     <div class="cta parbase section">
-      <div class="cta component ">
+      <div class="cta component">
        <?php  $url=$company_record->company_name;?>
         <a href="{{url($url.'/jobs')}}"><button class="btn btn-primary" >Search Careers Here</button></a>
       </div >
@@ -214,7 +214,7 @@
     </div></center>
 
     <div class="col-md-12 text-center">
-    Copyright © 2019 All rights reserved.</div>
+    ATS © 2019 - 2020 BABA Software. All rights reserved.</div>
     <!--div class="col-lg-6 col-md-6 col-sm-6 text-right">Design, Developed & Hosted By : <a href="http://www.dreamtechindia.co.in:8443/" target="_blank">Dreamtech Software & Services Pvt Ltd.</a></div-->
   </div>
 </footer>

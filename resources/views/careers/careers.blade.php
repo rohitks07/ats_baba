@@ -18,7 +18,6 @@
   <link href="{{url('assets/css/personal.css')}}" rel="stylesheet" type="text/css" />
   <script src="{{url('assets/js/modernizr.min.js')}}"></script>
 </head>
-
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <img class="navbar-brand" src="{{url('public/companylogo/'.$company_record->company_logo)}}" style="width: 9%;">
@@ -236,34 +235,34 @@
 
      
  
-  @foreach($listjob as $listjob)
+  @foreach($listjob as $listjobs)
  
     <div class="row">
       <div class="col-md-11">
         <div class="crd">
           <div class="row">
             <div class="col-md-10" style="background-color: #f7f7f7;">
-              <h3 style="color: #069;">{{$listjob['job_title']}}</h3>
-              <h4> {{$listjob['client_name']}} </h4>
+              <h3 style="color: #069;">{{$listjobs['job_title']}}</h3>
+              <h4> {{$listjobs['client_name']}} </h4>
             </div>
             <div class="col-md-2">
-              <img src="{{url('assets/images/sunweb.png')}}" class="log img img-thumbnail" style="height:100px; width:100px;">
-            </div>
+                <img src="{{url('public/companylogo/'.$company_record->company_logo)}}" class="log img img-thumbnail" style="height:40px; width:100px;">
+              </div>
           </div>
           <div class="row" style="border-bottom: 1px solid #9c9797;">
             <i class="fa fa-map-marker ft-size" aria-hidden="true"></i>
-            <div class="col-md-10">
-              <p style="font-size: 16px;">{{$listjob['city']}}&nbsp;{{$listjob['state']}} &nbsp;
-                {{$listjob['country']}} </p>
+            <div class="col-md-10"> 
+              <p style="font-size: 16px;">{{$listjobs['city']}}&nbsp;{{$listjobs['state']}} &nbsp;
+                {{$listjobs['country']}} <span style="float:right">Posted By {{$company_record->company_name}}</span> </p>
             </div>
           </div>
           <div class="row" style="margin-top: 8px;">
             <i class="fa fa-suitcase ft-size" aria-hidden="true"></i> &nbsp;
-            <p style="font-size: 16px;">{{$listjob['job_mode']}}</p>
+            <p style="font-size: 16px;">{{$listjobs['job_mode']}}</p>
             <i class="fa fa-clock-o ft-size" aria-hidden="true"></i> &nbsp;
             <p style="font-size: 16px;">50 minutes ago</p>
           </div>
-          <p style="margin-bottom: 8px; text-align: justify;">{{$listjob['job_description']}} </p>
+          <p style="margin-bottom: 8px; text-align: justify;">{{$listjobs['job_description']}} </p>
           <div class="col-md-12" style="text-align: right;">
             <button type="button" class="btn btn-primary">Apply</button>
           </div>
@@ -274,13 +273,15 @@
  
 
 @endforeach
-
+{{ $listjob->links() }}
+</div>
+</div>
 
 
 
   <footer class="footer">
     <div class="col-md-12 text-center">
-      Copyright © 2019 All rights reserved.</div>
+        ATS © 2019 - 2020 BABA Software. All rights reserved.</div>
     <!--div class="col-lg-6 col-md-6 col-sm-6 text-right">Design, Developed & Hosted By : <a href="http://www.dreamtechindia.co.in:8443/" target="_blank">Dreamtech Software & Services Pvt Ltd.</a></div-->
     <!-- </div> -->
   </footer>

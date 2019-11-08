@@ -1,5 +1,106 @@
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
+
+        
+                    <!--<div class="row"> 
+                        <div class="col-md-2">
+                            <div class="mini-stat" style="background-color:#317eeb; border-radius:10px;">
+                                <span class="mini-stat" style="margin-bottom: 0px;">
+                                            <i class="fa fa-comments-o fa-1x" style="float: left; margin-top:1em;"></i></span>
+                                <div class="mini-stat-info text-right text-dark">
+                                    <span>{{$toReturn['one_day_job']}} Jobs</span>
+                                    <p style="color: #fff;">Open Today !!</p>
+                                </div>
+                                <div class="panel-footer">
+                                    <a href="{{url('employer/posted_jobs')}}"><span class="pull-left" style="color:#428bca;">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right" style="color:#317eeb;margin-top:6%;font-size: 20px;"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="col-md-2">
+                            <div class="mini-stat" style="background-color:#d9534f; border-radius:10px;">
+                                <span class="mini-stat" style="margin-bottom: 0px;">
+                                            <i class="fa fa-tasks fa-1x" style="float: left; margin-top:1em;"></i></span>
+                                <div class="mini-stat-info text-right text-dark">
+                                    <span>{{$toReturn['total_application']}} Apps</span>
+                                    <p style="color: #fff;">Received Today !</p>
+                                </div>
+                                <div class="panel-footer">
+                                    <a href="{{url('employer/Application')}}"><span class="pull-left" style="color:#d9534f">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right" style="color:#d9534f;margin-top:6%;font-size: 20px;"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mini-stat" style="background-color:#f0ad4e; border-radius:10px;">
+                                <span class="mini-stat" style="margin-bottom: 0px;">
+                                            <i class="fa fa-support fa-1x" style="float: left; margin-top:1em;"></i></span>
+                                <div class="mini-stat-info text-right text-dark">
+                                    <span>{{$toReturn['total_job']}} Jobs</span>
+                                    <p style="color: #fff;">Work In Process !</p>
+                                </div>
+                                <div class="panel-footer">
+                                    <a href="{{url('employer/posted_jobs')}}"><span class="pull-left" style="color:#f0ad4e">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right" style="color:#f0ad4e;margin-top:6%;font-size: 20px;"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mini-stat" style="background-color:#5cb85c; border-radius:10px;">
+                                <span class="mini-stat" style="margin-bottom: 0px;">
+                                            <i class="fa fa-share-alt fa-1x" style="float: left; margin-top:1em;"></i></span>
+                                <div class="mini-stat-info text-right text-dark">
+                                    <span>{{$toReturn['total_resume']}} Resumes</span>
+                                    <p style="color: #fff;">Submitted !</p>
+                                </div>
+                                <div class="panel-footer">
+                                    <a href="{{url('employer/Application')}}"><span class="pull-left" style="color:#5cb85c;">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right" style="color:#5cb85c;margin-top:6%;font-size: 20px;"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mini-stat" style="background-color:#d35400; border-radius:10px;">
+                                <span class="mini-stat" style="margin-bottom: 0px;">
+                                            <i class="fa fa-share-alt fa-1x" style="float: left; margin-top:1em;"></i></span>
+                                <div class="mini-stat-info text-right text-dark">
+                                <span>{{$toReturn['tota_interview']}} Interview<span>
+                                    <p style="color: #fff;font-size:15px;">Happening Today !</p>
+                                </div>
+                                <div class="panel-footer">
+                                    
+        
+                                    <a href="{{url('employer/dashboard/interview-meeting')}}"><span class="pull-left"
+                                        style="color:#d35400 ;">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"
+                                            style="color:#d35400 ;margin-top:6%;font-size: 20px;"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mini-stat" style="background-color:#a569bd; border-radius:10px;">
+                                <span class="mini-stat" style="margin-bottom: 0px;">
+                                            <i class="fa fa-calendar fa-1x" style="float: left; margin-top:1em;"></i></span>
+                                <div class="mini-stat-info text-right text-dark">
+                                <span>{{$toReturn['total_meeting']}} Meeting</span>
+                                    <p style="color: #fff;">Happening Today !</p>
+                                </div>
+                                <div class="panel-footer">
+                                   
+        
+                                    <a href="{{url('employer/dashboard/interview-meeting')}}"><span class="pull-left"
+                                        style="color:#a569bd ;">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"
+                                            style="color:#a569bd ;margin-top:6%;font-size: 20px;"></i></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <!-- End row-->
+                    <!-- //header-ends -->
+                    
                             <div id="wrapper">
                                 <div class="content-page">
                                     <div class="content">
@@ -84,7 +185,7 @@
                                                     <i class="pull-left fa fa-check-circle dollar1 icon-rounded" style="background: #09c1b0;"></i>
                                                     <div class="stats">
                                                     <a href="{{url('employer/Application')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Application Details" style="float: right;"></i></a>
-                                                    <h5><strong>{{$toReturn['total_application']}} Application</strong></h5>
+                                                    <h5><strong>{{$toReturn['total_resume']}} Application</strong></h5>
                                                     <span> Total Applications !</span>
                                                     </div>
                                                 </div>
@@ -373,7 +474,7 @@
                                         </div>         
                                                 
                                                 
-                                            <!-- <div class="col-md-12">
+                                            <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-header bg-info" id="headingThree">
                                                         <h5 class="m-0 card-title">
@@ -433,7 +534,7 @@
                                                                                          <td style="display: flex;">
                                                                                              <!--<span class="badge badge-pill badge-primary">{{$assignee}}</span>&nbsp;
                                                                                              <span class="badge badge-pill badge-primary">{{$application}}</span>&nbsp;
-                                                                                             <span class="badge badge-pill badge-primary">{{$client_submittal}}</span>
+                                                                                             <span class="badge badge-pill badge-primary">{{$client_submittal}}</span>-->
                                                                                              <button type="button" class="btn btn-primary btn-sm" style="padding: 2px;min-width: 20px;min-height: 2px;">{{$assignee}}</button>
                                                                                              <button type="button" class="btn btn-primary btn-sm" style="padding: 2px;min-width: 20px;min-height: 2px;margin-left: 2px;">{{$application}}</button>
                                                                                              <button type="button" class="btn btn-primary btn-sm" style="padding: 2px;min-width: 20px;min-height: 2px;margin-left: 2px;">{{$client_submittal}}</button>
@@ -441,7 +542,7 @@
                         				                                                
                                                                                 </tr>
                                 
-                                                                                <!-- /.modal 
+                                                                                <!-- /.modal -->
                                                                                 <div id="published{{$posted_job['ID']}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
                                                                                         <div class="modal-dialog">
                                                                                             <div class="modal-content">
@@ -482,11 +583,14 @@
                                                                         {{$toReturn['job_post']->links()}}
                                                                     </div>
                                                                 </div>
+                                                                <!--end of col-->
                                                             </div>
-                                                        </div>
+                                                        </div> <!--end of row-->
+                                                    </div><!--end of card body-->
                                                 </div>
-                                            </div>                                            
-                                            <!-- <div class="col-md-12">
+                                            </div>
+                                            
+                                            <div class="col-md-12">
                                                  <div class="card">
                                                     <div class="card-header bg-info" id="headingTwo">
                                                         <h5 class="m-0 card-title">
@@ -532,7 +636,7 @@
                                                                         <td>{{$application['job_title']}}</td>
                                                                         <td>{{$application['job_client_name']}}</td>
                                                                         <td>{{$application['location']}}</td>
-                                                                        <!--<td>{{$application['job_visa']}}</td>
+                                                                        <!--<td>{{$application['job_visa']}}</td>-->
                                                                         <?php $vis=$application['job_visa'];
                                                                         $plus_visa=substr_count("$vis",",");
                                                                         $sh=explode(",",$vis);
@@ -548,12 +652,10 @@
                                                                 </tbody>
                                                             </table>
                                                             {{$toReturn['application']->links()}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>  -->
-
-
+                                                        </div><!--end of table-->
+                                                    </div><!--end of col-->
+                                                </div><!--end of row--> 
+                                            </div> <!--end of card body-->
                                             </div>
                                         </div>
                                         </div>
@@ -564,9 +666,6 @@
                     </div><!--end of content-->
                 </div><!--end of content-page-->
             </div><!--end of wrapper-->
-
-
-
 <script>
     var resizefunc = [];
 </script><br><br>

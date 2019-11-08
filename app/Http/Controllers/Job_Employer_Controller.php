@@ -263,7 +263,7 @@ ini_set('memory_limit', '-1');
     {                
         
         $jobs_list=tbl_post_jobs::where('job_code',00000)->get()->toArray();
-        return $jobs_list;
+        // return $jobs_list;
             $Add_to_post_job = new tbl_post_jobs(); 
              $Add_to_post_job ->for_group     =  $request->group_of_company;
             $Add_to_post_job ->client_name    =  $request->company_name;

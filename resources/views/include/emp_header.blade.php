@@ -30,23 +30,223 @@
         
     </head>
     <style>
-       .btn-group, .btn-group-vertical {
-                position: relative;
-                display: -ms-inline-flexbox;
-                display: inline-flex;
-                vertical-align: middle;
-                margin-top: 16px;
-            } 
-            #notification_data p{
-                font-size: 13px;
-                margin-left: 2em;
-                margin-right: 2em;
-            }
-            #notification_data{
-                overflow-y:scroll; 
-                width:100%;
-                height:350px;
-             }
+.btn-group, .btn-group-vertical {
+		position: relative;
+		display: -ms-inline-flexbox;
+		display: inline-flex;
+		vertical-align: middle;
+		margin-top: 16px;
+	} 
+	#notification_data p{
+		font-size: 13px;
+		margin-left: 2em;
+		margin-right: 2em;
+	}
+	#notification_data{
+		overflow-y:scroll; 
+		width:100%;
+		height:350px;
+	 }
+			 
+.card-title {
+        font-size: 17px;
+        font-weight: 100;
+        color: #ffffff;
+        margin-bottom: 0;
+        margin-top: 0;
+        text-transform: none;
+    }
+    
+    .modal .modal-dialog .modal-content .modal-footer {
+        padding: 0;
+        padding-top: 14px;
+        margin-right: 0em;
+    }
+    
+    #wrapper {
+        width: 100%;
+        overflow-y: scroll;
+    }
+.card-body {
+    flex: 1 1 auto;
+    padding: 0.5em;
+}
+ 
+.card-box .card-header {
+    padding: 8px 26px;
+}
+.card-box .card .card-header a[data-toggle=collapse] {
+    display: block;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: "Noto Sans", sans-serif;
+}
+
+table.dataTable thead > tr > th {
+    / padding-left: 8px; /
+    padding-right: 30px;
+}
+.table-bordered th {
+    border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+	font-size: 13px;
+	padding: 0.5em;
+}
+.table td{
+    padding: 0.10rem;
+	font-size: 12px;
+    padding-left: 1em;
+	border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+
+}
+.card-title {
+    font-size: 17px;
+    font-weight: 400;
+    color: #317eeb;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: none;
+    font-size: 20px;
+    font-family: none;
+}
+.content-page > .content {
+    margin-bottom: -14px;
+    margin-top: 62px;
+    padding: 20px 10px 15px 10px;
+}
+
+
+    /*-- col_3 --*/
+.widget{
+	padding:0;
+}
+.col-md-3.widget {
+  width: 18.8%;
+    -webkit-transition: 0.5s all;
+    -moz-transition:  0.5s all;
+    -o-transition:  0.5s all;
+    -ms-transition:  0.5 sall;
+    transition:  0.5s all;
+}
+.widget:hover i.fa {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.3);
+    -o-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.1);
+    -webkit-transition: 0.5s all;
+    -moz-transition:  0.5s all;
+    -o-transition:  0.5s all;
+    -ms-transition:  0.5 sall;
+    transition:  0.5s all;
+}
+.r3_counter_box {
+  min-height: 100px;
+  padding: 15px;
+  background-image: linear-gradient(#dbf3ff, #ffffff);
+}
+
+.stats {
+  overflow: hidden;
+}
+.r3_counter_box .fa {
+    margin-right: 0px;
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 43px;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5 sall;
+    transition: 0.5s all;
+}
+.stats span{
+	color:#777;
+	font-size:14px;
+}
+.fa.pull-left {
+  margin-right: 5% !important;
+}
+.icon-rounded{
+  background-color:#7460ee;
+  color: #ffffff;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -o-border-radius: 50px;
+  -ms-border-radius: 50px;
+  font-size: 25px;
+}
+.r3_counter_box.stats {
+  padding-left: 85px;
+}
+.r3_counter_box h5 {
+  margin: 10px 0 5px 0;
+  color:#000;
+  font-weight:600;
+  font-size: 16px;
+}
+i.user1{
+	background: #fc4b6c;
+}
+i.user2{
+	background: #1e88e5;
+}
+i.dollar1{
+	background: #ffb22b;
+}
+i.dollar2{
+	background: #00ad45;
+}
+.widget1 {
+    margin-right: 1%;
+    min-height: 58px;
+    max-width: 15.666667%;
+    box-shadow: 1px 1px 1px #bfbfbf;
+    background: #fff;
+}
+.widget{}
+.world-map {
+  width: 64%;
+  float: left;
+  background: #4597a8;
+  position: relative;
+  padding: 2em 2em 0 2em;
+}
+.world-map h3 {
+  float: left;
+  font-size: 1.9em;
+  color: #fff;
+  font-weight: 600;
+  padding: 0em 0 0.5em 0;
+}
+.world-map p {
+  float: right;
+  font-size: 1.3em;
+  color: #fff;
+  font-weight: 300;
+  padding: 0.5em 0 0.5em 0;
+}
+.row-one{
+	margin-top:20px;
+}
+@media (min-width: 768px){
+.widget{
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 15.5%;
+    box-shadow: 1px 1px 1px #bfbfbf;
+}
+}
     
     </style>
     <body>
@@ -98,16 +298,16 @@
                             </li>
                             <li class="d-none d-sm-block">
                                   <div class="btn-group">
-                                    <a class="btn btn-link float-left" href="{{url('employer/my_posted_contacts')}}" title="Contacts"><img src="http://hrmssystems.com/public/images/admin_images/newcontact.png"></a>
+                                    <a class="btn btn-link float-left" href="{{url('employer/my_posted_contacts')}}" title="Contacts"><i class="fa fa-user" aria-hidden="true" style="color: #fff;background: none;font-size: 17px;"></i></a>
                                   </div>
                               </li>
                             <li class="d-none d-sm-block">
                               <div class="btn-group">
-                                <a class="btn btn-link float-left" href="{{url('employer/posted_companies')}}" title="Organizations"><img src="http://hrmssystems.com/public/images/admin_images/co.png"></a>
+                                <a class="btn btn-link float-left" href="{{url('employer/posted_companies')}}" title="Organizations"><i class="fa fa-building" aria-hidden="true" style="color: #fff;background: none;font-size: 17px;"></i></a>
                               </div>
                              </li>
                              <li class="dropdown open">
-                                <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="http://hrmssystems.com/public/images/admin_images/dash-board-24.png"> </a>
+                                <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-th" aria-hidden="true"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" class="dropdown-item"><i class="fa fa-get-pocket"></i>&nbsp;&nbsp;A/C Receivables</a></li>
                                     <li><a href="#" class="dropdown-item"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;A/C Payables</a></li>
