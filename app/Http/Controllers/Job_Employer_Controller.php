@@ -1055,12 +1055,9 @@ public function PostjobsAssignToJobSeeker(Request $request)
 
     // new 
     public function report_show($id = "" , $name = ""){
-
         //for days
         $team_memeber = tbl_team_member::where('ID',$id)->first('email');
         $data = $team_memeber['email'];
-        
-
         for ($j=0; $j < 12 ; $j++) { 
             $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-'.$j.' days'));
             $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-'.$j.' days'));
@@ -1070,12 +1067,8 @@ public function PostjobsAssignToJobSeeker(Request $request)
             $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::whereDate('forward_date',$newDate[$j])->where('forward_by',$data)->get());
             $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::whereDate('dated',$newDate[$j])->where('submitted_by',$id)->get());
         }
-
-
-
         // for months;
         $global="";
-
         for($i=0;$i<12;$i++){
             if($i==0){
                 $one = date('d-m-Y');
