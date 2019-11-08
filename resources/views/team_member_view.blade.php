@@ -107,6 +107,10 @@
                                                         onclick="show_data({{$id}})" data-toggle="tooltip"
                                                         data-placement="top" title="" data-original-title="Report"><i
                                                             class="fa fa-briefcase"></i></a>
+                                                <a href="{{url('admin/team_members_view/report_show/'.$id)}}" class="on-default remove-row"
+                                                         data-toggle="tooltip"
+                                                        data-placement="top" title="" data-original-title="Report show"><i
+                                                            class="fa fa-briefcase"></i></a>
 
                                                 </td>
                                             </tr>
@@ -512,7 +516,7 @@
         //             saveAs(blob, "Report.png");
         //         });
 
-                
+
         //         });
         //     }
         // });
@@ -523,17 +527,17 @@
 
 
 
-       
-                                    var printContents = document.getElementById("all_table").innerHTML;
-                                    // var printContents = document.getElementsByClassName("all_table").innerHTML;
-                                    var originalContents = document.body.innerHTML;
 
-                                    document.body.innerHTML = printContents;
+        var printContents = document.getElementById("all_table").innerHTML;
+        // var printContents = document.getElementsByClassName("all_table").innerHTML;
+        var originalContents = document.body.innerHTML;
 
-                                    window.print();
+        document.body.innerHTML = printContents;
 
-                                    document.body.innerHTML = originalContents;
-                                
+        window.print();
+
+        document.body.innerHTML = originalContents;
+
     }
 
 </script>

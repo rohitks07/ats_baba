@@ -106,6 +106,8 @@ Route::get('admin/team_members_view/show_report_seeker','TeamMemberController@se
 Route::get('admin/team_members_view/show_report_seeker_applied_for','TeamMemberController@show_report_seeker_applied_for'); 
 Route::get('admin/team_members_view/forward_to','TeamMemberController@forward_to'); 
 
+Route::get('admin/team_members_view/report_show/{id}','TeamMemberController@report_show'); 
+
 Route::get('admin/visa_type','VisaTypeController@index');          
 Route::post('admin/visa_type/add','VisaTypeController@add_visa_type');              
 Route::post('admin/visa_type/edit','VisaTypeController@edit_visa_type');          

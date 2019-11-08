@@ -111,4 +111,29 @@ class TeamMemberController extends Controller
         // return @$data_tabl;
         return response(@$toReturn);
     }
+
+
+
+
+    public function report_show($id = ""){
+
+            //for days
+            $team_memeber = tbl_team_member::where('ID',$id)->first('email');
+            $data = $team_memeber['email'];
+
+            for ($j=0; $j < 12 ; $j++) { 
+                $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-'.$j.' days'));
+                $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-'.$j.' days'));
+                $newDate[$j] = date("Y-m-d", strtotime($toReturn['week_date_dated_us'][$j]));
+                $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::whereDate('dated',$newDate[$j])->where('created_by',$id)->get());
+                $toReturn['week_report'][$j]['candidate_created']= count(Tbl_job_seekers::whereDate('dated',$newDate[$j])->where('created_by',$id)->get());
+                $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::whereDate('forward_date',$newDate[$j])->where('forward_by',$data)->get());
+                $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::whereDate('dated',$newDate[$j])->where('submitted_by',$id)->get());
+            }
+
+            // return $toReturn;
+            // exit();
+
+        return view('report_view')->with('toReturn',$toReturn);
+    }
 }
