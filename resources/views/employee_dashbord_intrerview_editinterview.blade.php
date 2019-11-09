@@ -231,6 +231,7 @@
                                             <div class="col-md-6 mt-2">
                                                 <div class="form-group">
                                                         <input type="hidden" name="t0" id="id" value="{{$data['int']->job_ID}}">
+                                                        <input type="hidden" name="ID" id="ID" value="{{$data['int']->schedule_id}}">
 
                                                     <input type="date" class="form-control" name="date_interview" id="interviewdate"
                                                 aria-describedby="helpId" placeholder="" required value="{{$data['int']->interview_date}}">
@@ -317,11 +318,10 @@
                                                         <div class="form-group">
                                                             <select class="form-control" name="time_zone" id="type" required>
                                                                 <option selected>{{$data['int']->time_zone}}</option>
-                                                                <option>Time Zone</option>
-                                                                <option>Eastern Time Zone(ET)</option>
-                                                                <option>Pacific Time Zone(PT)</option>
-                                                                <option>Central Time Zone(CT)</option>
-                                                                <option>Indian Standard Time(IST)</option>
+                                                                @foreach ($toReturn['time_zone'] as $item)
+                                                            <option>{{$item->time_zone_name}}</option>
+                                                                @endforeach
+                                                                
                                                                 
                                                             </select>
                                                         </div>
@@ -349,7 +349,7 @@
                                                             
                                                             <!-- <option>Select Job For Schedule an interview</option> -->
                                                             @foreach ($toReturn['jobpost'] as $item)
-                                                        <option value="{{$item['ID']}}">{{$item['job_code']}}</option>
+                                                        <option value="{{$item['job_code']}}">{{$item['job_code']}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

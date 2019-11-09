@@ -280,11 +280,12 @@
                                                     {{-- Drop down --}}
                                                     <div class="form-group">
                                                         <select class="form-control" name="local_time" id="time_zone" required>
-                                                            <option value="">Time Zone</option>
-                                                                <option>Eastern Time Zone(ET)</option>
-                                                                <option>Pacific Time Zone(PT)</option>
-                                                                <option>Central Time Zone(CT)</option>
-                                                                <option>Indian Standard Time(IST)</option>
+                                                            <option value="">Select Time Zone</option>
+                                                            @foreach ($toReturn['time_zone'] as $item)
+                                                            <option>{{$item->time_zone_name}}</option>
+                                                            @endforeach
+
+
                                                         </select>
                                                         <p style="display:none;">This field cannot be empty</p>
                                                     </div>

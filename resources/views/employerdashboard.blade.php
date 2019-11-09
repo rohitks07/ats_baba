@@ -306,19 +306,33 @@
                                                                                     <th>Job Code</th>
                                                                                     <th>Candidate Name</th>
                                                                                     <th>Type</th>
+                                                                                    <th>Time Zone</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
                                                                                 @foreach($toReturn['interview'] as $interview)
                                                                                 <tr>
-                                                                                    <?php $interview_date=$interview['interview_date']; 
-                                                                                          $new_date = date("m-d-Y", strtotime($interview_date)); 
+                                                                                      <?php $interview_date=$interview['interview_date']; 
+                                                                                            $new_date = date("m-d-Y", strtotime($interview_date)); 
+
+                                                                                            $data_time = DB::table('tbl_time_zone')->where('time_zone_name',$interview['time_zone'])->first();
+                                                                                            $static_time = $data_time->change_time;
+                                                                                            $cal_value = $data_time->cal_value;
+                                                                                            if($cal_value == "+"){
+                                                                                                $secs = strtotime($interview['from_time'])-strtotime("00:00");
+                                                                                                $result = date("H:i A",strtotime($static_time)+$secs);
+                                                                                            }
+                                                                                            else{
+                                                                                                $secs = strtotime($interview['from_time'])-strtotime("00:00");
+                                                                                                $result = date("H:i A",strtotime($static_time)-$secs);
+                                                                                            }
                                                                                     ?>
                                                                                     <td>{{$new_date}}</td>
-                                                                                    <td>{{$interview['from_time']}}</td>
+                                                                                        <td>{{$result}}</td>
                                                                                     <td>{{$interview['job_ID']}}</td>
                                                                                     <td>{{$interview['candiate_name']}}</td>
                                                                                     <td>{{$interview['interview_type']}}</td>
+                                                                                    <td>{{$interview['time_zone']}}</td>
                                                                                 </tr>
                                                                                 @endforeach
                                                                             </tbody>
@@ -348,17 +362,36 @@
                                                                         <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap">
                                                                             <thead>
                                                                                 <tr>
+                                                                                    <th>Date</th>
                                                                                     <th>Time</th>
                                                                                     <th>Subject</th>
                                                                                     <th>Participant</th>
+                                                                                    <th>Time Zone</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
                                                                                 @foreach($toReturn['meeting'] as $meeting)
+                                                                                <?php 
+                                                                                            $meeting_date=$meeting['dated']; 
+                                                                                            $new_date = date("m-d-Y", strtotime($meeting_date)); 
+                                                                                            $data_time = DB::table('tbl_time_zone')->where('time_zone_name',$meeting['timezone'])->first();
+                                                                                            $static_time = $data_time->change_time;
+                                                                                            $cal_value = $data_time->cal_value;
+                                                                                            if($cal_value == "+"){
+                                                                                                $secs = strtotime($meeting['meeting_time'])-strtotime("00:00");
+                                                                                                $result = date("H:i A",strtotime($static_time)+$secs);
+                                                                                            }
+                                                                                            else{
+                                                                                                $secs = strtotime($meeting['meeting_time'])-strtotime("00:00");
+                                                                                                $result = date("H:i A",strtotime($static_time)-$secs);
+                                                                                            }
+                                                                                ?>
                                                                                 <tr>
-                                                                                    <td>{{$meeting['meeting_time']}}</td>
+                                                                                    <td>{{$new_date}}</td>
+                                                                                    <td>{{$result}}</td>
                                                                                     <td>{{$meeting['subject']}}</td>
                                                                                     <td>{{$meeting['participants']}}</td>
+                                                                                    <td>{{$meeting['timezone']}}</td>
                                                                                 </tr>
                                                                                 @endforeach
                                                                             </tbody>

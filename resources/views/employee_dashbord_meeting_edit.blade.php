@@ -284,11 +284,9 @@
                                                                             id="" required>
                                                                             <option selected>{{$data->timezone}}
                                                                             </option>
-                                                                            <option value="">Time Zone</option>
-                                                                            <option>Eastern Time Zone(ET)</option>
-                                                                            <option>Pacific Time Zone(PT)</option>
-                                                                            <option>Central Time Zone(CT)</option>
-                                                                            <option>Indian Standard Time(IST)</option>
+                                                                            @foreach ($toReturn['time_zone'] as $item)
+                                                                            <option>{{$item->time_zone_name}}</option>
+                                                                                @endforeach
 
                                                                         </select>
                                                                     </div>

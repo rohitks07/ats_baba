@@ -238,6 +238,24 @@ $.ajaxSetup({
 												<!--<span id="Experiencecheck">Plz Insert It Experience </span>-->
 										   </div>
 									</div>
+									<div class="form-group row">
+                                            <label class="col-sm-4 control-label">Total Experience <span
+                                                    style="color:red;"></span></label>
+                                            <div class="col-sm-8">
+                                                <input type="number" class="form-control" id="Experience"
+                                                    placeholder="Total Experience" name="experience" maxlength="10"
+                                                    required value="{{$details['total_experience']}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 control-label">Total USA Experience <span
+                                                    style="color:red;"></span></label>
+                                            <div class="col-sm-8">
+                                                <input type="number" class="form-control" id="Experience"
+                                                    placeholder="Total USA Experience" name="total_usa_experience"
+                                                    maxlength="10" required value="{{$details['total_usa_experience']}}">
+                                            </div>
+                                        </div>
 								<!--end of Visa-->
 								
 								</div><!--end of column-->

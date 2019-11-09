@@ -311,11 +311,11 @@
                                                         {{-- Drop down --}}
                                                         <div class="form-group">
                                                             <select class="form-control" name="time_zone" id="type" required>
-                                                                <option value="">Time Zone</option>
-                                                                <option>Eastern Time Zone(ET)</option>
-                                                                <option>Pacific Time Zone(PT)</option>
-                                                                <option>Central Time Zone(CT)</option>
-                                                                <option>Indian Standard Time(IST)</option>
+                                                                <option value="">Select Time Zone</option>
+                                                                @foreach ($toReturn['time_zone'] as $item)
+                                                            <option>{{$item->time_zone_name}}</option>
+                                                                @endforeach
+                                                                
                                                                 
                                                             </select>
                                                         </div>
@@ -342,7 +342,7 @@
                                                         <select class="form-control" name="interview_type" id="jobcode" required>
                                                             <option value="">Select Job For Schedule an interview</option>
                                                             @foreach ($toReturn['jobpost'] as $item)
-                                                        <option value="{{$item['ID']}}">{{$item['job_code']}}</option>
+                                                        <option value="{{$item['job_code']}}">{{$item['job_code']}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

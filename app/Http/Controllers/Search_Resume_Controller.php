@@ -130,7 +130,8 @@ class Search_Resume_Controller extends Controller
     public function edit_experience($id="")
     {
         $experiences= Tbl_seeker_experience::where('seeker_id',$id)->get();
-        return view('team_member_edit_experience')->with('experiences',$experiences)->with('exp_seeker_id',$id);
+        $country = countries::get();
+        return view('team_member_edit_experience')->with('experiences',$experiences)->with('exp_seeker_id',$id)->with('country',$country);
     }
 
     public function add_insert(Request $data)
@@ -144,7 +145,8 @@ class Search_Resume_Controller extends Controller
     public function show_up($id="",$seekerid=""){
         $exp=tbl_seeker_experience::where('ID',$id)->first();
         // return $exp;
-         return view('team_member_update_experience')->with('exp',$exp);
+         $country = countries::get();
+         return view('team_member_update_experience')->with('exp',$exp)->with('country',$country);
     }
 
 
@@ -270,6 +272,8 @@ public function update_personal_details(Request $request)
     'state'=>$val_state['state_name'],
     'city'=>$val_city['city_name'],
     'experience'=>$request->total_experience,
+    'total_experience'=>$request->experience,
+    'total_usa_experience'=>$request->total_usa_experience,
     'address_line_1'=>$request->addressline1,
     'address_line_2'=>$request->addressline2,
     'mobile'=>$request->mobilephone,

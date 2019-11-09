@@ -170,6 +170,9 @@
         overflow-y: scroll;
         width: 100%;
     }
+    .ui-datepicker-calendar {
+        display: none;
+    }
 
 </style>
 <div id="wrapper">
@@ -307,6 +310,24 @@
                                                     placeholder="Total It Experience" name="total_experience"
                                                     maxlength="10" required>
                                                 <span id="Experiencecheck">Please Enter Valid Experience Details </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 control-label">Total Experience <span
+                                                    style="color:red;"></span></label>
+                                            <div class="col-sm-8">
+                                                <input type="number" class="form-control" id="Experience"
+                                                    placeholder="Total Experience" name="experience" maxlength="10"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 control-label">Total USA Experience <span
+                                                    style="color:red;"></span></label>
+                                            <div class="col-sm-8">
+                                                <input type="number" class="form-control" id="Experience"
+                                                    placeholder="Total USA Experience" name="total_usa_experience"
+                                                    maxlength="10" required>
                                             </div>
                                         </div>
                                         <!--end of Visa-->
@@ -505,80 +526,11 @@
                                                                         <select type="text" name="edu_country[]"
                                                                             id="edu_country" class="form-control"
                                                                             placeholder="Country" style="width: 14%;">
-                                                                            <option value="" selected></option>
-                                                                            <!--@foreach($toReturn['countries'] as $countries)-->
-                                                                            <!--    <option value="{{$countries['country_name']}}"> {{$countries['country_name']}} </option>-->
-                                                                            <!--@endforeach	-->
-                                                                            <option value="Afghanistan">Afghanistan
-                                                                            </option>
-                                                                            <option value="Albany">Albany</option>
-                                                                            <option value="Algeria">Algeria</option>
-                                                                            <option value="Angola">Angola</option>
-                                                                            <option value="Argentina">Argentina</option>
-                                                                            <option value="Armenia">Armenia</option>
-                                                                            <option value="Australia">Australia</option>
-                                                                            <option value="Austria">Austria</option>
-                                                                            <option value="Azerbaijan">Azerbaijan
-                                                                            </option>
-                                                                            <option value="Bahamas">Bahamas</option>
-                                                                            <option value="Bahrain">Bahrain</option>
-                                                                            <option value="Bangladesh">Bangladesh
-                                                                            </option>
-                                                                            <option value="Belgium">Belgium</option>
-                                                                            <option value="Bhutan">Bhutan</option>
-                                                                            <option value="Bulgaria">Bulgaria</option>
-                                                                            <option value="Burma">Burma</option>
-                                                                            <option value="Burundi">Burundi</option>
-                                                                            <option value="Cambodia">Cambodia</option>
-                                                                            <option value="Cameroon">Cameroon</option>
-                                                                            <option value="Cape Verd">Cape Verd</option>
-                                                                            <option value="Central Africa">Central
-                                                                                Africa</option>
-                                                                            <option value="Chadi">Chadi</option>
-                                                                            <option value="Chile">Chile</option>
-                                                                            <option value="China">China</option>
-                                                                            <option value="Columbia">Columbia</option>
-                                                                            <option value="Comora">Comora</option>
-                                                                            <option value="Congo">Congo</option>
-                                                                            <option value="Costa Rica">Costa Rica
-                                                                            </option>
-                                                                            <option value="Croatia">Croatia</option>
-                                                                            <option value="Cuban">Cuban</option>
-                                                                            <option value="Cyprus">Cyprus</option>
-                                                                            <option value="Egypt">Egypt</option>
-                                                                            <option value="Fiji">Fiji</option>
-                                                                            <option value="Finland">Finland</option>
-                                                                            <option value="France">France</option>
-                                                                            <option value="Germany">Germany</option>
-                                                                            <option value="Greece">Greece</option>
-                                                                            <option value="Iceland">Iceland</option>
-                                                                            <option value="India">India</option>
-                                                                            <option value="Iran">Iran</option>
-                                                                            <option value="Iraq">Iraq</option>
-                                                                            <option value="Ireland">Ireland</option>
-                                                                            <option value="Israel">Israel</option>
-                                                                            <option value="Italy">Italy</option>
-                                                                            <option value="Jamaica">Jamaica</option>
-                                                                            <option value="Japan">Japan</option>
-                                                                            <option value="Jordan">Jordan</option>
-                                                                            <option value="Kenya">Kenya</option>
-                                                                            <option value="Kuwait">Kuwait</option>
-                                                                            <option value="Malaysia">Malaysia</option>
-                                                                            <option value="Mexico">Mexico</option>
-                                                                            <option value="Mongolia">Mongolia</option>
-                                                                            <option value="Nepal">Nepal</option>
-                                                                            <option value="New Zealand">New Zealand
-                                                                            </option>
-                                                                            <option value="Pakistan">Pakistan</option>
-                                                                            <option value="Peru">Peru</option>
-                                                                            <option value="Poland">Poland</option>
-                                                                            <option value="Qatar">Qatar</option>
-                                                                            <option value="Romania">Romania</option>
-                                                                            <option value="Russia">Russia</option>
-                                                                            <option value="Thailand">Thailand</option>
-                                                                            <option value="United States" selected>
-                                                                                United States</option>
-                                                                            <option value="Yemen">Yemen</option>
+                                                                            <option value="" selected>Select country</option>
+                                                                            @foreach($toReturn['countries'] as $countries)
+                                                                              <option value="{{$countries['country_name']}}"> {{$countries['country_name']}} </option>
+                                                                            @endforeach	
+                                                                            
 
                                                                         </select>
                                                                         <select name="completion_year[]" id="completion"
@@ -713,24 +665,26 @@
                                                                             </select>
                                                                             <input placeholder="Start Date"
                                                                                 name="start_date[]" id="start_date"
-                                                                                class="textbox-n form-control start_date"
-                                                                                type="text" onfocus="(this.type='date')"
-                                                                                onblur="(this.type='text')"
+                                                                                class="textbox-n form-control start_date date-picker"
+                                                                                type="text" 
                                                                                 id="start_date" style="width: 15%;">
                                                                             <input placeholder="End Date"
                                                                                 name="end_date[]" id="end_date"
-                                                                                class="textbox-n form-control end_date"
-                                                                                type="text" onfocus="(this.type='date')"
-                                                                                onblur="(this.type='text')"
-																				id="end_date" style="width: 15%;">
+                                                                                class="textbox-n form-control end_date date-picker1"
+                                                                                type="text" 
+                                                                                id="end_date" style="width: 15%;">
                                                                             <p><button type="button" id="btnAdd_Exp"
                                                                                     class="btn btn-primary">Add
                                                                                     More&nbsp;<i class="fa fa-plus"
                                                                                         aria-hidden="true"></i></button>
-																			</p>
-																			<label id="check_date" style="display:none;color:red;">In correct date format</label>
-																			<label id="check_date1" style="display:none;color:red;">In correct date format</label>
-																				<br>
+                                                                            </p>
+                                                                            <label id="check_date"
+                                                                                style="display:none;color:red;">In
+                                                                                correct date format</label>
+                                                                            <label id="check_date1"
+                                                                                style="display:none;color:red;">In
+                                                                                correct date format</label>
+                                                                            <br>
                                                                             <!-- <a class="btn btn-primary add-more-btn" style="float:left; margin-left:1em;">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></a>												   -->
                                                                             <label id="experience_check">Please fill All
                                                                                 Fields</label>
@@ -1113,591 +1067,581 @@
 <!--dynamic add skills-->
 
 <!-- validation Of Personal Details -->
+
+{{-- Add validate here --}}
 <script>
-    $(document).ready(function () {
-        // initializing error variables, hiding check/error span
-        $("#first_namecheck").hide();
-        $("#middle_namecheck").hide();
-        $("#last_namecheck").hide();
-        $("#dobcheck").hide();
-        $("#emailcheck").hide();
-        $("#ssncheck").hide();
-        $("#visacheck").hide();
-        $("#Experiencecheck").hide();
-        $("#citycheck").hide();
-        $("#mob_ph_check").hide();
-        $("#home_ph_check").hide();
-        $("#resume_check").hide();
-        $('#skills_check').hide();
-
-        var err_firstname = true;
-        var err_middlename = true;
-        var err_lastname = true;
-        var err_dob = true;
-        var err_email = true;
-        var err_ssn = true;
-        var err_visa = true;
-        var err_Experience = true;
-        var err_city = true;
-        var err_mob_ph = true;
-        var err_home_ph = true;
-        var err_resume = true;
-        var err_skills = true;
-
-        //validate first name
-        $("#first_name").blur(function () {
-            check_firstname();
-        });
-
-        function check_firstname() {
-            var firstname_val = $("#first_name").val();
-
-            var regexOnlyText = /^[a-zA-Z]+$/;
-            if (firstname_val == "" || regexOnlyText.test(firstname_val) != true) {
-                $("#first_namecheck").show();
-                $("#first_namecheck").focus();
-                $("#first_namecheck").css("color", "red");
-                err_firstname = false;
-                return false;
-            } else {
-                err_firstname = true;
-                $("#first_namecheck").hide();
-            }
-
-        }
-        //validate middle name
-        $("#middle_name").blur(function () {
-            check_middlename();
-        });
-
-        function check_middlename() {
-            var middlename_val = $("#middle_name").val();
-
-            var regexOnlyText = /^[a-zA-Z]+$/;
-            if (middlename_val != "") {
-                if (regexOnlyText.test(middlename_val) != true) {
-                    $("#middle_namecheck").show();
-                    $("#middle_namecheck").focus();
-                    $("#middle_namecheck").css("color", "red");
-                    err_middlename = false;
+        $(document).ready(function () {
+            // initializing error variables, hiding check/error span
+            $("#first_namecheck").hide();
+            $("#middle_namecheck").hide();
+            $("#last_namecheck").hide();
+            $("#dobcheck").hide();
+            $("#emailcheck").hide();
+            $("#ssncheck").hide();
+            $("#visacheck").hide();
+            $("#Experiencecheck").hide();
+            $("#citycheck").hide();
+            $("#mob_ph_check").hide();
+            $("#home_ph_check").hide();
+            $("#resume_check").hide();
+            $('#skills_check').hide();
+    
+            var err_firstname = true;
+            var err_middlename = true;
+            var err_lastname = true;
+            var err_dob = true;
+            var err_email = true;
+            var err_ssn = true;
+            var err_visa = true;
+            var err_Experience = true;
+            var err_city = true;
+            var err_mob_ph = true;
+            var err_home_ph = true;
+            var err_resume = true;
+            var err_skills = true;
+    
+            //validate first name
+            $("#first_name").blur(function () {
+                check_firstname();
+            });
+    
+            function check_firstname() {
+                var firstname_val = $("#first_name").val();
+    
+                var regexOnlyText = /^[a-zA-Z]+$/;
+                if (firstname_val == "" || regexOnlyText.test(firstname_val) != true) {
+                    $("#first_namecheck").show();
+                    $("#first_namecheck").focus();
+                    $("#first_namecheck").css("color", "red");
+                    err_firstname = false;
                     return false;
+                } else {
+                    err_firstname = true;
+                    $("#first_namecheck").hide();
+                }
+    
+            }
+            //validate middle name
+            $("#middle_name").blur(function () {
+                check_middlename();
+            });
+    
+            function check_middlename() {
+                var middlename_val = $("#middle_name").val();
+    
+                var regexOnlyText = /^[a-zA-Z]+$/;
+                if (middlename_val != "") {
+                    if (regexOnlyText.test(middlename_val) != true) {
+                        $("#middle_namecheck").show();
+                        $("#middle_namecheck").focus();
+                        $("#middle_namecheck").css("color", "red");
+                        err_middlename = false;
+                        return false;
+                    } else {
+                        err_middlename = true;
+                        $("#middle_namecheck").hide();
+                    }
                 } else {
                     err_middlename = true;
                     $("#middle_namecheck").hide();
                 }
-            } else {
-                err_middlename = true;
-                $("#middle_namecheck").hide();
+    
             }
-
-        }
-        //Validation last name
-        $("#last_name").blur(function () {
-            check_lastname();
-        });
-
-        function check_lastname() {
-            var lastname_val = $("#last_name").val();
-
-            var regexOnlyText = /^[a-zA-Z]+$/;
-            if (lastname_val == "" || regexOnlyText.test(lastname_val) != true) {
-                $("#last_namecheck").show();
-                $("#last_namecheck").focus();
-                $("#last_namecheck").css("color", "red");
-                err_lastname = false;
-                return false;
-            } else {
-                err_lastname = true;
-                $("#last_namecheck").hide();
+            //Validation last name
+            $("#last_name").blur(function () {
+                check_lastname();
+            });
+    
+            function check_lastname() {
+                var lastname_val = $("#last_name").val();
+    
+                var regexOnlyText = /^[a-zA-Z]+$/;
+                if (lastname_val == "" || regexOnlyText.test(lastname_val) != true) {
+                    $("#last_namecheck").show();
+                    $("#last_namecheck").focus();
+                    $("#last_namecheck").css("color", "red");
+                    err_lastname = false;
+                    return false;
+                } else {
+                    err_lastname = true;
+                    $("#last_namecheck").hide();
+                }
             }
-        }
-        //validate date of birth
-        $("#date_of_birth").blur(function () {
-            check_dob();
-        });
-
-        function check_dob() {
-            var date_of_birth = $("#date_of_birth").val();
-
-            if (date_of_birth) {
-                var dob_var = new Date(date_of_birth);
-                var dob_val_day = dob_var.getDate();
-                var dob_val_month = dob_var.getMonth() + 1;
-                var dob_val_year = dob_var.getFullYear();
-
-                if (!dob_val_day || !dob_val_month || !dob_val_year) {
-                    $("#dobcheck").show();
-                    $("#dobcheck").focus();
-                    $("#dobcheck").css("color", "red");
-                    err_dob = false;
-                    return false;
-                } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
-                    $("#dobcheck").show();
-                    $("#dobcheck").focus();
-                    $("#dobcheck").css("color", "red");
-                    err_dob = false;
-                    return false;
+            //validate date of birth
+            $("#date_of_birth").blur(function () {
+                check_dob();
+            });
+    
+            function check_dob() {
+                var date_of_birth = $("#date_of_birth").val();
+    
+                if (date_of_birth) {
+                    var dob_var = new Date(date_of_birth);
+                    var dob_val_day = dob_var.getDate();
+                    var dob_val_month = dob_var.getMonth() + 1;
+                    var dob_val_year = dob_var.getFullYear();
+    
+                    if (!dob_val_day || !dob_val_month || !dob_val_year) {
+                        $("#dobcheck").show();
+                        $("#dobcheck").focus();
+                        $("#dobcheck").css("color", "red");
+                        err_dob = false;
+                        return false;
+                    } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
+                        $("#dobcheck").show();
+                        $("#dobcheck").focus();
+                        $("#dobcheck").css("color", "red");
+                        err_dob = false;
+                        return false;
+                    } else {
+                        err_dob = true;
+                        $("#dobcheck").hide();
+                    }
                 } else {
                     err_dob = true;
                     $("#dobcheck").hide();
                 }
-            } else {
-                err_dob = true;
-                $("#dobcheck").hide();
+    
             }
-
-        }
-        //validate email
-        $("#email").blur(function () {
-            check_email();
-        });
-
-        function check_email() {
-            var email_val = $("#email").val();
-            var v =
-                /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-            var result = email_val.match(v);
-            if ((email_val.length == "") || (result == null)) {
-                $("#emailcheck").show();
-                $("#emailcheck").focus();
-                $("#emailcheck").css("color", "red");
-                err_email = false;
-                return false;
-            } else {
-                err_email = true;
-                $("#emailcheck").hide();
-            }
-        }
-        // validate Social Security Number (SSN)
-        $("#ssn").blur(function () {
-            check_ssn();
-        });
-
-        function check_ssn() {
-            var ssn_val = $("#ssn").val();
-
-            var regexOnlyNumbers = /^[0-9\-]+$/;
-            if (ssn_val != "") {
-                if (regexOnlyNumbers.test(ssn_val) != true) {
-                    $("#ssncheck").show();
-                    $("#ssncheck").focus();
-                    $("#ssncheck").css("color", "red");
-                    err_ssn = false;
+            //validate email
+            $("#email").blur(function () {
+                check_email();
+            });
+    
+            function check_email() {
+                var email_val = $("#email").val();
+                var v =
+                    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                var result = email_val.match(v);
+                if ((email_val.length == "") || (result == null)) {
+                    $("#emailcheck").show();
+                    $("#emailcheck").focus();
+                    $("#emailcheck").css("color", "red");
+                    err_email = false;
                     return false;
+                } else {
+                    err_email = true;
+                    $("#emailcheck").hide();
+                }
+            }
+            // validate Social Security Number (SSN)
+            $("#ssn").blur(function () {
+                check_ssn();
+            });
+    
+            function check_ssn() {
+                var ssn_val = $("#ssn").val();
+    
+                var regexOnlyNumbers = /^[0-9\-]+$/;
+                if (ssn_val != "") {
+                    if (regexOnlyNumbers.test(ssn_val) != true) {
+                        $("#ssncheck").show();
+                        $("#ssncheck").focus();
+                        $("#ssncheck").css("color", "red");
+                        err_ssn = false;
+                        return false;
+                    } else {
+                        err_ssn = true;
+                        $("#ssncheck").hide();
+                    }
                 } else {
                     err_ssn = true;
                     $("#ssncheck").hide();
                 }
-            } else {
-                err_ssn = true;
-                $("#ssncheck").hide();
             }
-        }
-        //validate Visa
-        $("#visa_status").blur(function () {
-            check_visa();
-        });
-
-        function check_visa() {
-            var visa_val = $("#visa_status").val();
-            if (visa_val.length == "") {
-                $("#visacheck").show();
-                $("#visacheck").focus();
-                $("#visacheck").css("color", "red");
-                err_visa = false;
-                return false;
-            } else {
-                err_visa = true;
-                $("#visacheck").hide();
+            //validate Visa
+            $("#visa_status").blur(function () {
+                check_visa();
+            });
+    
+            function check_visa() {
+                var visa_val = $("#visa_status").val();
+                if (visa_val.length == "") {
+                    $("#visacheck").show();
+                    $("#visacheck").focus();
+                    $("#visacheck").css("color", "red");
+                    err_visa = false;
+                    return false;
+                } else {
+                    err_visa = true;
+                    $("#visacheck").hide();
+                }
             }
-        }
-        //Validation Experience
-        $("#Experience").keyup(function () {
-            var var_tmp = $("#Experience").val();
-            $("#Experience").val(var_tmp.replace(/[^0-9]/g, ''));
-        });
-        $("#Experience").blur(function () {
-            check_Experience();
-        });
-
-        function check_Experience() {
-            var Experience_val = $("#Experience").val();
-
-            var regexOnlyNumbers = /^[0-9]+$/;
-            if (Experience_val == "" || regexOnlyNumbers.test(Experience_val) != true) {
-                $("#Experiencecheck").show();
-                $("#Experiencecheck").focus();
-                $("#Experiencecheck").css("color", "red");
-                err_Experience = false;
-                return false;
-            } else {
-                err_Experience = true;
-                $("#Experiencecheck").hide();
+            //Validation Experience
+            $("#Experience").keyup(function () {
+                var var_tmp = $("#Experience").val();
+                $("#Experience").val(var_tmp.replace(/[^0-9]/g, ''));
+            });
+            $("#Experience").blur(function () {
+                check_Experience();
+            });
+    
+            function check_Experience() {
+                var Experience_val = $("#Experience").val();
+    
+                var regexOnlyNumbers = /^[0-9]+$/;
+                if (Experience_val == "" || regexOnlyNumbers.test(Experience_val) != true) {
+                    $("#Experiencecheck").show();
+                    $("#Experiencecheck").focus();
+                    $("#Experiencecheck").css("color", "red");
+                    err_Experience = false;
+                    return false;
+                } else {
+                    err_Experience = true;
+                    $("#Experiencecheck").hide();
+                }
             }
-        }
-        //Validation Location
-        $("#country").blur(function () {
-            check_location();
-        });
-
-        function check_location() {
-            var loc_val = $("#country").val();
-            var loc_val1 = $("#state_text").val();
-            if ((loc_val == "") || (loc_val1 == "")) {
-                $("#citycheck").show();
-                $("#citycheck").focus();
-                $("#citycheck").css("color", "red");
-                err_city = false;
-                return false;
-            } else {
-                err_city = true;
-                $("#citycheck").hide();
-            }
-
-
-            var data = document.getElementById("myCheck");
-            var loc_val2 = $("#city").val();
-
-            if ((data.checked == false) && (loc_val2 == "")) {
-                $("#citycheck").show();
-                $("#citycheck").focus();
-                $("#citycheck").css("color", "red");
-                err_city = false;
-                return false;
-            } else if (data.checked == true) {
-                var city = document.getElementById("city_text_").value;
-                if (city == "") {
-                    $('#enter_city').css('color', 'red');
-                    $('#enter_city').css('display', 'block');
+            //Validation Location
+            $("#country").blur(function () {
+                check_location();
+            });
+    
+            function check_location() {
+                var loc_val = $("#country").val();
+                var loc_val1 = $("#state_text").val();
+                if ((loc_val == "") || (loc_val1 == "")) {
+                    $("#citycheck").show();
+                    $("#citycheck").focus();
+                    $("#citycheck").css("color", "red");
                     err_city = false;
                     return false;
                 } else {
-                    $('#enter_city').css('color', 'red');
-                    $('#enter_city').css('display', 'none');
+                    err_city = true;
+                    $("#citycheck").hide();
                 }
-
-            }
-
-
-        }
-
-        // function check_checkbx(){
-
-        // }
-        // validate mobile number
-        $("#mobile_number").blur(function () {
-            check_mb_phone();
-        });
-
-        function check_mb_phone() {
-            var var_mobile_number = $("#mobile_number").val();
-
-            var regexOnlyNumbers = /^[0-9-]+$/;
-            if (var_mobile_number.length != 12 || regexOnlyNumbers.test(var_mobile_number) != true) {
-                $("#mob_ph_check").show();
-                $("#mob_ph_check").focus();
-                $("#mob_ph_check").css("color", "red");
-                err_mob_ph = false;
-                return false;
-            } else {
-                err_mob_ph = true;
-                $("#mob_ph_check").hide();
-            }
-        }
-        // validate home number
-        $("#phone").blur(function () {
-            check_hm_phone();
-        });
-
-        function check_hm_phone() {
-            var var_homephone_number = $("#phone").val();
-
-            var regexOnlyNumbers = /^[0-9-]+$/;
-            if (var_homephone_number.length > 2) {
-                if (var_homephone_number.length != 12 || regexOnlyNumbers.test(var_homephone_number) != true) {
-                    $("#home_ph_check").show();
-                    $("#home_ph_check").focus();
-                    $("#home_ph_check").css("color", "red");
-                    err_home_ph = false;
+    
+    
+                var data = document.getElementById("myCheck");
+                var loc_val2 = $("#city").val();
+    
+                if ((data.checked == false) && (loc_val2 == "")) {
+                    $("#citycheck").show();
+                    $("#citycheck").focus();
+                    $("#citycheck").css("color", "red");
+                    err_city = false;
                     return false;
+                } else if (data.checked == true) {
+                    var city = document.getElementById("city_text_").value;
+                    if (city == "") {
+                        $('#enter_city').css('color', 'red');
+                        $('#enter_city').css('display', 'block');
+                        err_city = false;
+                        return false;
+                    } else {
+                        $('#enter_city').css('color', 'red');
+                        $('#enter_city').css('display', 'none');
+                    }
+    
+                }
+    
+    
+            }
+    
+            // function check_checkbx(){
+    
+            // }
+            // validate mobile number
+            $("#mobile_number").blur(function () {
+                check_mb_phone();
+            });
+    
+            function check_mb_phone() {
+                var var_mobile_number = $("#mobile_number").val();
+    
+                var regexOnlyNumbers = /^[0-9-]+$/;
+                if (var_mobile_number.length != 12 || regexOnlyNumbers.test(var_mobile_number) != true) {
+                    $("#mob_ph_check").show();
+                    $("#mob_ph_check").focus();
+                    $("#mob_ph_check").css("color", "red");
+                    err_mob_ph = false;
+                    return false;
+                } else {
+                    err_mob_ph = true;
+                    $("#mob_ph_check").hide();
+                }
+            }
+            // validate home number
+            $("#phone").blur(function () {
+                check_hm_phone();
+            });
+    
+            function check_hm_phone() {
+                var var_homephone_number = $("#phone").val();
+    
+                var regexOnlyNumbers = /^[0-9-]+$/;
+                if (var_homephone_number.length > 2) {
+                    if (var_homephone_number.length != 12 || regexOnlyNumbers.test(var_homephone_number) != true) {
+                        $("#home_ph_check").show();
+                        $("#home_ph_check").focus();
+                        $("#home_ph_check").css("color", "red");
+                        err_home_ph = false;
+                        return false;
+                    } else {
+                        err_home_ph = true;
+                        $("#home_ph_check").hide();
+                    }
                 } else {
                     err_home_ph = true;
                     $("#home_ph_check").hide();
+                    $("#phone").val("");
                 }
-            } else {
-                err_home_ph = true;
-                $("#home_ph_check").hide();
-                $("#phone").val("");
             }
-        }
-        // cv validate
-        $("#cv_file").change(function () {
-            check_resume();
-        });
-
-        function check_resume() {
-
-            var file_val = $("#cv_file").val();
-            var ext = file_val.split('.').pop();
-            if (ext == "pdf" || ext == "docx" || ext == "doc") {
-                $("#resume_check").hide();
-                err_resume = true;
-            } else {
-                $("#resume_check").show();
-                $("#resume_check").focus();
-                $("#resume_check").css("color", "red");
-                err_resume = false;
-                return false;
+            // cv validate
+            $("#cv_file").change(function () {
+                check_resume();
+            });
+    
+            function check_resume() {
+    
+                var file_val = $("#cv_file").val();
+                var ext = file_val.split('.').pop();
+                if (ext == "pdf" || ext == "docx" || ext == "doc") {
+                    $("#resume_check").hide();
+                    err_resume = true;
+                } else {
+                    $("#resume_check").show();
+                    $("#resume_check").focus();
+                    $("#resume_check").css("color", "red");
+                    err_resume = false;
+                    return false;
+                }
             }
-        }
-        //validate skills
-
-        // function check_skills()
-        // {
-        // 	var ch=$("#first_name").val();
-
-        // 	// var regexOnlyText = /^[a-zA-Z]+$/;
-        // 	if (firstname_val==""||regexOnlyText.test(firstname_val) != true){
-        // 		$("#first_namecheck").show();
-        // 		$("#first_namecheck").focus();
-        // 		$("#first_namecheck").css("color","red");
-        // 		err_firstname=false;
-        // 		return false;
-        // 	}
-        // 	else
-        // 	{
-        // 		err_firstname=true;
-        // 		$("#first_namecheck").hide();
-        // 	}
-
-        // }
-
-        // final submission
-        $("#validatefrm").click(function () {
-            // when submit button clicked, validate
-            check_firstname();
-            check_middlename();
-            check_lastname();
-            check_dob();
-            check_email();
-            check_ssn();
-            check_visa();
-            check_Experience();
-            check_location();
-            check_mb_phone();
-            check_hm_phone();
-            check_resume();
-            check_skills();
-
-
-            // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
-            if ((err_firstname == true) && (err_middlename == true) && (err_lastname == true) && (
-                    err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
-                    true) && (err_Experience == true) && (err_city == true) && (err_mob_ph == true) && (
-                    err_home_ph == true) && (err_resume == true) && (err_skill == true)) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
-
-        $("#tags").blur(function () {
-            var skill = document.getElementById("tags").value;
-            if (skill == "") {
-                $("#skill_check").show()
-                err_skills = false;
-            } else {
-				$("#skill_check").hide()
+            //validate skills
+    
+            // function check_skills()
+            // {
+            // 	var ch=$("#first_name").val();
+    
+            // 	// var regexOnlyText = /^[a-zA-Z]+$/;
+            // 	if (firstname_val==""||regexOnlyText.test(firstname_val) != true){
+            // 		$("#first_namecheck").show();
+            // 		$("#first_namecheck").focus();
+            // 		$("#first_namecheck").css("color","red");
+            // 		err_firstname=false;
+            // 		return false;
+            // 	}
+            // 	else
+            // 	{
+            // 		err_firstname=true;
+            // 		$("#first_namecheck").hide();
+            // 	}
+    
+            // }
+    
+            // final submission
+            $("#validatefrm").click(function () {
+                // when submit button clicked, validate
+                check_firstname();
+                check_middlename();
+                check_lastname();
+                check_dob();
+                check_email();
+                check_ssn();
+                check_visa();
+                check_Experience();
+                check_location();
+                check_mb_phone();
+                check_hm_phone();
+                check_resume();
                 check_skills();
-				err_skills = true;
-            }
-
-        });
-
-        function check_skills() {
-
-            // var ch=$('#Result').val();
-            var ch = document.getElementById("Result").value;
-            if (ch == "") {
-                err_skills = false;
-                $('#skills_check').show();
-            } else {
-				err_skills = true;
-                $('#skills_check').hide();
-            }
-        }
-
-        $("#validatefrm_submit").click(function () {
-
-           
+    
+    
+                // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
+                if ((err_firstname == true) && (err_middlename == true) && (err_lastname == true) && (
+                        err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
+                        true) && (err_Experience == true) && (err_city == true) && (err_mob_ph == true) && (
+                        err_home_ph == true) && (err_resume == true) && (err_skill == true)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+    
+    
+            $("#tags").blur(function () {
                 var skill = document.getElementById("tags").value;
                 if (skill == "") {
                     $("#skill_check").show()
                     err_skills = false;
                 } else {
-					err_skills = true;
+                    $("#skill_check").hide()
+                    check_skills();
+                    err_skills = true;
+                }
+    
+            });
+    
+            function check_skills() {
+    
+                // var ch=$('#Result').val();
+                var ch = document.getElementById("Result").value;
+                if (ch == "") {
+                    err_skills = false;
+                    $('#skills_check').show();
+                } else {
+                    err_skills = true;
+                    $('#skills_check').hide();
+                }
+            }
+    
+            $("#validatefrm_submit").click(function () {
+    
+    
+                var skill = document.getElementById("tags").value;
+                if (skill == "") {
+                    $("#skill_check").show()
+                    err_skills = false;
+                } else {
+                    err_skills = true;
                     check_skills();
                 }
-				if(err_skills==false){
-					return false;
-				}
-				else{
-					return true;
-				}
+                if (err_skills == false) {
+                    return false;
+                } else {
+                    return true;
+                }
+            });
         });
-    });
-
-</script>
-
-<!-- Validation of Education Details -->
-<script>
-    $(document).ready(function () {
-        $("#education_check").hide();
-        var err_education = true;
-        $("#edu_validatefrm").click(function () {
-            check_education();
+    
+    </script>
+    
+    <!-- Validation of Education Details -->
+    <script>
+        $(document).ready(function () {
+            $("#education_check").hide();
+            var err_education = true;
+            $("#edu_validatefrm").click(function () {
+                check_education();
+            });
+    
+            function check_education() {
+    
+                var degree_val = $("#degree").val();
+                var subject_val = $("#subject").val();
+                var institute_val = $("#institute").val();
+                var city_val = $("#edu_city").val();
+                var country_val = $("#edu_country").val();
+                var completion_val = $("#completion").val();
+    
+                if ((degree_val == "") || (subject_val == "") || (institute_val == "") || (city_val == "") || (
+                        country_val == "") || (completion_val == "")) {
+                    $("#education_check").show();
+                    $("#education_check").focus();
+                    $("#education_check").css("color", "red");
+                    err_education = false;
+                    return false;
+                } else {
+                    $("#education_check").hide();
+                }
+            }
+            $("#edu_validatefrm").click(function () {
+                err_education = true;
+                check_education();
+                if (err_education == true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
         });
-
-        function check_education() {
-
-            var degree_val = $("#degree").val();
-            var subject_val = $("#subject").val();
-            var institute_val = $("#institute").val();
-            var city_val = $("#edu_city").val();
-            var country_val = $("#edu_country").val();
-            var completion_val = $("#completion").val();
-
-            if ((degree_val == "") || (subject_val == "") || (institute_val == "") || (city_val == "") || (
-                    country_val == "") || (completion_val == "")) {
-                $("#education_check").show();
-                $("#education_check").focus();
-                $("#education_check").css("color", "red");
-                err_education = false;
-                return false;
-            } else {
-                $("#education_check").hide();
+    
+    </script>
+    
+    <!-- Validation of Experience Details -->
+    <script>
+        $(document).ready(function () {
+            $("#experience_check").hide();
+            var err_experience = true;
+            $("#exp_validatefrm").click(function () {
+                check_experience();
+            });
+    
+            function check_experience() {
+    
+                var job_val = $("#job_title").val();
+                var comp_val = $("#company_name").val();
+                var city_val = $("#exp_city").val();
+                var country_val = $("#exp_country").val();
+                var start_date_val = $("#start_date").val();
+                var end_date_val = $("#end_date").val();
+    
+                if ((job_val == "") || (comp_val == "") || (city_val == "") || (country_val == "") || (
+                        start_date_val == "") || (end_date_val == "")) {
+                    $("#experience_check").show();
+                    $("#experience_check").focus();
+                    $("#experience_check").css("color", "red");
+                    err_experience = false;
+                    return false;
+                } else {
+                    $("#experience_check").hide();
+                }
             }
-        }
-        $("#edu_validatefrm").click(function () {
-            err_education = true;
-            check_education();
-            if (err_education == true) {
-                return true;
-            } else {
-                return false;
+    
+            function val_date() {
+                var dob_val = $("#start_date").val();
+                var dob_var = new Date(dob_val);
+                var dob_val_day = dob_var.getDate();
+                var dob_val_month = dob_var.getMonth() + 1;
+                var dob_val_year = dob_var.getFullYear();
+    
+                if (!dob_val_day || !dob_val_month || !dob_val_year) {
+                    $("#check_date").show();
+                    $("#check_date").focus();
+                    $("#check_date").css("color", "red");
+                    err_start_date = false;
+                } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
+                    $("#check_date").show();
+                    $("#check_date").focus();
+                    $("#check_date").css("color", "red");
+                    err_start_date = false;
+                } else {
+                    err_start_date = true;
+                    $("#check_date").hide();
+                }
             }
+    
+    
+            function val_last() {
+                var dob_val = $("#end_date").val();
+                var dob_var = new Date(dob_val);
+                var dob_val_day = dob_var.getDate();
+                var dob_val_month = dob_var.getMonth() + 1;
+                var dob_val_year = dob_var.getFullYear();
+    
+                if (!dob_val_day || !dob_val_month || !dob_val_year) {
+                    $("#check_date1").show();
+                    $("#check_date1").focus();
+                    $("#check_date1").css("color", "red");
+                    err_start_date1 = false;
+                } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
+                    $("#check_date1").show();
+                    $("#check_date1").focus();
+                    $("#check_date1").css("color", "red");
+                    err_start_date1 = false;
+                } else {
+                    err_start_date1 = true;
+                    $("#check_date1").hide();
+                }
+            }
+            $("#exp_validatefrm").click(function () {
+                err_experience = true;
+                err_start_date = true;
+                err_start_date1 = true;
+                check_experience();
+                val_date();
+                val_last();
+                if ((err_experience == true) && (err_start_date == true) && (err_start_date1 == true)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
         });
-    });
-
-</script>
-
-<!-- Validation of Experience Details -->
-<script>
-    $(document).ready(function () {
-        $("#experience_check").hide();
-        var err_experience = true;
-        $("#exp_validatefrm").click(function () {
-            check_experience();
-        });
-
-        function check_experience() {
-
-            var job_val = $("#job_title").val();
-            var comp_val = $("#company_name").val();
-            var city_val = $("#exp_city").val();
-            var country_val = $("#exp_country").val();
-            var start_date_val = $("#start_date").val();
-            var end_date_val = $("#end_date").val();
-
-            if ((job_val == "") || (comp_val == "") || (city_val == "") || (country_val == "") || (
-                    start_date_val == "") || (end_date_val == "")) {
-                $("#experience_check").show();
-                $("#experience_check").focus();
-                $("#experience_check").css("color", "red");
-                err_experience = false;
-                return false;
-            } else {
-                $("#experience_check").hide();
-            }
-        }
-
-		function val_date(){
-			var dob_val= $("#start_date").val();   
-            var dob_var = new Date(dob_val);
-            var dob_val_day = dob_var.getDate();
-            var dob_val_month = dob_var.getMonth() + 1;
-            var dob_val_year = dob_var.getFullYear();
-
-            if(!dob_val_day || !dob_val_month || !dob_val_year)
-            {
-                $("#check_date").show();
-                $("#check_date").focus();
-                $("#check_date").css("color","red");    
-                err_start_date=false;
-            }
-            else if(dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear())
-            {
-                $("#check_date").show();
-                $("#check_date").focus();
-                $("#check_date").css("color","red"); 
-                err_start_date=false;
-            }
-            else
-            {
-                err_start_date=true;
-                $("#check_date").hide();
-            }
-		}
-
-
-		function val_last(){
-			var dob_val= $("#end_date").val();   
-            var dob_var = new Date(dob_val);
-            var dob_val_day = dob_var.getDate();
-            var dob_val_month = dob_var.getMonth() + 1;
-            var dob_val_year = dob_var.getFullYear();
-
-            if(!dob_val_day || !dob_val_month || !dob_val_year)
-            {
-                $("#check_date1").show();
-                $("#check_date1").focus();
-                $("#check_date1").css("color","red");    
-                err_start_date1=false;
-            }
-            else if(dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear())
-            {
-                $("#check_date1").show();
-                $("#check_date1").focus();
-                $("#check_date1").css("color","red"); 
-                err_start_date1=false;
-            }
-            else
-            {
-                err_start_date1=true;
-                $("#check_date1").hide();
-            }
-		}
-        $("#exp_validatefrm").click(function () {
-            err_experience = true;
-			err_start_date=true;
-			err_start_date1=true;
-            check_experience();
-			val_date();
-			val_last();
-            if ((err_experience == true)&&(err_start_date == true)&&(err_start_date1 == true)) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-    });
+    
+    </script>
 
 
 
-
-
-</script>
 <script type="text/javascript">
     $("#country").on("change", function (e) {
         console.log(e);
@@ -1830,6 +1774,35 @@
     // 	return false;
     // });
 
+</script>
+{{-- date picker --}}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+<script type="text/javascript">
+    $(function() {
+        $('.date-picker').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'm-yy',
+        onClose: function(dateText, inst) { 
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
+        });
+    });
+    $(function() {
+        $('.date-picker1').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'm-yy',
+        onClose: function(dateText, inst) { 
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
+        });
+    });
 </script>
 </body>
 
