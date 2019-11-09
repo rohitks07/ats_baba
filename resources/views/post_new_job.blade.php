@@ -241,14 +241,9 @@
                                             style="color:red;">*</span></label>
                                     <select name="visa[]" id="job_visa_status" class="form-control"
                                         style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple required>
-                                        <option value="EAD-GC" selected>EAD-GC</option>
-                                        <option value="EAD-H4">EAD-H4</option>
-                                        <option value="EAD-L2">EAD-L2</option>
-                                        <option value="EAD-OPT">EAD-OPT</option>
-                                        <option value="Green Card">Green Card</option>
-                                        <option value="H1 Visa">H1 Visa</option>
-                                        <option value="TN Visa">TN Visa</option>
-                                        <option value="US Citizen">US Citizen</option>
+                                        @foreach($toReturn['visa_type'] as $visa_type)
+                                                    <option value="{{$visa_type['type_name']}}">{{$visa_type['type_name']}} </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <!--Visa-->
@@ -259,29 +254,9 @@
                                             style="color:red;">*</span></label>
                                     <select name="quali[]" id="qualification" class="form-control"
                                         style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple required>
-                                        <option value="BA" selected>BA</option>
-                                        <option value="BE">BE</option>
-                                        <option value="BS">BS</option>
-                                        <option value="CA">CA</option>
-                                        <option value="Certification">Certification</option>
-                                        <option value="Diploma">Diploma</option>
-                                        <option value="HSSC">HSSC</option>
-                                        <option value="MA">MA</option>
-                                        <option value="MBA">MBA</option>
-                                        <option value="MS">MS</option>
-                                        <option value="PhD">PhD</option>
-                                        <option value="SSC">SSC</option>
-                                        <option value="ACMA">ACMA</option>
-                                        <option value="MCS">MCS</option>
-                                        <option value="Does not matter">Does not matter</option>
-                                        <option value="B.Tech">B.Tech</option>
-                                        <option value="BCOM">BCOM</option>
-                                        <option value="BBA">BBA</option>
-                                        <option value="BCA">BCA</option>
-                                        <option value="M.SC">M.SC</option>
-                                        <option value="M.Tech">M.Tech</option>
-                                        <option value="M.Com">M.Com</option>
-                                        <option value="MCA">MCA</option>
+                                        @foreach($toReturn['qualification'] as $qualification)
+                                        <option value="{{$qualification['val']}}">{{ $qualification['val']}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <!--Qualification -->
@@ -1090,7 +1065,7 @@ $("#country").on("change", function(e){
                 err_jobcode = false;
                 return false;
             } else {
-                isValid = regex.test(jobcode_val);
+                isValid = regex1.test(jobcode_val);
                 
                 if(!isValid){
                     $("#jobcode_check").show();
@@ -1116,7 +1091,7 @@ $("#country").on("change", function(e){
 
         function check_vacancies() {
             var jobcode_val = $("#no_of_vacancies").val();
-            var regex = /^[0-9-+()]*$/;
+            var regex = /^[a-zA-Z0-9_]*$/;
             var regex1 = /^[a-zA-Z ]*$/;
 
             if (jobcode_val == "") {
@@ -1155,7 +1130,7 @@ $("#country").on("change", function(e){
 
         function check_jobtitle() {
             var jobtitle_val = $("#job_title").val();
-            var regex1 = /^[a-zA-Z ]*$/;
+            var regex1 = /^[a-zA-Z0-9_]*$/;
             if (jobtitle_val == "") {
                 $("#jobtitle_check").show();
                 $("#jobtitle_check").focus();
@@ -1164,7 +1139,7 @@ $("#country").on("change", function(e){
                 return false;
             } else {
                 isValid = regex1.test(jobtitle_val);
-                
+
                 if(!isValid){
                     $("#jobtitle_check").show();
                     $("#jobtitle_check").css("color", "red");

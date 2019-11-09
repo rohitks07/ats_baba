@@ -46,6 +46,7 @@ use App\Tbl_job_mail;
 use App\tbl_forward_emp_details;
 use App\Tbl_seeker_documents;
 use App\tbl_job_history;
+use App\Tbl_time_zone;
 
 
 
@@ -700,7 +701,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $toReturn['visa_type']=Tbl_visa_type::get()->toArray();
         $toReturn['cities']          =cities::get()->toArray();
         $toReturn['countries']       =countries::get()->toArray();
-        $toReturn['states']          =states::get()->toArray();
+        $toReturn['states']          =states::get()->toArray(); 
        return view('post_new_candidate')->with('toReturn',$toReturn);
     }
     
@@ -779,6 +780,8 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $postcandidate->max_pay_rate="";
         $postcandidate->pay_rate_umo="";
         $postcandidate->experience=$request->total_experience;
+        $postcandidate->total_experience=$request->experience;
+        $postcandidate->total_usa_experience=$request->total_usa_experience;
         $postcandidate->save();
         $id=$postcandidate->id;
        //return $id;
@@ -1055,9 +1058,12 @@ public function PostjobsAssignToJobSeeker(Request $request)
 
     // new 
     public function report_show($id = "" , $name = ""){
+
         //for days
         $team_memeber = tbl_team_member::where('ID',$id)->first('email');
         $data = $team_memeber['email'];
+        
+
         for ($j=0; $j < 12 ; $j++) { 
             $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-'.$j.' days'));
             $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-'.$j.' days'));
@@ -1067,8 +1073,12 @@ public function PostjobsAssignToJobSeeker(Request $request)
             $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::whereDate('forward_date',$newDate[$j])->where('forward_by',$data)->get());
             $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::whereDate('dated',$newDate[$j])->where('submitted_by',$id)->get());
         }
+
+
+
         // for months;
         $global="";
+
         for($i=0;$i<12;$i++){
             if($i==0){
                 $one = date('d-m-Y');
@@ -1438,6 +1448,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
     
     public function show_interview_add(){
         $toReturn['jobpost']=tbl_post_jobs::select('job_code','ID')->get()->toArray();
+        $toReturn['time_zone'] = Tbl_time_zone::get();
         $data[]=array();
         $data['name']=Tbl_job_seekers::get()->toArray();
         return view ('employee_dashbord_intrerview_add')
@@ -1446,7 +1457,9 @@ public function PostjobsAssignToJobSeeker(Request $request)
     }
     
     public function show_meeting1(){
-        return view ('employee_dashbord_meeting_add');
+
+        $toReturn['time_zone'] = Tbl_time_zone::get();
+        return view ('employee_dashbord_meeting_add')->with('toReturn',$toReturn);
     }
     public function addinterview(Request $add){
         // return $add->candiate_name;
@@ -1500,8 +1513,10 @@ public function PostjobsAssignToJobSeeker(Request $request)
     public function upda($id ="")
     { 
         $data= tbl_meeting::where('meeting_ID',$id)->first();
+        $toReturn['time_zone'] = Tbl_time_zone::get();
         return view('employee_dashbord_meeting_edit')
-        ->with('data', $data);
+        ->with('data', $data)
+        ->with('toReturn',$toReturn);
     }
 
     public function updateadd(Request $Request)
@@ -1522,6 +1537,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $toReturn['jobpost']=tbl_post_jobs::select('job_code','ID')->get()->toArray();
         $data['name']=Tbl_job_seekers::get()->toArray();
         $data['int']= tbl_schedule_interview::where('job_ID',$id)->first();
+        $toReturn['time_zone'] = Tbl_time_zone::get();
         return view('employee_dashbord_intrerview_editinterview')
         ->with('data', $data)
         ->with('toReturn',$toReturn);
@@ -1535,7 +1551,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $exploded_value = explode('|', $candiate_name);
         $value_one = $exploded_value[0];
         $id=Session::get('user_id');
-        tbl_schedule_interview::where('job_ID', $Request->t0)->update(array(
+        tbl_schedule_interview::where('schedule_id', $Request->ID)->update(array(
         'interview_date'=>$Request->date_interview,
         'from_time'=>$Request->start_time,
         'end_time'=>$Request->end_time,

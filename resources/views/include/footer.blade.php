@@ -172,22 +172,7 @@
 </script>
 
 
-<script >
-    $('#edit_model_qualification').on('show.bs.modal' , function (event){
 
-        var button = $(event.relatedTarget)
-        var myqualificationval = button.data('myqualificationval')
-        var myqualificationtxt = button.data('myqualificationtxt')
-        var myqualificationid = button.data('myqualificationid')
-        var modal = $(this)
-
-
-        modal.find('.modal-body #qual').val(myqualificationval);
-        modal.find('.modal-body #txt').val(myqualificationtxt); 
-        modal.find('.modal-body #id').val(myqualificationid);
-
-    })
-</script>
 
 
 <script >
