@@ -253,6 +253,8 @@ ini_set('memory_limit', '-1');
             $toReturn['job_industries']  =tbl_job_industries::get()->toArray();
             $toReturn['cities']          =cities::get()->toArray();
             $toReturn['countries']       =countries::get()->toArray();
+            $toReturn['qualification']   =Tbl_qualifications::get()->toArray();
+            $toReturn['visa_type']=Tbl_visa_type::get()->toArray();
             $toReturn['states']          =states::get()->toArray();
             // $toReturn['countries']       =countries::where('')get()
             $country_name="United States";

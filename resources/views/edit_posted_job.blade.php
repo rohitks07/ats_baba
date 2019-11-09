@@ -1005,41 +1005,32 @@
         }
 
         //validate job code
-        $("#validatefrm").click(function () {
-            check_jobcode();
-        });
-        $("#job_code").blur(function () {
-            check_jobcode();
-        });
+        $("#validatefrm").click(function() {
+                check_jobcode();
+            });
+            $("#job_code").blur(function() {
+                check_jobcode();
+            });
 
-        function check_jobcode() {
-            var jobcode_val = $("#job_code").val();
-            var regex = /^[0-9-+()]*$/;
-            var regex1 = /^[a-zA-Z ]*$/;
+            function check_jobcode() {
+                var jobcode_val = $("#job_code").val();
+                var regex = /^[0-9-+()]*$/;
+                var regex1 = /^[a-zA-Z ]*$/;
 
-            if (jobcode_val == "") {
-                $("#jobcode_check").show();
-                $("#jobcode_check").focus();
-                $("#jobcode_check").css("color", "red");
-                err_jobcode = false;
-                return false;
-            } else {
-                isValid = regex.test(jobcode_val);
-
-                if(!isValid){
+                if (jobcode_val == "") {
                     $("#jobcode_check").show();
+                    $("#jobcode_check").focus();
                     $("#jobcode_check").css("color", "red");
                     err_jobcode = false;
                     return false;
-                }
-                else{
-                    $("#jobcode_check").hide();
-                    err_jobcode = true;
-                    return false;
-                }
+                } else {
+                        $("#jobcode_check").hide();
+                        err_jobcode = true;
+                        
+                    }
 
+                
             }
-        }
         //validate no of vancancy
         $("#validatefrm").click(function () {
             check_vacancies();
@@ -1079,36 +1070,29 @@
 
 
         //validate job title
-        $("#validatefrm").click(function () {
-            check_jobtitle();
-        });
-        $("#job_title").blur(function () {
-            check_jobtitle();
-        });
-        function check_jobtitle() {
-            var jobtitle_val = $("#job_title").val();
-            var regex1 = /^[a-zA-Z ]*$/;
-            if (jobtitle_val == "") {
-                $("#jobtitle_check").show();
-                $("#jobtitle_check").focus();
-                $("#jobtitle_check").css("color", "red");
-                err_jobtitle = false;
-                return false;
-            } else {
-                isValid = regex1.test(jobtitle_val);
-                if(!isValid){
+        $("#validatefrm").click(function() {
+                check_jobtitle();
+            });
+            $("#job_title").blur(function() {
+                check_jobtitle();
+            });
+
+            function check_jobtitle() {
+                var jobtitle_val = $("#job_title").val();
+                var regex1 = /^[a-zA-Z0-9_]*$/;
+                if (jobtitle_val == "") {
                     $("#jobtitle_check").show();
+                    $("#jobtitle_check").focus();
                     $("#jobtitle_check").css("color", "red");
                     err_jobtitle = false;
                     return false;
-                }
-                else{
-                    $("#jobtitle_check").hide();
-                    err_jobtitle = true;
-                    return false;
+                } else {
+                        $("#jobtitle_check").hide();
+                        err_jobtitle = true;
+                        return false;
+                    
                 }
             }
-        }
 
         //validate closing date
         $("#validatefrm").click(function () {

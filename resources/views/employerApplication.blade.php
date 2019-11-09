@@ -120,7 +120,7 @@ table.dataTable thead > tr > th {
                                                         ?>
                                                         <td onmouseover="visa_type({{$id}});"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none">{{$application['job_visa']}}</span></td>
                                                         <td>{{$application['pay_min']}}-{{$application['pay_max']}}</td>
-                                                        <td><a href="{{url('employer/job_matching/'.$seeker_id)}}">{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
+                                                        <td><a href="{{url('employer/candidate/'.$seeker_id)}}">{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
                                                         <td>@if($application['seeker_city']){{$application['seeker_city']}},&nbsp;@endif{{$application['seeker_state']}}</td>
                                                         <td>{{$application['can_visa']}}</td>
                                                         <?php $applied_date=date('m-d-Y',strtotime($application['applied_date'])); ?>

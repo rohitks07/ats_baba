@@ -314,8 +314,7 @@
                                                                                 <tr>
                                                                                       <?php $interview_date=$interview['interview_date']; 
                                                                                             $new_date = date("m-d-Y", strtotime($interview_date)); 
-
-                                                                                            $data_time = DB::table('tbl_time_zone')->where('time_zone_name',$interview['time_zone'])->first();
+                                                                                            $data_time = DB::table('tbl_time_zone')->where('time_zone_name',@$interview['time_zone'])->first();
                                                                                             $static_time = $data_time->change_time;
                                                                                             $cal_value = $data_time->cal_value;
                                                                                             if($cal_value == "+"){
@@ -373,8 +372,9 @@
                                                                                 @foreach($toReturn['meeting'] as $meeting)
                                                                                 <?php 
                                                                                             $meeting_date=$meeting['dated']; 
-                                                                                            $new_date = date("m-d-Y", strtotime($meeting_date)); 
-                                                                                            $data_time = DB::table('tbl_time_zone')->where('time_zone_name',$meeting['timezone'])->first();
+                                                                                            $new_date = date("m-d-Y", strtotime($meeting_date));
+                                                                                             
+                                                                                            $data_time = DB::table('tbl_time_zone')->where('time_zone_name',@$meeting['timezone'])->first();
                                                                                             $static_time = $data_time->change_time;
                                                                                             $cal_value = $data_time->cal_value;
                                                                                             if($cal_value == "+"){
