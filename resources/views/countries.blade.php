@@ -80,7 +80,8 @@
                                                      @foreach($countries as $countrie)
                                                     <tr>
                                                         <?php
-                                                        $id=$countrie->ID;
+                                                        $id=$countrie->country_id;
+                                                        // echo $id;
                                                         ?>
 
                                                       <td>{{$countrie->country_name}}</td>
@@ -133,7 +134,7 @@
                                                         </div>
 
 
-                                                        <a href="{{url('admin/countries/delete/'.$id)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                        <a href="{{URL::to('admin/countries/delete'.$id)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                                                       </td>
                                                     </tr>
                                                     @endforeach

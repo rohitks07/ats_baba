@@ -48,7 +48,7 @@ class CountriesController extends Controller
 
     public function delete_countries($id="")
     {
-            $Tbl_countries= Tbl_countries::where('ID',$id)->delete();
+          countries::where('country_id',$id)->delete();
         return  redirect('admin/countries');
     }
 
