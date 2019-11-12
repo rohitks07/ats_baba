@@ -118,7 +118,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header" style="  background-color:#317eeb;">
+                        <div class="card-header bg-info">
+                        <p style="font-size:18px;text-align:center;color:white;text-transform: uppercase;" class="mt-2">{{$toReturn['job_seeker']['first_name']}} {{$toReturn['job_seeker']['middle_name']}} {{$toReturn['job_seeker']['last_name']}}</p>
+                            </div>
+                    <div class="card-header mt-2" style="  background-color:#317eeb;">
                         <form action="{{url('employer/seeker/resume_update')}}" method="POST" enctype="multipart/form-data">
                             @csrf()
                             <h3 class="card-title" style="float:left; color:#fff; font-size:large;font-weight:400; text-transform: capitalize;">
@@ -132,7 +135,7 @@
                     <div class="card-body" style="height:148px;">
                         <div class="alert alert-success alert-dismissible">
                             @if(!empty($toReturn['job_seeker']['cv_file']))
-                            <input type="hidden" name="updatresume" value="{{$toReturn['job_seeker']['cv_file']}}"><a href="{{url('public/seekerresume/'.$toReturn['job_seeker']['cv_file'])}}">My Cv</a>
+                        <input type="hidden" name="updatresume" value="{{$toReturn['job_seeker']['cv_file']}}"><a href="{{url('public/seekerresume/'.$toReturn['job_seeker']['cv_file'])}}">{{$toReturn['job_seeker']['cv_file']}}</a>
                             @endif
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         </div>

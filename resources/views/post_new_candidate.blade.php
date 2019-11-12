@@ -880,19 +880,19 @@
 
 
 <!--skill Details -->
-<script>
+{{-- <script>
     $(document).ready(function () {
         $('#showa').click(function () {
             $('.menua').toggle("slide");
         });
     });
 
-</script>
+</script> --}}
 <!--skill Details -->
 
 
 <!--Eduication Details -->
-<script>
+{{-- <script>
     $(document).ready(function () {
         $('#shown').click(function () {
             $('.menun').toggle("slide");
@@ -910,7 +910,7 @@
         });
     });
 
-</script>
+</script> --}}
 <!--exp Details -->
 
 <!--dynamic clone for educational -->
@@ -1036,8 +1036,8 @@
 								<option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
 									 @endforeach  
 							</select>
-							<input placeholder="Start Date" name="start_date[]" class="textbox-n form-control start_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">
-							<input placeholder="End Date" name="end_date[]" class="textbox-n form-control end_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="start_date" style="width: 14%;">	
+							<input placeholder="Start Date" name="start_date[]" class="textbox-n form-control start_date date-picker" type="text"  id="start_date" style="width: 14%;">
+							<input placeholder="End Date" name="end_date[]" class="textbox-n form-control end_date date-picker" type="text"  id="start_date" style="width: 14%;">	
 													   
 
 							<button type="button" id="btnRemove" class="btn btn-primary btn_remove">Remove</button>		
@@ -1445,14 +1445,17 @@
                 check_resume();
                 check_skills();
     
-    
+                
                 // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
                 if ((err_firstname == true) && (err_middlename == true) && (err_lastname == true) && (
                         err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
                         true) && (err_Experience == true) && (err_city == true) && (err_mob_ph == true) && (
                         err_home_ph == true) && (err_resume == true) && (err_skill == true)) {
-                    return true;
+                            $('.menun').toggle("slide");
+                            return true;
                 } else {
+                    
+
                     return false;
                 }
             });
@@ -1510,9 +1513,9 @@
         $(document).ready(function () {
             $("#education_check").hide();
             var err_education = true;
-            $("#edu_validatefrm").click(function () {
-                check_education();
-            });
+            // $("#edu_validatefrm").click(function () {
+            //     check_education();
+            // });
     
             function check_education() {
     
@@ -1538,6 +1541,7 @@
                 err_education = true;
                 check_education();
                 if (err_education == true) {
+                    $('.menus').show("slide");
                     return true;
                 } else {
                     return false;
@@ -1584,19 +1588,30 @@
                 var dob_val_month = dob_var.getMonth() + 1;
                 var dob_val_year = dob_var.getFullYear();
     
-                if (!dob_val_day || !dob_val_month || !dob_val_year) {
-                    $("#check_date").show();
-                    $("#check_date").focus();
-                    $("#check_date").css("color", "red");
-                    err_start_date = false;
-                } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
-                    $("#check_date").show();
-                    $("#check_date").focus();
-                    $("#check_date").css("color", "red");
-                    err_start_date = false;
-                } else {
+                // if (!dob_val_day || !dob_val_month || !dob_val_year) {
+                //     $("#check_date").show();
+                //     $("#check_date").focus();
+                //     $("#check_date").css("color", "red");
+                //     err_start_date = false;
+                // } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
+                //     $("#check_date").show();
+                //     $("#check_date").focus();
+                //     $("#check_date").css("color", "red");
+                //     err_start_date = false;
+                // } else {
+                //     err_start_date = true;
+                //     $("#check_date").hide();
+                // }
+
+                if(dob_val == "" || dob_val == null){
+                     $("#check_date").show();
+                     $("#check_date").focus();
+                     $("#check_date").css("color", "red");
+                     err_start_date = false;
+                }else{
                     err_start_date = true;
                     $("#check_date").hide();
+
                 }
             }
     
@@ -1608,19 +1623,29 @@
                 var dob_val_month = dob_var.getMonth() + 1;
                 var dob_val_year = dob_var.getFullYear();
     
-                if (!dob_val_day || !dob_val_month || !dob_val_year) {
-                    $("#check_date1").show();
-                    $("#check_date1").focus();
-                    $("#check_date1").css("color", "red");
-                    err_start_date1 = false;
-                } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
-                    $("#check_date1").show();
-                    $("#check_date1").focus();
-                    $("#check_date1").css("color", "red");
-                    err_start_date1 = false;
-                } else {
+                // if (!dob_val_day || !dob_val_month || !dob_val_year) {
+                //     $("#check_date1").show();
+                //     $("#check_date1").focus();
+                //     $("#check_date1").css("color", "red");
+                //     err_start_date1 = false;
+                // } else if (dob_val_day > 31 || dob_val_month > 12 || dob_val_year > new Date().getFullYear()) {
+                //     $("#check_date1").show();
+                //     $("#check_date1").focus();
+                //     $("#check_date1").css("color", "red");
+                //     err_start_date1 = false;
+                // } else {
+                //     err_start_date1 = true;
+                //     $("#check_date1").hide();
+                // }
+                if(dob_val == "" || dob_val == null){
+                     $("#check_date1").show();
+                     $("#check_date1").focus();
+                     $("#check_date1").css("color", "red");
+                     err_start_date1 = false;
+                }else{
                     err_start_date1 = true;
                     $("#check_date1").hide();
+
                 }
             }
             $("#exp_validatefrm").click(function () {
@@ -1631,6 +1656,7 @@
                 val_date();
                 val_last();
                 if ((err_experience == true) && (err_start_date == true) && (err_start_date1 == true)) {
+                    $('.menua').toggle("slide");
                     return true;
                 } else {
                     return false;

@@ -116,7 +116,7 @@ width: 84%;
                     <div class="card">
                         <div class="card-header" style="  background-color:#317eeb;">
                                 <h3 class="card-title" style="color:#fff;text-transform: none; font-size:large;font-weight:100;">Edit Details:-{{$toReturn['personal']->first}}</h3></div>
-                                <input type="hidden" name="seeker_name" value="{{$toReturn['personal']->first}}">
+                                <input type="hidden" name="seeker_name" value="{{$toReturn['personal']->first}} {{$toReturn['personal']->last_name}}">
                                 <input type="hidden" name="seeker_email" value="{{$toReturn['personal']->email}}">
                                 <input type="hidden" name="seeker_city" value="{{$toReturn['personal']->city}}">
                                 <input type="hidden" name="seeker_visa" value="{{$toReturn['personal']->visa}}">
@@ -126,7 +126,7 @@ width: 84%;
                                         <div class="form-group row">
                                             <label for=""  class="control-label col-lg-4">Mobile Phone <span class="red">*</span></label>
                                             <div class="col-lg-8">
-                                                <input name="mobile_number" type="tel" class="form-control" id="mobile_number"   maxlength="12" required style="max-width:50%; border: 1px solid #bbb8b8;" />
+                                            <input name="mobile_number" type="tel" value="{{$toReturn['personal']->mobile}}" class="form-control" id="mobile_number"   maxlength="12" required style="max-width:50%; border: 1px solid #bbb8b8;" />
                                                 <label style="display:none;color:red;" id="mobile_number_check">Enter Valid number</label>
                                             </div>
                                         </div>
@@ -177,8 +177,10 @@ width: 84%;
                                          <div class="form-group row">
                                             <label for=""  class="control-label col-lg-4">Upload Resume<span class="red">*</span></label>
                                             <div class="col-lg-8">
-                                                  <input type="file" class="form-control" name="updated_resume" id="updated_resume"   required style="width: 50%;">
-              									  <p>Upload files only in .doc, .docx or .pdf format with maximum size of 6 MB.</p>
+                                                  <input type="file" class="form-control" name="updated_resume" id="updated_resume"   style="width: 50%;">
+                                                  <p>Upload files only in .doc, .docx or .pdf format with maximum size of 6 MB.</p>
+                                            <a href="{{url('public/seekerresume/'.$toReturn['personal']->cv_file)}}" target="_blank">{{$toReturn['personal']->cv_file}}</a>
+                                            <input type="hidden" name="cv" id="" value="{{$toReturn['personal']->cv_file}}">
                                             </div>
                                         </div>
 	                            </div>
