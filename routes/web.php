@@ -473,3 +473,5 @@ Route::get('admin/job_post_manage/search','Jobpost_manage_Controller@search');
 Route::get('admin/industries/delete{id}','IndustryController@delete_all_industries');
 Route::post('admin/industries/add','IndustryController@add_all_industries');
 Route::get('admin/job_seekers_manage/advance_search','jobseekersmanageController@advance_search');
+//new
+Route::get('employer/notification_data/{id}','NotificationController@jon_noti');

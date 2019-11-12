@@ -929,10 +929,6 @@ public function PostjobsAssignToJobSeeker(Request $request)
             $new_profile_image = rand() . '.' . $profile_image->getClientOriginalExtension();
             $profile_image->move(public_path('seekerresume'), $new_profile_image);
             }
-
-
-
-            
     	$team=new tbl_team_member();
     	$team->employer_id=Session::get('id');
     	$team->company_id=Session::get('org_ID');

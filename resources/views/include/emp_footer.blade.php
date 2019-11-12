@@ -112,14 +112,16 @@
                     type: 'get',
                     dataType: "json",
                     success: function(data) {
+                        console.log(data);
                         var No_notifiacation= data.length;
                         $('#notification_no').html(No_notifiacation);
                         $.each(data,function(i,notifications){
-                            $("#notification_data").append("<p>"+notifications.notification_text+"</p>");;
+                            id = notifications.notification_service_id;
+                            $("#notification_data").append("<a href='notification_data/"+id+"'>"+notifications.notification_text+"</a>");;
                         });
                     }
                 });
-
+ 
             
             // }
         });
