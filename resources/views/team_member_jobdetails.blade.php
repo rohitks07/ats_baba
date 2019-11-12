@@ -180,12 +180,12 @@
 															<td>{{@$data->experience}}</td>
 														</tr>
 														<tr>
-															<td>Apply By:</td>
+														<td>Apply By:</td>
 															@if(@$data->last_updated_by)
 															<?php 
-															$last_update_by=DB::table('tbl_team_member')->where('ID',@$data->last_updated_by)->first();
+															$last_update_by=DB::table('user')->where('ID',@$data->last_updated_by)->first();
 															?>
-															<td> {{@$last_update_by->first_name}}</td>
+															<td> {{@$last_update_by->full_name}}</td>
 															@endif
 														</tr>
 														<tr>
