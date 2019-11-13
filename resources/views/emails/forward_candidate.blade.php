@@ -8,8 +8,11 @@
 </style>
 </head>
 <body>
-<br>    
-<p><?php echo $data['forward_candidate']['content'];"<br>" ?> </br></p>
+<br>
+<?php 
+// echo $data['forward_candidate']['job_rate_type_fulltime'];
+// exit;?>
+<p><?php echo strip_tags($data['forward_candidate']['content']);"<br>" ?> </br></p>
 <table border="1px" style="border-collapse: collapse;">
 <tr><th colspan="2">Candidate’s Personal Details</th></tr>
 <tr><td style="width:250px">Full Name</td><td style="width:250px">{{$data['forward_candidate']['fullname']}}</td></tr>
@@ -46,10 +49,10 @@
 @if($data['forward_candidate']['linkedinid'])
 <tr><td>LinkedIn ID:</td><td>{{$data['forward_candidate']['linkedinid']}}</td></tr>
 @endif
-@if(!empty($data['forward_candidate']['job_type'] =="fulltime"))
-<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}K</td></tr>
+@if(!empty($data['forward_candidate']['job_type']=='Fulltime'))
+<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}/k on {{@$data['forward_candidate']['job_rate_type_fulltime']}} </td></tr>
 @else
-<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}/hr on C2C</td></tr>
+<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}/hr on {{@$data['forward_candidate']['job_rate_type']}}</td></tr>
 @endif
 
 </table>

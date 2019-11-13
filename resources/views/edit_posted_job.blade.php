@@ -217,14 +217,9 @@
                                 <label for="address" class="control-label col-lg-4">Visa<span style="color:red;">*</span></label>
                                 <select name="visa[]" id="job_visa_status" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple>
                                     <option selected>{{$toReturn['post_job']->job_visa_status}}</option>
-                                    <option value="EAD-GC">EAD-GC</option>
-                                    <option value="EAD-H4">EAD-H4</option>
-                                    <option value="EAD-L2">EAD-L2</option>
-                                    <option value="EAD-OPT">EAD-OPT</option>
-                                    <option value="Green Card">Green Card</option>
-                                    <option value="H1 Visa">H1 Visa</option>
-                                    <option value="TN Visa">TN Visa</option>
-                                    <option value="US Citizen">US Citizen</option>
+                                    @foreach($toReturn['visa_type'] as $visa_type)
+                                            <option value="{{$visa_type['type_name']}}">{{$visa_type['type_name']}} </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!--Visa-->
@@ -234,29 +229,9 @@
                                 <label for="address" class="control-label col-lg-4">Qualification <span style="color:red;">*</span></label>
                                 <select name="quali[]" id="qualification" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple>
                                     <option selected>{{$toReturn['post_job']->qualification}}</option>
-                                    <option value="BA">BA</option>
-                                    <option value="BE">BE</option>
-                                    <option value="BS">BS</option>
-                                    <option value="CA">CA</option>
-                                    <option value="Certification">Certification</option>
-                                    <option value="Diploma">Diploma</option>
-                                    <option value="HSSC">HSSC</option>
-                                    <option value="MA">MA</option>
-                                    <option value="MBA">MBA</option>
-                                    <option value="MS">MS</option>
-                                    <option value="PhD">PhD</option>
-                                    <option value="SSC">SSC</option>
-                                    <option value="ACMA">ACMA</option>
-                                    <option value="MCS">MCS</option>
-                                    <option value="Does not matter">Does not matter</option>
-                                    <option value="B.Tech">B.Tech</option>
-                                    <option value="BCOM">BCOM</option>
-                                    <option value="BBA">BBA</option>
-                                    <option value="BCA">BCA</option>
-                                    <option value="M.SC">M.SC</option>
-                                    <option value="M.Tech">M.Tech</option>
-                                    <option value="M.Com">M.Com</option>
-                                    <option value="MCA">MCA</option>
+                                    @foreach($toReturn['qualification'] as $qualification)
+                                            <option value="{{$qualification['val']}}">{{ $qualification['val']}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!--Qualification -->

@@ -86,7 +86,6 @@ table.dataTable thead > tr > th {
                                                         <th colspan="6">Job Details</th>
                                                         <th colspan="3">Candidate Details</th>
                                                         <th>Submittal Date</th>
-
                                                     </tr>-->
                                                     <tr>
                                                     	<th> Code</th>

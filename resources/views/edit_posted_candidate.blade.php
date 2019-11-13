@@ -470,7 +470,6 @@ $(document).ready(function(){
 										<label for="address" class="control-label col-lg-12"> </label>
 											<select name="degree[]" id="" class="form-control" placeholder="Degree Title" style="width: 14%; margin-left: 9px; border: 1px solid #737373;">
 												<option value="" selected>Select Degree</option>
-												    
 												<option>BCA</option>
 												<option>B.TECK</option>
 												<option>MCA</option>	

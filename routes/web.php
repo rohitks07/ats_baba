@@ -475,3 +475,4 @@ Route::post('admin/industries/add','IndustryController@add_all_industries');
 Route::get('admin/job_seekers_manage/advance_search','jobseekersmanageController@advance_search');
 //new
 Route::get('employer/notification_data/{id}','NotificationController@jon_noti');
+Route::get('employer/posted_job_assined/notification_data/{id}','NotificationController@jon_noti');
