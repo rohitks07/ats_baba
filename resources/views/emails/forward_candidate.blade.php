@@ -97,11 +97,15 @@ break;
 @endif
 </table>
 <br>
+<?php 
+// print_r($data['emp_details']);
+// exit;
+?>
 @if((@$data['emp_details'])!="")
 <u><b> Employer Details</b></u>
 <table border="1px" style="border-collapse: collapse;">
-<tr><td> Company Name</th> <td>Email Id </th><td>Employer Name </th> <td>Phone Number </th></tr>
-<tr> <td>{{$data['emp_details']['company_name']}}</td><td>{{$data['emp_details']['email_Id']}}</td><td>{{$data['emp_details']['employer_name']}}</td><td>{{$data['emp_details']['phone_number']}}</td></tr>
+<tr><td> Company Name</th> <td>Email Id </th><td>Employer Name </th> <td>Phone Number </th>@if(@$data['emp_details']['ext_no']) <td>Extension </th> @endif</tr>
+<tr> <td>{{$data['emp_details']['company_name']}}</td><td>{{$data['emp_details']['email_Id']}}</td><td>{{$data['emp_details']['employer_name']}}</td><td>{{$data['emp_details']['phone_number']}}</td>@if(@$data['emp_details']['ext_no'])<td>{{$data['emp_details']['ext_no']}}</td>@endif</tr>
 </table>
 @endif
 

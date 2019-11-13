@@ -114,10 +114,19 @@
                     success: function(data) {
                         console.log(data);
                         var No_notifiacation= data.length;
-                        $('#notification_no').html(No_notifiacation);
+                        $('#notification_no').html(No_notifiacation); 
                         $.each(data,function(i,notifications){
                             id = notifications.notification_service_id;
-                            $("#notification_data").append("<a href='notification_data/"+id+"'>"+notifications.notification_text+"</a>");;
+                            // $("#notification_data").append("<a href='notification_data/"+id+"'>"+notifications.notification_text+"</a>");;
+                            var noti = ` <div onMouseOut="this.style.BackgroundColor=#90B0FF"><a href="{{url('employer/notification_data/`+id+`')}}" style='font-size:15px;text-decloration:none;'> 
+                                <b style="color:#E50D0D;font-size:16px;">`+notifications.code_title+`</b>
+                                <br>
+                                <span style="color:black">`+notifications.notification_text+`</span> <br>
+                                <span style="color:black">`+notifications.by_personn+`</span>
+                                </a></div>
+                                <br>
+                                <br>  `;
+                            $("#notification_data").append(noti);
                         });
                     }
                 });

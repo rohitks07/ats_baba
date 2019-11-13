@@ -14,15 +14,20 @@ class NotificationController extends Controller
     public function show_notification()
     {
         $mydate=date('Y-m-d');
-    	$notification=Tbl_notification::where('notify_to',Session::get('user_id'))->limit(10)
+    	// $notification=Tbl_notification::where('notify_to',Session::get('user_id'))->limit(10)
+    	$notification=Tbl_notification::where('notify_to',Session::get('user_id'))
         ->where('submit_date','=', $mydate)
-        // ->orderBy('read_date')
+        ->orderBy('notification_id','DESC')
         ->get()->toArray();  
     	return  json_encode($notification);
     }
 
     public function jon_noti($id = ""){
-
+//         $toReturn['post_job'] = tbl_post_jobs::where('ID',63)->get()->toArray();
+//         echo "<pre>";
+//         print_r($toReturn['post_job']);
+//         exit;
+// return $id;
         $toReturn[]=array();
         $current_module_id=3;
         $toReturn['user_type']=Session::get('type');

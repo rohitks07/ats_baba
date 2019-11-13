@@ -288,12 +288,14 @@ i.dollar2{
                                     <li class="text-center notifi-title">Notification</li>
                                     <li class="list-group">
                                         <div > 
-                                         <a href=""><p id="notification_data"></p></a>
+                                         <a href=""><p id="notification_data" style="padding:20px;">
+                                             
+                                        </p></a>
                                        </div>
-                                        <a href="javascript:void(0);" class="list-group-item">
+                                        {{-- <a href="javascript:void(0);" class="list-group-item">
                                           <small>See all notifications</small>
-                                        </a>
-                                    </li>
+                                        </a> --}}
+                                    </li> 
                                 </ul>
                             </li>
                             <li class="d-none d-sm-block">

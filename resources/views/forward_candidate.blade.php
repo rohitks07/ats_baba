@@ -139,7 +139,7 @@
                                         <div class="form-group row">
                                             <label for="email" class="control-label col-lg-4">From<span class="red">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="email" style="width: 75%;" placeholder="Email Id" id="" name="email_from" disabled value="{{$toReturn['form_email_id']}}" required>
+                                                <input type="email" style="width: 75%;" class="form-control" placeholder="Email Id" id="" name="email_from" disabled value="{{$toReturn['form_email_id']}}" required>
                                             </div>
                                         </div>
 
@@ -148,7 +148,7 @@
                                             <div class="col-lg-8">
                                                 <input type="hidden" name="job_id" value="{{$toReturn['application_detail']['job_ID']}}">
                                                 <input type="hidden" name="seeker_id" value="{{$toReturn['application_detail']['seeker_ID']}}">
-                                                <input type="text" style="width: 75%;" placeholder=" Send Email To " id="email_to" name="email_to">
+                                                <input type="text" style="width: 75%;" class="form-control" placeholder=" Send Email To " id="email_to" name="email_to">
                                                 <span id="email_to_error">Please enter valid email ID</span>
                                             </div>
                                         </div>
@@ -156,7 +156,7 @@
                                         <div class="form-group row">
                                             <label for="CC" class="control-label col-lg-4">CC</label>
                                             <div class="col-lg-8">
-                                                <input type="text" style="width: 75%;" placeholder="CC " id="email_cc" name="email_cc">
+                                                <input type="text" class="form-control" style="width: 75%;" placeholder="CC " id="email_cc" name="email_cc">
                                                 <span id="email_cc_error">Please enter valid email ID</span>
                                             </div>
                                         </div>
@@ -164,7 +164,7 @@
                                         <div class="form-group row">
                                             <label for="Bcc" class="control-label col-lg-4">Bcc</label>
                                             <div class="col-lg-8">
-                                                <input type="text" style="width: 75%;" placeholder=" BCC" id="email_bcc" name="email_bcc">
+                                                <input type="text" class="form-control" style="width: 75%;" placeholder=" BCC" id="email_bcc" name="email_bcc">
                                                 <span id="email_bcc_error">Please enter valid email ID</span>
                                             </div>
                                         </div>
@@ -172,7 +172,7 @@
                                         <div class="form-group row">
                                             <label for="Subject" class="control-label col-lg-4">Subject<span class="red">*</label>
                                             <div class="col-lg-8">
-                                                <input type="text" style="width: 75%;" placeholder="Subject" id="subject" name="email_subject" required>
+                                                <input type="text" class="form-control" style="width: 75%;" placeholder="Subject" id="subject" name="email_subject" required>
                                                 <span id="subject_error">Please enter valid subject</span>
                                             </div>
                                         </div>
@@ -194,7 +194,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="fullname" checked>
                                                     <label class="form-label">Full Name<span class="red">*</span></label>
-                                                    <input type="text" id="fullname" placeholder="Full Name" name="fullname" value="{{$toReturn['application_detail']['candate_name']}}" required>
+                                                    <input type="text" class="form-control" id="fullname" placeholder="Full Name" name="fullname" value="{{$toReturn['application_detail']['candate_name']}}" required>
                                                     <span id="fullname_error">Please enter valid name</span>
                                                 </div>
                                                 <!--end of col-->
@@ -202,7 +202,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="phone_primary" checked>
                                                     <label class="form-label">Phone(Primary)<span class="red">*</span></label>
-                                                    <input type="text" id="phone_primart" placeholder="Phone(Primary)" name="phone_primary" value="{{$toReturn['application_detail']['phone_no_mobile']}}" maxlength="12" required>
+                                                    <input type="text" class="form-control" id="phone_primart" placeholder="Phone(Primary)" name="phone_primary" value="{{$toReturn['application_detail']['phone_no_mobile']}}" maxlength="12" required>
                                                     <span id="phone_primart_error">Please enter valid Phone</span>
                                                 </div>
                                                 <!--end of col-->
@@ -210,7 +210,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="condidate_email_id" checked>
                                                     <label class="form-label">Email ID<span class="red">*</span></label>
-                                                    <input type="text" id="condidate_email_id" placeholder="Email ID" name="condidate_email_id" value="{{$toReturn['application_detail']['email_id']}}" required>
+                                                    <input type="text" class="form-control" id="condidate_email_id" placeholder="Email ID" name="condidate_email_id" value="{{$toReturn['application_detail']['email_id']}}" required>
                                                     <span id="condidate_email_id_error">Please enter valid email ID</span>
                                                 </div><!-- end of col -->
 
@@ -218,20 +218,20 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="skypeid" checked>
                                                     <label class="form-label">Skype ID</label>
-                                                    <input type="text" id="skypeid" onblur="rate()" placeholder="Skype ID" name="skypeid">
+                                                    <input type="text" class="form-control" id="skypeid" onblur="rate()" placeholder="Skype ID" name="skypeid">
                                                 </div><!-- end of col -->
 
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="current_location" checked>
                                                     <label class="form-label">Current Location(City,State)<span class="red">*</span></label>
-                                                    <input type="text" id="current_location" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>
+                                                    <input type="text" class="form-control" id="current_location" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>
                                                     <span id="current_location_error">Should not be blank</span>
                                                 </div>
                                                 <!--end of col-->
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="us_visa_status" checked>
                                                     <label class="form-label">US Visa Status<span class="red">*</span></label>
-                                                    <input type="text" id="us_visa_status" placeholder=" US Visa Status " name="us_visa_status" value="{{$toReturn['application_detail']['visa_status']}}" required>
+                                                    <input type="text" class="form-control" id="us_visa_status" placeholder=" US Visa Status " name="us_visa_status" value="{{$toReturn['application_detail']['visa_status']}}" required>
                                                     <span id="us_visa_status_error">Please enter valid visa status</span>
                                                 </div>
                                                 <!--end of col-->
@@ -240,14 +240,14 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="visaexpiry" checked>
                                                     <label class="form-label">US Visa Expiry</label>
-                                                    <input type="date" id="visaexpiry" placeholder="US Visa Expiry" name="visaexpiry">
+                                                    <input type="date" class="form-control" id="visaexpiry" placeholder="US Visa Expiry" name="visaexpiry">
                                                     <span id="visaexpiry_error">Please enter valid expiry date</span>
                                                 </div><!-- end of col -->
 
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels" style="background-color:;">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="last_for_digit_ssn">
                                                     <label class="form-label">SSN No.(Last Four Digits)<span class="red"></span></label>
-                                                    <input type="text" maxlength="4" placeholder="SSN No.(Last Four Digits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title>
+                                                    <input type="text" class="form-control" maxlength="4" placeholder="SSN No.(Last Four Digits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title>
                                                     <span id="last_for_digit_ssn_error">Please enter SSN No. (last four digit only)</span>
                                                 </div>
                                                 <!--end of col-->
@@ -255,14 +255,14 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="passportno" checked>
                                                     <label class="form-label">Passport No</label>
-                                                    <input type="text" id="passportno" placeholder="Passport No" name="passportno">
+                                                    <input type="text" class="form-control" id="passportno" placeholder="Passport No" name="passportno">
                                                     <span id="passportno_error">Please enter valid passport no</span>
                                                 </div><!-- end of col -->
 
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="dob">
                                                     <label class="form-label">D O B<span class="red"></span></label>
-                                                    <input type="date" id="dob" placeholder="Date Of Birth" name="dob" />
+                                                    <input type="date" class="form-control" id="dob" placeholder="Date Of Birth" name="dob" />
                                                     <span id="dob_error">Please enter valid DOB</span>
                                                 </div>
                                                 <!--end of col-->
@@ -270,7 +270,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
                                                     <label class="form-label">Qualification With University Name and Passing Year(Bachelors)<span class="red">*</span></label>
-                                                    <input type="text" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni" required />
+                                                    <input type="text" class="form-control" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni" required />
                                                     <span id="qual_with_uni_error">Should not be blank</span>
                                                 </div>
                                                 <!--end of col-->
@@ -322,13 +322,13 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="linkedinid" checked>
                                                     <label class="form-label">Linkedin ID</label>
-                                                    <input type="text" id="linkedinid" onblur="rate()" placeholder="Linkedin Id" name="linkedinid">
+                                                    <input type="text" class="form-control" id="linkedinid" onblur="rate()" placeholder="Linkedin Id" name="linkedinid">
                                                 </div><!-- end of col -->
 
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="expectedrate" checked>
                                                     <label class="form-label">Expected Rate<span class="red">*</span></label>
-                                                    <input type="text" id="expectedrate" onblur="rate()" placeholder="Expected Rate" name="expectedrate" required>
+                                                    <input type="text" class="form-control" id="expectedrate" onblur="rate()" placeholder="Expected Rate" name="expectedrate" required>
                                                     <span id="expectedrate_error">Please enter valid rate</span>
                                                 </div><!-- end of col -->
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
@@ -421,54 +421,54 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[0][]" /></td>
-                                                        <td><input type="text" name="experience[0][]" /></td>
-                                                        <td><input type="text" name="experience[0][]" /></td>
+                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="experience[1][]" /></td>
-                                                        <td><input type="text" name="experience[1][]" /></td>
-                                                        <td><input type="text" name="experience[1][]" /></td>
+                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[2][]" /></td>
-                                                        <td><input type="text" name="experience[2][]" /></td>
-                                                        <td><input type="text" name="experience[2][]" /></td>
+                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="experience[3][]" /></td>
-                                                        <td><input type="text" name="experience[3][]" /></td>
-                                                        <td><input type="text" name="experience[3][]" /></td>
+                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[4][]" /></td>
-                                                        <td><input type="text" name="experience[4][]" /></td>
-                                                        <td><input type="text" name="experience[4][]" /></td>
+                                                        <td><input type="text" name="experience[4][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[4][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[4][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="experience[5][]" /></td>
-                                                        <td><input type="text" name="experience[5][]" /></td>
-                                                        <td><input type="text" name="experience[5][]" /></td>
+                                                        <td><input type="text" name="experience[5][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[5][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[5][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[6][]" /></td>
-                                                        <td><input type="text" name="experience[6][]" /></td>
-                                                        <td><input type="text" name="experience[6][]" /></td>
+                                                        <td><input type="text" name="experience[6][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[6][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[6][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="experience[7][]" /></td>
-                                                        <td><input type="text" name="experience[7][]" /></td>
-                                                        <td><input type="text" name="experience[7][]" /></td>
+                                                        <td><input type="text" name="experience[7][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[7][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[7][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[8][]" /></td>
-                                                        <td><input type="text" name="experience[8][]" /></td>
-                                                        <td><input type="text" name="experience[8][]" /></td>
+                                                        <td><input type="text" name="experience[8][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[8][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[8][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="experience[9][]" /></td>
-                                                        <td><input type="text" name="experience[9][]" /></td>
-                                                        <td><input type="text" name="experience[9][]" /></td>
+                                                        <td><input type="text" name="experience[9][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[9][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[9][]" class="form-control" /></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -492,60 +492,60 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" name="reference[0][]" /></td>
-                                                        <td><input type="text" name="reference[0][]" /></td>
-                                                        <td><input type="text" name="reference[0][]" /></td>
-                                                        <td><input type="text" name="reference[0][]" /></td>
-                                                        <td><input type="text" name="reference[0][]" /></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="reference[1][]" /></td>
-                                                        <td><input type="text" name="reference[1][]" /></td>
-                                                        <td><input type="text" name="reference[1][]" /></td>
-                                                        <td><input type="text" name="reference[1][]" /></td>
-                                                        <td><input type="text" name="reference[1][]" /></td>
+                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="reference[2][]" /></td>
-                                                        <td><input type="text" name="reference[2][]" /></td>
-                                                        <td><input type="text" name="reference[2][]" /></td>
-                                                        <td><input type="text" name="reference[2][]" /></td>
-                                                        <td><input type="text" name="reference[2][]" /></td>
+                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="reference[3][]" /></td>
-                                                        <td><input type="text" name="reference[3][]" /></td>
-                                                        <td><input type="text" name="reference[3][]" /></td>
-                                                        <td><input type="text" name="reference[3][]" /></td>
-                                                        <td><input type="text" name="reference[3][]" /></td>
+                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="reference[4][]" /></td>
-                                                        <td><input type="text" name="reference[4][]" /></td>
-                                                        <td><input type="text" name="reference[4][]" /></td>
-                                                        <td><input type="text" name="reference[4][]" /></td>
-                                                        <td><input type="text" name="reference[4][]" /></td>
+                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="reference[5][]" /></td>
-                                                        <td><input type="text" name="reference[5][]" /></td>
-                                                        <td><input type="text" name="reference[5][]" /></td>
-                                                        <td><input type="text" name="reference[5][]" /></td>
-                                                        <td><input type="text" name="reference[5][]" /></td>
+                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="reference[6][]" /></td>
-                                                        <td><input type="text" name="reference[6][]" /></td>
-                                                        <td><input type="text" name="reference[6][]" /></td>
-                                                        <td><input type="text" name="reference[6][]" /></td>
-                                                        <td><input type="text" name="reference[6][]" /></td>
+                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="reference[7][]" /></td>
-                                                        <td><input type="text" name="reference[7][]" /></td>
-                                                        <td><input type="text" name="reference[7][]" /></td>
-                                                        <td><input type="text" name="reference[7][]" /></td>
-                                                        <td><input type="text" name="reference[7][]" /></td>
+                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
+                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
+                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
+                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
+                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
                                                     </tr>
 
                                                 </tbody>
@@ -557,21 +557,23 @@
                                             <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
-                                                        <th colspan="4">Employer Details</th>
+                                                        <th colspan="5">Employer Details</th>
                                                     </tr>
                                                     <tr style="background: #317eeb;">
                                                         <th style="border: 1Px solid;">Company Name</th>
                                                         <th style="border: 1Px solid;"> Email Id</th>
                                                         <th style="border: 1Px solid;">Employer Name</th>
                                                         <th style="border: 1Px solid;">Phone Number</th>
+                                                        <th style="border: 1Px solid;">Phone Number Ext</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" name="Companyemp_detail" /></td>
-                                                        <td><input type="text" name="Emailemp_detail" /></td>
-                                                        <td><input type="text" name="Employeremp_detail" /></td>
-                                                        <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="10"></td>
+                                                        <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name" /></td>
+                                                        <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  /></td>
+                                                        <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  /></td>
+                                                        <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="10" class="form-control" placeholder="Phone Number"  ></td>
+                                                        <td><input type="text" name="extenson" id="extenson" maxlength="12" class="form-control" placeholder="Extention"  ></td>
                                                     </tr>
                                                     <p id="phone_mess" style="color:red;display:none;"> Please Enter Only Number</p>
                                                 </tbody>
@@ -597,14 +599,14 @@
                                                         <td><input type="checkbox" name="other_doc0" id="other_doc0" value="document_upload">
                                                             @if(!empty($toReturn['application_detail']['updated_resume']))
                                                             <input type="hidden" name="update_Resume_name" value="update_Resume">
-                                                            <input type="hidden" name="update_Resume_file" value="{{$toReturn['application_detail']['updated_resume']}}"><a href="{{url('public/seekerresume/'.$toReturn['application_detail']['updated_resume'])}}">{{$toReturn['application_detail']['updated_resume']}}</a>
+                                                            <input type="hidden" class="form-control" name="update_Resume_file" value="{{$toReturn['application_detail']['updated_resume']}}"><a href="{{url('public/seekerresume/'.$toReturn['application_detail']['updated_resume'])}}">{{$toReturn['application_detail']['updated_resume']}}</a>
                                                             @endif
                                                         <td><input type="button" name="delete_doc" id="delete_doc" value="Delete">
                                                     </tr>
                                                     <tr id="exp_detail">
                                                         <td class="form-group row delete_exp">
                                                             <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;">
-                                                            <input type="file" name="document_upload[]" id="document_upload" class="form-control" style="width: 40%;">
+                                                            <input type="file" class="form-control" name="document_upload[]" id="document_upload" class="form-control" style="width: 40%;">
                                                             <p><button type="button" id="btnAdd_Exp" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
                                                         </td>
                                                     </tr>

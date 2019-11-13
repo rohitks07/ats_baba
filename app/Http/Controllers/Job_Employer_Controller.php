@@ -1304,7 +1304,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         return view('posted_job_assined')->with('toReturn',$toReturn)->with('jobpost',$post_job)->with('assign_details',$assign_details);
     }
 
-     public function assign_active(Request $request)
+    public function assign_active(Request $request)
     {
         $job_id=$request->job_id;
         if($request->sts =='active')
@@ -1335,13 +1335,15 @@ public function PostjobsAssignToJobSeeker(Request $request)
         // return $table_post;
            
         $Notification=new Tbl_notification();
-        $Notification->notification_service_id=$assigned_job->id;
+        $Notification->notification_service_id=$request->job_id;
         $Notification->service_type="Jost Assigned";
         $Notification->notify_to=$assigned_job->owner_id;
         $Notification->notification_added_by=Session::get('id');
         $Notification->notification_added_to=$team_member_name->full_name;
         $Notification->applied_id=$assigned_job->owner_id;
-        $Notification->notification_text=$table_post->job_title. "  assigned to ".$team_member_name->full_name." By ".Session::get('full_name');
+        $Notification->notification_text="  Assigned to ".$team_member_name->full_name;
+        $Notification->code_title=$table_post->job_code." : ".$table_post->job_title ;
+        $Notification->by_personn=" By ".Session::get('full_name');
         $mydate=date('Y-m-d');
         $Notification->submit_date=$mydate;
         $Notification->updated_date=$mydate;
@@ -1658,6 +1660,7 @@ public function PostjobsAssignToJobSeeker(Request $request)
         $forward_candidate['job_type']=$Request->job_type;
         $forward_candidate['job_rate_type']=$Request->job_rate_type;
         $forward_candidate['job_rate_type_fulltime']=$Request->job_rate_type_fulltime;
+        // $forward_candidate['ext']=$Request->Phoneemp_detail;
         $email_to=$Request->email_to;
         // echo"<pre>";
         // print_r($experience_list);
@@ -1715,6 +1718,13 @@ public function PostjobsAssignToJobSeeker(Request $request)
            $emp_details->company_name=$Request->Companyemp_detail;
            $emp_details->email_Id=$Request->Emailemp_detail;
            $emp_details->phone_number=$Request->Phoneemp_detail;
+           $emp_details->ext_no=$Request->extenson;
+
+        //    return $Request->extenson;
+        //    if($Request->extenson != ""){
+        //     $emp_details->ext_no=1;
+        //     // $emp_details->ext_no=$Request->extenson;
+        //    }
            $emp_details->employer_name=$Request->Employeremp_detail;
            $emp_details->status=1;
            $emp_details->created_by=Session('user_id');
@@ -1883,6 +1893,24 @@ public function PostjobsAssignToJobSeeker(Request $request)
                 return redirect('employer/posted_jobs');
 
 
+        }
+
+        public function candidate_list(){
+            $value=Tbl_job_seekers::get()->toArray();
+
+            $data_array = [];
+            $str = '{';
+            foreach ($value as $item){
+                $var_patch = $item['first_name'].$item['last_name'];
+                $str .= '"'.$item['ID'].'":"'.$item['first_name'].$item['last_name'].'",';
+                array_push($data_array , $var_patch);
+            }
+            $str .= '}';
+            $str = str_replace(',}', '}', $str);
+            // return $str;
+            // exit();
+            $decoded_data = json_encode($data_array);
+            return response($str);
         }
 
 }
