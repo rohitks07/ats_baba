@@ -191,7 +191,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h4 class="modal-title mt-0" id="myModalLabel"
-                style="font-weight:100;">Edit Experience</h4>
+                style="font-weight:100;">Add Skill</h4>
             <button type="button" class="close" data-dismiss="modal"
                 aria-label="Close">
                 <span aria-hidden="true">&times;</span>

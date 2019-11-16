@@ -10,7 +10,7 @@
 <body>
 <br>
 <?php 
-//echo $data['forward_candidate']['dob'];
+//echo $data['forward_candidate']['content'];
 //exit;
 ?>
 <p><?php echo $data['forward_candidate']['content'];"<br>" ?> </br></p>
@@ -36,7 +36,7 @@
 @if($data['forward_candidate']['passportno'])
 <tr><td>Passport No.</td><td>{{$data['forward_candidate']['passportno']}}</td></tr>
 @endif
-@if($data['forward_candidate']['dob'])
+@if(!empty($data['forward_candidate']['dob']))
 <?php 
  $birthday=date('m-d-Y', strtotime($data['forward_candidate']['dob']));
  ?>
@@ -51,7 +51,7 @@
 <tr><td>LinkedIn ID:</td><td>{{$data['forward_candidate']['linkedinid']}}</td></tr>
 @endif
 @if(!empty($data['forward_candidate']['job_type']=='Fulltime'))
-<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}k/ {{@$data['forward_candidate']['job_rate_type_fulltime']}} </td></tr>
+<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}k/{{@$data['forward_candidate']['job_rate_type_fulltime']}} </td></tr>
 @else
 <tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}/hr on {{@$data['forward_candidate']['job_rate_type']}}</td></tr>
 @endif
@@ -62,15 +62,12 @@
 
 @if(($data['experience_list'][0][0])!="")
 <u><b>Experience Summary:-</b></u>
-<br>
-<br>
 @if($data['forward_candidate']['it_exper'])
-<h4>Total It Experience: {{$data['forward_candidate']['it_exper']}}+year</h4>
+<h4>Total IT Experience: {{$data['forward_candidate']['it_exper']}}+year</h4>
 @endif
 @if($data['forward_candidate']['us_exper'])
 <h4>Total US Experience: {{$data['forward_candidate']['us_exper']}}+year</h4>
 @endif
-<br>
 <br>
 <table border="1px" style="border-collapse: collapse;">
 <tr><td style="width:225px">Skill</td><td style="width:225px">Years of Experience/Exposure</td><td style="width:225px">Expertise Level (0 - 10)[1=Novice; 10=Expert]</td></tr>
@@ -81,12 +78,8 @@ if($data['experience_list'][$kee][0] == "" && $data['experience_list'][$kee][1] 
 break;
  ?>
 @endforeach
-@endif
-
-
-
 </table>
-<br>
+@endif
 <br>
 <!-- <h3><u>Last Two project references :</h3></u><br> -->
 @if(($data['reference_list'][0][0])!="")
@@ -94,7 +87,7 @@ break;
 <br>
 <br>
 <table border="1px " style="border-collapse: collapse;">
-<tr><td style="width:130px">Full Name</td><td style="width:130px">EmailId</td><td style="width:130px">Designation</td><td style="width:130px">Contact Number</td><td style="width:130px">Client Name</td></tr>
+<tr><td style="width:130px">Full Name</td><td style="width:130px">EmailId</td><td style="width:130px">Designation</td><td style="width:130px">Client Name</td><td style="width:130px">Location</td></tr>
 @foreach($data['reference_list'] as $key => $value)
 <tr><td>{{$data['reference_list'][$key][0]}}</td><td>{{$data['reference_list'][$key][1]}}</td><td>{{$data['reference_list'][$key][2]}}</td><td>{{$data['reference_list'][$key][3]}}</td><td>{{$data['reference_list'][$key][4]}}</td></tr>
 <?php $kee = $key + 1;

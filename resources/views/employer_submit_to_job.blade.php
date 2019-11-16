@@ -179,6 +179,7 @@
                                                 <!--<option value="$55-$60">$55 - $60</option>-->
                                                 <!--<option value="$60-$65">$60 - $65</option>-->
                                                 <!--<option value="$65-$70">$65 - $70</option>-->
+
                                                 <option value="DOE">(DOE)Depends upon Experience</option>
                                             </select>
                                         </div>

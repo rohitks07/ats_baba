@@ -6,11 +6,12 @@
     <div class="card-body">
 
         <a href=""><i class="fa fa-external-link fa-1x" aria-hidden="true"></i></h2></a>
+        <p><?php echo $data['mail_content'];"<br>" ?> </br></p>
         <div class="row">
             <div style="width:530px;">
                 <h2 style="font-weight:100;color:#317eeb;text-align: center;">Candidate Detail's</h2>
                 <table class="table table-bordered" border="1" cellpadding="10"
-                    style=" border-collapse:collapse;font-size:18px;margin-top:20px;width:600px;">
+                    style=" border-collapse:collapse;font-size:12px;margin-top:10px;width:500px;">
                     <tbody>
 
                         {{-- <tr>
@@ -34,10 +35,12 @@
                             <th>Job Location:</th>
                             <td>{{$data['candidate_val']['country']}}</td>
                         </tr>
+                        @if(@$data['candidate_val']['experience'])
                         <tr>
                             <th>Experience:</th>
-                            <td>{{$data['candidate_val']['experience']}}</td>
+                            <td>{{@$data['candidate_val']['experience']}}</td>
                         </tr>
+                        @endif
                         <tr>
                             <th>Education:</th>
                             <td>{{$data['seeker_exp']['degree_title']}}</td>
@@ -50,10 +53,12 @@
                             <th>Mobile:</th>
                             <td>{{$data['candidate_val']['mobile']}}</td>
                         </tr>
+                        @if(@$data['candidate_val']['skype_id'])
                         <tr>
                             <th>Skype Id:</th>
-                            <td>{{$data['candidate_val']['skype_id']}}</td>
+                            <td>{{@$data['candidate_val']['skype_id']}}</td>
                         </tr>
+                        @endif
                     </tbody>
                 </table>
                 <br>
@@ -61,24 +66,23 @@
 
 
             </div>
+            @foreach ($data['skills'] as $id)
             <div style="width:590px;">
                 <h3 style="font-weight:100;color:#317eeb;text-align: center;">Skills</h3>
                 <table class="table table-bordered" border="1" cellpadding="10"
                     style=" border-collapse:collapse;font-size:18px;width:600px;">
                     <tbody>
-                        @foreach ($data['skills'] as $id)
-
-
                         <tr>
                             <th>{{$id['skill_name']}}</th>
 
                         </tr>
-                        @endforeach
 
 
                     </tbody>
                 </table>
             </div>
+            @endforeach
+
 
         </div>
     </div>

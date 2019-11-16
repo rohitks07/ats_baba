@@ -218,7 +218,7 @@
                                 <select name="visa[]" id="job_visa_status" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" multiple>
                                     <option selected>{{$toReturn['post_job']->job_visa_status}}</option>
                                     @foreach($toReturn['visa_type'] as $visa_type)
-                                            <option value="{{$visa_type['type_name']}}">{{$visa_type['type_name']}} </option>
+                                    <option value="{{$visa_type['type_name']}}">{{$visa_type['type_name']}} </option>
                                     @endforeach
                                 </select>
                             </div>

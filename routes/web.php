@@ -84,7 +84,7 @@ Route::post('admin/upda_ads','Ads_Management@update_ads');
 Route::get('admin/countries','CountriesController@index');
 Route::post('admin/countries/add','CountriesController@add_countries'); 
 Route::post('admin/countries/edit','CountriesController@edit_countries'); 
-Route::get('admin/countries/delete{id}','CountriesController@delete_countries');
+Route::get('admin/countries/delete/{id}','CountriesController@delete_countries');
 Route::get('admin/cities','CityController@index');
 Route::post('admin/cities/add','CityController@add_cities'); 
 Route::post('admin/cities/edit','CityController@edit_cities'); 
@@ -316,7 +316,7 @@ Route::get('admin/cities/delete/{list}','CityController@delete');
 Route::get('admin/countries','CountriesController@index');//for countries call
 Route::post('admin/countries/add','CountriesController@add_countries'); 
 Route::post('admin/countries/edit','CountriesController@edit_countries'); 
-// Route::get('admin/countries/delete/{id}','CountriesController@delete_countries'); 
+Route::get('admin/countries/delete{id}','CountriesController@delete_countries'); 
 Route::post('admin/state/add','CityController@add_state'); 
 
 Route::get('admin/salary','SalaryController@index'); 
@@ -473,12 +473,6 @@ Route::get('admin/job_post_manage/search','Jobpost_manage_Controller@search');
 Route::get('admin/industries/delete{id}','IndustryController@delete_all_industries');
 Route::post('admin/industries/add','IndustryController@add_all_industries');
 Route::get('admin/job_seekers_manage/advance_search','jobseekersmanageController@advance_search');
-//new
 Route::get('employer/notification_data/{id}','NotificationController@jon_noti');
-Route::get('employer/posted_job_assined/notification_data/{id}','NotificationController@jon_noti');
-Route::post('teammember/send_report','teammemberSendController@send_report');
 Route::any('employer/manageteammember/team_members_view/send_report/{id}/{name}','teammemberSendController@report_show');
-Route::get('import','languageController@view');
-Route::post('language/save','languageController@import');
-
-
+Route::post('teammember/send_report','teammemberSendController@send_report');

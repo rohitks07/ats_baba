@@ -70,7 +70,7 @@ textarea[class="form-control"]{
     overflow-y:scroll;
 }
 .tabs li.tab {
-    background-color: #317eeb;
+    background-color: #b9e0ff;
     display: block;
     float: left;
     margin: 0;
@@ -80,7 +80,7 @@ textarea[class="form-control"]{
     background-color: transparent;
     border-radius: 0;
     border: none;
-    color: #ffffff !important;
+    color: #00000; !important;
     cursor: pointer;
     line-height: 50px;
     padding-left: 20px;
@@ -103,38 +103,31 @@ textarea[class="form-control"]{
     position: absolute;
     will-change: left, right;
 }
+table.dataTable thead > tr > th {
+    / padding-left: 8px; /
+    padding-right: 30px;
+}
+.table-bordered th {
+    border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+	font-size: 13px;
+	padding: 0.5em;
+}
+.table td{
+    padding: 0.10rem;
+	font-size: 12px;
+    padding-left: 1em;
+	border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
 
-.table td {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#fff;
 }
-.table tr {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#fff;
-}
-.table th {
-    padding: 7px;
-    font-size: top;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #000;
-    background:#e4e4e4;
-}
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 0.5px solid #000;
-}
-.table-bordered thead td, .table-bordered thead th {
-    border-bottom-width: 1px;
-}
+
 </style>
 	<div id="wrapper">                          
         <div class="content-page">              
@@ -144,16 +137,16 @@ textarea[class="form-control"]{
                             <ul class="nav nav-tabs tabs" role="tablist" style="height: 45px;">
                                 <li class="nav-item tab">
                                     <a class="nav-link active" id="home-tab-2" data-toggle="tab" href="#home-2" role="tab" aria-controls="home-2" aria-selected="false">
-                                    <span class="d-none d-sm-block">Contact</span></a>
+                                    <span class="d-none d-sm-block"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Contact</span></a>
                                     </li>
                                     <li class="nav-item tab">
                                         <a class="nav-link" id="profile-tab-2" data-toggle="tab" href="#profile-2" role="tab" aria-controls="profile-2" aria-selected="true">
-                                        <span class="d-none d-sm-block">Email List</span>
+                                        <span class="d-none d-sm-block"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;Email List</span>
                                         </a>
                                     </li>
                                     <li class="nav-item tab">
                                         <a class="nav-link" id="message-tab-2" data-toggle="tab" href="#message-2" role="tab" aria-controls="message-2" aria-selected="false">
-                                            <span class="d-none d-sm-block">Email Contact</span>
+                                            <span class="d-none d-sm-block"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;Email Contact</span>
                                         </a>
                                     </li>
                                     <li class="nav-item tab">
@@ -167,25 +160,23 @@ textarea[class="form-control"]{
                                             <div class="col-lg-12">
                                                 <div class="card">
                                                     <div class="card-header" style="background-color:#d0d0d0">
-                                                        <h3 class="card-title" style="color:#000;text-transform: none; font-size:large">Contact Detail:</h3>
+                                                        <h3 class="card-title" style="color:#000;text-transform: none; font-size:large;float:left;">Contact Detail:</h3>
+                                                        <div style="float:right;display: flex;">
                                                         <form action ="{{url('employer/importContact')}}" method="post" enctype="multipart/form-data">
                                                         	@csrf
-                                                        	<!-- <h3 class="card-title" style="float: right;" > -->
-								                     	 <!-- <a  id="select_doc"   style="color:#fff;">Import Contact</a> -->
 								                     	 <input type="file" id="Upload_cv" name="Upload_exe" >
 								                     	 <input type="submit" id="submit_btn" class="btn btn-success" value="ImportContact">
 								                     	 </form>
-                                                       <!--   <button type="button" class="btn btn-success" style="float: right;">
-													    <input type="file" value="Import Contact">Import Contact</button> -->
 													    @if(!empty($toReturn['user_type']=="teammember")) 
                                                         @if($toReturn['current_module_permission']['is_edit']=="yes")
-													    <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success" style="float: right;margin-right: 1em;">Add Contact</button></a>
+													    <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success">Add Contact</button></a>
 														@endif
 														@else
-                                                        <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success" style="float: right;margin-right: 1em;">Add Contact</button></a>
+                                                        <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success" style="margin-left:1em;">Add Contact</button></a>
                                                         @endif
 													</div>
-													</div>
+												</div>
+											</div>
 													<div class="card-body">
 															<div class="col-12">
 																<div class="table-responsive">
@@ -349,7 +340,7 @@ textarea[class="form-control"]{
 																		<th>Full Name</th>
 																		<th>Email List Name</th>
 																		<th>Date Created</th>
-																		{{-- <th>Created By</th> --}}
+																		<th>Created By</th>
 																		<th>Last Updated</th>
 																		<th>Last Updated By</th>
 																		<th>Actions</th>
@@ -365,12 +356,11 @@ textarea[class="form-control"]{
 																		<td>{{$emaillist -> last_name }}</td>
 																		<td>{{$emaillist -> full_name }}</td>
 																		<td>{{$emaillist -> email_contact_id }}</td>
-																		<td>{{date('d-m-Y', strtotime($emaillist -> created_date))}}</td>
-																		{{-- <td>{{date('d-m-Y', strtotime($emaillist->created_date))}}</td> --}}
-																		{{-- <td>{{$emaillist->id}}</td> --}}
-																		{{-- <td>{{$emaillist -> last_updated_date }}</td> --}}
-																		<td>--NA--</td>
-																		{{-- <td>{{date('d-m-Y', strtotime($emaillist -> last_updated_date))}}</td> --}}
+																		<td>{{$emaillist -> created_date }}</td>
+																		<!--<td>{{date('d-m-Y', strtotime($emaillist->created_date))}}</td>-->
+																		<td>{{$emaillist->id}}</td>
+																		<td>{{$emaillist -> last_updated_date }}</td>
+																		<!--<td>{{date('d-m-Y', strtotime($emaillist -> last_updated_date))}}</td>-->
 																		<td>{{$emaillist ->  first_name}}</td>
 																		<td class="actions">
                                                                     @if(!empty($toReturn['user_type']=="teammember")) 

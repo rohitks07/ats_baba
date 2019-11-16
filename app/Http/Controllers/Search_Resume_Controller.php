@@ -311,8 +311,8 @@ public function update_personal_details(Request $request)
 //Candidate->Education
 public function view_education($id="")
 {   
-   
-    $educations= Tbl_seeker_academic::where('seeker_id',$id)->get();    
+  
+    $educations= Tbl_seeker_academic::where('seeker_id',$id)->get(); 
     $country = countries::get();
     return view('employer_edit_education')->with('educations',$educations)->with('id',$id)->with('country',$country);
 }

@@ -2,97 +2,89 @@
  @include('include.emp_leftsidebar')
         
 		<style>
-		.btn-group, .btn-group-vertical {
-                position: relative;
-                display: -ms-inline-flexbox;
-                display: inline-flex;
-                vertical-align: middle;
-                margin-top: 16px;
-            }
-			.panel-footer {
-				padding: 5px 15px;
-				border-bottom-right-radius: 0px;
-				border-bottom-left-radius: 0px;
-				background-color: #ffffff;
-				width: 100%;
-				height: 31px;
-				/* margin-top: 6px; */
-				border-radius: 10px;
-				cursor:pointer;
-			}
-		
-			.mini-stat-info span {
-				color: #ffffff; 
-				display: block;
-				font-size: 21px;
-				font-weight: 500;
-			}
-			.card-body{
-				padding: 0.25rem;
-			}
-			
-				.card .card-header {
-					padding: 10px 20px;
-					border: none;
-					background: #428bca;
-					color: #fff;
-				}
-				.card-title {
-					font-size: 17px;
-					font-weight: 100;
-					color: #ffffff;
-					margin-bottom: 0;
-					margin-top: 0;
-					text-transform:none;
-				}
-			
-					.btn-primary {
-						color: #fff;
-						background-color: #428bca;
-						border-color: #357ebd;
-					}
-					.modal .modal-dialog .modal-content .modal-footer {
-						padding: 0;
-						padding-top: 14px;
-						margin-right: 5em;
-                    }
-				
-					#wrapper{
-					    width:100%;
-					    overflow-y:scroll;
-					}
-                    					
-                    .table td {
-                        padding: 7px;
-                        font-size: top;
-                        border-top: 1px solid #dee2e6;
-                        font-size: 14px;
-                        color: #000;
-                        background:#fff;
-                    }
-                    .table tr {
-                        padding: 7px;
-                        font-size: top;
-                        border-top: 1px solid #dee2e6;
-                        font-size: 14px;
-                        color: #000;
-                        background:#fff;
-                    }
-                    .table th {
-                        padding: 7px;
-                        font-size: top;
-                        border-top: 1px solid #dee2e6;
-                        font-size: 14px;
-                        color: #000;
-                        background:#e4e4e4;
-                    }
-                    .table thead th {
-                        vertical-align: bottom;
-                        border-bottom: 0.5px solid #000;
-                    }
-                    .table-bordered thead td, .table-bordered thead th {
-                        border-bottom-width: 1px;
-                    }
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    vertical-align: middle;
+    margin-top: 16px;
+}
+.panel-footer {
+	padding: 5px 15px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	background-color: #ffffff;
+	width: 100%;
+	height: 31px;
+	/* margin-top: 6px; */
+	border-radius: 10px;
+	cursor:pointer;
+}
+
+.mini-stat-info span {
+	color: #ffffff; 
+	display: block;
+	font-size: 21px;
+	font-weight: 500;
+}
+.card-body{
+	padding: 0.25rem;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 100;
+    color: #317eeb;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: none;
+}
+.card .card-header {
+    padding: 10px 20px;
+    background: #fff;
+    color: #000;
+}
+
+.btn-primary {
+	color: #fff;
+	background-color: #428bca;
+	border-color: #357ebd;
+}
+.modal .modal-dialog .modal-content .modal-footer {
+	padding: 0;
+	padding-top: 14px;
+	margin-right: 5em;
+}
+
+#wrapper{
+    width:100%;
+    overflow-y:scroll;
+}
+					
+  table.dataTable thead > tr > th {
+    / padding-left: 8px; /
+    padding-right: 30px;
+}
+.table-bordered th {
+    border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+	font-size: 13px;
+	padding: 0.5em;
+}
+.table td{
+    padding: 0.10rem;
+	font-size: 12px;
+    padding-left: 1em;
+	border-top: 4px solid #f5f5f5 !important;
+    border-bottom: 4px solid #f5f5f5 !important;
+    border-right: 4px solid #f5f5f5 !important;
+    border-left: 4px solid #f5f5f5 !important;
+	color:#000;
+
+}
 	</style>
      
         <div id="wrapper">                  
@@ -101,8 +93,8 @@
 				<!--start of first table-->				                     
 							<div class="row">
                             <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header" style="background:#317eeb;">
+                                <div class="card card-border card-primary">
+                                    <div class="card-header">
                                        <div class="row">
 											<div class="col-md-6">
 										 <h3 class="card-title" style="text-align:left;">Organizations</h3>

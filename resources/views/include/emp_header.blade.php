@@ -274,7 +274,7 @@ i.dollar2{
                             </li>
                             <li class="hide-phone float-left">
                                 <form role="search" class="navbar-form">
-                                    <input type="text"  class="form-control search-bar">
+                                    <input type="text" placeholder="Type here for search..." class="form-control search-bar">
                                     <a href="#" class="btn btn-search"><i class="fa fa-search"></i></a>
                                 </form>
                             </li>

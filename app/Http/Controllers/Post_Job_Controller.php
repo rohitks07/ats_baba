@@ -26,12 +26,14 @@ class Post_Job_Controller extends Controller
     public function insert(request $data)
     {
         
-        $con =  $data->country;
-        $sta=  $data->state;
-        $cit=  $data->city;
+        $con =  $request->country;
+        $sta=  $request->state;
+        $cit=  $request->city;
         $val_contries=countries::where('country_id',$con)->first('country_name')->toArray();
         $val_state=states::where('state_id',$sta)->first('state_name')->toArray();
         $val_city=cities::where('city_id',$cit)->first('city_name')->toArray();
+        
+        
         $validation = Validator::make($data->all(), [
             'logo' => 'required'
         ]);
@@ -62,6 +64,7 @@ class Post_Job_Controller extends Controller
         $tbl_company->dis_time_zone=$data->displaytimezone;
         $tbl_company->company_csz=' ';
         $tbl_company->save();
+      
         $comp_id=$tbl_company->id;
         // tbl_employer insertion
         $tbl_employer=new tbl_employers();
@@ -69,9 +72,9 @@ class Post_Job_Controller extends Controller
         $tbl_employer->email=$data->email_id;
         $tbl_employer->pass_code=$data->password_id;
         $tbl_employer->first_name=$data->firstname;
-        $tbl_employer->country=$val_contries['country_name'];
-        $tbl_employer->state=$val_state['state_name'];
-        $tbl_employer->city=$val_city['city_name'];
+        $tbl_employer->country=$data->country;
+        $tbl_employer->state=$data->state_text;
+        $tbl_employer->city=$data->city;
         $tbl_employer->mobile_phone=$data->mobile_phone;
         $date=date('Y-m-d');
         $tbl_employer->dated=$date;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Tbl_job_industries;
+use App\tbl_job_industries;
 
 class IndustryController extends Controller
 {
@@ -15,7 +15,7 @@ class IndustryController extends Controller
     public function index()
     {
     	  // $data['content'] ='sale.allsale';
-    	$user=Tbl_job_industries::all();
+    	$user=tbl_job_industries::all();
 	// return $user;
              return view('industries')->with("user",$user);
        
@@ -30,12 +30,12 @@ class IndustryController extends Controller
 	{
 		
 
-	 $del = Tbl_job_industries::where('ID',$id)->delete();
+	 $del = tbl_job_industries::where('ID',$id)->delete();
              return redirect('admin/industries');
 	}
 
 	public function add_all_industries (Request $request){
-		$add_data = new Tbl_job_industries();
+		$add_data = new tbl_job_industries();
 		$add_data->industry_name = $request->ind_name;
 		$add_data->save();
 

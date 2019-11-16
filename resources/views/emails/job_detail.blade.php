@@ -36,6 +36,7 @@ h3 {
    
    <div class="tab-pane show active" id="home-1" role="tabpanel" aria-labelledby="home-tab-1">
 				                <div class="card-body">
+				                            <p><b><?php echo $data['mail_content'];"<br>" ?> </br></b></p>
 				                    <h2 style="font-weight:100;color:#317eeb;"> {{$data['job_detail']->job_title}}
 				                      <a href=""><i class="fa fa-external-link fa-1x" aria-hidden="true"></i></h2></a>
 				                        <div class="row">

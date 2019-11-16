@@ -99,7 +99,7 @@
                                         <select name="group_of_company" id="for_group" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;" required>
                                             <option value="">Select Group Type</option>
                                             @foreach($toReturn['team_member_type'] as $team_member_type)
-                                            <option value="{{$team_member_type['type_name']}}">
+                                            <option value="{{$team_member_type['type_ID']}}">
                                                 {{$team_member_type['type_name']}} </option>
                                             @endforeach
                                         </select><br>
@@ -161,7 +161,7 @@
                                         <label for="address" class="control-label col-lg-4">Industry<span style="color:red;">*</span></label>
                                         <select name="industry" id="industry" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left: 9px;" required>
                                             @foreach($toReturn['job_industries'] as $job_industries)
-                                            <option value="{{$job_industries['industry_name']}}"> {{$job_industries['industry_name']}}
+                                            <option value="{{$job_industries['ID']}}"> {{$job_industries['industry_name']}}
                                             </option>
                                             @endforeach
                                         </select>
@@ -998,12 +998,12 @@
                     err_jobcode = false;
                     return false;
                 } else {
-                    $("#jobcode_check").hide();
-                    err_jobcode = true;
+                        $("#jobcode_check").hide();
+                        err_jobcode = true;
+                        
+                    }
 
-                }
-
-
+                
             }
             //validate no of vancancy
             $("#validatefrm").click(function() {
@@ -1042,6 +1042,7 @@
             }
 
 
+
             //validate job title
             $("#validatefrm").click(function() {
                 check_jobtitle();
@@ -1060,10 +1061,10 @@
                     err_jobtitle = false;
                     return false;
                 } else {
-                    $("#jobtitle_check").hide();
-                    err_jobtitle = true;
-                    return false;
-
+                        $("#jobtitle_check").hide();
+                        err_jobtitle = true;
+                        return false;
+                    
                 }
             }
             //validate closing date
@@ -1133,6 +1134,8 @@
                     $("#check_job_type").hide();
                 }
             }
+
+
             $("#validatefrm").click(function() {
                 err_group = true;
                 err_clientname = true;
@@ -1153,6 +1156,8 @@
                 check_date();
                 check_jon_type();
                 check_vacancies();
+
+
                 if ((err_country == true) && (err_state == true) && (err_group == true) && (
                         err_vacancies ==
                         true) && (err_clientname == true) && (err_owner == true) && (err_jobcode ==

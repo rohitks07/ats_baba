@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,8 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
-        // Using view composer to set following variables globally
-       
+        //
     }
 }

@@ -78,10 +78,8 @@
 
             jQuery(document).ready(function(){
                 $('.wysihtml5').wysihtml5();
-
             });
         </script>
-
         <script>
             /* ==============================================
             Counter Up
@@ -94,7 +92,7 @@
             });
             
         </script>
-         <script src="{{url('assets/js/ckeditor.js')}}"></script>
+        <script src="{{url('assets/js/ckeditor.js')}}"></script>
     <script>
         CKEDITOR.replace( 'article-ckeditor', {
     toolbar: [

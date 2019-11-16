@@ -1,5 +1,6 @@
-<footer class="footer">
-<center>HRMS © 2019 - 2020 HRMS Softwares. All rights reserved.</center>
+<footer class="footer" style="text-align:center;">
+    <center><div>ATS
+    © 2019 - 2020 BABA Software. All rights reserved.</div></center>
 </footer>
     <style>
 .footer {

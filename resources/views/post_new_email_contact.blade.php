@@ -1,6 +1,6 @@
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
-<script src="{{ asset("public/js/app.js")}}"></script>
+
 <style>
 .form-control{
 	border: 1px solid #737373;
@@ -16,7 +16,7 @@
 }
 .input-group-addon {
 		padding: 6px 15px;
-		font-size: 14px; 
+		font-size: 14px;
 		font-weight: 400;
 		color: #ffffff;
 		text-align: center;
@@ -67,61 +67,7 @@
 		width: 48%;
 	}
 
- </style>    
- <script>
-	//  $("#myform").submit(function(prevent) {
-	   
-	//    prevent.preventDefault();
-		$(document).ready(function() {
-	   $("#myform").submit(function() {
-	   
-		
-	   
-		 var firstname = $('#firstname').val();
-		 var lastname = $('#lastname').val();
-		 var emailid = $('#emailid').val();
-		 var fullname = $('#fullname').val();
-	   
-		 $(".error").remove();
-	   
-		 if (firstname.length < 4) {
-		   $('#firstname').after('<span class="error">This field is required and alphabet must be 5 char long</span>');
-		   return false;
-		 }
-		 else 
-		 {
-			var regEx = /\b[A-Za-z]/; 
-		   var validEmail= regEx.test(firstname);
-		   if (!validEmail) {
-			 $('#firstname').after('<span class="error">Enter a valid email</span>');
-			 return false;
-		   }
-		 }
-		 if (lastname.length < 3) {
-		   $('#lastname').after('<span class="error">This field is required and minimum 3 alphabet</span>');
-		   return false;
-		 }
-		 if (emailid.length < 5) {
-		   $('#emailid').after('<span class="error">This field is required</span>');
-		   return false;
-		 }
-		 else 
-		 {
-		   var regEx = /^([a-z0-9_\-\.])+\@([a-z_\-\.])+\.([a-z]{2,34})$/ 
-		   var validEmail= regEx.test(emailid);
-		   if (!validEmail) {
-			 $('#emailid').after('<span class="error">Enter a valid email</span>');
-			 return false;
-		   }
-		 }
-		  if (fullname.length < 10) {
-			$('#fullname').after('<span class="error">This field is required</span>');
-			return false;
-		  }
-	   });
-	   
-	   });
-		   </script>   		
+ </style>       		
 
 <body>       
  
@@ -137,14 +83,12 @@
                                     
 									<div class="card-body">
 									 <!--Salutation-->	
-							<form action="{{url('employer/post_new_email_contact/add')}}" name="" id="myform" method="post"> 
-									<input type="hidden" name="_token" value = "{{ csrf_token()  }}" > 
-								 <?php $date=date("Y-m-d"); ?>
-							<input type="hidden" name="date" value="{{$date}}" id="">                             
+							<form action="{{url('employer/post_new_email_contact/add')}}"  method="post"> 
+									<input type="hidden" name="_token" value = "{{ csrf_token()  }}" >                              
 									 <div class="form-group row">
 										<label class="col-sm-4 control-label">Salutation </label>
 											<div class="col-sm-8">
-												<select name="salutation" class="form-control" style="max-width:55%; border: 1px solid #737373; background:#fff;" requred>													
+												<select name="salutation" class="form-control" style="max-width:350px; border: 1px solid #737373; background:#fff;">													
 													<option value="Mr" >Mr</option>
 													<option value="Ms" >Ms</option>
 													<option value="Mrs" >Mrs</option>
@@ -159,7 +103,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4"> First Name </label>
 											<div class="col-lg-8">
-												<input type="text" id="firstname" name="firstname" placeholder="First Name" type="number--"  requred>
+												<input type="text" id="" name="firstname" placeholder="First Name" type="number--" >
 											</div>
 									  </div>
 								<!--end of Name-->
@@ -167,7 +111,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4"> Last Name </label>
 											<div class="col-lg-8">
-												<input type="text" id="lastname" name="lastname" placeholder="Last Name" type="number--"  requred>
+												<input type="text" id="" name="lastname" placeholder="Last Name" type="number--" >
 											</div>
 									  </div>
 								<!--end of Last Name-->
@@ -175,7 +119,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4"> Full Name </label>
 											<div class="col-lg-8">
-													<input type="text" id="fullname" name="fullname" placeholder="Full Name" type="number--"  requred>
+													<input type="text" id="" name="fullname" placeholder="Full Name" type="number--" >
 											</div>
 									  </div>
 								<!--end of Full Name-->
@@ -185,7 +129,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Email Id <span style="color:red;">*</span> </label>
 											<div class="col-lg-8">
-												<input type="text" id="emailid" name="emailid" placeholder="Email ID" type="number--" requred>
+												<input type="text" id="" name="emailid" placeholder="Email ID" type="number--">
 											</div>
 									  </div>
 								<!--end of Email (W)-->
@@ -196,7 +140,7 @@
 									 <div class="form-group row">
 										<label class="col-sm-4 control-label">Add in Contact Database </label>
 											<div class="col-sm-8">
-												<select name="contactdatabase" class="form-control" style="max-width:55%; border: 1px solid #737373;background:#fff;" requred>													
+												<select name="contactdatabase" class="form-control" style="max-width:350px; border: 1px solid #737373;background:#fff;">													
 													  <option value="active" >Active</option>
 														<option value="inactive"   >Inactive</option>												
 												</select>

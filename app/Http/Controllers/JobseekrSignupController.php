@@ -21,7 +21,6 @@ class JobseekrSignupController extends Controller
     }
 
     public function add(Request $request){
-      // return $request;
         //  $this->validate($request,[
         //     'first_name'   => 'required|max:255',
         //     'email'        => 'required|max:255',
@@ -102,16 +101,19 @@ class JobseekrSignupController extends Controller
         $jobseeker->pay_rate_umo='';
         $jobseeker->employer_id='';
         $jobseeker->save();
+
+
         //Create record for user table
         $user_login = new user();
         $user_login ->org_ID="1";
-        $user_login->user_id=$jobseeker->id;
-        $user_login ->user_type="seeker";
+        $user_login ->user_type="employee";
         $user_login ->full_name=$request->first_name;
         $user_login ->email    =$request->email;
         $user_login ->password =$password_ok;
         $user_login ->save();
-        return  redirect('/')->with('success',$message); 
+
+        
+        return  redirect('employee')->with('success',$message); 
      }
 
 }

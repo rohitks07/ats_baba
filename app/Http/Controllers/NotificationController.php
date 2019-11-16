@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Tbl_notification;
 use App\Tbl_team_member_permission;
 use App\tbl_post_jobs;
-use App\tbl_job_seekers;
+use App\Tbl_job_seekers;
 use Session;
 
 class NotificationController extends Controller
@@ -55,7 +55,7 @@ class NotificationController extends Controller
             $toReturn['post_job'] = tbl_post_jobs::where('ID',$id)->get();
 
         }
-        $post_job_show = tbl_job_seekers::get()->toArray();
+        $post_job_show = Tbl_job_seekers::get()->toArray();
 
         return view('posted_job_notification')->with('toReturn',$toReturn)->with('post_job_show',$post_job_show);
     }

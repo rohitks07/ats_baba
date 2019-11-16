@@ -161,6 +161,7 @@ class Job_Employer_Controller extends Controller
             $toReturn['post_job'] = tbl_post_jobs::where('employer_ID', Session::get('id'))->orderBy('ID', 'DESC')->paginate(20);
         }
         $post_job_show = tbl_job_seekers::get()->toArray();
+
         // job by applications
         ini_set('memory_limit', '-1');
         $user_type = Session::get('type');
@@ -558,8 +559,6 @@ class Job_Employer_Controller extends Controller
             $user_id = Session::get('user_id');
         }
         $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
-        // print_r($one_group_teammember_employer_id);
-        // exit;
         if ($one_group_teammember_employer_id) {
             $toReturn['application'] = Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs', 'tbl_seeker_applied_for_job.job_ID', '=', 'post_jobs.ID')
                 ->leftjoin('tbl_job_seekers as seeker', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'seeker.ID')
@@ -1543,7 +1542,6 @@ class Job_Employer_Controller extends Controller
     public function forward_candidate(Request $Request)
     {
         // return $Request->document_upload[0];
-        return $Request->dob;
         $update_resume = $Request->update_Resume_file;
         $experience_list = $Request->experience;
         $reference_list = $Request->reference;
@@ -1688,8 +1686,6 @@ class Job_Employer_Controller extends Controller
         }
         // print_r($data['seeker_extra_doc']);
         // exit;
-        return view('emails.forward_candidate')->with('data',$data);
-
         Mail::send('emails.forward_candidate', ['data' => $data], function ($message) use ($data) {
             $email_to = explode(',', $data['forward_candidate']['forward_to']);
             foreach ($email_to as $key => $value) {
@@ -1753,6 +1749,7 @@ class Job_Employer_Controller extends Controller
             }
             $message->from($data['forward_candidate']['forward_by'], $data['forward_candidate']['sender_fullname']);
         });
+        // return view('emails.forward_candidate')->with('data',$data);
 
         $job_history = new tbl_job_history();
         $job_history->job_id = $Request->job_id;

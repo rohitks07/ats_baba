@@ -25,10 +25,21 @@
 
 
 <style>
-    #wrapper{
-            width: 100%;
-            overflow-y: scroll;
-        }
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    margin-bottom: 3em;
+}
+#wrapper{
+    width: 100%;
+    overflow-y: scroll;
+    }
         
 table.dataTable thead > tr > th {
     / padding-left: 8px; /
@@ -54,6 +65,15 @@ table.dataTable thead > tr > th {
 	color:#000;
 
 }
+.card-title {
+    font-size: 21px;
+    font-weight: 100;
+    color: #797979;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
 	
 </style>
 	<div id="wrapper">
@@ -61,43 +81,36 @@ table.dataTable thead > tr > th {
                 <!-- Start content -->
                 <div class="content">
                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header" style="background-color: #317eeb;padding: 2px 20px;height:70px;" >
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <h3 style="color:white;margin-top:17px;margin-left:10px">Applications</h3>
-                                        </div>
-                                        <div class="col-md-4">
-                                                <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;height:30px;margin-top:18px;border:none;">
-
-                                        </div>
+                            <div class="col-lg-12">
+                                <div class="card card-border card-primary">
+                                    <div class="card-header"> 
+                                        <h3 class="card-title text-primary" style="float:left;">Application</h3> 
+                                        <h6 style="float:right;"><input id="myInput" type="text" placeholder="Search" style="height: 31px; width: 100%; padding: 13px; border:1px solid #9d9d9d; border-radius: 2px;"></h6>
                                     </div>
-
-                                </div>
-
-                            <div class="card-body" >
-                                <div class="row">
+                                    <div class="card-body"> 
+                                    <div class="row">
+                          
                                     <div class="col-md-12 col-sm-12 col-12">
-                                            <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
+                                            <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;">
                                                 
                                                     <thead class="table-light" style="text-align:center;">
                                                     <!--<tr>
                                                         <th colspan="6">Job Details</th>
                                                         <th colspan="3">Candidate Details</th>
                                                         <th>Submittal Date</th>
+
                                                     </tr>-->
                                                     <tr>
                                                     	<th> Code</th>
-                                                        <th>Title</th>
+                                                        <th width="10%">Title</th>
                                                         <th>Client</th>
                                                         <th width="10%">Location</th>
-                                                        <th width="20%">Visa Type</th>
-                                                        <th width="7%">Pay Rate</td>
+                                                        <th width="10%">Visa Type</th>
+                                                        <th width="10%">Pay Rate</td>
                                                         <th>Name</td>
                                                         <th width="10%">Location</th>
                                                         <th>Visa</th>
-                                                        <th width="7%">Date</th>
+                                                        <th width="10%">Date</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -117,7 +130,7 @@ table.dataTable thead > tr > th {
                                                         $plus_visa=substr_count("$vis",",");
                                                         $sh=explode(",",$vis);
                                                         ?>
-                                                        <td onmouseover="visa_type({{$id}});"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none">{{$application['job_visa']}}</span></td>
+                                                        <td onmouseover="visa_type({{$id}});"><span id="data1{{$id}}" >{{$sh[0]}}@if($plus_visa!=0),&nbsp;+{{$plus_visa}}@endif</span><span id="data2{{$id}}" style="display:none">{{$application['job_visa']}}</span></td>
                                                         <td>{{$application['pay_min']}}-{{$application['pay_max']}}</td>
                                                         <td><a href="{{url('employer/candidate/'.$seeker_id)}}">{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
                                                         <td>@if($application['seeker_city']){{$application['seeker_city']}},&nbsp;@endif{{$application['seeker_state']}}</td>
@@ -129,6 +142,7 @@ table.dataTable thead > tr > th {
                                                         <a href="{{url('employer/appli_del/'.$id)}}" class="hidden on-editing login-row" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                         <a href="{{url('employer/appli_forward/'.$id)}}" ><i class="fa fa-arrow-right"  title="Candidate Forward "></i></a>
                                                         <a href="{{url('employer/application_view/'.$id)}}"> <i class="fa fa-eye" aria-hidden="true" title="View  Application"></i></a>
+
                                                         </td>
                                                         <div class="modal fade" id="interviewModal" role="dialog">
                                                         <div class="modal-dialog modal-lg">
@@ -149,7 +163,6 @@ table.dataTable thead > tr > th {
                                                                             <input id="srttime" class=" form-control timepicker1" name="start_time" type="time" required>
                                                                             <!-- <input type="time" class="form-control" id="" placeholder="Start Time" name="srttime"> -->
                                                                         </div>
-                                                    
                                                                         <div class="form-group">
                                                                             <label for="email">End Time</label>
                                                                             <input id="endtime"   class="form-control timepicker2" name="end_time" type="time" required>
@@ -166,7 +179,7 @@ table.dataTable thead > tr > th {
                                                                             </select>
                                                                         </div>
                                                                         <input type="hidden" name="interview_type" value="{{$application['ID']}}">
-                                                                        <input type="hidden" name="candiate_name" value="{{$application['Seeker_id']}}">
+                                                                        <input type="hidden" name="candiate_name" value="{{$application['can_first_name']}}|{{$seeker_id}}">
                                                                         <div class="form-group">
                                                                             <label for="email">Instruction</label>
                                                                             <input type="text" class="form-control" id="" placeholder="" name="instruction">
@@ -201,6 +214,11 @@ table.dataTable thead > tr > th {
                             </div>  <!-- end card-body -->
                             </div>   <!--end card-->
                    </div>  <!--end row-->         
+                   </div>
+                   </div>
+                          </div>  <!--end row-->         
+                   </div>
+                   </div>
 
 
                    

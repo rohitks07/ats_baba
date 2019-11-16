@@ -70,7 +70,6 @@ class ContactController extends Controller
     }
     public function add_email_form(Request $request)
     {
-        return $request;
             $emailList = new Tbl_email_list_contacts;
             $emailList ->salutation = $request->salutation;
             $emailList ->first_name = $request->firstname;

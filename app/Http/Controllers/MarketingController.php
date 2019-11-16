@@ -26,8 +26,8 @@ class MarketingController extends Controller
             $toReturn['countries']=Tbl_countries::all();
             $toReturn['contacts'] =Tbl_post_contacts::all();   
             $toReturn['emailList']=Tbl_email_list::all();
-        $toReturn['email']=tbl_marketing_emailer::all();
-        $toReturn['email_Template']=Tbl_email_template::get();
+            $toReturn['email']=tbl_marketing_emailer::all();
+            $toReturn['email_Template']=Tbl_email_template::get();
 			return view('team_member_marketing')->with('toReturn',$toReturn);
 	}
 	public function send_mail(Request $request)
@@ -41,7 +41,6 @@ class MarketingController extends Controller
         $email_marketing->employer_id=7;
         $email_marketing->emailer_section='email_list';
         $email_marketing->save();
-
         $user = array('email'=>$request->email_to, 'cc'=>$email_cc, 'subject'=>$request->subject, 'mail_content'=>$request->email_content);    
         Mail::send('emails.mail_marketing',['data' => $user], function($message) use ($user) {
             $message->to($user['email'])

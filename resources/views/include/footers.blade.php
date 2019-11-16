@@ -4,7 +4,7 @@
 </footer>
         <script>
             var resizefunc = [];
-        </script> 
+        </script>
 
         <!-- jQuery  -->
         <script src="{{url('assets/js/jquery.min.js')}}"></script>

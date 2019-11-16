@@ -65,13 +65,31 @@
 	color:#000;
 
 }
+.card .card-header {
+    padding: 10px 20px;
+    /* border: none; */
+    background: #fff;
+    color: #fff;
+}
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    margin-bottom: 3em;
+}
+
 </style>        
 <div id="wrapper">                                            
     <div class="content-page">              
     	<div class="content">                
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card card-border card-primary">
                         <div class="card-header">
 								<input id="search" type="text" placeholder="Search" class="form-control" style="float:right;width:350px;border-radius:20px;height:30px;border:none;margin-top:2px;">
 						@if(!empty($toReturn['user_type']=="teammember"))
@@ -81,27 +99,27 @@
 							@endif
 						@else
 						<a href="{{url('employer/post_new_job')}}">
-						<button type="button" class="btn btn-success" style="float:right;">Add a Job</button></a>
+						<button type="button" class="btn btn-success" style="float:left;">Add a Job</button></a>
 						@endif
 					    </div>
-                        	<div class="card-body" style="border: 1px #B0B0B0 solid;">
+                        	<div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-12">
                                                 <table class="table table-bordered table-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%; overflow-x:scroll;" >
 			                                        <thead style="text-align:center;">
-			                                            <tr>                                                   
-			                                                <th width="10%">Code</th>
-			                                                <th width="15%">Title</th>
+			                                            <tr style="text-align: initial;">                                                   
+			                                                <th width="5%">Code</th>
+			                                                <th width="5%">Title</th>
 			                                                <th width="5%">Client</th>
-			                                                <th width="15%">Location</th>
+			                                                <th width="10%">Location</th>
 			                                                <th width="5%"># </th>
-															<th width="2%">Type</th>
-															<th width="7%">Visa </th>
-															<th width="7%">Pay Rate</th>
+															<th width="10%">Type</th>
+															<th width="10%">Visa </th>
+															<th width="10%">Pay Rate</th>
 			                                                <th width="10%">Publish Date</th>
-															<th >Status</th>                                                    
-															<th width="7%">Closing Date</th>
-															<th width="10%"><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
+														    <th width="10%">Status</th>                                                    
+															<th width="10%">Closing Date</th>
+															<th width="10%"><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
 															<th width="10%">Actions</th>     													
 			                                            </tr>
 			                                        </thead>
@@ -131,8 +149,13 @@
 				                                                <td>{{$closing_date}}</td>
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$new_last_Date}}</td>
-                                                                 <td><button type="button" class="btn btn-primary btn-sm">{{$assignee}}</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">{{$application}}</button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm">{{$client_submittal}}</button></td>
-				                                               <td class="actions">
+                                                                 <td style="display:flex;">
+                                                                     <!--<span class="badge badge-pill badge-primary">{{$assignee}}</span><span class="badge badge-pill badge-primary">{{$application}}</span><span class="badge badge-pill badge-primary">{{$client_submittal}}</span>-->
+                                                                     <button type="button" class="btn btn-primary btn-sm" style="padding: 2px;min-width: 20px;min-height: 2px;">{{$assignee}}</button>&nbsp;
+                                                                     <button type="button" class="btn btn-primary btn-sm" style="padding: 2px;min-width: 20px;min-height: 2px;margin-left: 2px;">{{$application}}</button>&nbsp;
+                                                                     <button type="button" class="btn btn-primary btn-sm" style="padding: 2px;min-width: 20px;min-height: 2px;margin-left: 2px;">{{$client_submittal}}</button>
+                                                                     </td>
+				                                                <td class="actions" width="20%; display:flex;">
 																@if(!empty($toReturn['user_type']=="teammember"))
 																@if($toReturn['current_module_permission']['is_edit']=="yes")
 																<a href="{{url('employer/job/edit/'.$id)}}"><i class="fa fa-pencil" title="Edit"></i></a>
@@ -151,7 +174,7 @@
 																@endif
 																<!-- @if($toReturn['current_module_permission']['is_delete']="yes") -->
 																<a href="{{url(''.$id)}}" data-toggle="modal"
-                                                                        data-target="#myModal{{$posted_job['ID']}}" title="Submit to job"><i class="fa fa-plane" aria-hidden="true"></i></a>
+                                                                        data-target="#myModal{{$posted_job['ID']}}" title="Add a candidate"><i class="fa fa-plane" aria-hidden="true"></i></a>
                                                                         <a  href="" data-toggle="modal" data-target="#mailModal{{$posted_job['ID']}}" title="mail"><i class="fa fa-envelope"></i></a>
                                                     	<a href="" data-toggle="modal" data-target="#exampleModalCenter{{$posted_job['ID']}}"><i class="fa fa-plus" title="Note"></i></a>
 																<!-- @endif -->									
@@ -334,13 +357,13 @@
                                                                             <input type="email" class="form-control"
                                                                                 id="mail_to"  name="mail_to" required>
                                                                         </div>
-                                                                        <div class="form-group">
-                                                                            <label for="recipient-name"
-                                                                                class="col-form-label">From:</label>
-                                                                            <input type="email" class="form-control"
-                                                                                id="mail_from" name="mail_from"
-                                                                                required>
-                                                                        </div>
+                                                                        <!--<div class="form-group">-->
+                                                                        <!--    <label for="recipient-name"-->
+                                                                        <!--        class="col-form-label">From:</label>-->
+                                                                        <!--    <input type="email" class="form-control"-->
+                                                                        <!--        id="mail_from" name="mail_from"-->
+                                                                        <!--        required>-->
+                                                                        <!--</div>-->
                                                                         <div class="form-group">
                                                                             <label for="recipient-name"
                                                                                 class="col-form-label">Subject:</label>

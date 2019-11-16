@@ -149,8 +149,7 @@
                                                                 <p>{{$item['country']}} , {{$item['state']}} ,
                                                                     {{$item['city']}}</p>
                                                             </td>
-                                                            <td style="text-align:center;">
-                                                                {{@$company_name->company_name}}</td>
+                                                        <td style="text-align:center;"> {{@$company_name->company_name}}</td>
                                                             <td align="center" valign="middle">
 
                                                                 <button type="button" class="btn btn-xs"
@@ -307,7 +306,7 @@
                     </div>
                 </div>
             </div><br><br><br>
-
+ 
             @include('include.footer')
 
 
@@ -319,6 +318,7 @@
                     var city = document.getElementById("city").value;
                     console.log("wind");
                     $("#show").empty();
+
                     $.ajax({
                         type: 'get',
                         url: '{{url("admin/job_post_manage/search")}}',
@@ -362,7 +362,7 @@
                                                 <td>` + value.last_date + `</td>
                                                 <td>` + value.job_title + `</td>
                                                 <td>` + value.country + ` , ` + value.state + ` , ` + value.city + `</td>
-                                                <td> ` + value.company_ID + ` </td>
+                                                <td> `+value.company_ID+` </td>
                                                 <td align="center" valign="middle">
                                             <button type="button" class="btn btn-xs"
                                                 style="background-color:#317eeb; color:#fff"
@@ -371,20 +371,13 @@
                                             </td>
 
                                             
-                                                                <td align="center" valign="middle">
-                                                                    @if (!empty(` + value.sts + `=="Published"))
+                                                                
                                                                     <button type="button" class="btn btn-xs"
                                                                         style="background-color:#04B431; color:#fff"
                                                                         data-toggle="modal"
                                                                         data-target="#exampleModal5` + value.ID +
                                     `">` + value.sts + `</button>
-                                                                    @else
-                                                                    <button type="button" class="btn btn-xs"
-                                                                        style="background-color:#04B431; color:#fff"
-                                                                        data-toggle="modal"
-                                                                        data-target="#exampleModal5` + value.ID +
-                                    `">` + value.sts + `</button>
-                                                                    @endif
+                                                                    
                                                                 </td>
 
                                                                 

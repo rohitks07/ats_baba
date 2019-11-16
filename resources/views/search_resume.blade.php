@@ -112,7 +112,6 @@ table.dataTable thead > tr > th {
                             <div class="card card-border card-primary">
                                 <div class="card-header">
                              <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;border:none;height:30px;margin-top:2.5px;border:1px solid #999;">
-
 								@if(!empty($toReturn['user_type']=="teammember")) 
                                 @if($toReturn['current_module_permission']['is_add']=="yes")                                      
 									<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-success" style="float:left;">Add a Candidate</button></a>
@@ -153,10 +152,11 @@ table.dataTable thead > tr > th {
                                                              $age=floor($exp_month/12);
                                                         ?>                                                                                         
 													<tr>										
-                                                    <td style="padding:5px;"><a href="{{url('employer/candidate/'.$id)}}" > {{$personal[$key]->first_name}} {{$personal[$key]->last_name}}</a></td>														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
+														<td style="padding:5px;"><a href="{{url('employer/candidate/'.$id)}}" >{{$personal[$key]->first_name}} {{$personal[$key]->last_name}}</a></td>
+														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
 														<!-- <td>{{$dob}}</td> -->
 
-                                                        <td>@if(@($personal[$key]->can_gender)=="male")
+                                                        <td>@if(@($personal[$key]->gender)=="male")
                                                         @if(@$age!="0")M {{$age}}@endif
                                                         @else
                                                         @if(@$age!="0")F {{$age}}@endif
@@ -197,6 +197,8 @@ table.dataTable thead > tr > th {
                                                                     <li><a href="{{url('employer/team_member_edit_experience/'.$id)}}">Experience</a></li>
                                                                     <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
                                                             </ul>
+                                                            <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user" title="Submit to Job"></i></a>
+                                                            <a href="{{url('employer/job_matching/'.$id)}}" title="Maching jobs"><i class="fa fa-check-square-o"> </i></a>
 														@endif
 														@if(!empty($toReturn['user_type']=="teammember"))  
                                                         @if($toReturn['current_module_permission']['is_delete']=="yes")  
@@ -388,18 +390,18 @@ table.dataTable thead > tr > th {
 									"_token": "{{ csrf_token() }}"
 								},
 								success: function (data) {
-									$('#append_view'+id).append('<table  style="border:1px solid;color:#787877;border-collapse: collapse; background-color: #f2f2f2;">');
-									// $('#append_view'+id).append("<thead>");
-									// $('#append_view'+id).append("<tr>");
+									$('#append_view'+id).append("<table class='table' style='border:1px solid'>");
+									$('#append_view'+id).append("<thead>");
+									$('#append_view'+id).append("<tr>");
 								// 	$('#append_view'+id).append("<th>Candidate _ID</th>");
 									$('#append_view'+id).append("<th>Title</th>");
 									$('#append_view'+id).append("<th>Note</th>");
 									$('#append_view'+id).append("<th>Created By</th>");
 									$('#append_view'+id).append("<th>Status</th>");
 									$('#append_view'+id).append("<th>Privacy</th>");
-									// $('#append_view'+id).append("</tr>");
-									// $('#append_view'+id).append("</thead>");
-									// $('#append_view'+id).append("<tbody>");
+									$('#append_view'+id).append("</tr>");
+									$('#append_view'+id).append("</thead>");
+									$('#append_view'+id).append("<tbody>");
 									$.each(data, function(index, value) {
 										
 										$('#append_view'+id).append("<tr>");
@@ -411,7 +413,7 @@ table.dataTable thead > tr > th {
 										$('#append_view'+id).append("<td>"+value.privacy_level+"</td>");
 										$('#append_view'+id).append("</tr>");
 										});
-										// $('#append_view'+id).append("</tbody>");
+										$('#append_view'+id).append("</tbody>");
 										$('#append_view'+id).append("</table>");
 										$('#view'+id).hide();
 																

@@ -355,7 +355,7 @@
                     <div class="row">
                         <div class="col-md-12">
                                 <div class="row form-group">
-                                    <label class="col-sm-4 control-label" for="example-input-normal">Sender Email</label>
+                                    <label class="col-sm-4 control-label" for="example-input-normal">Sender Name</label>
                                 <div class="col-sm-8">
                                 <input type="text" class="form-control"  name="sender_name" id="" disabled value="{{Session::get('email')}}" required="" aria-required="true" placeholder="Sender Name">
                                 </div>

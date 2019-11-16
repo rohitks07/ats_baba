@@ -61,6 +61,8 @@ class teammemberSendController extends Controller
             $document_array[]=$team_member_update;
         }
         $document_string=implode(',',$document_array);
+        // echo $document_string;
+        // exit;
         $send_report = new tbl_teammember_send_report();
         $send_report->sender_id = Session::get('id');
         $send_report->send_to = $Request->send_to;
@@ -77,35 +79,42 @@ class teammemberSendController extends Controller
         $send_report->save();
         $sender_email=Session::get('email');
         $sender_name=Session::get('full_name');
+        // echo $sender_name=$send_report->files;
+//         $multi_send_file=explode(',',$send_report->files);
+//         foreach ($multi_send_file as $key => $value) {
+//             echo $multi_send_file[$key];
+//         }
+// print_r($multi_send_file);
+// exit;
         $data = array('send_report' => $send_report,'sender_email'=>$sender_email,'sender_name'=>$sender_name);
-        // Mail::send('emails.send_report', ['data' => $data], function ($message) use ($data) {
-        //     $email_to = explode(',', $data['send_report']['send_to']);
-        //     foreach ($email_to as $key => $value) {
-        //         $message->to($email_to);
-        //     }
-        //     $message->subject($data['send_report']['subject']);
-        //     if ($data['send_report']['send_cc']) {
-        //         $email_cc = explode(',', $data['send_report']['send_cc']);
-        //         foreach ($email_cc as $key => $value) {
-        //             $message->cc($email_cc[$key]);
-        //         }
-        //     }
-        //     if ($data['send_report']['send_bcc']) {
-        //         $email_bcc = explode(',', $data['send_report']['send_bcc']);
-        //         foreach ($email_bcc as $key => $value) {
-        //             $message->bcc($email_bcc[$key]);
-        //         }
-        //     }
-        //     if ($data['send_report']['files']) {
-        //         $multi_send_file=explode(',',$data['send_report']['files']);
-        //         foreach ($multi_send_file as $key => $value) {
-        //         $document_path = "public/send_report/".$multi_send_file[$key];
-        //         $message->attach($document_path);
-        //         }
-        //     }
-        //     $message->from($data['sender_email'], $data['sender_name']);
-        // });
-        Session::flash('message', 'Your Report is Send SuccessFully'); 
+        Mail::send('emails.send_report', ['data' => $data], function ($message) use ($data) {
+            $email_to = explode(',', $data['send_report']['send_to']);
+            foreach ($email_to as $key => $value) {
+                $message->to($email_to);
+            }
+            $message->subject($data['send_report']['subject']);
+            if ($data['send_report']['send_cc']) {
+                $email_cc = explode(',', $data['send_report']['send_cc']);
+                foreach ($email_cc as $key => $value) {
+                    $message->cc($email_cc[$key]);
+                }
+            }
+            if ($data['send_report']['send_bcc']) {
+                $email_bcc = explode(',', $data['send_report']['send_bcc']);
+                foreach ($email_bcc as $key => $value) {
+                    $message->bcc($email_bcc[$key]);
+                }
+            }
+            if ($data['send_report']['files']) {
+                $multi_send_file=explode(',',$data['send_report']['files']);
+                foreach ($multi_send_file as $key => $value) {
+                $document_path = "public/send_report/".$multi_send_file[$key];
+                $message->attach($document_path);
+                }
+            }
+            $message->from($data['sender_email'], $data['sender_name']);
+        });
+
         return redirect('employer/dashboard');
     }
 }

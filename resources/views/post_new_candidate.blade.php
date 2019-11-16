@@ -652,17 +652,17 @@
 <script>
     $(document).ready(function() {
         $("#btnAdd_doc").click(function() {
-            var a = `<div class="input-group mb-3 delete_exp1">
+            var a = `<div class="input-group mb-3 delete_document">
   			<input type="file" class="form-control col-sm-8" placeholder="Recipient's username" name="multi_docs[]" aria-label="Recipient's username" aria-describedby="button-addon2">
   			<div class="input-group-append">
-			  <button type="button" class="btn btn-primary btn_remove1">Remove</button>
+			  <button type="button" class="btn btn-primary btn_remove1" id="remove_document">Remove</button>
   			</div>
 			</div>`;
             $("#div1").append(a);
 
         });
-        $(document).on('click', '.btn_remove1', function() {
-            $(this).closest('.delete_exp1').remove();
+        $(document).on('click', '#remove_document', function() {
+            $(this).closest('.delete_document').remove();
         });
 
     });
@@ -1198,6 +1198,39 @@
                 return false;
             }
         }
+        <!--skill Details -->
+{{-- <script>
+    $(document).ready(function () {
+        $('#showa').click(function () {
+            $('.menua').toggle("slide");
+        });
+    });
+
+</script> --}}
+<!--skill Details -->
+
+
+<!--Eduication Details -->
+{{-- <script>
+    $(document).ready(function () {
+        $('#shown').click(function () {
+            $('.menun').toggle("slide");
+        });
+    });
+
+</script>
+<!--Eduication Details -->
+
+<!--exp Details -->
+<script>
+    $(document).ready(function () {
+        $('#shows').click(function () {
+            $('.menus').toggle("slide");
+        });
+    });
+
+</script> --}}
+<!--exp Details -->
         // final submission
         $("#validatefrm").click(function() {
             // when submit button clicked, validate
@@ -1218,8 +1251,8 @@
             if ((err_firstname == true) && (err_middlename == true) && (err_lastname == true) && (
                     err_dob == true) && (err_email == true) && (err_ssn == true) && (err_visa ==
                     true) && (err_Experience == true) && (err_city == true) && (err_mob_ph == true) && (
-                    err_home_ph == true) && (err_resume == true) &&) {
-                $('.menun').toggle("slide");
+                    err_home_ph == true) && (err_resume == true)) {
+                $('.menun').show("slide");
                 return true;
             } else {
                 return false;

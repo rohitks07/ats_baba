@@ -16,6 +16,7 @@
         <link href="{{url('assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('assets/css/style.css')}}" rel="stylesheet" type="text/css" />
         <script src="{{url('assets/js/modernizr.min.js')}}"></script>
+        
     </head>
     <body>
 

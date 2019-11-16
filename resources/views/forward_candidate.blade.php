@@ -180,7 +180,7 @@
                                         <div class="form-group row">
                                             <label for="Subject" class="control-label col-lg-4">Email Content<span class="red">*</label>
                                             <div class="col-lg-6">
-                                                <textarea class="wysihtml5 form-control article-ckeditor" required  placeholder="Message body" style="height: 200px" name="email_content" ></textarea>
+                                                <textarea class="wysihtml5 form-control article-ckeditor" required  required placeholder="Message body" style="height: 200px" name="email_content" required></textarea>
                                             </div>
                                         </div>
                                         <div class="card-header bg-primary">
@@ -247,8 +247,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels" style="background-color:;">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="last_for_digit_ssn">
                                                     <label class="form-label">SSN No.(Last Four Digits)<span class="red"></span></label>
-                                                    <input type="text" class="form-control" maxlength="4" placeholder="SSN No.(Last Four Digits)" 
-                                                      name="last_for_digit_ssn" title>
+                                                    <input type="text" class="form-control" maxlength="4" placeholder="SSN No.(Last Four Digits)"   name="last_for_digit_ssn" title>
                                                     <span id="last_for_digit_ssn_error">Please enter SSN No. (last four digit only)</span>
                                                 </div>
                                                 <!--end of col-->
@@ -263,7 +262,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="dob">
                                                     <label class="form-label">D O B<span class="red"></span></label>
-                                                    <input type="date" class="form-control" id="dob" placeholder="Date Of Birth" name="dob"  value="{{$toReturn['candiate_record']->dob}}" />
+                                                    <input type="date" class="form-control" id="dob" placeholder="Date Of Birth" name="dob"   />
                                                     <span id="dob_error">Please enter valid DOB</span>
                                                 </div>
                                                 <!--end of col-->
@@ -342,14 +341,13 @@
                                                     </select>
                                                     <select name="job_rate_type_fulltime" id="fulltime_payrate" style="display:block">
                                                         <option value="">Select job type</option>
-                                                        <option value="C2C">C2C</option>
+                                                        <option value="annum">annum</option>
                                                         <!--<option value ="per annum"></option>-->
                                                     </select>
                                                     <select name="job_rate_type" id="contract_payrate" style="display:none">
                                                         <option value="">Select job type</option>
                                                         <option value="W2">W2</option>
                                                         <option value="1099">1099</option>
-                                                        <option value="C2H">C2H</option>
                                                         <option value="C2C">C2C</option>
 
                                                     </select>
@@ -573,7 +571,7 @@
                                                         <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name" /></td>
                                                         <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  /></td>
                                                         <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  /></td>
-                                                        <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="10" class="form-control" placeholder="Phone Number"  ></td>
+                                                        <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  ></td>
                                                         <td><input type="text" name="extenson" id="extenson" maxlength="12" class="form-control" placeholder="Extention"  ></td>
                                                     </tr>
                                                     <p id="phone_mess" style="color:red;display:none;"> Please Enter Only Number</p>
