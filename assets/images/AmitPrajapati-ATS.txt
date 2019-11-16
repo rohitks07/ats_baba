@@ -1,0 +1,69 @@
+
+
+
+Recruiter
+ - Request Candidate for Interview Availabilities [Optional: client to be automatically emailed] [Optional: employer to be informred]
+ - Schedule Interview
+
+>> Candidate Screen: with URL - https://itscient.baba.software/ats/?interview_id=JJAoj4o00kkhuy8wellkkjjhjhjh
+
+[ATS Baba logo]                                        [Company Logo]
+
+              Interview Confirmation
+
+Job Details
+Job ID: 24-JavaArch                                
+Job Title: Sr. Java Architect
+Client: Infosys
+Location: Sunnyvale, CA
+
+Candidate Details:
+Name:
+Phone (M):                               [Add More Numbers:]
+Phone (H):        
+Skype:                                   [Add More IDs.]
+Email: 
+
+Interview Type: Telephonic [Dropdown: In-person, Webex, Skype, Telephonic]
+Venue:       [Only if In-person]
+Start Date:                           Start Time:                                     [Dropdown of TimeZone]
+End Date: (autopopulate start date)   End time: (autopupulate start time + 1 hour)    [Autopupolate Timezone]
+
+Notes/Commentes: [Text Area with comments]
+
+
+
+      [Accept]  [Request alternate time]  [Reject]
+
+1. When Reject is pressed, an input button should come up as expansion
+2. When "Request alternate time" is pressed, 
+
+Please suggest your availability so that interviewers can schedule this directly. Provide as many slots as possible. 
+
+ [Date] [Start Time] - [End Time] [Dropdown of Timezones]
+
+[Add More slots]
+
+---- End of the Screen ---- 
+
+Additional Requirements
+
+1. If Candidate is a registered user in ATS Baba - he should also be notified on the portal, otherwise just email notification to him
+2. Recruiter should be notified of all actions
+3. Client should be notified if Recruiter has provided client emails. Client should a notifications with:-
+ - A unique URL with Candidate Submittal details with links to all attachments that were submitted
+ - Interview details
+ - Options to Re-schedule
+
+---- When recruiter submits a resume to client thru' email, they should also receive
+ - A unique URL with Candidate Submittal details with links to all attachments that were submitted
+ - The page should have button to schedule his interview or ask for interview availability
+ - if that happens candidate should get the email automatically, but should not be able to see clients' info.
+
+
+
+
+
+
+
+---

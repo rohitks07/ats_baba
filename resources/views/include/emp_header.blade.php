@@ -17,6 +17,7 @@
         <link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css')}}">
          <link href="{{url('plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
          <link href="{{url('plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
          <link href="{{url('plugins/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
@@ -273,7 +274,7 @@ i.dollar2{
                             </li>
                             <li class="hide-phone float-left">
                                 <form role="search" class="navbar-form">
-                                    <input type="text" placeholder="Type here for search..." class="form-control search-bar">
+                                    <input type="text"  class="form-control search-bar">
                                     <a href="#" class="btn btn-search"><i class="fa fa-search"></i></a>
                                 </form>
                             </li>

@@ -56,7 +56,14 @@ class Login_Controller extends Controller
                 } elseif ($user_type == 'teammember') {
                     $toReturn = array();
                     $toReturn['team_member'] = tbl_team_member::where('ID', Session::get('user_id'))->first();
-                    $toReturn['is_team_leader'] = tbl_team_member_type::where('team_leader_id', Session::get('user_id'))->first();
+
+                    $toReturn['is_team_leader'] = tbl_team_member_type::where('team_leader_id',Session::get('user_id'))->first();
+                    if($toReturn['is_team_leader']=="")
+                    {
+                        
+                    }
+                    // print_r($toReturn['is_team_leader']);
+                    // exit; 
                     if (!empty($toReturn['is_team_leader'])) {
                         $list_teammember = tbl_team_member::where('team_member_type', $toReturn['is_team_leader']['type_ID'])->get()->toArray();
                         $toReturn['one_group_teammember_list']['id'] = array();

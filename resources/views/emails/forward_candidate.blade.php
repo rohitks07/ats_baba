@@ -10,9 +10,10 @@
 <body>
 <br>
 <?php 
-// echo $data['forward_candidate']['job_rate_type_fulltime'];
-// exit;?>
-<p><?php echo strip_tags($data['forward_candidate']['content']);"<br>" ?> </br></p>
+//echo $data['forward_candidate']['dob'];
+//exit;
+?>
+<p><?php echo $data['forward_candidate']['content'];"<br>" ?> </br></p>
 <table border="1px" style="border-collapse: collapse;">
 <tr><th colspan="2">Candidate’s Personal Details</th></tr>
 <tr><td style="width:250px">Full Name</td><td style="width:250px">{{$data['forward_candidate']['fullname']}}</td></tr>
@@ -35,7 +36,7 @@
 @if($data['forward_candidate']['passportno'])
 <tr><td>Passport No.</td><td>{{$data['forward_candidate']['passportno']}}</td></tr>
 @endif
-@if(!empty($data['forward_candidate']['dob']))
+@if($data['forward_candidate']['dob'])
 <?php 
  $birthday=date('m-d-Y', strtotime($data['forward_candidate']['dob']));
  ?>
@@ -50,7 +51,7 @@
 <tr><td>LinkedIn ID:</td><td>{{$data['forward_candidate']['linkedinid']}}</td></tr>
 @endif
 @if(!empty($data['forward_candidate']['job_type']=='Fulltime'))
-<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}/k on {{@$data['forward_candidate']['job_rate_type_fulltime']}} </td></tr>
+<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}k/ {{@$data['forward_candidate']['job_rate_type_fulltime']}} </td></tr>
 @else
 <tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}/hr on {{@$data['forward_candidate']['job_rate_type']}}</td></tr>
 @endif
@@ -58,10 +59,17 @@
 </table>
 
 <!-- <h4>Total US Experience: 4+Years</h4> -->
-<br>
-<br>
+
 @if(($data['experience_list'][0][0])!="")
 <u><b>Experience Summary:-</b></u>
+<br>
+<br>
+@if($data['forward_candidate']['it_exper'])
+<h4>Total It Experience: {{$data['forward_candidate']['it_exper']}}+year</h4>
+@endif
+@if($data['forward_candidate']['us_exper'])
+<h4>Total US Experience: {{$data['forward_candidate']['us_exper']}}+year</h4>
+@endif
 <br>
 <br>
 <table border="1px" style="border-collapse: collapse;">

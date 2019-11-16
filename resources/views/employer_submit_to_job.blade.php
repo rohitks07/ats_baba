@@ -179,7 +179,6 @@
                                                 <!--<option value="$55-$60">$55 - $60</option>-->
                                                 <!--<option value="$60-$65">$60 - $65</option>-->
                                                 <!--<option value="$65-$70">$65 - $70</option>-->
-
                                                 <option value="DOE">(DOE)Depends upon Experience</option>
                                             </select>
                                         </div>
@@ -225,16 +224,19 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($toReturn['job_list'] as $job_list)
+                                                <?php $dated=date("m-d-Y",strtotime($job_list['dated']));
+                                                        $last_date=date("m-d-Y",strtotime($job_list['last_date']));
+                                                ?>
                                                 <tr>
                                                     <td><input type="radio" id="" name="job_id" value="{{$job_list['ID']}}"></td>
                                                     <td>{{$job_list['job_code']}}</td>
                                                     <td>{{$job_list['job_title']}}</td>
-                                                    <td>{{$job_list['job_title']}}</td>
+                                                    <td>{{$job_list['client_name']}}</td>
                                                     <td>{{$job_list['country']}}</td>
                                                     <td>{{$job_list['vacancies']}}</td>
                                                     <td>{{$job_list['job_mode']}}</td>
-                                                    <td>{{$job_list['dated']}}</td>
-                                                    <td>{{$job_list['last_date']}}</td>
+                                                    <td>{{$dated}}</td>
+                                                    <td>{{$last_date}}</td>
 
                                                 </tr>
                                                 @endforeach

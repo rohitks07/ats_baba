@@ -117,7 +117,7 @@
 					            <br>
                                 <div class="col-xl-12"> 
                                     <div class="card card-border card-info">
-                                        <div class="card-header"></div> 
+                                        <div class="card-header">
                                             <div class="card-body"> 
                                                 <div id="accordion-test-2" class="card-box">
                                                 <div class="row"> 

@@ -180,7 +180,7 @@
                                         <div class="form-group row">
                                             <label for="Subject" class="control-label col-lg-4">Email Content<span class="red">*</label>
                                             <div class="col-lg-6">
-                                                <textarea class="wysihtml5 form-control article-ckeditor" required id="article-ckeditor" required placeholder="Message body" style="height: 200px" name="email_content" required></textarea>
+                                                <textarea class="wysihtml5 form-control article-ckeditor" required  placeholder="Message body" style="height: 200px" name="email_content" ></textarea>
                                             </div>
                                         </div>
                                         <div class="card-header bg-primary">
@@ -218,7 +218,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="skypeid" checked>
                                                     <label class="form-label">Skype ID</label>
-                                                    <input type="text" class="form-control" id="skypeid" onblur="rate()" placeholder="Skype ID" name="skypeid">
+                                                    <input type="text" class="form-control" id="skypeid" onblur="rate()" placeholder="Skype ID" name="skypeid" value="{{$toReturn['candiate_record']->skype_id}}">
                                                 </div><!-- end of col -->
 
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
@@ -247,7 +247,8 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels" style="background-color:;">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="last_for_digit_ssn">
                                                     <label class="form-label">SSN No.(Last Four Digits)<span class="red"></span></label>
-                                                    <input type="text" class="form-control" maxlength="4" placeholder="SSN No.(Last Four Digits)" id="last_for_digit_ssn" name="last_for_digit_ssn" title>
+                                                    <input type="text" class="form-control" maxlength="4" placeholder="SSN No.(Last Four Digits)" 
+                                                      name="last_for_digit_ssn" title>
                                                     <span id="last_for_digit_ssn_error">Please enter SSN No. (last four digit only)</span>
                                                 </div>
                                                 <!--end of col-->
@@ -262,7 +263,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="dob">
                                                     <label class="form-label">D O B<span class="red"></span></label>
-                                                    <input type="date" class="form-control" id="dob" placeholder="Date Of Birth" name="dob" />
+                                                    <input type="date" class="form-control" id="dob" placeholder="Date Of Birth" name="dob"  value="{{$toReturn['candiate_record']->dob}}" />
                                                     <span id="dob_error">Please enter valid DOB</span>
                                                 </div>
                                                 <!--end of col-->
@@ -270,7 +271,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
                                                     <label class="form-label">Qualification With University Name and Passing Year(Bachelors)<span class="red">*</span></label>
-                                                    <input type="text" class="form-control" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni" required />
+                                                    <input type="text" class="form-control" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni" value="{{$toReturn['qualification']->institude}}&nbsp;{{$toReturn['qualification']->degree_title}}&nbsp;{{$toReturn['qualification']->completion_year}}&nbsp; {{$toReturn['qualification']->city}}" required />
                                                     <span id="qual_with_uni_error">Should not be blank</span>
                                                 </div>
                                                 <!--end of col-->

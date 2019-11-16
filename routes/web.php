@@ -476,3 +476,9 @@ Route::get('admin/job_seekers_manage/advance_search','jobseekersmanageController
 //new
 Route::get('employer/notification_data/{id}','NotificationController@jon_noti');
 Route::get('employer/posted_job_assined/notification_data/{id}','NotificationController@jon_noti');
+Route::post('teammember/send_report','teammemberSendController@send_report');
+Route::any('employer/manageteammember/team_members_view/send_report/{id}/{name}','teammemberSendController@report_show');
+Route::get('import','languageController@view');
+Route::post('language/save','languageController@import');
+
+

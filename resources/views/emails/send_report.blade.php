@@ -1,0 +1,1 @@
+<p><?php echo $data['send_report']['email_contenrt'];"<br>" ?> </br></p>
