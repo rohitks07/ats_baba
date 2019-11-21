@@ -16,6 +16,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700&display=swap" rel="stylesheet">
 <script>
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -210,6 +211,7 @@
                             </a>
                         </li>
                         <li class="nav-item tab">
+                           
                         </li>
                         <li class="nav-item tab">
                         </li>
@@ -220,11 +222,15 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title"
-                                            style="color:white;text-transform: none; font-size:large">
+                                            style="color:white;text-transform: none; font-size:large;font-family: 'Raleway', sans-serif;">
                                             Interviews
                                             <a href="{{url('employer/dashboard/interview-meeting/add')}}"><button
                                                     type="button" class="btn btn-success" style="float: right;">Add an
                                                     Interview</button></a>
+                                            <a href="{{url('employer/dashboard/interview_schedule_email_view')}}"><button
+                                                    type="button" class="btn btn-success" style="float: right;margin-right:20px;">Send Interview request</button></a>
+                                            <a href="{{url('employer/dashboard/create_email_template')}}"><button
+                                                    type="button" class="btn btn-success" style="float: right;margin-right:20px;">Create Last email template</button></a>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -250,7 +256,7 @@
 
                                                             <tr>
 
-                                                            <?php $ida=$r->job_ID; 
+                                                                <?php $ida=$r->job_ID; 
                                                             $date_application=$r->interview_date;
                                                             $new_date = date("m-d-Y", strtotime($date_application));
                                                             $data_time = DB::table('tbl_time_zone')->where('time_zone_name',$r->time_zone)->first();
@@ -313,7 +319,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title"
-                                            style="color:white;text-transform: none; font-size:large">
+                                            style="color:white;text-transform: none; font-size:large;font-family: 'Raleway', sans-serif;">
                                             Meetings
                                             <a href="{{url('employer/dashboard/interview-meeting-tab/add')}}"><button
                                                     type="button" class="btn btn-success"
@@ -398,6 +404,13 @@
                             </div> <!-- End Row -->
                         </div>
                     </div>
+                    <!--FOR Interview email-->
+                    <div class="tab-pane" id="message-3" role="tabpanel" aria-labelledby="message-tab-3"
+                        style="font-family: 'Raleway', sans-serif;font-weight:500;">
+                        <div class="row">
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--end of col-->
@@ -414,11 +427,32 @@
 
 
 
-<script>
+{{-- <script>
     $('#timepicker').timepicker();
     $('#timepicker1').timepicker();
     $('#timepicker3').timepicker();
 
+</script> --}}
+
+
+<script>
+    $('.timepicker').timepicker();
+    $('.timepicker1').timepicker();
+
 </script>
 <!--end of content-->
 @include('include.emp_footer')
+{{-- <script src="{{asset('public/js/ajax_for_email.js')}}"></script> --}}
+
+<script>
+    function change() {
+        venue = document.getElementById("type_int").value;
+        if (venue == "In-Person") {
+            $("#hidden").show('fast');
+        } else {
+            $("#hidden").hide('fast');
+            document.getElementById("venue").value=null;
+        }
+    }
+
+</script>

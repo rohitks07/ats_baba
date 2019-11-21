@@ -270,7 +270,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
                                                     <label class="form-label">Qualification With University Name and Passing Year(Bachelors)<span class="red">*</span></label>
-                                                    <input type="text" class="form-control" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni" value="{{$toReturn['qualification']->institude}}&nbsp;{{$toReturn['qualification']->degree_title}}&nbsp;{{$toReturn['qualification']->completion_year}}&nbsp; {{$toReturn['qualification']->city}}" required />
+                                                    <input type="text" class="form-control" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni"  required />
                                                     <span id="qual_with_uni_error">Should not be blank</span>
                                                 </div>
                                                 <!--end of col-->
@@ -588,20 +588,41 @@
                                                     </tr>
                                                     <tr style="background: #317eeb;">
                                                         <th style="border: 1Px solid;">Resume</th>
-                                                        <th style="border: 1Px solid;"></th>
-                                                        <th style="border: 1Px solid;"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
                                                     <tr style="background: aliceblue;" id="update_resume">
-                                                        <td><input type="checkbox" name="other_doc0" id="other_doc0" value="document_upload">
-                                                            @if(!empty($toReturn['application_detail']['updated_resume']))
-                                                            <input type="hidden" name="update_Resume_name" value="update_Resume">
+                                                    @if(!empty($toReturn['application_detail']['updated_resume']))
+                                                        <td><input type="checkbox" name="seeker_doc[]" id="other_doc0" value="{{$toReturn['application_detail']['updated_resume']}}">
+                                                            <!-- <input type="hidden" name="update_Resume_name" value="update_Resume"> -->
                                                             <input type="hidden" class="form-control" name="update_Resume_file" value="{{$toReturn['application_detail']['updated_resume']}}"><a href="{{url('public/seekerresume/'.$toReturn['application_detail']['updated_resume'])}}">{{$toReturn['application_detail']['updated_resume']}}</a>
                                                             @endif
-                                                        <td><input type="button" name="delete_doc" id="delete_doc" value="Delete">
+                                                        <!-- <td><input type="button" name="delete_doc" id="delete_doc" class="delete_doc"  value="Delete"> -->
                                                     </tr>
+                                                    <tr style="background: aliceblue;" id="update_resume">
+                                                        @if(!empty($toReturn['candiate_record']['otherdocuments1']))
+                                                        <td><input type="checkbox" name="seeker_doc[]" id="other_doc0" value="{{$toReturn['candiate_record']['otherdocuments1']}}">
+                                                            <!-- <input type="hidden" name="otherdocuments1_name" value="otherdocuments1"> -->
+                                                            <input type="hidden" class="form-control" name="otherdocuments1" value="{{$toReturn['candiate_record']['otherdocuments1']}}"><a href="{{url('public/seekerresume/'.$toReturn['candiate_record']['otherdocuments1'])}}">{{$toReturn['candiate_record']['otherdocuments1']}}</a>
+                                                            @endif
+                                                        <!-- <td><input type="button" name="delete_doc" id="delete_doc" class="delete_doc"  value="Delete"> -->
+                                                    </tr>
+                                                    <tr style="background: aliceblue;" id="update_resume">
+                                                        @if(!empty($toReturn['candiate_record']['otherdocuments2']))
+                                                        <td><input type="checkbox" name="seeker_doc[]" id="other_doc0" value="{{$toReturn['candiate_record']['otherdocuments2']}}">
+                                                            <input type="hidden" name="otherdocuments2_name" value="otherdocuments2">
+                                                            <input type="hidden" class="form-control" name="otherdocuments2" value="{{$toReturn['candiate_record']['otherdocuments2']}}"><a href="{{url('public/seekerresume/'.$toReturn['candiate_record']['otherdocuments2'])}}">{{$toReturn['candiate_record']['otherdocuments2']}}</a>
+                                                            @endif
+                                                        <!-- <td><input type="button" name="delete_doc" class="delete_doc" id="delete_doc" value="Delete"> -->
+                                                    </tr>
+                                                    @foreach($toReturn['candiate_extra_doc'] as $key=>$value)
+                                                        <tr style="background: aliceblue;" id="update_resume">
+                                                        @if($value['file_name'])
+                                                        <td><input type="checkbox" name="extra_seeker_doc[]" id="other_doc0" value="{{$value['file_name']}}">
+                                                            <input type="hidden" class="form-control" name="{{$value['file_name']}}" value="{{$value['file_name']}}"><a href="{{url('public/forward_document/'.$value['file_name'])}}">{{$value['file_name']}}</a>
+                                                        @endif
+                                                        </tr>
+                                                    @endforeach                                                    
                                                     <tr id="exp_detail">
                                                         <td class="form-group row delete_exp">
                                                             <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;">
@@ -698,7 +719,7 @@
     });
 </script>
 <script>
-    $("#delete_doc").click(function(e) {
+    $(".delete_doc").click(function(e) {
         $("#update_resume").css("display", "none");
     });
 </script>

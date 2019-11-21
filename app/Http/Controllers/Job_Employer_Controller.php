@@ -238,7 +238,7 @@ class Job_Employer_Controller extends Controller
         $Add_to_post_job->job_code       =  $request->job_code;
         $Add_to_post_job->job_title      =  $request->job_title;
         $Add_to_post_job->vacancies      =  $request->no_of_vacancies;
-        $Add_to_post_job->employer_ID     =  Session::get('id');
+        $Add_to_post_job->employer_ID     =  Session::get('id');                          
         $Add_to_post_job->owner_id = $request->owner_name;
         $Add_to_post_job->company_ID = Session::get('org_ID');
         $date = $request->closeing_date;
@@ -460,7 +460,7 @@ class Job_Employer_Controller extends Controller
         }
         $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
         if ($one_group_teammember_employer_id) {
-            $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->orderBy('ID', 'DESC')->paginate(20);
+            $toReturn['post_job'] = tbl_post_jobs::where('created_by', Session::get('id'))->orderBy('ID', 'DESC')->paginate(20);
         } else {
             $toReturn['post_job'] = tbl_post_jobs::where('employer_ID', Session::get('id'))->orderBy('ID', 'DESC')->paginate(20);
         }
@@ -1530,6 +1530,7 @@ class Job_Employer_Controller extends Controller
         $toReturn['application_detail'] = Tbl_seeker_applied_for_job::where('ID', $id)->first();
         // return $toReturn['application_detail'];
         $toReturn['candiate_record'] = Tbl_job_seekers::where('ID', $toReturn['application_detail']->seeker_ID)->first();
+         $toReturn['candiate_extra_doc'] =Tbl_seeker_documents::where('seeker_ID',$toReturn['application_detail']->seeker_ID)->get('file_name')->toArray();
         $toReturn['qualification'] = tbl_seeker_academic::where('ID', $toReturn['application_detail']->seeker_ID)->orderBy('ID', 'DESC')->first();
         $toReturn['form_email_id'] = Session::get('email');
         return view('forward_candidate')->with('toReturn', $toReturn);

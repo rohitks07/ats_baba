@@ -72,7 +72,9 @@ class Login_Controller extends Controller{
                             $toReturn['one_group_teammember_list']['full_name'][$key]=@$list_teammember[$key]['full_name'];
                             $count=$count+1;
                         }
-                        $toReturn['one_group_teammember_list']['id'][$count]=@$toReturn['is_team_leader']['team_leader_id'];
+                        // $toReturn['one_group_teammember_list']['id'][$count]=@$toReturn['is_team_leader']['team_leader_id'];
+                        $toReturn['one_group_teammember_list']['id'][$count]=Session::get('user_id');;
+                        
                         $toReturn['user_permission']=Tbl_team_member_permission::where('team_member_id',$user_id)
                         ->leftjoin('tbl_module','tbl_team_member_permission.permission_value','=','tbl_module.module_id')
                         ->get()->toArray();

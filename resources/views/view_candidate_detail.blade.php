@@ -132,13 +132,26 @@
                             </h3>
                         </form>
                     </div>
-                    <div class="card-body" style="height:148px;">
+                    <div class="card-body" style="height:200px;">
+                        @if(!empty($toReturn['job_seeker']['cv_file']))
                         <div class="alert alert-success alert-dismissible">
-                            @if(!empty($toReturn['job_seeker']['cv_file']))
                         <input type="hidden" name="updatresume" value="{{$toReturn['job_seeker']['cv_file']}}"><a href="{{url('public/seekerresume/'.$toReturn['job_seeker']['cv_file'])}}">{{$toReturn['job_seeker']['cv_file']}}</a>
-                            @endif
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
                         </div>
+                        @endif
+                        @if(!empty($toReturn['job_seeker']['otherdocuments1']))
+                        <div class="alert alert-success alert-dismissible">
+                            <input type="hidden" name="otherdocuments1" value="{{$toReturn['job_seeker']['otherdocuments1']}}"><a href="{{url('public/seekerresume/'.$toReturn['job_seeker']['otherdocuments1'])}}">{{$toReturn['job_seeker']['otherdocuments1']}}</a>
+                            <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+                        </div>
+                        @endif
+                        @if(!empty($toReturn['job_seeker']['otherdocuments2']))
+                        <div class="alert alert-success alert-dismissible">
+                            <input type="hidden" name="otherdocuments2" value="{{$toReturn['job_seeker']['otherdocuments2']}}"><a href="{{url('public/seekerresume/'.$toReturn['job_seeker']['otherdocuments2'])}}">{{$toReturn['job_seeker']['otherdocuments2']}}</a>
+                            <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+                        </div>
+                        @endif
+
                     </div>
                 </div>
             </div>

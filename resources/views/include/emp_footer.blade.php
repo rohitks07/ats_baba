@@ -188,6 +188,12 @@
 
         
         </script>
+        <script>
+        $(document).ready(function(){
+            setTimeout(function(){ $("#click").click(); }, 500);
+            
+        });
+        </script>
        </body>
 
 <!-- Mirrored from coderthemes.com/moltran/blue/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Jun 2019 12:15:40 GMT -->

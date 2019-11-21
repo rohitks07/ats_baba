@@ -269,7 +269,7 @@ i.dollar2{
                         <ul class="list-inline menu-left mb-0">
                             <li class="float-left">
                                 <a href="#" class="button-menu-mobile open-left">
-                                    <i class="fa fa-bars"></i>
+                                    <i class="fa fa-bars" id="click"></i>
                                 </a>
                             </li>
                             <li class="hide-phone float-left">
