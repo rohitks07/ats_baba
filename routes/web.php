@@ -481,7 +481,7 @@ Route::post('teammember/send_report','teammemberSendController@send_report');
 //new
 Route::get('employer/posted_job_assined/notification_data/{id}','NotificationController@jon_noti');
 Route::any('employer/dashboard/interview-meeting/show_candidate','Job_Employer_Controller@candidate_list');
-Route::any('employer/dashboard/interview_schedule_email_view','EmailInterviewController@show_interview_email');
+Route::any('employer/dashboard/interview_schedule_email_view','EmailInterviewController@show_interview_email'); 
 Route::any('employer/interview_job_details_view','EmailInterviewController@interview_job_details');
 Route::any('employer/interview_candidate_email','EmailInterviewController@interview_candidate_email');
 Route::any('employer/dashboard/interview_schedule_email','EmailInterviewController@interview_schedule_email');

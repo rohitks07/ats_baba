@@ -299,12 +299,15 @@
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                             <tr>
                                 <td style="padding-top: 5px ">
+                                   
+                                        <img src="{{url('http://baba.software/ats/public/companylogo/baba_logo.png')}}" alt="" style="width:150px;display:inline;float:left";>
+                                        <img src="{{url('http://baba.software/ats/public/companylogo/'.$data['logo'])}}" alt="Logo" style="width:150px;display:inline;float:right;margin-top:35px;"><br>
                                     <h1
-                                        style=" font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 26px; color: #333333; font-weight: bold; text-transform: uppercase;display:inline;float:left;margin-left:45px;margin-top:20px;">
+                                        style=" font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 26px; color: #333333; font-weight: bold; text-transform: uppercase;float:left;margin-left:45px;margin-top:20px;">
                                         Interview Confirmation</h1>
-                                    <h1
-                                        style="color:#2641C6;font-weight:bold;font-size:30px;font-family:Gill Sans, sans-serif;float:right;display:inline;margin-right:60px;">
-                                        <i>IT-SCIENT</i></h1>
+                                    
+                                    
+                                    </h1>
                                 </td>
                             </tr>
                             <tr>
@@ -385,6 +388,8 @@
                                         <p style="font-weight:bold;">{{$data['interviewdate']}}</p>
                                         <p style="font-weight:bold;">Start Time</p>
                                         <p style="font-weight:bold;">{{$data['start_time']}}</p>
+                                        <p style="font-weight:bold;">Time Zone</p>
+                                        
 
                                     </div>
                                     <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
@@ -397,6 +402,7 @@
                                         @endif
                                         <p style="font-weight:bold;">End Time</p>
                                         <p style="font-weight:bold;">{{$data['end_time']}}</p>
+                                        <p style="font-weight:bold;">{{$data['time_zone']}}</p>
 
 
 
@@ -407,19 +413,23 @@
                             <tr>
                                 <td
                                     style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
-                                    <a id="btn"
+                                    {{-- <a id="btn"
                                         href="{{url('http://baba.software/ats/interview_confirm/'.$data['uni_no'])}}"
-                                        type="button" style="text-decoration:none;">Accept</a>
-                                    <p style="display:inline;margin-left:20px;">Click to go to conformatation page</p>
+                                        type="button" style="text-decoration:none;">Click here</a>
+                                    <p style="display:inline;margin-left:20px;">Click for conformatation of for more option</p> --}}
+                                    <a id="btn"
+                                        href="{{url('http://localhost/baba.software/interview_confirm/'.$data['uni_no'])}}"
+                                        type="button" style="text-decoration:none;">Click here</a>
+                                    <p style="display:inline;margin-left:20px;">Click for conformatation of for more option</p>
                                     <br><br>
-                                    <a id="btn_two"
+                                    {{-- <a id="btn_two"
                                         href="{{url('http://baba.software/ats/reject_request/'.$data['uni_no'])}}"
                                         type="button" style="text-decoration:none;display:inline">Reject</a>
                                     {{-- <p style="display:inline;margin-left:20px;margin-top:10px">Click to go to the page</p> --}}
-                                    <br><br>
+                                    {{-- <br><br>
                                     <a id="btn_three"
                                         href="{{url('http://baba.software/ats/reject_reschedule/'.$data['uni_no'])}}"
-                                        type="button" style="text-decoration:none;display:inline">Request another time</a>
+                                        type="button" style="text-decoration:none;display:inline">Request another time</a> --}}
                                     
 
 

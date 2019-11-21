@@ -19,7 +19,7 @@
                                             @foreach ($data['name'] as $i)
                                             <option
                                                 value="{{$i['first_name']}} {{$i['middle_name']}} {{$i['last_name']}}|{{$i['ID']}}">
-                                                {{$i['first_name']}}</option>
+                                                {{$i['first_name']}} {{$i['middle_name']}} {{$i['last_name']}}</option>
                                             @endforeach
                                         </select>
                                     </div>

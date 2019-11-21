@@ -810,7 +810,7 @@
                 <div class="col-md-3">
 
                 </div>
-                <div class="col-md-6" id="none_div" style="margin-top:10%;">
+                <div class="col-md-6" id="none_div" style="margin-top:5%;">
 
                     <div class="card">
                         <div class="card-header">
@@ -864,13 +864,26 @@
 
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                                <small>Reason</small><br>
+                                                <textarea name="reason" id="reason" cols="50" rows="4"></textarea>  
+                                        </div>
+                                        <div class="col-md-3">
+                                            
+                                        </div>
+                                    </div>
 
                                     <br>
                                     <small id="error" style="color:red;display:none;">** This cannot be empty **</small>
 
 
-                                    <hr style="margin-top:50px;">
-                                    <button class="btn btn-primary " type="submit"> Submit</button>
+                                    <hr style="margin-top:50px;"> 
+                                    <button class="btn btn-primary " onclick="check()" type="button"> Submit</button>
+                                    <button class="btn btn-primary " id="click_val" style="display:none" type="submit"> Submit</button>
                                     <input type="hidden" value="{{$id}}" id="id_val" name="id_val">
                                     <br><br>
                                 </form>
@@ -893,7 +906,25 @@
     </div>
     </div>
 
-
+<script>
+    $('#reason').keypress(function(){
+        $('#reason').css('border-color','gry');
+    });
+    function check(){
+    var reason = $('#reason').val();
+    reason_val = $.trim(reason);
+    if((reason_val =="")||(reason_val ==null)){
+        $('#reason').css('border-color','red');
+        setTimeout(function(){ alert('Reason is required'); }, 500);
+        
+    }
+    else
+    {
+        $('#click_val').click();
+    }
+    }
+    
+</script>
 
 </body>
 @else

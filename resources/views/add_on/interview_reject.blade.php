@@ -792,95 +792,152 @@
         ;
     }
 
+    .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin-top: 23%;
+    margin-left: 45%;
+    overflow-y:none;
+}
+body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
 </style>
 
 <body
     style="background-image:linear-gradient(to bottom , #0E5588 , #45B1FF  , white);background-repeat:no-repeat;height:99.1vh;">
+    <div class="loader" id="show_loading" style="display:none;"></div>
+
+    <div id="hide">
+        <h1 class="header-w3ls"></h1>
+        <div class="main-bothside">
+            <div style="float:left"></div>
+            <div style="float:right;"><img src=""></div>
+        </div>
+        <div class="main-bothside">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-6" id="none_div" style="margin-top:10%;">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <img alt="" style="float:left;height:120px;"
+                                    src="{{url('public/companylogo/baba_logo.png')}}" alt="Logo missing">
+                                <img alt="" style="float:right;height:40px;margin-top:6%;"
+                                    src="{{url('public/companylogo/'.$mail->company_logo)}}" id="comp_logo"
+                                    alt="Logo missing">
+                            </div>
+                            <div class="card-body">
+                                {{-- <h5 class="card-title"></h5> --}}
+                                {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
+                                {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+                                <center>
+
+                                    <h1 class="card-text"
+                                        style="font-family: 'Raleway', sans-serif;font-size:20px;margin-top:50px;">Enter
+                                        Your Reason for rejecting </h1>
+                                    <textarea name="" id="val_text" cols="50" rows="5" style="margin-top:30px;"
+                                        required></textarea><br>
+                                    <small id="error" style="color:red;display:none;">** This cannot be empty **</small>
 
 
+                                    <hr style="margin-top:50px;">
+                                    <button class="btn btn-primary " onclick="show_review()"> Submit</button>
+                                    <input type="hidden" value="{{$id}}" id="id_val">
+                                    <br><br>
 
-    <h1 class="header-w3ls"></h1>
-    <div class="main-bothside">
-        <div style="float:left"></div>
-        <div style="float:right;"><img src=""></div>
-    </div>
-    <div class="main-bothside">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3">
-
-                </div>
-                <div class="col-md-6" id="none_div" style="margin-top:10%;">
-
-                    <div class="card">
-                        <div class="card-header">
-                            <img alt="" style="float:left;height:120px;"
-                                src="{{url('public/companylogo/baba_logo.png')}}" alt="Logo missing">
-                        <img alt="" style="float:right;height:40px;margin-top:6%;" src="{{url('public/companylogo/'.$mail->company_logo)}}" id="comp_logo"
-                                alt="Logo missing">
-                        </div>
-                        <div class="card-body">
-                            {{-- <h5 class="card-title"></h5> --}}
-                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
-                            {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
-                            <center>
-
-                                <h1 class="card-text"
-                                    style="font-family: 'Raleway', sans-serif;font-size:20px;margin-top:50px;">Enter
-                                    Your Reason for rejecting </h1>
-                                <textarea name="" id="val_text" cols="50" rows="5" style="margin-top:30px;" required></textarea><br>
-                                <small id="error" style="color:red;display:none;">** This cannot be empty **</small>
-
-
-                                <hr style="margin-top:50px;">
-                                <button class="btn btn-primary " onclick="show_review()"> Submit</button>
-                                <input type="hidden" value="{{$id}}" id="id_val">
-                                <br><br>
-
-                            </center>
+                                </center>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-3">
+
+                    </div>
                 </div>
-                <div class="col-md-3">
 
-                </div>
-            </div>
+                <div class="col-md-6">
+                    <div class="data_view" style="display: none;margin-top:3%;">
 
-            <div class="col-md-6">
-                <div class="data_view" style="display: none;margin-top:3%;">
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+    
 
     <script>
-        $("#val_text").keypress(function(){
-                $("#val_text").css('border-color','#DFDFDF');
-                $("#error").hide('fast');
+        $("#val_text").keypress(function () {
+            $('#show_loading').hide('fast');
+            $('#hide').show('fast');
+            $("#val_text").css('border-color', '#DFDFDF');
+            $("#error").hide('fast');
         });
+
         function show_review() {
+            $('#show_loading').show('fast');
+            $('#hide').hide('fast');
             var val_text = $("#val_text").val();
-            var id_val   = $("#id_val").val();
-            if(val_text == ""){
-                $("#val_text").css('border-color','red');
+            var id_val = $("#id_val").val();
+            if (val_text == "") {
+                $("#val_text").css('border-color', 'red');
                 $("#error").show('fast');
-            }
-            else{
-                
+                $('#show_loading').hide('fast');
+                $('#hide').show('fast');
+            } else {
+
                 $.ajax({
                     type: 'get',
                     url: '{{url("interview_request/review_reject")}}',
                     data: {
                         id_val: id_val,
-                        val_text:val_text,
+                        val_text: val_text,
                     },
                     success: function (data) {
-                        if(data == 1){
-                            alert("Thank you for your response");
-                        }else if(data == 0){
-                            $("#val_text").css('border-color','red');
+                        if (data == 1) {
+                            // alert("Thank you for your response");
+                            window.location.href = "{{url('/')}}";
+                        } else if (data == 0) {
+                            $('#show_loading').hide('fast');
+                            $('#hide').show('fast');
+                            $("#val_text").css('border-color', 'red');
                             $("#error").show('fast');
                         }
                         // window.location='{{ url("/") }}';
@@ -891,7 +948,7 @@
                 });
             }
 
-            
+
         }
 
     </script>

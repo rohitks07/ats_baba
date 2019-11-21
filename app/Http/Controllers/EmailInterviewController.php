@@ -24,7 +24,7 @@ class EmailInterviewController extends Controller
         $toReturn['time_zone'] = Tbl_time_zone::get();
         $data[]=array();
         $data['name']=Tbl_job_seekers::get()->toArray();
-         $val = 0;
+         $val = 0; 
       return view('interview_email_send_fill_data',compact('toReturn','data','val'));
    }
    public function interview_job_details(Request $REQUEST){
@@ -126,19 +126,27 @@ class EmailInterviewController extends Controller
              $add_mail->uni_no           = $uni_no;
              $add_mail->save();
     
-        
+        $user_name = user::where('user_id',Session::get('user_id'))->first();
+        $name = $user_name->full_name;
+        $logo_company = Tbl_companies::where('ID',Session::get('org_ID'))->first();
+        $logo = $logo_company->company_logo;
         $data=array('email_to'=>$email_to,'email_cc'=>$email_cc,'interviewdate'=>$interviewdate,'start_time'=>$start_time,
                     'end_time'=>$end_time,'type_int'=>$type_int,'time_zone'=>$time_zone,'jobcode_code'=>$jobcode_code,'instruction'=>$instruction,
-                    'candidatename_name'=>$candidatename_name,'jobcode_id'=>$jobcode_id,'job_data'=>$job_data,'candidatename_detail'=>$candidatename_detail,'venue'=>$venue,'end_date'=>$end_date,'uni_no'=>$uni_no,'emai_sent_by'=>$emai_sent_by);
+                    'candidatename_name'=>$candidatename_name,'jobcode_id'=>$jobcode_id,'job_data'=>$job_data,'candidatename_detail'=>$candidatename_detail,
+                    'venue'=>$venue,'end_date'=>$end_date,'uni_no'=>$uni_no,'emai_sent_by'=>$emai_sent_by,'name'=>$name,'logo'=>$logo,'time_zone'=>$time_zone);
 
-        // return view('emails.interview_mail')->with('data',$data);
-        // exit();
-        Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
-            $message->to($data['email_to'])
-                    ->bcc($data['email_cc'])
-                    ->subject('Review Interview');
-            $message->from($data['emai_sent_by'],'ATS BABA');
-        });
+        return view('emails.interview_mail')->with('data',$data);
+        exit();
+      //   Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
+      //       $message->to($data['email_to'])
+      //               ->subject('Review Interview');
+      //       $message->from($data['emai_sent_by'],$data['name']);
+      //   });
+      //   Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
+      //       $message->to($data['email_cc'])
+      //               ->subject('Review Interview');
+      //       $message->from($data['emai_sent_by'],$data['name']);
+      //   });
 
         // return view('emails.interview_mail')->with('data',$data);
         // exit();
@@ -181,6 +189,12 @@ class EmailInterviewController extends Controller
       $job =  tbl_post_jobs::where('ID',$value['mail']->job_id)->first();
       $candidate =  Tbl_job_seekers::where('ID',$value['mail']->candidatename_id)->first();
 
+      $review_data = tbl_interview_mail::where('uni_no',$u_id)->first();
+      $data_value = $review_data->uni_no;
+
+      $check_value = Tbl_schedule_preview::where('u_id',$data_value)->first();
+      @$check = $check_value->u_id;
+      if(($check =="")||($check ==null)){
 
       $add_interview                   = new tbl_schedule_interview();
       $add_interview->employer_ID      =$value['mail']->sent_by;
@@ -212,7 +226,10 @@ class EmailInterviewController extends Controller
       $add_schedule_preview->tbl_interview_mail_id = $value['mail']->id;
       $add_schedule_preview->interview_table_id    = $add_interview->id;
       $add_schedule_preview->sts                   = "accepted";
+      $add_schedule_preview->u_id                  = $data_value;
       $add_schedule_preview->save();
+
+   }
 
       return response($value);
    }
@@ -254,20 +271,25 @@ class EmailInterviewController extends Controller
                $add_schedule_preview->tbl_interview_mail_id = $value['mail']->id;
                $add_schedule_preview->reason                = $val_text;
                $add_schedule_preview->sts                   = "rejected";
+               $add_schedule_preview->u_id                   = $id_val;
                $add_schedule_preview->save();
 
-
+               //deleat function
+               $get_table_id = Tbl_schedule_preview::where('u_id',$id_val)->first(); 
+               tbl_schedule_interview::where('schedule_id',$get_table_id->interview_table_id)->delete();
 
                $user_email = user::where('user_id',$value['mail']->sent_by)->first();
-               $email_to = $user_email->email;
-
+               $email_to  = $user_email->email;
+               $user_name = $user_email->full_name;
+               $candidate_email_to = $value['mail']->email_to;
                $job =  tbl_post_jobs::where('ID',$value['mail']->job_id)->first();
                $candidate =  Tbl_job_seekers::where('ID',$value['mail']->candidatename_id)->first();
                $job_title       = $job->job_title;
                $job_code        = $job->job_code;
                $candidate_name  = $candidate->first_name .' '.$candidate->middle_name.' '.$candidate->last_name;
 
-               $data=array('email_to'=>$email_to,'job_title'=>$job_title,'job_code'=>$job_code,'candidate_name'=>$candidate_name,'val_text'=>$val_text,'emai_sent_by'=>$emai_sent_by);
+               $data=array('email_to'=>$email_to,'job_title'=>$job_title,'job_code'=>$job_code,'candidate_name'=>$candidate_name,
+                           'val_text'=>$val_text,'emai_sent_by'=>$emai_sent_by,'user_name'=>$user_name,'candidate_email_to'=>$candidate_email_to);
                // return view('emails.rejected_email')->with('data',$data);
                // exit();
                // Mail::send('emails.rejected_email',['data' => $data], function($message) use ($data){
@@ -278,7 +300,13 @@ class EmailInterviewController extends Controller
                Mail::send('emails.rejected_email',['data' => $data], function($message) use ($data){
                   $message->to($data['email_to'])
                           ->subject('Interview has been Rejected');
-                  $message->from($data['emai_sent_by'],'ATS BABA');
+                  $message->from($data['emai_sent_by'],$data['user_name']);
+               });
+
+               Mail::send('emails.rejected_email',['data' => $data], function($message) use ($data){
+                  $message->to($data['candidate_email_to'])
+                          ->subject('You have rejected the interview');
+                  $message->from($data['emai_sent_by'],$data['user_name']);
                });
 
 
@@ -317,6 +345,7 @@ class EmailInterviewController extends Controller
       $start_time = $REQUEST->start_time;
       $end_time   = $REQUEST->end_time;
       $id_val     = $REQUEST->id_val;
+      $reason     = $REQUEST->reason;
 
       $value['mail'] = Tbl_interview_mail::where('uni_no',$id_val)->first();
       $value['org_id'] =  Tbl_companies::where('ID',$value['mail']->org_id)->first();
@@ -327,10 +356,9 @@ class EmailInterviewController extends Controller
       $company_city = $value['org_id']->company_city;
       $company_state = $value['org_id']->company_state;
       $company_country = $value['org_id']->company_country;
-      $company_location_one = $value['org_id']->company_location_one;
+      $company_location  = $value['org_id']->company_location;
       
-      $table_id = $value['mail']->tbl_interview_mail_id;
-      tbl_schedule_interview::where('schedule_id',@$table_id)->delete();
+      
       
     //   return $emai_sent_by;
     //   exit;
@@ -344,28 +372,13 @@ class EmailInterviewController extends Controller
                $add_schedule_preview->email_to              = $value['mail']->email_to;
                $add_schedule_preview->email_cc              = $value['mail']->email_cc;
                $add_schedule_preview->tbl_interview_mail_id = $value['mail']->id;
+               $add_schedule_preview->u_id                  = $value['mail']->uni_no;
                $add_schedule_preview->sts                   = "rescheduled";
+               $add_schedule_preview->reason                = $reason;
                $add_schedule_preview->save();
 
 
-               $add_interview                   = new tbl_schedule_interview();
-               $add_interview->employer_ID      =$value['mail']->sent_by;
-               $add_interview->job_ID           =$job->job_code;
-               $add_interview->seeker_ID        =$value['mail']->candidatename_id;
-               $add_interview->interview_date   =$value['mail']->start_date;
-               $add_interview->interview_type   =$value['mail']->interview_type;
-               
-               $add_interview->from_time        =$REQUEST->start_time;
-               $add_interview->end_time         =$REQUEST->end_date;
-               
-               $add_interview->invitees_to      =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
-               $add_interview->invitees_cc      =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
-               $add_interview->candiate_name    =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
-               $add_interview->time_zone        =$value['mail']->time_zone;
-               $add_interview->instructions     =$value['mail']->instruction;
-               $add_interview->dated            =$value['mail']->date;
-               $add_interview->status           ='active';
-               $add_interview->save();
+
 
                $email_to = $value['mail']->email_to;
                $job_title= $job->job_title;
@@ -377,29 +390,38 @@ class EmailInterviewController extends Controller
                $end_time   = $REQUEST->end_time;
                $id_val     = $REQUEST->id_val;
                
-               $msg = "Your interview has been rescheduled";
-               $data=array('email_to'=>$email_to,'job_title'=>$job_title,'job_code'=>$job_code,'candidate_name'=>$candidate_name,'start_date'=>$start_date,'end_date'=>$end_date,'start_time'=>$start_time,'end_time'=>$end_time,'emai_sent_by'=>$emai_sent_by,'company_city'=>$company_city,'company_state'=>$company_state,'company_country'=>$company_country,'company_location_one'=>$company_location_one,'msg'=>$msg);
+               $msg = $candidate_name." has requested for reschedule interview";
+               $data=array('email_to'=>$email_to,'job_title'=>$job_title,'job_code'=>$job_code,'candidate_name'=>$candidate_name,
+                           'start_date'=>$start_date,'end_date'=>$end_date,'start_time'=>$start_time,'end_time'=>$end_time,
+                           'emai_sent_by'=>$emai_sent_by,'company_city'=>$company_city,'company_state'=>$company_state,
+                           'company_country'=>$company_country,'company_location '=>$company_location ,'msg'=>$msg,'reason'=>$reason);
 
                // return view('emails.reshidule_email')->with('data',$data);
-                  // Mail::send('emails.reshidule_email',['data' => $data], function($message) use ($data){
-                  //    $message->to('abhinavroy.itscient@gmail.com')
-                  //            ->subject('Rescheduled interview');
-                  //    $message->from($data['email_to'],'ATS BABA');
-                  // });
-               // exit();
+               // exit;
+                 
                Mail::send('emails.reshidule_email',['data' => $data], function($message) use ($data){
                   $message->to($data['emai_sent_by'])
-                          ->subject('Rescheduled interview');
-                  $message->from($data['email_to'],'ATS BABA');
+                          ->subject('Rescheduled Interview Request');
+                  $message->from($data['email_to'],$data['candidate_name']);
                });
-                $msg = "interview has been rescheduled";             
-                $data=array('email_to'=>$email_to,'job_title'=>$job_title,'job_code'=>$job_code,'candidate_name'=>$candidate_name,'start_date'=>$start_date,'end_date'=>$end_date,'start_time'=>$start_time,'end_time'=>$end_time,'emai_sent_by'=>$emai_sent_by,'company_city'=>$company_city,'company_state'=>$company_state,'company_country'=>$company_country,'company_location_one'=>$company_location_one,'msg'=>$msg);
+
+                $msg = "Reschedule Request has been sent";             
+                $data=array('email_to'=>$email_to,'job_title'=>$job_title,'job_code'=>$job_code,'candidate_name'=>$candidate_name,
+                'start_date'=>$start_date,'end_date'=>$end_date,'start_time'=>$start_time,'end_time'=>$end_time,'emai_sent_by'=>$emai_sent_by,
+                'company_city'=>$company_city,'company_state'=>$company_state,'company_country'=>$company_country,'company_location '=>$company_location ,
+                'msg'=>$msg,'reason'=>$reason);
 
                 Mail::send('emails.reshidule_email',['data' => $data], function($message) use ($data){
                   $message->to($data['email_to'])
-                          ->subject('Rescheduled interview');
+                          ->subject('Rescheduled Interview Request');
                   $message->from($data['emai_sent_by'],'ATS BABA');
                });
+
+
+               $uni_no = rand();
+               tbl_interview_mail::where('uni_no', $value['mail']->uni_no)->update(array(
+                  'uni_no' => $uni_no
+              ));
 
                return redirect('/');
    }

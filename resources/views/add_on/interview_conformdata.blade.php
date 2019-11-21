@@ -826,11 +826,15 @@
                                 <h3 class="card-text" style="font-family: 'Raleway', sans-serif;font-size:15px;margin-top:50px;">Thank You for applying</h3>    
                                 <h3 class="card-text" style="font-family: 'Raleway', sans-serif;font-size:15px;margin-top:50px;">Click on the button below for more detail's</h3>    
                                 <hr style="margin-top:50px;">
-                                <button class="btn btn-success " onclick="show_review()"> Review Details</button>
+                                <button class="btn btn-success " onclick="show_review()">Review Details</button><br>
+                            </center>
+                            <hr>
+                                <button class="btn btn-primary ml-2 mt-3" onclick="window.location='{{ url("reject_reschedule/".$id) }}'" style="float:right;border-radius:20px;">Request another time</button>
+                                <button class="btn btn-danger ml-2 mt-3" onclick="window.location='{{ url("reject_request/".$id) }}'" style="float:right;border-radius:20px;">Reject</button>
                                 <input type="hidden" value="{{$id}}" id="id_val">
                                 <br><br>
 
-                            </center>
+                            
                         </div>
                     </div>
                 </div>
@@ -1025,6 +1029,7 @@
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-danger" onclick="window.location='{{ url("/") }}'" style="float:right">Done</button>
+                        <button type="button" class="btn btn-primary mr-3" onclick="return_show()" style="float:right">back</button>
                         </div>
                         </div>
 
@@ -1044,6 +1049,14 @@
 
         }
 
+    </script>
+    <script>
+        function return_show(){
+        $('#show_display').hide(500);
+        $('.data_view').hide(500);
+        $('#none_div').show(500);
+        }
+        
     </script>
 
 
