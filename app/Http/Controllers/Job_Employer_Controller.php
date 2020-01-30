@@ -343,10 +343,6 @@ class Job_Employer_Controller extends Controller
         $Notification->read_date_team_member = $mydate;
         // $Notification->notification_service_id=$Add_to_post_job->ID;
         $Notification->save();
-
-
-
-
         Session::flash('success', 'Job Post Successfully');
         return redirect('employer/posted_jobs');
     }
@@ -467,6 +463,13 @@ class Job_Employer_Controller extends Controller
 
     public function view_my_posted_job()
     {
+        $toReturn[] = array();
+        $toReturn['user_type'] = Session::get('type');
+        $post_job_show = tbl_job_seekers::get()->toArray();
+            $toReturn['post_job'] = tbl_post_jobs::orderBy('ID', 'DESC')->paginate(20);
+
+        return view('my_posted_jobs')->with('toReturn', $toReturn)->with('post_job_show', $post_job_show);
+   
         ini_set('memory_limit', '-1');
         $toReturn[] = array();
         $current_module_id = 3;
@@ -480,8 +483,6 @@ class Job_Employer_Controller extends Controller
                     }
                 }
             }
-
-
             $toReturn['post_job'] = tbl_post_jobs::where('employer_ID', Session::get('id'))->orderBy('ID', 'DESC')->paginate(20);
         }
 
@@ -1113,7 +1114,7 @@ class Job_Employer_Controller extends Controller
     {
 
         $type = Session::get('type');
-
+        $data="";
         if ($type == "employer") {
             $data = "Yes";
         } else if ($type == "teammember") {

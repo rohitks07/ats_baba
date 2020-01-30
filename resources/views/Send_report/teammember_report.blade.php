@@ -211,10 +211,11 @@
                                                                         <b>{{$item['job_created']}}</b></td>
                                                                     <td style="text-align:center;color:blue;">
                                                                         <b>{{$item['candidate_created']}}</b></td>
-                                                                    <td style="text-align:center;color:blue;">
-                                                                        <b>{{$item['client_submittal']}}</b></td>
+                                                                   
                                                                     <td style="text-align:center;color:blue;">
                                                                         <b>{{$item['application_submitted']}}</b></td>
+                                                                    <td style="text-align:center;color:blue;">
+                                                                        <b>{{$item['client_submittal']}}</b></td>
 
                                                                 </tr>
 

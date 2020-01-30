@@ -72,20 +72,7 @@ class Report_Controller extends Controller
                                                     'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id','tbl_job_post_assign.org_id')
                                                     ->where('tbl_job_post_assign.org_id',Session::get('org_ID'))
                                                     ->get();
-                                                    // ->count();
-
-                                                    // return $date_team['post_assign'];
-                                                    // exit;
-
-            //create_candidate
-            // $date_team['create_candidate']=Tbl_job_seekers::leftjoin('user','user.user_id','=','tbl_job_seekers.employer_id')
-            //                                         ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
-            //                                         ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
-            //                                         ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
-            //                                         'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name')
-            //                                         ->get();
-
-
+   
             $date_team['create_candidate']=tbl_team_member_type::leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
                                                     ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
                                                     ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
@@ -102,13 +89,6 @@ class Report_Controller extends Controller
                                                     'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id','tbl_job_seekers.org_id')
                                                     ->where('tbl_job_seekers.org_id',Session::get('org_ID'))
                                                     ->get();
-            // $date_team['application_submitted']=Tbl_seeker_applied_for_job::leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
-            //                                         ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
-            //                                         ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
-            //                                         ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
-            //                                         ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
-            //                                         'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name')
-            //                                         ->get();
 
             $date_team['forward_candidate']=Tbl_forward_candidate::leftjoin('tbl_post_jobs','tbl_post_jobs.ID','=','tbl_forward_candidate.job_id')
                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_post_jobs.for_group')
@@ -144,10 +124,6 @@ class Report_Controller extends Controller
                     $global=$two;
                 }
             }
-            // $dat="09-2019";
-            // $toReturn['mn']= count(tbl_post_job::whereMonth('dated',$dat)->get()->toArray());
-            // return $toReturn['mn'];
-                // for yeaars
 
                 $global_year="";
                 for($k=0;$k<12;$k++){

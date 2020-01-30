@@ -27,8 +27,8 @@ class teammemberSendController extends Controller
         $data_id = $id;
         $team_memeber = tbl_team_member::where('ID', $id)->first('email');
         $data = $team_memeber['email'];
+        // return $data;
         $user = user::where('user_id',$id)->first();
-
         for ($j = 0; $j < 12; $j++) {
             $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-' . $j . ' days'));
             $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-' . $j . ' days'));
@@ -56,7 +56,7 @@ class teammemberSendController extends Controller
                 $global = $two;
             }
         }
-
+// return $toReturn;
         return view('Send_report.teammember_report')->with('toReturn', $toReturn)->with('name', $name)->with('data_id', $data_id);
     }
     public function send_report(Request $Request)
