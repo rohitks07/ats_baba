@@ -52,6 +52,8 @@
 @endif
 @if(!empty($data['forward_candidate']['job_type']=='Fulltime'))
 <tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}k/{{@$data['forward_candidate']['job_rate_type_fulltime']}} </td></tr>
+@elseif(!empty($data['forward_candidate']['job_type']=='Fulltime/Contract'))
+<tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}k/{{@$data['forward_candidate']['job_rate_type_fulltime']}} </td></tr> 
 @else
 <tr><td>Expected rate</td><td>${{$data['forward_candidate']['expectedrate']}}/hr on {{@$data['forward_candidate']['job_rate_type']}}</td></tr>
 @endif

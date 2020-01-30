@@ -344,7 +344,7 @@ a.bottom-text-w3ls {
 		<div class="sub-main-w3">
 			<div class="bg-content-w3pvt" style="max-width: 40%;">
 				<div class="top-content-style">
-					 <img src="http://hrmssystems.com/public/images/hrmslogo.png" />
+                    <img src="{{url('public/images/baba_logos.png')}}" height="80"/> 
 				</div>
 				<form action="{{url('login')}}" method="post">
                     @csrf
