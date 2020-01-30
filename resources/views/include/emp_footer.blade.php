@@ -190,10 +190,92 @@
         </script>
         <script>
         $(document).ready(function(){
-            setTimeout(function(){ $("#click").click(); }, 500);
+         
+            setTimeout(function(){  
+                $("#click_me").click(); 
+            }, 500);
+            // $('#hola').hide();
+            // $('#preloader').hide();
             
         });
         </script>
+        <script>
+            $(document).ready(function(){
+                $("#left").fadeIn(5); 
+                $("#right").fadeOut(5); 
+            setTimeout(function(){ 
+
+                // $("#right").click(); 
+                $("#done").click(); 
+                $("#left").fadeOut(5); 
+                $("#right").fadeIn(5); 
+            
+            }, 500);
+            
+        });
+
+            $('#right').click(function(){
+                $("#right").fadeOut(5);
+                $("#left").fadeIn(5);
+            });
+            $('#left').click(function(){
+                $("#left").fadeOut(5);
+                $("#right").fadeIn(5);
+            });
+
+        
+        </script>
+        <script>
+
+$( document ).ready(function() {
+            // function notification()
+            // {
+                $("#notification_data").empty();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{url('url_for_profile_image')}}",
+                    type: 'get',
+                    dataType: "json",
+                    success: function(data) {
+                        console.log(data);
+                        // $('#profile_image').attr('src','http://localhost/babasoftware/public/companylogo/'+data.company_logo);
+                        $('#profile_image').attr('src','http://baba.software/ats/public/companylogo/'+data.company_logo);
+                        
+                        
+                    }
+                });
+ 
+            
+            // }
+            setTimeout(function () {
+                        $('#preloader').fadeOut(500);
+                        $('#hola').fadeOut(500);
+                    }, 1000)
+            var change_val = $('#change_val').val();
+            
+            setTimeout(function () {
+                if(change_val == 1){
+                    
+                $('#hola').hide();
+                $('#preloader').hide();
+                $('#change_val').val('2');
+                
+                }
+            }, 3000)
+            
+        });
+
+</script>
+
+<script>
+// $(window).load(function () {
+        
+//     });
+</script>
        </body>
 
 <!-- Mirrored from coderthemes.com/moltran/blue/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Jun 2019 12:15:40 GMT -->

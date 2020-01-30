@@ -687,7 +687,7 @@
 </form>
 </div>
 
-@include('include.footers')
+@include('include.emp_footer')
 <script type="text/javascript">
     $("#Upload_cv").css('display', 'none');
 

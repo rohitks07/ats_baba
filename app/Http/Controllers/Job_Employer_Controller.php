@@ -19,6 +19,7 @@ use App\tbl_post_jobs;
 use App\tbl_schedule_interview;
 use App\Tbl_seeker_academic;
 use App\Tbl_seeker_applied_for_job;
+use App\Tbl_schedule_preview;
 use App\Tbl_seeker_applied_for_job_doc;
 use App\Tbl_seeker_experience;
 use App\Tbl_seeker_skills;
@@ -49,14 +50,18 @@ use App\tbl_forward_emp_details;
 use App\Tbl_seeker_documents;
 use App\tbl_job_history;
 use App\Tbl_time_zone;
-
-
-
-
+use App\tbl_application_candidate_reference;
+use App\tbl_application_candidate_exp_required;
+use App\tbl_application_candidate_documents;
+use App\tbl_application_emp_details;
 
 class Job_Employer_Controller extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('mian_session');
+    }
 
     public function dashboard()
     {
@@ -65,20 +70,36 @@ class Job_Employer_Controller extends Controller
         if ($toReturn['user_type'] == "teammember") {
             $toReturn['one_day_job'] = count(tbl_post_job::whereDate('dated', '=', date('Y-m-d'))->where('employer_ID', Session::get('user_id'))->get());
             $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
-            if ($one_group_teammember_employer_id) {
-                $toReturn['total_job'] = count(tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->get());
-            } else {
-                $toReturn['total_job'] = count(tbl_post_jobs::where('employer_ID', Session::get('id'))->get());
-            }
+
+            $toReturn['total_job'] = count(tbl_post_jobs::where('employer_ID', Session::get('id'))->get());
+
+
+            $toReturn['today_resume'] = count(Tbl_job_seekers::where('employer_id', Session::get('user_id'))->where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['total_resume'] = count(Tbl_job_seekers::where('employer_id', Session::get('user_id'))->get());
+
+            $toReturn['total_interview'] = count(tbl_schedule_interview::get());
+            $toReturn['today_interview'] = count(tbl_schedule_interview::where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
+            $toReturn['today_meeting'] = count(tbl_meeting::where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['total_meeting'] = count(tbl_meeting::get());
             $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
             if ($one_group_teammember_employer_id) {
-                // $toReturn['today_resume']
-                $toReturn['today_resume'] = count(Tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->where('dated', '=', date('Y-m-d'))->get());
-                $toReturn['total_resume'] = count(Tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->get());
+                $toReturn['today_application'] = count(Tbl_seeker_applied_for_job::whereIn('submitted_by', $one_group_teammember_employer_id)->where('dated', '=', date('Y-m-d'))->get());
+                $toReturn['total_application'] = count(Tbl_seeker_applied_for_job::whereIn('submitted_by', $one_group_teammember_employer_id)->get());
             } else {
-                $toReturn['today_resume'] = count(Tbl_job_seekers::where('employer_id', Session::get('user_id'))->where('dated', '=', date('Y-m-d'))->get());
-                $toReturn['total_resume'] = count(Tbl_job_seekers::where('employer_id', Session::get('user_id'))->get());
+                $toReturn['today_application'] = count(Tbl_seeker_applied_for_job::where('employer_ID', Session::get('user_id'))->where('dated', '=', date('Y-m-d'))->get());
+                $toReturn['total_application'] = count(Tbl_seeker_applied_for_job::where('employer_ID', Session::get('user_id'))->get());
             }
+        }
+
+        //team lead
+        else if ($toReturn['user_type'] == "teamlead") {
+            $toReturn['one_day_job'] = count(tbl_post_job::whereDate('dated', '=', date('Y-m-d'))->where('employer_ID', Session::get('user_id'))->get());
+            $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
+            $toReturn['total_job'] = count(tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->get());
+            $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
+            $toReturn['today_resume'] = count(Tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['total_resume'] = count(Tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->get());
             $toReturn['total_interview'] = count(tbl_schedule_interview::get());
             $toReturn['today_interview'] = count(tbl_schedule_interview::where('dated', '=', date('Y-m-d'))->get());
             $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
@@ -98,7 +119,7 @@ class Job_Employer_Controller extends Controller
             $toReturn['total_job'] = count(tbl_post_job::where('company_ID', $org_id)->get());
             $toReturn['one_day_job'] = count(tbl_post_job::whereDate('dated', '=', date('Y-m-d'))->where('company_ID', $org_id)->get());
             $toReturn['today_application'] = count(Tbl_seeker_applied_for_job::where('employer_ID', $id)->where('dated', '=', date('Y-m-d'))->get());
-            $toReturn['total_application'] = count(Tbl_seeker_applied_for_job::where('employer_ID', $id)->get());
+            $toReturn['total_application'] = count(Tbl_seeker_applied_for_job::whereIn('employer_ID', Session::get('one_group_teammember_id'))->get());
             // $toReturn['total_resume']=count(Tbl_job_seekers::where('employer_id',$id)->get());  
             $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
             $toReturn['today_interview'] = count(tbl_schedule_interview::where('dated', '=', date('Y-m-d'))->get());
@@ -209,9 +230,19 @@ class Job_Employer_Controller extends Controller
     public function view_post_form()
     {
         $toReturn = array();
-        $toReturn['team_member_type'] = tbl_team_member_type::get()->toArray();
+        // $toReturn['team_member_type'] = tbl_team_member_type::get()->toArray();
         $toReturn['post_job']        = tbl_post_jobs::get()->toArray();
-        $toReturn['team_member']     = tbl_team_member::get()->toArray();
+        if (Session::get('type') == "employer") {
+            $toReturn['team_member']     = tbl_team_member::get()->toArray();
+            $toReturn['team_member_type'] = tbl_team_member_type::get()->toArray();
+        } else {
+            $toReturn['team_member']     = tbl_team_member::where('team_member_type', Session::get('teamleader_id'))->orWhere('ID', Session::get('user_id'))->get()->toArray();
+            $toReturn['team_member_id'] = tbl_team_member::where('ID', Session::get('user_id'))->first();
+            $toReturn['team_member_type'] = tbl_team_member_type::where('type_ID', @$toReturn['team_member_id']['team_member_type'])->get()->toArray();
+            // return $toReturn['team_member_type'];
+
+            // $toReturn['is_team_leader']=tbl_team_member_type::where('team_leader_id',Session::get('user_id'))->first();
+        }
         $toReturn['job_industries']  = tbl_job_industries::get()->toArray();
         $toReturn['cities']          = cities::get()->toArray();
         $toReturn['countries']       = countries::get()->toArray();
@@ -227,8 +258,8 @@ class Job_Employer_Controller extends Controller
     public function Add_to_post_job(Request $request)
     {
 
-        $jobs_list = tbl_post_jobs::where('job_code', 00000)->get()->toArray();
-        // return $jobs_list;
+        // $jobs_list = tbl_post_jobs::where('job_code', 00000)->get()->toArray();
+        // return $request->job_code;
         $Add_to_post_job = new tbl_post_jobs();
         $Add_to_post_job->for_group     =  $request->group_of_company;
         $Add_to_post_job->client_name    =  $request->company_name;
@@ -238,7 +269,7 @@ class Job_Employer_Controller extends Controller
         $Add_to_post_job->job_code       =  $request->job_code;
         $Add_to_post_job->job_title      =  $request->job_title;
         $Add_to_post_job->vacancies      =  $request->no_of_vacancies;
-        $Add_to_post_job->employer_ID     =  Session::get('id');                          
+        $Add_to_post_job->employer_ID     = Session::get('id');
         $Add_to_post_job->owner_id = $request->owner_name;
         $Add_to_post_job->company_ID = Session::get('org_ID');
         $date = $request->closeing_date;
@@ -323,22 +354,14 @@ class Job_Employer_Controller extends Controller
     {
         ini_set('memory_limit', '-1');
         $toReturn[] = array();
-        // $toReturn['state']=Tbl_state::get()->toArray();
-        //  $toReturn['city']=Tbl_cities::get()->toArray();
-        // $toReturn['countries']=Tbl_countries::get()->toArray();
         $to = tbl_post_jobs::where('ID', $id)->get('for_group')->toArray();
-
         $toReturn['member_type'] = Tbl_team_member_type::where('type_ID', $to)->get('type_name')->first();
         //    return $toReturn['member_type'];
-
         $toReturn['qualification'] = Tbl_qualifications::get()->toArray();
         $toReturn['post_job_edit'] = tbl_post_jobs::get()->toArray();
         $toReturn['post_job'] = tbl_post_jobs::where('ID', $id)->first();
         $io = tbl_post_jobs::where('ID', $id)->get()->first();
-
-
         $toReturn['name'] = tbl_team_member::where('ID', $io['owner_id'])->get(['ID', 'full_name'])->toArray();
-
         $toReturn['team_member_type'] = tbl_team_member_type::get()->toArray();
         $toReturn['team_member']     = tbl_team_member::get()->toArray();
         // return $toReturn['team_member'];
@@ -457,12 +480,35 @@ class Job_Employer_Controller extends Controller
                     }
                 }
             }
-        }
-        $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
-        if ($one_group_teammember_employer_id) {
-            $toReturn['post_job'] = tbl_post_jobs::where('created_by', Session::get('id'))->orderBy('ID', 'DESC')->paginate(20);
-        } else {
+
+
             $toReturn['post_job'] = tbl_post_jobs::where('employer_ID', Session::get('id'))->orderBy('ID', 'DESC')->paginate(20);
+        }
+
+        if ($toReturn['user_type'] == 'teamlead') {
+            $user_permission_list = Session::get('user_permission');
+            if ($user_permission_list) {
+                foreach ($user_permission_list as $key => $value) {
+                    if ($user_permission_list[$key]['module_id'] == $current_module_id) {
+                        $toReturn['current_module_permission'] = Tbl_team_member_permission::where('permission_value', $current_module_id)->where('team_member_id', Session::get('user_id'))->first()->toArray();
+                    }
+                }
+            }
+            $group_teammember_user_id = Session::get('one_group_teammember_id');
+
+            foreach (@$group_teammember_user_id as $key => $value) {
+                $teammember_record = user::where('ID', $group_teammember_user_id[$key])->where('user_type', "teammember")->first();
+                $one_group_teammember_employer_id[$key] = @$teammember_record->ID;
+            }
+            // $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->orderBy('ID', 'DESC')->paginate(20);
+
+            $array_val = Session::get('one_group_teammember_id');
+
+            $toReturn['post_job']  = tbl_post_jobs::whereIn('created_by', $array_val)->orderBy('ID', 'DESC')->paginate(20);
+        }
+
+        if ($toReturn['user_type'] == "employer") {
+            $toReturn['post_job'] = tbl_post_jobs::where('company_ID', Session::get('org_ID'))->orderBy('ID', 'DESC')->paginate(20);
         }
         $post_job_show = tbl_job_seekers::get()->toArray();
 
@@ -474,7 +520,6 @@ class Job_Employer_Controller extends Controller
     {
 
         if ($request->seekerID != '' && $request->jobID != '') {
-
             $candiate_record = tbl_job_seekers::where('ID', $request->seekerID)->first();
             $job_record = tbl_post_jobs::where('ID', $request->jobID)->first();
             // return $candiate_record;
@@ -559,12 +604,14 @@ class Job_Employer_Controller extends Controller
             $user_id = Session::get('user_id');
         }
         $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
+        // return $one_group_teammember_employer_id;
         if ($one_group_teammember_employer_id) {
             $toReturn['application'] = Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs', 'tbl_seeker_applied_for_job.job_ID', '=', 'post_jobs.ID')
                 ->leftjoin('tbl_job_seekers as seeker', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'seeker.ID')
                 // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ' )
                 ->select('seeker.ID as seeker_id', 'tbl_seeker_applied_for_job.ID as application_id', 'tbl_seeker_applied_for_job.current_location as current_location', 'post_jobs.city as job_city', 'post_jobs.state as job_state', 'post_jobs.ID as ID', 'post_jobs.job_code as job_code', 'post_jobs.job_title as job_title', 'post_jobs.client_name as job_client_name', 'post_jobs.country as location', 'post_jobs.job_visa_status as  job_visa', 'post_jobs.pay_min as pay_min', 'seeker.city as seeker_city', 'seeker.state as seeker_state', 'post_jobs.pay_max as pay_max', 'seeker.first_name as can_first_name', 'seeker.last_name as can_last_name', 'seeker.country as can_location', 'seeker.visa_status as can_visa', 'tbl_seeker_applied_for_job.dated as applied_date')
                 ->whereIn('tbl_seeker_applied_for_job.submitted_by', $one_group_teammember_employer_id)
+                ->where('tbl_seeker_applied_for_job.org_id', Session::get('org_ID'))
                 ->orderBy('tbl_seeker_applied_for_job.ID', 'DESC')
                 ->paginate(20);
             // return $toReturn['application'][1]['job_state']; 
@@ -609,7 +656,7 @@ class Job_Employer_Controller extends Controller
             }
         } else {
             $toReturn['post_job'] = tbl_post_jobs::where('employer_ID', Session::get('id'))->paginate(10);
-            $personal = tbl_job_seekers::where('tbl_job_seekers.employer_id', Session::get('user_id'))->orderBy('ID', 'DESC')->distinct()->paginate(20);
+            $personal = tbl_job_seekers::where('tbl_job_seekers.employer_id', Session::get('user_id'))->where('org_id', Session::get('org_ID'))->orderBy('ID', 'DESC')->distinct()->paginate(20);
             foreach ($personal as $key => $value) {
                 $education = tbl_seeker_academic::where('seeker_ID', $personal[$key]->ID)->get('degree_title')->toArray();
                 foreach ($education as $key_seeker => $value) {
@@ -628,6 +675,21 @@ class Job_Employer_Controller extends Controller
                         $toReturn['current_module_permission'] = Tbl_team_member_permission::where('permission_value', $current_module_id)->where('team_member_id', Session::get('user_id'))->first()->toArray();
                     }
                 }
+            }
+        }
+        if ($toReturn['user_type'] == "employer") {
+            $all_user_id = user::where('org_ID', Session::get('org_ID'))->get('ID')->toArray();
+            $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->paginate(10);
+            $personal = tbl_job_seekers::whereIn('created_by', $one_group_teammember_employer_id)->where('org_id', Session::get('org_ID'))->orderBy('ID', 'DESC')
+                ->distinct()
+                ->paginate(20);
+            foreach ($personal as $key => $value) {
+                $eduArrya = array();
+                $education = tbl_seeker_academic::where('seeker_ID', $personal[$key]->ID)->get('degree_title')->toArray();
+                foreach ($education as $key_seeker => $value) {
+                    $eduArrya[$key_seeker] = $education[$key_seeker]['degree_title'];
+                }
+                $personal[$key]->degree = implode(',', $eduArrya);
             }
         }
         $job_list = Tbl_post_jobs::select('job_code', 'job_title', 'ID')->get()->toArray();
@@ -696,7 +758,9 @@ class Job_Employer_Controller extends Controller
         $postcandidate->mobile = $request->mobilephone;
         $postcandidate->home_phone = $request->homephone;
         $postcandidate->cv_file = $store_cv;
-        if (!empty($city_text)) {
+        // if (!empty($city_text)) {
+        //     $postcandidate->city    = $city_text;
+        if (($city_text !== "") && ($city_text !== null)) {
             $postcandidate->city    = $city_text;
         } else {
             $val_city = cities::where('city_id', $cit)->first('city_name');
@@ -728,6 +792,7 @@ class Job_Employer_Controller extends Controller
         $postcandidate->experience = $request->total_experience;
         $postcandidate->total_experience = $request->experience;
         $postcandidate->total_usa_experience = $request->total_usa_experience;
+        $postcandidate->org_id = Session::get('org_ID');
         $postcandidate->save();
         $id = $postcandidate->id;
         //return $id;
@@ -774,7 +839,6 @@ class Job_Employer_Controller extends Controller
                 $file_uploaded = $user_document_name->getClientOriginalExtension();
                 $user_document_name->move(public_path('forward_document'), $file_name);
                 $candidate_documents = new Tbl_seeker_documents();
-                //$candidate_documents->id=$forward_candidate->id;
                 $candidate_documents->document_type =  $file_uploaded;
                 $candidate_documents->file_name = $file_name;
                 $candidate_documents->status = 1;
@@ -862,6 +926,7 @@ class Job_Employer_Controller extends Controller
             ->with('city', tbl_cities::all())
             ->with('module', $module);
     }
+
     public function showteamadd(Request $Request)
     {
         if ($Request->hasFile('profile_image')) {
@@ -869,13 +934,10 @@ class Job_Employer_Controller extends Controller
             $new_profile_image = rand() . '.' . $profile_image->getClientOriginalExtension();
             $profile_image->move(public_path('seekerresume'), $new_profile_image);
         }
-
-
-
-
         $team = new tbl_team_member();
         $team->employer_id = Session::get('id');
         $team->company_id = Session::get('org_ID');
+        $team->org_id = Session::get('org_ID');
         // 	return $Request->member_id;
         $team->member_id = $Request->member_id;
         $team->team_member_type = $Request->group;
@@ -922,8 +984,9 @@ class Job_Employer_Controller extends Controller
         $user_tbl->full_name = $Request->full_name;
         $user_tbl->email = $Request->email;
         $user_tbl->user_id = $team->id;
+        $user_tbl->sts = 'active';
         $user_tbl->password = $Request->password;
-        $user_tbl->user_type = "teammember";
+        $user_tbl->user_type = $Request->team_type;
         $user_tbl->org_ID = Session::get('org_ID');
         $user_tbl->save();
         return redirect('employer/manageteammember');
@@ -946,6 +1009,7 @@ class Job_Employer_Controller extends Controller
         $teamType->date_closed = $date;
         $teamType->last_updated_date = $date;
         $teamType->last_updated_by = Session::get('id');
+        $teamType->org_id = Session::get('org_ID');
         $teamType->save();
         return redirect('employer/manageteammember');
     }
@@ -978,6 +1042,7 @@ class Job_Employer_Controller extends Controller
         $team_member = tbl_team_member::leftjoin('tbl_team_member_type as member_type', 'tbl_team_member.team_member_type', '=', 'member_type.type_ID')
             ->select(
                 'tbl_team_member.ID as ID',
+                'tbl_team_member.company_id as company_id',
                 'tbl_team_member.first_name as first_name',
                 'member_type.type_name as team_member_type',
                 'tbl_team_member.city as city',
@@ -990,9 +1055,11 @@ class Job_Employer_Controller extends Controller
                 'tbl_team_member.is_active as is_active',
                 'tbl_team_member.ID as ID'
             )
+            ->where('company_id', Session::get('org_ID'))
+            ->where('tbl_team_member.is_active', 'active')
             ->get();
 
-        $team_member_type = tbl_team_member_type::all();
+        $team_member_type = tbl_team_member_type::where('org_id', Session::get('org_ID'))->get();
 
         return view('manage_team_members')->with("team_member", $team_member)->with("team_member_type", $team_member_type)->with('toReturn', $toReturn);
     }
@@ -1007,19 +1074,18 @@ class Job_Employer_Controller extends Controller
         //for days
         $team_memeber = tbl_team_member::where('ID', $id)->first('email');
         $data = $team_memeber['email'];
+        $user = user::where('user_id', $id)->first();
 
 
         for ($j = 0; $j < 12; $j++) {
             $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-' . $j . ' days'));
             $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-' . $j . ' days'));
             $newDate[$j] = date("Y-m-d", strtotime($toReturn['week_date_dated_us'][$j]));
-            $toReturn['week_report'][$j]['job_created'] = count(tbl_post_job::whereDate('dated', $newDate[$j])->where('created_by', $id)->get());
+            $toReturn['week_report'][$j]['job_created'] = count(tbl_post_job::whereDate('dated', $newDate[$j])->where('created_by', $user->ID)->get());
             $toReturn['week_report'][$j]['candidate_created'] = count(Tbl_job_seekers::whereDate('dated', $newDate[$j])->where('created_by', $id)->get());
             $toReturn['week_report'][$j]['client_submittal'] = count(Tbl_forward_candidate::whereDate('forward_date', $newDate[$j])->where('forward_by', $data)->get());
             $toReturn['week_report'][$j]['application_submitted'] = count(Tbl_seeker_applied_for_job::whereDate('dated', $newDate[$j])->where('submitted_by', $id)->get());
         }
-
-
 
         // for months;
         $global = "";
@@ -1031,7 +1097,7 @@ class Job_Employer_Controller extends Controller
             } else {
                 $two = date('d-m-Y', (strtotime('-30 days', strtotime($global))));
                 $toReturn['monthly'][$i]['month_week_one1'] = $newDate = date("m-Y", strtotime($global));
-                $toReturn['monthly'][$i]['job_created_monthly1'] = count(tbl_post_job::whereMonth('dated', $toReturn['monthly'][$i]['month_week_one1'])->where('created_by', $id)->get());
+                $toReturn['monthly'][$i]['job_created_monthly1'] = count(tbl_post_job::whereMonth('dated', $toReturn['monthly'][$i]['month_week_one1'])->where('created_by', $user->ID)->get());
                 $toReturn['monthly'][$i]['candidate_created_monthly1'] = count(Tbl_job_seekers::whereMonth('dated', $toReturn['monthly'][$i]['month_week_one1'])->where('created_by', $id)->get());
                 $toReturn['monthly'][$i]['client_submittal_monthly1'] = count(Tbl_forward_candidate::whereMonth('forward_date', $toReturn['monthly'][$i]['month_week_one1'])->where('forward_by', $data)->get());
                 $toReturn['monthly'][$i]['application_submitted_monthly1'] = count(Tbl_seeker_applied_for_job::whereMonth('dated', $toReturn['monthly'][$i]['month_week_one1'])->where('submitted_by', $id)->get());
@@ -1061,7 +1127,15 @@ class Job_Employer_Controller extends Controller
 
     public function delete_teammember($id = "")
     {
-        $team_member_del = tbl_team_member::where('ID', $id)->delete();
+        // $team_member_del = tbl_team_member::where('ID', $id)->delete();
+
+        tbl_team_member::where('ID', $id)->update(array(
+            'is_active' => 'inactive'
+        ));
+        user::where('user_id', $id)->update(array(
+            'sts' => 'inactive'
+        ));
+
         return redirect('employer/manageteammember');
     }
 
@@ -1070,6 +1144,7 @@ class Job_Employer_Controller extends Controller
     {
         $data = tbl_team_member::where('ID', $id)->first();
         $toReturn['cities']     = cities::get()->toArray();
+        $toReturn['user']     = user::where('user_id', $id)->first();
         $toReturn['countries']  = countries::get()->toArray();
         $toReturn['states']     = states::get()->toArray();
         $toReturn['editteam'] = tbl_team_member_permission::where('team_member_id', $id)
@@ -1133,6 +1208,15 @@ class Job_Employer_Controller extends Controller
             'last_updated_date' => $date,
             'last_updated_by' => 2
         ));
+
+        user::where('user_id', $Request->ID)->update(array(
+            'full_name' => $Request->full_name,
+            'email'     => $Request->email,
+            'password'  => $Request->password,
+            'user_type'  => $Request->team_type
+        ));
+
+
         $module = $Request->editchange;
         // return $Request->ID;
         // exit;
@@ -1156,6 +1240,7 @@ class Job_Employer_Controller extends Controller
 
         return redirect('employer/manageteammember');
     }
+
     public function manageteamadd()
     {
         $team_member_type = tbl_team_member_type::all();
@@ -1256,6 +1341,7 @@ class Job_Employer_Controller extends Controller
             $assigned_job->status = "active";
             $assigned_job->read_flag = 0;
             $assigned_job->first_read_date_time = now();
+            $assigned_job->org_id = Session::get('org_ID');
             $assigned_job->favourite_flag = 0;
             $assigned_job->save();
             $id_assign = $assigned_job->id;
@@ -1331,12 +1417,17 @@ class Job_Employer_Controller extends Controller
             ->leftjoin('tbl_seeker_applied_for_job', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'tbl_job_seekers.ID')
             ->where('tbl_job_seekers.ID', $id)
             ->first();
-        //   return $toReturn['personal']->last_name;
+        $toReturn['candiate_extra_doc'] = Tbl_seeker_documents::where('seeker_ID', $id)->orderBy('ID', 'DESC')->get()->toArray();
+
+        //   return $toReturn['candiate_extra_doc '];
         $toReturn['job_list'] = tbl_post_jobs::get()->toArray();
+
+
         return view('employer_submit_to_job')->with('toReturn', $toReturn);
     }
     public function submit_candidate(Request $Request)
     {
+        if ($Request->job_id) { }
         $mydate = date('m-Y-d');
         $seeker_name = $Request->seeker_name;
         if ($Request->hasFile('updated_resume')) {
@@ -1388,7 +1479,62 @@ class Job_Employer_Controller extends Controller
         $seeker_applied_for_job->submitted_by = Session::get('user_id');
         $seeker_applied_for_job->pay_min = $pay_min;
         $seeker_applied_for_job->pay_max = $pay_max;
+        $seeker_applied_for_job->org_id = Session::get('org_ID');
         $seeker_applied_for_job->save();
+        foreach ($Request->reference as $key => $valuecandaidate) {
+            if ((!empty($Request->reference[$key][0])) && (!empty($Request->reference[$key][1])) && (!empty($Request->reference[$key][2])) && (!empty($Request->reference[$key][3])) && (!empty($Request->reference[$key][4]))) {
+                $candidate_reference = new tbl_application_candidate_reference();
+                $candidate_reference->forward_candidate_id = $seeker_applied_for_job->id;
+                $candidate_reference->fullname = $valuecandaidate[0];
+                $candidate_reference->officialEmail = $valuecandaidate[1];
+                $candidate_reference->designation = $valuecandaidate[2];
+                $candidate_reference->clientName = $valuecandaidate[3];
+                $candidate_reference->location = $valuecandaidate[4];
+                $candidate_reference->org_id = Session::get('org_ID');
+                $candidate_reference->save();
+            }
+        }
+        foreach ($Request->experience as $key => $valueexp) {
+            if (!empty($Request->experience[$key][0]) && (!empty($Request->experience[$key][1])) && (!empty($Request->experience[$key][2]))) {
+                $candidate_exp = new tbl_application_candidate_exp_required();
+                $candidate_exp->forward_candidate_id = $seeker_applied_for_job->id;
+                $candidate_exp->skills    = $valueexp[0];
+                $candidate_exp->yrs_of_exp    = $valueexp[1];
+                $candidate_exp->expertise_level = $valueexp[2];
+                $candidate_exp->org_id = Session::get('org_ID');
+                $candidate_exp->save();
+            }
+        }
+        if ($Request->file('document_upload') != "") {
+            foreach ($Request->file('document_upload') as $key => $file) {
+                $user_document_name = $Request->document_name[$key];
+                $file_name = $file->getClientOriginalName();
+                $file_uploaded =  $user_document_name . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('forward_document'), $file_uploaded);
+                $forward_candidate_documents = new tbl_application_candidate_documents();
+                $forward_candidate_documents->forward_candidate_id = $seeker_applied_for_job->id;
+                $forward_candidate_documents->document_name = $user_document_name;
+                $forward_candidate_documents->documents = $file_uploaded;
+                $forward_candidate_documents->status = 1;
+                $forward_candidate_documents->created_by = Session::get('id');
+                $forward_candidate_documents->modified_by = Session::get('id');
+                $forward_candidate_documents->org_id = Session::get('org_ID');
+                $forward_candidate_documents->save();
+            }
+        }
+        if ($Request->Companyemp_detail) {
+            $emp_details = new tbl_application_emp_details();
+            $emp_details->forward_candidate_id = $seeker_applied_for_job->id;
+            $emp_details->company_name = $Request->Companyemp_detail;
+            $emp_details->email_Id = $Request->Emailemp_detail;
+            $emp_details->phone_number = $Request->Phoneemp_detail;
+            $emp_details->ext_no = $Request->extenson;
+            $emp_details->employer_name = $Request->Employeremp_detail;
+            $emp_details->status = 1;
+            $emp_details->created_by = Session('user_id');
+            $emp_details->org_id = Session::get('org_ID');
+            $emp_details->save();
+        }
         $job_history = new tbl_job_history();
         $job_history->job_id = $Request->job_id;
         $job_history->update_text = "this is Job Is Submited";
@@ -1396,6 +1542,7 @@ class Job_Employer_Controller extends Controller
         $job_history->created_by = Session::get('id');
         $job_history->updated_by = Session::get('id');
         $job_history->save();
+
         // return $seeker_applied_for_job;
         return redirect('employer/Application');
         // return $Request;
@@ -1457,6 +1604,9 @@ class Job_Employer_Controller extends Controller
     {
         $toReturn['meetingall'] = tbl_meeting::all();
         $toReturn['interviewall'] = tbl_schedule_interview::all();
+        $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['rejected'] = Tbl_schedule_preview::where('sts', 'rejected')->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['sent'] = Tbl_schedule_preview::where('sts', 'sent')->orderBy('id', 'DESC')->paginate(15);
         return view('calendar', compact('toReturn'));
     }
     public function del($id = "")
@@ -1530,7 +1680,7 @@ class Job_Employer_Controller extends Controller
         $toReturn['application_detail'] = Tbl_seeker_applied_for_job::where('ID', $id)->first();
         // return $toReturn['application_detail'];
         $toReturn['candiate_record'] = Tbl_job_seekers::where('ID', $toReturn['application_detail']->seeker_ID)->first();
-         $toReturn['candiate_extra_doc'] =Tbl_seeker_documents::where('seeker_ID',$toReturn['application_detail']->seeker_ID)->get('file_name')->toArray();
+        $toReturn['candiate_extra_doc'] = Tbl_seeker_documents::where('seeker_ID', $toReturn['application_detail']->seeker_ID)->get('file_name')->toArray();
         $toReturn['qualification'] = tbl_seeker_academic::where('ID', $toReturn['application_detail']->seeker_ID)->orderBy('ID', 'DESC')->first();
         $toReturn['form_email_id'] = Session::get('email');
         return view('forward_candidate')->with('toReturn', $toReturn);
@@ -1864,5 +2014,251 @@ class Job_Employer_Controller extends Controller
         // exit();
         $decoded_data = json_encode($data_array);
         return response($str);
+    }
+
+    public function search_jobs(Request $request)
+    {
+
+        ini_set('memory_limit', '-1');
+        $toReturn[] = array();
+        $current_module_id = 3;
+        $toReturn['user_type'] = Session::get('type');
+        if ($toReturn['user_type'] == "teammember") {
+            $user_permission_list = Session::get('user_permission');
+            if ($user_permission_list) {
+                foreach ($user_permission_list as $key => $value) {
+                    if ($user_permission_list[$key]['module_id'] == $current_module_id) {
+                        $toReturn['current_module_permission'] = Tbl_team_member_permission::where('permission_value', $current_module_id)->where('team_member_id', Session::get('user_id'))->first()->toArray();
+                    }
+                }
+            }
+
+
+            $toReturn['post_job'] = tbl_post_jobs::where('employer_ID', Session::get('id'))
+                ->where('job_title', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('job_code', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('ID', 'DESC')
+                ->paginate(20);
+        }
+
+        if ($toReturn['user_type'] == 'teamlead') {
+            $user_permission_list = Session::get('user_permission');
+            if ($user_permission_list) {
+                foreach ($user_permission_list as $key => $value) {
+                    if ($user_permission_list[$key]['module_id'] == $current_module_id) {
+                        $toReturn['current_module_permission'] = Tbl_team_member_permission::where('permission_value', $current_module_id)->where('team_member_id', Session::get('user_id'))->first()->toArray();
+                    }
+                }
+            }
+            $group_teammember_user_id = Session::get('one_group_teammember_id');
+
+            foreach (@$group_teammember_user_id as $key => $value) {
+                $teammember_record = user::where('ID', $group_teammember_user_id[$key])->where('user_type', "teammember")->first();
+                $one_group_teammember_employer_id[$key] = @$teammember_record->ID;
+            }
+            // $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->orderBy('ID', 'DESC')->paginate(20);
+
+            $array_val = Session::get('one_group_teammember_id');
+
+            $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $array_val)
+                ->where('job_title', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('job_code', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('ID', 'DESC')
+                ->paginate(20);
+        }
+
+        if ($toReturn['user_type'] == "employer") {
+            $toReturn['post_job'] = tbl_post_jobs::where('company_ID', Session::get('org_ID'))
+                ->where('job_title', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('job_code', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('ID', 'DESC')
+                ->paginate(20);
+        }
+        $post_job_show = tbl_job_seekers::get()->toArray();
+
+        return view('my_posted_jobs')->with('toReturn', $toReturn)->with('post_job_show', $post_job_show);
+    }
+
+
+    public function search_application(Request $request)
+    {
+
+        ini_set('memory_limit', '-1');
+        $user_type = Session::get('type');
+        if ($user_type == "employer") {
+            $user_id = Session::get('org_ID');
+        } else {
+            $user_id = Session::get('user_id');
+        }
+        $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
+        if ($one_group_teammember_employer_id) {
+
+            $toReturn['application'] = Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs', 'tbl_seeker_applied_for_job.job_ID', '=', 'post_jobs.ID')
+                ->leftjoin('tbl_job_seekers as seeker', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'seeker.ID')
+                ->select('seeker.ID as seeker_id', 'tbl_seeker_applied_for_job.ID as application_id', 'tbl_seeker_applied_for_job.current_location as current_location', 'post_jobs.city as job_city', 'post_jobs.state as job_state', 'post_jobs.ID as ID', 'post_jobs.job_code as job_code', 'post_jobs.job_title as job_title', 'post_jobs.client_name as job_client_name', 'post_jobs.country as location', 'post_jobs.job_visa_status as  job_visa', 'post_jobs.pay_min as pay_min', 'seeker.city as seeker_city', 'seeker.state as seeker_state', 'post_jobs.pay_max as pay_max', 'seeker.first_name as can_first_name', 'seeker.last_name as can_last_name', 'seeker.country as can_location', 'seeker.visa_status as can_visa', 'tbl_seeker_applied_for_job.dated as applied_date')
+                ->where('tbl_seeker_applied_for_job.org_id', Session::get('org_ID'))
+                ->whereIn('tbl_seeker_applied_for_job.submitted_by', $one_group_teammember_employer_id)
+                ->where('post_jobs.job_title', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('post_jobs.job_code', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('post_jobs.client_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('seeker.first_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('seeker.middle_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('seeker.last_name', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('tbl_seeker_applied_for_job.ID', 'DESC')
+                ->paginate(20);
+        } else {
+            $toReturn['application'] = Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs', 'tbl_seeker_applied_for_job.job_ID', '=', 'post_jobs.ID')
+                ->leftjoin('tbl_job_seekers as seeker', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'seeker.ID')
+                // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ')
+                ->select('seeker.ID as seeker_id', 'tbl_seeker_applied_for_job.ID as application_id', 'tbl_seeker_applied_for_job.current_location as current_location', 'post_jobs.city as job_city', 'post_jobs.state as job_state', 'post_jobs.ID as ID', 'post_jobs.job_code as job_code', 'post_jobs.job_title as job_title', 'post_jobs.client_name as job_client_name', 'post_jobs.country as location', 'post_jobs.job_visa_status as  job_visa', 'post_jobs.pay_min as pay_min', 'seeker.city as seeker_city', 'seeker.state as seeker_state', 'post_jobs.pay_max as pay_max', 'seeker.first_name as can_first_name', 'seeker.last_name as can_last_name', 'seeker.country as can_location', 'seeker.visa_status as can_visa', 'tbl_seeker_applied_for_job.dated as applied_date')
+                ->where('tbl_seeker_applied_for_job.employer_ID', $user_id)
+                ->where('post_jobs.job_title', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('post_jobs.job_code', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('post_jobs.client_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('seeker.first_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('seeker.middle_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('seeker.last_name', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('tbl_seeker_applied_for_job.ID', 'DESC')
+                ->paginate(20);
+        }
+        return view('employerApplication')->with('toReturn', $toReturn);
+    }
+
+    public function candidate_search(Request $request)
+    {
+
+
+        ini_set('memory_limit', '-1');
+        $toReturn = array();
+        $source = "Internal";
+        $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
+        if ($one_group_teammember_employer_id) {
+            $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->paginate(10);
+
+
+            $personal = tbl_job_seekers::whereIn('created_by', $one_group_teammember_employer_id)
+                ->where('first_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('middle_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('visa_status', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('ID', 'DESC')
+                ->distinct()
+                ->paginate(20);
+
+
+
+
+            foreach ($personal as $key => $value) {
+                $eduArrya = array();
+                $education = tbl_seeker_academic::where('seeker_ID', $personal[$key]->ID)->get('degree_title')->toArray();
+                foreach ($education as $key_seeker => $value) {
+                    $eduArrya[$key_seeker] = $education[$key_seeker]['degree_title'];
+                }
+                $personal[$key]->degree = implode(',', $eduArrya);
+            }
+        } else {
+            $toReturn['post_job'] = tbl_post_jobs::where('employer_ID', Session::get('id'))->paginate(10);
+
+
+            $personal = tbl_job_seekers::where('tbl_job_seekers.employer_id', Session::get('user_id'))
+                ->where('org_id', Session::get('org_ID'))
+                ->where('first_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('middle_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('visa_status', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('ID', 'DESC')
+                ->distinct()
+                ->paginate(20);
+
+
+            foreach ($personal as $key => $value) {
+                $education = tbl_seeker_academic::where('seeker_ID', $personal[$key]->ID)->get('degree_title')->toArray();
+                foreach ($education as $key_seeker => $value) {
+                    $eduArrya[$key_seeker] = $education[$key_seeker]['degree_title'];
+                }
+                $personal[$key]->degree = implode(',', $eduArrya);
+            }
+        }
+        $current_module_id = 2;
+        $toReturn['user_type'] = Session::get('type');
+        if ($toReturn['user_type'] == "teammember") {
+            $user_permission_list = Session::get('user_permission');
+            if ($user_permission_list) {
+                foreach ($user_permission_list as $key => $value) {
+                    if ($user_permission_list[$key]['module_id'] == $current_module_id) {
+                        $toReturn['current_module_permission'] = Tbl_team_member_permission::where('permission_value', $current_module_id)->where('team_member_id', Session::get('user_id'))->first()->toArray();
+                    }
+                }
+            }
+        }
+        if ($toReturn['user_type'] == "employer") {
+            $all_user_id = user::where('org_ID', Session::get('org_ID'))->get('ID')->toArray();
+            $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->paginate(10);
+
+
+            $personal = tbl_job_seekers::whereIn('created_by', $one_group_teammember_employer_id)
+                ->where('org_id', Session::get('org_ID'))
+                ->where('first_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('middle_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('visa_status', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('ID', 'DESC')
+                ->distinct()
+                ->paginate(20);
+
+
+            foreach ($personal as $key => $value) {
+                $eduArrya = array();
+                $education = tbl_seeker_academic::where('seeker_ID', $personal[$key]->ID)->get('degree_title')->toArray();
+                foreach ($education as $key_seeker => $value) {
+                    $eduArrya[$key_seeker] = $education[$key_seeker]['degree_title'];
+                }
+                $personal[$key]->degree = implode(',', $eduArrya);
+            }
+        }
+        $job_list = Tbl_post_jobs::select('job_code', 'job_title', 'ID')->get()->toArray();
+        return view('search_resume')->with('personal', $personal)->with('source', $source)->with('toReturn', $toReturn)->with('job_list', $job_list);
+    }
+
+    public function submit_candidate_job_search(Request $request)
+    {
+
+        $source = "Internal";
+        $toReturn['personal'] = \DB::table('tbl_job_seekers')
+            ->select(
+                'tbl_job_seekers.ID as id',
+                'tbl_job_seekers.first_name as first',
+                'tbl_job_seekers.last_name as last_name',
+                'tbl_job_seekers.dob as dob',
+                'tbl_job_seekers.city as city',
+                'tbl_job_seekers.state as state',
+                'tbl_job_seekers.visa_status as visa',
+                'tbl_job_seekers.email as email',
+                'tbl_job_seekers.mobile as mobile',
+                'tbl_job_seekers.skype_id as skype_id',
+                'tbl_job_seekers.cv_file',
+                'tbl_seeker_applied_for_job.total_experience as experience',
+                'tbl_seeker_academic.degree_title as degree'
+            )
+            ->leftjoin('tbl_seeker_experience', 'tbl_seeker_experience.seeker_ID', '=', 'tbl_job_seekers.ID')
+            ->leftjoin('tbl_seeker_academic', 'tbl_seeker_academic.seeker_ID', '=', 'tbl_job_seekers.ID')
+            ->leftjoin('tbl_seeker_applied_for_job', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'tbl_job_seekers.ID')
+            ->where('tbl_job_seekers.ID', $request->id)
+            ->first();
+        $toReturn['candiate_extra_doc'] = Tbl_seeker_documents::where('seeker_ID', $request->id)->orderBy('ID', 'DESC')->get()->toArray();
+
+        //   return $toReturn['candiate_extra_doc '];
+        $toReturn['job_list'] = tbl_post_jobs::where('company_ID', Session::get('org_ID'))
+            ->where('job_title', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('job_code', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('client_name', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('job_mode', 'LIKE', '%' . $request->search . '%')
+            ->paginate(15);
+
+
+        return view('employer_submit_to_job')->with('toReturn', $toReturn);
     }
 }

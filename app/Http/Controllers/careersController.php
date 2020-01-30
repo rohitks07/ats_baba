@@ -19,7 +19,7 @@ class careersController extends Controller
     {
         return view('error_pages.page_404');
     }
-    $listjob=tbl_post_jobs::where('privacy_level','public')->where('company_ID',$company_record->ID)->get()->toArray();
+    $listjob=tbl_post_jobs::where('privacy_level','public')->where('company_ID',$company_record->ID)->paginate(5);
     // print_r($company_record->ID);
     // exit;
     return view('careers/careers')->with('listjob',$listjob)->with('company_record',$company_record);

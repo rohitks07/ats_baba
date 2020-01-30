@@ -12,29 +12,45 @@ use App\Tbl_seeker_applied_for_job;
 use App\Tbl_seeker_experience;
 use App\Tbl_forward_candidate;
 use App\Tbl_forward_candidate_reference;
+use App\Tbl_forward_candidate_exp_required;
 use App\Tbl_forward_candidate_document;
 use Mail;
 use App\tbl_forward_emp_details;
 use App\Tbl_seeker_documents;
 use App\tbl_job_history;
+use App\tbl_application_candidate_reference;
+use App\tbl_application_candidate_exp_required;
+use App\tbl_application_candidate_documents;
+use App\tbl_application_emp_details;
+
 
 class CandidateforwardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('mian_session');
+    }
     public function application_forword($id = "")
     {
         $toReturn['application_detail'] = Tbl_seeker_applied_for_job::where('ID', $id)->first();
-        // return $toReturn['application_detail'];
         $toReturn['candiate_record'] = Tbl_job_seekers::where('ID', $toReturn['application_detail']->seeker_ID)->first();
-        $toReturn['candiate_extra_doc'] =Tbl_seeker_documents::where('seeker_ID',$toReturn['application_detail']->seeker_ID)->get('file_name')->toArray();
-        // return $toReturn['candiate_extra_doc'];
-        $toReturn['qualification'] = tbl_seeker_academic::where('ID', $toReturn['application_detail']->seeker_ID)->orderBy('ID', 'DESC')->first();
+        // return $toReturn['candiate_record'];
+        $toReturn['candiate_extra_doc'] = Tbl_seeker_documents::where('seeker_ID', $toReturn['application_detail']->seeker_ID)->get('file_name')->toArray();
+        $toReturn['qualification'] = tbl_seeker_academic::where('seeker_ID', $toReturn['application_detail']->seeker_ID)->orderBy('ID', 'DESC')->first();
+        $toReturn['application_candidate_documents'] = tbl_application_candidate_documents::where('forward_candidate_id', $id)->get()->toArray();
+        $toReturn['application_candidate_exp_required'] = tbl_application_candidate_exp_required::where('forward_candidate_id', $id)->get()->toArray();
+        $toReturn['application_candidate_reference'] = tbl_application_candidate_reference::where('forward_candidate_id', $id)->get()->toArray();
+        $toReturn['application_emp_details'] = tbl_application_emp_details::where('forward_candidate_id', $id)->first();
         $toReturn['form_email_id'] = Session::get('email');
         return view('forward_candidate')->with('toReturn', $toReturn);
     }
     public function forward_candidate(Request $Request)
     {
-        // return $Request->seeker_doc;
-       
+        // return $Request->reference[0][0];
+
+
+        // return $Request->reference;
+        // return $Request->experience;
         $update_resume = $Request->update_Resume_file;
         $experience_list = $Request->experience;
         $reference_list = $Request->reference;
@@ -68,6 +84,7 @@ class CandidateforwardController extends Controller
         $forward_candidate->bcc = $Request->email_bcc;
         $forward_candidate->subject = $Request->email_subject;
         $forward_candidate->content = $Request->email_content;
+        $forward_candidate->email_sign = $Request->email_sign;
         $forward_candidate->fullname = $Request->fullname;
         $forward_candidate->ssn = $Request->last_for_digit_ssn;
         $forward_candidate->visa_status = $Request->us_visa_status;
@@ -93,8 +110,33 @@ class CandidateforwardController extends Controller
         $forward_candidate->personinterview = $Request->availa_for_per;
         $forward_candidate->availibilitynewproj = $Request->availa_for_new;
         $forward_candidate->expectedrate = $Request->expectedrate;
+        $forward_candidate->org_id = Session::get('org_ID');
         $forward_candidate->save();
-        $forward_candidate_reference = new Tbl_forward_candidate_reference();
+        // $forward_candidate_reference = new Tbl_forward_candidate_reference();
+        foreach ($Request->reference as $key => $valuecandaidate) {
+            if ((!empty($Request->reference[$key][0])) && (!empty($Request->reference[$key][1])) && (!empty($Request->reference[$key][2])) && (!empty($Request->reference[$key][3])) && (!empty($Request->reference[$key][4]))) {
+                $candidate_reference = new Tbl_forward_candidate_reference();
+                $candidate_reference->forward_candidate_id = $forward_candidate->id;
+                $candidate_reference->fullname = $valuecandaidate[0];
+                $candidate_reference->officialEmail = $valuecandaidate[1];
+                $candidate_reference->designation = $valuecandaidate[2];
+                $candidate_reference->clientName = $valuecandaidate[3];
+                $candidate_reference->location = $valuecandaidate[4];
+                $candidate_reference->org_id = Session::get('org_ID');
+                $candidate_reference->save();
+            }
+        }
+        foreach ($Request->experience as $key => $valueexp) {
+            if (!empty($Request->experience[$key][0]) && (!empty($Request->experience[$key][1])) && (!empty($Request->experience[$key][2])) && (!empty($Request->experience[$key][3])) && (!empty($Request->experience[$key][4]))) {
+                $candidate_exp = new Tbl_forward_candidate_exp_required();
+                $candidate_exp->forward_candidate_id = $forward_candidate->id;
+                $candidate_exp->skills    = $valueexp[0];
+                $candidate_exp->yrs_of_exp    = $valueexp[1];
+                $candidate_exp->expertise_level = $valueexp[2];
+                $candidate_exp->org_id = Session::get('org_ID');
+                $candidate_exp->save();
+            }
+        }
         $send_mail_id = Session::get('email');
         $forword_candidate['sender_fullname'] = Session::get('full_name');
         $forward_candidate['skypeid'] = $Request->skypeid;
@@ -108,30 +150,20 @@ class CandidateforwardController extends Controller
         $forward_candidate['us_exper'] = @$seeker_detail->total_usa_experience;
         $forward_candidate['it_exper'] = @$seeker_detail->experience;
         $email_to = $Request->email_to;
-         if($Request->seeker_doc)
-        {
-        $seeker_document=array();
-        $seeker_document_value=array();
-            foreach($Request->seeker_doc as $key=>$value)
-            {
-                $seeker_document[]=$Request->seeker_doc[$key];
-               
+        if ($Request->seeker_doc) {
+            $seeker_document = array();
+            $seeker_document_value = array();
+            foreach ($Request->seeker_doc as $key => $value) {
+                $seeker_document[] = $Request->seeker_doc[$key];
             }
         }
-       
-        if($Request->extra_seeker_doc)
-        {
-        $extra_seeker_document=array();
-        foreach($Request->extra_seeker_doc as $key=>$value)
-        {
-            $extra_seeker_document[]=$Request->extra_seeker_doc[$key];
-        }
-        }
-        // return $Request->extra_seeker_doc[0];
-        // print_r($seeker_document);
 
-        // print_r($extra_seeker_document);
-        // exit;
+        if ($Request->extra_seeker_doc) {
+            $extra_seeker_document = array();
+            foreach ($Request->extra_seeker_doc as $key => $value) {
+                $extra_seeker_document[] = $Request->extra_seeker_doc[$key];
+            }
+        }
         if ($Request->file('document_upload') != "") {
             foreach ($Request->file('document_upload') as $key => $file) {
                 $user_document_name = $Request->document_name[$key];
@@ -145,13 +177,14 @@ class CandidateforwardController extends Controller
                 $forward_candidate_documents->status = 1;
                 $forward_candidate_documents->created_by = Session::get('id');
                 $forward_candidate_documents->modified_by = Session::get('id');
+                $forward_candidate_documents->org_id = Session::get('org_ID');
                 $forward_candidate_documents->save();
                 $document_array = Tbl_forward_candidate_document::where('forward_candidate_id', $forward_candidate->id)->get('documents')->toArray();
                 $data['document_array'] = $document_array;
             }
-            $data = array('forward_candidate' => $forward_candidate, 'experience_list' => $experience_list, 'reference_list' => $reference_list,'document_array' => $document_array,'seeker_document'=>@$seeker_document,'extra_seeker_document'=>@$extra_seeker_document);
+            $data = array('forward_candidate' => $forward_candidate, 'experience_list' => $experience_list, 'reference_list' => $reference_list, 'document_array' => $document_array, 'seeker_document' => @$seeker_document, 'extra_seeker_document' => @$extra_seeker_document);
         } else {
-            $data = array('forward_candidate' => $forward_candidate, 'experience_list' => $experience_list, 'reference_list' => $reference_list,'seeker_document'=>@$seeker_document,'extra_seeker_document'=>@$extra_seeker_document);
+            $data = array('forward_candidate' => $forward_candidate, 'experience_list' => $experience_list, 'reference_list' => $reference_list, 'seeker_document' => @$seeker_document, 'extra_seeker_document' => @$extra_seeker_document);
         }
         if ($Request->Companyemp_detail) {
             $emp_details = new tbl_forward_emp_details();
@@ -163,19 +196,11 @@ class CandidateforwardController extends Controller
             $emp_details->employer_name = $Request->Employeremp_detail;
             $emp_details->status = 1;
             $emp_details->created_by = Session('user_id');
+            $emp_details->org_id = Session::get('org_ID');
             $emp_details->save();
             $data['emp_details'] = $emp_details;
         }
-        //  if ($data['seeker_document']) {
-             
-                    // print_r($data);
-                // }
-        // print_r($seeker_document);
-        // exit;
-        // echo "<pre>";
-        // print_r($data['extra_seeker_doc']);
-        // exit;
-        // return view('emails.forward_candidate')->with('data',$data);
+
         Mail::send('emails.forward_candidate', ['data' => $data], function ($message) use ($data) {
             $email_to = explode(',', $data['forward_candidate']['forward_to']);
             foreach ($email_to as $key => $value) {
@@ -200,36 +225,34 @@ class CandidateforwardController extends Controller
                     $message->attach($document_path);
                 }
                 if (@$data['extra_seeker_document']) {
-                    foreach (@$data['extra_seeker_document'] as $key=>$value) {
+                    foreach (@$data['extra_seeker_document'] as $key => $value) {
                         $path = "public/forward_document/" . @$data['extra_seeker_document'][$key];
                         $message->attach($path);
                     }
                 }
                 if (@$data['seeker_document']) {
-                    foreach (@$data['seeker_document'] as $key=>$value) {
-                    $path = "public/seekerresume/". @$data['seeker_document'][$key];
-                    $message->attach($path);
+                    foreach (@$data['seeker_document'] as $key => $value) {
+                        $path = "public/seekerresume/" . @$data['seeker_document'][$key];
+                        $message->attach($path);
                     }
                 }
-            }
-            else
-            {
+            } else {
                 if (@$data['extra_seeker_document']) {
-                    foreach (@$data['extra_seeker_document'] as $key=>$value) {
+                    foreach (@$data['extra_seeker_document'] as $key => $value) {
                         $path = "public/forward_document/" . @$data['extra_seeker_document'][$key];
                         $message->attach($path);
                     }
                 }
                 if (@$data['seeker_document']) {
-                    foreach (@$data['seeker_document'] as $key=>$value) {
-                    $path = "public/seekerresume/" . @$data['seeker_document'][$key];
-                    $message->attach($path);
+                    foreach (@$data['seeker_document'] as $key => $value) {
+                        $path = "public/seekerresume/" . @$data['seeker_document'][$key];
+                        $message->attach($path);
                     }
                 }
             }
             $message->from($data['forward_candidate']['forward_by'], $data['forward_candidate']['sender_fullname']);
         });
-    // return "done";
+        // return "done";
         $job_history = new tbl_job_history();
         $job_history->job_id = $Request->job_id;
         $job_history->update_text = "this is Job Is Sumit To Client";
@@ -237,6 +260,14 @@ class CandidateforwardController extends Controller
         $job_history->created_by = Session::get('id');
         $job_history->updated_by = Session::get('id');
         $job_history->save();
+        // return "done";
         return redirect('employer/Application');
+    }
+    public function List_submited_application()
+    {
+        $list_application_submittal = Tbl_forward_candidate::get()->toArray();
+        return view('application.sumitted_application')->with('application', $list_application_submittal);
+        print_r($list_application_submittal[0]);
+        exit;
     }
 }

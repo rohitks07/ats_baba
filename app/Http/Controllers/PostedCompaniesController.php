@@ -16,6 +16,7 @@ use Validator;
 
 class PostedCompaniesController extends Controller
 {
+   
    public function index()
    {
    	$post_company=Tbl_post_company::all();

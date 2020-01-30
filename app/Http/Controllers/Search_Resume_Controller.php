@@ -24,6 +24,11 @@ use App\Tbl_notification;
 
 class Search_Resume_Controller extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('mian_session');
+
+		}
     
     public function index(){
 
@@ -374,7 +379,7 @@ public function view_education($id="")
     {
         $data= Tbl_job_seekers::where('ID',$seeker_id)->first();
         $results = array();
-          $matchrecord=DB::table('tbl_post_jobs')->where('required_skills','LIKE', '%'.$data->skills.'%')->where('city', 'LIKE', '%'.$data->city.'%')->where('job_visa_status', 'LIKE', '%'.$data->visa_status.'%')->get()->toArray();
+          $matchrecord=DB::table('tbl_post_jobs')->orWhere('required_skills','LIKE', '%'.$data->skills.'%')->orWhere('city', 'LIKE', '%'.$data->city.'%')->where('job_visa_status', 'LIKE', '%'.$data->visa_status.'%')->orderBy('ID','DESC')->get()->toArray();
           $results['job_record']=$matchrecord;
         foreach($matchrecord as $key=>$value)
         {

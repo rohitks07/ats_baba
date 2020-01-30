@@ -11,50 +11,18 @@
     });
 </script>
 <style>
-    .table td {
-        padding: 7px;
-        font-size: top;
-        border-top: 1px solid #dee2e6;
-        font-size: 14px;
-        color: #000;
-        background: #fff;
-    }
-
-    .table tr {
-        padding: 7px;
-        font-size: top;
-        border-top: 1px solid #dee2e6;
-        font-size: 14px;
-        color: #000;
-        background: #fff;
-    }
-
-    .table th {
-        padding: 7px;
-        font-size: top;
-        border-top: 1px solid #dee2e6;
-        font-size: 14px;
-    }
-
-    .form-control {
-        border: 1px solid #737373;
-        width: 84%;
-    }
-
-    .active,
-    .btn:hover {
-        background-color: #000000;
-        color: white;
-    }
-
-    .control-label {
-        font-family: inherit;
+    .mini-stat-info span {
+        color: #ffffff;
+        display: block;
+        font-size: 21px;
+        font-weight: 500;
     }
 
     .card .card-header {
         padding: 10px 20px;
         border: none;
-        background: #428bca;
+        background: #317eeb;
+        ;
         color: #fff;
     }
 
@@ -67,119 +35,66 @@
         text-transform: none;
     }
 
-    .checkbox label {
-        display: inline-block;
-        padding-left: 5px;
-        position: absolute;
-        font-weight: 400;
-    }
-
-    .content-page {
-        overflow: hidden;
-        width: 100%;
-    }
-
-    .content-page>.content {
-        margin-bottom: 60px;
-        margin-top: 0px;
-        padding: 20px 10px 15px 10px;
-    }
-
-    .element {
-        background: #fff;
-        width: 100% height: 100%;
-
-    }
-
-    .formwraper {
-        margin-bottom: 20px;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px 5px 0 0;
-        width: 100%;
-    }
-
-    .jobdescription {
-        border: 1px solid #ddd;
-    }
-
-    .jobdescription .skillBox {
-        padding: 5px;
-        border: 1px solid #ddd;
-        font-size: 13px;
-        line-height: 18px;
-    }
-
-    .input-group-addon {
-        padding: 6px 15px;
-        font-size: 14px;
-        font-weight: 400;
-        color: #ffffff;
-        text-align: center;
-        background-color: #29b6f6;
-    }
-
-    input[type=text],
-    textarea,
-        {
-        -moz-transition: all 0.3s ease-in-out;
-        -o-transition: all 0.3s ease-in-out;
-        -webkit-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out;
-        outline: none;
-        padding: 15px 71px 1px 4px;
-        margin: 5px 1px 3px 0px;
-        border: 1px solid #DDDDDD;
-
-    }
-
-    input[type=text]:focus,
-    textarea:focus {
-        -moz-box-shadow: 0 0 5px #51cbee;
-        -webkit-box-shadow: 0 0 5px #51cbee;
-        box-shadow: 0 0 5px #51cbee;
-
-        border: 1px solid #51cbee;
-    }
-
-    label {
-        width: 100%;
-        float: left;
-    }
-
-    label {
-        font-weight: 200;
-        font-family: inherit;
-        font-size: 15px;
-    }
-
-
-    input[type=text] {
-        width: 83%;
-        padding: 7px;
-        border-radius: 5px;
-    }
-
-    textarea {
-        border-radius: 5px;
-        width: 48%;
+    .social {
+        margin-left: 13%;
     }
 
     #wrapper {
-        overflow-y: scroll;
         width: 100%;
+        overflow-y: scroll;
     }
 
-    .ui-datepicker-calendar {
-        display: none;
+    table.dataTable thead>tr>th {
+        / padding-left: 8px;/ padding-right: 30px;
+    }
+
+    .table-bordered th {
+        border-top: 4px solid #f5f5f5 !important;
+        border-bottom: 4px solid #f5f5f5 !important;
+        border-right: 4px solid #f5f5f5 !important;
+        border-left: 4px solid #f5f5f5 !important;
+        color: #000;
+        font-size: 13px;
+        padding: 0.5em;
+    }
+
+    .table td {
+        padding: 0.10rem;
+        font-size: 12px;
+        padding-left: 1em;
+        border-top: 4px solid #f5f5f5 !important;
+        border-bottom: 4px solid #f5f5f5 !important;
+        border-right: 4px solid #f5f5f5 !important;
+        border-left: 4px solid #f5f5f5 !important;
+        color: #000;
+
+    }
+
+    .card .card-header {
+        padding: 10px 20px;
+        /* border: none; */
+        background: #fff;
+        color: #fff;
+    }
+
+    .page-link {
+        position: relative;
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #007bff;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        margin-bottom: 3em;
     }
 </style>
 <div id="wrapper">
     <div class="content-page">
-        <div class="content"> <br><br><br>
+        <div class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card" style="border: 1px #C0C0C0 solid; width: 87%;">
+                    <div class="card" style="border: 1px #C0C0C0 solid; width: 100%;">
                         <div class="card-header" style="background-color: #317eeb;">
                             <h3 class="card-title" style="color:#fff;text-transform: none; font-size:large">Add
                                 Candidate</h3>
@@ -341,8 +256,7 @@
                                             <div id="textCity" style="display:none;" class="form-group row col-md-12">
                                                 <label for="" class="control-label col-lg-4">Enter City <span style="color:red;">*</span></label>
                                                 <input type="text" class="col-sm-5" id="city_text_" name="city_text_name">
-                                                <label for="" id="enter_city" style="display:block">Must be
-                                                    filled</label>
+                                                <label for="" id="enter_city" style="display:block">Invalid entry</label>
                                             </div>
                                         </div>
                                         <!--end Location -->
@@ -647,8 +561,33 @@
 </div> <!-- container -->
 </div> <!-- content -->
 </div>
+</div>
 <!-- END wrapper -->
 @include('include.emp_footer')
+<script>
+$(document).ready(function(){
+   setTimeout(function () {
+            $('#preloader').velocity({
+                opacity: 0.1,
+                translateY: "-80px"
+            }, {
+                duration: 400,
+                complete: function () {
+                    $('#hola').velocity({
+                        translateY: "-100%"
+                    }, {
+                        duration: 1000,
+                        easing: [0.7, 0, 0.3, 1],
+                        complete: function () {
+                            $('.home').addClass('animate-border divide');
+                        }
+                    })
+                }
+            })
+        }, 1000)
+        }); 
+});
+</script>
 <script>
     $(document).ready(function() {
         $("#btnAdd_doc").click(function() {
@@ -904,7 +843,7 @@
         function check_firstname() {
             var firstname_val = $("#first_name").val();
 
-            var regexOnlyText = /^[a-zA-Z]+$/;
+            var regexOnlyText = /^[a-zA-Z ]+$/;
             if (firstname_val == "" || regexOnlyText.test(firstname_val) != true) {
                 $("#first_namecheck").show();
                 $("#first_namecheck").focus();
@@ -925,7 +864,7 @@
         function check_middlename() {
             var middlename_val = $("#middle_name").val();
 
-            var regexOnlyText = /^[a-zA-Z]+$/;
+            var regexOnlyText = /^[a-zA-Z ]+$/;
             if (middlename_val != "") {
                 if (regexOnlyText.test(middlename_val) != true) {
                     $("#middle_namecheck").show();
@@ -951,7 +890,7 @@
         function check_lastname() {
             var lastname_val = $("#last_name").val();
 
-            var regexOnlyText = /^[a-zA-Z]+$/;
+            var regexOnlyText = /^[a-zA-Z ]+$/;
             if (lastname_val == "" || regexOnlyText.test(lastname_val) != true) {
                 $("#last_namecheck").show();
                 $("#last_namecheck").focus();
@@ -1091,6 +1030,9 @@
         $("#country").blur(function() {
             check_location();
         });
+        $("#city_text_").blur(function() {
+            check_location();
+        });
 
         function check_location() {
             var loc_val = $("#country").val();
@@ -1124,8 +1066,21 @@
                     err_city = false;
                     return false;
                 } else {
-                    $('#enter_city').css('color', 'red');
-                    $('#enter_city').css('display', 'none');
+                    // $('#enter_city').css('color', 'red');
+                    // $('#enter_city').css('display', 'none');
+                     var city = document.getElementById("city_text_").value;
+                    var regexOnlyText = /^[a-zA-Z ]+$/;
+
+                    if (regexOnlyText.test(city) != true) {
+                        $("#enter_city").show();
+                        $("#enter_city").focus();
+                        $("#enter_city").css("color", "red");
+                        err_city = false;
+                        return false;
+                    } else {
+                        err_city = true;
+                        $("#enter_city").hide();
+                    }
                 }
 
             }

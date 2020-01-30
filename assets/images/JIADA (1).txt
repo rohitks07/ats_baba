@@ -1,0 +1,37 @@
+
+
+JIADA Requirements
+1. Add more information on company details: industry, company size, address, etc.
+
+2. JIADA Homepage
+The login page at (http://jiada.baba.software/) should be converted to JIADA homepage and login section should be on top right.
+ * About US
+  - Mission & Vision
+  - Management Team
+  - Regional Offices
+ * Tenders
+ * Resources
+  - Master Plans
+  - Photo Gallery
+  - Important Links
+ * Careers
+ * Contact
+
+
+3. Companies Directory
+ * A menu (Member Companies) should list all companies. This would be created/managed 
+  by "Admin" user of JIADA - they can enter short/summary information or a detailed information. 
+ * The listing shold be in Olx style or IndiaMart style (5-10 items on Summary page - each page with 20-25 companies)
+ * Once clicked - Summary item would be redirected to a detailed page (homepage/micro-site style) of company 
+ * This listing can be taken over by the member company when they sign up and are approved by JIADA Admin
+ * company homepage would be a completely customizable by the company with sections like (company info and description, 
+   slider images, products/services, address, website, contact details, careers) 
+ * JIADA Admin can define URL for them such as https://jiada.baba.software/ktech
+
+
+4. Company Users
+ * A company user can sign-up to create company's profile to be listed in JIADA directory; Once JIADA Admin approves, the listing would be displayed
+ * OR a company user can take control of already listed information (created by JIADA) by sending a request 
+
+
+

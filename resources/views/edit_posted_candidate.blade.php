@@ -309,7 +309,7 @@ $.ajaxSetup({
 												<div id="textCity" style="display:none;"  class="form-group row col-md-12"> 
                                                         <label for="" class="control-label col-lg-4">Enter City <span style="color:red;">*</span></label>
 														<input type="text" class="form-control" class="col-sm-5" id="city_text" name="city_text_name">
-														<label for="" id="check_city_new" style="display:none;color:red;">Cannot be empty</label>
+														<label for="" id="check_city_new" style="display:none;color:red;">Invalid entry</label>
 													</div>
 												</div>
 								<!--end Location -->
@@ -747,6 +747,12 @@ $(function() {
 				{
 					check_location();
 				});
+				$("#city_text").blur(function()
+				{
+					check_location();
+				});
+				
+				
 				function check_location()
 				{
 					var loc_val=$("#country").val();
@@ -780,7 +786,20 @@ $(function() {
 						err_city_text=false;
 						}
 						else{
-							$("#check_city_new").hide();
+						     var city = document.getElementById("city_text").value;
+                             var regexOnlyText = /^[a-zA-Z ]+$/;
+        
+                            if (regexOnlyText.test(city) != true) {
+                                $("#check_city_new").show();
+                                $("#check_city_new").focus();
+                                $("#check_city_new").css("color", "red");
+                                err_city_text = false;
+                                return false;
+                            } else {
+                                err_city_text = true;
+                                $("#check_city_new").hide();
+                            }
+				// 			$("#check_city_new").hide();
 
 						}
 						

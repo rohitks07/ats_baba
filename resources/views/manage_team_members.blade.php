@@ -350,8 +350,8 @@
 
                                                                 <td>{{$team_member_type->type_name}}</td>
                                                                 <td>
-                                                                    <button type="button" class="btn-round-xs btn-xs"
-                                                                        style="background-color:#04B431; color:#fff">{{$team_member_type->status}}</button>
+                                                                    <button type="button" class="btn-xs"
+                                                                        style="background-color:#04B431; color:#fff;border:none;">{{$team_member_type->status}}</button>
                                                                 </td>
                                                                 <td>{{$date_created}}</td>
                                                                 <td>{{$date_closed}}</td>
@@ -361,11 +361,11 @@
                                                                     $number_of_members=count(DB::table('tbl_team_member')->where('team_member_type',$id)->get());
                                                                 ?>
                                                                     <button type="button" class="btn-round-xs btn-xs"
-                                                                        style="background-color:#1ba6df; color:#fff">{{$number_of_members}}</button>
+                                                                        style="background-color:#1ba6df; color:#fff;border:none;">{{$number_of_members}}</button>
                                                                 </td>
                                                                 <td>
                                                                     <button type="button" class="btn-round-xs btn-xs"
-                                                                        style="background-color:#1ba6df; color:#fff">0</button>
+                                                                        style="background-color:#1ba6df; color:#fff;border:none;">0</button>
                                                                 </td>
                                                                 <?php
                                                             	$id=$team_member_type->type_ID;

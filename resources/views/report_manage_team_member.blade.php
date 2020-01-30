@@ -150,9 +150,9 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header" style="background-color:white">
-                                            <h3 class="card-title" style="font-size:20px;"><b>DAILY REPORT OF: {{$name}}</b>
-
-                                            </h3>
+                                            <h3 class="card-title" style="font-size:20px;text-transform: uppercase;"><b>DAILY REPORT OF: {{$name}}</b>
+                                            </h3><br><br>
+                                            <h6 class="mt-3" style="float:left;">All date are according US time zone</h6>
                                             <button type="button" class="btn btn-warning text-dark  ml-3"
                                                 onclick="history.back();" style="float:right;">Back</button>
                                             <button type="button" class="btn btn-danger text-dark"
@@ -243,7 +243,7 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header" style="background-color:white">
-                                            <h3 class="card-title" style="font-size:20px;"><b>MONTHLY REPORT OF: {{$name}} </b>
+                                            <h3 class="card-title" style="font-size:20px;text-transform: uppercase;"><b>MONTHLY REPORT OF: {{$name}} </b>
                                             </h3>
                                             <button type="button" class="btn btn-warning text-dark ml-3"
                                                 onclick="history.back();" style="float:right;">Back</button>
@@ -338,7 +338,7 @@
 </div>
 <!--end of wrapper-->
 
-@include('include.footer')
+@include('include.emp_footer')
 
 <script>
     function get_pdf(value_of_html, name, id_of_div) {

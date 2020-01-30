@@ -15,6 +15,11 @@ use App\states;
 
 class ApplicationController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('mian_session');
+
+		}
    public function view_application($id="")
    {
 

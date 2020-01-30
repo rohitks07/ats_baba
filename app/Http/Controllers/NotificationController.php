@@ -11,6 +11,11 @@ use Session;
 
 class NotificationController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('mian_session');
+
+		}
     public function show_notification()
     {
         $mydate=date('Y-m-d');

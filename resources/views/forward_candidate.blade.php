@@ -180,7 +180,13 @@
                                         <div class="form-group row">
                                             <label for="Subject" class="control-label col-lg-4">Email Content<span class="red">*</label>
                                             <div class="col-lg-6">
-                                                <textarea class="wysihtml5 form-control article-ckeditor" required  required placeholder="Message body" style="height: 200px" name="email_content" required></textarea>
+                                                <textarea class="wysihtml5 form-control article-ckeditor" required   placeholder="Message body" style="height: 200px" name="email_content" ></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Subject" class="control-label col-lg-4">Enter Signature</label>
+                                            <div class="col-lg-6">
+                                                <textarea class="wysihtml5 form-control article-ckeditor"   placeholder="Enter Your Signature" style="height: 200px" name="email_sign" ></textarea>
                                             </div>
                                         </div>
                                         <div class="card-header bg-primary">
@@ -224,7 +230,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="current_location" checked>
                                                     <label class="form-label">Current Location(City,State)<span class="red">*</span></label>
-                                                    <input type="text" class="form-control" id="current_location" placeholder="Current Location(City,State)" name="current_location" value="{{$toReturn['application_detail']['current_location']}}" required>
+                                                    <input type="text" class="form-control" id="current_location" placeholder="Current Location(City,State)" name="current_location" value="{{@$toReturn['candiate_record']->city}}&nbsp;@if(@$toReturn['candiate_record']->state),{{@$toReturn['candiate_record']->state}}@endif " required>
                                                     <span id="current_location_error">Should not be blank</span>
                                                 </div>
                                                 <!--end of col-->
@@ -247,7 +253,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels" style="background-color:;">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="last_for_digit_ssn">
                                                     <label class="form-label">SSN No.(Last Four Digits)<span class="red"></span></label>
-                                                    <input type="text" class="form-control" maxlength="4" placeholder="SSN No.(Last Four Digits)"   name="last_for_digit_ssn" title>
+                                                    <input type="text" class="form-control"  placeholder="SSN No.(Last Four Digits)"   name="last_for_digit_ssn"  value="{{$toReturn['candiate_record']->ssn}}" title>
                                                     <span id="last_for_digit_ssn_error">Please enter SSN No. (last four digit only)</span>
                                                 </div>
                                                 <!--end of col-->
@@ -270,7 +276,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
                                                     <label class="form-label">Qualification With University Name and Passing Year(Bachelors)<span class="red">*</span></label>
-                                                    <input type="text" class="form-control" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni"  required />
+                                                    <input type="text" class="form-control" id="qual_with_uni" placeholder="Qualification With University Name and Passing Year" name="qual_with_uni"  value="{{@$toReturn['qualification']->degree_title}},&nbsp;{{@$toReturn['qualification']->major}},&nbsp;{{@$toReturn['qualification']->institude}},&nbsp;{{@$toReturn['qualification']->city}},&nbsp;{{@$toReturn['qualification']->country}},@if(@$toReturn['qualification']->completion_year)&nbsp;{{@$toReturn['qualification']->completion_year}} @endif" required />
                                                     <span id="qual_with_uni_error">Should not be blank</span>
                                                 </div>
                                                 <!--end of col-->
@@ -419,56 +425,37 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[4][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" name="experience[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[5][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[6][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" name="experience[7][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[7][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[7][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[8][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[8][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[8][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" name="experience[9][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[9][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[9][]" class="form-control" /></td>
-                                                    </tr>
+                                                    <?php $key_exp=0; ?>
+                                                    @if(@$toReturn['application_candidate_exp_required'])
+                                                        @foreach($toReturn['application_candidate_exp_required'] as $key_exp=>$value)
+                                                        <tr style="background: aliceblue;">
+                                                            <td><input type="text" name="experience[{{$key_exp}}][]" class="form-control"  value="{{@$value['skills']}}"/></td>
+                                                            <td><input type="text" name="experience[{{$key_exp}}][]" class="form-control" value="{{@$value['yrs_of_exp']}}" /></td>
+                                                            <td><input type="text" name="experience[{{$key_exp}}][]" class="form-control" value="{{@$value['expertise_level']}}" /></td>
+                                                        </tr>
+                                                        @endforeach
+                                                    @endif
+                                                        <tr style="background: aliceblue;">
+                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" /></td>
+                                                        </tr>
+                                                        <tr style="background: aliceblue;">
+                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" /></td>
+                                                        </tr>
+                                                        <tr style="background: aliceblue;">
+                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" /></td>
+                                                        </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -490,63 +477,46 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
-                                                    </tr>
-                                                    <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
-                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
-                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
-                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
-                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
-                                                    </tr>
-
+                                                    <?php $key_ref=0;?>
+                                                @if(@$toReturn['application_candidate_reference'])
+                                                    @foreach($toReturn['application_candidate_reference'] as $key_ref=>$value)
+                                                        <tr style="background: aliceblue;">
+                                                            <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control"  value="{{@$value['fullname']}}"/></td>
+                                                            <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control"  value="{{@$value['officialEmail']}}"/></td>
+                                                            <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control" value="{{@$value['designation']}}" /></td>
+                                                            <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control"  value="{{@$value['clientName']}}"/></td>
+                                                            <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control" value="{{@$value['location']}}" /></td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                                        <tr>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]" class="form-control"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" /></td>
+                                                        </tr>
+                                                        <tr style="background: aliceblue;">
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
+                                                        </tr>
+                                                        <tr style="background: aliceblue;">
+                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+4}}][]"class="form-control" /></td>
+                                                        </tr>
+                                                        <tr style="background: aliceblue;">
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
+                                                        </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -568,11 +538,11 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name" /></td>
-                                                        <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  /></td>
-                                                        <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  /></td>
-                                                        <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  ></td>
-                                                        <td><input type="text" name="extenson" id="extenson" maxlength="12" class="form-control" placeholder="Extention"  ></td>
+                                                        <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name"  value="{{@$toReturn['application_emp_details']->company_name}}"  /></td>
+                                                        <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  value="{{@$toReturn['application_emp_details']->email_Id}}"  /></td>
+                                                        <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  value="{{@$toReturn['application_emp_details']->employer_name}}"  /></td>
+                                                        <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  value="{{@$toReturn['application_emp_details']->phone_number}}"  ></td>
+                                                        <td><input type="text" name="extenson" id="extenson" maxlength="12" class="form-control" placeholder="Extention"   value="{{@$toReturn['application_emp_details']->ext_no}}" ></td>
                                                     </tr>
                                                     <p id="phone_mess" style="color:red;display:none;"> Please Enter Only Number</p>
                                                 </tbody>
@@ -620,9 +590,18 @@
                                                         @if($value['file_name'])
                                                         <td><input type="checkbox" name="extra_seeker_doc[]" id="other_doc0" value="{{$value['file_name']}}">
                                                             <input type="hidden" class="form-control" name="{{$value['file_name']}}" value="{{$value['file_name']}}"><a href="{{url('public/forward_document/'.$value['file_name'])}}">{{$value['file_name']}}</a>
-                                                        @endif
+                                                        </td>
+                                                            @endif
                                                         </tr>
-                                                    @endforeach                                                    
+                                                    @endforeach
+                                                    @foreach($toReturn['application_candidate_documents'] as $key=>$value)
+                                                    <tr>
+                                                       <td class="form-group row">
+                                                       <input type="checkbox" name="extra_seeker_doc[]" id="other_doc0" value="{{$value['documents']}}">
+                                                       <input type="hidden" class="form-control" name="{{$value['documents']}}" value="{{$value['documents']}}"><a href="{{url('public/forward_document/'.$value['documents'])}}">{{$value['documents']}}</a>   
+                                                        </td>   
+                                                    </tr>
+                                                    @endforeach                                                        
                                                     <tr id="exp_detail">
                                                         <td class="form-group row delete_exp">
                                                             <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;">

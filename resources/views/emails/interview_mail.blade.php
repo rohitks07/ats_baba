@@ -207,22 +207,23 @@
             padding: 10px;
             display: inline;
             border-radius: 10px;
-            display:inline
+            display: inline
         }
 
         #btn_two:hover {
             background-color: #B22929;
             transition: 0.5s;
         }
+
         #btn_three {
             color: white;
             background-color: #1D830F;
             float: left;
-            margin-top: 10px; 
+            margin-top: 10px;
             padding: 10px;
             display: inline;
             border-radius: 10px;
-            display:inline
+            display: inline
         }
 
         #btn_three:hover {
@@ -244,215 +245,266 @@
 
 </head>
 
-<body width="100%" bgcolor="#F1F1F1" style="margin: 0; mso-line-height-rule: exactly;">
-    <center style="width: 100%; background: #F1F1F1; text-align: left;">
+<body bgcolor="#F1F1F1" style="margin: 0; mso-line-height-rule: exactly;background-color:white">
+    <div style="width: 40%; background: white; text-align: left;float:left;position:relative">
+        <div style="width:100%">
+            <!-- Visually Hidden Preheader Text : BEGIN -->
+            <div
+                style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
+                Interview Confirmation
+            </div>
+            <!-- Visually Hidden Preheader Text : END -->
 
-        <!-- Visually Hidden Preheader Text : BEGIN -->
-        <div
-            style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
-            Interview Confirmation
-        </div>
-        <!-- Visually Hidden Preheader Text : END -->
-
-        <!--
+            <!--
             Set the email width. Defined in two places:
             1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 680px.
             2. MSO tags for Desktop Windows Outlook enforce a 680px width.
             Note: The Fluid and Responsive templates have a different width (600px). The hybrid grid is more "fragile", and I've found that 680px is a good width. Change with caution.
         -->
-        <div style="max-width: 680px; margin: auto;" class="email-container">
-            <!--[if mso]>
+            <div style="max-width: 750px; margin: auto;" class="email-container">
+                <!--[if mso]>
             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="680" align="center">
             <tr>
             <td>
             <![endif]-->
 
-            <!-- Email Body : BEGIN -->
-            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%"
-                style="max-width: 680px;" class="email-container">
+                <!-- Email Body : BEGIN -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%"
+                    style="max-width: 750px;" class="email-container">
 
 
-                <!-- HEADER : BEGIN -->
-                <tr>
-                    <td>
-                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                            <tr>
-                                <td style="padding-left:30px; text-align: left;">
-                                    {{-- <img src="{{url('public/companylogo/807911625.png')}}" width="200" height="13"
-                                    alt="alt_text" border="0"
-                                    style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 20px;
-                                    color: #555555;"> --}}
+                    <!-- HEADER : BEGIN -->
+                    <tr>
+                        <td>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding-left:30px; text-align: left;">
+                                        {{-- <img src="{{url('public/companylogo/807911625.png')}}" width="200"
+                                        height="13"
+                                        alt="alt_text" border="0"
+                                        style="height: auto; font-family: sans-serif; font-size: 15px; line-height:
+                                        20px;
+                                        color: #555555;"> --}}
 
 
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <!-- HEADER : END -->
-
-
-
-                <!-- HERO : BEGIN -->
-                <tr>
-                    <td bgcolor="#ffffff" style="border:1px solid #dddddd;">
-                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                            <tr>
-                                <td style="padding-top: 5px ">
-                                   
-                                        <img src="{{url('http://baba.software/ats/public/companylogo/baba_logo.png')}}" alt="" style="width:150px;display:inline;float:left";>
-                                        <img src="{{url('http://baba.software/ats/public/companylogo/'.$data['logo'])}}" alt="Logo" style="width:150px;display:inline;float:right;margin-top:35px;"><br>
-                                    <h1
-                                        style=" font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 26px; color: #333333; font-weight: bold; text-transform: uppercase;float:left;margin-left:45px;margin-top:20px;">
-                                        Interview Confirmation</h1>
-                                    
-                                    
-                                    </h1>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left;">
-                                    <div style="width:40%;float:left;background-color:#F0F0F0;padding:10px;">
-                                        <p><b>Job Details:-</b></p>
-                                        {{-- <p>Job ID</p> --}}
-                                        <p>Job Title</p>
-                                        <p>Job Company</p>
-                                        <p>Location</p>
-                                    </div>
-                                    <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
-                                        <p>&nbsp;</p>
-                                        {{-- <p>{{$data['jobcode_id']}}</p> --}}
-                                        <p>{{$data['jobcode_code']}}</p>
-                                        <p>{{$data['job_data']['client_name']}}</p>
-                                        <p>{{$data['job_data']['country']}} , {{$data['job_data']['city']}} ,
-                                            {{$data['job_data']['state']}}</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
-                                    <div style="width:40%;float:left;background-color:#F0F0F0;padding:10px;">
-                                        <p><b>Candidate Details:-</b></p>
-                                        <p>Name</p>
-                                        <p>Phone (M)</p>
-                                        <p>Phone (H)</p>
-                                        @if(($data['candidatename_detail']['skype_id']
-                                        !=="")&&($data['candidatename_detail']['skype_id'] !==null))
-                                        <p>Skype</p>
-                                        @endif
-                                        <p>Email</p>
-                                    </div>
-                                    <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
-                                        <p>&nbsp;</p>
-                                        <p>{{$data['candidatename_name']}}</p>
-                                        <p>{{$data['candidatename_detail']['mobile']}}</p>
-                                        <p>{{$data['candidatename_detail']['home_phone']}}</p>
-                                        @if(($data['candidatename_detail']['skype_id']
-                                        !=="")&&($data['candidatename_detail']['skype_id'] !==null))
-                                        <p>{{$data['candidatename_detail']['skype_id']}}</p>
-                                        @endif
-                                        <p>{{$data['candidatename_detail']['email']}}</p>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
-                                    <div style="width:40%;float:left;background-color:#F0F0F0;padding:10px;">
-                                        <p><b>Interview details:-</b></p>
-                                        @if(($data['venue'] !== "")&&($data['venue'] !== null))
-                                        <p>Venue</p>
-                                        @endif
-                                        <p>Interview Type</p>
-                                    </div>
-                                    <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
-                                        <p>&nbsp;</p>
-                                        @if($data['venue'] !== "")
-                                        <p>{{$data['venue']}}</p>
-                                        @endif
-                                        <p>{{$data['type_int']}}</p>
-
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
-                                    <div style="width:40%;float:left;background-color:#F0F0F0;padding:10px;">
-                                        <p><b>Time & Date ( Time in 24hr ):-</b></p>
-                                        <p style="font-weight:bold;">Start Date</p>
-                                        <p style="font-weight:bold;">{{$data['interviewdate']}}</p>
-                                        <p style="font-weight:bold;">Start Time</p>
-                                        <p style="font-weight:bold;">{{$data['start_time']}}</p>
-                                        <p style="font-weight:bold;">Time Zone</p>
-                                        
-
-                                    </div>
-                                    <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
-                                        <p>&nbsp;</p>
-                                        <p style="font-weight:bold;">End Date</p>
-                                        @if(($data['end_date'] !=="")&&($data['end_date'] !==null))
-                                        <p style="font-weight:bold;">{{$data['end_date']}}</p>
-                                        @else
-                                        <p style="font-weight:bold;">{{$data['interviewdate']}}</p>
-                                        @endif
-                                        <p style="font-weight:bold;">End Time</p>
-                                        <p style="font-weight:bold;">{{$data['end_time']}}</p>
-                                        <p style="font-weight:bold;">{{$data['time_zone']}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- HEADER : END -->
 
 
 
-                                    </div>
-                                </td>
-                            </tr>
+                    <!-- HERO : BEGIN -->
+                    <tr>
+                        <td bgcolor="#ffffff" style="border:1px solid #dddddd;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding-top: 5px ">
 
-                            <tr>
-                                <td
-                                    style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
-                                    {{-- <a id="btn"
+                                        <img src="{{url('http://baba.software/ats/public/companylogo/baba_logo.png')}}"
+                                            alt="" style="width:150px;display:inline;float:left" ;>
+                                        <img src="{{url('http://baba.software/ats/public/companylogo/'.$data['logo'])}}"
+                                            alt="Logo"
+                                            style="width:150px;display:inline;float:right;margin-top:35px;"><br>
+                                        <h1
+                                            style=" font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 26px; color: #333333; font-weight: bold; text-transform: uppercase;float:left;margin-left:45px;margin-top:20px;">
+                                            Interview Confirmation</h1>
+
+
+                                        </h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left;">
+                                        <div style="background-color:#F0F0F0">
+                                            <div style="width:40%;float:left;background-color:#F0F0F0;padding:10px;">
+                                                <p><b>Job Details:-</b></p>
+                                                {{-- <p>Job ID</p> --}}
+                                                <p>Job Title</p>
+                                                <p>Client</p>
+                                                {{-- <p>Location</p> --}}
+                                            </div>
+                                            <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
+                                                <p>&nbsp;</p>
+                                                {{-- <p>{{$data['jobcode_id']}}</p> --}}
+                                                <p style="text-transform: capitalize;">{{$data['jobcode_code']}}</p>
+                                                <p style="text-transform: capitalize;">
+                                                    {{$data['job_data']['client_name']}}
+                                                </p>
+                                                {{-- <p style="text-transform: capitalize;">{{$data['job_data']['country']}}
+                                                    ,
+                                                    {{$data['job_data']['city']}} ,
+                                                    {{$data['job_data']['state']}}</p> --}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
+                                        <div style="background-color:#F0F0F0">
+                                            <div style="width:40%;float:left;background-color:#F0F0F0;padding:10px;">
+                                                <p><b>Candidate Details:-</b></p>
+                                                <p>Name</p>
+                                                <p>Phone (M)</p>
+                                                <p>Phone (H)</p>
+                                                @if(($data['candidatename_detail']['skype_id']
+                                                !=="")&&($data['candidatename_detail']['skype_id'] !==null))
+                                                <p>Skype</p>
+                                                @endif
+                                                <p>Email</p>
+                                                <p>Location</p>
+                                            </div>
+                                            <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
+                                                <p>&nbsp;</p>
+                                                <p>{{$data['candidatename_name']}}</p>
+                                                <p>{{$data['candidatename_detail']['mobile']}}</p>
+                                                <p>{{$data['candidatename_detail']['home_phone']}}</p>
+                                                @if(($data['candidatename_detail']['skype_id']
+                                                !=="")&&($data['candidatename_detail']['skype_id'] !==null))
+                                                <p>{{$data['candidatename_detail']['skype_id']}}</p>
+                                                @endif
+                                                <p>{{$data['candidatename_detail']['email']}}</p>
+                                                <p>{{$data['location_candidate']}}</p>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
+                                        <div style="background-color:#F0F0F0;">
+                                            <div style="width:40%;float:left;background-color:#F0F0F0;padding:10px;">
+                                                <p><b>Interview details:-</b></p>
+                                                @if(($data['venue'] !== "")&&($data['venue'] !== null))
+                                                <p>Venue</p>
+                                                @endif
+                                                <p>Interview Type</p>
+                                                @if($data['type_int'] == "Webex")
+                                                <p>Webex Id</p>
+                                                @endif
+                                                <p>Instruction</p>
+                                            </div>
+                                            <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
+                                                <p>&nbsp;</p>
+                                                @if($data['venue'] !== "")
+                                                <p>{{$data['venue']}}</p>
+                                                @endif
+                                                <p>{{$data['type_int']}}</p>
+                                                @if($data['type_int'] == "Webex")
+                                                <p>{{@$data['webex']}}</p>
+                                                @endif
+                                                <p>{{$data['instruction']}}</p>
+
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
+                                        <div style="background-color:#F0F0F0">
+                                            <div style="width:40%;float:left;background-color:#F0F0F0;padding:10px;">
+                                                <p><b>Time & Date ( Time in 12hr ):-</b></p>
+                                                <p style="font-weight:bold;">Start Date</p>
+                                                <?php 
+                                           $start_date = date('m-d-Y', strtotime($data['interviewdate']));
+                                        ?>
+                                                <p style="font-weight:bold;">{{$start_date}}</p>
+                                                <p style="font-weight:bold;">Start Time</p>
+                                                <?php 
+                                           $start_time = date('h:i a', strtotime($data['start_time']));
+                                        ?>
+                                                <p style="font-weight:bold;">{{$start_time}}</p>
+                                                <p style="font-weight:bold;">Time Zone</p>
+
+
+                                            </div>
+                                            <div style="width:50%;float:left;background-color:#F0F0F0;padding:10px;">
+                                                <p>&nbsp;</p>
+                                                <p style="font-weight:bold;">End Date</p>
+                                                @if(($data['end_date'] !=="")&&($data['end_date'] !==null))
+                                                <?php 
+                                           $end_date = date('m-d-Y', strtotime($data['end_date']));
+                                        ?>
+                                                <p style="font-weight:bold;">{{$end_date}}</p>
+                                                @else
+                                                <p style="font-weight:bold;">{{$start_date}}</p>
+                                                @endif
+                                                <p style="font-weight:bold;">End Time</p>
+                                                <?php 
+                                           $end_time = date('h:i a', strtotime($data['end_time']));
+                                        ?>
+                                                <p style="font-weight:bold;">{{$end_time}}</p>
+                                                <p style="font-weight:bold;">{{$data['time_zone']}}</p>
+
+
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td
+                                        style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
+                                        <a id="btn"
                                         href="{{url('http://baba.software/ats/interview_confirm/'.$data['uni_no'])}}"
                                         type="button" style="text-decoration:none;">Click here</a>
-                                    <p style="display:inline;margin-left:20px;">Click for conformatation of for more option</p> --}}
-                                    <a id="btn"
-                                        href="{{url('http://localhost/baba.software/interview_confirm/'.$data['uni_no'])}}"
-                                        type="button" style="text-decoration:none;">Click here</a>
-                                    <p style="display:inline;margin-left:20px;">Click for conformatation of for more option</p>
-                                    <br><br>
-                                    {{-- <a id="btn_two"
+                                        <p style="display:inline;margin-left:20px;">Click for conformatation of for more
+                                            option</p>
+                                        <!--<a id="btn"-->
+                                        <!--    href="{{url('http://localhost/baba.software/interview_confirm/'.$data['uni_no'])}}"-->
+                                        <!--    type="button" style="text-decoration:none;">Click here</a>-->
+                                        <!--<p style="display:inline;margin-left:20px;">Click for conformatation of for more-->
+                                        <!--    option</p>-->
+                                        <br><br>
+                                        <hr>
+                                        <center>
+                                            <p style="font-weight:bold;">{{$data['signature']}}</p>
+                                        </center>
+                                        <hr>
+
+                                        {{-- <a id="btn_two"
                                         href="{{url('http://baba.software/ats/reject_request/'.$data['uni_no'])}}"
                                         type="button" style="text-decoration:none;display:inline">Reject</a>
-                                    {{-- <p style="display:inline;margin-left:20px;margin-top:10px">Click to go to the page</p> --}}
-                                    {{-- <br><br>
+                                        {{-- <p style="display:inline;margin-left:20px;margin-top:10px">Click to go to the page</p> --}}
+                                        {{-- <br><br>
                                     <a id="btn_three"
                                         href="{{url('http://baba.software/ats/reject_reschedule/'.$data['uni_no'])}}"
-                                        type="button" style="text-decoration:none;display:inline">Request another time</a> --}}
-                                    
+                                        type="button" style="text-decoration:none;display:inline">Request another
+                                        time</a>
+                                        --}}
 
 
-                                    {{-- <a id="btn" href="{{url('http://baba.software/ats/interview_confirm/'.$data['uni_no'])}}"
-                                    type="button" style="text-decoration:none;">Confirm</a>
-                                    <p style="display:inline;margin-left:20px;">Click to go to conformatation page</p>
-                                    --}}
-                                    {{-- <a id="btn" href="{{URL::to('http://localhost/ats_baba/interview_confirm/'.$data['uni_no'])}}"
-                                    type="button" style="text-decoration:none;">Confirm</a>
-                                    <p style="display:inline;margin-left:20px;">Click to go to conformatation page</p>
-                                    --}}
+
+                                        {{-- <a id="btn" href="{{url('http://baba.software/ats/interview_confirm/'.$data['uni_no'])}}"
+                                        type="button" style="text-decoration:none;">Confirm</a>
+                                        <p style="display:inline;margin-left:20px;">Click to go to conformatation page
+                                        </p>
+                                        --}}
+                                        {{-- <a id="btn" href="{{URL::to('http://localhost/ats_baba/interview_confirm/'.$data['uni_no'])}}"
+                                        type="button" style="text-decoration:none;">Confirm</a>
+                                        <p style="display:inline;margin-left:20px;">Click to go to conformatation page
+                                        </p>
+                                        --}}
+                                    </td>
+                                </tr>
+                                <td
+                                    style="padding: 0px 40px 40px 40px; font-family: sans-serif; font-size: 12px; line-height: 18px; color: #666666; text-align: left; font-weight:normal;">
+
+                                    <p style="margin: 0;">Copyright 2019-2020 <b>ATS BABA</b>, All Rights
+                                        Reserved.</p>
+
                                 </td>
-                            </tr>
-                            <td
-                                style="padding: 0px 40px 40px 40px; font-family: sans-serif; font-size: 12px; line-height: 18px; color: #666666; text-align: left; font-weight:normal;">
 
-                                <p style="margin: 0;">Copyright 2019-2020 <b>ATS BABA</b>, All Rights
-                                    Reserved.</p>
-
-                            </td>
-
-                            <tr>
-                                {{-- <td align="left" style="padding: 0px 40px 40px 40px;">
+                                <tr>
+                                    {{-- <td align="left" style="padding: 0px 40px 40px 40px;">
 
                                     <table width="180" align="left">
                                         <tr>
@@ -488,24 +540,24 @@
                                     </table>
 
                                 </td> --}}
-                            </tr>
+                                </tr>
 
-                        </table>
-                    </td>
-                </tr>
-                <!-- HERO : END -->
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- HERO : END -->
 
-                <!-- FOOTER : BEGIN -->
-                <tr>
-                    <td>
-                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                            <tr>
-                                {{-- <td
+                    <!-- FOOTER : BEGIN -->
+                    <tr>
+                        <td>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    {{-- <td
                                     style="padding: 40px 40px 10px 40px; font-family: sans-serif; font-size: 12px; line-height: 18px; color: #666666; text-align: left; font-weight:normal;">
                                     <p style="margin: 0;">IT-SCIENT</p>
                                 </td> --}}
-                            </tr>
-                            {{--  <tr>
+                                </tr>
+                                {{--  <tr>
                                 <td
                                     style="padding: 0px 40px 10px 40px; font-family: sans-serif; font-size: 12px; line-height: 18px; color: #666666; text-align: left; font-weight:normal;">
                                     <p style="margin: 0;">This email was sent to you from %%Company Email Address%%</p>
@@ -521,24 +573,24 @@
                             <tr> --}}
 
 
+                    </tr>
+
+                </table>
+                </td>
                 </tr>
+                <!-- FOOTER : END -->
 
-            </table>
-            </td>
-            </tr>
-            <!-- FOOTER : END -->
+                </table>
+                <!-- Email Body : END -->
 
-            </table>
-            <!-- Email Body : END -->
-
-            <!--[if mso]>
+                <!--[if mso]>
             </td>
             </tr>
             </table>
             <![endif]-->
-        </div>
+            </div>
 
-    </center>
+        </div>
 </body>
 
 </html>

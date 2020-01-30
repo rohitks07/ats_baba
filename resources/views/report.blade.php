@@ -232,7 +232,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-2"
                                                                                             style="border: 1px solid black;">
-                                                                                            <h4>Date</h4>
+                                                                                            <h4>Group's</h4>
                                                                                         </div>
                                                                                         <div class="col-md-2"
                                                                                             style="border: 1px solid black;">
@@ -421,7 +421,7 @@
                                                                                         <div class="col-md-2"
                                                                                             style="border: 1px solid black;">
                                                                                     <input type="hidden" id="date_time" value="{{$toReturn['week'][$key]['week_dates']}}">
-                                                                                            <h4>Date</h4>
+                                                                                            <h4>Group's</h4>
                                                                                         </div>
                                                                                         <div class="col-md-2"
                                                                                             style="border: 1px solid black;">
@@ -660,7 +660,7 @@
                                                                                         <div class="col-md-2"
                                                                                             style="border: 1px solid black;">
                                                                                     <input type="hidden" id="date_time" value="{{$monthly['month_week_one1']}}">
-                                                                                            <h4>Date</h4>
+                                                                                            <h4>Group's</h4>
                                                                                         </div>
                                                                                         <div class="col-md-2"
                                                                                             style="border: 1px solid black;">
@@ -885,7 +885,7 @@
                                                                                         <div class="col-md-2"
                                                                                             style="border: 1px solid black;">
                                                                                     <input type="hidden" id="date_time" value="{{$yearly['month_week_one1']}}">
-                                                                                            <h4>Date</h4>
+                                                                                            <h4>Group's</h4>
                                                                                         </div>
                                                                                         <div class="col-md-2"
                                                                                             style="border: 1px solid black;">
@@ -1055,7 +1055,7 @@
 </div>
 <!--end of wrapper-->
 
-@include('include.footer')
+@include('include.emp_footer')
 <script>
     function monthly_show(da) {
             console.log(da);

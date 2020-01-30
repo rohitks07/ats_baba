@@ -1,0 +1,15 @@
+
+DISTRICT RESOurce and scheme managament
+----------------------------------------------------------------------------------------------------------------------------------
+
+DATEs: <<with time>>
+TOTAL RECORD COUNT:  <<no. of rows in excel>>
+TOTAL SUCCESS COUNR: <<>>
+TOTAL FAIL COUNT: <<>>
+USER NAME:
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+ROW WISE ERROR DETAILS:--
+

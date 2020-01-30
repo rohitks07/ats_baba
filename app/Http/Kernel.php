@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'check'=>\App\Http\Middleware\CheckSesson::class,
         'check_jobseeker'=>\App\Http\Middleware\CheckSessonJobseeker::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'mian_session'=>\App\Http\Middleware\MainSession::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,

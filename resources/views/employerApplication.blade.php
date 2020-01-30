@@ -84,8 +84,22 @@ table.dataTable thead > tr > th {
                             <div class="col-lg-12">
                                 <div class="card card-border card-primary">
                                     <div class="card-header"> 
-                                        <h3 class="card-title text-primary" style="float:left;">Application</h3> 
-                                        <h6 style="float:right;"><input id="myInput" type="text" placeholder="Search" style="height: 31px; width: 100%; padding: 13px; border:1px solid #9d9d9d; border-radius: 2px;"></h6>
+                                        <h3 class="card-title text-primary" style="float:left;">Application</h3>
+                                        <button class="btn btn-info ml-5" onclick="location.href='{{url('employer/Application')}}';" type="button" style="float:left;" id="button-addon2" title="Show All Application"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+                                        <h6 style="float:right;">
+                                            <!--<input id="myInput" type="text" placeholder="Search" style="height: 31px; width: 100%; padding: 13px; border:1px solid #9d9d9d; border-radius: 2px;">-->
+                                            <form action="{{url('employer/Application/search_application')}}" method="get">
+                                        @csrf
+                                        <div class="input-group mb-3 mt-1" style="float:right;width:700px;">
+                                            <input type="text" class="form-control" placeholder="Search Application ( Title , Code , Client , First Name , Middle Name , Last Name )"
+                                                aria-label="Recipient's username" name="search" aria-describedby="button-addon2"
+                                                required>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                            </h6>
                                     </div>
                                     <div class="card-body"> 
                                     <div class="row">
@@ -130,7 +144,7 @@ table.dataTable thead > tr > th {
                                                         $plus_visa=substr_count("$vis",",");
                                                         $sh=explode(",",$vis);
                                                         ?>
-                                                        <td onmouseover="visa_type({{$id}});"><span id="data1{{$id}}" >{{$sh[0]}}@if($plus_visa!=0),&nbsp;+{{$plus_visa}}@endif</span><span id="data2{{$id}}" style="display:none">{{$application['job_visa']}}</span></td>
+                                                        <td onmouseover="visa_type({{$id}});" data-toggle="tooltip" title="{{$application['job_visa']}}"> {{$sh[0]}}@if($plus_visa!=0),&nbsp;+{{$plus_visa}}@endif<span id="data1{{$id}}"></span><span id="data2{{$id}}" style="display:none"></span></td>
                                                         <td>{{$application['pay_min']}}-{{$application['pay_max']}}</td>
                                                         <td><a href="{{url('employer/candidate/'.$seeker_id)}}">{{$application['can_first_name']}} {{$application['can_last_name']}}</td>
                                                         <td>@if($application['seeker_city']){{$application['seeker_city']}},&nbsp;@endif{{$application['seeker_state']}}</td>
@@ -227,6 +241,9 @@ table.dataTable thead > tr > th {
                    <script>
                     $('#srttime').timepicker1();
                     $('#endtime').timepicker2();
+                    $(document).ready(function () {
+                        $('[data-toggle="tooltip"]').tooltip();
+                    });
                 
                 </script>
                   

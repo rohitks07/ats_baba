@@ -17,6 +17,7 @@
             <table style="width:100%;text-align:center;border-collapse:collapse;" border="1">
                 <thead>
                     <tr style="font-family: 'Raleway', sans-serif;">
+                        
                         <th style="padding:20px 0px 20px 0px;font-size:12px;">Start date</th>
                         <th style="padding:20px 0px 20px 0px;font-size:12px;">Start time</th>
                         @if(($data['end_time']!=="")&&($data['end_time']!==null))
@@ -31,10 +32,16 @@
                 </thead>
                 <tbody>
                     <tr style="font-family: 'Raleway', sans-serif">
-                        <td style="padding:20px 0px 20px 0px;font-size:12px;">{{$data['start_date']}}</td>
+                        <?php 
+                            $start_date = date('m-d-Y',strtotime($data['start_date']))
+                        ?>
+                        <td style="padding:20px 0px 20px 0px;font-size:12px;">{{$start_date}}</td>
                         <td style="padding:20px 0px 20px 0px;font-size:12px;">{{$data['start_time']}}</td>
-                        @if(($data['end_time']!=="")||($data['end_time']!==null))
-                        <td style="padding:20px 0px 20px 0px;font-size:12px;">{{$data['end_time']}}</td>
+                        @if(($data['end_time']!=="")&&($data['end_time']!==null))
+                        <?php 
+                            $end_time = date('m-d-Y',strtotime($data['end_time']))
+                        ?>
+                        <td style="padding:20px 0px 20px 0px;font-size:12px;">{{$end_time}}</td>
                         @endif
                         <td style="padding:20px 0px 20px 0px;font-size:12px;">{{$data['job_code']}}</td>
                         <td style="padding:20px 0px 20px 0px;font-size:12px;">{{$data['job_title']}}</td>

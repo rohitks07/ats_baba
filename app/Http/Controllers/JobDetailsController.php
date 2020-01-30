@@ -14,6 +14,11 @@ use App\user;
 use DB;
 class JobDetailsController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('mian_session');
+
+		}
  public function show_detail($id ="")       
  {
 

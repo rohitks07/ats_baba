@@ -60,7 +60,7 @@
 
 <!-- <h4>Total US Experience: 4+Years</h4> -->
 
-@if(($data['experience_list'][0][0])!="")
+@if((@$data['experience_list'][0][0])!="")
 <u><b>Experience Summary:-</b></u>
 @if($data['forward_candidate']['it_exper'])
 <h4>Total IT Experience: {{$data['forward_candidate']['it_exper']}}+year</h4>
@@ -74,7 +74,7 @@
 @foreach($data['experience_list'] as $key => $value)
 <tr><td>{{$data['experience_list'][$key][0]}}</td><td>{{$data['experience_list'][$key][1]}}</td><td>{{$data['experience_list'][$key][2]}}</td></tr>
 <?php $kee = $key + 1;
-if($data['experience_list'][$kee][0] == "" && $data['experience_list'][$kee][1] == "" && $data['experience_list'][$kee][2] == "")
+if(@$data['experience_list'][$kee][0] == "" && @$data['experience_list'][$kee][1] == "" && @$data['experience_list'][$kee][2] == "")
 break;
  ?>
 @endforeach
@@ -82,7 +82,7 @@ break;
 @endif
 <br>
 <!-- <h3><u>Last Two project references :</h3></u><br> -->
-@if(($data['reference_list'][0][0])!="")
+@if((@$data['reference_list'][0][0])!="")
 <u><b>Reference:-</b></u>
 <br>
 <br>
@@ -91,7 +91,7 @@ break;
 @foreach($data['reference_list'] as $key => $value)
 <tr><td>{{$data['reference_list'][$key][0]}}</td><td>{{$data['reference_list'][$key][1]}}</td><td>{{$data['reference_list'][$key][2]}}</td><td>{{$data['reference_list'][$key][3]}}</td><td>{{$data['reference_list'][$key][4]}}</td></tr>
 <?php $kee = $key + 1;
-if($data['reference_list'][$kee][0] == "" && $data['reference_list'][$kee][1] == "" && $data['reference_list'][$kee][2] == "" && $data['reference_list'][$kee][3]=="" && $data['reference_list'][$kee][4]=="")
+if(@$data['reference_list'][$kee][0] == "" && @$data['reference_list'][$kee][1] == "" && @$data['reference_list'][$kee][2] == "" && @$data['reference_list'][$kee][3]=="" && @$data['reference_list'][$kee][4]=="")
 break; 
 ?>
 @endforeach
@@ -109,7 +109,9 @@ break;
 <tr> <td>{{$data['emp_details']['company_name']}}</td><td>{{$data['emp_details']['email_Id']}}</td><td>{{$data['emp_details']['employer_name']}}</td><td>{{$data['emp_details']['phone_number']}}</td>@if(@$data['emp_details']['ext_no'])<td>{{$data['emp_details']['ext_no']}}</td>@endif</tr>
 </table>
 @endif
-
+<br>
+<?php echo $data['forward_candidate']['email_sign']."<br>";?>
+<br>
 
 
 

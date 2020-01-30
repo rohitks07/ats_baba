@@ -883,27 +883,27 @@
         </div>
     </div>
 
-    <script>
-    $(document).ready(function(){
-        var id_val = $("#id_val").val();
-        $.ajax({
-                type: 'get',
-                url: '{{url("interview_request/review_onload")}}',
-                data:{
-                    id_val:id_val,
-                },
-                success:function(data){
-                    $("#comp_logo").attr("src","http://localhost/ats_baba/public/companylogo/"+data.org_id.company_logo);
-                },
-                error:function(data){
-                    alert("internal server error");
-                },
-        });
-    });
+    // <script>
+    // $(document).ready(function(){
+    //     var id_val = $("#id_val").val();
+    //     $.ajax({
+    //             type: 'get',
+    //             url: '{{url("interview_request/review_onload")}}',
+    //             data:{
+    //                 id_val:id_val,
+    //             },
+    //             success:function(data){
+    //                 $("#comp_logo").attr("src","http://localhost/ats_baba/public/companylogo/"+data.org_id.company_logo);
+    //             },
+    //             error:function(data){
+    //                 alert("internal server error");
+    //             },
+    //     });
+    // });
     
     
     
-    </script>
+    // </script>
     
 
     <script>
@@ -918,7 +918,13 @@
                     value: value
                 },
                 success: function (data) {
-
+                    // var start_date = new date('m-d-Y',data.mail.start_date);
+                    // var start_date = new Date(Date.parse(data.mail.start_date)).format("MM-dd-yyyy");
+                    var parts = data.mail.start_date.split('-');
+                    var start_date=  parts[1] + '-' + parts[1] + '-' + parts[0];
+                    
+                    var parts1 = data.mail.end_date.split('-');
+                    var end_date=  parts1[1] + '-' + parts1[1] + '-' + parts1[0];
                     var table = `
                 <div class="card">
                 <div class="card-header">
@@ -1021,8 +1027,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td scope="row">` + data.mail.start_date + `</td>
-                                    <td scope="row">` + data.mail.end_date + `</td>
+                                    <td scope="row">` + start_date + `</td>
+                                    <td scope="row">` + end_date + `</td>
                                     <td scope="row">` + data.mail.start_time + `</td>
                                     <td scope="row">` + data.mail.end_time + `</td>
                                 </tr>

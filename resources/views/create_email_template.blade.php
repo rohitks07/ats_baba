@@ -115,11 +115,16 @@
             @csrf
             <div class="content mt-3">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-12">
                         @include('add_on.input_field_for_creating_template')
                     </div>
-                    <div class="col-md-5" id="display_head" style="margin-top:6%;">
-                        @include('add_on.add_costom_email_template')
+                    <div class="col-md-12" id="display_head" style="margin-top:6%;">
+                        <hr>
+                        {{-- @include('add_on.add_costom_email_template') --}}
+                        <button type="submit" class="btn btn-primary"
+                            style="margin-left:40%;width:200px;height:50px;display:inline;border-radius:20px;float:left">SEND</button>
+                        <button type="button" id="edit" class="btn btn-info"
+                            style="margin-left:1%;width:100px;height:50px;display:inline;border-radius:20px">Edit Field</button>
                     </div>
                 </div>
             </div>
@@ -138,11 +143,11 @@
 @include('include.emp_footer')
 @if(@$val == 0)
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         $('#heading_input').css('border', '1px solid red');
     });
-    $('#heading_input').keypress(function(){
+    $('#heading_input').keypress(function () {
         $('#heading_input').css('border', '1px solid grey');
     });
 
@@ -158,7 +163,7 @@
         $('#job_visa').empty();
         $('#job_client_name').empty();
         $('#job_pay_rate').empty();
-        
+
         var job_val = $('#job_code').val();
         $.ajax({
             type: 'get',
@@ -188,6 +193,7 @@
         $('#candidate_location').empty();
         $('#candidate_skill').empty();
         $('#email_to').empty();
+        $('#candidate_name_value_first').empty();
 
         var candidate_val = $('#candidate_name').val();
         $.ajax({
@@ -201,6 +207,8 @@
                 $('#candidate_location').val(data.city + ' , ' + data.state + ' , ' + data.country);
                 $('#candidate_skill').val(data.skills);
                 $('#email_to').val(data.email);
+                // $('#candidate_name_value_first').html(data.first_name+' '+data.last_name);
+                // document.getElementById('candidate_name_value_first').innerHTML=data.first_name+' '+data.last_name;
             },
             error: function (data) {
                 console.log('internal error');
@@ -267,5 +275,164 @@
         $('#body').css('border-color', '#DFDFDF');
     });
 
+
+    //job_title
+    $('#job_title').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#job_title').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#job_title').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#job_title').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+
+    //location
+    $('#location').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#location').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#location').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#location').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+    //job_detail
+    $('#job_detail').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#job_detail').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#job_detail').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#job_detail').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+    //job_visa
+    $('#job_visa').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#job_visa').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#job_visa').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#job_visa').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+
+    //job_client_name
+    $('#job_client_name').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#job_client_name').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#job_client_name').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#job_client_name').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+    //job_pay_rate
+    $('#job_pay_rate').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#job_pay_rate').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#job_pay_rate').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#job_pay_rate').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+    //candidate_visa
+    $('#candidate_visa').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#candidate_visa').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#candidate_visa').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#candidate_visa').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+    //candidate_location
+    $('#candidate_location').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#candidate_location').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#candidate_location').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#candidate_location').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+    //email_to
+    $('#email_to').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#email_to').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#email_to').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#email_to').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
+    //candidate_skill
+    $('#candidate_skill').click(function () {
+        $('#lower_body').css('border-color', '#0062F9');
+    });
+    $('#candidate_skill').blur(function () {
+        $('#lower_body').css('border-color', '#DFDFDF');
+    });
+    $('#candidate_skill').click(function () {
+        $('#body').css('border-color', '#FF0000');
+    });
+    $('#candidate_skill').blur(function () {
+        $('#body').css('border-color', '#DFDFDF');
+    });
+
 </script>
+<script>
+    $('#edit').click(function () {
+        alert('Field are now editable');
+        $('#job_title').removeAttr('readonly');
+        $('#location').removeAttr('readonly');
+        $('#job_detail').removeAttr('readonly');
+        $('#job_visa').removeAttr('readonly');
+        $('#job_client_name').removeAttr('readonly');
+        $('#job_pay_rate').removeAttr('readonly');
+        $('#candidate_visa').removeAttr('readonly');
+        $('#candidate_location').removeAttr('readonly');
+        $('#candidate_skill').removeAttr('readonly');
+    });
+
+</script>
+
 

@@ -88,3 +88,5 @@
         </div>
     </div>
 </div> 
+
+@include('include.emp_footer')

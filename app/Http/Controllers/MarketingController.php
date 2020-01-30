@@ -18,6 +18,11 @@ use Mail;
 
 class MarketingController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('mian_session');
+
+		}
 	
 	public function index()
 	{

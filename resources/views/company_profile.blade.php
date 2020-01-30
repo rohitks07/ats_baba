@@ -14,7 +14,7 @@
             height:20%;
         }
         
-        .table td {
+        /* .table td {
             padding: 7px;
             font-size: top;
             border-top: 1px solid #dee2e6;
@@ -44,6 +44,13 @@
         }
         .table-bordered thead td, .table-bordered thead th {
             border-bottom-width: 1px;
+        } */
+        .table td{
+            padding:15px;
+            font-size:16px;
+        }
+        .table{
+            
         }
 </style>
         		
@@ -63,13 +70,13 @@
 								<button type="button" class="btn btn-info m-b-5" style="width:100%"> <i class="fa fa-users"></i>  <span>&nbsp;Manage Skill&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> </button>
 								<button type="button" class="btn btn-info m-b-5" style="width:100%"> <i class="fa fa-lock"></i> <span>Change Password</span> </button>
 							</div> -->
-                                <div class="card" style="border: 1px #C0C0C0 solid;">
+                                <div class="card" style="">
                                     <div class="card-header" style="  background-color:#317eeb;"><h3 class="card-title" style="color:#fff;text-transform: none; font-size:large">Company Profile</h3></div>
                                     <div class="card-body">
                                          <div class="row">
                                             <div class="col-12">
-                                                <div class="table-responsive">
-                                                    <table class="table mb-0">
+                                                <div class="">
+                                                    <table class="table table-hover mb-0" >
                                                     <form  action ="{{url('employer/companyprofile/edit')}}">
                                                         <tbody>
                                                             <!--<tr>-->
@@ -83,22 +90,23 @@
                                                                 <td>{{ $companies['company_name']}}</td>
 																 
                                                             </tr>
+                                                            
                                                             <tr>
                                                                 <td>Industry</td>
                                                                 <td>{{$companies['industries_name']}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Organization Type</td>
-                                                                <td>{{$companies['company_type']}}</td>
+                                                                <td>{{$companies['org_type']}}</td>
                                                             </tr>
 															<tr>
                                                                 <td>Federal ID/EIN</td>
                                                                 <td>{{$companies['federal_id']}}</td>
                                                             </tr>
-															<tr>
+															{{-- <tr>
                                                                 <td>DUNS (D&B)</td>
                                                                 <td>{{$companies['duns']}} </td>
-                                                            </tr>
+                                                            </tr> --}}
 															<tr>
                                                                 <td>Address</td>
                                                                 <td>{{$companies['company_address']}}</td>
@@ -131,7 +139,7 @@
                                                                 <td>Company LOGO </td>
                                                                 <div class="row">
                                                                     <div class="col-md-4">
-                                                                        <td><img src="{{url('public/companylogo/'.$companies[''])}}" class="img"></td>
+                                                                        <td><img src="{{url('public/companylogo/'.$companies['logo'])}}" style="height:70%" class="img" title="logo"></td>
                                                                     </div>
                                                                 </div>
                                                             </tr>

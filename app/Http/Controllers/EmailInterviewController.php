@@ -8,6 +8,8 @@ use App\Tbl_job_seekers;
 use App\tbl_post_jobs;
 use App\tbl_interview_mail;
 use App\Tbl_time_zone;
+use App\tbl_last_email;
+use App\tbl_team_member;
 use App\Tbl_companies;
 use App\tbl_schedule_interview;
 use App\Tbl_schedule_preview;
@@ -17,13 +19,154 @@ use Session;
 
 class EmailInterviewController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('mian_session');
 
-   public function show_interview_email(){
+		}
 
-        $toReturn['jobpost']=tbl_post_jobs::select('job_code','ID')->get()->toArray();
+//   public function show_interview_email(){
+
+//         $toReturn['jobpost']=tbl_post_jobs::select('job_code','ID')->get()->toArray();
+//         $toReturn['time_zone'] = Tbl_time_zone::get();
+//         $data[]=array();
+//         $data['name']=Tbl_job_seekers::get()->toArray();
+//          $val = 0; 
+//       return view('interview_email_send_fill_data',compact('toReturn','data','val'));
+//   }
+//   public function interview_job_details(Request $REQUEST){
+//       $id = $REQUEST->job_code;
+//       $jobpost=tbl_post_jobs::where('ID',$id)->first();
+      
+//       return response($jobpost);
+//   }
+
+//   public function interview_candidate_email(Request $REQUEST){
+//       $id = $REQUEST->candidate_id;
+//       $job_seeker_email = Tbl_job_seekers::where('ID',$id)->first();
+//       return response($job_seeker_email);
+//   }
+
+//   public function interview_schedule_email(Request $REQUEST){
+
+      
+
+//      $email_to        = $REQUEST->email_to;
+//      $email_cc        = $REQUEST->email_cc;
+//      $interviewdate   = $REQUEST->interviewdate;
+//      $start_time      = $REQUEST->start_time;
+//      $end_time        = $REQUEST->end_time;
+//      $type_int        = $REQUEST->type_int;
+//      $time_zone       = $REQUEST->time_zone;
+//      $jobcode         = $REQUEST->jobcode;
+//      $instruction     = $REQUEST->instruction;
+//      $candidatename   = $REQUEST->candidatename;
+//      $venue           = $REQUEST->venue;
+//      $end_date        = $REQUEST->end_date;
+//      $instruction_tr  = $REQUEST->instruction;
+//      $instruction     = ltrim($instruction_tr," ");
+
+//      $new_files_upload = "";
+//      if ($REQUEST->has('files_upload')){
+//       $files_upload = $REQUEST->file('files_upload');
+//       $new_files_upload =$files_upload->getClientOriginalName();
+//       $files_upload->move(public_path('seekerresume'), $new_files_upload);
+  
+//       }
+//       else{
+//           $store_cv=$REQUEST->cv_file_before;
+//       }
+     
+
+//     // name
+//     $candidatename_explode = explode('|',$candidatename);
+//     $candidatename_name    =  $candidatename_explode[0];
+//     $candidatename_id      =  $candidatename_explode[1];
+
+//     //company_name        
+//     $jobcode_explode = explode('|',$jobcode);
+//     $jobcode_code    =  $jobcode_explode[0];
+//     $jobcode_id      =  $jobcode_explode[1]; 
+
+//     //for job info
+//     $job_data = tbl_post_jobs::where('ID',$jobcode_id)->first();
+
+//     //for candedate
+//     $candidatename_detail = Tbl_job_seekers::where('ID',$candidatename_id)->first();
+
+//       //   $files_upload_val = implode($files_upload, ',');
+
+//         $uni_no = rand();
+//         $add_mail                    = new tbl_interview_mail();
+//         $add_mail->job_id            =$jobcode_id;
+//         $add_mail->candidatename_id  =$candidatename_id;
+//         $add_mail->start_date        =$interviewdate;
+//         $add_mail->end_date          =$end_date;
+//         $add_mail->start_time        =$start_time;
+//         $add_mail->start_time        =$start_time;
+//         $add_mail->end_time          =$end_time;
+//         $add_mail->interview_type    =$type_int;
+//         $add_mail->time_zone         =$time_zone;
+//         $add_mail->venue             =$venue;
+//         $add_mail->email_to          =$email_to;
+//         $add_mail->email_cc          =$email_cc;
+//         $add_mail->sent_by           =Session::get('user_id');
+//         $add_mail->org_id            =Session::get('org_ID'); 
+//         $add_mail->date              =date("Y-m-d"); 
+//         $user = user::where('user_id', Session::get('user_id'))->first();
+//         $emai_sent_by = $user->email;
+//         if(($instruction !=="")&&($instruction !==" ")){
+//           $add_mail->instruction    =$instruction;
+//          }
+//       else
+//          {
+//             $toReturn['jobpost']=tbl_post_jobs::select('job_code','ID')->get()->toArray();
+//             $toReturn['time_zone'] = Tbl_time_zone::get();
+//             $data[]=array();
+//             $data['name']=Tbl_job_seekers::get()->toArray();
+//             $val = 1;
+//             return view('interview_email_send_fill_data',compact('toReturn','data','val'));
+//          }
+//         if(($new_files_upload !=="")&&($new_files_upload !==null)){
+//              $add_mail->files            = $new_files_upload;
+//         }
+//              $add_mail->uni_no           = $uni_no;
+//              $add_mail->save();
+    
+//         $user_name = user::where('user_id',Session::get('user_id'))->first();
+//         $name = $user_name->full_name;
+//         $logo_company = Tbl_companies::where('ID',Session::get('org_ID'))->first();
+//         $logo = $logo_company->company_logo;
+//         $data=array('email_to'=>$email_to,'email_cc'=>$email_cc,'interviewdate'=>$interviewdate,'start_time'=>$start_time,
+//                     'end_time'=>$end_time,'type_int'=>$type_int,'time_zone'=>$time_zone,'jobcode_code'=>$jobcode_code,'instruction'=>$instruction,
+//                     'candidatename_name'=>$candidatename_name,'jobcode_id'=>$jobcode_id,'job_data'=>$job_data,'candidatename_detail'=>$candidatename_detail,
+//                     'venue'=>$venue,'end_date'=>$end_date,'uni_no'=>$uni_no,'emai_sent_by'=>$emai_sent_by,'name'=>$name,'logo'=>$logo,'time_zone'=>$time_zone);
+
+//         // return view('emails.interview_mail')->with('data',$data);
+//         // exit();
+//          Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
+//              $message->to($data['email_to'])
+//                      ->subject('Review Interview');
+//              $message->from($data['emai_sent_by'],$data['name']);
+//          });
+//          Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
+//              $message->to($data['email_cc'])
+//                      ->subject('Review Interview');
+//              $message->from($data['emai_sent_by'],$data['name']);
+//          });
+
+//         // return view('emails.interview_mail')->with('data',$data);
+//         // exit();
+//         return redirect('employer/dashboard/interview-meeting');
+        
+//   }
+public function show_interview_email(){
+
+        $toReturn['jobpost']=tbl_post_jobs::select('job_code','ID','job_title')->get()->toArray();
         $toReturn['time_zone'] = Tbl_time_zone::get();
         $data[]=array();
         $data['name']=Tbl_job_seekers::get()->toArray();
+        $data['company']=Tbl_companies::where('ID',Session::get('org_ID'))->first();
          $val = 0; 
       return view('interview_email_send_fill_data',compact('toReturn','data','val'));
    }
@@ -43,7 +186,6 @@ class EmailInterviewController extends Controller
    public function interview_schedule_email(Request $REQUEST){
 
       
-
      $email_to        = $REQUEST->email_to;
      $email_cc        = $REQUEST->email_cc;
      $interviewdate   = $REQUEST->interviewdate;
@@ -55,9 +197,13 @@ class EmailInterviewController extends Controller
      $instruction     = $REQUEST->instruction;
      $candidatename   = $REQUEST->candidatename;
      $venue           = $REQUEST->venue;
+     $webex           = $REQUEST->webex;
      $end_date        = $REQUEST->end_date;
      $instruction_tr  = $REQUEST->instruction;
      $instruction     = ltrim($instruction_tr," ");
+     $subject         = ltrim($REQUEST->subject,"");
+     $signature       = ltrim($REQUEST->signature,"");   
+
 
      $new_files_upload = "";
      if ($REQUEST->has('files_upload')){
@@ -89,7 +235,9 @@ class EmailInterviewController extends Controller
 
       //   $files_upload_val = implode($files_upload, ',');
 
-        $uni_no = rand();
+        $uni_no_val = strtotime(date('Y-m-d h:i:s'));
+        $uni_no =$uni_no_val + rand(5,5000000);
+
         $add_mail                    = new tbl_interview_mail();
         $add_mail->job_id            =$jobcode_id;
         $add_mail->candidatename_id  =$candidatename_id;
@@ -101,8 +249,11 @@ class EmailInterviewController extends Controller
         $add_mail->interview_type    =$type_int;
         $add_mail->time_zone         =$time_zone;
         $add_mail->venue             =$venue;
+        $add_mail->webex             =$webex;
         $add_mail->email_to          =$email_to;
         $add_mail->email_cc          =$email_cc;
+        $add_mail->subject           =$subject;
+        $add_mail->signature         =$signature;
         $add_mail->sent_by           =Session::get('user_id');
         $add_mail->org_id            =Session::get('org_ID'); 
         $add_mail->date              =date("Y-m-d"); 
@@ -125,7 +276,23 @@ class EmailInterviewController extends Controller
         }
              $add_mail->uni_no           = $uni_no;
              $add_mail->save();
+
+        //adding in table
+        $add_interview_sent                           = new Tbl_schedule_preview();
+        $add_interview_sent->job_id                   = $jobcode_id;
+        $add_interview_sent->seeker_id                = $candidatename_id;
+        $add_interview_sent->dated                    = date('Y-m-d');
+        $add_interview_sent->org_id                   = Session::get('org_ID');
+        $add_interview_sent->sent_by                  = Session::get('user_id');
+        $add_interview_sent->email_to                 = $email_to;
+        $add_interview_sent->email_cc                 = $email_cc;
+        $add_interview_sent->tbl_interview_mail_id    = $add_mail->id;
+        $add_interview_sent->sts                      = "sent";
+        $add_interview_sent->u_id                     = $uni_no;
+        $add_interview_sent->save();
     
+        $location_candidate = $candidatename_detail->city. ' , ' .$candidatename_detail->state. ' , ' .$candidatename_detail->country;
+
         $user_name = user::where('user_id',Session::get('user_id'))->first();
         $name = $user_name->full_name;
         $logo_company = Tbl_companies::where('ID',Session::get('org_ID'))->first();
@@ -133,20 +300,21 @@ class EmailInterviewController extends Controller
         $data=array('email_to'=>$email_to,'email_cc'=>$email_cc,'interviewdate'=>$interviewdate,'start_time'=>$start_time,
                     'end_time'=>$end_time,'type_int'=>$type_int,'time_zone'=>$time_zone,'jobcode_code'=>$jobcode_code,'instruction'=>$instruction,
                     'candidatename_name'=>$candidatename_name,'jobcode_id'=>$jobcode_id,'job_data'=>$job_data,'candidatename_detail'=>$candidatename_detail,
-                    'venue'=>$venue,'end_date'=>$end_date,'uni_no'=>$uni_no,'emai_sent_by'=>$emai_sent_by,'name'=>$name,'logo'=>$logo,'time_zone'=>$time_zone);
+                    'venue'=>$venue,'end_date'=>$end_date,'uni_no'=>$uni_no,'emai_sent_by'=>$emai_sent_by,'name'=>$name,'logo'=>$logo,'time_zone'=>$time_zone,
+                    'subject'=>$subject,'signature'=>$signature,'webex'=>$webex,'location_candidate'=>$location_candidate);
 
-        return view('emails.interview_mail')->with('data',$data);
-        exit();
-      //   Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
-      //       $message->to($data['email_to'])
-      //               ->subject('Review Interview');
-      //       $message->from($data['emai_sent_by'],$data['name']);
-      //   });
-      //   Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
-      //       $message->to($data['email_cc'])
-      //               ->subject('Review Interview');
-      //       $message->from($data['emai_sent_by'],$data['name']);
-      //   });
+        // return view('emails.interview_mail')->with('data',$data);
+        // exit();
+         Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
+             $message->to($data['email_to'])
+                     ->subject($data['subject']);
+             $message->from($data['emai_sent_by'],$data['name']);
+         });
+         Mail::send('emails.interview_mail',['data' => $data], function($message) use ($data){
+             $message->to($data['email_cc'])
+                     ->subject($data['subject']);
+             $message->from($data['emai_sent_by'],$data['name']);
+         });
 
         // return view('emails.interview_mail')->with('data',$data);
         // exit();
@@ -160,6 +328,72 @@ class EmailInterviewController extends Controller
       $encripted_id = tbl_interview_mail::where('uni_no',$id)->first();
       if($id == @$encripted_id->uni_no){
          $val = 1;
+         
+         $u_id = $id;
+         $value['mail'] =  tbl_interview_mail::where('uni_no',$u_id)->first();
+         $value['org_id'] =  Tbl_companies::where('ID',$value['mail']->org_id)->first();
+         $job =  tbl_post_jobs::where('ID',$value['mail']->job_id)->first();
+         $candidate =  Tbl_job_seekers::where('ID',$value['mail']->candidatename_id)->first();
+
+         $review_data = tbl_interview_mail::where('uni_no',$u_id)->first();
+         $data_value = $review_data->uni_no;
+
+         $check_value = Tbl_schedule_preview::where('u_id',$data_value)->where('sts','check')->first();
+        
+         @$check = $check_value->u_id;
+         if(($check =="")||($check ==null)){
+
+               $add_interview                   = new tbl_schedule_interview();
+               $add_interview->employer_ID      =$value['mail']->sent_by;
+               $add_interview->job_ID           =$job->job_code;
+               $add_interview->seeker_ID        =$value['mail']->candidatename_id;
+               $add_interview->interview_date   =$value['mail']->start_date;
+               $add_interview->interview_type   =$value['mail']->interview_type;
+               $add_interview->from_time        =$value['mail']->start_time;
+               $add_interview->end_time         =$value['mail']->end_date;
+               $add_interview->invitees_to      =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
+               $add_interview->invitees_cc      =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
+               $add_interview->candiate_name    =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
+               $add_interview->time_zone        =$value['mail']->time_zone;
+               $add_interview->instructions     =$value['mail']->instruction;
+               $add_interview->dated            =$value['mail']->date;
+               $add_interview->status           ='active';
+               $add_interview->save();
+
+               
+               $add_schedule_preview                        = new Tbl_schedule_preview();
+               $add_schedule_preview->job_id                = $value['mail']->job_id; 
+               $add_schedule_preview->seeker_id             = $value['mail']->candidatename_id;
+               $add_schedule_preview->dated                 = $value['mail']->date;
+               $add_schedule_preview->org_id                = $value['mail']->org_id;
+               $add_schedule_preview->sent_by               = $value['mail']->sent_by;
+               $add_schedule_preview->last_updated_date     = "";
+               $add_schedule_preview->email_to              = $value['mail']->email_to;
+               $add_schedule_preview->email_cc              = $value['mail']->email_cc;
+               $add_schedule_preview->tbl_interview_mail_id = $value['mail']->id;
+               $add_schedule_preview->interview_table_id    = $add_interview->id;
+               $add_schedule_preview->sts                   = "accepted";
+               $add_schedule_preview->u_id                  = $data_value;
+               $add_schedule_preview->save();
+               
+               $add_schedule_preview                        = new Tbl_schedule_preview();
+               $add_schedule_preview->job_id                = $value['mail']->job_id; 
+               $add_schedule_preview->seeker_id             = $value['mail']->candidatename_id;
+               $add_schedule_preview->dated                 = $value['mail']->date;
+               $add_schedule_preview->org_id                = $value['mail']->org_id;
+               $add_schedule_preview->sent_by               = $value['mail']->sent_by;
+               $add_schedule_preview->last_updated_date     = "";
+               $add_schedule_preview->email_to              = $value['mail']->email_to;
+               $add_schedule_preview->email_cc              = $value['mail']->email_cc;
+               $add_schedule_preview->tbl_interview_mail_id = $value['mail']->id;
+               $add_schedule_preview->interview_table_id    = $add_interview->id;
+               $add_schedule_preview->sts                   = "check";
+               $add_schedule_preview->u_id                  = $data_value;
+               $add_schedule_preview->save();
+
+            }
+            
+            
          return view('add_on.interview_conformdata')->with('val',$val)->with('id',$id);
       }
       else{
@@ -181,58 +415,58 @@ class EmailInterviewController extends Controller
       return response($data);
    }
 
-   public function review_onload(Request $REQUEST){
+//   public function review_onload(Request $REQUEST){
 
-      $u_id = $REQUEST->id_val;
-      $value['mail'] =  tbl_interview_mail::where('uni_no',$u_id)->first();
-      $value['org_id'] =  Tbl_companies::where('ID',$value['mail']->org_id)->first();
-      $job =  tbl_post_jobs::where('ID',$value['mail']->job_id)->first();
-      $candidate =  Tbl_job_seekers::where('ID',$value['mail']->candidatename_id)->first();
+//       $u_id = $REQUEST->id_val;
+//       $value['mail'] =  tbl_interview_mail::where('uni_no',$u_id)->first();
+//       $value['org_id'] =  Tbl_companies::where('ID',$value['mail']->org_id)->first();
+//       $job =  tbl_post_jobs::where('ID',$value['mail']->job_id)->first();
+//       $candidate =  Tbl_job_seekers::where('ID',$value['mail']->candidatename_id)->first();
 
-      $review_data = tbl_interview_mail::where('uni_no',$u_id)->first();
-      $data_value = $review_data->uni_no;
+//       $review_data = tbl_interview_mail::where('uni_no',$u_id)->first();
+//       $data_value = $review_data->uni_no;
 
-      $check_value = Tbl_schedule_preview::where('u_id',$data_value)->first();
-      @$check = $check_value->u_id;
-      if(($check =="")||($check ==null)){
+//       $check_value = Tbl_schedule_preview::where('u_id',$data_value)->first();
+//       @$check = $check_value->u_id;
+//       if(($check =="")||($check ==null)){
 
-      $add_interview                   = new tbl_schedule_interview();
-      $add_interview->employer_ID      =$value['mail']->sent_by;
-      $add_interview->job_ID           =$job->job_code;
-      $add_interview->seeker_ID        =$value['mail']->candidatename_id;
-      $add_interview->interview_date   =$value['mail']->start_date;
-      $add_interview->interview_type   =$value['mail']->interview_type;
-      $add_interview->from_time        =$value['mail']->start_time;
-      $add_interview->end_time         =$value['mail']->end_date;
-      $add_interview->invitees_to      =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
-      $add_interview->invitees_cc      =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
-      $add_interview->candiate_name    =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
-      $add_interview->time_zone        =$value['mail']->time_zone;
-      $add_interview->instructions     =$value['mail']->instruction;
-      $add_interview->dated            =$value['mail']->date;
-      $add_interview->status           ='active';
-      $add_interview->save();
+//       $add_interview                   = new tbl_schedule_interview();
+//       $add_interview->employer_ID      =$value['mail']->sent_by;
+//       $add_interview->job_ID           =$job->job_code;
+//       $add_interview->seeker_ID        =$value['mail']->candidatename_id;
+//       $add_interview->interview_date   =$value['mail']->start_date;
+//       $add_interview->interview_type   =$value['mail']->interview_type;
+//       $add_interview->from_time        =$value['mail']->start_time;
+//       $add_interview->end_time         =$value['mail']->end_date;
+//       $add_interview->invitees_to      =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
+//       $add_interview->invitees_cc      =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
+//       $add_interview->candiate_name    =$candidate->first_name.' '.$candidate->middle_name.' '.$candidate->last_name;
+//       $add_interview->time_zone        =$value['mail']->time_zone;
+//       $add_interview->instructions     =$value['mail']->instruction;
+//       $add_interview->dated            =$value['mail']->date;
+//       $add_interview->status           ='active';
+//       $add_interview->save();
 
       
-      $add_schedule_preview                        = new Tbl_schedule_preview();
-      $add_schedule_preview->job_id                = $value['mail']->job_id; 
-      $add_schedule_preview->seeker_id             = $value['mail']->candidatename_id;
-      $add_schedule_preview->dated                 = $value['mail']->date;
-      $add_schedule_preview->org_id                = $value['mail']->org_id;
-      $add_schedule_preview->sent_by               = $value['mail']->sent_by;
-      $add_schedule_preview->last_updated_date     = "";
-      $add_schedule_preview->email_to              = $value['mail']->email_to;
-      $add_schedule_preview->email_cc              = $value['mail']->email_cc;
-      $add_schedule_preview->tbl_interview_mail_id = $value['mail']->id;
-      $add_schedule_preview->interview_table_id    = $add_interview->id;
-      $add_schedule_preview->sts                   = "accepted";
-      $add_schedule_preview->u_id                  = $data_value;
-      $add_schedule_preview->save();
+//       $add_schedule_preview                        = new Tbl_schedule_preview();
+//       $add_schedule_preview->job_id                = $value['mail']->job_id; 
+//       $add_schedule_preview->seeker_id             = $value['mail']->candidatename_id;
+//       $add_schedule_preview->dated                 = $value['mail']->date;
+//       $add_schedule_preview->org_id                = $value['mail']->org_id;
+//       $add_schedule_preview->sent_by               = $value['mail']->sent_by;
+//       $add_schedule_preview->last_updated_date     = "";
+//       $add_schedule_preview->email_to              = $value['mail']->email_to;
+//       $add_schedule_preview->email_cc              = $value['mail']->email_cc;
+//       $add_schedule_preview->tbl_interview_mail_id = $value['mail']->id;
+//       $add_schedule_preview->interview_table_id    = $add_interview->id;
+//       $add_schedule_preview->sts                   = "accepted";
+//       $add_schedule_preview->u_id                  = $data_value;
+//       $add_schedule_preview->save();
 
-   }
+//   }
 
-      return response($value);
-   }
+//       return response($value);
+//   }
 
    public function reject_request($id=''){
 
@@ -416,7 +650,10 @@ class EmailInterviewController extends Controller
                           ->subject('Rescheduled Interview Request');
                   $message->from($data['emai_sent_by'],'ATS BABA');
                });
-
+                
+                //deleat function
+               $get_table_id = Tbl_schedule_preview::where('u_id',$id_val)->first(); 
+               tbl_schedule_interview::where('schedule_id',$get_table_id->interview_table_id)->delete();
 
                $uni_no = rand();
                tbl_interview_mail::where('uni_no', $value['mail']->uni_no)->update(array(
@@ -432,8 +669,8 @@ class EmailInterviewController extends Controller
    public function create_email_template()
    {
 
-      $toReturn['jobpost'] = tbl_post_jobs::select('job_code', 'ID')->get()->toArray();
-      $toReturn['seeker'] = Tbl_job_seekers::get()->toArray();
+      $toReturn['jobpost'] = tbl_post_jobs::select('job_code', 'ID')->orderBy('ID', 'DESC')->get()->toArray();
+      $toReturn['seeker'] = Tbl_job_seekers::orderBy('ID', 'DESC')->get()->toArray();
       $val = 1;
       return view('create_email_template', compact('toReturn', 'val'));
    }
@@ -456,7 +693,118 @@ class EmailInterviewController extends Controller
       return response($data);
    }
 
-   public function send_email_last_detail(Request $REQUEST)
+//   public function send_email_last_detail(Request $REQUEST)
+//   {
+
+
+//       $heading_input       = $REQUEST->heading_input;
+//       $body_head_input     = $REQUEST->body_head_input;
+//       $job_code            = $REQUEST->job_code;
+//       $job_title           = $REQUEST->job_title;
+//       $location            = $REQUEST->location;
+//       $job_detail          = $REQUEST->job_detail;
+//       $job_visa            = $REQUEST->job_visa;
+//       $job_client_name     = $REQUEST->job_client_name;
+//       $job_pay_rate        = $REQUEST->job_pay_rate;
+//       $candidate_name      = $REQUEST->candidate_name;
+//       $candidate_visa      = $REQUEST->candidate_visa;
+//       $candidate_location  = $REQUEST->candidate_location;
+//       $candidate_skill     = $REQUEST->candidate_skill;
+//       $email_to            = $REQUEST->email_to;
+//       $email_bcc           = $REQUEST->email_bcc;
+//       $subject_email       = $REQUEST->subject_email;
+
+//       $job_explode = explode('|', $job_code);
+//       $candidate_name_explode = explode('|', $candidate_name);
+//       $candidate_name_val = $candidate_name_explode[0];
+//       $heading_input_val   = ltrim($heading_input, " ");
+
+//       if (($heading_input_val == "") || ($heading_input_val == null)) {
+//          $val = 0;
+//          $toReturn['jobpost'] = tbl_post_jobs::select('job_code', 'ID')->get()->toArray();
+//          $toReturn['seeker'] = Tbl_job_seekers::get()->toArray();
+//          return view('create_email_template', compact('toReturn', 'data', 'val'));
+//       }
+//       $user_id = Session::get('user_id');
+//       $user_email = user::where('user_id', $user_id)->first();
+
+//       $add_to_email = new tbl_last_email();
+//       $add_to_email->email_to          = $email_to;
+//       $add_to_email->email_by          = $user_email->email;
+//       $add_to_email->job_id            = $job_explode[1];
+//       $add_to_email->candidate_id      = $candidate_name_explode[1];
+//       $add_to_email->sent_by           = $user_id;
+//       $add_to_email->dated             = date('Y-m-d');
+//       $add_to_email->org_id            = Session::get('org_ID');
+//       $add_to_email->email_bcc         = $email_bcc;
+//       $add_to_email->heading_input     = $heading_input_val;
+//       $add_to_email->body_head_input   = $body_head_input;
+//       $add_to_email->subject_email     = $subject_email;
+//       $add_to_email->save();
+
+      
+      
+//       $email_by  = $user_email->email;
+//       $user_name = $user_email->full_name;
+      
+//       $company_details  = Tbl_companies::where('ID',Session::get('org_ID'))->first();
+//       $user_team_detail = tbl_team_member::where('ID',Session::get('user_id'))->first();
+
+//       $footer = " || ".@$company_details->company_name." || Tel: ".@$user_team_detail->mobile_number." || Email: ".@$email_by." || Web: ".@$company_details->company_website." || ";
+
+//       $body_head_input_val = ltrim($body_head_input, " ");
+//       $temp = 'abhinavroy.itscient@gmail.com';
+//       if (($body_head_input_val !== null) || ($body_head_input_val !== "")) {
+//          $data = array(
+//             'email_to' => $email_to, 'job_title' => $job_title, 'job_code' => $job_code, 'candidate_name_val' => $candidate_name_val,
+//             'email_by' => $email_by, 'heading_input_val' => $heading_input_val, 'body_head_input_val' => $body_head_input_val, 'location' => $location,
+//             'job_detail' => $job_detail, 'job_visa' => $job_visa, 'job_client_name' => $job_client_name, 'job_pay_rate' => $job_pay_rate, 'candidate_location' => $candidate_location,
+//             'candidate_skill' => $candidate_skill, 'email_bcc' => $email_bcc,'subject_email'=>$subject_email,'candidate_visa'=>$candidate_visa,'user_name'=>$user_name,'footer'=>$footer,
+//             'temp'=>$temp
+//          );
+//       } else {
+//          $data = array(
+//             'email_to' => $email_to, 'job_title' => $job_title, 'job_code' => $job_code, 'candidate_name_val' => $candidate_name_val,
+//             'email_by' => $email_by, 'heading_input_val' => $heading_input_val, 'location' => $location, 'job_detail' => $job_detail,
+//             'job_visa' => $job_visa, 'job_client_name' => $job_client_name, 'job_pay_rate' => $job_pay_rate, 'candidate_location' => $candidate_location,
+//             'candidate_skill' => $candidate_skill, 'email_bcc' => $email_bcc,'subject_email'=>$subject_email,'candidate_visa'=>$candidate_visa,'user_name'=>$user_name,'footer'=>$footer, 
+//             'temp'=>$temp 
+//          );
+//       }
+
+
+//       Mail::send('add_on.final_email', ['data' => $data], function ($message) use ($data) {
+//          $message->to($data['email_to'])
+//                  ->subject($data['subject_email']);
+
+//          if ($data['email_bcc']) {
+//             $email_bcc_val = explode(',', $data['email_bcc']);
+//             foreach ($email_bcc_val as $key => $value) {
+//               $message->bcc($email_bcc_val[$key]);
+//             }
+//          }
+//          $message->from($data['email_by'],$data['candidate_name_val']);
+//       });
+      
+//       Mail::send('add_on.final_email', ['data' => $data], function ($message) use ($data) {
+//          $message->to($data['email_by'])
+//          // $message->to($data['temp'])
+//                  ->subject($data['subject_email']);
+
+//          if ($data['email_bcc']) {
+//             $email_bcc_val = explode(',', $data['email_bcc']);
+//             foreach ($email_bcc_val as $key => $value) {
+//               $message->bcc($email_bcc_val[$key]);
+//             }
+//          }
+//          $message->from($data['email_by'],$data['candidate_name_val']);
+//       });
+//       // return view('add_on.final_email')->with('data',$data);
+      
+//       return redirect('employer/dashboard/interview-meeting');
+
+//   }
+public function send_email_last_detail(Request $REQUEST)
    {
 
 
@@ -476,6 +824,7 @@ class EmailInterviewController extends Controller
       $email_to            = $REQUEST->email_to;
       $email_bcc           = $REQUEST->email_bcc;
       $subject_email       = $REQUEST->subject_email;
+      $signature_show      = $REQUEST->signature_show;
 
       $job_explode = explode('|', $job_code);
       $candidate_name_explode = explode('|', $candidate_name);
@@ -511,9 +860,9 @@ class EmailInterviewController extends Controller
       $user_name = $user_email->full_name;
       
       $company_details  = Tbl_companies::where('ID',Session::get('org_ID'))->first();
-      $user_team_detail = Tbl_team_member::where('ID',Session::get('user_id'))->first();
+      $user_team_detail = tbl_team_member::where('ID',Session::get('user_id'))->first();
 
-      $footer = " || ".$company_details->company_name." || Tel: ".$user_team_detail->mobile_number." || Email: ".$email_by." || Web: ".$company_details->company_website." || ";
+      $footer = " || ".@$company_details->company_name." || Tel: ".@$user_team_detail->mobile_number." || Email: ".@$email_by." || Web: ".$company_details->company_website." || ";
 
       $body_head_input_val = ltrim($body_head_input, " ");
       $temp = 'abhinavroy.itscient@gmail.com';
@@ -523,7 +872,7 @@ class EmailInterviewController extends Controller
             'email_by' => $email_by, 'heading_input_val' => $heading_input_val, 'body_head_input_val' => $body_head_input_val, 'location' => $location,
             'job_detail' => $job_detail, 'job_visa' => $job_visa, 'job_client_name' => $job_client_name, 'job_pay_rate' => $job_pay_rate, 'candidate_location' => $candidate_location,
             'candidate_skill' => $candidate_skill, 'email_bcc' => $email_bcc,'subject_email'=>$subject_email,'candidate_visa'=>$candidate_visa,'user_name'=>$user_name,'footer'=>$footer,
-            'temp'=>$temp
+            'temp'=>$temp,'signature_show'=>$signature_show
          );
       } else {
          $data = array(
@@ -531,9 +880,11 @@ class EmailInterviewController extends Controller
             'email_by' => $email_by, 'heading_input_val' => $heading_input_val, 'location' => $location, 'job_detail' => $job_detail,
             'job_visa' => $job_visa, 'job_client_name' => $job_client_name, 'job_pay_rate' => $job_pay_rate, 'candidate_location' => $candidate_location,
             'candidate_skill' => $candidate_skill, 'email_bcc' => $email_bcc,'subject_email'=>$subject_email,'candidate_visa'=>$candidate_visa,'user_name'=>$user_name,'footer'=>$footer, 
-            'temp'=>$temp 
+            'temp'=>$temp,'signature_show'=>$signature_show
          );
       }
+    //   return view('add_on.final_email')->with('data',$data);
+    //   exit;
 
 
       Mail::send('add_on.final_email', ['data' => $data], function ($message) use ($data) {
@@ -562,7 +913,6 @@ class EmailInterviewController extends Controller
          }
          $message->from($data['email_by'],$data['candidate_name_val']);
       });
-      // return view('add_on.final_email')->with('data',$data);
       
       return redirect('employer/dashboard/interview-meeting');
 

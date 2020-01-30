@@ -111,14 +111,28 @@ table.dataTable thead > tr > th {
                         <div class="col-12">
                             <div class="card card-border card-primary">
                                 <div class="card-header">
-                             <input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;border:none;height:30px;margin-top:2.5px;border:1px solid #999;">
+                             <!--<input id="myInput" type="text" placeholder="   Search" style="float:right;width:350px;border-radius:20px;border:none;height:30px;margin-top:2.5px;border:1px solid #999;">-->
+                             <form action="{{url('employer/search_resume/search_candidate')}}" method="get">
+                                    @csrf
+                                    <div class="input-group mb-3 mt-1" style="float:right;width:700px;">
+                                        <input type="text" class="form-control"
+                                            placeholder="Search Application ( First Name , Middle Name , Last Name , Email ,Visa)"
+                                            aria-label="Recipient's username" name="search"
+                                            aria-describedby="button-addon2" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"
+                                                id="button-addon2">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
 								@if(!empty($toReturn['user_type']=="teammember")) 
                                 @if($toReturn['current_module_permission']['is_add']=="yes")                                      
-									<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-success" style="float:left;">Add a Candidate</button></a>
+									<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-info" style="float:left;">Add a Candidate</button></a>
                                 @endif
 								@else
-								<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-success" style="float:left;">Add a Candidate</button></a>
-								@endif											
+								<a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-info" style="float:left;">Add a Candidate</button></a>
+								@endif
+								<button class="btn btn-primary ml-5" onclick="location.href='{{url('employer/search_resume')}}';" type="button" title="Show All Candidate" style="float:left;" id="button-addon2"><i class="fa fa-repeat" aria-hidden="true"></i></button>
 								</div> 
                                 <div class="card-body">
                                     <div class="row" >
@@ -152,7 +166,7 @@ table.dataTable thead > tr > th {
                                                              $age=floor($exp_month/12);
                                                         ?>                                                                                         
 													<tr>										
-														<td style="padding:5px;"><a href="{{url('employer/candidate/'.$id)}}" >{{$personal[$key]->first_name}} {{$personal[$key]->last_name}}</a></td>
+														<td style="padding:5px;"><a href="{{url('employer/candidate/'.$id)}}" >{{$personal[$key]->first_name}} {{$personal[$key]->middle_name}}  {{$personal[$key]->last_name}}</a></td>
 														<?php $dob=date('m-d-Y', strtotime($personal[$key]->dob)); ?>
 														<!-- <td>{{$dob}}</td> -->
 
@@ -162,7 +176,7 @@ table.dataTable thead > tr > th {
                                                         @if(@$age!="0")F {{$age}}@endif
                                                         @endif
                                                         </td>
-														<td>@if($personal[$key]->city){{$personal[$key]->city}} , @endif &nbsp;{{$personal[$key]->state}}</td>
+														<td>@if($personal[$key]->city) {{$personal[$key]->city}}  @endif @if($personal[$key]->state) ,&nbsp;{{$personal[$key]->state}} @endif</td>
 														<td>{{$personal[$key]->visa_status}}</td>
 														@if($personal[$key]->experience)
 														<td>{{$personal[$key]->experience}}+</td>

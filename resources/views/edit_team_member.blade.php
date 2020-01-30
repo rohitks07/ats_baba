@@ -408,6 +408,25 @@
                                     </div>
                                 </div>
                                 <!--end of Jobs History-->
+                                <!--Member type-->
+                                <div class="form-group row">
+                                    <label class="col-sm-4 control-label">Type<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="team_type" name="team_type"
+                                            style="border: 1px solid #b3b3b3;" required>
+                                            @if($toReturn['user']->user_type == 'teamlead')
+                                            <option value="{{$toReturn['user']->user_type}}" selected>Team leader</option>
+                                            @else
+                                            <option value="{{$toReturn['user']->user_type}}" selected>Teammember</option>
+                                            @endif
+                                            <option value="teamlead">Team leader</option>
+                                            <option value="teammember">Teammember</option>
+                                        </select>
+                                        {{-- <span id="jobhistory" name="jobhistory">This field must not be empty</span> --}}
+                                    </div>
+                                </div>
+                                <!--end Member type-->
                         </div>
                         <!-- card-body -->
                     </div>
@@ -486,7 +505,7 @@
                                     <label class="col-md-2 control-label">Profile Image</label>
                                     <div class="col-lg-10">
                                     <input type="file" class="form-control" name="profile_image" >
-                                            <input type="hidden" id="profile_image" name="cv_file_before" value="{{$data->profile_image}}" >
+                                            <input type="hidden"  name="cv_file_before" value="{{$data->profile_image}}" >
                                             <a href="{{url('public/seekerresume/'.$data->profile_image)}}">{{$data->profile_image}}</a>
                                             <br>
                                         <span id="profile" name="profile">Upload files only in .jpg, .jpeg, .gif or .png
@@ -807,28 +826,28 @@
                 $("#jobhistory").hide();
             }
         }
-        //validate file upload
-        $("#profile_image").change(function () {
-            check_file();
-        });
-        $("#validatefrm").click(function () {
-            check_file();
-        });
+        // //validate file upload
+        // $("#profile_image").change(function () {
+        //     check_file();
+        // });
+        // $("#validatefrm").click(function () {
+        //     check_file();
+        // });
 
-        function check_file() {
+        // function check_file() {
 
-            var file_val = $("#profile_image").val();
-            var ext = file_val.split('.').pop();
-            if (ext == "jpg" || ext == "jpeg" || ext == "gif" || ext == "png") {
-                $("#profile").hide();
-            } else {
-                $("#profile").show();
-                $("#profile").focus();
-                $("#profile").css("color", "red");
-                err_file = false;
-                return false;
-            }
-        }
+        //     var file_val = $("#profile_image").val();
+        //     var ext = file_val.split('.').pop();
+        //     if (ext == "jpg" || ext == "jpeg" || ext == "gif" || ext == "png") {
+        //         $("#profile").hide();
+        //     } else {
+        //         $("#profile").show();
+        //         $("#profile").focus();
+        //         $("#profile").css("color", "red");
+        //         err_file = false;
+        //         return false;
+        //     }
+        // }
         //validate state
         $("#validatefrm").click(function () {
             check_state();
@@ -849,19 +868,20 @@
         }
 
         $("#validatefrm").click(function () {
-            err_file = true;
+            // err_file = true;
             err_ph = true;
             err_home_ph = true;
             err_city = true;
             err_jobhistory = true;
             err_state = true;
-            check_file();
+            // check_file();
             check_phone();
             check_home_phone();
             check_loc();
             check_state();
-            if ((err_ph == true) && (err_home_ph == true) && (err_city == true) && (err_file == true) &&
-                (err_jobhistory = true) && (err_state = true)) {
+            // if ((err_ph == true) && (err_home_ph == true) && (err_city == true) && (err_file == true) &&
+            //     (err_jobhistory = true) && (err_state = true)) {
+            if ((err_ph == true) && (err_home_ph == true) && (err_city == true) && (err_jobhistory = true) && (err_state = true)) {
                 return true;
             } else {
                 return false;

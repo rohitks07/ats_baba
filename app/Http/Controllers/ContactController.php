@@ -11,6 +11,11 @@ use Session;
 
 class ContactController extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('mian_session');
+
+		}
     public function index(){
         return view ('post_new_contacts');
     }

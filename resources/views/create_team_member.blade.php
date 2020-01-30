@@ -219,7 +219,7 @@
                                 <div class="form-group row">
                                     <label for="" class="control-label col-lg-4">Member Id <span style="color:red;">*</span></label>
                                     <div class="col-lg-8">
-                                        <input type="text" name="member_id" id="member_id" placeholder="Member ID">
+                                        <input type="text" name="member_id" class="form-control" id="member_id" placeholder="Member ID" required>
                                         <br>
                                         <span id="member_id_check">Please enter valid memeber Id</span>
                                     </div>
@@ -228,7 +228,7 @@
                                 <div class="form-group row">
                                     <label for="" class="control-label col-lg-4">Name <span style="color:red;">*</span></label>
                                     <div class="col-lg-8">
-                                        <input type="text" id="full_name" name="full_name" placeholder="Full Name">
+                                        <input type="text" id="full_name" class="form-control" name="full_name" placeholder="Full Name" required>
                                         <br>
                                         <span id="namecheck" name="namecheck" style="color:red;">Please Enter Your Name</span>
                                     </div>
@@ -237,7 +237,8 @@
                                 <!--Group-->
                                 <div class="form-group row">
                                     <label for="address" class="control-label col-lg-4">Group<span style="color:red;">*</span></label>
-                                    <select class="form-control" name="group" id="group" style="max-width:150px; border: 1px solid #b3b3b3;margin-left: 1%;">
+                                    <select class="form-control" name="group" id="group" style="max-width:150px; border: 1px solid #b3b3b3;margin-left: 1%;" required>
+                                        <option value="">Select group</option>
                                         @foreach($group as $group)
                                         <option value="{{$group->type_ID}}">{{$group->type_name}}</option>
                                         @endforeach
@@ -248,9 +249,9 @@
                                 <div class="form-group row">
                                     <label for="" class="control-label col-lg-4">Email <span style="color:red;">*</span></label>
                                     <div class="col-lg-8">
-                                        <input class="text" id="email" name="email" placeholder="Email" type="text">
+                                        <input class="form-control" id="email" name="email" placeholder="Email" type="text" required>
                                         <br>
-                                        <span id="emailcheck" name="emailcheck" style="color:red;">Please enter a correct email ID</span>
+                                        <span id="emailcheck"  name="emailcheck" style="color:red;">Please enter a correct email ID</span>
                                     </div>
                                 </div>
                                 <!--end of Email-->
@@ -258,7 +259,7 @@
                                 <div class="form-group row">
                                     <label for="" class="control-label col-lg-4">Password<span style="color:red;">*</span></label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+                                        <input class="form-control" id="password" name="password" placeholder="Password" type="password" required>
                                         <span id="passwordcheck" name="passwordcheck" style="color:red;">Value must have 6 characters or more</span>
                                     </div>
                                 </div>
@@ -268,7 +269,7 @@
                                 <div class="form-group row">
                                     <label for="" class="control-label col-lg-4">Confirm Password<span style="color:red;">*</span></label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" type="password">
+                                        <input class="form-control"  id="confirm_password" name="confirm_password" placeholder="Confirm Password" type="password" required>
                                         <span id="cmfpascheck" name="cmfpascheck" style="color:red;">Both password field must be same</span>
                                     </div>
                                 </div>
@@ -282,7 +283,7 @@
                                 <div class="form-group row">
                                     <label for="" class="control-label col-lg-4">Mobile Phone<span style="color:red;">*</span></label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" id="mobile_number" name="mobile_number" placeholder="Enter your mobile number" type="text" maxlength="10">
+                                        <input class="form-control" id="mobile_number" name="mobile_number" placeholder="Enter your mobile number" type="text" maxlength="10" required>
                                         <span id="phcheck" name="phcheck" style="color:red;">Enter your mobile number</span>
                                     </div>
                                 </div>
@@ -291,7 +292,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-4 control-label">Jobs History <span style="color:red;">*</span></label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="jobs_history" name="jobs_history" style="max-width:50%; border: 1px solid #b3b3b3;">
+                                        <select class="form-control" id="jobs_history" name="jobs_history" style="max-width:50%; border: 1px solid #b3b3b3;" required>
                                             <option value="yes">Yes</option>
                                             <option value="no">No</option>
                                         </select>
@@ -299,6 +300,21 @@
                                     </div>
                                 </div>
                                 <!--end of Jobs History-->
+                                <!--Member type-->
+                                <div class="form-group row">
+                                    <label class="col-sm-4 control-label">Type<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="team_type" name="team_type"
+                                            style="border: 1px solid #b3b3b3;" required>
+                                            <option value="">Select Member type</option>
+                                            <option value="teamlead">Team leader</option>
+                                            <option value="teammember">Teammember</option>
+                                        </select>
+                                        {{-- <span id="jobhistory" name="jobhistory">This field must not be empty</span> --}}
+                                    </div>
+                                </div>
+                                <!--end Member type-->
                             </div>
                             <!-- card-body -->
                         </div>
@@ -352,7 +368,7 @@
                             <br>
                             <label class="col-md-2 control-label">Profile Image</label>
                             <div class="col-lg-10">
-                                <input type="file" class="form-control" name="profile_image" id="profile_image" value="">
+                                <input type="file" class="form-control" name="profile_image"  value="" required>
                                 <span id="profile" name="profile">Upload files only in .jpg, .jpeg, .gif or .png format with max size of 6 MB.</span>
                             </div>
                         </div>
@@ -602,35 +618,36 @@
             }
         }
         //validate file upload
-        $("#profile_image").change(function() {
-            check_file();
-        });
-        $("#validatefrm").click(function() {
-            check_file();
-        });
-        function check_file() {
+        // $("#profile_image").change(function() {
+        //     check_file();
+        // });
+        // $("#validatefrm").click(function() {
+        //     check_file();
+        // });
+        // function check_file() {
 
-            var file_val = $("#profile_image").val();
-            var ext = file_val.split('.').pop();
-            if (ext == "jpg" || ext == "jpeg" || ext == "gif" || ext == "png") {
-                $("#profile").hide();
-            } else {
-                $("#profile").show();
-                $("#profile").focus();
-                $("#profile").css("color", "red");
-                err_file = false;
-                return false;
-            }
-        }
+        //     var file_val = $("#profile_image").val();
+        //     var ext = file_val.split('.').pop();
+        //     if (ext == "jpg" || ext == "jpeg" || ext == "gif" || ext == "png") {
+        //         $("#profile").hide();
+        //     } else {
+        //         $("#profile").show();
+        //         $("#profile").focus();
+        //         $("#profile").css("color", "red");
+        //         err_file = false;
+        //         return false;
+        //     }
+        // }
         $("#validatefrm").click(function() {
             err_file = true;
             err_ph = true;
             err_city = true;
             err_jobhistory = true;
-            check_file();
+            // check_file();
             check_phone();
             check_loc();
-            if ((err_ph == true) && (err_city == true) && (err_file == true) && (err_jobhistory = true)) {
+            // if ((err_ph == true) && (err_city == true) && (err_file == true) && (err_jobhistory = true)) {
+            if ((err_ph == true) && (err_city == true) && (err_jobhistory = true)) {
                 return true;
             } else {
                 return false;

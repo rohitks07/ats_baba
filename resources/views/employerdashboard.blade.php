@@ -38,7 +38,7 @@
                                                 <div class="r3_counter_box">
                                                     <i class="pull-left fa fa-share-alt dollar1 icon-rounded"></i>
                                                     <div class="stats">
-                                                    <a href="{{url('employer/dashboard/interview-meeting')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Interview Details" style="float: right;"></i></a>
+                                                    <a href="{{url('employer/dashboard/interview-meeting')}}"><i class="fa fa-eye" id="interview" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Interview Details" style="float: right;"></i></a>
                                                     <h5><strong>{{$toReturn['today_interview']}} Interview</strong></h5>
                                                     <span>Happening Today !</span>
                                                     </div>

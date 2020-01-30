@@ -201,19 +201,36 @@
                             <a class="nav-link active" id="profile-tab-2" data-toggle="tab" href="#profile-2" role="tab"
                                 aria-controls="profile-2" aria-selected="true">
                                 <!-- $con=count($tbl_interview_add); -->
-                                <span class="d-none d-sm-block">Interviews </span>
+                                <span class="d-none d-sm-block" style="font-size:1.2vh;color:black">Scheduled </span>
+                            </a>
+                        </li>
+                        <li class="nav-item tab">
+                            <a class="nav-link" id="message-tab-3" data-toggle="tab" href="#message-3" role="tab"
+                                aria-controls="message-3" aria-selected="false">
+                                <span class="d-none d-sm-block" style="font-size:1.2vh;color:black">Reschedule</span>
+                            </a>
+                        </li>
+                        <li class="nav-item tab">
+                            <a class="nav-link" id="message-tab-4" data-toggle="tab" href="#message-4" role="tab"
+                                aria-controls="message-4" aria-selected="false">
+                                <span class="d-none d-sm-block" style="font-size:1.2vh;color:black">Sent Email</span>
+                            </a>
+                        </li>
+                        <li class="nav-item tab">
+                            <a class="nav-link" id="message-tab-5" data-toggle="tab" href="#message-5" role="tab"
+                                aria-controls="message-5" aria-selected="false">
+                                <span class="d-none d-sm-block" style="font-size:1.2vh;color:black">Rejected</span>
                             </a>
                         </li>
                         <li class="nav-item tab">
                             <a class="nav-link" id="message-tab-2" data-toggle="tab" href="#message-2" role="tab"
                                 aria-controls="message-2" aria-selected="false">
-                                <span class="d-none d-sm-block">Meetings</span>
+                                <span class="d-none d-sm-block" style="font-size:1.2vh;color:black">Meetings</span>
                             </a>
                         </li>
+                        
                         <li class="nav-item tab">
-                           
-                        </li>
-                        <li class="nav-item tab">
+                            
                         </li>
                     </ul>
                     <div class="tab-pane" id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
@@ -224,13 +241,13 @@
                                         <h3 class="card-title"
                                             style="color:white;text-transform: none; font-size:large;font-family: 'Raleway', sans-serif;">
                                             Interviews
-                                            <a href="{{url('employer/dashboard/interview-meeting/add')}}"><button
-                                                    type="button" class="btn btn-success" style="float: right;">Add an
-                                                    Interview</button></a>
+                                            <!--<a href="{{url('employer/dashboard/interview-meeting/add')}}"><button-->
+                                            <!--        type="button" class="btn btn-info" style="float: right;">Add an-->
+                                            <!--        Interview</button></a>-->
                                             <a href="{{url('employer/dashboard/interview_schedule_email_view')}}"><button
-                                                    type="button" class="btn btn-success" style="float: right;margin-right:20px;">Send Interview request</button></a>
+                                                    type="button" class="btn btn-info" style="float: right;margin-right:20px;">Send Interview request</button></a>
                                             <a href="{{url('employer/dashboard/create_email_template')}}"><button
-                                                    type="button" class="btn btn-success" style="float: right;margin-right:20px;">Create Last email template</button></a>
+                                                    type="button" class="btn btn-info" style="float: right;margin-right:20px;">Create Final Email template</button></a>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -283,12 +300,12 @@
                                                                 <td>{{$r->interview_type}}</td>
 
                                                                 <td class="actions">
-                                                                    <a href="{{url('employer/dashboard/interview-meeting-intedit'.$ida)}}"
-                                                                        class="hidden on-editing login-row"
-                                                                        data-placement="top" title=""
-                                                                        data-toggle="tooltip"
-                                                                        data-original-title="Edit"><i
-                                                                            class="fa fa-pencil"></i></a>
+                                                                    <!--<a href="{{url('employer/dashboard/interview-meeting-intedit'.$ida)}}"-->
+                                                                    <!--    class="hidden on-editing login-row"-->
+                                                                    <!--    data-placement="top" title=""-->
+                                                                    <!--    data-toggle="tooltip"-->
+                                                                    <!--    data-original-title="Edit"><i-->
+                                                                    <!--        class="fa fa-pencil"></i></a>-->
                                                                     <a href="{{url('employer/dashboard/interview-meeting-intdel'.$ida)}}"
                                                                         class="on-default edit-row"
                                                                         data-toggle="tooltip" data-placement="top"
@@ -322,7 +339,7 @@
                                             style="color:white;text-transform: none; font-size:large;font-family: 'Raleway', sans-serif;">
                                             Meetings
                                             <a href="{{url('employer/dashboard/interview-meeting-tab/add')}}"><button
-                                                    type="button" class="btn btn-success"
+                                                    type="button" class="btn btn-info"
                                                     style="float: right; margin-right: 1em;">Add a Meeting</button></a>
                                         </h3>
                                     </div>
@@ -331,9 +348,9 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="table-responsive">
-                                                    <table id="datatable-responsive"
-                                                        class="table table-striped table-bordered dt-responsive nowrap"
-                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <table id="datatable"
+                                                    class="table table-striped table-bordered dt-responsive nowrap"
+                                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                         <thead>
                                                             <thead>
                                                                 <tr>
@@ -388,11 +405,317 @@
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         data-original-title="delete"><i
                                                                             class="fa fa-trash-o"></i></a>
+                                                                            
                                                                 </td>
                                                             </tr>
                                                             @endforeach
                                                         </tbody>
                                                     </table>
+                                                </div>
+                                            </div>
+                                            <!--end of col-->
+                                        </div>
+                                        <!--end of row-->
+                                    </div>
+                                    <!--end of card body-->
+                                </div>
+                            </div> <!-- End Row -->
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="message-3" role="tabpanel" aria-labelledby="message-tab-3">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header bg-info">
+                                        <h3 class="card-title "
+                                            style="color:white;text-transform: none; font-size:large;font-family: 'Raleway', sans-serif;">
+                                            Interview Reschedule
+                                            {{-- <a href="{{url('employer/dashboard/interview-meeting-tab/add')}}"><button
+                                                    type="button" class="btn btn-info"
+                                                    style="float: right; margin-right: 1em;">Add a Meeting</button></a> --}}
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive">
+                                                    <table id="datatable"
+                                                    class="table  table-bordered dt-responsive nowrap"
+                                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="padding:10px;">Job Title</th>
+                                                                    <th style="padding:10px;">Email</th>
+                                                                    <th style="padding:10px;">Name</th>
+                                                                    <th style="padding:10px;">Time</th>
+                                                                    <th style="padding:10px;">Date</th>
+                                                                    <th style="padding:10px;">Time Zone</th>
+                                                                    {{-- <th>Actions</th> --}}
+                                                                </tr>
+                                                            </thead>
+                                                        <tbody>
+                                                            @foreach ($toReturn['schedule'] as $i)
+
+
+                                                            <tr>
+                                                                <?php 
+                                                                $id = $i->id;
+                                                                // $date_application1 = $i->meeting_date;
+                                                                // $new_date1 = date("m-d-Y", strtotime($date_application1));
+                                                                $get_time_zone = DB::table('tbl_interview_mail')->where('id',$i->tbl_interview_mail_id)->first();
+                                                                @$time_zone = DB::table('tbl_time_zone')->where('time_zone_name',$get_time_zone->time_zone)->first();
+                                                                $job_seeker = DB::table('tbl_job_seekers')->where('ID',$i->seeker_id)->first();
+                                                                $job = DB::table('tbl_post_jobs')->where('ID',$i->job_id)->first();
+                                                                @$static_time = $time_zone->change_time;
+                                                                $cal_value = $data_time->cal_value;
+                                                                if($cal_value == "+"){
+                                                                    $secs = strtotime($i->start_time);
+                                                                    $result = date("h:i a",strtotime($static_time)+$secs);
+                                                                }
+                                                                else{
+                                                                    $secs = strtotime($i->start_time);
+                                                                    $result = date("h:i a",strtotime($static_time)-$secs);
+                                                                }
+                                                                $date_val = date('m-d-Y', strtotime(@$get_time_zone->start_date))
+                                                                ?>
+                                                                <td style="padding:6px;">{{$job->job_title}}</td>
+                                                                <td style="padding:6px;">{{$job_seeker->email}}</td>
+                                                                <td style="padding:6px;">{{$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
+                                                                <td style="padding:6px;">{{@$result}}</td>
+                                                                <td style="padding:6px;">{{$date_val}}</td>
+                                                                <td style="padding:6px;">{{@$get_time_zone->time_zone}}</td>
+                                                                
+                                                                
+
+
+
+
+                                                                {{-- <td class="actions">
+
+                                                                    <a href="{{url('employer/dashboard/interview-meeting-up'.$id)}}"
+                                                                        class="hidden on-editing login-row"
+                                                                        data-placement="top" title=""
+                                                                        data-toggle="tooltip"
+                                                                        data-original-title="Edit"><i
+                                                                            class="fa fa-pencil"></i></a>
+                                                                    <a href="{{url('employer/dashboard/interview-meeting-del'.$id)}}"
+                                                                        title="delete"
+                                                                        class="hidden on-editing login-row"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        data-original-title="delete"><i
+                                                                            class="fa fa-trash-o"></i></a>
+                                                                </td> --}}
+                                                            </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                    {{$toReturn['schedule']->links()}}
+                                                </div>
+                                            </div>
+                                            <!--end of col-->
+                                        </div>
+                                        <!--end of row-->
+                                    </div>
+                                    <!--end of card body-->
+                                </div>
+                            </div> <!-- End Row -->
+                        </div>
+                    </div>
+                    {{-- Tab 4 --}}
+                    <div class="tab-pane" id="message-4" role="tabpanel" aria-labelledby="message-tab-4">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header bg-info">
+                                        <h3 class="card-title"
+                                            style="color:white;text-transform: none; font-size:large;font-family: 'Raleway', sans-serif;">
+                                            Interview Sent Email
+                                            {{-- <a href="{{url('employer/dashboard/interview-meeting-tab/add')}}"><button
+                                                    type="button" class="btn btn-info"
+                                                    style="float: right; margin-right: 1em;">Add a Meeting</button></a> --}}
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive">
+                                                    <table id="datatable"
+                                                    class="table  table-bordered dt-responsive nowrap"
+                                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="padding:10px;">Job Title</th>
+                                                                    <th style="padding:10px;">Email</th>
+                                                                    <th style="padding:10px;">Name</th>
+                                                                    <th style="padding:10px;">Time</th>
+                                                                    <th style="padding:10px;">Date</th>
+                                                                    <th style="padding:10px;">Time Zone</th>
+                                                                    {{-- <th>Actions</th> --}}
+                                                                </tr>
+                                                            </thead>
+                                                        <tbody>
+                                                            @foreach ($toReturn['sent'] as $i)
+
+
+                                                            <tr>
+                                                                <?php 
+                                                                $id = $i->id;
+                                                                // $date_application1 = $i->meeting_date;
+                                                                // $new_date1 = date("m-d-Y", strtotime($date_application1));
+                                                                $get_time_zone = DB::table('tbl_interview_mail')->where('id',$i->tbl_interview_mail_id)->first();
+                                                                @$time_zone = DB::table('tbl_time_zone')->where('time_zone_name',$get_time_zone->time_zone)->first();
+                                                                $job_seeker = DB::table('tbl_job_seekers')->where('ID',$i->seeker_id)->first();
+                                                                $job = DB::table('tbl_post_jobs')->where('ID',$i->job_id)->first();
+                                                                @$static_time = $time_zone->change_time;
+                                                                $cal_value = $data_time->cal_value;
+                                                                if($cal_value == "+"){
+                                                                    $secs = strtotime($i->start_time);
+                                                                    $result = date("h:i a",strtotime($static_time)+$secs);
+                                                                }
+                                                                else{
+                                                                    $secs = strtotime($i->start_time);
+                                                                    $result = date("h:i a",strtotime($static_time)-$secs);
+                                                                }
+                                                                $date_val = date('m-d-Y', strtotime(@$get_time_zone->start_date))
+                                                                ?>
+                                                                <td style="padding:6px;">{{$job->job_title}}</td>
+                                                                <td style="padding:6px;">{{$job_seeker->email}}</td>
+                                                                <td style="padding:6px;">{{$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
+                                                                <td style="padding:6px;">{{@$result}}</td>
+                                                                <td style="padding:6px;">{{$date_val}}</td>
+                                                                <td style="padding:6px;">{{@$get_time_zone->time_zone}}</td>
+                                                                
+                                                                
+
+
+
+
+                                                                {{-- <td class="actions">
+
+                                                                    <a href="{{url('employer/dashboard/interview-meeting-up'.$id)}}"
+                                                                        class="hidden on-editing login-row"
+                                                                        data-placement="top" title=""
+                                                                        data-toggle="tooltip"
+                                                                        data-original-title="Edit"><i
+                                                                            class="fa fa-pencil"></i></a>
+                                                                    <a href="{{url('employer/dashboard/interview-meeting-del'.$id)}}"
+                                                                        title="delete"
+                                                                        class="hidden on-editing login-row"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        data-original-title="delete"><i
+                                                                            class="fa fa-trash-o"></i></a>
+                                                                </td> --}}
+                                                            </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                    {{$toReturn['sent']->links()}}
+                                                </div>
+                                            </div>
+                                            <!--end of col-->
+                                        </div>
+                                        <!--end of row-->
+                                    </div>
+                                    <!--end of card body-->
+                                </div>
+                            </div> <!-- End Row -->
+                        </div>
+                    </div>
+                    {{--Tab 5--}}
+                    <div class="tab-pane" id="message-5" role="tabpanel" aria-labelledby="message-tab-5">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header bg-info">
+                                        <h3 class="card-title"
+                                            style="color:white;text-transform: none; font-size:large;font-family: 'Raleway', sans-serif;letter-spacing:1px;">
+                                            Interview Rejected Email
+                                            {{-- <a href="{{url('employer/dashboard/interview-meeting-tab/add')}}"><button
+                                                    type="button" class="btn btn-info"
+                                                    style="float: right; margin-right: 1em;">Add a Meeting</button></a> --}}
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive">
+                                                    <table id="datatable"
+                                                    class="table  table-bordered dt-responsive nowrap"
+                                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="padding:10px;">Job Title</th>
+                                                                    <th style="padding:10px;">Email</th>
+                                                                    <th style="padding:10px;">Name</th>
+                                                                    <th style="padding:10px;">Time</th>
+                                                                    <th style="padding:10px;">Date</th>
+                                                                    <th style="padding:10px;">Time Zone</th>
+                                                                    {{-- <th>Actions</th> --}}
+                                                                </tr>
+                                                            </thead>
+                                                        <tbody>
+                                                            @foreach ($toReturn['rejected'] as $i)
+
+
+                                                            <tr>
+                                                                <?php 
+                                                                $id = $i->id;
+                                                                // $date_application1 = $i->meeting_date;
+                                                                // $new_date1 = date("m-d-Y", strtotime($date_application1));
+                                                                $get_time_zone = DB::table('tbl_interview_mail')->where('id',$i->tbl_interview_mail_id)->first();
+                                                                @$time_zone = DB::table('tbl_time_zone')->where('time_zone_name',$get_time_zone->time_zone)->first();
+                                                                $job_seeker = DB::table('tbl_job_seekers')->where('ID',$i->seeker_id)->first();
+                                                                $job = DB::table('tbl_post_jobs')->where('ID',$i->job_id)->first();
+                                                                @$static_time = $time_zone->change_time;
+                                                                $cal_value = $data_time->cal_value;
+                                                                if($cal_value == "+"){
+                                                                    $secs = strtotime($i->start_time);
+                                                                    $result = date("h:i a",strtotime($static_time)+$secs);
+                                                                }
+                                                                else{
+                                                                    $secs = strtotime($i->start_time);
+                                                                    $result = date("h:i a",strtotime($static_time)-$secs);
+                                                                }
+                                                                $date_val = date('m-d-Y', strtotime(@$get_time_zone->start_date))
+                                                                ?>
+                                                                <td style="padding:6px;">{{$job->job_title}}</td>
+                                                                <td style="padding:6px;">{{$job_seeker->email}}</td>
+                                                                <td style="padding:6px;">{{$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
+                                                                <td style="padding:6px;">{{@$result}}</td>
+                                                                <td style="padding:6px;">{{$date_val}}</td>
+                                                                <td style="padding:6px;">{{@$get_time_zone->time_zone}}</td>
+                                                                
+                                                                
+
+
+
+
+                                                                {{-- <td class="actions">
+
+                                                                    <a href="{{url('employer/dashboard/interview-meeting-up'.$id)}}"
+                                                                        class="hidden on-editing login-row"
+                                                                        data-placement="top" title=""
+                                                                        data-toggle="tooltip"
+                                                                        data-original-title="Edit"><i
+                                                                            class="fa fa-pencil"></i></a>
+                                                                    <a href="{{url('employer/dashboard/interview-meeting-del'.$id)}}"
+                                                                        title="delete"
+                                                                        class="hidden on-editing login-row"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        data-original-title="delete"><i
+                                                                            class="fa fa-trash-o"></i></a>
+                                                                </td> --}}
+                                                            </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                    {{$toReturn['rejected']->links()}}
                                                 </div>
                                             </div>
                                             <!--end of col-->

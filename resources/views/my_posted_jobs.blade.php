@@ -91,16 +91,29 @@
                 <div class="col-lg-12">
                     <div class="card card-border card-primary">
                         <div class="card-header">
-								<input id="search" type="text" placeholder="Search" class="form-control" style="float:right;width:350px;border-radius:20px;height:30px;border:none;margin-top:2px;">
+								<!--<input id="search" type="text" placeholder="Search" class="form-control" style="float:right;width:350px;border-radius:20px;height:30px;border:none;margin-top:2px;">-->
+								<form action="{{url('employer/posted_jobs/search')}}" method="get">
+                                @csrf
+                                <div class="input-group mb-3 mt-1" style="float:right;width:500px;">
+                                    <input type="text" class="form-control" placeholder="Search Jobs ( title , code )"
+                                        aria-label="Recipient's username" name="search" aria-describedby="button-addon2"
+                                        required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                                    </div>
+                                </div>
+                            </form>
 						@if(!empty($toReturn['user_type']=="teammember"))
 							@if($toReturn['current_module_permission']['is_add']=="yes")                                       
 							<a href="{{url('employer/post_new_job')}}">
-							<button type="button" class="btn btn-success" style="float:left;">Add a Job</button></a>
+							<button type="button" class="btn btn-info" style="float:left;">Add a Job</button></a>
 							@endif
 						@else
 						<a href="{{url('employer/post_new_job')}}">
-						<button type="button" class="btn btn-success" style="float:left;">Add a Job</button></a>
+						<button type="button" class="btn btn-info" style="float:left;">Add a Job</button></a>
 						@endif
+						<a href="{{url('employer/posted_jobs')}}" >
+                                        <button type="button" class="btn btn-primary ml-3 " style="float:left;padding:10px" title="Show all jobs"><i class="fa fa-repeat" aria-hidden="true"></i></button></a>
 					    </div>
                         	<div class="card-body">
                                         <div class="row">
@@ -118,9 +131,9 @@
 															<th width="10%">Pay Rate</th>
 			                                                <th width="10%">Publish Date</th>
 														    <th width="10%">Status</th>                                                    
-															<th width="10%">Closing Date</th>
-															<th width="10%"><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
-															<th width="10%">Actions</th>     													
+															<th width="7%">Closing Date</th>
+															<th width="6%"><i class="fa fa-user fa-lg" aria-hidden="true" title="Assignees"></i>&nbsp<i class="fa fa-file-text fa-lg" aria-hidden="true" title="Application"></i>&nbsp;<i class="fa fa-check-square-o fa-lg" aria-hidden="true" title="Client Submittal"></i></th> 
+															<th width="18%">Actions</th>     													
 			                                            </tr>
 			                                        </thead>
 			                                        <tbody  id="myTable">  
@@ -145,7 +158,8 @@
                                                         $plus_visa=substr_count("$vis",",");
                                                         $sh=explode(",",$vis);
                                                         ?>
-                                                        <td onmouseover="visa_type({{$id}});" id="visa{{$id}}"><span id="data1{{$id}}" >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span><span id="data2{{$id}}" style="display:none;" >{{$posted_job['job_visa_status']}}</span></td><td>{{$posted_job['pay_min']}}-{{$posted_job['pay_max']}}</td>													
+                                                        <td onmouseover="visa_type({{$id}});" data-toggle="tooltip" title="{{$posted_job['job_visa_status']}}" id="visa{{$id}}"><span >{{$sh[0]}},&nbsp;+{{$plus_visa}}</span></td>
+                                                                <td>{{$posted_job['pay_min']}}-{{$posted_job['pay_max']}}</td>													
 				                                                <td>{{$closing_date}}</td>
 																<td>{{$posted_job['sts']}}</td>
 																<td>{{$new_last_Date}}</td>
@@ -177,7 +191,10 @@
                                                                         data-target="#myModal{{$posted_job['ID']}}" title="Add a candidate"><i class="fa fa-plane" aria-hidden="true"></i></a>
                                                                         <a  href="" data-toggle="modal" data-target="#mailModal{{$posted_job['ID']}}" title="mail"><i class="fa fa-envelope"></i></a>
                                                     	<a href="" data-toggle="modal" data-target="#exampleModalCenter{{$posted_job['ID']}}"><i class="fa fa-plus" title="Note"></i></a>
-																<!-- @endif -->									
+																<!-- @endif -->		
+																<a href="" data-toggle="modal"
+                                                        onclick="share({{$posted_job['ID']}})" title="share"><i
+                                                            class="fa fa-share"></i></a>
 																<div class="modal fade" id="myModal{{$posted_job['ID']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
 																<div class="modal-dialog modal-lg">
 																	<div class="modal-content">
@@ -416,6 +433,9 @@
                 </div>
 <script>
     var resizefunc = [];
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>
 @include('include.emp_footer')
 <script>
@@ -511,6 +531,186 @@
         // });
 
     </script>
+    
+    {{-- ******************************* Under this sharing code is written ******************************* --}}
+
+    <script>
+        function share(id) {
+            alert('this module work in progress')
+            $('#exampleModalScrollable').modal();
+            $('#id_for_job').val(id);
+        }
+
+        function share_twiter() {
+            $('#exampleModalScrollable').modal('toggle');
+            $('#share_twiter').modal();
+            var id = $('#id_for_job').val();
+
+            $.ajax({
+                type: 'get',
+                url: '{{url("employer/job_details/share_linked_in")}}',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#job_title_twiter').val(data.job.job_title);
+                    $('#job_detail_twiter').html(data.job.job_description);
+                    $('#visa_twiter').val(data.job.job_visa_status);
+                    $('#skills_twiter').val(data.job.required_skills);
+                    $('#url_twiter').val('http://baba.software/ats/careers/job_detail/' + data.job.ID + '/' + data.org);
+                    // $('#share_fb').attr('src', "https://www.facebook.com/plugins/share_button.php?href=http://localhost/babasoftware/careers/job_detail/" + data.job.ID + '/' +data.org+"=large&width=77&height=28&appId")    
+                    $('#twiter_link').attr('href', "https://twitter.com/intent/tweet?url=http://baba.software/ats/careers/job_detail/"+ data.job.ID + '/' + data.org)
+
+
+                },
+                error: function (data) {
+                    alert('Internal Server error');
+                }
+            });
+
+        }
+
+
+        function share_facebook(){
+            $('#exampleModalScrollable').modal('toggle');
+            $('#share_facebook').modal();
+            var id = $('#id_for_job').val();
+
+            $.ajax({
+                type: 'get',
+                url: '{{url("employer/job_details/share_linked_in")}}',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#job_title').val(data.job.job_title);
+                    $('#job_detail').html(data.job.job_description);
+                    $('#visa').val(data.job.job_visa_status);
+                    $('#skills').val(data.job.required_skills);
+                    $('#url').val('http://localhost/babasoftware/careers/job_detail/' + data.job.ID + '/' +
+                        data.org);
+                   $('#share_fb').attr('src', "https://www.facebook.com/plugins/share_button.php?href=http://baba.software/ats/careers/job_detail/" + data.job.ID + '/' +data.org)   
+                    // $('#share_fb').attr('src', "https://www.facebook.com/plugins/share_button.php?href=http://itscient.com/")    
+
+
+                },
+                error: function (data) {
+                    alert('Internal Server error');
+                }
+            });
+        }
+
+    </script>
+
+    <!-- Modal -->
+    <div id="exampleModalScrollable" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalScrollableTitle">Share</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id_for_job">
+                    <center>
+                        <button type="button" onclick="share_twiter()" class="btn btn-info"> Share on
+                            Twitter</button>
+                        <button type="button" onclick="share_facebook()" class="btn text-light"
+                            style="background-color:#4267b2"> Share on
+                            Facebook</button>
+                    </center>
+                </div>
+                <div class="modal-footer">
+
+                    <small>Click the respective button for sharing this job post</small>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="share_twiter" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalScrollableTitle">Share on Twiter <i
+                            class="fa fa-linkedin-in"></i></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="">Job Title</label>
+                    <input type="text" id="job_title_twiter" class="form-control" readonly>
+                    <label for="" class="mt-2">Job details</label>
+                    <textarea name="" id="job_detail_twiter" style="width:100%" rows="10" readonly></textarea>
+                    <label for="" class="mt-2">Link URL</label>
+                    <input type="text" id="url_twiter" class="form-control" readonly>
+                    <label for="" class="mt-2">Visa status</label>
+                    <input type="text" id="visa_twiter" class="form-control" readonly>
+                    <label for="" class="mt-2">Skills</label>
+                    <input type="text" id="skills_twiter" class="form-control" readonly>
+
+                </div>
+                <div class="modal-footer">
+
+                    {{-- <button type="button" class="btn btn-info">Share</button> --}}
+                    <a id="twiter_link"
+                        class="btn btn-info" data-show-count="false">Tweet on twiter</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="share_facebook" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalScrollableTitle">Share on Facebook <i
+                            class="fa fa-linkedin-in"></i></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="">Job Title</label>
+                    <input type="text" id="job_title" class="form-control" readonly>
+                    <label for="" class="mt-2">Job details</label>
+                    <textarea name="" id="job_detail" style="width:100%" rows="10" readonly></textarea>
+                    <label for="" class="mt-2">Link URL</label>
+                    <input type="text" id="url" class="form-control" readonly>
+                    <label for="" class="mt-2">Privacy</label>
+                    <label for="" class="mt-2">Visa status</label>
+                    <input type="text" id="visa" class="form-control" readonly>
+                    <label for="" class="mt-2">Skills</label>
+                    <input type="text" id="skills" class="form-control" readonly>
+
+                </div>
+                <div class="modal-footer">
+
+                    {{-- <button type="button" class="btn btn-info">Share</button> --}}
+                    <iframe
+                        width="77" height="28" id="share_fb" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+                        allowTransparency="true" allow="encrypted-media"></iframe>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {{-- *******************************  sharing code ends here ******************************* --}}
 </html>
 
 														

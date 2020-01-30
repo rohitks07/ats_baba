@@ -23,4 +23,5 @@
         </div>
     </div>
 </div>
-<button type="submit" class="btn btn-primary" style="margin-left:35%;width:200px;height:50px;">SEND</button>
+<button type="submit" class="btn btn-primary" style="margin-left:35%;width:200px;height:50px;display:inline">SEND</button>
+<button type="button" id="edit" class="btn btn-info" style="margin-left:1%;width:100px;height:50px;display:inline">Edit Field</button>

@@ -92,6 +92,10 @@
         overflow-y: scroll;
     }
 
+    .btn:hover {
+        background-color: white;
+    }
+
 </style>
 
 <body>
@@ -108,14 +112,17 @@
                         enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="card">
-                            <div class="card-header bg-success">
+                            <div class="card-header bg-info">
                                 <h3 class="card-title mt-1"
                                     style="color:white;text-transform: none;font-family: 'Raleway', sans-serif;font-weight:500;font-size:18px;letter-spacing:1px;">
                                     Send Email ( Interview Request )
-                                    <button type="submit" class="btn btn-warning text-dark"
+                                    <button type="button" class="btn btn-light text-dark" onclick="submit_data()"
                                         style="float: right; margin-right: 1em;font-weight:500;border-radius:20px;">Send
                                         Email</button>
-                                    <a class="btn btn-warning text-dark"
+                                    <button type="submit" id="data_submit" class="btn btn-light text-dark"
+                                        style="float: right; margin-right: 1em;font-weight:500;border-radius:20px;display:none">Send
+                                        Email</button>
+                                    <a class="btn btn-light text-dark"
                                         href="{{url('employer/dashboard/interview_schedule_email_view')}}"
                                         title="Reload"
                                         style="float: right; margin-right: 1em;font-weight:500;border-radius:30px;">↻</a>
@@ -134,10 +141,15 @@
                             <!--end of card body-->
                         </div>
                     </form>
+
                 </div> <!-- End Row -->
+                <br><br>
             </div>
+
         </div>
+
     </div>
+
 
 </body>
 
@@ -164,8 +176,73 @@
 @else
 @endif
 <script>
+    //for subject
+    $('#subject').keypress(function () {
+        $('#subject_check').hide('show');
+        $('#subject').css('border-color', '#E6E6E6');
+    });
+    //for signature
+    $('#signature').keypress(function () {
+        $('#signature_check').hide('show');
+        $('#signature').css('border-color', '#E6E6E6');
+    });
+    //for instruction
+    $('#instruction').keypress(function () {
+        $('#instruction_check').hide('show');
+        $('#instruction').css('border-color', '#E6E6E6');
+    });
+    // validation
+    function submit_data() {
+        var subject = $('#subject').val();
+        var signature = $('#signature').val();
+        var instruction = $('#instruction').val();
+
+        var subject_trimed = $.trim(subject);
+        var signature_trimed = $.trim(signature);
+        var instruction_trimed = $.trim(instruction);
+
+        if ((subject_trimed == "") && (instruction_trimed == "") && (signature_trimed == "")) {
+            $('#subject_check').show('show');
+            $('#subject').css('border-color', 'red');
+            $('#instruction_check').show('show');
+            $('#instruction').css('border-color', 'red');
+            $('#signature_check').show('show');
+            $('#signature').css('border-color', 'red');
+        } else if ((subject_trimed == "") && (instruction_trimed == "")) {
+            $('#subject_check').show('show');
+            $('#subject').css('border-color', 'red');
+            $('#instruction_check').show('show');
+            $('#instruction').css('border-color', 'red');
+        } else if ((instruction_trimed == "") && (signature_trimed == "")) {
+            $('#instruction_check').show('show');
+            $('#instruction').css('border-color', 'red');
+            $('#signature_check').show('show');
+            $('#signature').css('border-color', 'red');
+        } else if ((subject_trimed == "") && (signature_trimed == "")) {
+            $('#subject_check').show('show');
+            $('#subject').css('border-color', 'red');
+            $('#signature_check').show('show');
+            $('#signature').css('border-color', 'red');
+        } else if (subject_trimed == "") {
+            $('#subject_check').show('show');
+            $('#subject').css('border-color', 'red');
+        } else if (instruction_trimed == "") {
+            $('#instruction_check').show('show');
+            $('#instruction').css('border-color', 'red');
+        } else if (signature_trimed == "") {
+            $('#signature_check').show('show');
+            $('#signature').css('border-color', 'red');
+        } else {
+            $('#data_submit').click();
+        }
+
+    }
+    //end validation
+
+</script>
+<script>
     $("#instruction").keypress(function () {
-        $("#instruction").css('border-color','#F0F0F0');
+        $("#instruction").css('border-color', '#F0F0F0');
     });
 
 </script>
@@ -178,6 +255,13 @@
         } else {
             $("#hidden").hide('fast');
             document.getElementById("venue").value = null;
+        }
+        hidden_webex = document.getElementById('type_int').value;
+        if (hidden_webex == "Webex") {
+            $('#hidden_webex').show('fast');
+        } else {
+            $('#hidden_webex').hide('fast');
+            document.getElementById("webex").value = null;
         }
     }
 

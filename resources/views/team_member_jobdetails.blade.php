@@ -165,7 +165,7 @@
 														</tr>
 														<tr>
 															<td>Salary:</td>
-															<td>{{@$data->pay_min}}</td>
+															<td>{{@$data->pay_min}} - {{@$data->pay_max}}  {{$data->pay_uom}}</td>
 														</tr>
 														<tr>
 															<td>Job Location:</td>
@@ -190,18 +190,21 @@
 														</tr>
 														<tr>
 															<td>Job Posting Date:</td>
-															<td>{{@$data->dated}}</td>
+															<?php 
+																			$converted_date1 = date('m-d-Y',strtotime($data->dated));  
+																	?>
+															<td>{{@$converted_date1->dated}}</td>
 														</tr>
 													</tbody>
 												</table>
 												<br>
 
 												<h3>Job Description</h3>
-												<p>{{@$data[0]->job_description}}</p>
+												<p>{{@$data->job_description}}</p>
 
 												<h3>Skills Required</h3>
 												<hr>
-												<button type="button" class="btn btn-outline-primary">{{@$data[0]->required_skills}}</button>&nbsp;&nbsp;
+												<button type="button" class="btn btn-outline-primary">{{@$data->required_skills}}</button>&nbsp;&nbsp;
 														<!-- <button type="button" class="btn btn-outline-primary">react js</button>&nbsp;&nbsp;
 														<button type="button" class="btn btn-outline-primary">HTML</button>&nbsp;&nbsp;
 														<button type="button" class="btn btn-outline-primary">css</button> -->
@@ -227,13 +230,13 @@
 																	<td>Client Name:</td>
 																	<td>{{@$data->client_name}}</td>
 																</tr>
-																<tr>
-																	<td>Job Slug:</td>
-																	<td>{{@$data->job_slug}}</td>
-																</tr>
+																<!--<tr>-->
+																<!--	<td>Job Slug:</td>-->
+																<!--	<td>{{@$data->job_slug}}</td>-->
+																<!--</tr>-->
 																<tr>
 																	<td>Job Duration:</td>
-																	<td>{{@$data->job_duration}}</td>
+																	<td>{{@$data->job_duration}}  {{@$data->job_duration_uom}}</td>
 																</tr>
 																<tr>
 																	<td>Is Featured:</td>
@@ -245,16 +248,22 @@
 																</tr>
 																<tr>
 																	<td>Created Date:</td>
-																	<td>{{@$data->dated}}</td>
+																	<?php 
+																			$converted_date2 = date('m-d-Y',strtotime($data->dated));  
+																	?>
+																	<td>{{@$converted_date2}}</td>
 																</tr>
 																<tr>
 																	<td>Last Updated Date:</td>
-																	<td>{{@$data->last_updated_date}}</td>
+																	<?php 
+																			$converted_date3 = date('m-d-Y',strtotime($data->last_updated_date));  
+																	?>
+																	<td>{{@$converted_date3}}</td>
 																</tr>
 																<tr>
 																@if(@$data->last_updated_by)
 															<?php 
-															$last_update_by=DB::table('tbl_team_member')->where('ID',@$data->last_updated_by)->first();
+															$last_update_by=DB::table('user')->where('ID',@$data->last_updated_by)->first();
 															?>
 																	<td>Last Updated By:</td>
 																	<td>{{@$last_update_by->first_name}}</td>
@@ -287,7 +296,10 @@
 														</thead>
 														@foreach($toReturn['application'] as $application)
 															<tr>
-																<td>{{$application['dated']}}</td>
+															    	<?php 
+																			$converted_date4 = date('m-d-Y',strtotime($application['dated']));  
+																	?>
+																<td>{{$converted_date4}}</td>
 																<td>{{$application['candate_name']}}</td>
 																<td></td>
 																<td>{{$application['current_location']}}</td>
@@ -331,7 +343,10 @@
 														<tbody>
 														@foreach($toReturn['Client_submittals'] as $client_submittals)
 														<tr>
-																<td>{{$client_submittals['forward_date']}}</td>
+														    	<?php 
+																			$converted_date5 = date('m-d-Y',strtotime($client_submittals['forward_date']));  
+																	?>
+																<td>{{$converted_date5}}</td>
 																<td>{{$client_submittals['job_code']}}</td>
 																<td>{{$client_submittals['job_title']}}</td>
 																<td>{{$client_submittals['job_type']}}</td>
@@ -371,7 +386,10 @@
 																		@foreach($toReturn['list_job_history'] as $job_history)
 																		<?php $user_name=DB::table('user')->where('ID',$job_history['created_by'])->first('full_name');?>
 																				<tr>
-																					<td>{{$job_history['created_date']}}</td>
+																				    <?php 
+																			$converted_date6 = date('m-d-Y',strtotime($job_history['created_date']));  
+																	?>
+																					<td>{{$converted_date6}}</td>
 																					<td>{{$user_name->full_name}}</td>
 																					<td>{{$job_history['update_text']}}</td>
 																				</tr>

@@ -358,6 +358,7 @@
                                     <label class="col-sm-4 control-label" for="example-input-normal">Sender Name</label>
                                 <div class="col-sm-8">
                                 <input type="text" class="form-control"  name="sender_name" id="" required="" aria-required="true" placeholder="Sender Name">
+                                <input type="hidden" class="form-control"  name="id" id="" required="" value="{{$id}}" aria-required="true" placeholder="Sender Name">
                                 </div>
                             </div> 
                         </div>
@@ -406,7 +407,7 @@
                         <div class="row form-group">
                             <label class="col-sm-4 control-label" for="example-input-normal">file<span style="color: red;">*</span></label>
                             <div class="col-sm-8">
-                                <input type="file" class="form-control" name="sendfile" id="" required="" aria-required="true" >
+                                <input type="file" class="form-control" name="sendfile" id=""="" aria-required="true" >
                             </div>
                         </div>
                     </div>

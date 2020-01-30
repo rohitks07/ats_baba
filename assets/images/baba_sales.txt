@@ -1,0 +1,38 @@
+1.       After Login something has error popup, I checked that isn’t server issue         -----------------------------solved by nikhil--------------------------
+
+2.       Create company not working error on this page
+
+3.       Product data table:  Product Code, Name, Category(showing number)  Type ( Product, Services), Edit not working ----- assigneed to abhishek
+
+n  Add Product there was already service option please add this also   ---   assigneed to abhishek
+
+n  Add category/subcategory missing --- assigneed to lokeshwari
+
+4.       Add Sales People to Sales Person, Add Designating missing in setting option, Field Alignment and validation and Password encrypted format(screenshot)
+ (http://baba.software/sales/add-sales-rep/ ) wrong URL format, Edit not working all the field showing blank  ----->Asinged to Nikhil
+
+5.       Create Lead:  Lead Order,  Lead name( Person name) and Phone number should mandatory because this important atleast, Save customer option not working  -----Asinged to Nikhil-----
+
+6.       Sales Order:
+
+n  Add Order Sales Owner not showing recent added  people ----------------------------------------------------------solved by nikhil----------------------------------------
+
+n  Change Date Picker    -------------------------------------------------------------------------------------------solved by nikhil----------------------------------------
+
+n  Select Account :  Account should create automatically if not we can select old account ( as per zoho)
+
+n  Select product  ( service/Product)  and price should come from product , Grand Total and Tax not working-----Asinged to Abhishek-----
+
+7.       Lead Status report
+
+8.       Lead Activity report ) Important
+
+9.       Dashboard details -----Asinged to Nikhil
+
+10.Notification Not working, I thing rohit has done this please ask him to upload this code.
+11. Master->Designating 
+
+Category
+subcategory
+Measure Type
+Measure Name

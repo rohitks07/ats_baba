@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card card-border card-primary">
-                        <div class="card-header"><h3 class="card-title text-primary">Pay rate
+                        <div class="card-header"><h3 class="card-title text-primary">Application View
                         </h3> </div> 
                         <div class="card-body">
                         <b>Job:-</b> {{$toReturn['job_details']->job_code}},&nbsp;{{$toReturn['job_details']->job_title}} &nbsp;| &nbsp;<b>Candidate:-</b>{{$toReturn['seeker_details']->first_name}}&nbsp;{{$toReturn['seeker_details']->last_name}} &nbsp;|&nbsp;<b>Phone:-</b>{{$toReturn['list_application']->phone_no_mobile}}

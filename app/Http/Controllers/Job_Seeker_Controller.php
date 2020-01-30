@@ -22,9 +22,14 @@ class Job_Seeker_Controller extends Controller{
 
     public function __construct()
 		{
-			$this->middleware('check_jobseeker');
+			$this->middleware('mian_session');
 
 		}
+//     public function __construct()
+// 		{
+// 			$this->middleware('check_jobseeker');
+
+// 		}
     public function index(){
         return view('indexjobseeker');
      } 

@@ -16,6 +16,11 @@ use App\tbl_team_member;
 
 class Report_Controller extends Controller
 {
+    public function __construct()
+		{
+			$this->middleware('mian_session');
+
+		}
 
     public function repost_show(){
                 ini_set('memory_limit', '-1');
@@ -25,13 +30,13 @@ class Report_Controller extends Controller
                 $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-'.$j.' days'));
                 $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-'.$j.' days'));
                 $newDate[$j] = date("Y-m-d", strtotime($toReturn['week_date_dated_us'][$j]));
-                $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::whereDate('dated',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::where('company_ID',Session::get('org_ID'))->whereDate('dated',$newDate[$j])->get());
                 // $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::whereDate('dated',$newDate[$j])->where('company_ID',$org_id)->get());
                 // $data_group[$j]=tbl_post_job::whereDate('dated',$newDate[$j])->where('company_ID',$org_id)->get('for_group');
-                $toReturn['week_report'][$j]['candidate_created']= count(Tbl_job_seekers::whereDate('dated',$newDate[$j])->get());
-                $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::whereDate('forward_date',$newDate[$j])->get());
-                $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::whereDate('dated',$newDate[$j])->get());
-                $toReturn['week_report'][$j]['post_assign']= count(Tbl_job_post_assign::whereDate('job_assigned_date',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['candidate_created']= count(Tbl_job_seekers::where('org_id',Session::get('org_ID'))->whereDate('dated',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::where('org_id',Session::get('org_ID'))->whereDate('forward_date',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::where('org_id',Session::get('org_ID'))->whereDate('dated',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['post_assign']= count(Tbl_job_post_assign::where('org_id',Session::get('org_ID'))->whereDate('job_assigned_date',$newDate[$j])->get());
                 
             }
             
@@ -41,6 +46,7 @@ class Report_Controller extends Controller
             $date_team['team']=Tbl_team_member_type::leftjoin('tbl_post_jobs','tbl_post_jobs.for_group','=','tbl_team_member_type.type_ID')
             ->select('tbl_team_member_type.type_ID as id','tbl_team_member_type.type_name',
                     'tbl_post_jobs.for_group as group','tbl_post_jobs.dated as date','tbl_post_jobs.company_ID')
+                    ->where('tbl_post_jobs.company_ID',Session::get('org_ID'))
                     ->get();
 
 
@@ -54,18 +60,22 @@ class Report_Controller extends Controller
             //                             ->count();
             //                             return $date_team['jobs_created'];
             //job post assign
+
+
+
             $post_assign=Tbl_job_post_assign::get()->toArray();
-
-
-                                    
-
             //job assign
             $date_team['post_assign']=tbl_team_member::leftjoin('tbl_job_post_assign','tbl_job_post_assign.team_member_id','=','tbl_team_member.ID')     
                                                     ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
                                                     ->select('tbl_team_member.team_member_type','tbl_team_member.company_id','tbl_team_member.full_name',
                                                     'tbl_job_post_assign.team_member_id','tbl_team_member_type.type_name','tbl_team_member_type.type_ID',
-                                                    'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id')
+                                                    'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id','tbl_job_post_assign.org_id')
+                                                    ->where('tbl_job_post_assign.org_id',Session::get('org_ID'))
                                                     ->get();
+                                                    // ->count();
+
+                                                    // return $date_team['post_assign'];
+                                                    // exit;
 
             //create_candidate
             // $date_team['create_candidate']=Tbl_job_seekers::leftjoin('user','user.user_id','=','tbl_job_seekers.employer_id')
@@ -80,7 +90,8 @@ class Report_Controller extends Controller
                                                     ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
                                                     ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
                                                     ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
-                                                    'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
+                                                    'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id','tbl_job_seekers.org_id')
+                                                    ->where('tbl_job_seekers.org_id',Session::get('org_ID'))
                                                     ->get();
             // application_submitted
             $date_team['application_submitted']=Tbl_seeker_applied_for_job::leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
@@ -88,7 +99,8 @@ class Report_Controller extends Controller
                                                     ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
                                                     ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
                                                     ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
-                                                    'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
+                                                    'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id','tbl_job_seekers.org_id')
+                                                    ->where('tbl_job_seekers.org_id',Session::get('org_ID'))
                                                     ->get();
             // $date_team['application_submitted']=Tbl_seeker_applied_for_job::leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
             //                                         ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
@@ -101,7 +113,8 @@ class Report_Controller extends Controller
             $date_team['forward_candidate']=Tbl_forward_candidate::leftjoin('tbl_post_jobs','tbl_post_jobs.ID','=','tbl_forward_candidate.job_id')
                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_post_jobs.for_group')
                                                                    ->select('tbl_team_member_type.type_ID','tbl_team_member_type.type_name',
-                                                                        'tbl_post_jobs.for_group','tbl_forward_candidate.forward_date','tbl_forward_candidate.forward_by')
+                                                                        'tbl_post_jobs.for_group','tbl_forward_candidate.forward_date','tbl_forward_candidate.forward_by','tbl_post_jobs.company_ID')
+                                                                        ->where('tbl_post_jobs.company_ID',Session::get('org_ID'))
                                                                         ->get();
                                                                         $google=$date_team['forward_candidate'];
             //   return $google;                                       
@@ -123,11 +136,11 @@ class Report_Controller extends Controller
                 else{
                     $two= date('d-m-Y',(strtotime ( '-30 days' , strtotime (   $global) ) ));
                     $toReturn['monthly'][$i]['month_week_one1'] =$newDate = date("m-Y", strtotime($global));
-                    $toReturn['monthly'][$i]['job_created_monthly1']= count(tbl_post_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['candidate_created_monthly1']= count(Tbl_job_seekers::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['client_submittal_monthly1']= count(Tbl_forward_candidate::whereMonth('forward_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
-                    $toReturn['monthly'][$i]['post_assign_month1']= count(tbl_job_post_assign::whereMonth('job_assigned_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                    $toReturn['monthly'][$i]['job_created_monthly1']= count(tbl_post_job::where('company_ID',Session::get('org_ID'))->whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                    $toReturn['monthly'][$i]['candidate_created_monthly1']= count(Tbl_job_seekers::where('org_id',Session::get('org_ID'))->whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                    $toReturn['monthly'][$i]['client_submittal_monthly1']= count(Tbl_forward_candidate::where('org_id',Session::get('org_ID'))->whereMonth('forward_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                    $toReturn['monthly'][$i]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::where('org_id',Session::get('org_ID'))->whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                    $toReturn['monthly'][$i]['post_assign_month1']= count(tbl_job_post_assign::where('org_id',Session::get('org_ID'))->whereMonth('job_assigned_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
                     $global=$two;
                 }
             }
@@ -147,11 +160,11 @@ class Report_Controller extends Controller
     
                         $two= date('d-m-Y',(strtotime ( '-365 days' , strtotime (   $global_year) ) ));
                         $toReturn['yearly'][$k]['month_week_one1'] =$newDate = date("Y", strtotime($global_year));
-                        $toReturn['yearly'][$k]['job_created_monthly1']= count(tbl_post_job::whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
-                        $toReturn['yearly'][$k]['candidate_created_monthly1']= count(Tbl_job_seekers::whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
-                        $toReturn['yearly'][$k]['client_submittal_monthly1']= count(Tbl_forward_candidate::whereYear('forward_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
-                        $toReturn['yearly'][$k]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
-                        $toReturn['yearly'][$k]['post_assign_month1']= count(Tbl_job_post_assign::whereYear('job_assigned_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                        $toReturn['yearly'][$k]['job_created_monthly1']= count(tbl_post_job::where('company_ID',Session::get('org_ID'))->whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                        $toReturn['yearly'][$k]['candidate_created_monthly1']= count(Tbl_job_seekers::where('org_id',Session::get('org_ID'))->whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                        $toReturn['yearly'][$k]['client_submittal_monthly1']= count(Tbl_forward_candidate::where('org_id',Session::get('org_ID'))->whereYear('forward_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                        $toReturn['yearly'][$k]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::where('org_id',Session::get('org_ID'))->whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                        $toReturn['yearly'][$k]['post_assign_month1']= count(Tbl_job_post_assign::where('org_id',Session::get('org_ID'))->whereYear('job_assigned_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
                         $global_year=$two;
                     }
                 }
@@ -271,6 +284,117 @@ class Report_Controller extends Controller
 
                 return response()->json($date_team);
 
+    }
+
+    public function report_graph()
+    {   
+        return view('report_graph');
+    }
+
+    public function graph_how(){
+
+        ini_set('memory_limit', '-1');
+        $org_id = Session::get('org_ID');
+        //for days
+        for ($j = 0; $j < 12; $j++) {
+            $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-'.$j.' days'));
+                $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-'.$j.' days'));
+                $newDate[$j] = date("Y-m-d", strtotime($toReturn['week_date_dated_us'][$j]));
+                $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::where('company_ID',Session::get('org_ID'))->whereDate('dated',$newDate[$j])->get());
+                // $toReturn['week_report'][$j]['job_created']= count(tbl_post_job::whereDate('dated',$newDate[$j])->where('company_ID',$org_id)->get());
+                // $data_group[$j]=tbl_post_job::whereDate('dated',$newDate[$j])->where('company_ID',$org_id)->get('for_group');
+                $toReturn['week_report'][$j]['candidate_created']= count(Tbl_job_seekers::where('org_id',Session::get('org_ID'))->whereDate('dated',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['client_submittal']= count(Tbl_forward_candidate::where('org_id',Session::get('org_ID'))->whereDate('forward_date',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['application_submitted']= count(Tbl_seeker_applied_for_job::where('org_id',Session::get('org_ID'))->whereDate('dated',$newDate[$j])->get());
+                $toReturn['week_report'][$j]['post_assign']= count(Tbl_job_post_assign::where('org_id',Session::get('org_ID'))->whereDate('job_assigned_date',$newDate[$j])->get());
+        }
+
+        return response ($toReturn['week_report']);
+    }
+
+    public function graph_month(){
+
+        ini_set('memory_limit', '-1');
+        $org_id = Session::get('org_ID');
+        // for months;
+        $global="";
+        for($i=0;$i<12;$i++){
+
+            if($i==0){
+                $one = date('d-m-Y');
+                $global=$one;
+            }
+            else{
+                $two= date('d-m-Y',(strtotime ( '-30 days' , strtotime (   $global) ) ));
+                $toReturn['monthly'][$i]['month_week_one1'] =$newDate = date("m-Y", strtotime($global));
+                $toReturn['monthly'][$i]['job_created_monthly1']= count(tbl_post_job::where('company_ID',Session::get('org_ID'))->whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                $toReturn['monthly'][$i]['candidate_created_monthly1']= count(Tbl_job_seekers::where('org_id',Session::get('org_ID'))->whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                $toReturn['monthly'][$i]['client_submittal_monthly1']= count(Tbl_forward_candidate::where('org_id',Session::get('org_ID'))->whereMonth('forward_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                $toReturn['monthly'][$i]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::where('org_id',Session::get('org_ID'))->whereMonth('dated',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                $toReturn['monthly'][$i]['post_assign_month1']= count(tbl_job_post_assign::where('org_id',Session::get('org_ID'))->whereMonth('job_assigned_date',$toReturn['monthly'][$i]['month_week_one1'])->get()->toArray());
+                $global=$two;
+            }
+        }
+
+        return response ($toReturn['monthly']);
+    }
+
+    public function graph_year(){
+
+        ini_set('memory_limit', '-1');
+        $org_id = Session::get('org_ID');
+        // for yeaars
+
+        $global_year="";
+        for($k=0;$k<12;$k++){
+
+            if($k==0){
+                $one = date('d-m-Y');
+                $global_year=$one;
+            }
+            else {
+
+                $two= date('d-m-Y',(strtotime ( '-365 days' , strtotime (   $global_year) ) ));
+                $toReturn['yearly'][$k]['month_week_one1'] =$newDate = date("Y", strtotime($global_year));
+                $toReturn['yearly'][$k]['job_created_monthly1']= count(tbl_post_job::where('company_ID',Session::get('org_ID'))->whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                $toReturn['yearly'][$k]['candidate_created_monthly1']= count(Tbl_job_seekers::where('org_id',Session::get('org_ID'))->whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                $toReturn['yearly'][$k]['client_submittal_monthly1']= count(Tbl_forward_candidate::where('org_id',Session::get('org_ID'))->whereYear('forward_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                $toReturn['yearly'][$k]['application_submitted_monthly1']= count(Tbl_seeker_applied_for_job::where('org_id',Session::get('org_ID'))->whereYear('dated',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                $toReturn['yearly'][$k]['post_assign_month1']= count(Tbl_job_post_assign::where('org_id',Session::get('org_ID'))->whereYear('job_assigned_date',$toReturn['yearly'][$k]['month_week_one1'])->get()->toArray());
+                $global_year=$two;
+            }
+        }
+
+        return response ($toReturn['yearly']);
+    }
+    
+    
+    public function team_and_group_report(){
+
+        $group_teammember_user_id = Session::get('one_group_teammember_id');
+
+        $team_member = tbl_team_member::leftjoin('tbl_team_member_type as member_type', 'tbl_team_member.team_member_type', '=', 'member_type.type_ID')
+            ->select(
+                'tbl_team_member.ID as ID',
+                'tbl_team_member.company_id as company_id',
+                'tbl_team_member.first_name as first_name',
+                'member_type.type_name as team_member_type',
+                'tbl_team_member.city as city',
+                'tbl_team_member.state as state',
+                'tbl_team_member.country as  country',
+                'tbl_team_member.loc_time_zone as loc_time_zone',
+                'tbl_team_member.first_login_date as first_login_date',
+                'tbl_team_member.last_login_date as last_login_date',
+                'tbl_team_member.last_updated_date as last_updated_date',
+                'tbl_team_member.is_active as is_active',
+                'tbl_team_member.ID as ID'
+            )
+            ->where('company_id',Session::get('org_ID'))
+            ->where('tbl_team_member.team_member_type',Session::get('group_type'))
+            ->where('tbl_team_member.is_active','active')
+            ->paginate(12);
+    
+        return view('team_and_group_report')->with('team_member',$team_member);
     }
 
 
