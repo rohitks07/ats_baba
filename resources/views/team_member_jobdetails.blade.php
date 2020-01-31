@@ -190,10 +190,16 @@
 														</tr>
 														<tr>
 															<td>Job Posting Date:</td>
-															<?php 
-																			$converted_date1 = date('m-d-Y',strtotime($data->dated));  
+															<!-- <?php 
+															           $converted_date1 = date('y-m-d',strtotime($data->dated));   
 																	?>
-															<td>{{@$converted_date1->dated}}</td>
+															<td>{{@$converted_date1->dated}}</td> -->
+
+
+															<?php 
+																			$converted_date1 = date('y-m-d',strtotime($data->dated));  
+																	?>
+																	<td>{{@$converted_date1}}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -215,7 +221,7 @@
 														<table class="table">
 															<tbody>
 																<tr>
-																	<td>Jobe code:</td>
+																	<td>Job code:</td>
 																	<td>{{@$data->job_code}}</td>
 																</tr>
 																<tr>
@@ -249,24 +255,25 @@
 																<tr>
 																	<td>Created Date:</td>
 																	<?php 
-																			$converted_date2 = date('m-d-Y',strtotime($data->dated));  
+																			$converted_date2 = date('y-m-d',strtotime($data->dated));  
 																	?>
 																	<td>{{@$converted_date2}}</td>
 																</tr>
 																<tr>
 																	<td>Last Updated Date:</td>
 																	<?php 
-																			$converted_date3 = date('m-d-Y',strtotime($data->last_updated_date));  
+																			$converted_date3 = date('y-m-d',strtotime($data->last_updated_date));  
 																	?>
 																	<td>{{@$converted_date3}}</td>
 																</tr>
 																<tr>
 																@if(@$data->last_updated_by)
 															<?php 
-															$last_update_by=DB::table('user')->where('ID',@$data->last_updated_by)->first();
+															    $last_update_by=DB::table('user')->where('ID',@$data->last_updated_by)->first();
 															?>
 																	<td>Last Updated By:</td>
-																	<td>{{@$last_update_by->first_name}}</td>
+																	<!-- <td>{{@$last_update_by->first_name}}</td> -->
+																	<td> {{@$last_update_by->full_name}}</td>
 																	@endif
 																</tr>
 															</tbody>
@@ -297,7 +304,7 @@
 														@foreach($toReturn['application'] as $application)
 															<tr>
 															    	<?php 
-																			$converted_date4 = date('m-d-Y',strtotime($application['dated']));  
+																			$converted_date4 = date('y-m-d',strtotime($application['dated']));  
 																	?>
 																<td>{{$converted_date4}}</td>
 																<td>{{$application['candate_name']}}</td>
