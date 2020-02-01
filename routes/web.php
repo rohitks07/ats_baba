@@ -209,6 +209,7 @@ Route::get('employer/post_new_candidate', 'Job_Employer_Controller@show_form');
 Route::post('employer/post_new_candidate/insert', 'Job_Employer_Controller@post_new_candidate');
 Route::get('employer/dashboard', 'Job_Employer_Controller@dashboard');
 Route::post('job_application/sts', 'Job_Employer_Controller@status');
+Route::get('employer/show_job_details/{id}','Job_Employer_Controller@fetch_job_details');
 
 
 
@@ -268,6 +269,7 @@ Route::get('employer/Application', 'Job_Employer_Controller@application');
 Route::get('employer/appli_del/{id}', 'Job_Employer_Controller@application_delete');
 
 Route::get('employer/posted_jobs', 'Job_Employer_Controller@view_my_posted_job');
+Route::get('employer/show_candiate_details/{id}','Job_Employer_Controller@get_candiate_deatils');
 Route::get('employer/post_new_job', 'Job_Employer_Controller@view_post_form');
 Route::post('employer/post_new_job/post_job', 'Job_Employer_Controller@Add_to_post_job');
 Route::get('employer/job/edit/{id}', 'Job_Employer_Controller@editjob');

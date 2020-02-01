@@ -463,12 +463,12 @@ class Job_Employer_Controller extends Controller
 
     public function view_my_posted_job()
     {
-        $toReturn[] = array();
-        $toReturn['user_type'] = Session::get('type');
-        $post_job_show = tbl_job_seekers::get()->toArray();
-            $toReturn['post_job'] = tbl_post_jobs::orderBy('ID', 'DESC')->paginate(20);
+        // $toReturn[] = array();
+        // $toReturn['user_type'] = Session::get('type');
+        // $post_job_show = tbl_job_seekers::get()->toArray();
+        //     $toReturn['post_job'] = tbl_post_jobs::orderBy('ID', 'DESC')->paginate(20);
 
-        return view('my_posted_jobs')->with('toReturn', $toReturn)->with('post_job_show', $post_job_show);
+        // return view('my_posted_jobs')->with('toReturn', $toReturn)->with('post_job_show', $post_job_show);
    
         ini_set('memory_limit', '-1');
         $toReturn[] = array();
@@ -1924,9 +1924,9 @@ class Job_Employer_Controller extends Controller
         $data = new Tbl_jobs_notes();
         $data->title     =  $request->title;
         $data->note      =  $request->note;
-        $data->job_id    =  $request->id;
+        $data->job_id    =  $request->job_id;
         $data->created_time = $date;
-        $data->created_by = $request->owner_id;
+        $data->created_by = Session::get('id');
         $data->privacy_level    = $request->privacy;
         $data->status           = "active";
         $data->save();
@@ -1938,9 +1938,9 @@ class Job_Employer_Controller extends Controller
         $data = new tbl_candidate_notes();
         $data->title     =  $request->title;
         $data->note      =  $request->note;
-        $data->candidate_id    =  $request->id;
+        $data->candidate_id    =  $request->candidate_id;
         $data->created_time = $date;
-        $data->created_by = $request->owner_id;
+        $data->created_by = Session::get('id');
         $data->privacy_level    = $request->privacy;
         $data->status           = "active";
         $data->save();
@@ -1955,6 +1955,7 @@ class Job_Employer_Controller extends Controller
     }
     public function add_new_job_email(Request $request)
     {
+        // return $request;
         $candiate_name = $request->job;
         $exploded_value = explode('|', $candiate_name);
         $value_one = $exploded_value[0];
@@ -1969,6 +1970,7 @@ class Job_Employer_Controller extends Controller
         $postmail->save();
         $toemail = $request->mail_to;
         $formemail = Session::get('email');
+        $sender_name=Session::get('full_name');
         $candidate_id = $value_one;
         $toReturn['job_seekers'] = Tbl_job_seekers::where('id', $candidate_id)->first()->toArray();
         $toReturn['seeker_exp'] = Tbl_seeker_academic::where('seeker_ID', $candidate_id)->first();
@@ -1986,13 +1988,13 @@ class Job_Employer_Controller extends Controller
         $job_detail = $toReturn['job_post'];
         $mail_content = $request->comment;
         $mail_subject = $request->subject;
-        $data = array('job_detail' => $job_detail, 'tomail' => $toemail, 'form_mail' => $formemail, 'mail_content' => $mail_content, 'mail_subject' => $mail_subject, 'candidate_val' => $candidate_val, 'seeker_exp' => $seeker_exp, 'exp' => $exp, 'skills' => $skills);
+        $data = array('job_detail' => $job_detail, 'tomail' => $toemail,'sender_name'=>$sender_name ,'form_mail' => $formemail, 'mail_content' => $mail_content, 'mail_subject' => $mail_subject, 'candidate_val' => $candidate_val, 'seeker_exp' => $seeker_exp, 'exp' => $exp, 'skills' => $skills);
         // print_r($data['candidate_val']);
         // exit;
         Mail::send('emails.job_detail_job', ['data' => $data], function ($message) use ($data) {
             $message->to($data['tomail'])
                 ->subject($data['mail_subject']);
-            $message->from($data['form_mail'], 'ATS BABA');
+            $message->from($data['form_mail'], $data['sender_name']);
         });
         // return view('emails.job_detail_job')->with('data',$data);
         return redirect('employer/posted_jobs');
@@ -2261,5 +2263,15 @@ class Job_Employer_Controller extends Controller
 
 
         return view('employer_submit_to_job')->with('toReturn', $toReturn);
+    }
+    public function get_candiate_deatils($id="")
+    {
+        $post_job_show = tbl_job_seekers::orderBy('ID', 'DESC')->take(100)->select('ID','first_name','middle_name','last_name')->get()->toArray();
+return $post_job_show;
+    }
+    public function fetch_job_details($id="")
+    {
+        $job_list = Tbl_post_jobs::select('job_code','job_title', 'ID')->get()->toArray();
+return $job_list;
     }
 }

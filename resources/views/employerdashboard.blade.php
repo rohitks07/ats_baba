@@ -315,9 +315,9 @@
                                                                                       <?php $interview_date=$interview['interview_date']; 
                                                                                             $new_date = date("m-d-Y", strtotime($interview_date)); 
 
-                                                                                            $data_time = DB::table('tbl_time_zone')->where('time_zone_name',$interview['time_zone'])->first();
-                                                                                            $static_time = $data_time->change_time;
-                                                                                            $cal_value = $data_time->cal_value;
+                                                                                            @$data_time = DB::table('tbl_time_zone')->where('time_zone_name',$interview['time_zone'])->first();
+                                                                                            $static_time = @$data_time->change_time;
+                                                                                            $cal_value = @$data_time->cal_value;
                                                                                             if($cal_value == "+"){
                                                                                                 $secs = strtotime($interview['from_time'])-strtotime("00:00");
                                                                                                 $result = date("H:i A",strtotime($static_time)+$secs);
