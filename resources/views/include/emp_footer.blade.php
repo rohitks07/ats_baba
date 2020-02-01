@@ -16,22 +16,22 @@
         <script src="{{url('assets/js/jquery.slimscroll.js')}}"></script>
         <script src="{{url('assets/js/jquery.blockUI.js')}}"></script>
         <script src="{{url('assets/js/waves.js')}}"></script>
-        <script src="{{url('assets/js/wow.min.js')}}"></script>
-        <script src="{{url('assets/js/jquery.nicescroll.js')}}"></script>
+        <script src="{{url('assets/js/wow.min.js')}}"></script> 
+        <script src="{{url('assets/js/jquery.nicescroll.js')}}"></script> 
         <script src="{{url('assets/js/jquery.scrollTo.min.js')}}"></script>
         
         <!-- jQuery -->
-        <script src="{{url('/plugins/moment/moment.min.js')}}"></script>
+        <!-- <script src="{{url('/plugins/moment/moment.min.js')}}"></script> -->
         
         <!-- Counter js  -->
         <script src="{{url('/plugins/waypoints/lib/jquery.waypoints.js')}}"></script>
-        <script src="{{url('/plugins/counterup/jquery.counterup.min.js')}}"></script>
+        <script src="{{url('/plugins/counterup/jquery.counterup.min.js')}}"></script> 
         
         <!-- sweet alerts -->
-        <script src="{{url('/plugins/sweetalert2/sweetalert2.js')}}"></script>
+         <!-- <script src="{{url('/plugins/sweetalert2/sweetalert2.js')}}"></script>  -->
         
         <!-- flot Chart -->
-        <script src="{{url('/plugins/flot-chart/jquery.flot.min.js')}}"></script>
+        <script src="{{url('/plugins/flot-chart/jquery.flot.min.js')}}"></script> 
         <script src="{{url('/plugins/flot-chart/jquery.flot.time.js')}}"></script>
         <script src="{{url('/plugins/flot-chart/jquery.flot.tooltip.min.js')}}"></script>
         <script src="{{url('/plugins/flot-chart/jquery.flot.resize.js')}}"></script>
@@ -41,45 +41,46 @@
         <script src="{{url('/plugins/flot-chart/jquery.flot.crosshair.js')}}"></script>
 
         <!-- Todoapp -->
-        <script src="{{url('assets/pages/jquery.todo.js')}}"></script>
+        <!-- <script src="{{url('assets/pages/jquery.todo.js')}}"></script> -->
         
         <!-- jQuery  -->
-        <script src="{{url('assets/pages/jquery.chat.js')}}"></script>
+        <!-- <script src="{{url('assets/pages/jquery.chat.js')}}"></script> -->
         
         <!-- Dashboard js  -->
-        <script src="{{url('assets/pages/jquery.dashboard.js')}}"></script>
+         <!-- <script src="{{url('assets/pages/jquery.dashboard.js')}}"></script>  -->
 
         <!-- App js  -->
         <script src="{{url('assets/js/jquery.app.js')}}"></script>
         <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-          <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+        <!-- <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script> -->
+
          <script src="{{url('plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
-            <script src="{{url('plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
+            <!-- <script src="{{url('plugins/datatables/dataTables.bootstrap4.min.js')}}"></script> -->
           <script src="{{url('plugins/datatables/dataTables.buttons.min.js')}}"></script>
-           <script src="{{url('plugins/datatables/dataTables.buttons.min.js')}}"></script>
+           <!-- <script src="{{url('plugins/datatables/dataTables.buttons.min.js')}}"></script> -->
             <script src="{{url('plugins/datatables/buttons.bootstrap4.min.js')}}"></script>
-            <script src="{{url('plugins/datatables/jszip.min.js')}}"></script>
-         <script src="{{url('plugins/datatables/pdfmake.min.js')}}"></script>
+            <!-- <script src="{{url('plugins/datatables/jszip.min.js')}}"></script> -->
+          <script src="{{url('plugins/datatables/pdfmake.min.js')}}"></script> 
            <script src="{{url('plugins/datatables/vfs_fonts.js')}}"></script>
             <script src="{{url('plugins/datatables/buttons.html5.min.js')}}"></script>
             <script src="{{url('plugins/datatables/buttons.print.min.js')}}"></script>
             <script src="{{url('plugins/datatables/dataTables.fixedHeader.min.js')}}"></script>
-            <script src="{{url('plugins/datatables/dataTables.fixedHeader.min.js')}}"></script>
+            <!-- <script src="{{url('plugins/datatables/dataTables.fixedHeader.min.js')}}"></script> -->
             <script src="{{url('plugins/datatables/dataTables.keyTable.min.js')}}"></script>
-            <script src="{{url('plugins/datatables/dataTables.keyTable.min.js')}}"></script>
+            <!-- <script src="{{url('plugins/datatables/dataTables.keyTable.min.js')}}"></script> -->
+             <!-- <script src="{{url('plugins/datatables/dataTables.scroller.min.js')}}"></script> -->
              <script src="{{url('plugins/datatables/dataTables.scroller.min.js')}}"></script>
-             <script src="{{url('plugins/datatables/dataTables.scroller.min.js')}}"></script>
-             <script src="{{url('plugins/datatables/dataTables.responsive.min.js')}}"></script>
+             <!-- <script src="{{url('plugins/datatables/dataTables.responsive.min.js')}}"></script> -->
             <script src="{{url('plugins/datatables/dataTables.responsive.min.js')}}"></script>
              <script src="{{url('plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
-             <script src="{{url('plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js')}}"></script>
+             <!-- <script src="{{url('plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js')}}"></script> -->
         <script src="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js')}}"></script>
-        <script>
+        <!-- <script>
 
             jQuery(document).ready(function(){
                 $('.wysihtml5').wysihtml5();
             });
-        </script>
+        </script> -->
         <script>
             /* ==============================================
             Counter Up
@@ -92,9 +93,9 @@
             });
             
         </script>
-        <script src="{{url('assets/js/ckeditor.js')}}"></script>
+        <!-- <script src="{{url('assets/js/ckeditor.js')}}"></script> -->
     <script>
-        CKEDITOR.replace( 'article-ckeditor', {
+        // CKEDITOR.replace( 'article-ckeditor', {
     toolbar: [
      { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },
      // { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },
@@ -103,9 +104,9 @@
      '/',                   
      { name: 'basicstyles', items: [ 'Bold', 'Italic' ] }
     ]
-   });
+   
 </script>
- <script src="{{('assets/pages/datatables.init.js')}}"></script>
+ <!-- <script src="{{('assets/pages/datatables.init.js')}}"></script> -->
 
 
         <script>
@@ -116,7 +117,7 @@
                 $('#datatable-scroller').DataTable( { ajax: "{{('plugins/datatables/json/scroller-demo.json')}}", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
                 var table = $('#datatable-fixed-header').DataTable( { fixedHeader: true } );
             } );
-            TableManageButtons.init();
+            // TableManageButtons.init();
         </script>
          <script type="text/javascript">
             $( document ).ready(function() {
