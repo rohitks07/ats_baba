@@ -1569,26 +1569,23 @@ class Job_Employer_Controller extends Controller
     }
     public function addinterview(Request $add)
     {
-        // return $add->candiate_name;
-        $candiate_name = $add->candiate_name;
-        $exploded_value = explode('|', $candiate_name);
-        $value_one = $exploded_value[0];
-        $value_two = $exploded_value[1];
-        $id = Session::get('user_id');
+        // return $add;
+        $application_details= Tbl_seeker_applied_for_job::where('ID',$add->application_id)->first();
+        $employer_ID = Session::get('user_id');
         $add_interview = new tbl_schedule_interview();
         $add_interview->interview_date = $add->date_interview;
         $add_interview->from_time = $add->start_time;
         $add_interview->end_time = $add->end_time;
         $add_interview->interview_type = $add->type;
-        $add_interview->job_ID = $add->interview_type;
-        $add_interview->invitees_to = $value_one;
-        $add_interview->candiate_name = $value_one;
+        $add_interview->job_ID = $application_details->job_ID;
+        $add_interview->invitees_to = $application_details->candate_name;
+        $add_interview->candiate_name = $application_details->candate_name;
         $add_interview->dated = date('Y-m-d');
         $add_interview->instructions = $add->instruction;
         $add_interview->time_zone = $add->time_zone;
-        $add_interview->employer_ID = $id;
-        $add_interview->seeker_ID = $value_two;
-        $add_interview->invitees_cc = $value_one;
+        $add_interview->employer_ID = $employer_ID;
+        $add_interview->seeker_ID = $application_details->seeker_ID;
+        $add_interview->invitees_cc = $application_details->candate_name;
         $add_interview->save();
         return redirect('employer/dashboard/interview-meeting');
     }
