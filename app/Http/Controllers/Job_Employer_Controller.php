@@ -60,11 +60,13 @@ class Job_Employer_Controller extends Controller
 
     public function __construct()
     {
+        ini_set('memory_limit', '-1');
         $this->middleware('mian_session');
     }
 
     public function dashboard()
     {
+        ini_set('memory_limit', '-1');
         $id = Session::get('user_id');
         $toReturn['user_type'] = Session::get('type');
         if ($toReturn['user_type'] == "teammember") {
@@ -172,6 +174,7 @@ class Job_Employer_Controller extends Controller
 
     public function status(Request $request)
     {
+        ini_set('memory_limit', '-1');
         $id = $request->id;
         $status = $request->sts;
         if ($status == 'deleted') {
@@ -185,6 +188,7 @@ class Job_Employer_Controller extends Controller
 
     public function view_post_form()
     {
+        ini_set('memory_limit', '-1');
         $toReturn = array();
         // $toReturn['team_member_type'] = tbl_team_member_type::get()->toArray();
         $toReturn['post_job']        = tbl_post_jobs::get()->toArray();
@@ -213,7 +217,7 @@ class Job_Employer_Controller extends Controller
 
     public function Add_to_post_job(Request $request)
     {
-
+        ini_set('memory_limit', '-1');
         // $jobs_list = tbl_post_jobs::where('job_code', 00000)->get()->toArray();
         // return $request->job_code;
         $Add_to_post_job = new tbl_post_jobs();
@@ -345,6 +349,7 @@ class Job_Employer_Controller extends Controller
 
     public function updatejob(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         // return $Request;
         $con =  $Request->country;
         $sta =  $Request->state;
@@ -475,7 +480,7 @@ class Job_Employer_Controller extends Controller
 
     public function PostjobsAssignToJobSeeker(Request $request)
     {
-
+        ini_set('memory_limit', '-1');
         if ($request->seekerID != '' && $request->jobID != '') {
             $candiate_record = tbl_job_seekers::where('ID', $request->seekerID)->first();
             $job_record = tbl_post_jobs::where('ID', $request->jobID)->first();
@@ -517,6 +522,7 @@ class Job_Employer_Controller extends Controller
     }
     public function delete_employer($id = '')
     {
+        ini_set('memory_limit', '-1');
         $employer_data1 = tbl_post_jobs::where('ID', $id)->first('job_title');
         // return $employer_data1;
         $Notification = new Tbl_notification();
@@ -544,6 +550,7 @@ class Job_Employer_Controller extends Controller
 
     public function show_detail($id = "")
     {
+        ini_set('memory_limit', '-1');
         $data = tbl_post_jobs::where('ID', $id)->first();
         $industry = tbl_job_industries::where('ID', $data->industry_ID)->first();
         return view('team_member_jobdetails')
@@ -587,7 +594,7 @@ class Job_Employer_Controller extends Controller
     public function application_delete($id = '')
     {
 
-
+        ini_set('memory_limit', '-1');
         $employer_application_delete = Tbl_seeker_applied_for_job::where('ID', $id)->delete();
         return redirect('employer/Application');
     }
@@ -654,6 +661,7 @@ class Job_Employer_Controller extends Controller
     }
     public function list_delete($id = "")
     {
+        ini_set('memory_limit', '-1');
         $personal = tbl_job_seekers::where('ID', $id)->delete();
         return redirect('employer/search_resume');
     }
@@ -661,6 +669,7 @@ class Job_Employer_Controller extends Controller
 
     public function show_form()
     {
+        ini_set('memory_limit', '-1');
         $toReturn = array();
         $toReturn['degree'] = Tbl_seeker_academic::get()->toArray();
         $toReturn['visa_type'] = Tbl_visa_type::get()->toArray();
@@ -674,6 +683,7 @@ class Job_Employer_Controller extends Controller
 
     public function post_new_candidate(Request $request)
     {
+        ini_set('memory_limit', '-1');
         $con =  $request->country;
         $sta =  $request->state;
         $cit =  $request->city_name;
@@ -875,7 +885,7 @@ class Job_Employer_Controller extends Controller
     // Team member managing functions
     public function showteam()
     {
-
+        ini_set('memory_limit', '-1');
         $module = Tbl_module::all();
         return view('create_team_member')
             ->with('group', Tbl_team_member_type::all())
@@ -886,6 +896,7 @@ class Job_Employer_Controller extends Controller
 
     public function showteamadd(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         if ($Request->hasFile('profile_image')) {
             $profile_image = $Request->file('profile_image');
             $new_profile_image = rand() . '.' . $profile_image->getClientOriginalExtension();
@@ -952,12 +963,14 @@ class Job_Employer_Controller extends Controller
 
     public function addteam()
     {
+        ini_set('memory_limit', '-1');
         return view('create_team_member_group');
     }
 
 
     public function addteaminsert(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         $teamType = new Tbl_team_member_type();
         $teamType->type_name = $Request->groupname;
         $teamType->status = 1;
@@ -973,6 +986,7 @@ class Job_Employer_Controller extends Controller
 
     public function editteam(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         $id = $Request->id;
         $editteamgroup = Tbl_team_member_type::where('type_ID', $id)->update(array(
             'type_name' => $Request->type_namegroup
@@ -983,6 +997,7 @@ class Job_Employer_Controller extends Controller
 
     public function manageteam()
     {
+        ini_set('memory_limit', '-1');
         $current_module_id = 11;
         $toReturn['user_type'] = Session::get('type');
         if ($toReturn['user_type'] == "teammember") {
@@ -1027,7 +1042,7 @@ class Job_Employer_Controller extends Controller
     // new 
     public function report_show($id = "", $name = "")
     {
-
+        ini_set('memory_limit', '-1');
         //for days
         $team_memeber = tbl_team_member::where('ID', $id)->first('email');
         $data = $team_memeber['email'];
@@ -1068,6 +1083,7 @@ class Job_Employer_Controller extends Controller
     // starts here
     public function permission_org()
     {
+        ini_set('memory_limit', '-1');
         $type = Session::get('type');
         $data = "";
         if ($type == "employer") {
@@ -1087,6 +1103,7 @@ class Job_Employer_Controller extends Controller
 
     public function delete_teammember($id = "")
     {
+        ini_set('memory_limit', '-1');
         // $team_member_del = tbl_team_member::where('ID', $id)->delete();
 
         tbl_team_member::where('ID', $id)->update(array(
@@ -1102,6 +1119,7 @@ class Job_Employer_Controller extends Controller
 
     public function edit_teammember($id = "")
     {
+        ini_set('memory_limit', '-1');
         $data = tbl_team_member::where('ID', $id)->first();
         $toReturn['cities']     = cities::get()->toArray();
         $toReturn['user']     = user::where('user_id', $id)->first();
@@ -1129,6 +1147,7 @@ class Job_Employer_Controller extends Controller
 
     public function edit_teammember_add(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         // return $Request->profile_image;
         $date = date('Y-m-d h:i:s', time());
         $con =  $Request->country;
@@ -1203,6 +1222,7 @@ class Job_Employer_Controller extends Controller
 
     public function manageteamadd()
     {
+        ini_set('memory_limit', '-1');
         $team_member_type = tbl_team_member_type::all();
         return view('manage_team_members_group')->with("team_member_type", $team_member_type);
         // 	return view('manage_team_members')->with("team_member_type",$team_member_type);
@@ -1210,12 +1230,14 @@ class Job_Employer_Controller extends Controller
     }
     public function delete_teammember_type($id = "")
     {
+        ini_set('memory_limit', '-1');
         $team_member_del = tbl_team_member_type::where('type_ID', $id)->delete();
 
         return redirect('employer/manageteammember');
     }
     public function manageteamaddedit(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         $type_ID = $Request->type_id;
         $team_type = tbl_team_member_type::where('type_ID', $type_ID)->first();
         $type_name = $Request->type_namegroup;
@@ -1228,6 +1250,7 @@ class Job_Employer_Controller extends Controller
 
     public function add_email_form(Request $request)
     {
+        ini_set('memory_limit', '-1');
         $emailList = new Tbl_email_list_contacts;
         $emailList->salutation = $request->salutation;
         $emailList->first_name = $request->firstname;
@@ -1242,17 +1265,20 @@ class Job_Employer_Controller extends Controller
 
     public function show_email_form()
     {
+        ini_set('memory_limit', '-1');
         return view('post_new_email_contact');
     }
 
     public function delete_email($id = "")
     {
+        ini_set('memory_limit', '-1');
         $email_delete  = Tbl_email_list_contacts::where('id', $id)->delete();
         return redirect('employer/my_posted_contacts');
     }
 
     public function delete_email_list($id = "")
     {
+        ini_set('memory_limit', '-1');
         $email_delete_list = Tbl_email_list::where('id', $id)->delete();
         return redirect('employer/my_posted_contacts');
     }
@@ -1261,6 +1287,7 @@ class Job_Employer_Controller extends Controller
 
     public function assign_job($id = "")
     {
+        ini_set('memory_limit', '-1');
         $toReturn = array();
         $toReturn['team_member_list'] = tbl_team_member::get()->toArray();
         foreach ($toReturn['team_member_list'] as $key => $value) {
@@ -1288,6 +1315,7 @@ class Job_Employer_Controller extends Controller
 
     public function assign_active(Request $request)
     {
+        ini_set('memory_limit', '-1');
         $job_id = $request->job_id;
         if ($request->sts == 'active') {
             $assigned_job = new tbl_job_post_assign();
@@ -1355,6 +1383,7 @@ class Job_Employer_Controller extends Controller
 
     public function list_candidate($id = "")
     {
+        ini_set('memory_limit', '-1');
         $source = "Internal";
         $toReturn['personal'] = \DB::table('tbl_job_seekers')
             ->select(
@@ -1387,6 +1416,7 @@ class Job_Employer_Controller extends Controller
     }
     public function submit_candidate(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         if ($Request->job_id) { }
         $mydate = date('m-Y-d');
         $seeker_name = $Request->seeker_name;
@@ -1511,6 +1541,7 @@ class Job_Employer_Controller extends Controller
 
     public function show_interview_add()
     {
+        ini_set('memory_limit', '-1');
         $toReturn['jobpost'] = tbl_post_jobs::select('job_code', 'ID')->get()->toArray();
         $toReturn['time_zone'] = Tbl_time_zone::get();
         $data[] = array();
@@ -1522,12 +1553,13 @@ class Job_Employer_Controller extends Controller
 
     public function show_meeting1()
     {
-
+        ini_set('memory_limit', '-1');
         $toReturn['time_zone'] = Tbl_time_zone::get();
         return view('employee_dashbord_meeting_add')->with('toReturn', $toReturn);
     }
     public function addinterview(Request $add)
     {
+        ini_set('memory_limit', '-1');
         // return $add;
         $application_details = Tbl_seeker_applied_for_job::where('ID', $add->application_id)->first();
         $employer_ID = Session::get('user_id');
@@ -1551,6 +1583,7 @@ class Job_Employer_Controller extends Controller
 
     public function addmeeting(Request $add)
     {
+        ini_set('memory_limit', '-1');
         $id = Session::get('user_id');
         $cdate = date('Y-m-d');
         DB::insert('insert into tbl_meetings(meeting_date,meeting_time,subject,timezone,participants,employer_ID,dated) values(?,?,?,?,?,?,?)', [$add->date, $add->meeting_time, $add->subject, $add->local_time, $add->parti, $id, $cdate]);
@@ -1559,6 +1592,7 @@ class Job_Employer_Controller extends Controller
 
     public function meetingshow()
     {
+        ini_set('memory_limit', '-1');
         $toReturn['meetingall'] = tbl_meeting::all();
         $toReturn['interviewall'] = tbl_schedule_interview::all();
         $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->orderBy('id', 'DESC')->paginate(15);
@@ -1568,6 +1602,7 @@ class Job_Employer_Controller extends Controller
     }
     public function del($id = "")
     {
+        ini_set('memory_limit', '-1');
         $contact_delete = tbl_meeting::where('meeting_ID', $id)->delete();
         return redirect('employer/dashboard/interview-meeting');
     }
@@ -1575,11 +1610,13 @@ class Job_Employer_Controller extends Controller
 
     public function delint($ida = "")
     {
+        ini_set('memory_limit', '-1');
         $contact_delete1 = tbl_schedule_interview::where('job_ID', $ida)->delete();
         return redirect('employer/dashboard/interview-meeting');
     }
     public function upda($id = "")
     {
+        ini_set('memory_limit', '-1');
         $data = tbl_meeting::where('meeting_ID', $id)->first();
         $toReturn['time_zone'] = Tbl_time_zone::get();
         return view('employee_dashbord_meeting_edit')
@@ -1589,6 +1626,7 @@ class Job_Employer_Controller extends Controller
 
     public function updateadd(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         tbl_meeting::where('meeting_ID', $Request->id_main)->update(array(
             'meeting_date' => $Request->date,
             'meeting_time' => $Request->meeting_time,
@@ -1601,6 +1639,7 @@ class Job_Employer_Controller extends Controller
 
     public function updaint($id = "")
     {
+        ini_set('memory_limit', '-1');
         $data[] = array();
         $toReturn['jobpost'] = tbl_post_jobs::select('job_code', 'ID')->get()->toArray();
         $data['name'] = Tbl_job_seekers::get()->toArray();
@@ -1614,6 +1653,7 @@ class Job_Employer_Controller extends Controller
 
     public function updateedit(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         $candiate_name = $Request->candiate_name;
         $exploded_value = explode('|', $candiate_name);
         $value_one = $exploded_value[0];
@@ -1634,6 +1674,7 @@ class Job_Employer_Controller extends Controller
     }
     public function application_forword($id = "")
     {
+        ini_set('memory_limit', '-1');
         $toReturn['application_detail'] = Tbl_seeker_applied_for_job::where('ID', $id)->first();
         // return $toReturn['application_detail'];
         $toReturn['candiate_record'] = Tbl_job_seekers::where('ID', $toReturn['application_detail']->seeker_ID)->first();
@@ -1644,11 +1685,13 @@ class Job_Employer_Controller extends Controller
     }
     public function list_teammember($id = "")
     {
+        ini_set('memory_limit', '-1');
         $data = tbl_team_member::where('team_member_type', $id)->get();
         return json_encode($data);
     }
     public function forward_candidate(Request $Request)
     {
+        ini_set('memory_limit', '-1');
         // return $Request->document_upload[0];
         $update_resume = $Request->update_Resume_file;
         $experience_list = $Request->experience;
@@ -1870,12 +1913,14 @@ class Job_Employer_Controller extends Controller
     }
     public function show_job_note(Request $request)
     {
+        ini_set('memory_limit', '-1');
         $id = $request->id;
         $data = Tbl_jobs_notes::where('job_id', $id)->get()->toArray();
         return response()->json($data);
     }
     public function add_job_note(Request $request)
     {
+        ini_set('memory_limit', '-1');
         $date = date("Y-m-d h:i:sa");
         $data = new Tbl_jobs_notes();
         $data->title     =  $request->title;
@@ -1890,6 +1935,7 @@ class Job_Employer_Controller extends Controller
     }
     public function add_candidate_note(Request $request)
     {
+        ini_set('memory_limit', '-1');
         $date = date("Y-m-d h:i:sa");
         $data = new tbl_candidate_notes();
         $data->title     =  $request->title;
@@ -1905,12 +1951,14 @@ class Job_Employer_Controller extends Controller
 
     public function show_candidate_note(Request $request)
     {
+        ini_set('memory_limit', '-1');
         $id = $request->id;
         $data = tbl_candidate_notes::where('candidate_id', $id)->get()->toArray();
         return response()->json($data);
     }
     public function add_new_job_email(Request $request)
     {
+        ini_set('memory_limit', '-1');
         // return $request;
         $candiate_name = $request->job;
         $exploded_value = explode('|', $candiate_name);
@@ -1958,6 +2006,7 @@ class Job_Employer_Controller extends Controller
 
     public function candidate_list()
     {
+        ini_set('memory_limit', '-1');
         $value = Tbl_job_seekers::get()->toArray();
 
         $data_array = [];
@@ -2184,7 +2233,7 @@ class Job_Employer_Controller extends Controller
 
     public function submit_candidate_job_search(Request $request)
     {
-
+        ini_set('memory_limit', '-1');
         $source = "Internal";
         $toReturn['personal'] = \DB::table('tbl_job_seekers')
             ->select(
@@ -2220,11 +2269,13 @@ class Job_Employer_Controller extends Controller
     }
     public function get_candiate_deatils($id = "")
     {
+        ini_set('memory_limit', '-1');
         $post_job_show = tbl_job_seekers::orderBy('ID', 'DESC')->take(100)->select('ID', 'first_name', 'middle_name', 'last_name')->get()->toArray();
         return $post_job_show;
     }
     public function fetch_job_details($id = "")
     {
+        ini_set('memory_limit', '-1');
         $job_list = Tbl_post_jobs::select('job_code', 'job_title', 'ID')->get()->toArray();
         return $job_list;
     }
