@@ -2,9 +2,9 @@
 @include('include.emp_leftsidebar')
 
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-{{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="jquery.simple-calendar.js"></script> --}}
-<link rel="stylesheet" type="text/css" href="simple-calendar.css" />
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{url('jquery.simple-calendar.js')}}"></script> 
+<link rel="stylesheet" type="text/css" href="{{url('simple-calendar.css')}}" /> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
@@ -197,7 +197,6 @@
                     <div class="form-group">
                         <label for="email">Start Time</label>
                         <input id="srttime" class=" form-control timepicker1" name="start_time" type="time" required>
-                        <!-- <input type="time" class="form-control" id="" placeholder="Start Time" name="srttime"> -->
                     </div>
                     <div class="form-group">
                         <label for="email">End Time</label>
@@ -214,9 +213,7 @@
                             <option>In-Person</option>
                         </select>
                     </div>
-                    <input type="text" id="application_id" name="application_id">
-                    <input type="text" id="interview_type" name="interview_type" value="">
-                    <input type="text"  id="candiate_name" name="candiate_name" value="">
+                    <input type="hidden" id="application_id" name="application_id">
                     <div class="form-group">
                         <label for="email">Instruction</label>
                         <input type="text" class="form-control" id="" placeholder="" name="instruction">
@@ -251,12 +248,6 @@ $("#interviewModal").modal("show");
 </script>
 
 <script>
-    $('#srttime').timepicker1();
-    $('#endtime').timepicker2();
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-
 </script>
 
 @include('include.emp_footer')

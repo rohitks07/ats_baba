@@ -193,9 +193,10 @@
                                                                     </th>
                                                                     <th
                                                                         style="text-align:center;color:white;background-color:rgb(10, 153, 247);">
-                                                                        Application Forward
+                                                                        Client Submittal
                                                                         </th>
-                                                                    {{-- <th>Action</th> --}}
+                                                                    <th style="text-align:center;color:white;background-color:rgb(10, 153, 247);">
+                                                                        Action</th>
 
 
                                                                 </tr>
@@ -215,6 +216,10 @@
                                                                         <b>{{$item['application_submitted']}}</b></td>
                                                                     <td style="text-align:center;color:blue;">
                                                                         <b>{{$item['client_submittal']}}</b></td>
+                                                                        <?php $username=$name;
+                                                                            $user_id=$data_id; 
+                                                                        ?>
+                                                                    <td><a href="{{url('team_members_view/excelexport/')}}/{{$data_id}}/{{$name}}/{{$item['week_date']}}"> <span></span> Import</a></td>
 
                                                                 </tr>
 
@@ -284,7 +289,7 @@
                                                                     </th>
                                                                     <th
                                                                         style="text-align:center;color:white;background-color:rgb(10, 153, 247);">
-                                                                        Application Forward</th>
+                                                                        Client Submittal </th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>

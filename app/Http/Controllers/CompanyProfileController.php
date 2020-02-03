@@ -161,6 +161,6 @@ class CompanyProfileController extends Controller
   public function url_for_profile_image(){
 
     $logo = Tbl_companies::where('ID',Session::get('org_ID'))->first();
-      return response ($logo);
+      return $logo;
   }
 }

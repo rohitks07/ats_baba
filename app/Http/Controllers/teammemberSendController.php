@@ -36,7 +36,10 @@ class teammemberSendController extends Controller
             $toReturn['week_report'][$j]['job_created'] = count(tbl_post_job::whereDate('dated', $newDate[$j])->where('created_by', $user->ID)->get());
             $toReturn['week_report'][$j]['candidate_created'] = count(Tbl_job_seekers::whereDate('dated', $newDate[$j])->where('created_by', $id)->get());
             $toReturn['week_report'][$j]['client_submittal'] = count(Tbl_forward_candidate::whereDate('forward_date', $newDate[$j])->where('forward_by', $data)->get());
+            $toReturn['week_report'][$j]['client_submittal_export'] =Tbl_forward_candidate::whereDate('forward_date', $newDate[$j])->where('forward_by', $data)->get();
+   
             $toReturn['week_report'][$j]['application_submitted'] = count(Tbl_seeker_applied_for_job::whereDate('dated', $newDate[$j])->where('submitted_by', $id)->get());
+            
         }
 
         // for months;

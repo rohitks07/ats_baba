@@ -13,6 +13,7 @@
 
 //Login page 
 // Auth::routes();
+
 Route::get('/', 'Login_Controller@index');
 Route::post('login', 'Login_Controller@login_page');
 Route::get('forget_password', 'Login_Controller@forget_password');
@@ -234,7 +235,7 @@ Route::get('employer/manageteammember/add/delete/{id}', 'Job_Employer_Controller
 Route::post('employer/manageteammember/add/edit', 'Job_Employer_Controller@manageteamaddedit');
 //new
 Route::any('employer/manageteammember/team_members_view/report_show/{id}/{name}', 'Job_Employer_Controller@report_show');
-Route::any('permission/org', 'Job_Employer_Controller@permission_org');
+Route::get('permission/org', 'Job_Employer_Controller@permission_org');
 //employeer Features for marketing
 Route::get('employer/marketing', 'MarketingController@index');
 Route::post('employer/market_mail', 'MarketingController@send_mail');
@@ -477,6 +478,7 @@ Route::get('admin/job_seekers_manage/advance_search', 'jobseekersmanageControlle
 Route::get('employer/notification_data/{id}', 'NotificationController@jon_noti');
 Route::any('employer/manageteammember/team_members_view/send_report/{id}/{name}', 'teammemberSendController@report_show');
 Route::post('teammember/send_report', 'teammemberSendController@send_report');
+Route::get('team_members_view/excelexport/{id}/{name}/{date}','Import_Controller@exportclientsubmittal');
 
 
 //new
@@ -530,3 +532,4 @@ Route::get('employer/search_resume/search_candidate', 'Job_Employer_Controller@c
 
 //search for submit candidate to job
 Route::get('employer/submit_candidate_detail/submit_candidate_job_search/new', 'Job_Employer_Controller@submit_candidate_job_search');
+Route::get('export/excel','Import_Controller@export_excel');

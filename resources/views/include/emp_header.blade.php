@@ -2,13 +2,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>HRMS</title>
+    <title>ATS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="assets/images/hrmslogo.png">
+   
 
     <link href="{{url('plugins/sweetalert2/sweetalert2.css')}}" rel="stylesheet" type="text/css">
 
@@ -16,15 +16,15 @@
     <link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('assets/css/style.css')}}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css')}}">
-    <link href="{{url('plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+    <link  href="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css')}}" rel="stylesheet" type="text/css">
+    <!-- <link href="{{url('plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" /> -->
     <link href="{{url('plugins/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('plugins/datatables/fixedHeader.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{url('plugins/datatables/fixedHeader.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" /> -->
     <link href="{{url('plugins/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('plugins/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('plugins/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('plugins/datatables/scroller.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{url('plugins/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="{{url('plugins/datatables/scroller.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" /> -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&display=swap" rel="stylesheet">
 
     <script src="{{url('assets/js/modernizr.min.js')}}"></script>
@@ -89,7 +89,8 @@
     }
 
     table.dataTable thead>tr>th {
-        / padding-left: 8px;/ padding-right: 30px;
+        /* padding-left: 8px; */
+         padding-right: 30px;
     }
 
     .table-bordered th {

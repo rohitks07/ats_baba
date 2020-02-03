@@ -17,30 +17,31 @@
         overflow-y: scroll;
     }
 
-    table.dataTable thead > tr > th {
-    / padding-left: 8px; /
-    padding-right: 30px;
-}
-.table-bordered th {
-    border-top: 4px solid #f5f5f5 !important;
-    border-bottom: 4px solid #f5f5f5 !important;
-    border-right: 4px solid #f5f5f5 !important;
-    border-left: 4px solid #f5f5f5 !important;
-	color:#000;
-	font-size: 13px;
-	padding: 0.5em;
-}
-.table td{
-    padding: 0.10rem;
-	font-size: 12px;
-    padding-left: 1em;
-	border-top: 4px solid #f5f5f5 !important;
-    border-bottom: 4px solid #f5f5f5 !important;
-    border-right: 4px solid #f5f5f5 !important;
-    border-left: 4px solid #f5f5f5 !important;
-	color:#000;
+    table.dataTable thead>tr>th {
+        / padding-left: 8px;/ padding-right: 30px;
+    }
 
-}
+    .table-bordered th {
+        border-top: 4px solid #f5f5f5 !important;
+        border-bottom: 4px solid #f5f5f5 !important;
+        border-right: 4px solid #f5f5f5 !important;
+        border-left: 4px solid #f5f5f5 !important;
+        color: #000;
+        font-size: 13px;
+        padding: 0.5em;
+    }
+
+    .table td {
+        padding: 0.10rem;
+        font-size: 12px;
+        padding-left: 1em;
+        border-top: 4px solid #f5f5f5 !important;
+        border-bottom: 4px solid #f5f5f5 !important;
+        border-right: 4px solid #f5f5f5 !important;
+        border-left: 4px solid #f5f5f5 !important;
+        color: #000;
+
+    }
 
 
     .card .card-header {
@@ -104,7 +105,6 @@
         margin-bottom: 30px;
         padding: 5px;
     }
-
 </style>
 
 <div id="wrapper">
@@ -114,35 +114,29 @@
                 <div class="col-xl-12">
                     <ul class="nav nav-tabs tabs" role="tablist">
                         <li class="nav-item tab">
-                            <a class="nav-link active" id="home-tab-2" data-toggle="tab" href="#home-2" role="tab"
-                                aria-controls="home-2" aria-selected="false">
+                            <a class="nav-link active" id="home-tab-2" data-toggle="tab" href="#home-2" role="tab" aria-controls="home-2" aria-selected="false">
                                 <span class="d-block d-sm-none"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                 <span class="d-none d-sm-block"><i class="fa fa-calendar" aria-hidden="true"></i>
                                     &nbsp;&nbsp; Daily</span>
                             </a>
                         </li>
                         <li class="nav-item tab">
-                            <a class="nav-link" id="profile-tab-2" data-toggle="tab" href="#profile-2" role="tab"
-                                aria-controls="profile-2" aria-selected="true">
+                            <a class="nav-link" id="profile-tab-2" data-toggle="tab" href="#profile-2" role="tab" aria-controls="profile-2" aria-selected="true">
                                 <span class="d-block d-sm-none"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                 <span class="d-none d-sm-block"><i class="fa fa-calendar" aria-hidden="true"></i>
                                     &nbsp;&nbsp; Weekly</span>
                             </a>
                         </li>
                         <li class="nav-item tab">
-                            <a class="nav-link" id="message-tab-2" data-toggle="tab" href="#message-2" role="tab"
-                                aria-controls="message-2" aria-selected="false">
+                            <a class="nav-link" id="message-tab-2" data-toggle="tab" href="#message-2" role="tab" aria-controls="message-2" aria-selected="false">
                                 <span class="d-block d-sm-none"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                                <span class="d-none d-sm-block"><i class="fa fa-calendar"
-                                        aria-hidden="true"></i>&nbsp;&nbsp; Monthly</span>
+                                <span class="d-none d-sm-block"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp; Monthly</span>
                             </a>
                         </li>
                         <li class="nav-item tab">
-                            <a class="nav-link" id="setting-tab-2" data-toggle="tab" href="#setting-2" role="tab"
-                                aria-controls="setting-2" aria-selected="false">
+                            <a class="nav-link" id="setting-tab-2" data-toggle="tab" href="#setting-2" role="tab" aria-controls="setting-2" aria-selected="false">
                                 <span class="d-block d-sm-none"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                                <span class="d-none d-sm-block"><i class="fa fa-calendar"
-                                        aria-hidden="true"></i>&nbsp;&nbsp; Yearly</span>
+                                <span class="d-none d-sm-block"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp; Yearly</span>
                             </a>
                         </li>
                         <li style="width: 20%;background: #b9e0ff;"></li>
@@ -160,16 +154,13 @@
                                             <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
                                                     <label class="sr-only" for="exampleInputEmail2">Start Date</label>
-                                                    <input type="date" id="daily_1date" class="form-control"
-                                                        placeholder="Start Date">
+                                                    <input type="date" id="daily_1date" class="form-control" placeholder="Start Date">
                                                 </div>
                                                 <div class="form-group m-l-10">
                                                     <label class="sr-only" for="exampleInputPassword2">End Date</label>
-                                                    <input type="date" id="daily_2date" class="form-control"
-                                                        placeholder="End Date">
+                                                    <input type="date" id="daily_2date" class="form-control" placeholder="End Date">
                                                 </div>
-                                                <button type="button" onclick="daily()"
-                                                    class="btn btn-icon waves-effect waves-light btn-purple m-b-5">
+                                                <button type="button" onclick="daily()" class="btn btn-icon waves-effect waves-light btn-purple m-b-5">
                                                     <i class="fa fa-search"></i> </button>
                                             </form>
                                         </div>
@@ -202,15 +193,9 @@
                                                                     <td>{{$week_report['application_submitted']}}</td>
                                                                     <td>{{$week_report['client_submittal']}}</td>
                                                                     <td>
-                                                                        <a href="" data-toggle="modal"
-                                                                            data-target=".bd-example-modal-lg5{{$date_val}}" title="view group" ><i
-                                                                                class="fa fa-edit"
-                                                                                aria-hidden="true" ></i></a>
+                                                                        <a href="" data-toggle="modal" data-target=".bd-example-modal-lg5{{$date_val}}" title="view group"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                                                     </td>
-                                                                    <div class="modal fade bd-example-modal-lg5{{$date_val}}"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="myLargeModalLabe1"
-                                                                        aria-hidden="true">
+                                                                    <div class="modal fade bd-example-modal-lg5{{$date_val}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabe1" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="container-fluid">
@@ -221,38 +206,30 @@
                                                                                         </div>
                                                                                         <div class="col-md-1 mt-4">
 
-                                                                                            <a href=""
-                                                                                                data-dismiss="modal"><i
-                                                                                                    class="fa ion-android-close"></i></a>
+                                                                                            <a href="" data-dismiss="modal"><i class="fa ion-android-close"></i></a>
                                                                                             </h3>
                                                                                         </div>
                                                                                     </div>
                                                                                     <br>
                                                                                     <br>
                                                                                     <div class="row">
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Group's</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Jobs Created</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Jobs Assigned</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Candidate Created</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Application Submitted
                                                                                             </h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Client Submittal </h4>
                                                                                         </div>
                                                                                     </div>
@@ -271,41 +248,30 @@
                                                                                     ?>
                                                                                     <div class="row">
 
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h6>{{$item['type_name']}}
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$job_create}}</h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$job_assigned}}</h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$candidate_create}}
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$application_submitted}}
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$client_submittal}}
                                                                                             </h6>
                                                                                         </div>
@@ -342,23 +308,21 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">Weekly Report:
-                                                -
+                                                <!-- - {{$toReturn['week_report'][0]['week_date']}} -
+                                                {{$toReturn['week_report'][11]['week_date']}} -->
 
                                             </h3>
                                             <form class="form-inline" style="float:right;margin-bottom: 0px;">
                                                 <div class="form-group">
                                                     <label class="sr-only" for="exampleInputEmail2">Start Date</label>
-                                                    <input type="date" id="week_first" class="form-control"
-                                                        placeholder="Start Date">
+                                                    <input type="date" id="week_first" class="form-control" placeholder="Start Date">
                                                 </div>
 
                                                 <div class="form-group m-l-10">
                                                     <label class="sr-only" for="exampleInputPassword2">End Date</label>
-                                                    <input type="date" id="week_second" class="form-control"
-                                                        placeholder="End Date">
+                                                    <input type="date" id="week_second" class="form-control" placeholder="End Date">
                                                 </div>
-                                                <button type="button" onclick="weekly()"
-                                                    class="btn btn-icon waves-effect waves-light btn-purple m-b-5">
+                                                <button type="button" onclick="weekly()" class="btn btn-icon waves-effect waves-light btn-purple m-b-5">
                                                     <i class="fa fa-search"></i> </button>
                                             </form>
                                         </div>
@@ -380,74 +344,59 @@
                                                             </thead>
                                                             @foreach ( $toReturn['week'] as $key => $item )
                                                             <tr>
-                                                        <td>{{$toReturn['week'][$key]['week_dates']}}</td>
-                                                            <input type="hidden" value="{{$toReturn['week'][$key]['week_start']}}">
-                                                            <input type="hidden" value="{{$toReturn['week'][$key]['week_end']}}">
-                                                        <td>{{$toReturn['week'][$key]['job_created_weekly1']}}</td>
-                                                        <td>{{$toReturn['week'][$key]['post_assign_week_wise1']}}</td>
-                                                        <td>{{$toReturn['week'][$key]['candidate_created1']}}</td>
-                                                        <td>{{$toReturn['week'][$key]['application_submitted1']}}</td>
-                                                        <td>{{$toReturn['week'][$key]['client_submittal1']}}</td>
+                                                                <td>{{$toReturn['week'][$key]['week_dates']}}</td>
+                                                                <input type="hidden" value="{{$toReturn['week'][$key]['week_start']}}">
+                                                                <input type="hidden" value="{{$toReturn['week'][$key]['week_end']}}">
+                                                                <td>{{$toReturn['week'][$key]['job_created_weekly1']}}</td>
+                                                                <td>{{$toReturn['week'][$key]['post_assign_week_wise1']}}</td>
+                                                                <td>{{$toReturn['week'][$key]['candidate_created1']}}</td>
+                                                                <td>{{$toReturn['week'][$key]['application_submitted1']}}</td>
+                                                                <td>{{$toReturn['week'][$key]['client_submittal1']}}</td>
                                                                 <td>
-                                                                        <a href="" data-toggle="modal"
-                                                                        data-target=".bd-example-modal-lg20{{$toReturn['week'][$key]['week_dates']}}"><i
-                                                                            class="fa fa-edit"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a href="" data-toggle="modal" data-target=".bd-example-modal-lg20{{$toReturn['week'][$key]['week_dates']}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
 
                                                                 </td>
-                                                                <div class="modal fade bd-example-modal-lg20{{$toReturn['week'][$key]['week_dates']}}"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="myLargeModalLabe1"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg">
-                                                                            <div class="modal-content">
-                                                                                <div class="container-fluid">
+                                                                <div class="modal fade bd-example-modal-lg20{{$toReturn['week'][$key]['week_dates']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabe1" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg">
+                                                                        <div class="modal-content">
+                                                                            <div class="container-fluid">
 
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-11">
-                                                                                            <h3>Group Report Monthly</h3>
-                                                                                        </div>
-                                                                                        <div class="col-md-1 mt-4">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-11">
+                                                                                        <h3>Group Report Monthly</h3>
+                                                                                    </div>
+                                                                                    <div class="col-md-1 mt-4">
 
-                                                                                            <a href=""
-                                                                                                data-dismiss="modal"><i
-                                                                                                    class="fa ion-android-close"></i></a>
-                                                                                            </h3>
-                                                                                        </div>
+                                                                                        <a href="" data-dismiss="modal"><i class="fa ion-android-close"></i></a>
+                                                                                        </h3>
                                                                                     </div>
-                                                                                    <br>
-                                                                                    <br>
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                    <input type="hidden" id="date_time" value="{{$toReturn['week'][$key]['week_dates']}}">
-                                                                                            <h4>Group's</h4>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h4>Jobs Created</h4>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h4>Jobs Assigned</h4>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h4>Candidate Created</h4>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h4>Application Submitted
-                                                                                            </h4>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h4>Client Submittal </h4>
-                                                                                        </div>
+                                                                                </div>
+                                                                                <br>
+                                                                                <br>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <input type="hidden" id="date_time" value="{{$toReturn['week'][$key]['week_dates']}}">
+                                                                                        <h4>Group's</h4>
                                                                                     </div>
-                                                                                    @foreach (@$toReturn['team_member']
-                                                                                    as  $item)
-                                                                                    <?php $group_id=$item['type_ID'];
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Jobs Created</h4>
+                                                                                    </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Jobs Assigned</h4>
+                                                                                    </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Candidate Created</h4>
+                                                                                    </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Application Submitted
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h4>Client Submittal </h4>
+                                                                                    </div>
+                                                                                </div>
+                                                                                @foreach (@$toReturn['team_member'] as $item)
+                                                                                <?php $group_id=$item['type_ID'];
                                                                                           $start_date=$toReturn['week'][$key]['week_start'];
                                                                                           $end_date=$toReturn['week'][$key]['week_end'];
                                                                                           $new_val=$toReturn['week'][$key]['week_dates'];
@@ -513,58 +462,47 @@
                                                                                                                                             ->where('tbl_team_member_type.type_ID',$group_id)
                                                                                                                                             ->count();                                                        
                                                                                     ?>
-                                                                                    <div class="row">
+                                                                                <div class="row">
 
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6>{{$item['type_name']}}
-                                                                                                
-                                                                                            </h6>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
-                                                                                                {{$date_team['jobs_created_weekly']}}
-                                                                                             </h6>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
-                                                                                                {{$date_team['post_assign_weekly']}}
-                                                                                                </h6>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
-                                                                                                {{$date_team['create_candidate_weekly']}}
-                                                                                               
-                                                                                            </h6>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
-                                                                                                {{ $date_team['application_submitted_weekly']}}
-                                                                                                
-                                                                                            </h6>
-                                                                                        </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
-                                                                                                {{ $date_team['client_submital_weekly']}}
-                                                                                                
-                                                                                            </h6>
-                                                                                        </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6>{{$item['type_name']}}
+
+                                                                                        </h6>
                                                                                     </div>
-                                                                                    @endforeach
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">
+                                                                                            {{$date_team['jobs_created_weekly']}}
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">
+                                                                                            {{$date_team['post_assign_weekly']}}
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">
+                                                                                            {{$date_team['create_candidate_weekly']}}
+
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">
+                                                                                            {{ $date_team['application_submitted_weekly']}}
+
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                    <div class="col-md-2" style="border: 1px solid black;">
+                                                                                        <h6 style="color:blue;text-align:center;">
+                                                                                            {{ $date_team['client_submital_weekly']}}
+
+                                                                                        </h6>
+                                                                                    </div>
                                                                                 </div>
+                                                                                @endforeach
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                </div>
                                                             </tr>
                                                             @endforeach
 
@@ -629,15 +567,9 @@
                                                                     <td>{{$monthly['client_submittal_monthly1']}}</td>
                                                                     <?php $vardate=$monthly['month_week_one1']; ?>
                                                                     <td>
-                                                                        <a href="" data-toggle="modal"
-                                                                        data-target=".bd-example-modal-lg8{{$monthly['month_week_one1']}}"><i
-                                                                                class="fa fa-edit"
-                                                                                aria-hidden="true"></i></a>
+                                                                        <a href="" data-toggle="modal" data-target=".bd-example-modal-lg8{{$monthly['month_week_one1']}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                                                     </td>
-                                                                    <div class="modal fade bd-example-modal-lg8{{$monthly['month_week_one1']}}"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="myLargeModalLabe1"
-                                                                        aria-hidden="true">
+                                                                    <div class="modal fade bd-example-modal-lg8{{$monthly['month_week_one1']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabe1" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="container-fluid">
@@ -648,44 +580,36 @@
                                                                                         </div>
                                                                                         <div class="col-md-1 mt-4">
 
-                                                                                            <a href=""
-                                                                                                data-dismiss="modal"><i
-                                                                                                    class="fa ion-android-close"></i></a>
+                                                                                            <a href="" data-dismiss="modal"><i class="fa ion-android-close"></i></a>
                                                                                             </h3>
                                                                                         </div>
                                                                                     </div>
                                                                                     <br>
                                                                                     <br>
                                                                                     <div class="row">
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                    <input type="hidden" id="date_time" value="{{$monthly['month_week_one1']}}">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <input type="hidden" id="date_time" value="{{$monthly['month_week_one1']}}">
                                                                                             <h4>Group's</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Jobs Created</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Jobs Assigned</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Candidate Created</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Application Submitted
                                                                                             </h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Client Submittal </h4>
                                                                                         </div>
                                                                                     </div>
                                                                                     @foreach (@$toReturn['team_member']
-                                                                                    as  $item)
+                                                                                    as $item)
                                                                                     <?php $group_id=$item['type_ID'];
                                                                                           $new_val=$monthly['month_week_one1'];
                                                                                         //   $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
@@ -746,48 +670,37 @@
                                                                                     ?>
                                                                                     <div class="row">
 
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h6>{{$item['type_name']}}
-                                                                                                
+
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$date_team['jobs_created']}}
-                                                                                             </h6>
+                                                                                            </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$date_team['post_assign']}}
-                                                                                                </h6>
+                                                                                            </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$date_team['create_candidate']}}
-                                                                                               
+
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{ $date_team['application_submitted']}}
-                                                                                                
+
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{ $date_team['client_submital']}}
-                                                                                                
+
                                                                                             </h6>
                                                                                         </div>
                                                                                     </div>
@@ -854,15 +767,9 @@
                                                                     </td>
                                                                     <td>{{$yearly['client_submittal_monthly1']}}</td>
                                                                     <td>
-                                                                            <a href="" data-toggle="modal"
-                                                                            data-target=".bd-example-modal-lg20{{$yearly['month_week_one1']}}"><i
-                                                                                    class="fa fa-edit"
-                                                                                    aria-hidden="true"></i></a>
-                                                                        </td>
-                                                                        <div class="modal fade bd-example-modal-lg20{{$yearly['month_week_one1']}}"
-                                                                        tabindex="-1" role="dialog"
-                                                                        aria-labelledby="myLargeModalLabe1"
-                                                                        aria-hidden="true">
+                                                                        <a href="" data-toggle="modal" data-target=".bd-example-modal-lg20{{$yearly['month_week_one1']}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                    <div class="modal fade bd-example-modal-lg20{{$yearly['month_week_one1']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabe1" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
                                                                                 <div class="container-fluid">
@@ -873,44 +780,36 @@
                                                                                         </div>
                                                                                         <div class="col-md-1 mt-4">
 
-                                                                                            <a href=""
-                                                                                                data-dismiss="modal"><i
-                                                                                                    class="fa ion-android-close"></i></a>
+                                                                                            <a href="" data-dismiss="modal"><i class="fa ion-android-close"></i></a>
                                                                                             </h3>
                                                                                         </div>
                                                                                     </div>
                                                                                     <br>
                                                                                     <br>
                                                                                     <div class="row">
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                    <input type="hidden" id="date_time" value="{{$yearly['month_week_one1']}}">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <input type="hidden" id="date_time" value="{{$yearly['month_week_one1']}}">
                                                                                             <h4>Group's</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Jobs Created</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Jobs Assigned</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Candidate Created</h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Application Submitted
                                                                                             </h4>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h4>Client Submittal </h4>
                                                                                         </div>
                                                                                     </div>
                                                                                     @foreach (@$toReturn['team_member']
-                                                                                    as  $item)
+                                                                                    as $item)
                                                                                     <?php $group_id=$item['type_ID'];
                                                                                           $new_val=$yearly['month_week_one1'];
                                                                                         //   $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
@@ -971,48 +870,37 @@
                                                                                     ?>
                                                                                     <div class="row">
 
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
                                                                                             <h6>{{$item['type_name']}}
-                                                                                                
+
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$date_team['jobs_created_Year']}}
-                                                                                             </h6>
+                                                                                            </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$date_team['post_assign_Year']}}
-                                                                                                </h6>
+                                                                                            </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{$date_team['create_candidate_Year']}}
-                                                                                               
+
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{ $date_team['application_submitted_Year']}}
-                                                                                                
+
                                                                                             </h6>
                                                                                         </div>
-                                                                                        <div class="col-md-2"
-                                                                                            style="border: 1px solid black;">
-                                                                                            <h6
-                                                                                                style="color:blue;text-align:center;">
+                                                                                        <div class="col-md-2" style="border: 1px solid black;">
+                                                                                            <h6 style="color:blue;text-align:center;">
                                                                                                 {{ $date_team['client_submital_Year']}}
-                                                                                                
+
                                                                                             </h6>
                                                                                         </div>
                                                                                     </div>
@@ -1058,25 +946,25 @@
 @include('include.emp_footer')
 <script>
     function monthly_show(da) {
-            console.log(da);
-            $.ajax({
-                type:'POST',
-                url:'{{url("employer/report/monthly_group")}}',
-                data:{
-                    _token: '{!! csrf_token() !!}',
-                    da:da,
-                },
-                success:function(data){
-                    
-                    console.log(data);
-                },
-                error:function(data){
-                    console.log(data)
-                }
+        console.log(da);
+        $.ajax({
+            type: 'POST',
+            url: '{{url("employer/report/monthly_group")}}',
+            data: {
+                _token: '{!! csrf_token() !!}',
+                da: da,
+            },
+            success: function (data) {
 
-            });
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data)
+            }
 
-      }
+        });
+
+    }
 
 </script>
 
