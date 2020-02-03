@@ -119,7 +119,7 @@
 <div id="wrapper">
     <div class="content-page">
         <div class="content">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" action="{{url('employer/submit_candidate')}}" method="post" enctype="multipart/form-data">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" autocomplete="off" action="{{url('employer/submit_candidate')}}" method="post" enctype="multipart/form-data">
                 @csrf()
                 <div class="row">
                     <div class="col-md-12">
@@ -261,7 +261,7 @@
                                         </table>
                                         <hr>
                                         <div align="center">
-                                            <input type="checkbox" onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required"> &nbsp;&nbsp;&nbsp; Experience Required ?
+                                            <input type="checkbox" required onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required">  &nbsp;&nbsp;&nbsp; Experience Required ?
 
                                             <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead style="    background: #317eeb;">
@@ -276,26 +276,26 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[0][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[0][]" class="form-control" id="next1"/></td>
+                                                        <td><input type="text" name="experience[0][]" class="form-control" id="nexta" maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[0][]" class="form-control" id="nextw"/></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[1][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[1][]" class="form-control" id="next2" /></td>
+                                                        <td><input type="text" name="experience[1][]" class="form-control"  id="nextb" maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[1][]" class="form-control" id="nextx"/></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
-                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[2][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[2][]" class="form-control" id="next3"/></td>
+                                                        <td><input type="text" name="experience[2][]" class="form-control" id="nextc" maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[2][]" class="form-control" id="nexty"/></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[3][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[3][]" class="form-control" id="next4"/></td>
+                                                        <td><input type="text" name="experience[3][]" class="form-control" id="nextd" maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[3][]" class="form-control" id="nextz"/></td>
                                                     </tr>
-                                                    <tr style="background: aliceblue;">
+                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="experience[4][]" class="form-control" /></td>
                                                         <td><input type="text" name="experience[4][]" class="form-control" /></td>
                                                         <td><input type="text" name="experience[4][]" class="form-control" /></td>
@@ -324,7 +324,7 @@
                                                         <td><input type="text" name="experience[9][]" class="form-control" /></td>
                                                         <td><input type="text" name="experience[9][]" class="form-control" /></td>
                                                         <td><input type="text" name="experience[9][]" class="form-control" /></td>
-                                                    </tr>
+                                                    </tr> 
                                                 </tbody>
                                             </table>
                                         </div>
@@ -347,11 +347,11 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" /></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" id="test" /></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" id="test1"/></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" id="test2"/></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" id="test3"/></td>
+                                                        <td><input type="text" name="reference[0][]" class="form-control" id="test4"/></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="reference[1][]" class="form-control" /></td>
@@ -374,7 +374,7 @@
                                                         <td><input type="text" name="reference[3][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[3][]" class="form-control" /></td>
                                                     </tr>
-                                                    <tr>
+                                                     <tr>
                                                         <td><input type="text" name="reference[4][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[4][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[4][]" class="form-control" /></td>
@@ -401,7 +401,7 @@
                                                         <td><input type="text" name="reference[7][]"class="form-control" /></td>
                                                         <td><input type="text" name="reference[7][]"class="form-control" /></td>
                                                         <td><input type="text" name="reference[7][]"class="form-control" /></td>
-                                                    </tr>
+                                                    </tr> 
 
                                                 </tbody>
                                             </table>
@@ -410,7 +410,7 @@
                                     </div>
                                     <hr>
                                     <div align="center">
-                                        <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
+                                        <input type="checkbox" required onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
                                         <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                             <thead>
                                                 <tr style="background: #317eeb;">
@@ -426,11 +426,13 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name" /></td>
-                                                    <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  /></td>
-                                                    <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  /></td>
+                                                    <td><input type="text" name="Companyemp_detail"  class="form-control" id="first_name" placeholder="Company name" />
+                                                    <p id="first_name_val"></p></td>
+                                                    <td><input type="text" name="Emailemp_detail" class="form-control"  placeholder="EmailId"/></td>
+                                                    <td><input type="text" name="Employeremp_detail" id="last_name"  class="form-control" placeholder="Empolyer Name"  />
+                                                    <p id="last_name_val"></p></td>
                                                     <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  ></td>
-                                                    <td><input type="text" name="extenson" id="extenson" maxlength="12" class="form-control" placeholder="Extention"  ></td>
+                                                    <td><input type="text" name="extenson" id="extenson" maxlength="4" class="form-control" placeholder="Extention"  ></td>
                                                 </tr>
                                                 <p id="phone_mess" style="color:red;display:none;"> Please Enter Only Number</p>
                                             </tbody>
@@ -478,7 +480,7 @@
                                                     @endif
                                                     <tr id="exp_detail">
                                                         <td class="form-group row delete_exp">
-                                                            <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;">
+                                                            <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;"><p id="document_name_val"></p>
                                                             <input type="file" class="form-control" name="document_upload[]" id="document_upload" class="form-control" style="width: 40%;">
                                                             <p><button type="button" id="btnAdd_Exp" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
                                                         </td>
@@ -486,13 +488,13 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <hr>
+                                    <hr>
                                
                                 <div class="buttons"><br>
-                                    <center><button type="button" onclick="sub_btn()"
-                                            class="btn btn-info">Submit</button></center>
-                                    <center><button type="submit" id="btn_sub" class="btn btn-info"
-                                            style="display:none">Submit</button></center>
+                                    <center><button type="button" onclick="sub_btn()" 
+                                         id="submit_btn" class="btn btn-info button">Submit</button></center>
+                                     <center><button type="submit" id="btn_sub" class="btn btn-info"
+                                            style="display:none">Submit</button></center>     
                                 </div>
                             </div>
                         </div>
@@ -529,6 +531,7 @@
         }
     }
 </script>
+
 <script>
     function sub_btn() {
         return validateGroup(document.getElementsByName("job_id")) && validateGroup(document.getElementsByName(
@@ -642,6 +645,7 @@
     }
     $('#mobile_number').keyup(phoneMask);
 </script>
+
 <script>
     $("#mobile_number").blur(function() {
         mon_no();
@@ -688,6 +692,247 @@
         $(this).closest('.delete_exp').remove();
     });
 </script>
+
+
+
+<script>
+
+// ('.alphaonly').bind('keyup blur',function(){ 
+//     var node = $(this);
+//     node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+// );
+
+// $("#test").keypress(function(event){
+//         var inputValue = event.charCode;
+//         //alert(inputValue);
+//         if(!((inputValue > 64 && inputValue < 91) || (inputValue > 96 && inputValue < 123)||(inputValue==32) || (inputValue==0))){
+//             event.preventDefault();
+//         }
+//     });
+
+$('#test').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+// $('#test1').bind('keyup blur',function(){ 
+//     var node = $(this);
+//     node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+// );
+
+
+
+$('#test2').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#test3').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#test4').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+</script>
+
+<script >
+
+$('#next1').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#nexta').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#nextw').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+$('#next2').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#nextb').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#nextx').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#next3').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#nextc').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#nexty').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#next4').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#nextd').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#nextz').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+
+
+
+
+</script>
+
+
+ <!-- <script>
+    $(document).ready(function() 
+    {
+    
+     $("first_name_val").hide();
+    
+     err_first_name = true;
+    
+     $("#first_name").blur(function(){
+         username1();
+       });
+       function username1(){
+         var t = $("#first_name").val();
+
+         if(t.length==""){
+           $("#first_name_val").show();
+           $("#first_name_val").html("This field is required");
+           $("#first_name_val").focus();
+           $("#first_name_val").css("color","red");
+
+             err_first_name=false;
+             return false;
+         }else{
+             err_first_name=true;
+           $("#first_name_val").hide();
+         }
+       }
+
+    });  
+
+ //validation for employer name text box
+
+$(document).ready(function()
+{
+
+  $("#last_name_val").hide();
+   err_last_name=true;
+
+           $("#last_name").blur(function(){
+            username2();
+        });
+
+
+        function username2(){
+          var R = $("#last_name").val();
+         
+          if(R.length==""){
+            $("#last_name_val").show();
+            $("#last_name_val").html("This field is required");
+            $("#last_name_val").focus();
+            $("#last_name_val").css("color","red");
+
+            err_last_name=false;
+                    return false;
+          }
+          else{
+            err_last_name=true;
+              $("#last_name_val").hide();
+            
+          }
+        }
+
+   });
+
+// validation of Document Name text box
+
+$(document).ready(function()
+{
+
+  $("#document_name_val").hide();
+   err_document_name=true;
+
+           $("#job_title").blur(function(){
+            username3();
+        });
+
+
+        function username3(){
+          var L= $("#job_title").val();
+         
+          if(L.length==""){
+            $("#document_name_val").show();
+            $("#document_name_val").html("This field is required");
+            $("#document_name_val").focus();
+            $("#document_name_val").css("color","red");
+
+            err_document_name=false;
+                    return false;
+          }
+          else{
+            err_document_name=true;
+              $("#document_name_val").hide();
+            
+          }
+        }
+
+   });
+
+// validation on submit button
+
+$("#submit_btn").click(function(){
+
+   err_first_name=true;
+   err_last_name=true;
+   err_document_name=true;
+
+     username1();
+     username2();
+     username3();
+
+  if((err_first_name==true)&&(err_last_name==true)&&(err_document_name==true))
+ {
+   return true;
+  }
+  else{
+    return false;
+  
+  }
+});
+
+</script>  -->
+
 
 </body>
 <!-- Mirrored from coderthemes.com/moltran/blue/form-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Jun 2019 12:15:55 GMT -->
