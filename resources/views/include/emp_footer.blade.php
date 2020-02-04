@@ -16,7 +16,7 @@
 <script src="{{url('assets/js/detect.js')}}"></script>
 <script src="{{url('assets/js/fastclick.js')}}"></script>
 <script src="{{url('assets/js/jquery.slimscroll.js')}}"></script>
-<script src="{{url('assets/js/jquery.blockUI.js')}}"></script>
+<!-- <script src="{{url('assets/js/jquery.blockUI.js')}}"></script> -->
 <script src="{{url('assets/js/waves.js')}}"></script>
 <script src="{{url('assets/js/wow.min.js')}}"></script>
 <script src="{{url('assets/js/jquery.nicescroll.js')}}"></script>
@@ -26,7 +26,7 @@
 <!-- <script src="{{url('/plugins/moment/moment.min.js')}}"></script> -->
 
 <!-- Counter js  -->
-<script src="{{url('/plugins/waypoints/lib/jquery.waypoints.js')}}"></script>
+<!-- <script src="{{url('/plugins/waypoints/lib/jquery.waypoints.js')}}"></script> -->
 <script src="{{url('/plugins/counterup/jquery.counterup.min.js')}}"></script>
 
 <!-- sweet alerts -->
@@ -52,7 +52,7 @@
 <!-- <script src="{{url('assets/pages/jquery.dashboard.js')}}"></script>  -->
 
 <!-- App js  -->
-<script src="{{url('assets/js/jquery.app.js')}}"></script>
+<!-- <script src="{{url('assets/js/jquery.app.js')}}"></script> -->
 <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <!-- <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script> -->
 
@@ -62,7 +62,7 @@
 <!-- <script src="{{url('plugins/datatables/dataTables.buttons.min.js')}}"></script> -->
 <script src="{{url('plugins/datatables/buttons.bootstrap4.min.js')}}"></script>
 <!-- <script src="{{url('plugins/datatables/jszip.min.js')}}"></script> -->
-<script src="{{url('plugins/datatables/pdfmake.min.js')}}"></script>
+<!-- <script src="{{url('plugins/datatables/pdfmake.min.js')}}"></script> -->
 <!-- <script src="{{url('plugins/datatables/vfs_fonts.js')}}"></script> -->
 <!-- <script src="{{url('plugins/datatables/buttons.html5.min.js')}}"></script> -->
 <!-- <script src="{{url('plugins/datatables/buttons.print.min.js')}}"></script> -->
@@ -76,7 +76,7 @@
 <!-- <script src="{{url('plugins/datatables/dataTables.responsive.min.js')}}"></script> -->
 <!-- <script src="{{url('plugins/datatables/responsive.bootstrap4.min.js')}}"></script> -->
 <!-- <script src="{{url('plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js')}}"></script> -->
-<script src="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js')}}"></script>
+<!-- <script src="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js')}}"></script> -->
 <!-- <script>
 
             jQuery(document).ready(function(){
@@ -98,17 +98,17 @@
 <!-- <script src="{{url('assets/js/ckeditor.js')}}"></script> -->
 <script>
     // CKEDITOR.replace( 'article-ckeditor', {
-    toolbar: [
-        { name: 'document', groups: ['mode', 'document', 'doctools'], items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] },
-        // { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },
-        { name: 'clipboard', groups: ['clipboard', 'undo'], items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
-        // [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
-        '/',
-        { name: 'basicstyles', items: ['Bold', 'Italic'] }
-    ]
+    // toolbar: [
+    //     { name: 'document', groups: ['mode', 'document', 'doctools'], items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] },
+    //     // { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },
+    //     { name: 'clipboard', groups: ['clipboard', 'undo'], items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+    //     // [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
+    //     '/',
+    //     { name: 'basicstyles', items: ['Bold', 'Italic'] }
+    // ]
 
 </script>
-<script src="{{url('assets/pages/datatables.init.js')}}"></script>
+<!-- <script src="{{url('assets/pages/datatables.init.js')}}"></script> -->
 
 
 <script>

@@ -1,7 +1,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 
 <script>
     $.ajaxSetup({
@@ -9,7 +9,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
 </script>
 <style>
     #wrapper {
@@ -186,7 +185,7 @@
                                                                 $week_report)
                                                                 <tr>
                                                                     <td>{{$week_report['week_date']}}</td>
-                                                                    <?php $date_val=$week_report['week_date']; ?>
+                                                                    <?php $date_val = $week_report['week_date']; ?>
                                                                     <td>{{$week_report['job_created']}}</td>
                                                                     <td>{{$week_report['post_assign']}}</td>
                                                                     <td>{{$week_report['candidate_created']}}</td>
@@ -235,16 +234,16 @@
                                                                                     </div>
                                                                                     @foreach (@$toReturn['team_member']
                                                                                     as $item)
-                                                                                    <?php $group_id=$item['type_ID'];
-                                                                                          $new_val=$week_report['week_date'];
-                                                                                          $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
-                                                                                          $date = strtotime($newDate); 
-                                                                                          $datetime=date('Y-m-d h:i:s', $date); 
-                                                                                          $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate));
-                                                                                          $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
-                                                                                          $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate));
-                                                                                          $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate));
-                                                                                          $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate));
+                                                                                    <?php $group_id = $item['type_ID'];
+                                                                                    $new_val = $week_report['week_date'];
+                                                                                    $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/", "$3-$1-$2", $new_val);
+                                                                                    $date = strtotime($newDate);
+                                                                                    $datetime = date('Y-m-d h:i:s', $date);
+                                                                                    $application_submitted = count($date_team['application_submitted']->where('type_ID', $group_id)->whereIn('dated', $newDate));
+                                                                                    $client_submittal = count($date_team['forward_candidate']->where('for_group', $group_id)->where('forward_date', $newDate));
+                                                                                    $job_assigned = count($date_team['post_assign']->where('type_ID', $group_id)->whereIn('job_assigned_date', $newDate));
+                                                                                    $job_create = count($date_team['team']->where('group', $group_id)->whereIn('date', $newDate));
+                                                                                    $candidate_create = count($date_team['create_candidate']->where('type_ID', $group_id)->whereIn('dated', $newDate));
                                                                                     ?>
                                                                                     <div class="row">
 
@@ -396,72 +395,97 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 @foreach (@$toReturn['team_member'] as $item)
-                                                                                <?php $group_id=$item['type_ID'];
-                                                                                          $start_date=$toReturn['week'][$key]['week_start'];
-                                                                                          $end_date=$toReturn['week'][$key]['week_end'];
-                                                                                          $new_val=$toReturn['week'][$key]['week_dates'];
-                                                                                        //   $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
-                                                                                          
-                                                                                        //   $date = strtotime($newDate); 
-                                                                                        //   $datetime=date('Y-m-d h:i:s', $date); 
-                                                                                        //   $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
-                                                                                        //   $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
-                                                                                        //   $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
-                                                                                        //   $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
-                                                                                        //   $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                <?php $group_id = $item['type_ID'];
+                                                                                $start_date = $toReturn['week'][$key]['week_start'];
+                                                                                $end_date = $toReturn['week'][$key]['week_end'];
+                                                                                $new_val = $toReturn['week'][$key]['week_dates'];
+                                                                               
+                                                                                $date_team['jobs_created_weekly'] = DB::table('tbl_team_member_type')
+                                                                                    ->leftjoin('tbl_post_jobs', 'tbl_post_jobs.for_group', '=', 'tbl_team_member_type.type_ID')
+                                                                                    ->select(
+                                                                                        'tbl_team_member_type.type_ID as id',
+                                                                                        'tbl_team_member_type.type_name',
+                                                                                        'tbl_post_jobs.for_group as group',
+                                                                                        'tbl_post_jobs.dated as date',
+                                                                                        'tbl_post_jobs.company_ID'
+                                                                                    )
+                                                                                    ->where('tbl_post_jobs.dated', '>=', $start_date)
+                                                                                    ->where('tbl_post_jobs.dated', '<=', $end_date)
+                                                                                    ->where('tbl_post_jobs.for_group', $group_id)
+                                                                                    ->count();
 
-                                                                                          $date_team['jobs_created_weekly']=DB::table('tbl_team_member_type')
-                                                                                                                                        ->leftjoin('tbl_post_jobs','tbl_post_jobs.for_group','=','tbl_team_member_type.type_ID')
-                                                                                                                                        ->select('tbl_team_member_type.type_ID as id','tbl_team_member_type.type_name',
-                                                                                                                                                'tbl_post_jobs.for_group as group','tbl_post_jobs.dated as date','tbl_post_jobs.company_ID')
-                                                                                                                                        ->where('tbl_post_jobs.dated','>=',$start_date)
-                                                                                                                                        ->where('tbl_post_jobs.dated','<=',$end_date  )
-                                                                                                                                        ->where('tbl_post_jobs.for_group',$group_id)
-                                                                                                                                        ->count();
+                                                                                $date_team['post_assign_weekly'] = DB::table('tbl_team_member')
+                                                                                    ->leftjoin('tbl_job_post_assign', 'tbl_job_post_assign.team_member_id', '=', 'tbl_team_member.ID')
+                                                                                    ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_team_member.team_member_type')
+                                                                                    ->select(
+                                                                                        'tbl_team_member.team_member_type',
+                                                                                        'tbl_team_member.company_id',
+                                                                                        'tbl_team_member.full_name',
+                                                                                        'tbl_job_post_assign.team_member_id',
+                                                                                        'tbl_team_member_type.type_name',
+                                                                                        'tbl_team_member_type.type_ID',
+                                                                                        'tbl_job_post_assign.job_assigned_date',
+                                                                                        'tbl_team_member.company_id'
+                                                                                    )
+                                                                                    ->where('tbl_job_post_assign.job_assigned_date', '>=', $start_date)
+                                                                                    ->where('tbl_job_post_assign.job_assigned_date', '<=', $end_date)
+                                                                                    ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                    ->count();
+                                                                                $date_team['create_candidate_weekly'] = DB::table('tbl_team_member_type')
+                                                                                    ->leftjoin('tbl_team_member', 'tbl_team_member.team_member_type', '=', 'tbl_team_member_type.type_ID')
+                                                                                    ->leftjoin('user', 'user.user_id', '=', 'tbl_team_member.ID')
+                                                                                    ->leftjoin('tbl_job_seekers', 'tbl_job_seekers.employer_id', '=', 'user.user_id')
+                                                                                    ->select(
+                                                                                        'tbl_job_seekers.ID',
+                                                                                        'tbl_job_seekers.dated',
+                                                                                        'tbl_job_seekers.employer_id',
+                                                                                        'tbl_team_member.full_name',
+                                                                                        'tbl_team_member.team_member_type',
+                                                                                        'tbl_team_member_type.type_ID',
+                                                                                        'tbl_team_member_type.type_name',
+                                                                                        'tbl_team_member.company_id'
+                                                                                    )
+                                                                                    ->where('tbl_job_seekers.dated', '>=', $start_date)
+                                                                                    ->where('tbl_job_seekers.dated', '<=', $end_date)
+                                                                                    ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                    ->count();
+                                                                                $date_team['application_submitted_weekly'] = DB::table('tbl_seeker_applied_for_job')
+                                                                                    ->leftjoin('tbl_job_seekers', 'tbl_job_seekers.ID', '=', 'tbl_seeker_applied_for_job.seeker_ID')
+                                                                                    ->leftjoin('user', 'user.ID', '=', 'tbl_job_seekers.employer_id')
+                                                                                    ->leftjoin('tbl_team_member', 'tbl_team_member.ID', '=', 'user.user_id')
+                                                                                    ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_team_member.team_member_type')
+                                                                                    ->select(
+                                                                                        'tbl_job_seekers.ID',
+                                                                                        'tbl_job_seekers.dated',
+                                                                                        'tbl_seeker_applied_for_job.dated',
+                                                                                        'tbl_job_seekers.employer_id',
+                                                                                        'tbl_team_member.full_name',
+                                                                                        'tbl_team_member.team_member_type',
+                                                                                        'tbl_team_member_type.type_ID',
+                                                                                        'tbl_team_member_type.type_name',
+                                                                                        'tbl_team_member.company_id'
+                                                                                    )
+                                                                                    ->where('tbl_job_seekers.dated', '>=', $start_date)
+                                                                                    ->where('tbl_job_seekers.dated', '<=', $end_date)
+                                                                                    ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                    ->count();
 
-                                                                                          $date_team['post_assign_weekly']=DB::table('tbl_team_member')
-                                                                                                                                    ->leftjoin('tbl_job_post_assign','tbl_job_post_assign.team_member_id','=','tbl_team_member.ID')     
-                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
-                                                                                                                                    ->select('tbl_team_member.team_member_type','tbl_team_member.company_id','tbl_team_member.full_name',
-                                                                                                                                                'tbl_job_post_assign.team_member_id','tbl_team_member_type.type_name','tbl_team_member_type.type_ID',
-                                                                                                                                                'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id')
-                                                                                                                                        ->where('tbl_job_post_assign.job_assigned_date','>=',$start_date)
-                                                                                                                                        ->where('tbl_job_post_assign.job_assigned_date','<=',$end_date  )
-                                                                                                                                        ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                        ->count();
-                                                                                        $date_team['create_candidate_weekly']=DB::table('tbl_team_member_type')
-                                                                                                                                            ->leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
-                                                                                                                                            ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
-                                                                                                                                            ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
-                                                                                                                                            ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
-                                                                                                                                                     'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
-                                                                                                                                            ->where('tbl_job_seekers.dated','>=',$start_date)
-                                                                                                                                            ->where('tbl_job_seekers.dated','<=',$end_date  )
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();
-                                                                                    $date_team['application_submitted_weekly']=DB::table('tbl_seeker_applied_for_job')
-                                                                                                                                                    ->leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
-                                                                                                                                                    ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
-                                                                                                                                                    ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
-                                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
-                                                                                                                                                    ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
-                                                                                                                                                            'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
-                                                                                                                                            ->where('tbl_job_seekers.dated','>=',$start_date)
-                                                                                                                                            ->where('tbl_job_seekers.dated','<=',$end_date  )
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();
 
-
-                                                                                    $date_team['client_submital_weekly']=DB::table('tbl_forward_candidate')
-                                                                                                                                            ->leftjoin('tbl_post_jobs','tbl_post_jobs.ID','=','tbl_forward_candidate.job_id')
-                                                                                                                                            ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_post_jobs.for_group')
-                                                                                                                                            ->select('tbl_team_member_type.type_ID','tbl_team_member_type.type_name',
-                                                                                                                                                    'tbl_post_jobs.for_group','tbl_forward_candidate.forward_date','tbl_forward_candidate.forward_by')
-                                                                                                                                            ->where('tbl_forward_candidate.forward_date','>=',$start_date)
-                                                                                                                                            ->where('tbl_forward_candidate.forward_date','<=',$end_date  )
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();                                                        
-                                                                                    ?>
+                                                                                $date_team['client_submital_weekly'] = DB::table('tbl_forward_candidate')
+                                                                                    ->leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
+                                                                                    ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_post_jobs.for_group')
+                                                                                    ->select(
+                                                                                        'tbl_team_member_type.type_ID',
+                                                                                        'tbl_team_member_type.type_name',
+                                                                                        'tbl_post_jobs.for_group',
+                                                                                        'tbl_forward_candidate.forward_date',
+                                                                                        'tbl_forward_candidate.forward_by'
+                                                                                    )
+                                                                                    ->where('tbl_forward_candidate.forward_date', '>=', $start_date)
+                                                                                    ->where('tbl_forward_candidate.forward_date', '<=', $end_date)
+                                                                                    ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                    ->count();
+                                                                                ?>
                                                                                 <div class="row">
 
                                                                                     <div class="col-md-2" style="border: 1px solid black;">
@@ -551,9 +575,9 @@
                                                             </thead>
                                                             <tbody>
                                                                 @foreach ($toReturn['monthly'] as $monthly)
-                                                                <?php @$month=$monthly['month_week_one1']; 
-                                                                      $newDate_val = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3:$1",$month);
-                                                                    //   $newDate_val = date('Y-m', strtotime($month));
+                                                                <?php @$month = $monthly['month_week_one1'];
+                                                                $newDate_val = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/", "$3:$1", $month);
+                                                                //   $newDate_val = date('Y-m', strtotime($month));
                                                                 ?>
                                                                 <tr>
                                                                     {{-- <input type="text" id="date_time" value="{{$monthly['month_week_one1']}}"> --}}
@@ -565,7 +589,7 @@
                                                                     <td>{{$monthly['application_submitted_monthly1']}}
                                                                     </td>
                                                                     <td>{{$monthly['client_submittal_monthly1']}}</td>
-                                                                    <?php $vardate=$monthly['month_week_one1']; ?>
+                                                                    <?php $vardate = $monthly['month_week_one1']; ?>
                                                                     <td>
                                                                         <a href="" data-toggle="modal" data-target=".bd-example-modal-lg8{{$monthly['month_week_one1']}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                                                     </td>
@@ -610,63 +634,88 @@
                                                                                     </div>
                                                                                     @foreach (@$toReturn['team_member']
                                                                                     as $item)
-                                                                                    <?php $group_id=$item['type_ID'];
-                                                                                          $new_val=$monthly['month_week_one1'];
-                                                                                        //   $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
-                                                                                          
-                                                                                        //   $date = strtotime($newDate); 
-                                                                                        //   $datetime=date('Y-m-d h:i:s', $date); 
-                                                                                        //   $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
-                                                                                        //   $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
-                                                                                        //   $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
-                                                                                        //   $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
-                                                                                        //   $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                    <?php $group_id = $item['type_ID'];
+                                                                                    $new_val = $monthly['month_week_one1'];
+                                                                                  
+                                                                                    $date_team['jobs_created'] = DB::table('tbl_team_member_type')
+                                                                                        ->leftjoin('tbl_post_jobs', 'tbl_post_jobs.for_group', '=', 'tbl_team_member_type.type_ID')
+                                                                                        ->select(
+                                                                                            'tbl_team_member_type.type_ID as id',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_post_jobs.for_group as group',
+                                                                                            'tbl_post_jobs.dated as date',
+                                                                                            'tbl_post_jobs.company_ID'
+                                                                                        )
+                                                                                        ->whereMonth('tbl_post_jobs.dated', $new_val)
+                                                                                        ->where('tbl_post_jobs.for_group', $group_id)
+                                                                                        ->count();
+                                                                                    $date_team['post_assign'] = DB::table('tbl_team_member')
+                                                                                        ->leftjoin('tbl_job_post_assign', 'tbl_job_post_assign.team_member_id', '=', 'tbl_team_member.ID')
+                                                                                        ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_team_member.team_member_type')
+                                                                                        ->select(
+                                                                                            'tbl_team_member.team_member_type',
+                                                                                            'tbl_team_member.company_id',
+                                                                                            'tbl_team_member.full_name',
+                                                                                            'tbl_job_post_assign.team_member_id',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_team_member_type.type_ID',
+                                                                                            'tbl_job_post_assign.job_assigned_date',
+                                                                                            'tbl_team_member.company_id'
+                                                                                        )
+                                                                                        ->whereMonth('tbl_job_post_assign.job_assigned_date', $new_val)
+                                                                                        ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                        ->count();
+                                                                                    $date_team['create_candidate'] = DB::table('tbl_team_member_type')
+                                                                                        ->leftjoin('tbl_team_member', 'tbl_team_member.team_member_type', '=', 'tbl_team_member_type.type_ID')
+                                                                                        ->leftjoin('user', 'user.user_id', '=', 'tbl_team_member.ID')
+                                                                                        ->leftjoin('tbl_job_seekers', 'tbl_job_seekers.employer_id', '=', 'user.user_id')
+                                                                                        ->select(
+                                                                                            'tbl_job_seekers.ID',
+                                                                                            'tbl_job_seekers.dated',
+                                                                                            'tbl_job_seekers.employer_id',
+                                                                                            'tbl_team_member.full_name',
+                                                                                            'tbl_team_member.team_member_type',
+                                                                                            'tbl_team_member_type.type_ID',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_team_member.company_id'
+                                                                                        )
+                                                                                        ->whereMonth('tbl_job_seekers.dated', $new_val)
+                                                                                        ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                        ->count();
+                                                                                    $date_team['application_submitted'] = DB::table('tbl_seeker_applied_for_job')
+                                                                                        ->leftjoin('tbl_job_seekers', 'tbl_job_seekers.ID', '=', 'tbl_seeker_applied_for_job.seeker_ID')
+                                                                                        ->leftjoin('user', 'user.ID', '=', 'tbl_job_seekers.employer_id')
+                                                                                        ->leftjoin('tbl_team_member', 'tbl_team_member.ID', '=', 'user.user_id')
+                                                                                        ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_team_member.team_member_type')
+                                                                                        ->select(
+                                                                                            'tbl_job_seekers.ID',
+                                                                                            'tbl_job_seekers.dated',
+                                                                                            'tbl_seeker_applied_for_job.dated',
+                                                                                            'tbl_job_seekers.employer_id',
+                                                                                            'tbl_team_member.full_name',
+                                                                                            'tbl_team_member.team_member_type',
+                                                                                            'tbl_team_member_type.type_ID',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_team_member.company_id'
+                                                                                        )
+                                                                                        ->whereMonth('tbl_job_seekers.dated', $new_val)
+                                                                                        ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                        ->count();
 
-                                                                                          $date_team['jobs_created']=DB::table('tbl_team_member_type')
-                                                                                                                                        ->leftjoin('tbl_post_jobs','tbl_post_jobs.for_group','=','tbl_team_member_type.type_ID')
-                                                                                                                                        ->select('tbl_team_member_type.type_ID as id','tbl_team_member_type.type_name',
-                                                                                                                                                'tbl_post_jobs.for_group as group','tbl_post_jobs.dated as date','tbl_post_jobs.company_ID')
-                                                                                                                                        ->whereMonth('tbl_post_jobs.dated',$new_val)
-                                                                                                                                        ->where('tbl_post_jobs.for_group',$group_id)
-                                                                                                                                        ->count();
-                                                                                          $date_team['post_assign']=DB::table('tbl_team_member')
-                                                                                                                                    ->leftjoin('tbl_job_post_assign','tbl_job_post_assign.team_member_id','=','tbl_team_member.ID')     
-                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
-                                                                                                                                    ->select('tbl_team_member.team_member_type','tbl_team_member.company_id','tbl_team_member.full_name',
-                                                                                                                                                'tbl_job_post_assign.team_member_id','tbl_team_member_type.type_name','tbl_team_member_type.type_ID',
-                                                                                                                                                'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id')
-                                                                                                                                        ->whereMonth('tbl_job_post_assign.job_assigned_date',$new_val)
-                                                                                                                                        ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                        ->count();
-                                                                                        $date_team['create_candidate']=DB::table('tbl_team_member_type')
-                                                                                                                                            ->leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
-                                                                                                                                            ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
-                                                                                                                                            ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
-                                                                                                                                            ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
-                                                                                                                                                     'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
-                                                                                                                                            ->whereMonth('tbl_job_seekers.dated',$new_val)
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();
-                                                                                    $date_team['application_submitted']=DB::table('tbl_seeker_applied_for_job')
-                                                                                                                                                    ->leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
-                                                                                                                                                    ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
-                                                                                                                                                    ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
-                                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
-                                                                                                                                                    ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
-                                                                                                                                                            'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
-                                                                                                                                            ->whereMonth('tbl_job_seekers.dated',$new_val)
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();
 
-
-                                                                                    $date_team['client_submital']=DB::table('tbl_forward_candidate')
-                                                                                                                                            ->leftjoin('tbl_post_jobs','tbl_post_jobs.ID','=','tbl_forward_candidate.job_id')
-                                                                                                                                            ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_post_jobs.for_group')
-                                                                                                                                            ->select('tbl_team_member_type.type_ID','tbl_team_member_type.type_name',
-                                                                                                                                                    'tbl_post_jobs.for_group','tbl_forward_candidate.forward_date','tbl_forward_candidate.forward_by')
-                                                                                                                                            ->whereMonth('tbl_forward_candidate.forward_date',$new_val)
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();                                                        
+                                                                                    $date_team['client_submital'] = DB::table('tbl_forward_candidate')
+                                                                                        ->leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
+                                                                                        ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_post_jobs.for_group')
+                                                                                        ->select(
+                                                                                            'tbl_team_member_type.type_ID',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_post_jobs.for_group',
+                                                                                            'tbl_forward_candidate.forward_date',
+                                                                                            'tbl_forward_candidate.forward_by'
+                                                                                        )
+                                                                                        ->whereMonth('tbl_forward_candidate.forward_date', $new_val)
+                                                                                        ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                        ->count();
                                                                                     ?>
                                                                                     <div class="row">
 
@@ -810,63 +859,88 @@
                                                                                     </div>
                                                                                     @foreach (@$toReturn['team_member']
                                                                                     as $item)
-                                                                                    <?php $group_id=$item['type_ID'];
-                                                                                          $new_val=$yearly['month_week_one1'];
-                                                                                        //   $newDate = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$1-$2",$new_val);
-                                                                                          
-                                                                                        //   $date = strtotime($newDate); 
-                                                                                        //   $datetime=date('Y-m-d h:i:s', $date); 
-                                                                                        //   $application_submitted= count($date_team['application_submitted']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
-                                                                                        //   $client_submittal= count($date_team['forward_candidate']->where('for_group',$group_id)->where('forward_date',$newDate));                                                                                         
-                                                                                        //   $job_assigned= count($date_team['post_assign']->where('type_ID',$group_id)->whereIn('job_assigned_date',$newDate)->whereIn('company_id',$org_id));
-                                                                                        //   $job_create= count($date_team['team']->where('group',$group_id)->whereIn('date',$newDate)->whereIn('company_ID',$org_id));
-                                                                                        //   $candidate_create= count($date_team['create_candidate']->where('type_ID',$group_id)->whereIn('dated',$newDate)->whereIn('company_id',$org_id));
+                                                                                    <?php $group_id = $item['type_ID'];
+                                                                                    $new_val = $yearly['month_week_one1'];
 
-                                                                                          $date_team['jobs_created_Year']=DB::table('tbl_team_member_type')
-                                                                                                                                        ->leftjoin('tbl_post_jobs','tbl_post_jobs.for_group','=','tbl_team_member_type.type_ID')
-                                                                                                                                        ->select('tbl_team_member_type.type_ID as id','tbl_team_member_type.type_name',
-                                                                                                                                                'tbl_post_jobs.for_group as group','tbl_post_jobs.dated as date','tbl_post_jobs.company_ID')
-                                                                                                                                        ->whereYear('tbl_post_jobs.dated',$new_val)
-                                                                                                                                        ->where('tbl_post_jobs.for_group',$group_id)
-                                                                                                                                        ->count();
-                                                                                          $date_team['post_assign_Year']=DB::table('tbl_team_member')
-                                                                                                                                    ->leftjoin('tbl_job_post_assign','tbl_job_post_assign.team_member_id','=','tbl_team_member.ID')     
-                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
-                                                                                                                                    ->select('tbl_team_member.team_member_type','tbl_team_member.company_id','tbl_team_member.full_name',
-                                                                                                                                                'tbl_job_post_assign.team_member_id','tbl_team_member_type.type_name','tbl_team_member_type.type_ID',
-                                                                                                                                                'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id')
-                                                                                                                                        ->whereYear('tbl_job_post_assign.job_assigned_date',$new_val)
-                                                                                                                                        ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                        ->count();
-                                                                                        $date_team['create_candidate_Year']=DB::table('tbl_team_member_type')
-                                                                                                                                            ->leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
-                                                                                                                                            ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
-                                                                                                                                            ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
-                                                                                                                                            ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_job_seekers.employer_id',
-                                                                                                                                                     'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
-                                                                                                                                            ->whereYear('tbl_job_seekers.dated',$new_val)
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();
-                                                                                    $date_team['application_submitted_Year']=DB::table('tbl_seeker_applied_for_job')
-                                                                                                                                                    ->leftjoin('tbl_job_seekers','tbl_job_seekers.ID','=','tbl_seeker_applied_for_job.seeker_ID')
-                                                                                                                                                    ->leftjoin('user','user.ID','=','tbl_job_seekers.employer_id')  
-                                                                                                                                                    ->leftjoin('tbl_team_member','tbl_team_member.ID','=','user.user_id')  
-                                                                                                                                                    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
-                                                                                                                                                    ->select('tbl_job_seekers.ID','tbl_job_seekers.dated','tbl_seeker_applied_for_job.dated','tbl_job_seekers.employer_id',
-                                                                                                                                                            'tbl_team_member.full_name','tbl_team_member.team_member_type','tbl_team_member_type.type_ID','tbl_team_member_type.type_name','tbl_team_member.company_id')
-                                                                                                                                            ->whereYear('tbl_job_seekers.dated',$new_val)
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();
+                                                                                    $date_team['jobs_created_Year'] = DB::table('tbl_team_member_type')
+                                                                                        ->leftjoin('tbl_post_jobs', 'tbl_post_jobs.for_group', '=', 'tbl_team_member_type.type_ID')
+                                                                                        ->select(
+                                                                                            'tbl_team_member_type.type_ID as id',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_post_jobs.for_group as group',
+                                                                                            'tbl_post_jobs.dated as date',
+                                                                                            'tbl_post_jobs.company_ID'
+                                                                                        )
+                                                                                        ->whereYear('tbl_post_jobs.dated', $new_val)
+                                                                                        ->where('tbl_post_jobs.for_group', $group_id)
+                                                                                        ->count();
+                                                                                    $date_team['post_assign_Year'] = DB::table('tbl_team_member')
+                                                                                        ->leftjoin('tbl_job_post_assign', 'tbl_job_post_assign.team_member_id', '=', 'tbl_team_member.ID')
+                                                                                        ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_team_member.team_member_type')
+                                                                                        ->select(
+                                                                                            'tbl_team_member.team_member_type',
+                                                                                            'tbl_team_member.company_id',
+                                                                                            'tbl_team_member.full_name',
+                                                                                            'tbl_job_post_assign.team_member_id',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_team_member_type.type_ID',
+                                                                                            'tbl_job_post_assign.job_assigned_date',
+                                                                                            'tbl_team_member.company_id'
+                                                                                        )
+                                                                                        ->whereYear('tbl_job_post_assign.job_assigned_date', $new_val)
+                                                                                        ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                        ->count();
+                                                                                    $date_team['create_candidate_Year'] = DB::table('tbl_team_member_type')
+                                                                                        ->leftjoin('tbl_team_member', 'tbl_team_member.team_member_type', '=', 'tbl_team_member_type.type_ID')
+                                                                                        ->leftjoin('user', 'user.user_id', '=', 'tbl_team_member.ID')
+                                                                                        ->leftjoin('tbl_job_seekers', 'tbl_job_seekers.employer_id', '=', 'user.user_id')
+                                                                                        ->select(
+                                                                                            'tbl_job_seekers.ID',
+                                                                                            'tbl_job_seekers.dated',
+                                                                                            'tbl_job_seekers.employer_id',
+                                                                                            'tbl_team_member.full_name',
+                                                                                            'tbl_team_member.team_member_type',
+                                                                                            'tbl_team_member_type.type_ID',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_team_member.company_id'
+                                                                                        )
+                                                                                        ->whereYear('tbl_job_seekers.dated', $new_val)
+                                                                                        ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                        ->count();
+                                                                                    $date_team['application_submitted_Year'] = DB::table('tbl_seeker_applied_for_job')
+                                                                                        ->leftjoin('tbl_job_seekers', 'tbl_job_seekers.ID', '=', 'tbl_seeker_applied_for_job.seeker_ID')
+                                                                                        ->leftjoin('user', 'user.ID', '=', 'tbl_job_seekers.employer_id')
+                                                                                        ->leftjoin('tbl_team_member', 'tbl_team_member.ID', '=', 'user.user_id')
+                                                                                        ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_team_member.team_member_type')
+                                                                                        ->select(
+                                                                                            'tbl_job_seekers.ID',
+                                                                                            'tbl_job_seekers.dated',
+                                                                                            'tbl_seeker_applied_for_job.dated',
+                                                                                            'tbl_job_seekers.employer_id',
+                                                                                            'tbl_team_member.full_name',
+                                                                                            'tbl_team_member.team_member_type',
+                                                                                            'tbl_team_member_type.type_ID',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_team_member.company_id'
+                                                                                        )
+                                                                                        ->whereYear('tbl_job_seekers.dated', $new_val)
+                                                                                        ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                        ->count();
 
 
-                                                                                    $date_team['client_submital_Year']=DB::table('tbl_forward_candidate')
-                                                                                                                                            ->leftjoin('tbl_post_jobs','tbl_post_jobs.ID','=','tbl_forward_candidate.job_id')
-                                                                                                                                            ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_post_jobs.for_group')
-                                                                                                                                            ->select('tbl_team_member_type.type_ID','tbl_team_member_type.type_name',
-                                                                                                                                                    'tbl_post_jobs.for_group','tbl_forward_candidate.forward_date','tbl_forward_candidate.forward_by')
-                                                                                                                                            ->whereYear('tbl_forward_candidate.forward_date',$new_val)
-                                                                                                                                            ->where('tbl_team_member_type.type_ID',$group_id)
-                                                                                                                                            ->count();                                                        
+                                                                                    $date_team['client_submital_Year'] = DB::table('tbl_forward_candidate')
+                                                                                        ->leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
+                                                                                        ->leftjoin('tbl_team_member_type', 'tbl_team_member_type.type_ID', '=', 'tbl_post_jobs.for_group')
+                                                                                        ->select(
+                                                                                            'tbl_team_member_type.type_ID',
+                                                                                            'tbl_team_member_type.type_name',
+                                                                                            'tbl_post_jobs.for_group',
+                                                                                            'tbl_forward_candidate.forward_date',
+                                                                                            'tbl_forward_candidate.forward_by'
+                                                                                        )
+                                                                                        ->whereYear('tbl_forward_candidate.forward_date', $new_val)
+                                                                                        ->where('tbl_team_member_type.type_ID', $group_id)
+                                                                                        ->count();
                                                                                     ?>
                                                                                     <div class="row">
 
@@ -954,18 +1028,17 @@
                 _token: '{!! csrf_token() !!}',
                 da: da,
             },
-            success: function (data) {
+            success: function(data) {
 
                 console.log(data);
             },
-            error: function (data) {
+            error: function(data) {
                 console.log(data)
             }
 
         });
 
     }
-
 </script>
 
 <!--SCRIPT FOR SEARCH-->
@@ -1001,7 +1074,7 @@
                 one_new: new_d,
                 two_new: new_t
             },
-            success: function (data) {
+            success: function(data) {
                 // console.log(data);
                 // console.log('hell ya');
                 var value = `<div class="table-responsive">
@@ -1036,7 +1109,7 @@
                 //     console.log(data);
                 //     });
             },
-            error: function (data) {
+            error: function(data) {
                 console.log(data);
                 // console.log("hell no");
             }
@@ -1078,7 +1151,7 @@
                 one_new: new_d,
                 two_new: new_t
             },
-            success: function (data) {
+            success: function(data) {
                 // console.log(data);
                 // console.log('hell ya');
                 var value = `<div class="table-responsive">
@@ -1114,7 +1187,7 @@
                 //     console.log(data);
                 //     });
             },
-            error: function (data) {
+            error: function(data) {
                 console.log(data);
                 // console.log("hell no");
             }
@@ -1198,5 +1271,4 @@
     //     });
 
     // }
-
 </script>

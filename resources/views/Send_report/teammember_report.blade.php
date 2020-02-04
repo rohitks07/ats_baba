@@ -1,7 +1,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include('include.emp_header')
 @include('include.emp_leftsidebar')
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 
 <script>
     $.ajaxSetup({
@@ -219,7 +219,7 @@
                                                                         <?php $username=$name;
                                                                             $user_id=$data_id; 
                                                                         ?>
-                                                                    <td><a href="{{url('team_members_view/excelexport/')}}/{{$data_id}}/{{$name}}/{{$item['week_date']}}"> <span></span> Import</a></td>
+                                                                    <td><a href="{{url('team_members_view/excelexport/daily')}}/{{$data_id}}/{{$name}}/{{$item['week_date']}}"> <span></span> Export In Excel</a></td>
 
                                                                 </tr>
 
@@ -290,6 +290,9 @@
                                                                     <th
                                                                         style="text-align:center;color:white;background-color:rgb(10, 153, 247);">
                                                                         Client Submittal </th>
+                                                                        <th
+                                                                        style="text-align:center;color:white;background-color:rgb(10, 153, 247);">
+                                                                        Action </th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -310,6 +313,11 @@
                                                                     <td style="text-align:center;color:blue;">
                                                                         <b>{{$item['client_submittal_monthly1']}}</b>
                                                                     </td>
+                                                                    <?php $username=$name;
+                                                                            $user_id=$data_id; 
+                                                                        ?>
+                                                                    <td><a href="{{url('team_members_view/excelexport/montly')}}/{{$data_id}}/{{$name}}/{{$item['month_week_one1']}}"> <span></span> Export In Excel</a></td>
+
                                                                 </tr>
 
                                                                 @endforeach

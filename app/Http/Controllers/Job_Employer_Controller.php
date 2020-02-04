@@ -1409,7 +1409,7 @@ class Job_Employer_Controller extends Controller
         $toReturn['candiate_extra_doc'] = Tbl_seeker_documents::where('seeker_ID', $id)->orderBy('ID', 'DESC')->get()->toArray();
 
         //   return $toReturn['candiate_extra_doc '];
-        $toReturn['job_list'] = tbl_post_jobs::get()->toArray();
+        $toReturn['job_list'] = tbl_post_jobs::orderBy('ID','DESC')->limit(100)->get()->toArray();
 
 
         return view('employer_submit_to_job')->with('toReturn', $toReturn);

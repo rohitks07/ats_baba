@@ -478,7 +478,8 @@ Route::get('admin/job_seekers_manage/advance_search', 'jobseekersmanageControlle
 Route::get('employer/notification_data/{id}', 'NotificationController@jon_noti');
 Route::any('employer/manageteammember/team_members_view/send_report/{id}/{name}', 'teammemberSendController@report_show');
 Route::post('teammember/send_report', 'teammemberSendController@send_report');
-Route::get('team_members_view/excelexport/{id}/{name}/{date}','Import_Controller@exportclientsubmittal');
+Route::get('team_members_view/excelexport/daily/{id}/{name}/{date}','Import_Controller@exportclientsubmittaldaily');
+Route::get('team_members_view/excelexport/montly/{id}/{name}/{date}','Import_Controller@exportclientsubmittalmontly');
 
 
 //new
