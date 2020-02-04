@@ -412,7 +412,7 @@
                                         </div>
                                         <hr>
                                         <div align="center">
-                                            <input type="checkbox" onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required"> &nbsp;&nbsp;&nbsp; Experience Required ?
+                                            <input type="checkbox" required onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required"> &nbsp;&nbsp;&nbsp; Experience Required ?
 
                                             <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead style="    background: #317eeb;">
@@ -430,31 +430,31 @@
                                                     @if(@$toReturn['application_candidate_exp_required'])
                                                         @foreach($toReturn['application_candidate_exp_required'] as $key_exp=>$value)
                                                         <tr style="background: aliceblue;">
-                                                            <td><input type="text" name="experience[{{$key_exp}}][]" class="form-control"  value="{{@$value['skills']}}"/></td>
+                                                            <td><input type="text" name="experience[{{$key_exp}}][]" class="form-control" value="{{@$value['skills']}}"  /></td>
                                                             <td><input type="text" name="experience[{{$key_exp}}][]" class="form-control" value="{{@$value['yrs_of_exp']}}" /></td>
                                                             <td><input type="text" name="experience[{{$key_exp}}][]" class="form-control" value="{{@$value['expertise_level']}}" /></td>
                                                         </tr>
                                                         @endforeach
                                                     @endif
                                                         <tr style="background: aliceblue;">
-                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" id="skillb"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" id="year2" maxlength="2"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" id="expertiselevy" maxlength="2"/></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" id="skillc"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" id="year3" maxlength="2"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" id="expertiselevx" maxlength="2"/></td>
                                                         </tr>
                                                         <tr style="background: aliceblue;">
-                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" id="skilld"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" id="year4" maxlength="2"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" id="expertiselevw" maxlength="2"/></td>
                                                         </tr>
                                                         <tr style="background: aliceblue;">
-                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" id="skille"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" id="year5" maxlength="2"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" id="expertiselevv" maxlength="2"/></td>
                                                         </tr>
 
                                                 </tbody>
@@ -483,47 +483,47 @@
                                                     @foreach($toReturn['application_candidate_reference'] as $key_ref=>$value)
                                                         <tr style="background: aliceblue;">
                                                             <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control"  value="{{@$value['fullname']}}"/></td>
-                                                            <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control"  value="{{@$value['officialEmail']}}"/></td>
+                                                            <td><input type="email" name="reference[{{$key_ref}}][]" class="form-control"  value="{{@$value['officialEmail']}}"/></td>
                                                             <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control" value="{{@$value['designation']}}" /></td>
-                                                            <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control"  value="{{@$value['clientName']}}"/></td>
+                                                            <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control"  value="{{@$value['clientName']}}" /></td>
                                                             <td><input type="text" name="reference[{{$key_ref}}][]" class="form-control" value="{{@$value['location']}}" /></td>
                                                         </tr>
                                                     @endforeach
                                                 @endif
                                                         <tr>
-                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]" class="form-control"/></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]" class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]" class="form-control" id="full_name2"/></td>
+                                                            <td><input type ="email" name="reference[{{$key_ref+1}}][]" class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" id="designation2"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" id="client_name2"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+1}}][]"class="form-control" id="location2"/></td>
                                                         </tr>
                                                         <tr style="background: aliceblue;">
-                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" id="full_name3"/></td>
+                                                            <td><input type ="email" name="reference[{{$key_ref+2}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" id="designation3"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" id="client_name3"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+2}}][]"class="form-control" id="location3"/></td>
                                                         </tr>
                                                         <tr style="background: aliceblue;">
-                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+4}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" id="full_name4"/></td>
+                                                            <td><input type ="email" name="reference[{{$key_ref+3}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" id="designation4"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+3}}][]"class="form-control" id="client_name4"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+4}}][]"class="form-control" id="location4"/></td>
                                                         </tr>
                                                         <tr style="background: aliceblue;">
-                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
-                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" id="full_name5"/></td>
+                                                            <td><input type ="email" name="reference[{{$key_ref+5}}][]"class="form-control" /></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" id="designation5"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" id="client_name5"/></td>
+                                                            <td><input type ="text" name="reference[{{$key_ref+5}}][]"class="form-control" id="location5"/></td>
                                                         </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <hr>
                                         <div align="center">
-                                            <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
+                                            <input type="checkbox"  required onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
                                             <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
@@ -539,7 +539,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name"  value="{{@$toReturn['application_emp_details']->company_name}}"  /></td>
+                                                        <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name"  value="{{@$toReturn['application_emp_details']->company_name}}" id="company_name" /><span id="company_name_detail">Please enter valid name</span></td>
                                                         <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  value="{{@$toReturn['application_emp_details']->email_Id}}"  /></td>
                                                         <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  value="{{@$toReturn['application_emp_details']->employer_name}}"  /></td>
                                                         <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  value="{{@$toReturn['application_emp_details']->phone_number}}"  ></td>
@@ -721,6 +721,8 @@
         $("#expectedrate_error").hide();
         $("#expectedrate_error1").hide();
         $("#passportno_error").hide();
+        // $("#company_name_detail").hide();
+
         var err_email_to = true;
         var err_email_cc = true;
         var err_email_bcc = true;
@@ -743,6 +745,7 @@
         var err_linkedinid = true;
         var err_expectedrate = true;
         var err_expectedrate1 = true;
+        // var err_companyname = true;
         //validate email to
         $("#email_to").keyup(function() {
             var var_tmp = $("#email_to").val();
@@ -1169,6 +1172,7 @@
             check_passportno();
             check_qual_with_uni();
             check_expectedrate();
+            check_companyname();
             // check if error occured | True <=> to return true/ submit | false <=> stay on same form, error occured
             if ((err_email_to == true) && (err_email_cc == true) && (err_email_bcc == true) && (err_subject == true) && (err_fullname == true) && (err_phone_primart == true) && (err_condidate_email_id == true) && (err_current_location == true) && (err_us_visa_status == true) && (err_visaexpiry == true) && (err_last_for_digit_ssn == true) && (err_passportno == true) && (err_dob == true) && (err_qual_with_uni == true) && (err_expectedrate == true) && (err_expectedrate1 == true)) {
                 return true; //ok
@@ -1178,6 +1182,187 @@
         });
     });
 </script>
+
+
+<script>
+// validation of experience check box
+
+$('#skillb').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#year2').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+$('#expertiselevy').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#skillc').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#year3').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+$('#expertiselevx').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#skilld').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#year4').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+$('#expertiselevw').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#skille').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#year5').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+$('#expertiselevv').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+// validation of reference check box
+
+$('#full_name2').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#designation2').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#client_name2').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#location2').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#full_name3').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#designation3').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#client_name3').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#location3').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#full_name4').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#designation4').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#client_name4').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#location4').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#full_name5').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#designation5').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#client_name5').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#location5').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+</script>
+
+
+ <!-- <script>
+
+$("#company_name").blur(function() {
+            check_companyname();
+        });
+
+        function check_companyname() {
+            var companyname_val = $("#company_name").val();
+
+            var regexOnlyText = /^[a-zA-Z ]+$/;
+            if (companyname_val == "" || regexOnlyText.test(companyname_val) != true) {
+                $("#company_name_detail").show();
+                $("#company_name_detail").focus();
+                $("#company_name_detail").css("color", "red");
+                err_companyname = false;
+                return false;
+            } else {
+                err_companyname = true;
+                $("#company_name_detail").hide();
+            }
+
+        }
+
+
+</script>  -->
+
 <script>
     function jobtype() {
         temp = document.getElementById('expectedrate1').value;
