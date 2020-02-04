@@ -13,8 +13,13 @@
 
 //Login page 
 // Auth::routes();
-
-Route::get('/', 'Login_Controller@index');
+Route::get('/',function(){
+    return view('login.employer_login');
+});
+Route::get('employer_reset_password',function(){
+    return view('login.employer_reset_password');
+});
+Route::get('/login', 'Login_Controller@index');
 Route::post('login', 'Login_Controller@login_page');
 Route::get('forget_password', 'Login_Controller@forget_password');
 Route::post('email_link', 'Login_Controller@send_mail');

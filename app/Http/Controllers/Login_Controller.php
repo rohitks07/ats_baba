@@ -261,13 +261,12 @@ class Login_Controller extends Controller{
 
             else{
             	$error="NOT LOGIN !!!!";
-            	return view('employee_admin')->with('error',$error);
+            	return view('login.employer_login')->with('error',$error);
             }
-        
         }
         else{
             	$error="Email Id Not Found !!!!";
-        	return view('employee_admin')->with('error',$error);
+            	return view('login.employer_login')->with('error',$error);
         }
     }
     
