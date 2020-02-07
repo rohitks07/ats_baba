@@ -16,7 +16,7 @@
                         <div class="card-header" style="background-color:#317eeb;">
                             <h3 class="card-title" style="color:#fff;text-transform: none; font-size:large">Edit
                                 Education
-                                <a href="{{url('employer/employer_edit_education/')}}"></a>
+                                <a href="{{url('employer/search_resume')}}"><button type="button" class="btn btn-success" style="float: right;">Back</button></a>
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"
                                     style="float: right;">Add Education</button></h3>
 
@@ -63,7 +63,7 @@
                                                             title="Edit"></i></a>
                                                     <a
                                                         href="{{url('employer/employer_edit_education/del/'.$id.'/'.$seekerid)}}"><i
-                                                            class="fa fa-trash-o" aria-hidden="true"
+                                                            class="fa fa-trash-o" aria-hidden="true" onclick="return confirm('Are you sure you want to delete this item?');"
                                                             style="color:#317eeb;" title="Delete"></i></a>
                                                 </td>
                                                 <!-- Model Update -->
@@ -94,7 +94,7 @@
                                                                                 id="seeker_ID" name="seeker_ID"
                                                                                 value="{{$education['seeker_ID']}}">
                                                                             <input class="form-control" type="text"
-                                                                                id="degree_title" name="degree_title"
+                                                                                id="degree" name="degree_title"
                                                                                 placeholder="Degree"
                                                                                 value="{{$education['degree_title']}}">
                                                                         </div>
@@ -104,7 +104,7 @@
                                                                             class="control-label col-lg-4">Institute</label>
                                                                         <div class="col-lg-8">
                                                                             <input class="form-control " type="text"
-                                                                                id="institude" name="institude"
+                                                                                id="institute" name="institude"
                                                                                 placeholder="Institute"
                                                                                 value="{{$education['institude']}}">
                                                                         </div>
@@ -114,7 +114,7 @@
                                                                             class="control-label col-lg-4">City</label>
                                                                         <div class="col-lg-8">
                                                                             <input class="form-control " type="text"
-                                                                                id="city" name="city" placeholder="City"
+                                                                                id="city_name" name="city" placeholder="City"
                                                                                 value="{{$education['city']}}" required>
                                                                             <span id="cityerror"
                                                                                 class="text-danger"></span>
@@ -169,7 +169,7 @@
                                                                             Completion</label>
                                                                         <div class="col-lg-8">
                                                                             <input class="form-control " type="text"
-                                                                                id="completion_year"
+                                                                                id="year_completion"
                                                                                 name="completion_year"
                                                                                 placeholder="Year of Completion"
                                                                                 value="{{$education['completion_year']}}"
@@ -195,9 +195,9 @@
 
 
                                             </tr>
-                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
+                                              <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+                                                 <div class="modal-dialog" role="document"> 
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">Add Education
@@ -222,7 +222,7 @@
                                                                             id="seeker_ID" name="seeker_ID"
                                                                             value="{{$education['seeker_ID']}}">
                                                                         <input class="form-control" type="text"
-                                                                            id="degree_title" name="degree_title"
+                                                                            id="degree" name="degree_title"
                                                                             placeholder="Degree" value="" required>
                                                                         <span id="degree_titleerror"
                                                                             class="text-danger"></span>
@@ -233,7 +233,7 @@
                                                                         class="control-label col-lg-4">Institute</label>
                                                                     <div class="col-lg-8">
                                                                         <input class="form-control " type="text"
-                                                                            id="institude" name="institude"
+                                                                            id="institute" name="institude"
                                                                             placeholder="Institute" value="" required>
                                                                         <span id="institudeerror"
                                                                             class="text-danger"></span>
@@ -244,7 +244,7 @@
                                                                         class="control-label col-lg-4">City</label>
                                                                     <div class="col-lg-8">
                                                                         <input class="form-control " type="text"
-                                                                            id="city" name="city" placeholder="City"
+                                                                            id="city_name" name="city" placeholder="City"
                                                                             value="" required>
                                                                         <span id="cityerror" class="text-danger"></span>
                                                                     </div>
@@ -302,7 +302,7 @@
                                                                         Completion</label>
                                                                     <div class="col-lg-8">
                                                                         <input class="form-control " type="text"
-                                                                            id="completion_year" name="completion_year"
+                                                                            id="year_completion" name="completion_year"
                                                                             placeholder="Year of Completion" value=""
                                                                             required>
                                                                     </div>
@@ -335,11 +335,6 @@
         <!--container-fluid-->
     </div>
     <!--content-->
-
-
-
-
-
 
 
 
@@ -385,5 +380,32 @@
         // }
 
     </script>
+
+<script>
+
+$('#degree').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#institute').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+$('#city_name').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+);
+
+
+$('#year_completion').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+</script>
+
+
 
     </html>
