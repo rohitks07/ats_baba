@@ -326,61 +326,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModal{{$posted_job['ID']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title mt-0" id="myLargeModalLabel">Submit To Job</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header"> </div>
-                                <h3 class="card-title"></h3>
-                                <form method="post" action="{{url('posted_jobs/assign')}}" id="FormValidation" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="jobID" value="{{$id}}">
-                                    <div class="card-body">
-                                       
-                                        <div class="row">
-                                            <div class=" col-12">
-                                                <table id="datatable" class="table  table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: auto;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Select</th>
-                                                            <th>Name</th>
-                                                            <th>Age</th>
-                                                            <th>Visa</th>
-                                                            <th>Exp.(Year)</th>
-                                                            <th>Skills</th>
-                                                            <th>Address</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                       
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                            </div>
-                        </div>
-                    </div> <!-- End Row -->
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
-                </div>
-            </div>
-            </form>
-        </div>
-    </div>
+    
     <script>
         var resizefunc = [];
         $(document).ready(function () {
