@@ -49,7 +49,7 @@ class CandidateforwardController extends Controller
         // return $Request->reference[0][0];
 
 
-        // return $Request->reference;
+        return $Request->reference;
         // return $Request->experience;
         $update_resume = $Request->update_Resume_file;
         $experience_list = $Request->experience;

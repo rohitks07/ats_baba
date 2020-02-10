@@ -268,7 +268,7 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="dob">
                                                     <label class="form-label">D O B<span class="red"></span></label>
-                                                    <input type="date" class="form-control" id="dob" placeholder="Date Of Birth" name="dob"   />
+                                                    <input type="date" class="form-control"  placeholder="Date Of Birth" name="dob"   />
                                                     <span id="dob_error">Please enter valid DOB</span>
                                                 </div>
                                                 <!--end of col-->
@@ -438,22 +438,22 @@
                                                     @endif
                                                         <tr style="background: aliceblue;">
                                                             <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" id="skillb"/></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" id="year2" maxlength="2"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control"  /></td>
                                                             <td><input type ="text" name="experience[{{$key_exp+1}}][]" class="form-control" id="expertiselevy" maxlength="2"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" id="skillc"/></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" id="year3" maxlength="2"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control"  /></td>
                                                             <td><input type ="text" name="experience[{{$key_exp+2}}][]" class="form-control" id="expertiselevx" maxlength="2"/></td>
                                                         </tr>
                                                         <tr style="background: aliceblue;">
                                                             <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" id="skilld"/></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" id="year4" maxlength="2"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control"/></td>
                                                             <td><input type ="text" name="experience[{{$key_exp+3}}][]" class="form-control" id="expertiselevw" maxlength="2"/></td>
                                                         </tr>
                                                         <tr style="background: aliceblue;">
                                                             <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" id="skille"/></td>
-                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" id="year5" maxlength="2"/></td>
+                                                            <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" /></td>
                                                             <td><input type ="text" name="experience[{{$key_exp+4}}][]" class="form-control" id="expertiselevv" maxlength="2"/></td>
                                                         </tr>
 
@@ -523,7 +523,7 @@
                                         </div>
                                         <hr>
                                         <div align="center">
-                                            <input type="checkbox"  required onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
+                                            <input type="checkbox"   onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
                                             <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
@@ -539,7 +539,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name"  value="{{@$toReturn['application_emp_details']->company_name}}" id="company_name" /><span id="company_name_detail">Please enter valid name</span></td>
+                                                        <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name"  value="{{@$toReturn['application_emp_details']->company_name}}" id="company_name" /><span id="company_name_detail" style="display: none;">Please enter valid name</span></td>
                                                         <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  value="{{@$toReturn['application_emp_details']->email_Id}}"  /></td>
                                                         <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  value="{{@$toReturn['application_emp_details']->employer_name}}"  /></td>
                                                         <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  value="{{@$toReturn['application_emp_details']->phone_number}}"  ></td>
