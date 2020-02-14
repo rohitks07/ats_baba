@@ -64,7 +64,7 @@
         }
 
         .carousel-btns{
-            margin-bottom:-60px;
+            margin-bottom:0px;
         }
 
         /* .col-md-5 {
@@ -93,15 +93,25 @@
     width: 100vw;
     height: 100vh;
     background: #00356B;
+    margin-top: -2em;
+    overflow: hidden;
 }
 #particle {
-    background: linear-gradient(to top, rgb(0, 60, 81),rgb(1, 96, 128), #3F51B5);
+    background: linear-gradient(to top, #03A9F4,#673AB7, #3F51B5);
+  position:fixed;
   position:fixed;
   top:0;
   right:0;
   bottom:0;
   left:0;
   z-index:0; 
+}
+
+p {
+    font-size: 14px;
+    letter-spacing: 0;
+    margin: 0 0 16px;
+    text-align: center;
 }
 #overlay {
   position: relative;
@@ -119,6 +129,16 @@
     color: inherit;
   font-weight:100;
 }
+@media(max-width: 500px){
+    #particles-js{
+            overflow: unset;
+        }
+    }
+    @media(max-width: 780px){
+    #particles-js{
+            overflow: unset;
+        }
+    }
     </style>
 </head>
 
@@ -181,13 +201,13 @@
                                         <br>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="rememberPass">
-                                                  <span class="mdl-switch__label">Remember</span>
+                                                  <span class="mdl-switch__label">Remember Me</span>
                                         <input type="checkbox" id="rememberPass" class="mdl-switch__input">
                                       
                                         </label>
 
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style=" text-align:right;">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <a href="{{url('employer_reset_password')}}">Reset Password</a>
                                         </div>
                                     </div>
@@ -216,27 +236,40 @@
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
                                 <img class="img-responsive center-block" src="{{url('public/login/img/payroll.png')}}" alt="step1">
-                               
+                                <div style="padding: 2em;">
+                                    <p style=" color:#fff; text-align: center;">Payroll Baba is a comprehensive payroll software that maintains salary information and settings, taking inputs from various sources and produces 100% accurate payroll.</p>
+                                </div>
                             </div>
                             <div class="item">
                                 <img class="img-responsive center-block" src="{{url('public/login/img/crm.png')}}" alt="step2">
-                                
+                                <div style="padding: 2em;">
+                                    <p style=" color:#fff; text-align: center;">Best Automated CRM Software for Business Growth. Get started in minutes below — it’s 100% free.</p>
+                                </div> 
                             </div>
-                            <div class="item">
+                            <div class="item" style="background: #eda0c4;">
                                 <img class="img-responsive center-block" src="{{url('public/login/img/recruitment.png')}}" alt="step3">
+                                <div style="padding: 2em;">
+                                    <p style=" color:#fff; text-align: center;margin-top: -3em;">Modern Recruiting Tools To Automate The Hiring Process By Making It Easier For Your Team To Share, View And Collaborate On Your Candidate Pipeline.</p>
+                                </div>
                                 
                             </div>
-                            <div class="item">
+                            <div class="item" style="background: #0ba5a3;">
                                 <img class="img-responsive center-block" src="{{url('public/login/img/lms.png')}}" alt="step4">
-                               
+                                <div style="padding: 2em;">
+                                    <p style=" color:#fff; text-align: center;margin-top: -3em;">Baba Software is the powerfully simple way for teams to learn and deliver even bigger result. With Baba, you can up skill your teams into modern roles and improve workflow efficiency.</p>
+                                </div>
                             </div>
-                            <div class="item">
+                            <div class="item" style="background: #a3ca71;">
                                 <img class="img-responsive center-block" src="{{url('public/login/img/ar.png')}}" alt="step5">
-                                
+                                <div style="padding: 2em;">
+                                    <p style=" color:#fff; text-align: center;margin-top: -3em;">Baba Software is a provider of cloud-based Accounts receivable software.</p>
+                                </div>
                             </div>
-                            <div class="item">
-                                <img class="img-responsive center-block" src="{{url('public/login/img/sales.png')}}" alt="step6">
-                                
+                            <div class="item" style="background: #fde7f4;">
+                                <img class="img-responsive center-block" src="{{url('public/login/img/sales1.png')}}" alt="step6">
+                                <div style="padding: 2em;">
+                                    <p style=" color:#000; text-align: center;margin-top: -3em;">A Simple SALES Built To Acquire, Engage And Retain Customers. Get Started In Minutes Below — It’s 100% Free.</p>
+                                </div>
                             </div>
                         </div>
                         <!-- Indicators -->
@@ -256,7 +289,7 @@
             </div>
             <!--center-block-->
 
-            <div class="col-md-12 text-center" style="color:rgb(250, 248, 248); padding-top:40px; ">
+            <div class="col-md-12 text-center" style="color:rgb(250, 248, 248); padding-top:50px;">
                 ATS © 2019 - 2020 BABA Software. All rights reserved.
             </div>
         </div>

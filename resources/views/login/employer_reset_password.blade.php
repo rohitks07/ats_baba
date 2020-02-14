@@ -94,7 +94,7 @@
             background: #00356B;
         }
         #particle {
-            background: linear-gradient(to top, rgb(0, 60, 81),rgb(1, 96, 128), rgb(1, 129, 171));
+            background: linear-gradient(to top, #03A9F4,#673AB7, #3F51B5);
         position:fixed;
         top:0;
         right:0;
@@ -151,7 +151,7 @@
                                 <div class="col-lg-12 col-lg-offset-1 col-lg-offset-right-1 col-md-12 col-md-offset-1 col-md-offset-right-1 col-sm-12 col-xs-12 pull-right ">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="email" id="emailAddress">
-                                        <label class="mdl-textfield__label" for="emailAddress">Email Address</label>
+                                        <label class="mdl-textfield__label" for="" placeholder="Email Address">Email Address</label>
                                     </div>
                                 </div>
 
