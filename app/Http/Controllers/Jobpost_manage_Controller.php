@@ -39,7 +39,8 @@ class Jobpost_manage_Controller extends Controller
         return redirect('admin/job_post_manage');
 
     }
-    public function update_view($id=""){
+    public function update_view($id="")
+    {
         $value=tbl_post_job::where('ID',$id)->get()->toArray();
         $for_group=tbl_post_job::where('ID',$id)->get('for_group')->toArray();
         $industry_id=tbl_post_job::where('ID',$id)->get('industry_ID')->toArray();
@@ -75,9 +76,9 @@ class Jobpost_manage_Controller extends Controller
                 'industry_ID'=>$Request->industry,
                 'experience'=>$Request->experience,
                 'job_mode'=>$Request->job_type,
-                'country'=>$Request->country,
-                'state'=>$Request->state,
-                'city'=>$Request->city,
+                'country'=>$Request->country_name,
+                'state'=>$Request->state_name,
+                'city'=>$Request->city_name,
                 'pay_min'=>$value_one,
                 'pay_max'=>$value_two,
     
@@ -93,9 +94,9 @@ class Jobpost_manage_Controller extends Controller
                 'industry_ID'=>$Request->industry,
                 'experience'=>$Request->experience,
                 'job_mode'=>$Request->job_type,
-                'country'=>$Request->country,
-                'state'=>$Request->state,
-                'city'=>$Request->city_op,
+                'country'=>$Request->country_name,
+                'state'=>$Request->state_name,
+                'city'=>$Request->city_name,
                 'pay_min'=>$value_one,
                 'pay_max'=>$value_two,
     

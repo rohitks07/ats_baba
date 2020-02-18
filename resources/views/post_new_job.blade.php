@@ -254,14 +254,53 @@
 
                                         <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
                                             <div id="select_city">
-                                                <select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;margin-left: -35px;" required>
+                                                <select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;margin-left: -35px;" required>
                                                     <option value="" selected>Select City </option>
                                                 </select>
                                                 <br>
                                                 <span id="citycheck">Please choose Your Location</span>
                                             </div>
                                         </div>
-                                        <input type="checkbox" class="" id="myCheck" onclick="mycity()" style="width:20px;height:20px;">
+
+                                        
+                                        <div class="" style="padding:5px 15px; border:1px solid #bbb8b8;border-radius:3px; margin-bottom:10px;">
+                                            <table class="" style="width:100%;">
+                                               <tbody id="exp_detail">
+                                                 <tr>
+                                                 <td width="">
+                                                     <select name="country_name[]" class="form-control country_ids" placeholder="" style="width: 100%; border: 1px solid #bbb8b8;">
+                                                       <option value="">{{$country_name}}</option>
+                                                            @foreach($toReturn['countries'] as $country)
+                                                       <option value="{{$country['country_id']}}">{{ $country['country_name'] }}
+                                                          </option>
+                                                            @endforeach
+                                                      </select>
+                                                  </td>
+                                                  <td width="160px">
+                                                   <select class="form-control state_ids" name="state_name[]"  style="width: 100%; border: 1px solid #bbb8b8;">
+                                                    <option value="">select state</option>
+                                                      </select>
+                                                      </td>
+                                                      <td width="160px">
+                                                       <select  class="form-control city_ids" name="city_name[]" style="width: 100%; border: 1px solid #bbb8b8;">
+                                                            <option value="">select city</option>
+                                                           </select>
+                                                             </td>
+                                                         <td width="55px"></td>
+                                                         </tr>
+                                                       </tbody>
+                                                       <tbody>
+                                                          <tr>
+                                                           <td colspan="4" style="text-align: left;"><button type="button" id="btnAdd_Exp" class="btn btn-primary" >Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                                                            </tr>
+                                                           </tbody>
+                                                          </table>
+                                                       </div>
+       
+
+
+                                       
+                                      <input type="checkbox" class="" id="myCheck" onclick="mycity()" style="width:20px;height:20px;">
                                         <label id="city_label" class="control-label col-lg-4">Enter City if not
                                             present</label>
 
@@ -272,6 +311,7 @@
                                         </div>
 
                                     </div>
+                     
                                     <!--end of location-->
 
                                     <!--Job Type-->
@@ -1265,4 +1305,89 @@
             // }
         }
     </script>
+
+
+<script>
+    $(document).ready(function() {
+        var i = 1;
+        $('#btnAdd_Exp').click(function(){
+            i++;
+            var data2 = `<tr>
+                            <td>
+                                <select name="country_name[]" class="form-control country_ids" placeholder="" style="width: 100%; border: 1px solid #bbb8b8;">
+                                    <option value="">{{$country_name}}</option>
+                                    @foreach($toReturn['countries'] as $country)
+                                        <option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control state_ids" name="state_name[]" style="width: 100%; border: 1px solid #bbb8b8;">
+                                    <option value="">select state</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select  class="form-control city_ids" name="city_name[]" style="width: 100%; border: 1px solid #bbb8b8;">
+                                    <option value="">select city</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="button" id="btnRemove" class="btn btn-primary btn_remove"><i class="fa fa-trash"></i></button>	
+                            </td>
+                        </tr>`;
+
+           $('#exp_detail').append(data2);
+        });
+    });
+    $(document).on('click', '.btn_remove', function() {
+        $(this).closest('tr').remove();
+    });
+</script> 
+<script>
+    $(".delete_doc").click(function(e) {
+        $("#update_resume").css("display", "none");
+    });
+</script>
+ 
+
+
+<script type="text/javascript">
+    $("#exp_detail").on("change", ".country_ids", function(e) {
+        var tr = $(this).closest("tr"); // getting its parent "tr"
+        $(tr).find('.state_ids').empty();
+        var country_id = e.target.value;
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/state/")}}' + "/" + country_id,
+            success: function(data) {
+                console.log(data);
+                $.each(data, function(index, value) {
+                    $(tr).find('.state_ids').append("<option value=" + '"' + value.state_id + '"' +
+                        "selected>" + value.state_name + "</option>");
+                       
+                });
+            },
+
+         });
+    });
+
+    $("#exp_detail").on("change", ".state_ids", function(e) {
+        var tr = $(this).closest("tr"); // getting its parent "tr"
+        $(tr).find('.city_ids').empty();
+        var state_id = e.target.value;
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/city/")}}' + "/" + state_id,
+            success: function(data) {
+                console.log(data);
+                $.each(data, function(index, value) {
+                    $(tr).find('.city_ids').append("<option value=" + '"' + value.city_id + '"' +
+                        "selected>" + value.city_name + "</option>");
+                });
+
+            },
+        });
+    });
+
+</script> 
     </body>

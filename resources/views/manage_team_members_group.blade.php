@@ -118,7 +118,7 @@
                                                 	$id=$team_member_type->type_ID;
                                                 	?>
                                                     <td class="actions">
-                                                        <a href="" data-toggle="modal" data-target="#edit_model_type" class="on-default edit-row" data-toggle="tooltip" data-type_name="{{$team_member_type->type_name}}" data-type_id="{{$team_member_type->type_ID}}" data-placement="top" title="" data-original-title="Edit">
+                                                        <a href="{{url('employer/manageteammember/add/edit/'.$id)}}" data-toggle="modal" data-target="#edit_model_type" class="on-default edit-row" data-toggle="tooltip" data-type_name="{{$team_member_type->type_name}}" data-type_id="{{$team_member_type->type_ID}}" data-placement="top" title="" data-original-title="Edit">
                                                             <button type="button" class="btn-round-xs btn-xs" style="background-color:#606060; color:#fff">Edit</button>
                                                         </a>
                                                         <a href="{{url('employer/manageteammember/add/delete/'.$id)}}" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
@@ -198,8 +198,8 @@ console.log("document is ready");
 
     });  
     </script>
+
     <script >
-    
     $('#edit_model_type').on('show.bs.modal' , function (event){
 
         var button = $(event.relatedTarget)
@@ -210,8 +210,6 @@ console.log("document is ready");
 
         modal.find('.modal-body #type_name').val(type_name);
         modal.find('.modal-body #type_id').val(type_id);
-
     })
-
-    </script>
+   </script>
 </body>

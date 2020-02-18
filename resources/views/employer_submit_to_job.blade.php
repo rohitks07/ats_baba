@@ -208,7 +208,7 @@
                                     style="color:rgb(255, 255, 255);text-transform: none; font-size:large; font-weight:100;float:left;text-transform: uppercase;">Published
                                     Jobs</h3>
                                     <button class="btn btn-light mt-2 ml-5" type="button" title="Reload Jobs" style="border-radius: 50px; padding:15px;"
-                                                    id="button-addon2" onclick="location.href='{{url('employer/submit_candidate_detail/'.$toReturn['personal']->id)}}';"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+                                                    id="button-addon2" onclick="location.href='{{url('employer/submit_candidate_detail/'.$toReturn['personal']->id)}};"><i class="fa fa-repeat" aria-hidden="true"></i></button>
                                     
                                         <div class="input-group mb-3 mt-2" style="float:right;width:700px;">
                                             <input type="text" class="form-control" id="value_text"
@@ -278,52 +278,52 @@
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="experience[0][]" class="form-control" id="next1"/></td>
                                                         <td><input type="text" name="experience[0][]" class="form-control" id="nexta" maxlength="2"/></td>
-                                                        <td><input type="text" name="experience[0][]" class="form-control" id="nextw"/></td>
+                                                        <td><input type="text" name="experience[0][]" class="form-control" id="nextw"  maxlength="2"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="text" name="experience[1][]" class="form-control" id="next2" /></td>
                                                         <td><input type="text" name="experience[1][]" class="form-control"  id="nextb" maxlength="2"/></td>
-                                                        <td><input type="text" name="experience[1][]" class="form-control" id="nextx"/></td>
+                                                        <td><input type="text" name="experience[1][]" class="form-control" id="nextx"  maxlength="2"/></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="experience[2][]" class="form-control" id="next3"/></td>
                                                         <td><input type="text" name="experience[2][]" class="form-control" id="nextc" maxlength="2"/></td>
-                                                        <td><input type="text" name="experience[2][]" class="form-control" id="nexty"/></td>
+                                                        <td><input type="text" name="experience[2][]" class="form-control" id="nexty"  maxlength="2"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="text" name="experience[3][]" class="form-control" id="next4"/></td>
                                                         <td><input type="text" name="experience[3][]" class="form-control" id="nextd" maxlength="2"/></td>
-                                                        <td><input type="text" name="experience[3][]" class="form-control" id="nextz"/></td>
+                                                        <td><input type="text" name="experience[3][]" class="form-control" id="nextz"  maxlength="2"/></td>
                                                     </tr>
                                                      <tr style="background: aliceblue;">
                                                         <td><input type="text" name="experience[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[4][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[4][]" class="form-control"  maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[4][]" class="form-control"  maxlength="2"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="text" name="experience[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[5][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[5][]" class="form-control"  maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[5][]" class="form-control"  maxlength="2"/></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="experience[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[6][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[6][]" class="form-control"  maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[6][]" class="form-control"  maxlength="2"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="text" name="experience[7][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[7][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[7][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[7][]" class="form-control"  maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[7][]" class="form-control"  maxlength="2"/></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="experience[8][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[8][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[8][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[8][]" class="form-control"  maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[8][]" class="form-control"  maxlength="2"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="text" name="experience[9][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[9][]" class="form-control" /></td>
-                                                        <td><input type="text" name="experience[9][]" class="form-control" /></td>
+                                                        <td><input type="text" name="experience[9][]" class="form-control"  maxlength="2"/></td>
+                                                        <td><input type="text" name="experience[9][]" class="form-control"  maxlength="2"/></td>
                                                     </tr> 
                                                 </tbody>
                                             </table>
@@ -348,56 +348,56 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><input type="text" name="reference[0][]" class="form-control" id="test" /></td>
-                                                        <td><input type="text" name="reference[0][]" class="form-control" id="test1"/></td>
+                                                        <td><input type="email" name="reference[0][]" class="form-control" id="test1"/></td>
                                                         <td><input type="text" name="reference[0][]" class="form-control" id="test2"/></td>
                                                         <td><input type="text" name="reference[0][]" class="form-control" id="test3"/></td>
                                                         <td><input type="text" name="reference[0][]" class="form-control" id="test4"/></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="reference[1][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[1][]" class="form-control" /></td>
+                                                        <td><input type="email" name="reference[1][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[1][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[1][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[1][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="text" name="reference[2][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[2][]" class="form-control" /></td>
+                                                        <td><input type="email" name="reference[2][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[2][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[2][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[2][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="reference[3][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[3][]" class="form-control" /></td>
+                                                        <td><input type="email" name="reference[3][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[3][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[3][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[3][]" class="form-control" /></td>
                                                     </tr>
                                                      <tr>
                                                         <td><input type="text" name="reference[4][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[4][]" class="form-control" /></td>
+                                                        <td><input type="email" name="reference[4][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[4][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[4][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[4][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="reference[5][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[5][]" class="form-control" /></td>
+                                                        <td><input type="email" name="reference[5][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[5][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[5][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[5][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="text" name="reference[6][]" class="form-control" /></td>
-                                                        <td><input type="text" name="reference[6][]" class="form-control" /></td>
+                                                        <td><input type="email" name="reference[6][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[6][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[6][]" class="form-control" /></td>
                                                         <td><input type="text" name="reference[6][]" class="form-control" /></td>
                                                     </tr>
                                                     <tr style="background: aliceblue;">
                                                         <td><input type="text" name="reference[7][]"class="form-control" /></td>
-                                                        <td><input type="text" name="reference[7][]"class="form-control" /></td>
+                                                        <td><input type="email" name="reference[7][]"class="form-control" /></td>
                                                         <td><input type="text" name="reference[7][]"class="form-control" /></td>
                                                         <td><input type="text" name="reference[7][]"class="form-control" /></td>
                                                         <td><input type="text" name="reference[7][]"class="form-control" /></td>
@@ -410,7 +410,7 @@
                                     </div>
                                     <hr>
                                     <div align="center">
-                                        <input type="checkbox" required onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
+                                        <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
                                         <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                             <thead>
                                                 <tr style="background: #317eeb;">
@@ -428,7 +428,7 @@
                                                 <tr>
                                                     <td><input type="text" name="Companyemp_detail"  class="form-control" id="first_name" placeholder="Company name" />
                                                     <p id="first_name_val"></p></td>
-                                                    <td><input type="text" name="Emailemp_detail" class="form-control"  placeholder="EmailId"/></td>
+                                                    <td><input type="email" name="Emailemp_detail" class="form-control"  placeholder="EmailId"/></td>
                                                     <td><input type="text" name="Employeremp_detail" id="last_name"  class="form-control" placeholder="Empolyer Name"  />
                                                     <p id="last_name_val"></p></td>
                                                     <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  ></td>

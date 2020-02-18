@@ -281,6 +281,9 @@
                                                 </div>
                                                 <!--end of col-->
 
+
+                                                  
+
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="Open_For_Relocation" checked>
                                                     <label class="form-label">Open For Relocation(Yes/No)<span class="red">*</span></label>
@@ -407,7 +410,7 @@
                                                 </div>
                                                 <!--end of col-->
 
-                                                <!--                                        </div> end of row  -->
+                                                <!--</div> end of row  -->
                                             </div>
                                         </div>
                                         <hr>

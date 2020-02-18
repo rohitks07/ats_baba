@@ -180,7 +180,7 @@
                                         <div class="form-group row">
                                             <label for="Subject" class="control-label col-lg-4">Email Content<span class="red">*</label>
                                             <div class="col-lg-6">
-                                                <textarea class="wysihtml5 form-control article-ckeditor" required  required placeholder="Message body" style="height: 200px" name="email_content" required></textarea>
+                                                <textarea class="wysihtml5 form-control article-ckeditor" placeholder="Message body" style="height: 200px" name="email_content" required></textarea>
                                             </div>
                                         </div>
                                         <div class="card-header bg-primary">
@@ -275,6 +275,15 @@
                                                 </div>
                                                 <!--end of col-->
 
+                                                  <!-- <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
+                                                    <input class="form-check-input chkbx" type="checkbox" name="param[]" checked value="qual_with_uni" checked>
+                                                    <label class="form-label">Passing Year<span class="red">*</span></label>
+                                                    <input type="text" class="form-control" id="completion_year" placeholder="Completion year" name="passing_year"  required />
+                                                    <span id="completion_year_error">Should not be blank</span>
+                                                </div> -->
+                                                <!--end of col-->   
+
+
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="Open_For_Relocation" checked>
                                                     <label class="form-label">Open For Relocation(Yes/No)<span class="red">*</span></label>
@@ -365,7 +374,7 @@
                                                 <span id="expectedrate_error1">Please enter valid rate</span> -->
                                                 <!-- </div>end of col -->
 
-                                                <div class="col-sm-1" id="dels" style="background-color:;">
+                                                <div class="col-sm-1" id="dels" >
 
                                                     <p id="wrong2" style="color:red;"></p>
 
@@ -373,7 +382,7 @@
                                                 <!--end of col-->
 
 
-                                                <div class="col-sm-1" id="dels" style="background-color:;">
+                                                <div class="col-sm-1" id="dels" >
 
                                                     <p id="wrong" style="color:red;"></p>
 
@@ -383,7 +392,7 @@
 
 
 
-                                                <div class="col-sm-1" id="dels" style="background-color:;">
+                                                <div class="col-sm-1" id="dels" >
 
                                                     <p id="chk" style="color:red;"></p>
 
@@ -407,7 +416,7 @@
                                         <div align="center">
                                             <input type="checkbox" onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required"> &nbsp;&nbsp;&nbsp; Experience Required ?
 
-                                            <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
+                                            <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead style="    background: #317eeb;">
                                                     <tr>
                                                         <th colspan="5">Experiences</th>
@@ -569,7 +578,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name" /></td>
-                                                        <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  /></td>
+                                                        <td><input type="email" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  /></td>
                                                         <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  /></td>
                                                         <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  ></td>
                                                         <td><input type="text" name="extenson" id="extenson" maxlength="12" class="form-control" placeholder="Extention"  ></td>
@@ -634,7 +643,7 @@
                                             </table>
                                         </div>
                                         <hr>
-                                        <center><button type="submit" class="btn btn-info" id="send">Send</button></center>
+                                        <center><button type="submit" class="btn btn-info" id="send_btn">Send</button></center>
                                     </div> <!-- .form -->
                                 </div> <!-- card-body -->
                             </div> <!-- card -->
@@ -1172,7 +1181,7 @@
         }
 
         // final submission
-        $("#send").click(function() {
+        $("#send_btn").click(function() {
             // when submit button clicked, validate
             check_email_to();
             check_email_cc();

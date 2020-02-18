@@ -54,6 +54,8 @@ use App\tbl_application_candidate_reference;
 use App\tbl_application_candidate_exp_required;
 use App\tbl_application_candidate_documents;
 use App\tbl_application_emp_details;
+use App\tbl_job_location;
+
 
 class Job_Employer_Controller extends Controller
 {
@@ -217,6 +219,7 @@ class Job_Employer_Controller extends Controller
 
     public function Add_to_post_job(Request $request)
     {
+        //  return $request;
         ini_set('memory_limit', '-1');
         // $jobs_list = tbl_post_jobs::where('job_code', 00000)->get()->toArray();
         // return $request->job_code;
@@ -237,8 +240,8 @@ class Job_Employer_Controller extends Controller
         $Add_to_post_job->dated       =  date('Y-m-d');
         $Add_to_post_job->job_visa_status =  implode(',', $request->visa);
         $Add_to_post_job->qualification  =  implode(',', $request->quali);
-        $con =  $request->country;
-        $sta =  $request->state;
+        $con =  $request->country_name;
+        $sta =  $request->state_name;
         $cit =  $request->city_name;
         $city_text = $request->city_text_name;
         $val_contries = countries::where('country_id', $con)->first('country_name');
@@ -279,6 +282,28 @@ class Job_Employer_Controller extends Controller
         $Add_to_post_job->save();
         $job_id = $Add_to_post_job->id;
         $job_code = $Add_to_post_job->job_code;
+        $country_names_array=$request->country_name;
+         
+            foreach($country_names_array as $key => $value){
+            
+
+               if($country_names_array!=""){
+                       $job_location = new tbl_job_location();
+                       $job_location->job_id         =$job_id;
+                       $job_location->employer_id    = Session::get('id');
+                       $job_location->owner_name     = $request->owner_name;
+                       $job_location->org_id         = Session::get('org_ID');
+                       $job_location->country        = $request->country_name[$key];
+                       $job_location->state          = $request->state_name[$key];
+                       $job_location->city           = $request->city_name[$key];
+
+                       $job_location->save();
+            }
+        
+            }
+            
+            
+
 
         //Add Notiofication
         // $notification=new Tbl_notification();
@@ -287,6 +312,7 @@ class Job_Employer_Controller extends Controller
         //   $user_user_id=implode(',',$user_list);
         //   echo $user_user_id;
         //   exit;
+
         $Notification = new Tbl_notification();
         $Notification->notification_service_id = $job_id;
         $Notification->service_type = "Post Job";
@@ -305,8 +331,13 @@ class Job_Employer_Controller extends Controller
         $Notification->save();
         Session::flash('success', 'Job Post Successfully');
         return redirect('employer/posted_jobs');
+            
+        
     }
-    public function editjob($id = "")
+
+
+ 
+    public function editjob(  $id ="" )
     {
         ini_set('memory_limit', '-1');
         $toReturn[] = array();
@@ -333,12 +364,15 @@ class Job_Employer_Controller extends Controller
         $toReturn['qualification']   = Tbl_qualifications::get()->toArray();
         $toReturn['visa_type'] = Tbl_visa_type::get()->toArray();
         // return $toReturn['post_job3'];
-        $toReturn['country_one'] = countries::where('country_name', $post_job1['country'])->get()->toArray();
-        $toReturn['state_one'] = states::where('state_name', $post_job2['state'])->get()->toArray();
-        $toReturn['city_one'] = cities::where('city_name', $post_job3['city'])->get()->toArray();
-        // return  $toReturn['country_one'];
+        $toReturn['country'] = countries::where('country_name', $post_job1['country_name'])->get()->toArray();
+        $toReturn['state'] = states::where('state_name', $post_job2['state_name'])->get()->toArray();
+        $toReturn['city'] = cities::where('city_name', $post_job3['city_name'])->get()->toArray();
+        //  return  $toReturn['country_one'];
+        $toReturn['countries']       = countries::get()->toArray();
 
+        $toReturn['job_location']=tbl_job_location::where('job_id',$id)->get();
 
+        // return $toReturn['job_location'];
         // return $toReturn['industries_name'];
         // return $toReturn['post_job'];
         // $toReturn['team_member_name']=tbl_team_member::where('ID',$toReturn['post_job']['industry_ID'])->first('industry_name');
@@ -346,14 +380,13 @@ class Job_Employer_Controller extends Controller
     }
 
 
-
     public function updatejob(Request $Request)
     {
         ini_set('memory_limit', '-1');
-        // return $Request;
+        //  return $Request;
         $con =  $Request->country;
         $sta =  $Request->state;
-        $cit =  $Request->city_name;
+        $cit =  $Request->city;
         $city_text =  $Request->city_text_name;
         $val_contries = countries::where('country_id', $con)->orWhere('country_name', $con)->first('country_name');
         $val_state = states::where('state_id', $sta)->orWhere('state_name', $sta)->first('state_name');
@@ -391,17 +424,66 @@ class Job_Employer_Controller extends Controller
             'for_group' => $Request->group_of_company
         );
         $select_payment = $Request->select_payment;
-        if ($select_payment == 'DOE') {
+          if($select_payment == 'DOE') {
             $job_detail['pay_min']  =  $select_payment;
             $job_detail['pay_max'] = $select_payment;
         } else {
             $payment_array = explode('-', $select_payment);
             $job_detail['pay_min']  =  $payment_array[0];
-            $job_detail['pay_max']      =  $payment_array[1];
+            $job_detail['pay_max']  =  $payment_array[1];
         }
 
+            $post_job = tbl_post_jobs::where('ID', $id)->update($job_detail);
 
-        $post_job = tbl_post_jobs::where('ID', $id)->update($job_detail);
+                
+            $country_names_array=$Request->country_name;
+            return $country_names_array;
+                           if($country_names_array!=""){
+         
+            foreach($country_names_array as $key => $value){
+            
+            $job_location =  tbl_job_location::where('job_id',$Request->$id)->update(array(
+                    //    job_id         =$job_id;
+                'employer_id'    => Session::get('id'),
+                'owner_name'     => $Request->owner_name,
+                'org_id'         => Session::get('org_ID'),
+                'country'        => $Request->country_name[$key],
+                'state'          => $Request->state_name[$key],
+                'city'           => $Request->city_name[$key],
+
+                      
+
+               ));
+            }
+        exit;
+            }
+            
+            
+
+            // $update_umo=umo::where('id',$Request->umo_id_update)->update(array(
+            //     'umo_name'=>$Request->umo_name,
+                
+            // ));
+         
+            
+//            $job_location_var =tbl_job_location::where('job_id',$Request->id)->update(array(
+           
+//              $job_location_var->employer_id=Session::get('id');
+//              $job_location_var->owner_name = $Request->owner_name;
+//              $job_location_var->org_id     = Session::get('org_ID');
+//              $job_location_var->country        = $Request->country_name[$key];
+//              $job_location_var->state          = $Request->state_name[$key];
+//              $job_location_var->city           = $Request->city_name[$key];
+
+//              $job_location_var->save();
+//           ));
+
+//   }
+
+ 
+       
+
+
         $Notification = new Tbl_notification();
         $Notification->notification_service_id = $id;
         $Notification->service_type = "Update Job";
@@ -419,10 +501,10 @@ class Job_Employer_Controller extends Controller
         $Notification->save();
 
         return redirect('employer/posted_jobs');
-    }
+}
 
+       public function view_my_posted_job()
 
-    public function view_my_posted_job()
     {
         // $toReturn[] = array();
         // $toReturn['user_type'] = Session::get('type');
@@ -1153,7 +1235,7 @@ class Job_Employer_Controller extends Controller
         $con =  $Request->country;
         $sta =  $Request->state;
         $cit =  $Request->city;
-        $val_contries = countries::where('country_id', $con)->orWhere('country_name', $con)->first('country_name');
+        $val_contries = countries::where('country_id', $con)->orWhere('country', $con)->first('country_name');
         $val_state = states::where('state_id', $sta)->orWhere('state_name', $sta)->first('state_name');
         $val_city = cities::where('city_id', $cit)->orWhere('city_name', $cit)->first('city_name');
         if ($Request->has('profile_image')) {

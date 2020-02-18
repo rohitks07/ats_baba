@@ -46,23 +46,23 @@ class CandidateforwardController extends Controller
     }
     public function forward_candidate(Request $Request)
     {
-        // return $Request->reference[0][0];
+        //    return $Request->reference[0][0];
 
 
-        return $Request->reference;
-        // return $Request->experience;
+            //   return $Request->reference;
+        //  return $Request->experience;
         $update_resume = $Request->update_Resume_file;
         $experience_list = $Request->experience;
         $reference_list = $Request->reference;
         $job_id = $Request->job_id;
         $seeker_id = $Request->seeker_id;
-        // return $seeker_id;
+        //   return $seeker_id;
         $seeker_detail = Tbl_job_seekers::where('ID', $seeker_id)->first();
         $seeker_edu_detail = tbl_seeker_academic::where('seeker_id', $seeker_id)->first();
         $seeker_otherdocuments1 = $seeker_detail->otherdocuments1;
         $seeker_otherdocuments2 = $seeker_detail->otherdocuments2;
 
-        // return $seeker_edu_detail;
+            // return $seeker_edu_detail;
         $seeker_exp_detail = tbl_seeker_experience::where('seeker_ID', $seeker_id)->first();
         $current_org = $seeker_exp_detail['company_name'];
         $start_date = $seeker_exp_detail['start_date'];
@@ -101,8 +101,11 @@ class CandidateforwardController extends Controller
         $forward_candidate->current_org = $current_org;
         $forward_candidate->qualification = $seeker_edu_detail['degree_level'];
         $forward_candidate->qualification1 = $Request->qual_with_uni;
-        // $forward_candidate->prefer_location=$Request->prefer_location;
+        //  $forward_candidate->prefer_location=$Request->prefer_location;
+
         $forward_candidate->passyear = $seeker_edu_detail['completion_year'];
+        //  $forward_candidate->passyear =$Request->completion_year;
+       
         $forward_candidate->dob = $Request->dob;
         $forward_candidate->entered = $Request->entred_in_us;
         $forward_candidate->relocation = $Request->Open_For_Relocation;

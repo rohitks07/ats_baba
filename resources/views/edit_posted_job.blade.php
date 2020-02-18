@@ -241,23 +241,21 @@
                          <!-- col 2-->
                          <div class="col-lg-6 col-md-6 col-sm-6">
                               <!--location-->
-                               <div class="form-group row" STYLE="background-color:;">
+                               <div class="form-group row" style="background-color:;">
                                     <label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
-                                    <select name="country" id="country"  class="form-control "  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-                                            @foreach ($toReturn['country_one'] as $item)
+                                    <select name="country" id="country"  class="form-control"  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
+                                            @foreach ($toReturn['country'] as $item)
                                             <option value="{{$item['country_id']}}" selected>{{$item['country_name']}}</option>
                                             @endforeach
                                             @foreach($toReturn['countries'] as $country)
                                     <option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
                                       @endforeach  
-
-                                      
-                                      
-                                     
                                     </select>
+
+
   
-                                    <select name="state" id="state_text" class="form-control " style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
-                                            @foreach ($toReturn['state_one'] as $item)
+                                    <select name="state" id="state_text" class="form-control "  placeholder="Select State" style="max-width:22%; margin-left: 9px; border: 1px solid #bbb8b8;" required>
+                                            @foreach ($toReturn['state'] as $item)
                                             <option value="{{$item['state_id']}}" selected>{{$item['state_name']}}</option>
                                             @endforeach
                                           <!--<option >{{$toReturn['post_job']->state}}</option>-->
@@ -273,8 +271,8 @@
                                       <!-- START -->
                                         <div class="col-md-12" style="float: right;margin-left: 21.5em;margin-top: 2%;">
                                             <div id="select_city">
-												<select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
-                                                        @foreach ($toReturn['city_one'] as $item)
+												<select name="city" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
+                                                        @foreach ($toReturn['city'] as $item)
                                                         <option value="{{$item['city_id']}}" selected>{{$item['city_name']}}</option>
                                                         @endforeach
                                                     <option value="">Select City </option>
@@ -282,7 +280,59 @@
 												<br>
 												<span id="citycheck">Please choose Your Location</span>
                                             </div> 
-										</div>
+                                        </div>
+                                        
+                                        <div class="" style="padding:5px 15px; border:1px solid #bbb8b8;border-radius:3px; margin-bottom:10px;">
+                                            <table class="" style="width:100%;">
+                                               <tbody id="exp_detail">
+                                                    @foreach($toReturn['job_location'] as $key_location => $value_location) 
+                                                  <tr>
+                                                 <td width="160px">
+                                                     <select name="country_name[]" class="form-control country_ids" placeholder="" style="width: 100%; border: 1px solid #bbb8b8;">
+                                                        @foreach ($toReturn['country'] as $item)
+                                                        <option value="{{$item['country_id']}}" selected>{{$item['country_name']}}</option>
+                                                        @endforeach
+                                                        @foreach($toReturn['countries'] as $country)
+                                                        <option value="{{$country['country_id']}}"  @if($value_location->country==$country['country_id']) {{"selected"}} @endif>{{ $country['country_name'] }}</option>
+                                                        @endforeach  
+                                                      </select>
+                                                  </td>
+                                                  <td width="160px">
+                                                   <select class="form-control state_ids" name="state_name[]"  style="width: 100%; border: 1px solid #bbb8b8;">
+                                                       @if($value_location->state)
+                                                       @php
+                                                       $state_name=DB::table('states')->where('state_id',$value_location->state)->first(); 
+                                                       @endphp 
+                                                       <option value="{{$value_location->state}}">{{$state_name->state_name}}</option>
+                                                       @endif
+                                                      </select>
+                                                      </td>
+
+                                                      <td width="160px">
+                                                       <select  class="form-control city_ids" name="city_name[]" style="width: 100%; border: 1px solid #bbb8b8;">
+                                                        @if($value_location->city)
+                                                        @php
+                                                        $city_name=DB::table('cities')->where('city_id',$value_location->city)->first(); 
+                                                        @endphp 
+                                                      <option value="{{$value_location->city}}">{{$city_name->city_name}}</option>
+                                                        @endif
+                                                        </select>
+                                                        </td>
+
+                                                         <td width="55px"></td>
+                                                         </tr>
+                                                        </tbody>
+                                                       <tbody>
+                                                          <tr>
+                                                        @endforeach
+                                                           <td colspan="4" style="text-align: left;"><button type="button" id="btnAdd_Exp" class="btn btn-primary" >Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></td>
+                                                            </tr>
+                                                           </tbody>
+                                                          </table>
+                                                       </div>
+       
+                                                       
+
                                         <input type="checkbox" id="myCheck"  onclick="mycity()" style="width:20px;height:20px;">
                                         <label id="city_label" class="control-label col-lg-4">Enter City if not present</label>
 
@@ -1223,82 +1273,91 @@
                 document.getElementById("select_ranage_other").style.display = "block";
             }
             // alert(temp);
-        // if (temp == 'Full Time') {
-        //     //alert('full time');
-        //     var x = document.getElementById("pay_min").options[1].disabled = false;
-        //     var x = document.getElementById("pay_min").options[2].disabled = false;
-        //     var x = document.getElementById("pay_min").options[3].disabled = false;
-        //     var x = document.getElementById("pay_min").options[4].disabled = false;
-        //     var x = document.getElementById("pay_min").options[5].disabled = false;
-        //     var x = document.getElementById("pay_min").options[6].disabled = false;
-        //     var x = document.getElementById("pay_min").options[7].disabled = false;
-        //     var x = document.getElementById("pay_min").options[8].disabled = false;
-        //     var x = document.getElementById("pay_min").options[9].disabled = false;
-        //     var x = document.getElementById("pay_min").options[10].disabled = false;
-        //     var x = document.getElementById("pay_min").options[11].disabled = true;
-        //     var x = document.getElementById("pay_min").options[12].disabled = true;
-        //     var x = document.getElementById("pay_min").options[13].disabled = true;
-        //     var x = document.getElementById("pay_min").options[14].disabled = true;
-        //     var x = document.getElementById("pay_min").options[15].disabled = true;
-        //     var x = document.getElementById("pay_min").options[16].disabled = true;
-        //     var x = document.getElementById("pay_min").options[17].disabled = true;
-        //     var x = document.getElementById("pay_min").options[18].disabled = true;
-        //     var x = document.getElementById("pay_min").options[19].disabled = true;
-        //     var x = document.getElementById("pay_min").options[20].disabled = true;
-        //     var x = document.getElementById("pay_min").options[21].disabled = true;
-        //     var x = document.getElementById("pay_min").options[22].disabled = true;
-        // } else if (temp == 'Contract') {
-        //     //alert('Contract');
-        //     var x = document.getElementById("pay_min").options[1].disabled = true;
-        //     var x = document.getElementById("pay_min").options[2].disabled = true;
-        //     var x = document.getElementById("pay_min").options[3].disabled = true;
-        //     var x = document.getElementById("pay_min").options[4].disabled = true;
-        //     var x = document.getElementById("pay_min").options[5].disabled = true;
-        //     var x = document.getElementById("pay_min").options[6].disabled = true;
-        //     var x = document.getElementById("pay_min").options[7].disabled = true;
-        //     var x = document.getElementById("pay_min").options[8].disabled = true;
-        //     var x = document.getElementById("pay_min").options[9].disabled = true;
-        //     var x = document.getElementById("pay_min").options[10].disabled = true;
-        //     var x = document.getElementById("pay_min").options[11].disabled = false;
-        //     var x = document.getElementById("pay_min").options[12].disabled = false;
-        //     var x = document.getElementById("pay_min").options[13].disabled = false;
-        //     var x = document.getElementById("pay_min").options[14].disabled = false;
-        //     var x = document.getElementById("pay_min").options[15].disabled = false;
-        //     var x = document.getElementById("pay_min").options[16].disabled = false;
-        //     var x = document.getElementById("pay_min").options[17].disabled = false;
-        //     var x = document.getElementById("pay_min").options[18].disabled = false;
-        //     var x = document.getElementById("pay_min").options[19].disabled = false;
-        //     var x = document.getElementById("pay_min").options[20].disabled = false;
-        //     var x = document.getElementById("pay_min").options[21].disabled = false;
-        //     var x = document.getElementById("pay_min").options[22].disabled = false;
-
-
-        // } else {
-        //     var x = document.getElementById("pay_min").options[1].disabled = false;
-        //     var x = document.getElementById("pay_min").options[2].disabled = false;
-        //     var x = document.getElementById("pay_min").options[3].disabled = false;
-        //     var x = document.getElementById("pay_min").options[4].disabled = false;
-        //     var x = document.getElementById("pay_min").options[5].disabled = false;
-        //     var x = document.getElementById("pay_min").options[6].disabled = false;
-        //     var x = document.getElementById("pay_min").options[7].disabled = false;
-        //     var x = document.getElementById("pay_min").options[8].disabled = false;
-        //     var x = document.getElementById("pay_min").options[9].disabled = false;
-        //     var x = document.getElementById("pay_min").options[10].disabled = false;
-        //     var x = document.getElementById("pay_min").options[11].disabled = false;
-        //     var x = document.getElementById("pay_min").options[12].disabled = false;
-        //     var x = document.getElementById("pay_min").options[13].disabled = false;
-        //     var x = document.getElementById("pay_min").options[14].disabled = false;
-        //     var x = document.getElementById("pay_min").options[15].disabled = false;
-        //     var x = document.getElementById("pay_min").options[16].disabled = false;
-        //     var x = document.getElementById("pay_min").options[17].disabled = false;
-        //     var x = document.getElementById("pay_min").options[18].disabled = false;
-        //     var x = document.getElementById("pay_min").options[19].disabled = false;
-        //     var x = document.getElementById("pay_min").options[20].disabled = false;
-        //     var x = document.getElementById("pay_min").options[21].disabled = false;
-        //     var x = document.getElementById("pay_min").options[22].disabled = false;
-
-        // }
     }
 
 </script>
+
+<script>
+    $(document).ready(function() {
+        var i = 1;
+        $('#btnAdd_Exp').click(function(){
+            i++;
+            var data2 = `<tr>
+                            <td>
+                                <select name="country_name[]" class="form-control country_ids" placeholder="" style="width: 100%; border: 1px solid #bbb8b8;">
+                                    @foreach ($toReturn['countries'] as $item)
+                                            <option value="{{$item['country_id']}}" selected>{{$item['country_name']}}</option>
+                                            @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control state_ids" name="state_name[]" style="width: 100%; border: 1px solid #bbb8b8;">
+                                    <option value="">select state</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select  class="form-control city_ids" name="city_name[]" style="width: 100%; border: 1px solid #bbb8b8;">
+                                    <option value="">select city</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="button" id="btnRemove" class="btn btn-primary btn_remove"><i class="fa fa-trash"></i></button>	
+                            </td>
+                        </tr>`;
+
+           $('#exp_detail').append(data2);
+        });
+    });
+    $(document).on('click', '.btn_remove', function() {
+        $(this).closest('tr').remove();
+    });
+</script> 
+<script>
+    $(".delete_doc").click(function(e) {
+        $("#update_resume").css("display", "none");
+    });
+</script>
+ 
+
+
+<script type="text/javascript">
+    $("#exp_detail").on("change", ".country_ids", function(e) {
+        var tr = $(this).closest("tr"); // getting its parent "tr"
+        $(tr).find('.state_ids').empty();
+        var country_id = e.target.value;
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/state/")}}' + "/" + country_id,
+            success: function(data) {
+                console.log(data);
+                $.each(data, function(index, value) {
+                    $(tr).find('.state_ids').append("<option value=" + '"' + value.state_id + '"' +
+                        "selected>" + value.state_name + "</option>");
+                       
+                });
+            },
+
+         });
+    });
+
+    $("#exp_detail").on("change", ".state_ids", function(e) {
+        var tr = $(this).closest("tr"); // getting its parent "tr"
+        $(tr).find('.city_ids').empty();
+        var state_id = e.target.value;
+        $.ajax({
+            type: 'get',
+            url: '{{url("employer/post_new_job/post_job/city/")}}' + "/" + state_id,
+            success: function(data) {
+                console.log(data);
+                $.each(data, function(index, value) {
+                    $(tr).find('.city_ids').append("<option value=" + '"' + value.city_id + '"' +
+                        "selected>" + value.city_name + "</option>");
+                });
+
+            },
+        });
+    });
+
+</script> 
+
 </body>

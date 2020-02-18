@@ -146,7 +146,7 @@
                                                             <td style="text-align:center;">
                                                                 <strong>{{$item['job_title']}}</strong></td>
                                                             <td>
-                                                                <p>{{$item['country']}} , {{$item['state']}} ,
+                                                                 <p>{{$item['country']}} , {{$item['state']}} , 
                                                                     {{$item['city']}}</p>
                                                             </td>
                                                         <td style="text-align:center;"> {{@$company_name->company_name}}</td>

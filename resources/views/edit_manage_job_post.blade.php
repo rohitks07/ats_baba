@@ -242,7 +242,7 @@
                                                 <div class="col-md-2 mt-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <select class="form-control" name="country" id="country"
+                                                            <select class="form-control" name="country_name" id="country"
                                                                 required>
                                                                 @foreach($value as $item)
                                                                 <option value="{{$item['country']}}" selected>
@@ -264,7 +264,7 @@
                                                 <div class="col-md-2 mt-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <select class="form-control" name="state" id="state_text"
+                                                            <select class="form-control" name="state_name" id="state_text"
                                                                 required>
                                                                 @foreach ($value as $item)
 
@@ -285,7 +285,7 @@
                                                 <div class="col-md-2 mt-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <select class="form-control" name="city" id="city" required>
+                                                            <select class="form-control" name="city_name" id="city" required>
                                                                 @foreach($value as $item)
                                                                 <option value="{{$item['city']}}" selected>
                                                                     {{$item['city']}}

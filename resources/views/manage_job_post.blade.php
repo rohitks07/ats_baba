@@ -91,7 +91,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label class="sr-only" for="exampleInputEmail2">City</label>
-                                        <input type="city" class="form-control" id="city" name="city" type="text"
+                                        <input type="city" class="form-control" id="city" name="city_name" type="text"
                                             placeholder="Search by City">
                                     </div>
                                 </div>
@@ -137,10 +137,15 @@
                                                             <?php 
                                                                 $id=$item['ID'];   
                                                                 // $company_name=DB::select('select * from tbl_companies where ID = ?',[$item['company_ID']]); 
-                                                               $company_name = DB::table('tbl_companies')->where('ID',$item['company_ID'])->first('company_name');  
+                                                               $company_name = DB::table('tbl_companies')->where('ID',$item['company_ID'])->first('company_name');
+                                                               //$country_name = DB::table('countries')->where('ID',$item['country_id'])->first('country_name');
+                                                               // echo @$country_name->country_name;
                                                             //   echo @$company_name->company_name; 
                                                             //    exit;
                                                                ?>
+
+
+                                                            
                                                             <td>{{$item['dated']}}</td>
                                                             <td>{{$item['last_date']}}</td>
                                                             <td style="text-align:center;">
@@ -148,6 +153,11 @@
                                                             <td>
                                                                 <p>{{$item['country']}} , {{$item['state']}} ,
                                                                     {{$item['city']}}</p>
+                                                                
+                                                                    
+
+
+
                                                             </td>
                                                         <td style="text-align:center;"> {{@$company_name->company_name}}</td>
                                                             <td align="center" valign="middle">
@@ -361,7 +371,7 @@
                                                 <td>` + value.dated + `</td>
                                                 <td>` + value.last_date + `</td>
                                                 <td>` + value.job_title + `</td>
-                                                <td>` + value.country + ` , ` + value.state + ` , ` + value.city + `</td>
+                                                <td>` + value.country_name + ` , ` + value.state_name + ` , ` + value.city_name + `</td>
                                                 <td> `+value.company_ID+` </td>
                                                 <td align="center" valign="middle">
                                             <button type="button" class="btn btn-xs"
