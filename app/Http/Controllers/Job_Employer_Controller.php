@@ -436,54 +436,29 @@ class Job_Employer_Controller extends Controller
             $post_job = tbl_post_jobs::where('ID', $id)->update($job_detail);
 
                 
-            $country_names_array=$Request->country_name;
-            return $country_names_array;
-                           if($country_names_array!=""){
+        //     $country_names_array=$Request->country_name;
+        //     return $country_names_array;
+        //                    if($country_names_array!=""){
          
-            foreach($country_names_array as $key => $value){
+        //     foreach($country_names_array as $key => $value){
             
-            $job_location =  tbl_job_location::where('job_id',$Request->$id)->update(array(
-                    //    job_id         =$job_id;
-                'employer_id'    => Session::get('id'),
-                'owner_name'     => $Request->owner_name,
-                'org_id'         => Session::get('org_ID'),
-                'country'        => $Request->country_name[$key],
-                'state'          => $Request->state_name[$key],
-                'city'           => $Request->city_name[$key],
+        //     $job_location =  tbl_job_location::where('job_id',$Request->$id)->update(array(
+        //             //    job_id         =$job_id;
+        //         'employer_id'    => Session::get('id'),
+        //         'owner_name'     => $Request->owner_name,
+        //         'org_id'         => Session::get('org_ID'),
+        //         'country'        => $Request->country_name[$key],
+        //         'state'          => $Request->state_name[$key],
+        //         'city'           => $Request->city_name[$key],
 
                       
 
-               ));
-            }
-        exit;
-            }
+        //        ));
+        //     }
+        // exit;
+        //     }
             
             
-
-            // $update_umo=umo::where('id',$Request->umo_id_update)->update(array(
-            //     'umo_name'=>$Request->umo_name,
-                
-            // ));
-         
-            
-//            $job_location_var =tbl_job_location::where('job_id',$Request->id)->update(array(
-           
-//              $job_location_var->employer_id=Session::get('id');
-//              $job_location_var->owner_name = $Request->owner_name;
-//              $job_location_var->org_id     = Session::get('org_ID');
-//              $job_location_var->country        = $Request->country_name[$key];
-//              $job_location_var->state          = $Request->state_name[$key];
-//              $job_location_var->city           = $Request->city_name[$key];
-
-//              $job_location_var->save();
-//           ));
-
-//   }
-
- 
-       
-
-
         $Notification = new Tbl_notification();
         $Notification->notification_service_id = $id;
         $Notification->service_type = "Update Job";
