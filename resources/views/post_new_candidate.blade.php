@@ -110,8 +110,8 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">First Name <span style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name"><br>
-                                                <span id="first_namecheck">Not valid First Name</span>
+                                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                                                <p id="first_namecheck">Not valid First Name</p>
                                             </div>
                                         </div>
                                         <!--end of Name-->
@@ -128,8 +128,8 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Last Name<span style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name"><br>
-                                                <span id="last_namecheck">Not valid Last Name</span>
+                                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                                                <p id="last_namecheck">Not valid Last Name</p>
                                             </div>
                                         </div>
                                         <!--end of Last Name-->
@@ -163,7 +163,7 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Email<span style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" maxlength="35"><br>
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" maxlength="35">
                                                 <span id="emailcheck">Please Enter valid Email</span>
                                             </div>
                                         </div>
@@ -245,7 +245,6 @@
                                                     <select name="city_name" id="city" class="form-control " style="max-width:22%; border: 1px solid #bbb8b8;" required>
                                                         <option value="">Select City</option>
                                                     </select>
-                                                    <br>
 
                                                     <span id="citycheck">Please choose Your Location</span>
                                                 </div>
@@ -280,7 +279,7 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Mobile Phone<span style="color:red;">*</span></label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="mobile_number" name="mobilephone" placeholder="Mobile Phone" maxlength="12"><br>
+                                                <input type="text" class="form-control" id="mobile_number" name="mobilephone" placeholder="Mobile Phone" maxlength="12">
                                                 <span id="mob_ph_check">Please Enter a Valid Mobile Number</span>
                                             </div>
                                         </div>
@@ -289,7 +288,7 @@
                                         <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Home Phone<span style="color:red;"></span></label>
                                             <div class="col-lg-8">
-                                                <input type="text " class="form-control" id="phone" name="homephone" placeholder="Home Phone" maxlength="12"><br>
+                                                <input type="text " class="form-control" id="phone" name="homephone" placeholder="Home Phone" maxlength="12">
                                                 <span id="home_ph_check">Please Enter a Valid Home Number</span>
                                             </div>
                                         </div>
@@ -301,7 +300,7 @@
                                                 <input type="file" class="form-control" class="form-control" name="cv_file" id="cv_file" style="background:#fff;" required>
                                                 <p>Upload files only in .doc, .docx or .pdf format with maximum size of
                                                     32 MB.</p>
-                                                <span id="resume_check">Please Choose a Valid File</span>
+                                                <p id="resume_check" style="margin-top: -15px;">Please Choose a Valid File</p>
                                             </div>
                                         </div>
                                         <!--end of Select File-->
@@ -425,8 +424,7 @@
                                                                             <option value="1970">1970</option>
                                                                         </select>
                                                                         <p><button type="button" id="btnAdd" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
-                                                                        <span id="education_check">Please fill All
-                                                                            Fields</span>
+                                                                        <p id="education_check" style="margin-left: 1em; margin-top: -6px">Please fill All Fields</p>
                                                                     </div>
                                                                     <!--form group row close-->
                                                                 </div> <!-- <close id> -->
@@ -484,11 +482,10 @@
                                                                             <p><button type="button" id="btnAdd_Exp" class="btn btn-primary">Add
                                                                                     More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button>
                                                                             </p>
-                                                                            <label id="check_date" style="display:none;color:red;">In
-                                                                                correct date format</label>
-                                                                            <label id="check_date1" style="display:none;color:red;">In
-                                                                                correct date format</label>
-                                                                            <br>
+                                                                            <label id="check_date" style="display:none;color:red;">
+                                                                                In Correct Date format(Start Date)&nbsp;</label>
+                                                                            <label id="check_date1" style="display:none;color:red;">
+                                                                                In Correct Date format(End Date)&nbsp;</label>
                                                                             <!-- <a class="btn btn-primary add-more-btn" style="float:left; margin-left:1em;">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></a>												   -->
                                                                             <label id="experience_check">Please fill All
                                                                                 Fields</label>
@@ -533,7 +530,7 @@
                                                                 <div class="col-lg-4">
                                                                     <input class="form-control" style="border: 1px solid #737373; width:100%;" id="tags" name="skill" type="text" required>
                                                                     <span class="help-block" style="text-align:right;"><small>
-                                                                            Enter skill in this formate ex-
+                                                                            Enter skill in this Format ex-
                                                                             java,cpp,c,laravel,html etc. </small></span>
                                                                     <br>
                                                                     <span id="skill_check" style="display:none;color:red;">Please Add
