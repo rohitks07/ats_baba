@@ -83,12 +83,13 @@
                                     
 									<div class="card-body">
 									 <!--Salutation-->	
-							<form action="{{url('employer/post_new_email_contact/add')}}"  method="post"> 
+							<form action="{{url('employer/post_new_email_contact/add')}}"  method="post" autocomplete="off"> 
 									<input type="hidden" name="_token" value = "{{ csrf_token()  }}" >                              
 									 <div class="form-group row">
 										<label class="col-sm-4 control-label">Salutation </label>
 											<div class="col-sm-8">
-												<select name="salutation" class="form-control" style="max-width:350px; border: 1px solid #737373; background:#fff;">													
+												<select name="salutation" class="form-control" style="max-width:350px; border: 1px solid #737373; background:#fff;">
+												<option value="">--Select--</option>													
 													<option value="Mr" >Mr</option>
 													<option value="Ms" >Ms</option>
 													<option value="Mrs" >Mrs</option>
@@ -101,9 +102,9 @@
 									<!--end of Salutation-->
 									<!--Name-->	   
 									<div class="form-group row">
-										<label for="" class="control-label col-lg-4"> First Name </label>
+										<label for="" class="control-label col-lg-4"> First Name<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="" name="firstname" placeholder="First Name" type="number--" >
+												<input type="text" id="" name="firstname" placeholder="First Name" type="number--" required>
 											</div>
 									  </div>
 								<!--end of Name-->
@@ -129,7 +130,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Email Id <span style="color:red;">*</span> </label>
 											<div class="col-lg-8">
-												<input type="text" id="" name="emailid" placeholder="Email ID" type="number--">
+												<input type="email" id="" name="emailid" placeholder="Email ID" type="number--" class="form-control" style="width:500px;" required>
 											</div>
 									  </div>
 								<!--end of Email (W)-->
@@ -138,11 +139,12 @@
 							
 								<!--Add in Contact Database-->	   						                                  
 									 <div class="form-group row">
-										<label class="col-sm-4 control-label">Add in Contact Database </label>
+										<label class="col-sm-4 control-label">Status <span style="color:red;">*</span></label>
 											<div class="col-sm-8">
-												<select name="contactdatabase" class="form-control" style="max-width:350px; border: 1px solid #737373;background:#fff;">													
-													  <option value="active" >Active</option>
-														<option value="inactive"   >Inactive</option>												
+												<select name="contactdatabase" class="form-control" style="max-width:350px; border: 1px solid #737373;background:#fff;" required>													
+												<option value="">--Select--</option>	 
+												<option value="active" >Active</option>
+														<option value="inactive">Inactive</option>												
 												</select>
 										   </div>
 									</div>									

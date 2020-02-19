@@ -268,6 +268,8 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                        
+
                                                             @foreach ($toReturn['interviewall'] as $r)
 
 
@@ -277,8 +279,8 @@
                                                             $date_application=$r->interview_date;
                                                             $new_date = date("m-d-Y", strtotime($date_application));
                                                             $data_time = DB::table('tbl_time_zone')->where('time_zone_name',$r->time_zone)->first();
-                                                            $static_time = $data_time->change_time;
-                                                            $cal_value = $data_time->cal_value;
+                                                           @$static_time = $data_time->change_time;
+                                                            @$cal_value = $data_time->cal_value;
                                                             if($cal_value == "+"){
                                                                 $secs = strtotime($r->from_time)-strtotime("00:00");
                                                                 $result = date("H:i A",strtotime($static_time)+$secs);
@@ -287,6 +289,7 @@
                                                                 $secs = strtotime($r->from_time)-strtotime("00:00");
                                                                 $result = date("H:i A",strtotime($static_time)-$secs);
                                                             }
+                                                           
                                                             // $secs = strtotime($r->from_time)-strtotime("00:00");
                                                             // $result = date("H:i",strtotime($static_time)+$secs);
                                                             // $secs = strtotime("1:00")-strtotime("00:00");

@@ -82,7 +82,8 @@ class Job_Employer_Controller extends Controller
             $toReturn['total_resume'] = count(Tbl_job_seekers::where('employer_id', Session::get('user_id'))->get());
 
             $toReturn['total_interview'] = count(tbl_schedule_interview::get());
-            $toReturn['today_interview'] = count(tbl_schedule_interview::where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['today_interview'] = count(tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get());
+
             $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
             $toReturn['today_meeting'] = count(tbl_meeting::where('dated', '=', date('Y-m-d'))->get());
             $toReturn['total_meeting'] = count(tbl_meeting::get());
@@ -99,13 +100,14 @@ class Job_Employer_Controller extends Controller
         //team lead
         else if ($toReturn['user_type'] == "teamlead") {
             $toReturn['one_day_job'] = count(tbl_post_job::whereDate('dated', '=', date('Y-m-d'))->where('employer_ID', Session::get('user_id'))->get());
+           
             $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
             $toReturn['total_job'] = count(tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->get());
             $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
             $toReturn['today_resume'] = count(Tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->where('dated', '=', date('Y-m-d'))->get());
             $toReturn['total_resume'] = count(Tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->get());
             $toReturn['total_interview'] = count(tbl_schedule_interview::get());
-            $toReturn['today_interview'] = count(tbl_schedule_interview::where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['today_interview'] = count(tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get());
             $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
             $toReturn['today_meeting'] = count(tbl_meeting::where('dated', '=', date('Y-m-d'))->get());
             $toReturn['total_meeting'] = count(tbl_meeting::get());
@@ -122,11 +124,12 @@ class Job_Employer_Controller extends Controller
             $toReturn['showdata'] = tbl_post_jobs::where('company_ID', $org_id)->count();
             $toReturn['total_job'] = count(tbl_post_job::where('company_ID', $org_id)->get());
             $toReturn['one_day_job'] = count(tbl_post_job::whereDate('dated', '=', date('Y-m-d'))->where('company_ID', $org_id)->get());
+           
             $toReturn['today_application'] = count(Tbl_seeker_applied_for_job::where('employer_ID', $id)->where('dated', '=', date('Y-m-d'))->get());
             $toReturn['total_application'] = count(Tbl_seeker_applied_for_job::whereIn('employer_ID', Session::get('one_group_teammember_id'))->get());
             // $toReturn['total_resume']=count(Tbl_job_seekers::where('employer_id',$id)->get());  
             $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
-            $toReturn['today_interview'] = count(tbl_schedule_interview::where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['today_interview'] = count(tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get());
             $toReturn['today_meeting'] = count(tbl_meeting::where('dated', '=', date('Y-m-d'))->get());
             $toReturn['total_meeting'] = count(tbl_meeting::get());
         }

@@ -46,24 +46,24 @@ class Import_Controller extends Controller
 			foreach ($sheetData as $key => $value) {
 				$contact_list = new Tbl_post_contacts();
 				//$contact_list=$value->id;
-				$contact_list->company_name = $sheetData[$key][0];
-				$contact_list->designation = $sheetData[$key][1];
-				$contact_list->sub_name = $sheetData[$key][2];
-				$contact_list->cont_per_name = $sheetData[$key][3];
-				$contact_list->phone_c = $sheetData[$key][4];
-				$contact_list->phone_w = $sheetData[$key][5];
-				$contact_list->email_h = $sheetData[$key][6];
-				$contact_list->email_w = $sheetData[$key][7];
-				$contact_list->country = $sheetData[$key][8];
-				$contact_list->state = $sheetData[$key][9];
-				$contact_list->city = $sheetData[$key][10];
-				$contact_list->status = $sheetData[$key][11];
+				$contact_list->company_name = @$sheetData[$key][0];
+				$contact_list->designation = @$sheetData[$key][1];
+				$contact_list->sub_name = @$sheetData[$key][2];
+				$contact_list->cont_per_name = @$sheetData[$key][3];
+				$contact_list->phone_c = @$sheetData[$key][4];
+				$contact_list->phone_w = @$sheetData[$key][5];
+				$contact_list->email_h = @$sheetData[$key][6];
+				$contact_list->email_w = @$sheetData[$key][7];
+				$contact_list->country = @$sheetData[$key][8];
+				$contact_list->state = @$sheetData[$key][9];
+				$contact_list->city = @$sheetData[$key][10];
+				$contact_list->status = @$sheetData[$key][11];
 				// $contact_list->created_date=$sheetData[$key][12];
 				$mydate = date('Y-m-d');
 				$contact_list->created_by = $mydate;
 				$contact_list->last_updated_by = 90;
 				$contact_list->last_updated_date = $mydate;
-				$contact_list->employer_id = $sheetData[$key][16];
+				$contact_list->employer_id = @$sheetData[$key][16];
 				$contact_list->save();
 			}
 			$msg = "DataSheet Import Done";

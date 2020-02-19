@@ -201,10 +201,12 @@ Route::post('employer/posted_companies/update', 'PostedCompaniesController@updat
 Route::get('employer/posted_companies/delete/{id}', 'PostedCompaniesController@delete');
 Route::get('employer/manages_team_members', 'EmployerManageTeamMemberController@index');
 Route::get('employer/post_new_contacts', 'ContactController@index');
+Route::get('employer/post_new_contacts/change_add_status','ContactController@change_add_status');
 Route::post('employer/post_new_contacts/add', 'ContactController@add');
 Route::get('employer/my_posted_contacts', 'ContactController@show');
-Route::get('employer/my_posted_contacts/delete/{id}', 'ContactController@delet');
-Route::post('employer/post_new_email_contact/add', 'Job_Employer_Controller@add_email_form');
+Route::get('employer/my_posted_contacts/delete/{id}', 'ContactController@delete');
+
+Route::post('employer/post_new_email_contact/add', 'ContactController@add_email_form');
 Route::get('employer/post_new_email_contact/show', 'ContactController@show_email_form');
 Route::get('employer/my_posted_contacts/delete_email/{id}', 'ContactController@delete_email');
 Route::get('employer/my_posted_contacts/delete_email_list/{id}', 'ContactController@delete_email_list');

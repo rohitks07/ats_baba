@@ -136,7 +136,7 @@
                                                             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%;">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th style="width:100;"></th>
+                                                                        <th style="width:100;">Process</th>
                                                                         <th>{{$toReturn['date'][0]}}</th>
                                                                         <th>{{$toReturn['date'][1]}}</th>
                                                                         <th>{{$toReturn['date'][2]}}</th>
@@ -218,7 +218,7 @@
                                                             <table id="datatable2" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" ;>
                                                                 <thead>
                                                                     <tr>
-                                                                        <th style="width:100;"></th>
+                                                                        <th style="width:100;">Process</th>
                                                                         <th>{{$toReturn['date'][0]}}</th>
                                                                         <th>{{$toReturn['date'][1]}}</th>
                                                                         <th>{{$toReturn['date'][2]}}</th>
