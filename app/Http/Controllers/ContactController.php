@@ -9,6 +9,7 @@ use App\Tbl_email_list;
 use App\Tbl_team_member_permission;
 use Session;
 
+
 class ContactController extends Controller
 {
     public function __construct()
@@ -25,14 +26,14 @@ class ContactController extends Controller
     {
             $contact_object = new Tbl_post_contacts;
             $contact_object ->sub_name      = $request ->salutation;
-            $contact_object ->cont_per_name = $request ->name;
-            $contact_object ->phone_c       = $request ->phone_c;
+            $contact_object ->cont_per_name = $request ->name;//mandatory
+            $contact_object ->phone_c       = $request ->phone_c;//mandatory
             $contact_object ->phone_w       = $request ->phone_w;
-            $contact_object ->email_h       = $request ->email_h;
+            $contact_object ->email_h       = $request ->email_h;//mandatory
             $contact_object ->email_w       = $request ->email_w;
-            $contact_object ->country       = $request ->country;
-            $contact_object ->state         = $request->state;
-            $contact_object ->city          = $request->city;
+            $contact_object ->country       = $request ->country;//mandatory
+            $contact_object ->state         = $request->state;//mandatory
+            $contact_object ->city          = $request->city;//mandatory
             $contact_object ->company_name  = $request->company_name;
             $contact_object ->designation   = $request->designation;
             $contact_object->status="active";
@@ -69,9 +70,22 @@ class ContactController extends Controller
     } 
     public function delete($id="")
     {
-    
-            $contact_delete = Tbl_post_contacts::where('id',$id)->delete();
+       
+        $contact_delete = Tbl_post_contacts::where('id',$id)->delete();
+           
         return redirect('employer/my_posted_contacts');
+    }
+
+    
+    public function edit_contact_data($id="")
+    {
+      
+        $edit_data = Tbl_post_contacts::where('id',$id)->first();
+
+     
+        return $edit_data;
+
+        // return redirect('employer/my_posted_contacts'); 
     }
     public function add_email_form(Request $request)
     {

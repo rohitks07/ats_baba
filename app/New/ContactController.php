@@ -8,21 +8,62 @@ use App\Tbl_email_list_contacts;
 use App\Tbl_email_list;
 use App\Tbl_team_member_permission;
 use Session;
+use App\Tbl_salutation;
+use App\Tbl_countries;
+use App\Tbl_state;
+use App\Tbl_cities;
+use App\Tbl_team_member_type;
 
 
 
 
 class ContactController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        return view ('post_new_contacts');
+
+        // $datas = Tbl_post_contacts::leftJoin('tbl_team_member_type','tbl_post_contacts.company_name','=','tbl_team_member_type.type_ID')
+        //                             ->leftJoin('states','tbl_post_contacts.state_id','=','states.state_id')
+        //                             ->get();
+
+        // $contact_object =  Tbl_post_contacts::leftJoin('tbl_team_member_type','tbl_post_contacts.company_name','=','tbl_team_member_type.type_ID')
+        // ->leftJoin('states','tbl_post_contacts.state_id','=','states.state_id')
+        // ->select('tbl_post_contacts.*','tbl_team_member_type.type_name','states.state_name')
+        // ->get();
+       
+        return view('post_new_contacts');
     }
 
+    public function change_add_status(Request $request)
+    {
+        $hidden_input_purpose = "add";
+        $hidden_input_id= "NA";
+
+      
+    
+        $contact_object =  new Tbl_post_contacts;
+
+        $salutions = Tbl_salutation::get();
+        $countries = Tbl_countries::get();
+        $states = Tbl_state::get();
+        $cities = Tbl_cities::get();
+        $team_member_types = Tbl_team_member_type::get();
+
+        if(isset($request->purpose)&&isset($request->id)){
+            $hidden_input_purpose=$request->purpose;
+            $hidden_input_id=$request->id;
+            $contact_object = $contact_object->find($request->id);
+        }
+        return view('post_new_contacts')->with(compact('hidden_input_purpose','hidden_input_id','contact_object','salutions','countries','states','cities','team_member_types'));
+    }
 
     public function add(Request $request){
 
         $contact_object = new Tbl_post_contacts;
+        if($request->hidden_input_purpose=="edit")
+        {
+            $contact_object = $contact_object->find($request->hidden_input_id);
+        }
 
         $contact_object -> sub_name      = $request ->salutation;
         $contact_object -> cont_per_name = $request ->name;
@@ -47,7 +88,6 @@ class ContactController extends Controller
         $contact_object -> save();
 
         return redirect('employer/my_posted_contacts');
-        // return $request;
     }
 
 
@@ -71,7 +111,10 @@ class ContactController extends Controller
                     }
                 }
             }
-        $contact_object =Tbl_post_contacts::all();   
+        $contact_object =Tbl_post_contacts::leftJoin('tbl_team_member_type','tbl_post_contacts.company_name','=','tbl_team_member_type.type_ID')
+                        ->leftJoin('states','tbl_post_contacts.state','=','states.state_id')
+                        ->select('tbl_post_contacts.*','tbl_team_member_type.type_name','states.state_name')
+                        ->get(); 
         $emailList = Tbl_email_list_contacts::all();
         $email=Tbl_email_list::all();
 
@@ -86,16 +129,29 @@ class ContactController extends Controller
         return redirect('employer/my_posted_contacts');
     }
 
+    public function edit_contact_data($id="")
+    {
+      
+        $edit_data = Tbl_post_contacts::where('id',$id)->first();
+
+        return redirect('employer/my_posted_contacts'); 
+    }
+
     public function add_email_form(Request $request){
-
+        
         $emailList = new Tbl_email_list_contacts;
-
-        $emailList ->salutation = $request-> salutation;
-        $emailList ->first_name = $request-> firstname;
-        $emailList ->last_name  = $request-> lastname;
-        $emailList ->full_name  = $request-> fullname;
+        $emailList->employer_id = Session::get('id');
+        $emailList ->salutation = $request->salutation;
+        $emailList ->first_name = $request->firstname;
+        $emailList ->last_name  = $request->lastname;
+        $emailList ->full_name  = $request->fullname;
         $emailList ->email_contact_id =$request->emailid;
-        $emailList ->add_in_contact_db = $request-> contactdatabase;
+        $emailList ->add_in_contact_db = $request->contactdatabase;
+        $mydate=date('Y-m-d');
+        $emailList->last_updated_date = $mydate;
+      
+
+        $emailList->created_by = Session::get('full_name');
        
         $emailList ->save();
         

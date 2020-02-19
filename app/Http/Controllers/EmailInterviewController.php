@@ -184,7 +184,6 @@ public function show_interview_email(){
    }
 
    public function interview_schedule_email(Request $REQUEST){
-
       
      $email_to        = $REQUEST->email_to;
      $email_cc        = $REQUEST->email_cc;

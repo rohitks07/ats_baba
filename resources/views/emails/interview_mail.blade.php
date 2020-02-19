@@ -454,7 +454,7 @@
                                     <td
                                         style="padding: 0px 40px 20px 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; text-align: left; font-weight:normal;">
                                         <a id="btn"
-                                        href="{{url('http://baba.software/ats/interview_confirm/'.$data['uni_no'])}}"
+                                        href="{{url('http://localhost/ats_baba/interview_confirm/'.$data['uni_no'])}}"
                                         type="button" style="text-decoration:none;">Click here</a>
                                         <p style="display:inline;margin-left:20px;">Click for conformatation of for more
                                             option</p>

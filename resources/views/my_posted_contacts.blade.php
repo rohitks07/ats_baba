@@ -164,15 +164,15 @@ table.dataTable thead > tr > th {
                                                         <div style="float:right;display: flex;">
                                                         <form action ="{{url('employer/importContact')}}" method="post" enctype="multipart/form-data">
                                                         	@csrf
-								                     	 <input type="file" id="Upload_cv" name="Upload_exe" >
-								                     	 <input type="submit" id="submit_btn" class="btn btn-success" value="ImportContact">
+								                     	 <!-- <input type="file" id="Upload_cv" name="Upload_exe" > -->
+								                     	 <!-- <input type="submit" id="submit_btn" class="btn btn-success" value="Import  Contact"> -->
 								                     	 </form>
 													    @if(!empty($toReturn['user_type']=="teammember")) 
                                                         @if($toReturn['current_module_permission']['is_edit']=="yes")
-													    <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success">Add Contact</button></a>
+													    <a href="{{url('employer/post_new_contacts/change_add_status')}}"><button type="button" class="btn btn-success">Add Contact</button></a>
 														@endif
 														@else
-                                                        <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success" style="margin-left:1em;">Add Contact</button></a>
+                                                        <a href="{{url('employer/post_new_contacts/change_add_status')}}"><button type="button" class="btn btn-success" style="margin-left:1em;">Add Contact</button></a>
                                                         @endif
 													</div>
 												</div>
@@ -203,17 +203,19 @@ table.dataTable thead > tr > th {
 																		<td>{{$contact_object -> phone_w }}</td>
 																		<td>{{$contact_object -> email_h}}</td>
 																		<td>{{$contact_object -> email_w}}</td>
-																		<td>{{$contact_object -> state}},{{$contact_object -> city}}</td>
-																		<td>{{$contact_object -> company_name}}</td>
+																		<td>{{$contact_object -> state_name}},{{$contact_object -> city}}</td>
+																		<td>{{$contact_object -> type_name}}</td>
 																		<td>{{$contact_object -> designation}}</td>
 																		<td class="actions">
                                                                              @if(!empty($toReturn['user_type']=="teammember")) 
         
 																		@if($toReturn['current_module_permission']['is_edit']=="yes")
-																		<a href="{{url('employer/my_posted_contacts/delete/'.$id)}}" data-toggle="modal" data-target="#contact-edit"><i class="fa fa-pencil"></i></a>
+																		<!-- <a href="{{url('employer/post_new_contacts')}}"><button type="button" class="btn btn-success">Add Contact</button></a> -->
+																		
+																		<a href="{{url('employer/post_new_contacts/change_add_status')}}?purpose=edit&id={{$contact_object->id}}"><i class="fa fa-pencil"></i></a>
 																		@endif
 																		@else
-                                                                        <a href="{{url('employer/my_posted_contacts/delete/'.$id)}}" data-toggle="modal" data-target="#contact-edit"><i class="fa fa-pencil"></i></a>
+                                                                        <a href="{{url('employer/post_new_contacts/change_add_status')}}?purpose=edit&id={{$contact_object->id}}"><i class="fa fa-pencil"></i></a>
 
 																		@endif
                                                                         @if(!empty($toReturn['user_type']=="teammember")) 
@@ -259,7 +261,7 @@ table.dataTable thead > tr > th {
 																	<th>Email List Name</th>
 																	<th>Description</th>
 																	<th>Privacy</th>
-																	<th>Active?</th>
+																	<th>Active</th>
 																	<th>Date Created</th>
 																	<th>Created By</th>
 																	<th>Last Updated</th>
@@ -284,6 +286,7 @@ table.dataTable thead > tr > th {
                                                                 @if(!empty($toReturn['user_type']=="teammember")) 
 
 																	@if($toReturn['current_module_permission']['is_edit']=="yes")
+																	
 																	<a href="{{url('employer/my_posted_contacts/del_email/'.$id)}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="delete"><i class="fa fa-trash-o"></i></a>
 																	@endif
 																	@else
@@ -358,7 +361,7 @@ table.dataTable thead > tr > th {
 																		<td>{{$emaillist -> email_contact_id }}</td>
 																		<td>{{$emaillist -> created_date }}</td>
 																		<!--<td>{{date('d-m-Y', strtotime($emaillist->created_date))}}</td>-->
-																		<td>{{$emaillist->id}}</td>
+																		<td>{{$emaillist->created_by}}</td>
 																		<td>{{$emaillist -> last_updated_date }}</td>
 																		<!--<td>{{date('d-m-Y', strtotime($emaillist -> last_updated_date))}}</td>-->
 																		<td>{{$emaillist ->  first_name}}</td>
@@ -402,7 +405,7 @@ table.dataTable thead > tr > th {
 	    	</div>
 
  <!-- /.modal -->
-    <div id="#contact-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+    <div id="contact-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
