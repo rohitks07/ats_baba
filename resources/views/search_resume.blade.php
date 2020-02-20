@@ -205,7 +205,7 @@
                                                             <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
                                                         </ul>
                                                         <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user" title="Submit to Job"></i></a>
-                                                        <a href="{{url('employer/job_matching/'.$id)}}" title="Maching jobs"><i class="fa fa-check-square-o"> </i></a>
+                                                        <a href="{{url('employer/job_matching/'.$id)}}" title="Matching Jobs"><i class="fa fa-check-square-o"> </i></a>
                                                         @endif
                                                         @else
                                                         <i class="fa fa-pencil" aria-hidden="true" data-toggle="dropdown" style="color: #1ba6df;cursor: pointer;" title="Edit"></i>
@@ -217,21 +217,17 @@
                                                             <li><a href="{{url('employer/team_member_skills/'.$id)}}">Skills</a></li>
                                                         </ul>
                                                         <a href="{{url('employer/submit_candidate_detail/'.$id)}}"><i class="fa fa-user" title="Submit to Job"></i></a>
-                                                        <a href="{{url('employer/job_matching/'.$id)}}" title="Maching jobs"><i class="fa fa-check-square-o"> </i></a>
+                                                        <a href="{{url('employer/job_matching/'.$id)}}" title="Matching Jobs"><i class="fa fa-check-square-o"> </i></a>
                                                         @endif
                                                         @if(!empty($toReturn['user_type']=="teammember"))
                                                         @if($toReturn['current_module_permission']['is_delete']=="yes")
-                                                        <a href="{{url('employer/search_resume/delete',$id)}}">
-                                                            <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;" title="Delete"></i>
-                                                        </a>
+                                                        <a href="{{url('employer/search_resume/delete',$id)}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;" title="Delete"></i></a>
                                                         @endif
                                                         @else
-                                                        <a href="{{url('employer/search_resume/delete',$id)}}">
+                                                        <a href="{{url('employer/search_resume/delete',$id)}}" onclick="return confirm('Are you sure you want to delete this item?');">
                                                             <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;" title="Delete"></i>
                                                         </a>
                                                         @endif
-
-
                                                         <a  onclick="showmailModal({{$id}})" ><i class="fa fa-envelope" aria-hidden="true" style="color:#317eeb;" title="Mail"></i></a>
                                                         <a href="javascript:void();"  onclick="candidatenotemodel({{$personal[$key]->ID}})" ><i class="fa fa-plus" title="Note" aria-hidden="true"></i></a>
                                                         <!-- Modal -->
@@ -354,19 +350,18 @@
                 </div>
                 <div class="modal-footer">
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 
 
-
-        @include('include.emp_footer')
+@include('include.emp_footer')
 <script>
 function candidatenotemodel(id)
 {
-   
+    $('#append_view').html(""); // reset
+    $('#view').show(); // reset
     $("#candidate_id_notes").val(id);
     $("#candidatenotemodel").modal("show");
 }
@@ -406,8 +401,6 @@ function candidatenotemodel(id)
             }
             </script>
         <script type="text/javascript">
-
-
             function viewcandidate_details() {
                 var candidate_id=$("#candidate_id_notes").val();
                 $.ajax({
@@ -418,31 +411,37 @@ function candidatenotemodel(id)
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function (data) {
-                        $('#append_view').append("<table class='table' style='border:1px solid'>");
-                        $('#append_view').append("<thead>");
-                        $('#append_view').append("<tr>");
-                        // 	$('#append_view'+id).append("<th>Candidate _ID</th>");
-                        $('#append_view').append("<th>Title</th>");
-                        $('#append_view').append("<th>Note</th>");
-                        $('#append_view').append("<th>Created By</th>");
-                        $('#append_view').append("<th>Status</th>");
-                        $('#append_view').append("<th>Privacy</th>");
-                        $('#append_view').append("</tr>");
-                        $('#append_view').append("</thead>");
-                        $('#append_view').append("<tbody>");
+                        // console.log(data);
+                        var to_append = ``;
+                        to_append += `<table class='table' border="1" style='border-collapse: collapse;'>`;
+                        to_append += `<thead>`;
+                            to_append += `<tr>`;
+                                // 	$('#append_view'+id).append("<th>Candidate _ID</th>");
+                                to_append += `<th>Title </th>`;
+                                to_append += `<th>Note   </th>`;
+                                to_append += `<th>Created By   </th>`;
+                                to_append += `<th>Status   </th>`;
+                                to_append += `<th>Privacy   </th>`;
+                            to_append += `</tr>`;
+                        to_append += `</thead>`;
+                        to_append += `<tbody>`;
+                        if(data.length==0){
+                            to_append += `<tr><td colspan="5">No data found</td></tr>`;
+                        }
                         $.each(data, function (index, value) {
 
-                            $('#append_view').append("<tr>");
-                            // 		$('#append_view'+id).append("<td>"+value.candidate_id+"</td>");
-                            $('#append_view').append("<td>" + value.title + "</td>");
-                            $('#append_view').append("<td>" + value.note + "</td>");
-                            $('#append_view').append("<td>" + value.created_by + "</td>");
-                            $('#append_view').append("<td>" + value.status + "</td>");
-                            $('#append_view').append("<td>" + value.privacy_level + "</td>");
-                            $('#append_view').append("</tr>");
+                            to_append += `<tr>`;
+                                // 		$('#append_view'+id).append("<td>"+value.candidate_id+"</td>`;
+                                to_append += `<td>` + value.title +`</td>`;
+                                to_append += `<td>` + value.note +`</td>`;
+                                to_append += `<td>` + value.created_by +`</td>`;
+                                to_append += `<td>` + value.status +`</td>`;
+                                to_append += `<td>` + value.privacy_level + `</td>`;
+                            to_append += `</tr>`;
                         });
-                        $('#append_view').append("</tbody>");
-                        $('#append_view').append("</table>");
+                        to_append += `</tbody>`;
+                        to_append += `</table>`;
+                        $('#append_view').html(to_append);
                         $('#view').hide();
 
                     },
@@ -452,7 +451,6 @@ function candidatenotemodel(id)
 
                 });
             }
-
         </script>
 
         </html>

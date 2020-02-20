@@ -721,6 +721,7 @@ class Job_Employer_Controller extends Controller
     }
     public function list_delete($id = "")
     {
+    
         ini_set('memory_limit', '-1');
         $personal = tbl_job_seekers::where('ID', $id)->delete();
         return redirect('employer/search_resume');
@@ -743,6 +744,8 @@ class Job_Employer_Controller extends Controller
 
     public function post_new_candidate(Request $request)
     {
+        return $request;
+
         ini_set('memory_limit', '-1');
         $con =  $request->country;
         $sta =  $request->state;
@@ -2002,7 +2005,7 @@ class Job_Employer_Controller extends Controller
         $data->note      =  $request->note;
         $data->candidate_id    =  $request->candidate_id;
         $data->created_time = $date;
-        $data->created_by = Session::get('id');
+        $data->created_by = Session::get('full_name');
         $data->privacy_level    = $request->privacy;
         $data->status           = "active";
         $data->save();

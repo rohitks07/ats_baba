@@ -159,7 +159,7 @@
                                             <!-- <span><input name="pay_min" type="text" class="form-control" id="pay_min"  min="0" style="width: 29%; float:left;"/></span>
 							                  <span><input name="pay_max" type="text" class="form-control" id="pay_max" min="0" style="width: 29%; float:left;"/></span> -->
                                             <select name="payment_range" id="select_ranage" class="form-control" style="max-width:50%; border: 1px solid #bbb8b8;" >
-                                                <option value=""> select Salary/Pay Rate</option>
+                                                <option value=""> Salary/Pay Rate</option>
                                                 <option value="15k-20k">15k - 20k</option>
                                                 <option value="20k-25k">20k - 25k</option>
                                                 <option value="25k-30k">25k - 30k</option>
@@ -261,7 +261,7 @@
                                         </table>
                                         <hr>
                                         <div align="center">
-                                            <input type="checkbox" required onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required">  &nbsp;&nbsp;&nbsp; Experience Required ?
+                                            <input type="checkbox" required onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required">&nbsp;&nbsp;&nbsp; Experience Required ?
 
                                             <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead style="    background: #317eeb;">
@@ -410,7 +410,7 @@
                                     </div>
                                     <hr>
                                     <div align="center">
-                                        <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
+                                        <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Employer Details ?
                                         <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                             <thead>
                                                 <tr style="background: #317eeb;">
@@ -440,7 +440,7 @@
                                     </div>
                                     <hr>
                                     <div align="center">
-                                            <input type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="attachment_required" id="attachment_required" value="attachment_required"> &nbsp;&nbsp;&nbsp; Attachment Required ?
+                                            <input type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="attachment_required" id="attachment_required" value="attachment_required">&nbsp;&nbsp;&nbsp;Attachment Required ?
                                             <table class="table" style="display:none;" id="attach_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
