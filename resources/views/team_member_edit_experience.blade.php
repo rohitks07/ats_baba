@@ -190,7 +190,7 @@
                                                         class="fa fa-pencil" aria-hidden="true"
                                                         style="color: #1ba6df;cursor: pointer;" title="Edit"></i></a>
                                                 <a
-                                                    href="{{url('employer/team_member_edit_experience_del/'.$id.'/'.$seeker_id)}}">
+                                                    href="{{url('employer/team_member_edit_experience_del/'.$id.'/'.$seeker_id)}}" onclick="return confirm('Are you sure you want to delete this item?');">
                                                     <i class="fa fa-trash-o" aria-hidden="true" style="color:#317eeb;"
                                                         title="Delete"></i></a></td>
                                         </tr>
