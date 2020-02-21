@@ -255,6 +255,10 @@ Route::post('employer/marketing/addcontact', 'MarketingController@addcontact');
 Route::get('employer/emailTemplate/delete/{id}', 'MarketingController@deletetemplate');
 Route::get('employer/marketing/emaillistdelete/{id}', 'MarketingController@deleteemaillist');
 Route::get('employer/marketing/contactdelete/{id}', 'MarketingController@deleteContact');
+Route::get('employer/tempalate/select', 'MarketingController@get_template_data');
+
+
+
 Route::get('notifications', 'NotificationController@show_notification');
 Route::get('employer/posted_job_assined/{id}', 'Job_Employer_Controller@assign_job');
 Route::get('employer/posted_job_assined', 'Job_Employer_Controller@assign_job');

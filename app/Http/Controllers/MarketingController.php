@@ -13,6 +13,8 @@ use App\Tbl_salutation;
 use App\Tbl_countries;
 use Session;
 use Mail;
+use Response;
+
 
 
 
@@ -34,7 +36,8 @@ class MarketingController extends Controller
             $toReturn['email']=tbl_marketing_emailer::all();
             $toReturn['email_Template']=Tbl_email_template::get();
 			return view('team_member_marketing')->with('toReturn',$toReturn);
-	}
+    }
+    
 	public function send_mail(Request $request)
 	{
 		$email_marketing = new tbl_marketing_emailer();
@@ -136,4 +139,12 @@ class MarketingController extends Controller
          // $email_content=htmlspecialchars_decode($email_Template);
         return json_encode($email_Template);
     }
+
+    public function get_template_data()
+    {
+        $data =  Tbl_email_template::get();
+            return Response::json($data);
+                
+    }
+    
 }

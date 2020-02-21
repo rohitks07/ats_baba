@@ -270,14 +270,15 @@
                                                 <div class="form-group row">
                                                     <label for="Subject" class="control-label col-lg-4">Subject<span class="red">*</span></label>
                                                     <div class="col-lg-8">
-                                                    <input type="text" placeholder="Subject" name="subject" required> <input type="button" value="tempalate" name="tempalate" onclick="template_list()" id="sendtemplate">
+                                                    <input type="text" placeholder="Subject" name="subject" required> 
+                                                    <input type="button" value="Template" name="tempalate" id="get_template" onclick="get_template_function();">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="Subject" class="control-label col-lg-4">Select Template<span class="red">*</span></label>
                                                     <div class="col-lg-8">
-                                                        <select id ="content" class="form-control" style="background:#fff;">
-                                                        <option >select</option>
+                                                        <select id="template_content" class="form-control" style="width: 50%;">
+                                                            <option>Select</option>
                                                         </select>
                                                     </div>
                                                     
@@ -286,14 +287,14 @@
                                                 <div class="form-group row">
                                                     <label for="Subject" class="control-label col-lg-4">Email Content<span class="red">*</span></label>
                                                     <div class="col-lg-6">
-                                                        <textarea class="wysihtml5 form-control article-ckeditor" name="email_content" id="article-ckeditor" placeholder="Message body" style="height: 200px"></textarea>
-                                                    </div>
+                                                        <textarea class="form-control" name="email_content" required id="et_content" placeholder="Discription" style="height: 200px"></textarea>
+                                                    </div> 
                                                 </div>
                                                 <div align="center">
                                                     <a href="{{url('employer/schedule')}}">
                                                         <input type="button" class="btn btn-info" value="Schedule">
                                                     </a>
-                                                        <input type="submit" class="btn btn-info" value="send">
+                                                        <input type="submit" class="btn btn-info" value="Send">
                                                 </div>
                                             </form>
                                         </div>
@@ -402,21 +403,21 @@
                                                 <div class="col-sm-8">
                                                     <select class="form-control" name="salutation" style="width:50%; border: 1px solid #737373; background: #fff">
                                                     @foreach($toReturn['salutation'] as $salutation)
-												    <option>{{$salutation['salutation']}}</option>
-												@endforeach
+												        <option>{{$salutation['salutation']}}</option>
+												    @endforeach
                                                     </select>
                                                </div>
                                             </div><!--end of Salutation-->
                                             <div class="form-group row">
                                             <label for="" class="control-label col-lg-4">Name <span style="color:red;">*</span></label>
                                                 <div class="col-lg-8">
-                                                     <input type="text" id="" name="name" placeholder="Contact Person Name" >
+                                                     <input type="text" id="" name="name" placeholder="Contact Person Name" required>
                                                 </div>
                                             </div>       
                                             <div class="form-group row">
                                                 <label for="" class="control-label col-lg-4">Phone (C)</label>
                                                 <div class="col-lg-8">
-                                                     <input type="text" id="" name="phone_c" placeholder="00.000.000" maxlength="10">
+                                                     <input type="text" id="" name="phone_c" placeholder="00.000.000" maxlength="10" >
                                                 </div>
                                             </div>    
                                             <div class="form-group row">
@@ -577,7 +578,7 @@
                                         <div class="form-group row">
                                             <label for="Subject" class="control-label col-lg-4">Discription<span class="red">*</span></label>
                                             <div class="col-lg-6">
-                                                <textarea class="wysihtml5 form-control editor" name="email_content" id="editor" placeholder="Discription " style="height: 200px"></textarea>
+                                                <textarea class="form-control" name="email_content" id="et_content" placeholder="Discription " style="height: 200px"></textarea>
                                             </div>
                                         </div>
                                         <div align="center">
@@ -603,7 +604,7 @@
                                         <div class="form-group row">
                                             <label for="Subject" class="control-label col-lg-4">Discription<span class="red">*</span></label>
                                             <div class="col-lg-6">
-                                                <textarea class="wysihtml5 form-control et_content" id="et_content" name="email_content"  placeholder="Discription " style="height: 200px"></textarea>
+                                                <textarea class="form-control" id="et_content" name="email_content"  placeholder="Discription " style="height: 200px"></textarea>
                                             </div>
                                         </div>
                                         <div align="center">
@@ -698,26 +699,72 @@ function sendTemplate(id)
     //                 }
     //             });
 }
-function template_list()
-{
-    $("#content").empty();
-    $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-                });
-                $.ajax({
-                    url: "{{url('employer/marketing/listtemplate')}}",
-                    type: 'get',
-                    dataType: "json",
+// function template_list()
+// {
+//     $("#content").empty();
+//     $.ajaxSetup({
+//                 headers: {
+//                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//                 }
+//                 });
+//                 $.ajax({
+//                     url: "{{url('employer/marketing/listtemplate')}}",
+//                     type: 'get',
+//                     dataType: "json",
 
-                    success: function(data) {
-                            $.each(data,function(i,content){
-                            $("#content").append("<option>"+content.et_sender_name+"</option>");
-                        });
-                        console.log(data);
+//                     success: function(data) {
+//                             $.each(data,function(i,content){
+//                             $("#content").append("<option>"+content.et_sender_name+"</option>");
+//                         });
+//                         console.log(data);
 
+//                     }
+//                 });
+// }
+</script>
+
+<script>
+    function get_template_function()
+    {
+            // alert("dfdfdfdf");
+        $("#template_content").html("<option value=''>--Select--</option>"); //empty/blank the option for append
+
+        if($("#get_template").val()) //value throught append
+        {
+            $.ajax({
+                url: "{{url('employer/tempalate/select')}}",
+                data: { 'get_template': $("#get_template").val()},     //call_purpose_id send to db for get result according to id 
+                method: "GET",
+                contentType: 'application/json',
+                dataType: "json",
+                success: function (data){
+
+                    console.log(data);
+                    for(var i=0; i<data.length; i++){
+                        $("#template_content").append("<option value='"+data[i].et_id+"'>"+data[i].et_sender_name+"</option>");  //inside option for append
                     }
-                });
-}
+                }
+            });
+        }
+        // console.log("dfdfdfdfd");
+    }
+</script>
+
+<script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('et_content', {
+        skin: 'moono',
+        enterMode: CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P,
+        toolbar: [{ name: 'basicstyles', groups: ['basicstyles'], items: ['Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor'] },
+        { name: 'styles', items: ['Format', 'Font', 'FontSize'] },
+        { name: 'scripts', items: ['Subscript', 'Superscript'] },
+        { name: 'justify', groups: ['blocks', 'align'], items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+        { name: 'paragraph', groups: ['list', 'indent'], items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+        { name: 'links', items: ['Link', 'Unlink'] },
+        // { name: 'insert', items: ['Image'] },
+        { name: 'spell', items: ['jQuerySpellChecker'] },
+        { name: 'table', items: ['Table'] }
+        ],
+    });
 </script>
