@@ -1,4 +1,4 @@
-<footer class="footer" style="text-align:center;">
+<footer class="footer" style="text-align:center; z-index: +5;">
     <center>
         <div>ATS
             © 2019 - 2020 BABA Software. All rights reserved.</div>

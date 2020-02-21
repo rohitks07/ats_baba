@@ -1,6 +1,5 @@
  <!-- ========== Left Sidebar Start ========== -->
-
-<div class="left side-menu">
+<div class="left side-menu" style="z-index: 8;">
     <div class="sidebar-inner slimscrollleft"><br>
                     <!--- Divider -->
       <div id="sidebar-menu">

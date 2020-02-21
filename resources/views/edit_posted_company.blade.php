@@ -50,6 +50,10 @@ input[type=text],
         font-size: 15px;
     }
 
+	.control-label {
+		font-family: inherit;
+	}
+
 
     input[type=text] {
         width: 66%;
@@ -79,7 +83,7 @@ input[type=text],
 										<input type="hidden" name="post_company_id" value="{{$toReturn['posted_companies_id']}}">
 										<label for="" class="control-label col-lg-4">Company <span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input class="form-control" id="" name="company_name" value="{{$toReturn['edit_posted_company']['company_name']}}" placeholder="Company Name">
+												<input type="text" class="form-control" id="" name="company_name" value="{{$toReturn['edit_posted_company']['company_name']}}" placeholder="Company Name">
 											</div>
 									  </div>
 								<!--end of Company Name-->
@@ -95,7 +99,7 @@ input[type=text],
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">Federal ID / EIN </label>
 											<div class="col-lg-8">
-												<input  id="fed_id" name="fed_id" placeholder="00-0000000"  value="{{$toReturn['edit_posted_company']['fed_id']}}" type="number_format">
+												<input id="fed_id" name="fed_id" placeholder="00-0000000"  value="{{$toReturn['edit_posted_company']['fed_id']}}" type="text">
 											</div>
 									  </div>
 								<!--end of Federal ID / EIN-->
@@ -103,7 +107,7 @@ input[type=text],
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4">DUNS </label>
 											<div class="col-lg-8">
-												<input id="duns" name="duns" placeholder="00-0000000" value="{{$toReturn['edit_posted_company']['duns']}}" type="number_format">
+												<input id="duns" name="duns" placeholder="00-0000000" value="{{$toReturn['edit_posted_company']['duns']}}" type="text">
 											</div>
 									  </div>
 								<!--end of DUNS-->
@@ -112,6 +116,14 @@ input[type=text],
 										<label for="" class="control-label col-lg-4">Company Logo</label>
 											<div class="col-lg-8">
 												<input type="file" class="form-control" name="company_logo" id="company_logo" value="{{$toReturn['edit_posted_company']['company_logo']}}" style="width:55%; background:#fff;">
+												<input type="hidden" name="company_logo_delete" id="company_logo_delete">
+												@if($toReturn['edit_posted_company']['company_logo'])
+													<div id="company_logo_previous" style="display: inline-block; position: relative; margin: 5px 0;border: 1px solid rgb(175, 174, 174);border-radius: 3px;">
+														<img src="{{url('public/companylogo/')}}/{{$toReturn['edit_posted_company']['company_logo']}}" style="height: 150px;width: 150px;">
+														<span style="position:absolute;top:0;right:0; background: rgba(202, 0, 0, 0.85); font-size: 18px; cursor: pointer; padding: 5px 10px;" onclick='company_logo_delete("<?php echo $toReturn['edit_posted_company']['company_logo'] ?>", this)'>Del</span>
+													</div>
+													<p style="color:red;" id="company_logo_error_msg"> </p>
+												@endif
 											</div>
 									  </div>
 								<!--Company Logo-->
@@ -165,7 +177,7 @@ input[type=text],
 									</div>									
 								<!--end of Employees-->
 								<div class="form-group" style="width:100%; height:80px;background:#e4e4e4;"><br>
-									    <center><button class="btn btn-info waves-effect waves-light m-b-5" type="submit">Edit Company</button> </center></a>                                                   </div>																   
+									    <center><button class="btn btn-info waves-effect waves-light m-b-5" type="submit"  onclick="return submitForm()">Edit Company</button> </center></a>                                                   </div>																   
                                          </form>                                      
                                     </div> <!-- card-body -->
                                 </div> <!-- card -->
@@ -176,7 +188,58 @@ input[type=text],
             </div>
         </div>
         <div>
-        <!-- END wrapper -->
+		<!-- END wrapper -->
+		
+		<script>
+			function company_logo_delete(path, e) {
+				$("#company_logo_delete").val(path);
+				$(e).closest("#company_logo_previous").fadeOut(300);
+			}
+		</script>
+<script>
+	var company_logo_error = true;
+
+
+	$(document).ready(function(){
+        $("#company_logo").change(function(){
+            dept_icon_validate();
+        });
+
+    });
+
+
+	 // dept_icon validation
+	 function dept_icon_validate(){
+        var dept_icon_val = $("#company_logo").val();
+        var ext = dept_icon_val.substring(dept_icon_val.lastIndexOf('.') + 1);
+        if(ext){
+            if(ext !="jpg" && ext!="jpeg" && ext!="png" && ext!="JPEG" && ext!="PNG" && ext!="JPG"){
+                company_logo_error=true;
+                $("#company_logo").addClass('is-invalid');
+                $("#company_logo_error_msg").html("Please Select jpg/jpeg/png/JPEG/PNG/JPG Image Only");
+            }
+            else{
+                company_logo_error=false;
+                $("#company_logo").removeClass('is-invalid');
+				$("#company_logo_error_msg").html("");
+            }
+        }
+        else{
+            company_logo_error=false;
+            $("#company_logo").removeClass('is-invalid');
+			$("#company_logo_error_msg").html("");
+        }
+    }
+
+
+	function submitForm(){
+		// alert('sdfsdfds');
+		dept_icon_validate();
+
+        if(company_logo_error){ return false; } // error occured
+        // else{ $(".custom-loader").show(); return true; } // proceed to submit form data -->
+    }
+	</script>
        @include('include.emp_footer')
 	</body>
 </html>

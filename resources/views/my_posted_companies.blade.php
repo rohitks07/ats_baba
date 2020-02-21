@@ -126,16 +126,16 @@
                                                 <tr>
                                                 	<?php 
                                                 	$id=$post_company->id;?>
-                                                	 <td>{{$post_company->company_name}}</td>
+                                                	<td>{{$post_company->company_name}}</td>
                                                     <td>{{$post_company->fed_id}}</td>
                                                     <td>{{$post_company->duns}}</td>
                                                     <td>{{$post_company->country}}&nbsp;&nbsp;&nbsp;{{$post_company->state}}</td>													
                                                     <td>{{$post_company->state_of_org}}</td>
 													<td>{{$post_company->employees}}</td>
 																		
-                                                  <td class="actions">
-													<a href="{{url('employer/posted_companies/edit/'.$id)}}"><i class="fa fa-pencil-square-o" style="color:#1ba6df;">&nbsp;&nbsp;</i>
-													<a href="{{url('employer/posted_companies/delete/'.$id)}}"><i class="fa fa-trash-o" style="color:#1ba6df;" date-title="delete"></i></a>																							
+                                                    <td class="actions">
+                                                        <a href="{{url('employer/posted_companies/edit/'.$id)}}"><i class="fa fa-pencil-square-o" style="color:#1ba6df;">&nbsp;&nbsp;</i>
+                                                        <a href="{{url('employer/posted_companies/delete/'.$id)}}" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash-o" style="color:#1ba6df;" date-title="delete"></i></a>																							
                                               
                                               </tr>
 											@endforeach	    											  
